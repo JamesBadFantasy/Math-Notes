@@ -1,0 +1,399 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Homework 5}
+\author{James Pagan, October 2023}
+\date{Professor Serfaty}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Section 3.2}
+
+% --------------------------------------------- %
+
+\subsection{Problem 3}
+
+We have that $\pdv{f}{x} = 2x + 2y = \pdv{f}{y}$, so all first-order partial derivatives are $0$ at $(x_{0}, y_{0})$, and $\pdv[2]{f}{x} = \pdv[2]{f}{x}{y} = \pdv[2]{f}{y} = 2$ at $(x_{0}, y_{0})$. Then observing that $\vec{0} = (x_{0}, y_{0})$ and defining that $\vec{h} = (h_{1}, h_{2})$ yields
+\begin{align*}
+	f(\vec{h}) &= f(\vec{0}) + \sum_{i = 1}^{2} h_{i} \pdv{f}{x_{i}} \left( \vec{0} \right) + \frac{1}{2} \sum_{1 \le i, j \le 2} h_{i} h_{j} \pdv[2]{f}{x_{i}}{x_{j}} \left( \vec{0} \right) + R_{2}(\vec{0}, \vec{h}) \\
+	&= 0 + 0 + \frac{1}{2} \left( 2 h_{1}^{2} + 4 h_{1}h_{2} + 2h_{2}^{2} \right) + R_{2}(\vec{h}, \vec{0}) \\
+	&= (h_{1} + h_{2})^{2} + R_{2}(\vec{0}, \vec{h}),
+\end{align*}
+where $\lim\limits_{\vec{h} \to \vec{0}} \frac{R_{2}(\vec{0}, \vec{h})}{\norm{\vec{h}}^{2}} = 0$. Because $f$ is defined such that $f(\vec{h}) = (h_{1} + h_{2})^{2}$, we must have that $R_{2}(\vec{0}, \vec{h}) = 0$; thus, the second-order Taylor formula returns that $\boxed{f(\vec{h}) = (h_{1} + h_{2})^{2}}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 5} 
+
+Observe that all first-order and second-order partial derivatives of $e^{x + y}$ are $e^{x + y}$ itself; at $(x_{0}, y_{0}) = \vec{0}$, these evaluate to $1$. We conclude that if $\vec{h} = (h_{1}, h_{2})$,
+\begin{align*}
+	f(\vec{h}) &= f(\vec{0}) + \sum_{i = 1}^{2} h_{i} \pdv{f}{x_{i}} \left( \vec{0} \right) + \frac{1}{2} \sum_{1 \le i, j \le 2} h_{i} h_{j} \pdv[2]{f}{x_{i}}{x_{j}} \left( \vec{0} \right) + R_{2}(\vec{0}, \vec{h}) \\
+	&= 1 + h_{i} + h_{2} + \frac{1}{2} (h_{1}^{2} + 2h_{1}h_{2} + h_{2}^{2}) + R_{2}(\vec{0}, \vec{h}) \\
+	&= \boxed{\frac{1}{2}h_{1}^{2} + \frac{1}{2}h_{2}^{2} + h_{1} + h_{1}h_{2} + h_{2} + 1 + R_{2}(\vec{0}, \vec{h})},
+\end{align*}
+where $\lim\limits_{\vec{h} \to \vec{0}} \frac{R_{2}(\vec{0}, \vec{h})}{\norm{\vec{h}}^{2}}= 0$. 
+
+% --------------------------------------------- %
+
+\subsection{Problem 7}
+
+We have that
+\begin{align*}
+	\pdv{f}{x} &= y \cos(xy) - y \sin(xy), \\
+	\pdv{f}{y} &= x \cos(xy) - x \sin(xy), \\
+	\pdv[2]{f}{x} &= - y^{2} \sin(xy) - y^{2} \cos(xy), \\
+	\pdv[2]{f}{x}{y} &= \cos(xy) - \sin(xy) - xy \sin(xy) - xy \cos(xy), \\ 
+	\pdv[2]{f}{x}{y} &= -x^{2} \sin(xy) - x^{2} \cos(xy).
+\end{align*}
+At the point $(x_{0}, y_{0}) = \vec{0}$, these compute to $\pdv{f}{x} = \pdv{f}{y} = \pdv[2]{f}{x} = \pdv[2]{f}{y} = 0$ and $\pdv[2]{f}{x}{y} = 1$. We conclude that if $\vec{h} = (h_{1}, h_{2})$,
+\begin{align*}
+	f(\vec{h}) &= f(\vec{0}) + \sum_{i = 1}^{2} h_{i} \pdv{f}{x_{i}} \left( \vec{0} \right) + \frac{1}{2} \sum_{1 \le i, j \le 2} h_{i} h_{j} \pdv[2]{f}{x_{i}}{x_{j}} \left( \vec{0} \right) + R_{2}(\vec{0}, \vec{h}) \\
+	&= 1 + 0 + \frac{1}{2}(0 + 2h_{1}h_{2} + 0) + R_{2}(\vec{0}, \vec{h}) \\
+	&= \boxed{h_{1}h_{2} + 1 + R_{2}(\vec{0, \vec{h}})},
+\end{align*}
+where $\lim\limits_{\vec{h} \to \vec{0}} \frac{R_{2}(\vec{0}, \vec{h})}{\norm{\vec{h}}^{2}} = 0$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 11}
+
+We have that
+\begin{align*}
+	\pdv{g}{x} &= y \cos(xy) - 6x \ln(y) \\
+	\pdv{g}{y} &= x \cos(xy) - \frac{3x^{2}}{y} \\
+	\pdv[2]{g}{x} &= - y^{2} \sin(xy) - 6 \ln(y) \\ 
+	\pdv[2]{g}{x}{y} &= -xy \sin(xy) + \cos(xy) - \frac{6x}{y} \\
+	\pdv[2]{g}{y} &= -x^{2} \sin(xy) + \frac{3x^{2}}{y^{2}}.
+\end{align*}
+At the point $(x_{0}, y_{0}) = (\tfrac{\pi}{2}, 1)$, these partial derivatives evaluate to $0$, $-\tfrac{3 \pi^{2}}{4}$, $-1$, $-\tfrac{7 \pi}{2}$, and $\tfrac{\pi^{2}}{2}$ respectively. We conlude that if $\vec{x} = (\tfrac{\pi}{2}, 1)$ and $\vec{h} = (h_{1}, h_{2})$, 
+\begin{align*}
+	g(\vec{x} + \vec{h}) &= g(\vec{x}) + \sum_{i = 1}^{2} h_{i} \pdv{g}{x_{i}} \left( \vec{x} \right) + \frac{1}{2} \sum_{1 \le i, j \le 2} h_{i} h_{j} \pdv[2]{g}{x_{i}}{x_{j}} \left( \vec{x} \right) + R_{2}(\vec{x}, \vec{h}) \\
+	&= 1 + 0 -\frac{3 \pi^{2}}{4} h_{2} + \frac{1}{2} (-h_{1}^{2} - 7 \pi h_{1}h_{2} + \frac{\pi^{2}}{2}h_{2}^{2}) + R_{2}(\vec{x, \vec{h}}) \\
+	&= \boxed{-\frac{1}{2}h_{1}^{2} + \frac{\pi^{2}}{4} h_{2}^{2} - \frac{7\pi}{2} h_{1} h_{2} - \frac{3\pi^{2}}{4} h_{2} + 1 + R_{2}(\vec{x}, \vec{h})}, 
+\end{align*}
+where $\lim\limits_{\vec{h} \to \vec{0}} \frac{R_{2}(\vec{x}, \vec{h})}{\norm{\vec{h}}^{2}} = 0$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 12}
+
+(NOTE: I assume I only need to approximate $f(-1, -1)$ for the functions from Exercises $3$, $5$, and $7$.)
+
+\textbf{Problem 3}: The approximation computes to $(-1 - 1)^{2} = \boxed{4}$.
+
+\textbf{Problem 5}: The approximation computes to $\tfrac{1}{2} + \tfrac{1}{2} - 1 + 1 - 1 + 1 = \boxed{1}$.
+
+\textbf{Problem 7}: The approximation computes to $1 + 1 = \boxed{2}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 13}
+
+\textbf{Part (a)}: Let $R_{n}(x - h)$ be the remainder of the $(n - 1)$-th taylor polynomial of $f(x + h)$ --- namely,
+\[
+	R_{n}(x + h) = f(x + h) - \sum_{k = 0}^{n - 1} \frac{f^{(k)}(x)}{k!} h^{k}.
+\]
+Observe that there is some $c \in (x, x + h)$ such that
+\[
+	R_{n}(x + h) = \frac{f^{n}(c)}{n!}(x + h - c)^{n}.
+\]
+Let $M$ be the constant such that $\abs{f^{(k)}(x)} < M^{k}$ for all $k \in \mathbb{Z}_{> 0}$ over the interval $[c - 1, c + 1]$; thus,
+\[
+	\lim\limits_{n \to \infty} \abs{R_{n}(x - h)} = \lim\limits_{n \to \infty} \frac{\abs{f^{n}(c)}}{n!}\abs{x + h - c}^{n} \le \lim\limits_{n \to \infty} \frac{\abs{Mh}^{n}}{n!}.
+\]
+The right-hand side is a term of the expression $\sum_{n = 0}^{\infty} \frac{\abs{Mh}^{n}}{n!}$, which is convergent and defined to be $e^{\abs{Mh}}$. By the contrapositive of the Divergence Test, we must have that $\lim\limits_{n \to \infty} \frac{\abs{Mh}^{n}}{n!} = 0$, so $\lim\limits_{n \to \infty} \abs{R_{n}(x - h)} = 0$. Then for all $\epsilon > 0$, there exists $N$ such that 
+\[
+	N < n \implies \abs{f(x + h) - \sum_{k = 0}^{n - 1} \frac{f^{(k)}(t)}{x!} h^{k}} = \abs{\abs{R_{n}(x - h)} - 0} < \epsilon.
+\]
+We conclude via the definition of a limit that
+\[
+	f(x + h) = \lim\limits_{n \to \infty} \sum_{k = 0}^{n} \frac{f^{(k)}(x)}{k!} h^{k} = \sum_{k = 0}^{\infty} \frac{f^{(k)}(x)}{k!} h^{k},
+\]
+as required.
+
+\textbf{Part (b)}: It is trivial that $e^{x}$ and $-\tfrac{1}{x}$ are $C^{\infty}$ for $x > 0$, so their composition $e^{-\frac{1}{x}}$ is $C^{\infty}$ for $x > 0$ --- and $0$ is clearly $C^{\infty}$ for $x \le 0$. Clearly, all derivatives of $f$ at $0$ approaching from the left are zero; it remains to be proven that all derivatives approaching from the \textit{right} are zero. Define
+\[
+	S = \{ p \left( x \right) e^{-\tfrac{1}{x}} \mid p(x) \text{ is a rational function }\},
+\]
+where $\mathcal{R}(\mathbb{R})$ is the set of all polynomials with real-valued coefficents. Observe that for all $p(x) \in \mathcal{P(\mathbb{R})}$, we may repeatedly apply l'Hospital's Rule to deduce that
+\[
+	\lim\limits_{x \to \infty} p(x) e^{x} = \lim\limits_{x \to \infty} \frac{p(x)}{e^{-x}} = \cdots = \lim\limits_{x \to \infty} \pm \frac{1}{e^{-x}} = \lim\limits_{x \to \infty} \pm e^{x} = \pm \infty.
+\]
+The above argument may be formalized by induction. Therefore,
+\[
+	\lim\limits_{x \to 0^{+}} r \left( x \right) e^{-\tfrac{1}{x}} = 0.
+\]
+for all rational functions $r$. We claim that all derivatives of $e^{\tfrac{1}{x}}$ lie in $S$ -- this is true for the $0$-th derivative (namely $e^{\tfrac{1}{x}}$ itself), and further derivatives may be proven via induction. We conclude that all $n$-th order derivatives of $e^{\tfrac{1}{x}}$ lie in $S$, so their limit approaching $x = 0$ from above yields $0$. $e^{-\tfrac{1}{x}}$ is therefore $C^{\infty}$.
+
+However, constructing a taylor series of $e^{-\tfrac{1}{x}}$ at $x = -1$ yields $f(x) = 0$, which does not attain the positive values of $e^{-\tfrac{1}{x}}$. We conclude that $e^{-\tfrac{1}{x}}$ is not analytic.
+
+\textbf{Part (c)}: A function $f : \mathbb{R}^{n} \to \mathbb{R}$ is called an \textbf{analytic} function provided that if $\vec{h} = (h_{1}, \ldots, h_{n})$,
+\[
+	f(\vec{x} + \vec{h}) = f(\vec{x}) + \frac{1}{1!} \sum_{i = 1}^{n}h_{i} \pdv{f}{x_{i}} \left( \vec{x} \right) + \frac{1}{2!} \sum_{1 \le i, j \le n} h_{i}h_{j} \pdv[2]{f}{x_{i}}{x_{j}} (\vec{x}) + \cdots
+\]
+\textbf{ANSWER}: We claim that if for all closed discs $U \subset \mathbb{R}^{n}$, there exists a constant $M$ such that all $n$-th order partial derivatives of $f$ at $\vec{x}$ are bounded above by a constant $M^{n}$ for each $n$, then the right-hand side of this equation converges and equals $f(\vec{x} + \vec{h})$.
+
+We define the remainder of the $n$th taylor polynomial as $R_{k}(\vec{x}, \vec{h})$:
+\begin{align*}
+	R_{k}(\vec{x}, \vec{h}) &= f(x + h) - f(\vec{x}) - \frac{1}{1!} \sum_{i = 1}^{n}h_{i} \pdv{f}{x_{i}} \left( \vec{x} \right) - \cdots \\ 
+	&- \frac{1}{(k - 1)!} \sum_{1 \le i_{1}, \ldots, i_{k - 1} \le n} h_{i_{1}} \cdots h_{i_{k}} \pdv{^{k - 1}\partial }{x_{i_{1}} \ldots x_{i_{k - 1}}} (\vec{x}).
+\end{align*}
+As $f$ is $C^{\infty}$, we have that 
+\[
+	R_{k}(\vec{x}, \vec{h}) = \frac{1}{k!} \sum_{1 \le i_{1}, \ldots, i_{k} \le n} h_{i_{1}} \cdots h_{i_{k}} \pdv{^{k} f}{x_{i_{1}} \cdots \partial x_{i_{k}}} \vec{c}_{i_{1} \cdots i_{k}},
+\]
+where $\vec{c}_{i_{1} \cdots i_{k}}$ lies somewhere on the line joining $\vec{x}$ to $\vec{x} + h$. Define $h = \max\{h_{1}, \ldots, h_{n}\}$, and let $M$ be the constant such that $M^{n}$ bounds (above) the $n$-th order partial derivatives of $f$ over the closed disc with radius $1$ centered at $\vec{c}$; thus,
+\begin{align*}
+	\lim\limits_{k \to \infty} \abs{R_{k}(\vec{x}, \vec{h})} &= \lim\limits_{k \to \infty} \abs{\frac{1}{k!} \sum_{1 \le i_{1}, \ldots, i_{k} \le n} h_{i_{1}} \cdots h_{i_{k}} \pdv{^{k} f}{x_{i_{1}} \cdots \partial x_{i_{k}}} \vec{c}_{i_{1} \cdots} i_{k}} \\
+	&\le \lim\limits_{k \to \infty} \abs{\frac{1}{k!} \sum_{1 \le i_{1}, \ldots, i_{n} \le n} h^{k} M^{k}} \\
+	&= \abs{n^{n}} \lim\limits_{k \to \infty} \frac{\abs{hM}^{k}}{k!}.
+\end{align*}
+The right-hand side is a term of the expression $\sum_{k = 0}^{\infty} \frac{\abs{Mh}^{k}}{k!}$, which is convergent and defined to be $e^{\abs{Mh}}$. By the contrapositive of the Divergence Test, we must have that $\lim\limits_{k \to \infty} \frac{\abs{Mh}^{k}}{k!} = 0$, so $\lim\limits_{k \to \infty} R_{k}(x - h) = 0$. Then for all $\epsilon > 0$, there exists $N$ such that 
+\begin{align*}
+	N < k \implies& \abs{\abs{R_{k}(\vec{x}, \vec{n})} - 0} \\
+	=& \abs{f(\vec{x} + \vec{h}) - f(\vec{x}) - \cdots - \frac{1}{(k - 1)!} \sum_{1 \le i_{1}, \ldots, i_{k - 1} \le n} h_{i_{1}} \cdots h_{i_{k}} \pdv{^{k - 1}\partial }{x_{i_{1}} \ldots x_{i_{k - 1}}} \left(\vec{x}\right)} \\
+	<& \epsilon.
+\end{align*}
+We conclude via the definition of a limit that
+\begin{align*}
+	f(\vec{x} + \vec{h}) &= \lim\limits_{k \to \infty} \left( f(\vec{x}) + \cdots + \frac{1}{(k - 1)!} \sum_{1 \le i_{1}, \ldots, i_{k - 1} \le n} h_{i_{1}} \cdots h_{i_{k}} \pdv{^{k - 1}\partial }{x_{i_{1}} \ldots x_{i_{k - 1}}} \left(\vec{x}\right) \right) \\
+	&= f(\vec{x}) + \frac{1}{1!} \sum_{i = 1}^{n}h_{i} \pdv{f}{x_{i}} \left( \vec{x} \right) + \frac{1}{2!} \sum_{1 \le i, j \le n} h_{i}h_{j} \pdv[2]{f}{x_{i}}{x_{j}} (\vec{x}) + \cdots,
+\end{align*}
+as required.
+
+\textbf{Part (d)}: Observe that all higher partial derivatives of $e^{x + y}$ evaluate to $1$ at $(x_{0}, y_{0}) = (0, 0)$. Then via our work in Part (c), the taylor series at $\vec{h} = (h_{1}, h_{2})$ is
+\begin{align*}
+	e^{h_{1} + h_{2}} &= 1 + \frac{1}{1!} \sum_{i = 1}^{2} h_{i} + \frac{1}{2!} \sum_{1 \le i, j \le 2} h_{i} h_{j} + \frac{1}{3!} \sum_{1 \le i, j, k \le 2} h_{i} h_{j} h_{k} + \cdots \\
+    &= 1 + \frac{1}{1!} \sum_{i = 1}^{2} h_{i} + \frac{1}{2!} \left( \sum_{i = 1}^{2} h_{i} \right)^{2} + \frac{1}{3!} \left( \sum_{i = 1}^{2} h_{i} \right)^{2} + \cdots \\
+    &= \boxed{\sum_{i = 0}^{\infty} \frac{(h_{1} + h_{2})^{i}}{i!}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\section{Section 3.3}
+
+% --------------------------------------------- %
+
+\subsection{Problem 1}
+
+The partial derivatives of $f$ are as follows:
+\begin{align*}
+	\pdv{f}{x} = 2x + y \\ 
+	\pdv{f}{y} = x - 2y \\
+	\pdv[2]{f}{x} = 2 \\
+	\pdv[2]{f}{x}{y} = 1 \\
+	\pdv[2]{f}{y} = -2.
+\end{align*}
+The critical points $(x_{0}, y_{0})$ of $f$ satisfy $2x_{0} + y_{0} = x_{0} - 2y_{0} = 0$ --- the only solution of which is $(0, 0)$. At this point,
+\[
+	\left( \pdv[2]{f}{x} \right) \left( \pdv[2]{f}{y} \right) - \left( \pdv[2]{f}{x}{y} \right)^{2} = -4 - 1 = -5 < 0,
+\]
+so $(0, 0)$ is a saddle point of $f$. The only critical point of $f$ is $\boxed{(0, 0), \text{ a saddle point of }f}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 4}
+
+The partial derivatives of $f$ are as follows:
+\begin{align*}
+	\pdv{f}{x} = 2x + 3y \\
+	\pdv{f}{y} = 2y + 3x \\
+	\pdv[2]{f}{x} = 2 \\
+	\pdv[2]{f}{x}{y} = 3 \\
+	\pdv[2]{f}{y} = 2.
+\end{align*}
+The critical points $(x_{0}, y_{0})$ of $f$ satisfy $2x_{0} + 3y_{0} = 2y_{0} + 3x_{0} = 0$ --- the only solution of which is $(0, 0)$. At this point,
+\[
+	\left( \pdv[2]{f}{x} \right) \left( \pdv[2]{f}{y} \right) - \left( \pdv[2]{f}{x}{y} \right)^{2} = 4 - 9 = -5 < 0
+\]
+so $(0, 0)$ is a saddle point of $f$. The only critical point of $f$ is $\boxed{(0, 0), \text{ a saddle point of }f}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 6}
+
+The partial derivatives of $f$ are as follows:
+\begin{align*}
+	\pdv{f}{x} &= 2x - 3y + 5 \\
+	\pdv{f}{y} &= 12y - 3x - 2 \\
+	\pdv[2]{f}{x} &= 2 \\
+	\pdv[2]{f}{x}{y} &= -3 \\
+	\pdv[2]{f}{y} &= 12.
+\end{align*}
+The only point $(x_{0}, y_{0})$ that satisfies $2x_{0} - 3y_{0} = -5$ and $-3x_{0} + 12y_{0} - 2 = 0$ is clearly $(-\frac{18}{5}, -\tfrac{11}{15})$. At this point,
+\[
+	\left( \pdv[2]{f}{x} \right) \left( \pdv[2]{f}{y} \right) - \left( \pdv[2]{f}{x}{y} \right)^{2} = 24 - 9 = 15 > 0
+\]
+and $\pdv[2]{f}{x} = 2 > 0$, so this point is a local minimum of $f$. The only critical point of $f$ is thus $\boxed{\text{$(-\tfrac{18}{5}, -\tfrac{11}{15})$, a local minimum of $f$.}}$
+
+% --------------------------------------------- %
+
+\subsection{Problem 9}
+
+Observe that $\boxed{\text{$(0, 0)$ is a local maximum}}$, as for all $(x, y) \in \mathbb{R}^{2}$,
+\[
+	\cos(x^{2} + y^{2}) \le 1 = \cos(0^{2} + 0^{2}).
+\]
+Similarly, $\boxed{\text{$(0, \sqrt{\pi})$ and $\left( \sqrt{\tfrac{\pi}{2}}, \sqrt{\tfrac{\pi}{2}} \right)$ are local minima}}$, as for all $(x, y) \in \mathbb{R}^{2}$,
+
+\[
+	cos(x^{2} + y^{2}) \ge -1 = \cos \left( \sqrt{\frac{\pi}{2}}^{2} + \sqrt{\frac{\pi}{2}}^{2} \right) = \cos(0^{2} + \sqrt{\pi}^{2}).
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 17}
+
+The partial derivatives of $f$ are as follows:
+\begin{align*}
+	\pdv{f}{x} = 24x - 24y \\
+	\pdv{y}{y} = 24y^{2} - 24x \\
+	\pdv[2]{f}{x} = 24 \\
+	\pdv[2]{f}{x}{y} = -24 \\
+	\pdv[2]{f}{y} = 48y \\
+\end{align*}
+All critical points of $f$ thus satisfy $24x - 24y = 0 = 24y^{2} - 24x$, of which the only solutions are clearly $(0, 0)$ and $(1, 1)$. For $(0, 0)$, see that
+\[
+	\left( \pdv[2]{f}{x} \right) \left( \pdv[2]{f}{y} \right) - \left( \pdv[2]{f}{x}{y} \right)^{2} = 0 - (-24)^{2} < 0,
+\]
+so $(0, 0)$ is a saddle point. As for $(1, 1)$
+\[
+	\left( \pdv[2]{f}{x} \right) \left( \pdv[2]{f}{y} \right) - \left( \pdv[2]{f}{x}{y} \right)^{2} = 24(48) - (-24)^{2} > 0
+\]
+and $\pdv[2]{f}{x} > 0$, so the only local extremum of $f$ is $\boxed{\text{$(1, 1)$, a local minimum}}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 27}
+
+It is $\boxed{\text{indeterminate}}$; without knowing the determinant of $H$, we cannot know whether $\vec{x}_{0}$ is degenerate or a saddle point of $f$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 28}
+
+Observe that all points on the plane $2x - y + 2z = 20$ are of the form
+\[
+	\left(x, y, 10 - x + \tfrac{1}{2}y\right)
+\]
+for all $x, y \in \mathbb{R}$. The distance $d$ of any point to the origin is thus a function of $x$ and $y$: namely,
+\[
+	d(x, y) = \sqrt{x^{2} + y^{2} + \left(10 - x + \tfrac{1}{2}y\right)^{2}} = \sqrt{2x^{2} + \tfrac{5}{4}y^{2} - 20x - xy + 10y + 100}
+\]
+for all $x, y \in \mathbb{R}$. As this function is nonnegative, it suffices to find the minimum of the square $d(x, y)$. The partial derivatives of the square of $d$ are as follows:
+\begin{align*}
+	\pdv{d^{2}}{x} &= 4x - y - 20 \\
+	\pdv{d^{2}}{y} &= \tfrac{5}{2}y - x + 10 \\
+	\pdv[2]{d^{2}}{x} &= 4 \\
+	\pdv[2]{d^{2}}{x}{y} &= -1 \\
+	\pdv[2]{d^{2}}{y} &= \tfrac{5}{2}.
+\end{align*}
+A critical point $(x_{0}, y_{0})$ of $d^{2}$ satisfies $4x_{0} - y_{0} - 20 = \tfrac{5}{2}y_{0} - x_{0} + 10 = 0$ --- the only solution of which is clearly $\left( \tfrac{40}{9}, -\tfrac{20}{9} \right)$. At this point,
+\[
+	\left( \pdv[2]{f}{x} \right) \left( \pdv[2]{f}{y} \right) - \left( \pdv[2]{f}{x}{y} \right)^{2} = 4 \left( \frac{5}{2} \right) - (-1)^{2} > 0
+\]
+and $\pdv[2]{d^{2}}{x} > 0$, so this point is a global minimum of $d^{2}$. As $d^{2}$ is a continuous function that has no further critical points, we conclude that this point is a \textit{global} minimum of $d^{2}$ --- and thus, a global minimum of $d$. We conclude that the point on the plane $2x - y + 2z + 20$ nearest the origin is 
+\[
+	\left( \frac{40}{9}, -\frac{20}{9}, 10 - \frac{40}{9} - \frac{10}{9} \right) = \boxed{\left( \frac{40}{9}, -\frac{20}{9}, \frac{40}{9} \right)}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 30}
+
+A rectangular parallelepiped with side lengths $x$, $y$, and $z$ has surface area $2x + 2y + 2z$ and volume $xyz$. We wish to prove that across all triples $a, b, c \in \mathbb{R}_{> 0}$ such that $2ab + 2bc + 2ca$ equals a fixed real $S$, the maximum of $abc$ is attained when $a = b = c$.
+
+Consider all $a, b, c > 0$ such that $2a + 2b + 2c = S$; from the AM-GM Inequality, we have that
+\[
+	2\sqrt[3]{a^{2}b^{2}c^{2}} \le \frac{2ab + 2bc + 2ca}{3} = \frac{S}{3},
+\]
+with equality if and only if $a = b = c$. This rearranges to
+\[
+	abc \le \sqrt{\left( \frac{S}{6} \right)^{3}}.
+\]
+which expresses the maximum of $abc$ as attained biconditionally when $a = b = c$. We conclude that a rectangular parallelepiped with fixed surface area has maximum volume when its side lengths are equal.
+
+% --------------------------------------------- %
+
+\subsection{Problem 52}
+
+\textbf{Note: I used Lagrange Multipliers, which we learned in class the day this assignment was due on the 17th.}
+
+Let the two unlabeled sides of the pentagon --- or equivalently, the two legs of the isosceles triangle --- by $z$. The triangle inequality necessitates that $2z > y$. We thus seek to minimize the area $A$ of the pentagon:
+\[
+	A(x, y, z) = xy + \frac{y}{2} \sqrt{z^{2} - \left(\tfrac{y}{2}\right)^{2}},
+\]
+under the restriction that the perimeter $P$ is fixed at a real number $p$:
+\[
+	P(x, y, z) = 2x + y + 2z = p.
+\]
+We seek to use Lagrange Mulitpliers. We are given that $A$ attains a maximum; also, for all $(x, y, z)$ such that $P(x, y, z) = p$, we have that $\grad P (x, y, z) = (2, 1, 2) \ne \vec{0}$. Then for all local minima and maxima of $A$, there exists a real number $\lambda$ such that
+\[
+	\begin{bmatrix} y \\ x + \frac{1}{2} \sqrt{z^{2} - \left( \tfrac{y}{2} \right)^{2}} - \frac{y^{2}}{8\sqrt{z^{2} - \left( \tfrac{y}{2} \right)^{2}}} \\ \frac{yz}{2\sqrt{z^{2} - \left( \tfrac{y}{2} \right)^{2}}} \end{bmatrix} = \grad f(x, y, z) = \lambda \grad g (x, y, z) = \begin{bmatrix} 2\lambda \\ \lambda \\ 2\lambda \end{bmatrix}.
+\]
+We thus find that
+\[
+	y = 2\lambda = \frac{yz}{2\sqrt{z^{2} - \left( \tfrac{y}{2} \right)^{2}}},
+\]
+so $\sqrt{z^{2} - \left( \tfrac{y}{2} \right)^{2}} = \tfrac{z}{2}$. Thus,
+\[
+	\sqrt{z^{2} - \lambda^{2}} = \tfrac{z}{2} \implies \frac{3z^{2}}{4} = \lambda^{2} \implies  z = \frac{2\lambda \sqrt{3}}{3}.
+\]
+Finally, we solve for $x$:
+\[
+	\lambda = x + \frac{1}{2} \sqrt{z^{2} - \left( \tfrac{y}{2} \right)^{2}} - \frac{y^{2}}{8\sqrt{z^{2} - \left( \tfrac{y}{2} \right)^{2}}}  = x + \frac{z}{4} - \frac{y^{2}}{4z} = x + \frac{\lambda \sqrt{3}}{6} - \frac{\lambda \sqrt{3}}{2} = x - \frac{\lambda\sqrt{3}}{3}
+\]
+so $x = \lambda \left(\tfrac{3 + \sqrt{3}}{3}\right)$. Therefore, 
+\[
+	p = 2x + y + 2z = 2\lambda \left( \frac{3 + \sqrt{3}}{3} \right) + 2\lambda + \frac{4\lambda \sqrt{3}}{3} = \lambda (4 + 2 \sqrt{3}),
+\]
+so $\lambda = p \left( \frac{2 - \sqrt{3}}{2} \right)$. As we are given that $A$ attains a maximum, it must be achieved at this $\lambda$-value, where $x$, $y$, and $z$ are
+\begin{align*}
+	& \boxed{x = p \left( \frac{3 - \sqrt{3}}{6} \right)} = p \left( \frac{2 - \sqrt{3}}{2} \right) \left( \frac{3 + \sqrt{3}}{3} \right) = \lambda \left( \frac{3 + \sqrt{3}}{3} \right), \\
+	& \boxed{y = p(2 - \sqrt{3})} = 2 p \left( \frac{2 - \sqrt{3}}{2} \right) = 2\lambda, \\
+	& \boxed{z = p \left( \frac{2\sqrt{3} - 3}{3} \right)} = \frac{2p \sqrt{3}}{3} \left( \frac{2 - \sqrt{3}}{2} \right)= \frac{2\lambda \sqrt{3}}{3}.
+\end{align*}
+It is trivial to verify that $2z > y$. We conclude that the area we seek is
+\begin{align*}
+	xy + \frac{y}{2} \sqrt{z^{2} - \left(\tfrac{y}{2}\right)^{2}} &= xy + \frac{yz}{4} \\
+	&= p^{2} \left( \frac{3 - \sqrt{3}}{6} \right) \left( 2 - \sqrt{3} \right) + \frac{p^{2}}{4} \left( 2 - \sqrt{3} \right) \left( \frac{2 \sqrt{3} - 3}{3} \right) \\
+	&= p^{2} \left( \frac{9 - 5\sqrt{3}}{6} + \frac{7 \sqrt{3} - 12}{12} \right) \\
+	&= p^{2} \left( \frac{6 - 3 \sqrt{3}}{12} \right) \\
+	&= \boxed{p^{2} \left( \frac{2 - \sqrt{3}}{4} \right)}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\end{document}

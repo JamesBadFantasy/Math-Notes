@@ -1,0 +1,186 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref, tikz}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 140: Assignment 9}
+\author{James Pagan, December 2023}
+\date{Professor Raquépas}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 1}
+
+\textbf{Part (a)}: The trace of the matrix
+\[
+	\begin{bmatrix} 1 & \tfrac{1}{4} \\ \tfrac{1}{4} & 1 \end{bmatrix}
+\]
+is $1 + 1 = \boxed{2}$.
+
+\textbf{Part (b)}: Define the matricies $C$ and $D$ as follows:
+\[
+	C = \begin{bmatrix} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{n1} & \cdots & a_{nn} \end{bmatrix} \qquad \text{and} \qquad D = \begin{bmatrix} b_{11} & \cdots & b_{1n} \\ \vdots & \ddots & \vdots \\ b_{n1} & \cdots & b_{nn} \end{bmatrix},
+\]
+We thus deduce that
+\begin{align*}
+	\tr(CD) &= \sum_{i = 1}^{n} \sum_{j = 1}^{n} a_{ij} b_{ji} \\
+			&= \sum_{j = 1}^{n} \sum_{i = 1}^{n} b_{ji} a_{ij} \\
+			&= \tr(DC).
+\end{align*}
+
+\textbf{Part (c)}: Suppose that for a $2$-by-$2$ matrix $A$ that there exists a diagonal $2$-by-$2$ matrix $\Lambda$ and an invertible $2$-by-$2$ matrix $J$ such that $A = J \Lambda J^{-1}$. Then by the result of Part (b),
+\[
+	\tr(A) = \tr \left( J \Lambda J^{-1} \right) \tr\left( (J \Lambda) J^{-1} \right) = \tr \left( J^{-1} (J \Lambda) \right) = \tr(\Lambda).
+\]
+
+\textbf{Part (d)}: In Assignment 8, we deduced that the eigenvalues of 
+\[
+	\begin{bmatrix} 1 & \tfrac{1}{4} \\ \tfrac{1}{4} & 1 \end{bmatrix}
+\]
+are $\tfrac{3}{4}$ and $\tfrac{5}{4}$. The trace of this matrix is $2$ --- which is the same as the sum of its eigenvalues.
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+\textbf{Part (a)} We define:
+\[
+	A = \begin{bmatrix} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{n1} & \cdots & a_{nn} \end{bmatrix}
+\]
+Then
+\[
+	A^{\top} = \begin{bmatrix} a_{11} & \cdots & a_{n1} \\ \vdots & \ddots & \vdots \\ a_{1n} & \cdots & a_{nn} \end{bmatrix},
+\]
+so
+\[
+	\tr(A) = \sum_{i = 1}^{n} a_{ii} = \tr(A^{\top}).
+\]
+\textbf{Part (b)}: We have that
+\[
+	\tr \left( \begin{bmatrix} 0 & 9 \\ 4 & 6 \end{bmatrix} \begin{bmatrix} 7 & 8 \\ 7 & 6 \end{bmatrix} \right) = \tr \left( \begin{bmatrix} 63 & 54 \\ 70 & 68 \end{bmatrix} \right) = 131 \ne (6)(13) = \tr \left( \begin{bmatrix} 0 & 9 \\ 4 & 6 \end{bmatrix} \right) \tr \left( \begin{bmatrix} 7 & 8 \\ 7 & 6 \end{bmatrix} \right).
+\]
+\textbf{Part (c)}: We have that if
+\[
+	A = \begin{bmatrix} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{n1} & \cdots & a_{nn} \end{bmatrix} \qquad \text{and} \qquad B = \begin{bmatrix} b_{11} & \cdots & b_{1n} \\ \vdots & \ddots & \vdots \\ b_{n1} & \cdots & b_{nn} \end{bmatrix},
+\]
+then
+\begin{align*}
+	\tr(A + B) &= \tr \left( \begin{bmatrix} a_{11} + b_{11} & \cdots & a_{1n} + b_{1n} \\ \vdots & \ddots & \vdots \\ a_{n1} + b_{n1} & \cdots & a_{nn} + b_{nn} \end{bmatrix} \right) \\
+	&= \sum_{i = 1}^{n} (a_{ii} + b_{ii}) \\
+	&= \sum_{i = 1}^{n} a_{ii} + \sum_{i = 1}^{n} b_{ii} \\
+	&= \tr(A) + \tr(B).
+\end{align*}
+
+\textbf{Part (d)}: We have that
+\begin{align*}
+	\det \left( \begin{bmatrix} 0 & 2 \\ 1 & 3 \end{bmatrix} + \begin{bmatrix} -1 & 2 \\ -1 & 3 \end{bmatrix} \right) &= \det \left( \begin{bmatrix} -1 & 4 \\ 0 & 9 \end{bmatrix} \right) \\
+	&= -9 \\
+	&\ne -2 - 1 \\
+	&= \det \left( \begin{bmatrix} 0 & 2 \\ 1 & 3 \end{bmatrix} \right) + \det \left( \begin{bmatrix} -1 & 2 \\ -1 & 3 \end{bmatrix} \right).
+\end{align*}
+
+\textbf{Part (e)}: We have that
+\[
+	\tr (\lambda A) = \tr \left( \begin{bmatrix} \lambda a_{11} & \cdots & \lambda a_{1n} \\ \vdots & \ddots & \vdots \\\lambda  a_{n1} & \cdots & \lambda a_{nn} \end{bmatrix} \right) = \sum_{i = 1}^{n} \lambda a_{ii} = \lambda \sum_{i = 1}^{n} a_{ii} = \lambda \tr(A).
+\]
+\textbf{Part (f)}: We have that
+\[
+	\det(2I) = \det \left( \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \right) = 4 \ne 2 = 2 \det(I).
+\]
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+\textbf{Part (a)}: $\boxed{\text{Yes}}$, $P$ is diagonalizable. Observe that
+\begin{align*}
+	\begin{bmatrix} 0.5 & 0.5 & 0 \\ 0.5 & 0.5 & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \\
+	\begin{bmatrix} 0.5 & 0.5 & 0 \\ 0.5 & 0.5 & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \\
+	\begin{bmatrix} 0.5 & 0.5 & 0 \\ 0.5 & 0.5 & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\end{align*}
+Thus the direct sum of the eigenspaces of $P$ has dimension $3$, so $P$ is diagonalizable.
+
+\textbf{Part (b)}: For all eigenvalues $\lambda$ of $Q$, 
+\[
+	0 = \begin{vmatrix} 1 - \lambda & 0 & 2 \\ 0 & -1 - \lambda & 1 \\ 0 & 0 & 3 - \lambda \end{vmatrix} = (1 - \lambda)(-1 - \lambda)(3 - \lambda).
+\]
+Thus, the eigenvalues are $\boxed{\lambda = -1, 1, 3}$.
+
+\textbf{Part (c)}: One such eigenvector is $\hat{\textbf{\i}}$, as
+\[
+	\begin{bmatrix} 1 & 0 & 2 \\ 0 & -1 & 1 \\ 0 & 0 & 3 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} = \hat{\textbf{\i}}.
+\]
+\textbf{Part (d)}: The following diagram was (painfully) made on TikZ:
+
+\begin{tikzpicture}
+	\draw[<->,thick] (-3,0)--(3,0) node[right]{$x$};
+	\draw[<->,thick] (0,-3)--(0, 3) node[above]{$y$};
+	\draw[scale = 0.2, smooth, samples=100, domain=-1.5:3.4] plot({\x}, {-\x*\x*\x+3*\x*\x-3*\x+1});
+\end{tikzpicture}
+
+The eigenvalue appears to be $1$. To compute this, note that all eigenvalues $\lambda$ satisfy
+\[
+	0 = \begin{vmatrix} 1 - \lambda & 1 & 0 \\ 0 & 1 - \lambda & 1 \\ 0 & 0 & 1 - \lambda \end{vmatrix} = (1 - \lambda)^{3},
+\]
+so $\lambda = 1$ is the only eigenvalue. Now, consider all vectors such that
+\[
+	\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} a \\ b \\ c \end{bmatrix} = \begin{bmatrix} a \\ b \\ c \end{bmatrix}.
+\]
+Then $a + b = a$ and $b + c = b$; thus, $a = b = 0$. We conclude that the eigenspace of the eigenvalue $1$ is the following space:
+\[
+	\boxed{\left\{ \lambda \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \mid \lambda \in \mathbb{R} \right\}}.
+\]
+\textbf{Part (e)}: We have that
+\begin{align*}
+	\begin{bmatrix} 1 & 1 & 0 \\ 1 & 1 & 1 \\ 0 & 1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ \sqrt{2} \\ 1 \end{bmatrix} &= \begin{bmatrix}  1 + \sqrt{2} \\ 2 + \sqrt{2} \\ 1 + \sqrt{2} \end{bmatrix} = (1 + \sqrt{2})\begin{bmatrix} 1 \\ \sqrt{2} \\ 1 \end{bmatrix} \\
+	\begin{bmatrix} 1 & 1 & 0 \\ 1 & 1 & 1 \\ 0 & 1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ -\sqrt{2} \\ 1 \end{bmatrix} &= \begin{bmatrix} 1 - \sqrt{2} \\ 2 - \sqrt{2} \\ 1 - \sqrt{2} \end{bmatrix} = (1 - \sqrt{2}) \begin{bmatrix} 1 \\ -\sqrt{2} \\ 1 \end{bmatrix}
+\end{align*}
+As per orthogonality, realize that
+\[
+	\begin{bmatrix} 1 \\ \sqrt{2} \\ 1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ -\sqrt{2} \\ 1 \end{bmatrix} = 1^{2} + (\sqrt{2})(-\sqrt{2}) + 1 = 1 -2 + 1 = 0,
+\]
+so the two eigenvectors are orthogonal.
+
+\textbf{Part (f)}: Realize that $S$ is symmetric, and recall that all eigenvectors of a symmetric matrix are orthogonal. It thus suffices to find a vector orthogonal to the two above, one of which is $\uvec{\i} - \uvec{k}$:
+\[
+	\begin{bmatrix} 1 \\ \sqrt{2} \\ 1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} = 1 + \sqrt{2}(0) - 1 = 0 = 1 - \sqrt{2}(0) -1 = \begin{bmatrix} 1 \\ -\sqrt{2} \\ 1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}.
+\]
+To find this eigenvector's eigenvalue, we simply compute $S(\uvec{\i} - \uvec{k})$:
+\[
+	\begin{bmatrix} 1 & 1 & 0 \\ 1 & 1 & 1 \\ 0 & 1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix},
+\]
+so the other eigenvalue is $\boxed{1}$.
+% --------------------------------------------- %
+
+\end{document}

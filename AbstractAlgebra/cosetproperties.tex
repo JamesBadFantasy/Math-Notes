@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{Coset Properties}
+\author{James Pagan}
+\date{August 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\section{Group Cosets}
+
+You can prove most of these in your head; it's just writing all these down is pretty useful.
+
+\textbf{Basic Properties of Cosets}: If $H \subseteq G$ and $a, b \in G$ with $h \in H$,
+
+\begin{itemize}
+
+	\item $H(ab) = (Ha)b$ and $(ab)H = a(bH)$
+	\item $|Ha| = |aH| = H$.
+	\item $Ha = Hb$ or $Ha \cap Hb = \varnothing$; $aH = bH$ or $aH \cap bH = \varnothing$;
+
+\end{itemize}
+
+\textbf{Cosets and Subgroups}: If $N \trianglelefteq G$ and $H \subseteq G$ with $a, b \in G$,
+
+\begin{itemize}
+
+	\item $aNa^{-1} = N$ or $aNa^{-1} \subseteq N$.
+	\item $aN = Na$.
+	\item $Ha \subseteq Ga$ and $aH \subseteq aG$.
+
+\end{itemize}
+
+\textbf{Homomorphisms}: If $\varphi: G \rightarrow H$ is a homomorphism,
+
+\begin{itemize}
+
+	\item $\varphi(a)\varphi(H) = \varphi(aH)$ and $\varphi(H)\varphi(a) = \varphi(Ha)$
+
+\end{itemize}
+
+\newpage
+
+\section{Ring Cosets}
+
+For a ring $R$ with an ideal $I$ and an element $r \in R$, we define the coset of rings as follows: $r + I = \{ r + i \mid i \in I \}$.
+
+\textbf{Basic Properties of Cosets}: If $I \trianglelefteq R$ and $r, j \in R$ with $i \in I$,
+
+\begin{itemize}
+	\item $I + (r + j) = (I + r) + j$ and $(r + j) + I = r + (j + I)$
+	\item $r + I = I + r$.
+	\item $I + r = I + j$ or $I + r \cap I + j = \varnothing$.
+	\item $I + r = I + j \iff r - j \in I$.
+\end{itemize}
+
+\textbf{Homomorphisms}: If $\varphi: G \rightarrow H$ is a homomorphism,
+
+\begin{itemize}
+	\item $\varphi(r + I) = \varphi(r) + \varphi(I) = \varphi(I) + \varphi(r) = \varphi(I + r)$.
+\end{itemize}
+
+\end{document}

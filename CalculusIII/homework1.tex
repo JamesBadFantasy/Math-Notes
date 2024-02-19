@@ -1,0 +1,278 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Homework One}
+\author{James Pagan}
+\date{15 September 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+% --------------------------------------------- %
+
+\section{Section 1.2}
+
+\subsection*{Problem 12}
+
+The vector $\mathbf{\vec{v} = \tfrac{5\sqrt{13}}{13} (3, -2)}$ is perpendicular to $(2, 3)$, as 
+\[ 
+	\vec{v} \cdot \begin{bmatrix} 2 \\ 3 \end{bmatrix} = \left( \frac{5\sqrt{13}}{13} \begin{bmatrix} 3 \\ -2 \end{bmatrix} \right) \cdot \begin{bmatrix} 2 \\ 3 \end{bmatrix} = \frac{5\sqrt{13}}{13} \left( \begin{bmatrix} 3 \\ -2 \end{bmatrix} \cdot \begin{bmatrix} 2 \\ 3 \end{bmatrix} \right) =  \frac{5\sqrt{13}}{13} (0) = 0,
+\]
+and has norm $5$, as 
+\[ 
+\norm{\vec{v}} = \norm{\frac{5\sqrt{13}}{13} \begin{bmatrix} 3 \\ -2 \end{bmatrix}} = \frac{5\sqrt{13}}{13} \norm{\begin{bmatrix} 3 \\ -2 \end{bmatrix}} = \frac{5\sqrt{13}}{13} \sqrt{13} = 5. 
+\]
+
+\newpage
+
+\subsection*{Problem 15}
+
+For two vectors $\vec{v}, \vec{w} \in \mathbb{R}^{n}$, let $\theta$ be the angle between $\vec{v}$ and $\vec{w}$. We claim that $\vec{v} \cdot \vec{w} = -\norm{\vec{v}}\norm{\vec{w}}$ if and only if $\mathbf{\theta = 180^{\circ}}$ \textbf{or at least one of the vectors is} $\mathbf{\vec{0}}$.
+
+Suppose that $\vec{v} \cdot \vec{w} = -\norm{\vec{v}}\norm{\vec{w}}$. Trivially, if one of these vectors is $\vec{0}$, then $\vec{v} \cdot \vec{w} = 0 = -\norm{\vec{v}}\norm{\vec{w}}$. If both vectors are nonzero, then their norms are nonzero; we find that  
+\[ 
+	\cos(\theta) = \frac{\vec{v} \cdot \vec{w}}{\norm{\vec{v}}\norm{\vec{w}}} = - \frac{\norm{\vec{v}}\norm{\vec{w}}}{{\norm{\vec{v}}\norm{\vec{w}}}} = -1,
+\]
+so, $\theta = 180^{\circ}$. Identical means prove that both $\theta = 180^{\circ}$ and least one of $\vec{v}$ or $\vec{w}$ being $\vec{0}$ imply that $\vec{v} \cdot \vec{w} = -\norm{\vec{v}}\norm{\vec{w}}$, which completes the proof.
+
+\subsection*{Problem 20}
+
+Using the formula, we find that the projection of $\vec{u} = - \uvec{i}+ \uvec{j} + \uvec{k}$ onto $\vec{v} = 2 \uvec{i} + \uvec{j}- 3 \uvec{k}$ is
+\[ 
+	\frac{\vec{u} \cdot \vec{v}}{\norm{\vec{v}}^2} \vec{v} = \frac{-2 + 1 - 3}{1^2 + 2^2 + (-3)^2} (2 \uvec{i} + \uvec{j} - 3 \uvec{k}) = -\frac{4}{14} (2 \uvec{i} + \uvec{j} - 3 \uvec{k}) = \mathbf{- \frac{4}{7} \uvec{i} - \frac{2}{7} \uvec{j} + \frac{6}{7} \uvec{k}}. 
+\]
+
+\subsection*{Problem 24}
+
+(a) Two such vectors are $\mathbf{\vec{v_{1}} = (1, 1, -1)}$ \textbf{and} $\mathbf{\vec{v_{2}} = (-2, 2, 0)}$, as $\vec{v}_{1} \cdot \vec{v}_{2} = -2 + 2 + 0 = 0$ and each vector lies on the plane, since the plane contains $(0, 0, 0)$ and the tips of each vector:
+\[ 
+	(1) + (1) + 2(-1) = 0 = (-2) + (2) + 2(0)
+\]
+
+(b) We have that the orthogonal projection of $\vec{b}$ onto $P$ is 
+\[
+	\operatorname{Proj}_{\vec{v_{1}}} (\vec{b}) +\operatorname{Proj}_{\vec{v_{2}}} (\vec{b}) = \frac{\vec{v_{1}} \cdot \vec{b}}{\norm{\vec{v_{1}}}^2} \vec{v_{1}} + \frac{\vec{v_{2}} \cdot \vec{b}}{\norm{\vec{v_{2}}}^2} \vec{v_{2}} = \frac{3 + 1 - 1}{1^2 + 1^2 + (-1)^2} \vec{v_{1}} + \frac{-6 + 2 + 0}{(-2)^2 + (2)^2 + 0} \vec{v_{2}}, 
+\]
+which simplfies to $\vec{v_{1}} - \tfrac{1}{2}\vec{v_{2}}$. Thus, the projection is $\mathbf{(2, 0, -1)}$.
+
+\subsection*{Problem 25}
+
+Two such vectors are $\mathbf{\vec{v_{1}} = (3, 4, -7)}$ \textbf{and} $\mathbf{\vec{v_{2}} = (-2, 1, 1)}$.
+	
+Both vectors are orthogonal to $(1, 1, 1)$, as $\vec{v_{1}} \cdot (1, 1, 1) = 3 + 4 - 7 = 0$ and $\vec{v_{2}} \cdot (1, 1, 1) = -2 + 1 + 1 = 0$. Further observe that if $\theta$ is the angle between $\vec{v_{1}}$ and $\vec{v_{2}}$, 
+\[ 
+	\cos (\theta) = \frac{\vec{v_{1}} \cdot \vec{v_{2}}}{\norm{\vec{v_{1}}} \norm{\vec{v_{2}}}} = \frac{-6 + 4 - 7}{\sqrt{3^2 + 4^2 + (-7)^2} \times \sqrt{(-2)^2 + 1^2 + 1^2)}} = \frac{-9}{\sqrt{74} \times \sqrt{6}} \ne 1, -1,
+\]
+so $\theta \ne 0^{\circ}, 180^{\circ}$. Therefore, $\vec{v_{1}}$ and $\vec{v_{2}}$ are nonparallel.
+
+\subsection*{Problem 26}
+
+Let $P = (3, 1, -2)$ be the given vector; let $\ell$ be the given line and define $m$ as shown (where the equation of $\ell$ is also shown):
+\[ 
+	\ell = \begin{bmatrix} -1 \\ -2 \\ -1 \end{bmatrix} + t \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} \qquad \text{and} \qquad  m = \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} + t \begin{bmatrix} 2 \\ 1 \\ -3 \end{bmatrix}
+\]
+
+Further define two vectors: $Q = (1, 0, 1)$ and $S = (0, -1, 0)$. Observe that $Q$ is the intersection of $\ell$ and $m$, obtained at $t = 2$ and $t = 0$ respectively; further note that $P$ is on $m$ at $t = 1$ and $S$ is on $\ell$ at $t = 1$.
+
+The vector $\vec{QP}$ is thus $(2, 1, -3)$ and $\vec{QS}$ is $(-1, -1, -1)$. Therefore, $\vec{QP} \cdot \vec{QS} = -2 - 1 + 3 = 0$; we find that $\vec{QS}$ and $\vec{QP}$ are perpendicular. By deduction, $\ell$ and $m$ are perpendicular --- then as $m$ is perpendicular to $\ell$ and contains $P = (3, 1, -2)$, $\mathbf{m}$ \textbf{is our desired line}.
+
+% --------------------------------------------- %
+
+\section{Section 1.3}
+
+\subsection*{Problem 8}
+
+The volume of the parallelepiped is the (absolute value of the) cross product of the vectors that constitute its sides. We compute this quantity using the Rule of Sarrus:
+\[
+	\begin{vmatrix} 1 & 0 & 4 \\ 0 & 3 & 2 \\ 0 & -1 & -1 \end{vmatrix} = -3 + 0 + 0 - 0 - 0 - (-2) = -1,
+\]
+so the desired area is $\mathbf{1}$.
+
+\subsection*{Problem 10}
+
+The two unit vectors orthogonal to $-5 \uvec{i} + 9 \uvec{j} - 4 \uvec{k}$ and $7 \uvec{i} + 8 \uvec{j} + 9 \uvec{k}$ are
+\[
+	\frac{1}{\sqrt{23667}} \left( 113 \uvec{i} + 17 \uvec{j} - 103 \uvec{k} \right) \qquad \text{and} \qquad - \frac{1}{\sqrt{23667}} \left( 113 \uvec{i} + 17 \uvec{j} - 103 \uvec{k} \right).
+\]
+
+Denote these vectors by $\vec{v}$ and $-\vec{v}$ respectively. Note that 
+\[
+	v \cdot (-5 \uvec{i} + 9 \uvec{j} -4 \uvec{k}) = \frac{1}{\sqrt{23667}} \begin{bmatrix} 113 \\ 17 \\ -103 \end{bmatrix} \cdot \begin{bmatrix} -5 \\ 9 \\ -4 \end{bmatrix} = \frac{-565 + 153 + 412}{\sqrt{23667}} = \frac{0}{\sqrt{23667}} = 0
+\]
+and
+\[	
+	v \cdot (7 \uvec{i} + 8 \uvec{j} + 9 \uvec{k}) = \frac{1}{\sqrt{23667}} \begin{bmatrix} 113 \\ 17 \\ -103 \end{bmatrix} \cdot \begin{bmatrix} 7 \\ 8 \\ 9 \end{bmatrix} = \frac{791 + 136 - 927}{\sqrt{23667}} = \frac{0}{\sqrt{23667}} = 0.
+\]
+Similarly, the dot product of $-\vec{v}$ with $-5 \uvec{i} + 9 \uvec{j} - 4 \uvec{k}$ and $7 \uvec{i} + 8 \uvec{j} + 9 \uvec{k}$ are both zero. Finally, we have that 
+\[
+	\norm{\frac{1}{\sqrt{23667}} \left( 113 \uvec{i} + 17 \uvec{j} - 103 \uvec{k} \right)} = \frac{\sqrt{113^{2} + 17^{2} + (-103)^2}}{\sqrt{23667}} = \frac{\sqrt{23667}}{\sqrt{23667}} = 1.
+\]
+Similarly, $\norm{-\vec{v}} = \norm{\vec{v}} = 1$. Thus $\vec{v}$ and $- \vec{v}$ are the two unit vectors orthogonal to $-5 \uvec{i} + 9 \uvec{j} - 4 \uvec{k}$ and $7 \uvec{i} + 8 \uvec{j} + 9 \uvec{k}$. 
+
+\subsection*{Problem 14}
+
+The four quantities are as follows:
+\begin{itemize}
+	\item $\vec{u} + \vec{v}$: Trivially, the sum is $-3 \uvec{i} - \uvec{j} - 3 \uvec{k}$.
+	\item $\vec{u} \cdot \vec{v}$: The dot product is $3(-6) + 1(-2) + (-1)(-2) = -18$.
+	\item $\norm{\vec{u}}$: The norm is $\sqrt{3^2 + 1^2 + (-1)^2} = \sqrt{11}$.
+	\item $\norm{\vec{v}}$: The norm is $\sqrt{(-6)^2 + (-2)^2 + (-2)^2} = 2\sqrt{11}$
+	\item $\vec{u} \times \vec{v}$: We compute the cross product by the Rule of Sarrus:
+	\[
+		\begin{vmatrix} \uvec{i} & 3 & -6\\ \uvec{j} & 1 & -2 \\ \uvec{k} & -1 & -2 \end{vmatrix} = -2 \uvec{i} + 6 \uvec{j} + (-6) \uvec{k} - 2 \uvec{i} - (-6) \uvec{j} - (-6) \uvec{k}, 
+	\]
+	which is $-4 \uvec{i} + 12 \uvec{j}$.
+\end{itemize}
+
+\subsection*{Problem 16}
+
+(a) The equation is $\vec{v} = \mathbf{t(2, 0, -1) + s(0, 4, -3)}$. At $t, s = 0$, this equation returns $(0, 0, 0)$; at $t = 1$, $s = 0$, this equation retuns $(2, 0, -1)$; and at $t = 0$, $s = 1$, this equation returns $(0, 4, -3)$. The plane thus contains all three points.
+
+(b) The equation is $\vec{v} = \mathbf{(1, 2, 0) + t(-1, -1, -2) + s(3, -2, 1)}$. At $t, s = 0$, this equation returns $(1, 2, 0)$; at $t = 1$, $s = 0$, this equation returns $(0, 1, -2)$; and at $t = 0$, $s = 1$, this equation returns $(4, 0, 1)$. The plane thus contains all three points.
+
+(c) The equation is $\vec{v} = \mathbf{(2, -1, 3) + t(-2, 1, 2) + s(3, 8, -4)}$. At $t, s = 0$, this equation returns $(2, -1, 3)$; at $t = 1$, $s = 0$, this equation returns $(0, 0, 5)$; and at $t = 0$, $s = 1$, this equation returns $(5, 7, -1)$. The plane thus contains all three points.
+
+\subsection*{Problem 22}
+
+We claim that the line $\vec{v} = \mathbf{(1, 0, -1) + t(-6, 4, 10)}$ is the intersection of the planes $3(x-1) + 2y + (z + 1) = 0$ and $(x-1) + 4y - (z + 1) = 0$. 
+
+Observe that the tips of both $(1, 0, -1)$ and $(-5, 4, 9)$ lie on the intersection of the planes:
+\begin{align*}
+	3(1 - 1) + 2(0) + (-1 + 1) = 0 \qquad \text{and} \qquad (1 - 1) + 4(0) - (-1 + 1) = 0. \\
+	3(-5 - 1) + 2(4) + (9 + 1) = 0 \qquad \text{and} \qquad (-5 - 1) + 4(4) - (9 + 1) = 0. 
+\end{align*}
+
+Therefore, the intersection of the planes is the line formed by these two points. As $(1, 0, 1)$ and $(-5. 4, 9)$ lie on $\vec{v} = (1, 0, -1) + t(-6, 4, 10)$ at $t = 0$ and $t = 1$ respectively, we conclude that such a line is the intersection of the planes.
+
+\subsection*{Problem 26}
+
+For two vectors $\vec{v}, \vec{w} \in \mathbb{R}^{n}$, let $\theta$ be the angle between $\vec{v}$ and $\vec{w}$. We claim that $\norm{\vec{v} \times \vec{w}} = \tfrac{1}{2}\norm{\vec{v}}\norm{\vec{w}}$ if and only if $\mathbf{\theta = 30^{\circ}, \theta = 150^{\circ}}$, \textbf{or at least one of the vectors is} $\mathbf{\vec{0}}$.
+
+Suppose that $\norm{\vec{v} \times \vec{w}} = \tfrac{1}{2} \norm{\vec{v}}\norm{\vec{w}}$. Trivially, if one of these vectors is $\vec{0}$, then $\norm{\vec{v} \times \vec{w}} = 0 = \tfrac{1}{2}\norm{\vec{v}}\norm{\vec{w}}$. If both vectors are nonzero, then their norms are nonzero; we find that  
+\[ 
+	\abs{\sin(\theta)} = \frac{\norm{\vec{v} \times \vec{w}}}{\norm{\vec{v}}\norm{\vec{w}}} = \frac{\tfrac{1}{2}\norm{\vec{v}}\norm{\vec{w}}}{{\norm{\vec{v}}\norm{\vec{w}}}} = \frac{1}{2},
+\]
+so, $\theta = 30^{\circ}$ or $\theta = 150^{\circ}$. Identical means prove that both $\theta = 30^{\circ}$, $\theta = 150^{\circ}$, and least one of $\vec{v}$ or $\vec{w}$ being $\vec{0}$ imply that $\norm{\vec{v} \times \vec{w}} = \tfrac{1}{2}\norm{\vec{v}}\norm{\vec{w}}$, which completes the proof.
+
+\subsection*{Problem 28}
+
+We claim the plane $\mathbf{3x - 2y + 4z = 20}$ satisfies the conditions of the problem.
+
+Note that the vector $(3, -2, 4)$ is perpendicular to this plane. This is the direction vector of the line $\vec{v} = (1, -2, 2) + t(3, -2, 4)$, so the line is perpendicular to the plane.
+
+Furthermore, observe that as $3(2) - 2(-1) + 4(3) = 20$, the plane passes through the point $(2, -1, 3)$. This completes the proof.
+
+% --------------------------------------------- %
+
+\section{Section 1.4}
+
+\subsection*{Problem 1}
+
+We claim the Cartesian point $(\sqrt{2}, -\sqrt{6}, -2\sqrt{2})$ has spherical coordinates $\mathbf{(4, 300^{\circ}, 135^{\circ})}$. To verify this, we use the conversion formulas on our claimed spherical coordinates into Cartesian coordiantes:
+\begin{itemize}
+	\item $4 \sin(135^{\circ})\cos(300^{\circ}) = 4\left(\tfrac{\sqrt{2}}{2}\right)\left(\tfrac{1}{2}\right) = \sqrt{2}$.
+	\item $4 \sin(135^{\circ})\sin(300^{\circ}) = 4\left(\tfrac{\sqrt{2}}{2}\right)\left(-\tfrac{\sqrt{3}}{2}\right) = -\sqrt{6}$.
+	\item $4 \cos(135^{\circ}) = 4\left(-\tfrac{\sqrt{2}}{2}\right) = -2\sqrt{2}$. 
+\end{itemize}
+Thus the spherical coordinate $(4, 300^{\circ}, 135^{\circ})$ and Cartesian coordinate $(\sqrt{2}, -\sqrt{6}, -2\sqrt{2})$ describe the same point.
+
+\subsection*{Problem 2}
+
+We claim the Cartesian point $(\sqrt{6}, -\sqrt{2}, -2\sqrt{2})$ has spherical coordinates $\mathbf{(4, 330^{\circ}, 135^{\circ})}$. To verify this, we use the conversion formulas on our claimed spherical coordinates into Cartesian coordiantes:
+\begin{itemize}
+	\item $4 \sin(135^{\circ})\cos(330^{\circ}) = 4\left(\tfrac{\sqrt{2}}{2}\right)\left(\tfrac{\sqrt{3}}{2}\right) = \sqrt{6}$.
+	\item $4 \sin(135^{\circ})\sin(330^{\circ}) = 4\left(\tfrac{\sqrt{2}}{2}\right)\left(-\tfrac{1}{2}\right) = -\sqrt{2}$.
+	\item $4 \cos(135^{\circ}) = 4\left(-\tfrac{\sqrt{2}}{2}\right) = -2\sqrt{2}$. 
+\end{itemize}
+Thus the spherical coordinate $(4, 330^{\circ}, 135^{\circ})$ and Cartesian coordinate $(\sqrt{6}, -\sqrt{2}, -2\sqrt{2})$ describe the same point.
+
+\subsection*{Problem 11}
+
+In Cartesian coordinates, the equation we seek is $x^{2} + y^{2} + z^{2} = R^{2}$; we must convert this equation to cylindrical coordinates. Letting a point $(x, y, z)$ on $S$ have cylindrical coordinates $r, \theta, z)$, we find that 
+\begin{align*}
+	r^{2} + z^{2} &= r^{2} (\cos^{2}(\theta) + \sin^{2}(\theta)) + z^{2} = r^{2} (\cos^{2}(\theta)) + r^{2} (\sin^{2}(\theta)) + z^{2} \\
+	&= (r \cos(\theta))^{2} + (r \sin(\theta))^{2} + z^{2} = x^{2} + y^{2} + z^{2} = R^{2}.
+\end{align*}
+The equation we seek is thus $r^{2} + z^{2} = R^{2}$. It is trivial to verify that all points $(r, \theta, z)$ such that $r^{2} + z^{2} = R^{2}$ lie on $S$, which completes the proof
+
+% --------------------------------------------- %
+
+\section{Section 1.5}
+
+\subsection*{Problem 7}
+
+If $\norm{\vec{v}} = \norm{\vec{w}}$ for two vectors $\vec{v}, \vec{w} \in \mathbb{R}^{n}$, then $\norm{\vec{v}}^2 = \norm{\vec{w}}^{2}$, so 
+\[
+	(\vec{v} + \vec{w}) \cdot (\vec{v} - \vec{w}) = (\vec{v} \cdot \vec{v}) - (\vec{v} \cdot \vec{w}) + (\vec{w} \cdot \vec{v}) - (\vec{w} \cdot \vec{w}) = \vec{v} \cdot \vec{v} - \vec{w} \cdot \vec{w} = \norm{\vec{v}}^{2} - \norm{\vec{w}}^{2} = 0.
+\]
+Hence, $\vec{v} + \vec{w}$ and $\vec{v} - \vec{w}$ are orthogonal.
+
+\subsection*{Problem 11}
+
+We claim that only $B$ is an intervible matrix. To verify, we find the determinant of all three matricies using the Rule of Sarrus:
+\begin{align*}
+	\det (A) &= \begin{vmatrix}	1 & 2 & 3 \\ 0 & 1 & 1 \\ 0 & 3 & 3 \end{vmatrix} = 3 + 0 + 0 - 0 - 0 -3 = 0, \\
+	\det (B) &= \begin{vmatrix} 0 & 0 & 3 \\ -1 & 1 & 19 \\ 2 & 3 & \pi \end{vmatrix} = 0 + 0 + (-9) - 6 - 0 - 0 = -15, \\
+	\det (C) &= \begin{vmatrix} 1 & 1 \\ 1 & 1 \end{vmatrix} = 1 - 1 = 0.
+\end{align*}
+We conclude that because $B$ has nonzero determinant, it is an invertible matrix --- and because $A$ and $C$ have a determinant of $0$, they are not invertible.
+
+\subsection*{Problem 12}
+
+The matrix $A$ maps the vector $(2, 2, -2)$ to $\vec{0}$, as verified by the following computation:
+\[
+	\begin{bmatrix}	1 & 2 & 3 \\ 0 & 1 & 1 \\ 0 & 3 & 3 \end{bmatrix} \begin{bmatrix} 2 \\ 2 \\ -2 \end{bmatrix} = \begin{bmatrix} 2 + 4 - 6 \\ 0 + 2 - 2 \\ 0 + 6 - 6 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
+\]
+
+\subsection*{Problem 14}
+
+We have that for all real numbers $x_{1}, x_{2}, \ldots x_{n}$ and $y_{1}, y_{2}, \ldots y_{n}$, 
+\begin{align*}
+	\left( \sum_{i = 1}^{n} x_{i}y_{i} \right)^{2} &= \sum_{i = 1}^{n} x_{i}^{2} y_{i}^{2} + \sum_{i < j} x_{i} y_{i} x_{j} y_{j}, \\
+	&= \left( \sum_{i = 1}^{n} x_{i}^{2} y_{i}^{2} + \sum_{1 \le i \ne j \le n} x_{i}^{2} y_{j}^{2} \right) - \left( \sum_{1 \le i \ne j \le n} x_{i}^{2} y_{j}^{2} - \sum_{i < j} x_{i} y_{i} x_{j} y_{j} \right), \\
+	&= \left( \sum_{i = 1}^{n} x_{i}^{2} \right) \left( \sum_{i = 1}^{n} y_{i}^{2} \right) - \sum_{i < j} (x_{i}y_{j} - x_{j}y_{i})^{2}. 
+\end{align*}
+
+The Trivial Inequality returns that $\sum_{i < j} (x_{i}y_{j} - x_{j}y_{i})^{2} \ge 0$. Therefore,
+\[
+	\left( \sum_{i = 1}^{n} x_{i}^{2} \right) \left( \sum_{i = 1}^{n} y_{i}^{2} \right) - \left( \sum_{i = 1}^{n} x_{i}y_{i} \right)^{2} = \sum_{i < j} (x_{i}y_{j} - x_{j}y_{i})^{2} \ge 0.
+\]
+Rearranging this yields 
+\[
+	\left( \sum_{i = 1}^{n} x_{i}^{2} \right) \left( \sum_{i = 1}^{n} y_{i}^{2} \right) \ge \left( \sum_{i = 1}^{n} x_{i}y_{i} \right)^{2}.
+\]
+which is the Cauchy-Schwarz Inequality.
+
+% --------------------------------------------- %
+
+\end{document}

@@ -1,0 +1,748 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\conjugate}[1]{\bar{#1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{Rudin: Basic Topology}
+\author{James Pagan}
+\date{December 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Finite, Countable, and Uncountable Sets}
+
+% --------------------------------------------- %
+
+\subsection{Functions}
+
+A \textbf{function} or \textbf{mapping} from a set $A$ to a set $B$ is an assignment of each element of $A$ to an element of $Y$. The set $A$ is called the \textbf{domain}, $B$ is called the \textbf{codomain}, the elements $f(x)$ are called the \textbf{values} of $f$, and the set of all $f(x)$ is called the \textbf{image} of $f$. SUch a relation is notated as $f : A \to B$.
+
+The \textbf{inverse image} $f^{-1}(E)$ of a subset $E \subset B$ is the set of all $x \in A$ such that $f(x) \in E$. $f^{-1}(y)$ for $y \in B$ denotes the set of all $x \in A$ such that $f(x) = y$. If $f^{-1}(y)$ contains of one element of $A$ for each $y \in B$, then $f$ is said to be an \textbf{bijective} (or one-to-one) mapping of $A$ into $B$.
+
+If there exists a bijective mapping of $A$ onto $B$, we say that $A$ and $B$ can be put into \textbf{one-to-one correspondence} (or that $A$ and $B$ have the same cardinal number, or that they are equivalent), and we write $A \sim B$. Trivially, this relation has the following properties:
+\begin{itemize}
+	\item \textbf{Reflexivity}: $A \sim A$.
+	\item \textbf{Symmetry}: $A \sim B$ if and only if $B \sim A$.
+	\item \textbf{Transitivity}: $A \sim B$ and $B \sim C$ implies that $A \sim C$.
+\end{itemize}
+Any relation with these three properties is called an \textbf{equivalence relation}. Intuitively, we have that $A \sim B$ if and only if $A$ and $B$ have the ``same number of elements''.
+
+% --------------------------------------------- %
+
+\subsection{Cardinality}
+
+Let $J_{n}$ be the set whose elements are the integers $0, \ldots, n - 1$; let $J$ be the set consisting of all nonnegative integers. Then for any set $A$, we say:
+\begin{itemize}
+	\item $A$ is \textbf{finite} if $A \sim J_{n}$ for some $n$.
+	\item $A$ is \textbf{infinite} if $A$ is not finite.
+	\item $A$ is \textbf{countable} if $A \sim J$.
+	\item $A$ is \textbf{uncountable} if $A$ is neither finite nor countable.
+	\item $A$ is \textbf{at most countable} if $A$ is neither finite or countable.
+\end{itemize}
+Let $K$ be the set of nonnegative integers. Then $K$ has the same cardinal number as $J$:
+\begin{align*}
+	K &= 0, 1, 2, 3, 4, 5, 6, 7, 8, \ldots \\
+	J &= 0, -1, 1, -2, 2, -3, 3, -4, 4, \ldots
+\end{align*}
+The function exhibited by the relation above is the following function:
+\[
+	\begin{cases}
+		\tfrac{n}{2} & n \text{ is even} \\
+		-\tfrac{n + 1}{2} & n \text{ is odd}.
+	\end{cases}
+\]
+A finite set cannot have the same cardinal number as one of its proper subsets. However, this is always possible for infinite sets --- for instance, via a subset formed by removing one single element. This is an alternative definition of an infinite set.
+
+% --------------------------------------------- %
+
+\subsection{Sequences} 
+
+A \textbf{sequence} is a function $f$ defined on the set $\mathbb{Z}_{> 0}$ or $\mathbb{Z}_{\ge 0}$ (which we shall denote neutrally by $J$). If $f(x) = x_{n}$ for $n \in J$, we often denote the total sequence by ${x_{n}}$ or by $(x_{0}), x_{1}, x_{2}, x_{3}, \ldots$. The values of $f$ are called the \textbf{terms} of the sequence. If $A$ is a set and $x_{n} \in A$ for all $n \in J$, then ${x_{n}}$ is called a sequence in $A$.
+
+A countable set is the range of a bijective function with domain over $J$; therefore, we may regard all countable functions as the range of a sequence with distinct terms. Intuitively, a countable set can be ``arranged in a sequence.''
+
+\begin{theorem}
+	Every infinite subset of a countable set $A$ is countable.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose $E \subset A$ and $E$ is infinite. Arrange the elements of $A$ into a sequence ${x_{n}}$ of distinct elements.
+
+		Let $n_{1}$ be the smallest integer such that $x_{n_{1}} \in E$, let $n_{2}$ be the smallest integer larger than $n_{1}$ such that $x_{n_{2}} \in E$, and so on. More formally, define $n_{k}$ recursively:
+		\[
+			n_{k} = \min \{ m \in \mathbb{Z} \mid x_{m} \in E, m > \max \{ n_{1}, \ldots, n_{n} \} \}.
+		\]
+		The fact $E$ is infinite implies that $x_{n_{1}}, x_{n_{2}}, \ldots$ is an infinite sequence with distinct elements.
+
+		The function $f(m) = x_{n_{m}}$ for $m \in \mathbb{Z}_{> 0}$ thus obtains a bijection between $A$ and $J$. We conclude that $A$ is countable.
+	\end{proof}
+\end{adjustwidth}
+
+In some sense, $J$ is the ``smallest infinity;'' subsets of $J$ are either finite or countable. Conversely, the Axiom of Choice implies that all uncountable sets have a countable subset. 
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Union and Intersection}
+
+Let $A$ and $\Omega$ be sets, and suppose that with each element $\alpha$ of $A$, there is a corresponding subset of $\Omega$ which we denote by $E_{\alpha}$. The set whose elements are the sets $E_{\alpha}$ will be denoted by $\{ E_{\alpha} \}$. We sometimes refer to a set of sets as a \textit{collection} or \textit{family} of sets.
+
+The \textbf{union} of the sets $E_{\alpha}$ is defined to be the set $S$ such that $x \in S$ if and only if $x \in E_{\alpha}$ for at least one $\alpha \in A$. We use the notation
+\[
+	S = \bigcup\limits_{\alpha \in A} E_{\alpha}.
+\]
+If $A$ consists of the integers $1, \ldots n$, we use the notation $S = \bigcup\limits_{i = 1}^{n} E_{i}$ or $S = E_{1} \cup \cdots \cup E_{n}$.
+
+The \textbf{intersection} of the sets $E_{\alpha}$ is defined to be the set $P$ such that $x \in P$ if and only if $x \in \alpha$ for all $\alpha \in A$. We will use the notation
+\[
+	S = \bigcap\limits_{\alpha \in A} E_{\alpha},
+\]
+with similar notation above if $A$ is the positive integers or a subset thereof. It is trivial that unions and intersections are associative and commutative.
+
+\begin{theorem}
+	If $A$, $B$, and $C$ are sets, the following distributive laws hold:
+	\begin{align}
+		A \cap (B \cup C) = (A \cap B) \cup (A \cap C) \\
+		A \cup (B \cap C) = (A \cup B) \cap (A \cup C)
+	\end{align}
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		For (1), suppose $x \in A \cap (B \cup C)$. Then $x \in A$ and $x \in (B \cup C)$ --- we \textit{must} have that $x \in B$ or $x \in C$. Then $x \in (A \cap B)$ or $x \in (A \cap C)$, so in all cases, $x \in (A \cap B) \cup (A \cap C)$.
+
+		Conversely, suppose $x \in (A \cap B) \cup (A \cap B)$. Then $x \in (A \cap B)$ or $x \in (A \cap C)$. Therefore, $x \in A$, and $x \in B$ or $x \in C$; we conclude that $x \in A \cap (B \cup C)$.
+
+		Hence, $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$. Identity (2) has a similar proof.
+	\end{proof}
+\end{adjustwidth}
+Several more trivial identities include $A \subset A \cup B$ and $(A \cap B) \subset A$ for all sets $A$ and $B$. If $A \subset B$, then $A \cup B = B$ and $A \cap B = A$. The empty set is denoted $\varnothing$.
+
+\newpage
+
+\begin{theorem}
+	Let $E_{1}, E_{2}, \ldots$ be a sequence of countable sets, and put
+	\[
+		S = \bigcup\limits_{n = 1}^{\infty} E_{n}.
+	\]
+	Then $S$ is countable.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		For each $n \in \mathbb{Z}_{> 0}$, let $E_{n}$ be arrange in a sequence $x_{n1}, x_{n2}, \ldots$, and consider the infinite array.
+		\[
+			\begin{array}{ccccc}
+				x_{11} & x_{12} & x_{13} & x_{14} & \cdots \\
+				x_{21} & x_{22} & x_{23} & x_{24} & \cdots \\
+				x_{31} & x_{32} & x_{33} & x_{34} & \cdots \\
+				x_{41} & x_{42} & x_{43} & x_{44} & \cdots \\
+				\vdots & \vdots & \vdots & \vdots & \ddots
+			\end{array}
+		\]
+		If we ``travel in diagonal lines'', we produce the sequence
+		\[
+			x_{11}, x_{21}, x_{12}, x_{31}, x_{22}, x_{13}, x_{41}, x_{32}, x_{23}, x_{14}, \ldots.
+		\]
+		This can be formalized by a rather painful argument invoving $\tfrac{n(n + 1)}{2}$. If we accept this construction, it is easy to see that each $x_{ij}$ for $i, j \in \mathbb{Z}_{> 0} \in S$ lies in the sequence --- and clearly each element of the sequence is a member of $S$. 
+
+		Then $S$ and the sequence have the same cardinal number, so $S$ is countable.
+	\end{proof}
+\end{adjustwidth}
+
+A corollary is that if $A$ is at most countable --- and $B_{\alpha}$ is at most countable for each $\alpha \in A$ --- then put 
+\[
+	T = \bigcup\limits_{\alpha \in A} B_{\alpha}.
+\]
+Then $T$ is at most countable. This is because $T$ is equivalent to a subset of $S$ defined in the prior theorem.
+
+\begin{theorem}
+	Let $A$ be a countable set, and let $B_{n}$ be the set of all $n$-tuples $(a_{1}, \ldots, a_{n})$, where $a_{k} \in A$ for all $k \in \{ 1, \ldots, n \}$. Then $B$ is countable.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		We use induction. Clearly $B_{1}$ is countable, as $A = B_{1}$; we thus proceed to the assumption that $B_{n}$ is countable. Realize the following one-to-one correspondence between elements of $B_{n + 1}$ and pairs of an element of $B_{n}$ and $A$:
+		\[
+			(a_{1}, \ldots, a_{n}, a_{n + 1}) \iff \{(a_{1}, \ldots, a_{n}), a_{n + 1}\}
+		\]
+		Then define $B_{\alpha} = \{ b, \alpha \mid b \in B_{n} \}$ for each $\alpha \in A$. Clearly $B_{\alpha} \sim B_{n}$ for fixed $\alpha$, so each $B_{\alpha}$ is countable. Then
+		\[
+			B_{n + 1} \sim \bigcup\limits_{\alpha \in A} B_{a}.
+		\]
+		By Theorem 3, the right-hand side is countable. This completes the induction.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+A corollary of this theorem is that $\mathbb{Q}$ is countable, as by the one-to-one correspondence $\tfrac{a}{b} \iff (a, b)$. Thus $\mathbb{Q} \subset \mathbb{Z}_{2}$, so $\mathbb{Q}$ is at most countable; $\mathbb{Q}$ must be countable as it contains the countable set $\mathbb{Z}$.
+
+\begin{theorem}
+	The set $A$ of all sequences whose elements are the digits $0$ and $1$ is uncountable.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose $x_{1}, x_{2}, \ldots$ is a family of all sequences whose elements are the digits $0$ and $1$. Consider the element $x$ formed by swapping the first digit of $x_{1}$, the second digit of $x_{2}$, the third digit of $x_{3}$, and so on. We claim that $x \notin \{ x_{n} \}$
+		
+		Suppose for contradiction that $x \in \{ x_{n} \}$ --- namely, that there exists $r \in \mathbb{Z}_{> 0}$ such that $x = x_{r}$. We defined the $r$-th digit of $x$ to be distinct from $x_{r}$, so they cannot be equal --- a contradiction.
+		
+		Thus, any mapping from the positive integers to $A$ will exclude some sequence in $A$. We conclude that $A$ is not countable.
+	\end{proof}
+\end{adjustwidth}
+
+This theorem --- combined with knowledge of binary notation --- implies that the set of all real numbers is uncountable. We will elaborate on this proof later in this document.
+
+% --------------------------------------------- %
+
+\section{Metric Spaces}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{metric space} is a set $X$ equipped with a function $d : X \times X \to \mathbb{R}$ called a \textbf{metric} that satisfies the following four axioms for all $x, y, z \in X$:
+\begin{enumerate}
+	\item \textbf{Positivity}: $d(x, y) \ge 0$, with equality if and only if $x = y$.
+	\item \textbf{Symmetry}: $d(x, y) = d(y, x)$.
+	\item \textbf{Triangle Inequality}: $d(x, z) + d(z, y) \ge d(x, y)$.
+\end{enumerate}
+The elements of $X$ are called \textbf{points}.
+
+% --------------------------------------------- %
+
+\subsection{Multiple Complex Variables}
+
+The most critical metric spaces are $\mathbb{R}^{n}$ (particularly $\mathbb{R}$) and $\mathbb{C}$. To elaborate upon both simultaneously, these documents will expand upon $\mathbb{C}^{n}$, equipped with the Euclidean norm for all $\vec{z} = (z_{1}, z_{2}, \ldots, z_{n}) \in \mathbb{C}^{n}$:
+\[
+	\norm{\vec{z}} = \sqrt{\abs{z_{1}}^{2} + \abs{z_{2}}^{2} + \cdots + \abs{z_{n}}^{2}}
+\]
+\newpage
+\begin{theorem}
+	The Triangle Inequality holds for all $\vec{z}, \vec{w} \in \mathbb{C}^{n}$:
+	\[
+		\norm{\vec{z}} + \norm{\vec{w}} \ge \norm{\vec{z} + \vec{w}}.
+	\]
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $\vec{z} = (z_{1}, \ldots, z_{n})$ and $\vec{w} = (w_{1}, \ldots, w_{n})$. Assuming the Triangle Inequality in $\mathbb{C}$, we have that
+		\begin{align*}
+			\norm{\vec{z}} + \norm{\vec{w}} &= \sqrt{\sum\limits_{i = 1}^{n} \abs{z_{i}}^{2}} + \sqrt{\sum\limits_{i = 1}^{n} \abs{w_{i}}^{2}} \\
+			&= \sqrt{\left(\sqrt{\sum\limits_{i = 1}^{n} \abs{z_{i}}^{2}} + \sqrt{\sum\limits_{i = 1}^{n} \abs{w_{i}}^{2}}\right)^{2}} \\
+			&= \sqrt{\sum\limits_{i = 1}^{n} \abs{z_{i}}^{2} + 2 \sqrt{\left( \sum\limits_{i = 1}^{n} \abs{z_{i}}^{2} \right)\left( \sum\limits_{i = 1}^{n} \abs{w_{i}}^{2} \right)} + \sum\limits_{i = 1}^{n} \abs{w_{i}}^{2}} \\
+			&\ge \sqrt{\sum\limits_{i = 1}^{n} \abs{z_{i}}^{2} + 2 \sum\limits_{i = 1}^{n} \abs{z_{i}w_{i}} + \sum\limits_{i = 1}^{n} \abs{w_{i}}^{2}} \\
+			&= \sqrt{\sum\limits_{i = 1}^{n} \left( \abs{z_{i}}^{2} + 2 \abs{z_{i}w_{i}} + \abs{w_{i}}^{2} \right)} \\
+			&= \sqrt{\sum\limits_{i = 1}^{n} \left(\abs{z_{i}} + \abs{w_{i}}\right)^{2}} \\
+			&\ge \sqrt{\sum\limits_{i = 1}^{n} \abs{z_{i} + w_{i}}^{2}} \\
+			&= \norm{\vec{z} + \vec{w}}.
+		\end{align*}
+		Thus, $\mathbb{C}^{n}$ is a metric space.
+	\end{proof}
+\end{adjustwidth}
+
+$\mathbb{C}^{n}$ is also equipped with a dot product that maps vectors to scalars:
+\[
+	\vec{z} \cdot \vec{w} = z_{1} \conjugate{w_{1}} + \cdots + z_{n} \conjugate{w_{n}}.
+\]
+The properties of the complex dot product are expanded in my Linear Alebra notes: the document AbstractAlgebra/axler6.tex.
+
+\newpage
+
+In $\mathbb{R}^{k}$, a \textbf{k-cell} is a multi-dimensional analogue of a box, defined if $a_{i} < b_{i}$ for all $i \in \{ 1, \ldots, k \}$ as 
+\[
+	\{ (x_{1}, \ldots, x_{k}) \mid a_{i} \le x_{i} \le b_{i} \text{ for all } i \in \{ 1, \ldots, k \} \}.
+\]
+A set $E \in \mathbb{R}^{n}$ is \textbf{convex} if the line collecting any two points of $E$ lines within $E$; namely if
+\[
+	\lambda \vec{x} + (1 - \lambda) \vec{y} \in E
+\]
+for all $\vec{x}, \vec{y} \in E$ and $\lambda \in [0, 1]$. Trivially, open balls are convex.
+
+% --------------------------------------------- %
+
+\subsection{Topological Notions}
+
+Let $X$ be a metric space. Then the natural topology upon $X$ is as follows for $x \in X$ and $E \subseteq X$:
+\begin{itemize}
+	\item An \textbf{open ball} of radius $r \in \mathbb{R}_{> 0}$ situated at $x$ (denoted $B_{r}(x)$) is the set of all $y \in X$ such that $d(x, y) < r$. 
+	\item $x$ is a \textbf{limit point} of $E$ if every open ball at $x$ contains a point inside $E$.
+	\item $x$ is an \textbf{interior point} of $E$ if there exists an open ball $N$ at $x$ such that $N \subseteq X$.
+	\item $x$ is an \textbf{isolated point} of $E$ if $p \in E$ and $x$ is not a limit point of $E$.
+	\item $E$ is an \textbf{open set} if all $y \in X$ are interior points.
+	\item $E$ is a \textbf{closed set} if it contains all its limit points.
+	\item The \textbf{complement} of $E$ (denoted $E^{\complement}$) is the set of all points $x \in X$ such that $x \notin E$.
+	\item $E$ is \textbf{perfect} if $E$ is closed and if every point of $E$ is a limit point of $E$.
+	\item $E$ is \textbf{bounded} if there exists an open ball $B_{r}(x)$ for $x \in X$ such that $E \subseteq B_{r}(x)$.
+	\item $E$ is \textbf{dense} in $X$ if $E = X$ or every point of $X$ is a limit point of $E$.
+\end{itemize}
+
+Rudin uses the term \textbf{neighborhood} to speak of an open ball; I will use it to speak of a set that contains an open ball.
+
+\newpage
+
+\begin{theorem}
+	Every open ball is an open set.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Denote $N$ by the open ball centered at $x \in X$ with radius $r > 0$, and let $y \in N$ --- that is, $d(x, y) < r$.
+
+		If $x \ne y$, denote $M$ as the open ball centered at $y$ with radius $r - d(x, y)$. If $z \in M$, then $d(z, y) < r - d(x, y)$, so
+		\[
+			d(z, x) \le d(z, y) + d(y, x) < r - d(x, y) + d(y, x) = r.
+		\]
+		Hence, $z \in N$ and $M \subseteq N$. Then each $y \in N$ is an interior point; the case $x = y$ is trivial.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $x$ is a limit point of $E$, then every open ball at $x$ contains infinitely many points of $E$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose for contradiction that there exists an open ball $N$ at $x$ that contains only a finite number of points of $E$. Denote the points $x_{1}, \ldots, x_{n}$ as the points of $N \cap E$. Then we define:
+		\[
+			r = \min \{ d(x_{1}, x), \ldots, d(x_{n}, x) \}
+		\]
+		The open ball at $x$ with radius $r$ contains none of these points, and is entirely within $N$; we deduce it should not contain a point in $E$. This contradicts the fact $x$ is a limit point.
+	\end{proof}
+\end{adjustwidth}
+\begin{corollary}
+	A finite set has no limit points.
+\end{corollary}
+
+We will enumerate the topological properties of the following sets. If a property (excluding compactness and connectedness) is not listed, it fails to hold:
+\begin{enumerate}
+	\item The set of all complex $z$ such $\abs{z} < 1$ is open and bounded.
+	\item The set of all complex $z$ such that $\abs{z} \le 1$ is closed, perfect, and bounded.
+	\item A nonempty finite set is closed and bounded.
+	\item The set of all integers is closed.
+	\item The set consisting of the numbers $1, \tfrac{1}{2}, \tfrac{1}{3}, \tfrac{1}{4}, \ldots$ is bounded.
+	\item The set consisting of all complex numbers is closed, open, and perfect.
+	\item The segment $(a, b) \subset \mathbb{R}^{1}$ is open and bounded.
+\end{enumerate}
+
+\newpage
+
+\begin{theorem}
+	Let $\{ E_{\alpha} \}$ be a collection of sets $E_{\alpha}$. Then
+	\[
+		\left( \bigcup\limits_{\alpha} E_{\alpha} \right)^{\complement} = \bigcap\limits_{\alpha} \left( E_{\alpha}^{\complement} \right)
+	\]
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		If $x \in \left( \bigcup_{\alpha} E_{\alpha} \right)^{\complement}$, then $x \notin \bigcup_{\alpha} E_{\alpha}$ and $x \notin E_{\alpha}$ for all $\alpha$. Then $x \in E_{\alpha}^{\complement}$ for all $\alpha$, so $x \in \bigcap\_{E_{\alpha}^{\complement}}$. Hence 
+		\[
+			\left( \bigcup_{\alpha} E_{\alpha} \right)^{\complement} \subseteq \bigcap\limits_{\alpha} \left( E_{\alpha}^{\complement} \right).
+		\]
+		Conversely, if $x \in \bigcap\limits_{\alpha} \left( E_{\alpha}^{\complement} \right)$, then $x \in E_{\alpha}^{\complement}$ for each $\alpha$; then $x \notin E_{\alpha}$ for each $\alpha$, and $x \notin \bigcup_{\alpha} E_{\alpha}$. Thus $x \in \left( \bigcup_{\alpha} E_{\alpha} \right)^{\complement}$, so
+		\[
+			\left( \bigcup\limits_{\alpha} E_{\alpha} \right)^{\complement} \supseteq \bigcap\limits_{\alpha} \left( E_{\alpha}^{\complement} \right)
+		\]
+		We conclude that $ \left( \bigcup_{\alpha} E_{\alpha} \right)^{\complement} = \bigcap_{\alpha} \left( E_{\alpha}^{\complement} \right)$.
+	\end{proof}
+\end{adjustwidth}
+
+
+\begin{theorem}
+	$E$ is an open set if and only if $E^{\complement}$ is a closed set.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $E$ be an open set and let $x$ be a limit point of $E^{\complement}$. Suppose for contradiction that $x \in E$. Then $x$ is an interior point of $E$, so there exists an open ball $N$ such that $N \subseteq E$; this contradicts the fact that $x$ is a limit point of $E^{\complement}$. We conclude that $x \in E^{\complement}$, so $E^{\complement}$ is closed.
+
+		Now, suppose that $E^{\complement}$ is a closed set, and let $x \in E$. Suppose for contradiction that there does not exist an open ball $N$ at $x$ such that $N \subseteq E$. Then $x$ is a limit point; as $E^{\complement}$ is closed, $x \in E^{\complement}$. This contradiction leads us to conclude that $x$ is an interior point, so $E$ is open.
+	\end{proof}
+\end{adjustwidth}
+\begin{corollary}
+	$F$ is a closed set if and only if $F^{\complement}$ is open.
+\end{corollary}
+
+\newpage
+
+\begin{theorem}
+	The following four results hold:
+	\begin{enumerate}
+		\item For any collection $G_{\alpha}$ of open sets, $G = \bigcup_{\alpha} G_{\alpha}$ is open.
+		\item For any collection $F_{\alpha}$ of closed sets, $F = \bigcap_{\alpha} F_{\alpha}$ is closed.
+		\item For any finite collection $G_{1}, \ldots, G_{n}$ of open sets, $G = \bigcap_{i = 1}^{n} G_{i}$ is open.
+		\item For any finite collection $F_{1}, \ldots, F_{n}$ if closed sets, $F = \bigcup_{i = 1}^{n} F_{i}$ is closed.
+	\end{enumerate}
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		For (1): If $x \in G$, then $x \in G_{\alpha}$ for some index $\alpha$. As $G_{\alpha}$ is open, there exists an open ball $N$ at $x$ such that $N \subseteq G_{\alpha}$; thus $N \subseteq G$, so $G$ is open.
+
+		For (2): We take complements. The set $F_{\alpha}^{\complement}$ are all open sets, so
+		\[
+			\bigcup\limits_{\alpha} F_{\alpha}^{\complement} = \left( \bigcap\limits_{\alpha} F_{\alpha} \right)^{\complement}
+		\]
+		is open. Then $\bigcap_{\alpha} F_{\alpha} = F$ is closed.
+
+		For (3): If $x \in G$, then $x \in G_{i}$ for all $i \in \{ 1, \ldots, n \}$. Then for each $i \in \{ 1, \ldots, n \}$, there exists an open ball $N_{i}$ centered at $x$ with radius $r_{i}$ such that $N_{i} \subseteq G_{i}$. Define
+		\[
+			r = \min \{ r_{1}, \ldots, r_{n} \},
+		\]
+		and let $N$ be the open ball of radius $N$ centered at $x$. Then $N \subseteq N_{i} \subseteq G_{i}$ for each $i \in \{ 1, \ldots, n \}$, so $N \subseteq G$; hence $x$ is an interior point, and $G$ is open.
+
+		For (4): We take complements. The sets $F_{1}^{\complement}, \ldots, F_{n}^{\complement}$ are open, so
+		\[
+			\bigcap\limits_{i = 1}^{n} (F_{i}^{\complement}) = \left( \bigcup\limits_{i = 1}^{n} F_{i} \right)^{\complement}
+		\]
+		is open; thus $\bigcup_{i = 1}^{n} F_{i}$ is closed. It is trivial to further deduce that results (3) and (4) fail for infinite collections of sets.
+	\end{proof}
+\end{adjustwidth}
+
+Let $X$ be a metric space, $E$ be a set in $X$, and $E'$ be the set of all limit points of $E$ in $X$. Then the \textbf{closure} if $E$ is the set $\overline{E} = E \cup E'$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Let $X$ be a metric space and $E \subset X$. Then
+		\begin{enumerate}
+			\item $\overline{E}$ is closed.
+			\item $E = \overline{E}$ if and only if $E$ is closed.
+			\item $\overline{E} \subseteq F$ for every closed set $F \subseteq X$ such that $E \subseteq F$.
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		For (1): Suppose that $x \in \overline{E}^{\complement}$, so $x \notin E$ and $x \notin E'$. Then $x$ is not a limit point of $E$, so there exists an open ball $N_{1}$ at $x$ of radius $r_{1}$ disjoint from $E$ --- that is, $N_{1} \subseteq E^{\complement}$.
+
+		Suppose for contradiction that $x$ is a limit point of $E'$; then for all $\epsilon > 0$, the open ball of radius $\epsilon$ at $x$ contains a point of $E'$. Denoting this point by $y$, we have $d(x, y) < r$; thus, consider the open ball at $y$ of all $z$ such that
+		\[
+			d(y, z) < r - d(x, y).
+		\]
+		As $y \in E'$, $y$ is a limit point of $E$; thus there exists a $z_{0} \in E$ in the open ball defined above. By the Triangle Inequality,
+		\[
+			d(x, z_{0}) \le d(x, y) + d(y, z_{0}) < d(x, y) + r - d(x, y) = r.
+		\]
+		Thus $z_{0}$ lies in the open ball of radius $\epsilon$. We conclude that all open balls centered at $x$ contain a point in $E$, so $x$ is a limit point of $E$ --- a contradiction. We conclude that $x$ is not a limit point of $E'$; so, there exists an open ball $N_{2}$ at $x$ of radius $r_{2}$ disjoint from $E'$ --- that is, $N_{2} \subseteq (E')^{\complement}$. 
+		
+		Defining $r = \min \{ r_{1}, r_{2} \}$ and $N$ as the open ball of radius $r$ at $x$, we have $N \subseteq N_{1} \subseteq E^{\complement}$ and $N \subseteq N_{2} \subseteq (E')^{\complement}$; thus,
+		\[
+			N \subseteq E^{\complement} \cap \left( E' \right)^{\complement} = \left( E \cup E' \right)^{\complement} = \overline{E}^{\complement}.
+		\]
+    Hence $\overline{E}^{\complement}$ is an open set, so $\overline{E}$ is closed. For (2): If $E = \overline{E}$, then $E$ contains all of its limit points, so it is closed. If $E$ is a closed set, then $E' \subseteq E$, so $\overline{E} = E \cup E' = E$.
+		
+		For (3): Suppose $F$ is a closed set in $X$ such that $E \subseteq F$. Then $F' \subseteq F$; since limit points of $E$ are limit points of $F$, $E' \subseteq F'$ --- hence $E' \subseteq F$. We conclude that $\overline{E} = E \cup E' \subseteq F$.
+	\end{proof}
+\end{adjustwidth}
+
+This implies that $\overline{E}$ is the smallest closed set in $X$ that contains $E$.
+
+\begin{theorem}
+	Let $E$ be a nonempty set of real numbers which is bounded above, and set $y = \sup E$. Then $y \in \overline{E}$; hence $y \in E$ if $E$ is closed.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		If $y \in E$, then $y \in \overline{E}$. If $y \notin E$: by the minimality of $y$, there exists $x \in E$ such that $y - \epsilon < x$ for all $\epsilon > 0$. Hence, open balls at $y$ of arbitrary radius $\epsilon$ contain a point in $E$, so $y$ is a limit point. Then $y \in E' \subseteq \overline{E}$.
+	\end{proof}
+\end{adjustwidth}
+
+Suppose $E \subseteq Y \subseteq X$. It is important to note that $Y$ is a metric space in its own right under the distance of $X$; it is possible for $E$ to be an open set in $X$, but not $Y$. We say that $E$ is \textbf{open relative} to $Y$ if for each $x \in E$ there is $r > 0$ such that $y \in Y$ and $d(x, y) < r$ implies $y \in E$.
+
+\begin{theorem}
+	Suppose $Y \subseteq X$. A subset $E$ of $Y$ is open relative to $Y$ if and only if $E = Y \cap G$ for some open subset $G$ of $X$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose that $E$ is open relative to $y$; then for each $x \in R$, there is $r_{x} > 0$ such that $y \in Y$ and $d(x, y) < r_{p}$ implies $y \in E$. Then define $N_{x}$ as the open ball centered at $x \in E$ with radius $r_{x}$, and consider the set
+		\[
+			G = \bigcup\limits_{x \in E} N_{x}.
+		\]
+		$G$ is an open subset of $X$ by Theorems 7 and 11. It is easy to see that $E \subseteq Y \cap G$; as per the converse, it is clear that $N_{x} \cap Y \subseteq E$, so performing an infinite union yields $G \cap y \subseteq E$. We conclude that $E = G \cap Y$
+		
+
+		The contrary is quite easy to see: if $E = Y \cap G$, then $x \in E$ implies that $x \in Y$ and $x \in N_{x}$, so there exists $r_{x} > 0$ such that $d(x, y) < r_{x}$ and $x \in Y$ implies $x \in E$. By definition, $E$ is open relative to $Y$.
+	\end{proof}
+\end{adjustwidth}
+
+An \textbf{open cover} of a set $E$ in a metric space $X$ is a collection $\{ G_{\alpha} \}$ of open subsets of $X$ such that $E \subseteq \bigcup_{\alpha} G_{\alpha}$.
+
+% --------------------------------------------- %
+
+\section{Compact Sets}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A subset $K$ of a metric space $X$ is \textbf{compact} if every open cover of $K$ contains a \textit{finite} subcover --- if for all open covers $\{ G_{\alpha} \}$ of $K$, there exist finitely many indicies $\alpha_{1}, \ldots, \alpha_{n}$ such that
+\[
+	K \subseteq G_{\alpha_{1}} \cup \cdots \cup G_{\alpha_{n}}.
+\]
+All finite sets are clearly compact --- we may simply select one open set that contains each element to attain a finite subcovering. Temporarily, let $K$ be compact relative to $X$ if the definition above is satisfied.
+
+\newpage
+
+\subsection{In Metric Spaces}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Suppose $K \subseteq Y \subseteq X$. Then $K$ is compact to $X$ if and only if $K$ is compact relative to $Y$
+	\end{theorem}
+	\begin{proof}
+		Suppose that $K$ is compact relative to $X$, and let $\{ G_{a} \}$ be a collection of sets open relative to $Y$ such that $K \subseteq \bigcup_{\alpha} G_{\alpha}$. By Theorem 14, there exist sets $H_{\alpha}$ open relative to $X$ such that for each $\alpha$,
+		\[
+			G_{\alpha} = H_{\alpha} \cap Y.
+		\]
+		As $K \subseteq \bigcap_{\alpha} H_{\alpha}$, the sets $H_{\alpha}$ constitute an open covering of $K$ in $X$. As $K$ is compact, there exist indicies $\alpha_{1}, \ldots, \alpha_{n}$ such that
+		\[
+			K \subseteq \bigcup\limits_{i = 1}^{n} H_{\alpha_{i}}.
+		\]
+		As $K \subseteq Y$, we have
+		\[
+			K \subseteq \left( \bigcup\limits_{i = 1}^{n} H_{\alpha_{i}} \right) \cap Y = \bigcup\limits_{i = 1}^{n} (H_{\alpha_{i}} \cap Y) = \bigcup\limits_{i = 1}^{n} G_{\alpha_{i}}.
+		\]
+		$G_{\alpha_{i}}$ constitute an open covering of $K$ in $Y$, so $K$ is compact in $Y$. Now, let us suppose $K$ is compact relative to $Y$, and let $\{ H_{\alpha} \}$ be an open covering of $K$ in $X$. Set
+		\[
+			G_{\alpha} = H_{\alpha} \cap Y.
+		\]
+		for sets $G_{\alpha}$ open relative to $Y$. Then as $K \subseteq Y$ and $K \subseteq \bigcup_{\alpha} H_{\alpha}$, similar logic applies:
+		\[
+			K \subseteq \left( \bigcup\limits_{i = 1}^{n} H_{\alpha_{i}} \right) \cap Y = \bigcup\limits_{i = 1}^{n} (H_{\alpha_{i}} \cap Y) = \bigcup\limits_{i = 1}^{n} G_{\alpha_{i}}.
+		\]
+		So $G_{\alpha}$ is an open covering of $K$ in $Y$; then there exist finitely indicies such that
+		\[
+			K \subseteq \bigcup\limits_{i = 1}^{n} G_{\alpha_{i}} \subseteq \bigcup\limits_{i = 1}^{n} H_{\alpha_{i}},
+		\]
+		so $K$ is compact in $X$. This concludes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	Any closed subset $F$ of a compact set $K$ is compact.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose $F \subseteq K \subseteq X$, for closed $F$ and compact $K$. Suppose $\{ G_{\alpha} \}$ is an open cover of $F$ --- then $\left( \bigcup_{\alpha} G_{\alpha} \right) \cup F^{\complement}$ is an open cover of $K$, and thus contains a finite subcover.
+
+		If $F^{\complement}$ is a member of this finite subcover, we may remove it to obtain a finite subcover of $F$; thus a finite subcollection of $\{ G_{\alpha} \}$ contains $F$, so $F$ is compact.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+\begin{theorem}
+	Any compact subset $K$ of a metric space $X$ is closed.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof} 
+		We will prove that $K^{\complement}$ is open --- that if $x \in K^{\complement}$, there exists an open ball centered at $x$ contained outside $K$. One $x$ is selected, construct an open covering of $K$ as follows: for any $k \in K$, let $N_{k}$ be the open ball centered at $k$ with radius $\tfrac{1}{2} d(x, k)$. Then
+		\[
+			\bigcup_{k \in K} N_{k}
+		\]
+		is an open covering of $K$; since $K$ is compact, there exist $k_{1}, \ldots, k_{n}$ such that $K \subseteq N_{k_{1}} \cup \cdots \cup N_{k_{n}}$. Then the open ball $N$ at $x$ with radius $\min \{ d(x, k_{1}), \ldots, d(x, k_{n}) \}$ is disjoint from each $N_{k_{i}}$ (say, by contradiction using the Triangle Inequalty), so
+		\[
+			N \cap K \, \subseteq \, N \cap (N_{k_{1}} \cup \cdots \cup N_{k_{n}}) \, = \, \varnothing.
+		\]
+		Thus $N \subseteq K^{\complement}$. We deduce that $K^{\complement}$ is open, so $K$ is closed.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{corollary}
+	If $F$ is closed and $K$ is compact, then $F \cap K$ is compact.
+\end{corollary}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Since $K$ is closed, $F \cap K$ is closed subset of $K$; thus it is compact.
+	\end{proof}
+\end{adjustwidth}
+
+\subsection{The Heine-Borel Theorem}
+
+\begin{theorem}
+	Suppose $\{ K_{\alpha} \}$ are compact in $X$. If the intersection of every finite subcollection of $\{ K_{\alpha} \}$ is nonempty, then $\bigcap_{\alpha} K_{\alpha}$ is nonempty.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Fix $K_{1}$ of $\{ K_{\alpha} \}$; suppose for contradiction that for all $k \in K_{1}$, there exists $\alpha$ such that $k \notin K_{\alpha}$. Then $k \in K_{a}^{\complement}$, so $\{ K_{\alpha}^{\complement} \}$ forms an open covering of $K_{1}$. We deduce the existence of indicies $\alpha_{1}, \ldots, \alpha_{n}$ such that
+		\[
+			K_{1} \subseteq K_{\alpha_{1}}^{\complement} \cup \cdots \cup K_{\alpha_{n}}^{\complement};
+		\]
+		or equivalently,
+		\[
+			K_{1}^{\complement} \supseteq K_{\alpha_{1}} \cap \cdots \cap K_{\alpha_{n}}.
+		\]
+		This yields the desired contradiction, since
+		\[
+			(K_{\alpha_{1}} \cap \cdots \cap K_{\alpha_{n}}) \cap K_{1} = K_{1}^{\complement} \cap K_{1} = \varnothing.
+		\]
+		Then there exists $k \in K_{1}$ such that $k \in K_{\alpha}$ for all $\alpha$, so $\bigcap_{\alpha} K_{\alpha}$ is nonempty.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{corollary}
+	If $\{ K_{n} \}$ are compact sets such that $K_{n} \supseteq K_{n + 1}$ for each $n \in \mathbb{Z}_{> 0}$, then $\bigcup_{n = 1}^{\infty} K_{i}$ is nonempty.
+\end{corollary}
+
+\newpage
+
+\begin{theorem}
+	If $E$ is an infinite subset of a compact set $K$, then $E$ contains a limit point in $K$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		If each $k \in K$ is not a limit point, then there exists an open ball $N_{k}$ at $k$ of nonzero radius that contains at most one point of $E$ --- namely, $k$ itself.
+		
+		The $N_{k}$ constitute an open covering of $K$ (and therefore $E$), yet no finite subcovering can contain each $E$; thus it cannot contain $K$. Hence, $K$ cannot be compact.
+
+		Taking the contrapositive yields the desired result.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}[Nested Intervals Theorem]
+	Suppose $\{ I_{n} \}$ is a sequence of intervals in $\mathbb{R}$ such that $I_{n} \supseteq I_{n + 1}$ for all $m \in \mathbb{Z}_{> 0}$. Then $\bigcap_{n = 1}^{\infty} I_{n}$ is nonempty.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $I_{n} = [a_{n}, b_{n}]$ for sequences $a_{n}$ and $b_{n}$; define $A = \sup a_{n}$. Realize that for all $m, n \in \mathbb{Z}_{> 0}$,
+		\[
+			a_{n} \le a_{m + n} \le b_{m + n} \le b_{n}.
+		\]
+		Thus $b_{n}$ is an upper bound of all $a_{n}$, so $A \le b_{n}$. Since $a_{n} \le A$, we find that $A \in I_{n}$ for each $n \in \mathbb{Z}_{> 0}$. This concludes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	Suppose $\{ I_{n} \}$ is a sequence of $k$-cells such that $I_{n} \supseteq I_{n + 1}$ for all $m \in \mathbb{Z}_{> 0}$. Then $\bigcap_{n = 1}^{\infty} I_{n}$ is nonempty.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $I_{n}$ consist of all points $\vec{x}_{n} = (x_{n1}, \ldots, x_{nk})$ such that for $i \in \mathbb{Z}_{> 0}$ and $j \in \{ 1, \ldots, k \}$,
+		\[
+			a_{ij} < x_{ij} < b_{ij}.
+		\]
+		For each $j \in \{ 1, \ldots, k \}$, define $I_{1j}, I_{2j}, \ldots$ as $[a_{1j}, b_{1j}], [a_{2j}, b_{2j}], \ldots$. By Theorem 20, there exists $v_{j}$ in each interval. The vector $\vec{v} = (v_{1}, \ldots, v_{n})$ thus lies inside each $k$-cell, so $\bigcup_{n = 1}^{\infty} I_{n}$ is nonempty.
+	\end{proof}
+\end{adjustwidth}
+
+The following proof expands upon my Bolzano-Weierstrauss reasoning found in RealAnalysis/proofs.tex; the construction will thus be simplified for brevity.
+
+\begin{theorem}
+	Every $k$-cell is compact.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose for contradiction that the $k$-cell $I_{1}$ is not compact. Then all open coverings $\{ G_{\alpha} \}$ of $I_{1}$ lack a subcollection that covers $I$.
+
+		Then define $c_{j} = \tfrac{1}{2}(a_{j} + b_{j})$; the intervals $[a_{j}, c_{j}]$ and $[c_{j}, b_{j}]$ across all $j \in \{ 1, \ldots, k \}$ split $I$ into $2^{k}$ subcells. At least one of these subcells is not covered by a finite subcollection of $\{ G_{\alpha} \}$; call it $I_{2}$. 
+
+		Repeat this construction on $I_{2}$ to optain a subcell $I_{3}$ that is not covered by $\{ G_{\alpha} \}$; repeat this process \textit{ad infinitum}.
+
+		\newpage
+
+		We obtain a sequence of $k$-cells $\{ I_{n} \}$ such that $I_{n} \supseteq I_{n + 1}$ for all $n \in \mathbb{Z}_{> 0}$, each uncovered by any finite subcollection of $\{ G_{\alpha} \}$. Theorem 21 thus applies: there exists 
+		\[
+			x \in \bigcup\limits_{n = 1}^{\infty} I_{n}.
+		\]
+		Since $\{ G_{\alpha} \}$ covers $I_{1}$, there exists some open set $G_{\alpha}$ that contains $x$; inside this open set is $N_{r}$, an open ball at $x$ of radius $r$.
+		\begin{adjustwidth}{1cm}{}
+			\begin{claim}
+				For some $m \in \mathbb{Z}_{> 0}$, we have $I_{n} \subseteq G_{\alpha}$.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Realize that $I_{1}$ is contained within the open ball at its centroid of the following radius:
+				\[
+					\delta = \frac{1}{2} \sqrt{\sum\limits_{i = 1}^{n} (b_{i} - a_{i})^{2}}.
+				\]
+				The relevant proof is long but straightforward, utilizing the Pigeonhole Principle. Thus, $I_{n}$ is contained within the open ball at its centroid of radius $\delta \,/\, 2^{n - 1}$.
+
+				Set $m = \lfloor \log_{2}\left( \tfrac{\delta}{r} \right) + 1 \rfloor + 1$. Then
+				\[
+					\frac{\delta}{2^{m - 1}} < \frac{\delta}{2^{\log_{2}(\delta \,/\, r)}} = \frac{\delta}{\delta \,/\, r} = r.
+				\]
+				Then if $N_{m}$ is the open ball with radius $m$, we conclude that
+				\[
+					I_{m} \subseteq N_{m} \subseteq N_{r} \subseteq G_{\alpha},
+				\]
+				as required.
+			\end{proof}
+		\end{adjustwidth}
+		This attains the desired contradiction: that $I_{m}$ cannot be covered by a finite subcollection of $\{ G_{\alpha} \}$, yet it is covered by $G_{\alpha}$. We conclude that $I_{1}$ must be compact.
+	\end{proof}
+\end{adjustwidth}
+
+Define a \textbf{k-pseudocell} in $\mathbb{C}^{n}$ as the set of all $\vec{z} \in \mathbb{C}^{n}$ such that $\Re \vec{z}$ and $\Im \vec{z}$ lie in potentially distinct $k$-cells. We will use this non-standard definition exclusively for Theorem 23.
+
+\begin{corollary}
+	Suppose $\{ I_{n} \}$ is a sequence of $k$-pseudocells such that $I_{n} \supseteq I_{n + 1}$ for all $m \in \mathbb{Z}_{> 0}$. Then $\bigcap_{n = 1}^{\infty} I_{n}$ is nonempty.
+\end{corollary}
+
+\begin{corollary}
+	All $k$-pseudocells are compact.
+\end{corollary}
+
+\newpage
+
+\begin{theorem}[Heine-Borel]
+	For $E \subseteq \mathbb{C}^{k}$, the following conditions are equivalent:
+	\begin{enumerate}
+		\item $E$ is closed and bounded.
+		\item $E$ is compact.
+		\item Every infinite subset of $E$ has a limit point in $E$.
+	\end{enumerate}
+	Furthermore, (2) and (3) are equivalent in an arbitrary metric space.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose (1). As $E$ is bounded, it is a subset of some $k$-pseudocell. Since $E$ is closed, it is compact by Theorem 16 --- thus establishing (2). If we assume (2), we yield (3) by Theorem 19.
+
+		Assume that $E$ is not bounded. Then there exists a sequence of vectors $\{ \vec{z}_{n} \}$ for $n \in \mathbb{Z}_{> 0}$ such that
+		\[
+			\abs{\vec{z}_{n}} > n.
+		\]
+		A straightforward argument verifies that no limit point for this sequence exists in $E$, so (3) is not met.
+
+		Assume that $E$ is not closed. Then there exists a vector $\vec{z} \notin E$ which is a limit point of $E$ but lies outside of $E$. Then for each $n \in \mathbb{Z}_{> 0}$, there exists a sequence of vectors $\vec{z}_{n} \in E$ such that
+		\[
+			\norm{\vec{z}_{n} - \vec{z}} < \frac{1}{n}.
+		\]
+		The subset $\{ \vec{z}_{n} \mid n \in \mathbb{Z}_{> 0} \}$ is infinite; we claim its only limit point is $\vec{z}$. This is because if $\vec{w} \in \mathbb{C}^{n}$ and $\vec{w} \ne \vec{z}$,
+		\begin{align*}
+			\norm{\vec{z}_{n} - \vec{w}} &\ge \norm{\vec{z} - \vec{w}} - \norm{\vec{z}_{n} - \vec{z}} \\
+			&\ge \norm{\vec{z} - \vec{w}} - \frac{1}{n} \\
+			&\ge \frac{\norm{\vec{z} - \vec{w}}}{2}
+		\end{align*}
+		for all but finitely many $n$. Thus the open ball at $\vec{w}$ of radius $\tfrac{1}{2} \norm{\vec{z} - \vec{w}}$ does not contain infinitely many $\vec{z}_{n}$, so it cannot be a limit point --- so (3) is not met.
+		
+		Then if we suppose (3), $E$ must be closed and bounded --- implying (1). This concludes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}[Weierstrauss]
+	Every bounded infinite subset of $\mathbb{C}^{n}$ contains a limit point.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		All bounded infinite subsets $E$ of $\mathbb{C}^{n}$ are contained within an $n$-cell $I$. Since $I$ is compact by Theorem 22, $E$ has a limit point in $E$ by Theorem 19 (and 23!).
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\end{document}

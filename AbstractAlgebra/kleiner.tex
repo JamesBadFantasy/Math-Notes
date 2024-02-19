@@ -1,0 +1,770 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+\newtheorem{remark}{Remark}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\title{MATH-UA 349: Honors Algebra II}
+\author{James Pagan}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Exposition}
+
+\textbf{MATH-UA 349} studies primarily \textbf{Ring Theory}, following \textit{Algebra} by Michael Artin (2nd edition). At various times, we will use materials from other texts: for example, \textit{Topics in Algebra} by Herstein. The grading policy is as follows:
+
+\begin{enumerate}
+	\item 20\%: Homework
+	\item 20\%: Quizzes
+	\item 40\%: Two midterms
+	\item 20\%: Final Exam
+\end{enumerate}
+
+More information can be found on Brightspace.
+
+% --------------------------------------------- %
+
+\section{Rings}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{ring} is a tuple $(R, +, \cdot, 1)$ for binary operaitons $+ : R \times R \to R$ and $\cdot : R \times R \to R$ that satisfies the following axioms: 
+\begin{enumerate}
+	\item $(R, +)$ is an Abelian group. We denote its additive identity by $0$.
+	\item Multiplication is associative.
+	\item Distributive laws: For all $a, b, c \in R$, we have $a(b + c) = ab + ac$ and $(a + b)c = ac + bc$.
+	\item $1$ is a multiplicative identity: for all $a \in A$, we have $a1 = 1a = a$.
+\end{enumerate}
+
+We can view left multiplication $ab$ by $a$ for $b \in R$ as a mapping $\ell_{a} : R \to R$; if so, we only require that $\ell_{a}$ is an Abelian group homomorphism with respect to adition.
+
+\begin{remark}
+	Some texts do not assume the existence of multiplicative identity.
+\end{remark}
+
+\subsection{Examples}
+
+\begin{enumerate}
+	\item \textbf{Integers}: The integers $\mathbb{Z}$ are the most motivating example of a ring, under addition and multiplication.
+	\item \textbf{Other Types of Numbers}: The rationals $\mathbb{Q}$, the reals $\mathbb{R}$, and the complex numbers $\mathbb{C}$ are all rings under addition and multiplication.
+	\item \textbf{Zero Ring}: The zero ring $\{ 0 \}$ with multiplicative and additive identity $0$ is a ring.
+	\item \textbf{Functions over a Ring}: For a ring $R$ and a set $S$, the set $\{ f : S \to R \}$ is a ring under the ring's addition and multiplication --- namely, $(f + g)(s) = f(s) + g(s)$ and $(f \cdot g)(s) = f(s) \cdot g(s)$.
+	\item \textbf{Functions over the Reals}: Setting $R = S = \mathbb{R}$ in the above example yields that real-valued functions are rings. It contains notable subrings, such as continuous functions, continuously differentiable functions, real analytic functions, and so on.
+	\item \textbf{Homomorphisms}: For an Abelian group $A$ (with operation denoted by addition), the set $\Hom(A, A)$ is an Abelian group under addition and composition. The mulitiplicative operation is \textit{not} commutative!
+	\item \textbf{Vector Spaces}: For a vector space $V$, the set of all linear operators $\mathcal{L}(V, V)$ is a ring under addition and composition of operators. This is actually a special case of the group homomorphisms above.
+	\item \textbf{Group Rings}: Let $G$ be any group, not necessarily Abelian. If $G$ is a group and $R$ is a ring, then we can form a group ring:
+	\[
+		RG = \left\{ \sum\limits_{g \in G} a_{g} g \, \Big| \, a_{g} \in R, \, a_{g} = 0 \text{ for all but finitely many } g.  \right\}
+	\]
+	Addition is defined naturally via the above definition. Multiplication is defined as follows:
+	\[
+		\left( \sum\limits_{g \in G} a_{g} g \right) \left( \sum\limits_{g' \in G} b_{g'} g'  \right) = \sum\limits_{g, g' \in G} \Big( (a_{g} g) \cdot (b_{g'} g') \Big)
+	\]
+	\item \textbf{Quaternions}: Suppose that $\vec{e}_{1}, \vec{e}_{2}, \vec{e}_{3}, \vec{e}_{4}$ are the basis vectors of $\mathbb{R}^{4}$. We often denote these by the following names:
+	\[
+		\vec{e}_{1} = 1, \quad \vec{e}_{2} = \vec{i}, \quad \vec{e}_{3} = \vec{j}, \quad \vec{e}_{4} = \vec{k}.
+	\]
+	Addition is defined naturaly, treating each of the above as variables. As per multiplication, we declare
+	\[
+		-1 = \vec{i}^{2} = \vec{j}^{2} = \vec{k}^{2} = \vec{i}\vec{j}\vec{k},
+	\]
+	from which we can derive the full Cayley table for $1, \vec{i}, \vec{j}, \vec{k}$. To multi0ply arbitrary quaternions, we simply distribute the following:
+	\[
+		(a_{1} + a_{2} \vec{i} + a_{3} \vec{j} + a_{4} \vec{k})(b_{1} + b_{2} \vec{i} + b_{3} \vec{j} + b_{4} \vec{k})
+	\]
+	The set of all quaternions is denoted $\mathbb{H}$, and is \textit{not} commutative; we have $\vec{ij} = -\vec{ji}$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Motivation}
+
+Rings appear naturally in various contexts. For instance
+\begin{enumerate}
+	\item \textbf{Factorization}: The unique factorization of integers over $\mathbb{Z}$ can generalize to certain clases of rings.
+	\item \textbf{Solving Equations}: Suppose we have a polynomial $p(x) = a_{n}x^{n} + a_{n - 1}x^{n - 1} + \cdots + a_{1}x + a_{0}$, where coefficents lie in some number system $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, or $\mathbb{C}$. Trying to solve equations pushes us to consider new number fields: the equation $x + 1$ pushes us to consider $\mathbb{Z}$, the equation $2x = 1$ pushes us to consider $\mathbb{Q}$, and so on for $x^{2} = 2$ and $x^{2} = -1$.
+	\item \textbf{Systems of Linear Equations}: Suppose we have a system of equations
+	\begin{align*}
+		a_{11} x_{1} + \cdots + a_{1n} x_{n} &= b_{1} \\
+											 &\quad \vdots \\
+		a_{n1} x_{1} + \cdots + a_{nn} x_{n} &= b_{n},
+	\end{align*}
+	where coefficents lie in some ring. The natural approach to solve such systems is Linear Algebra, with coefficents in a ring.
+	\item \textbf{Systems of Polynomial Euations}: For polynomials over some $\mathbb{R}$, if we have equations 
+	\[
+		p_{i}(x_{1}, \ldots, x_{n}) = 0
+	\]
+	for each $i \in \{ 1, \ldots, n \}$. Their study is enormous and beautiful, constituting the subject of \textbf{Algebraic Geometry}. The foundation of this theory (and indeed, the first page of Hartshorne) depends on the classical results of Commutative Ring Theory.
+\end{enumerate}
+
+Rings appear in numerous areas of mathematics, including Geometry, Topology, and Analysis.
+
+% --------------------------------------------- %
+
+\subsection{Terminology}
+
+\textbf{STANDING ASSUMPTION}: All rings are \textit{assumed commutative} unless stated otherwise. We now introduce the following notions for $a \in R$:
+\begin{enumerate}
+	\item \textbf{Units}: $a$ is a unit if there exists $b \in R$ such that $ab = 1$.
+	\item \textbf{Field}: A ring $R$ is a field if nonzero elements form a group under multiplication --- notably, if every nonzero element is a unit. Since this group cannot be nonzero (as all groups), we mandate that $R$ contains more than one element.
+	\item \textbf{Zero Divisors}: $a$ is a zero divisor if there exists \textit{nonzero} $b$ such that $ab = 0$. Zero itself is a zero divisor.
+	\item \textbf{Modulo}: The ring $\mathbb{Z} \,/\, p \mathbb{Z}$ is the set of integers $0, \ldots, p - 1 \pmod{p}$. This set is actually a field.
+		\begin{adjustwidth}{0.5cm}{}
+			\begin{claim}
+				$\mathbb{Z} \,/\, p \mathbb{Z}$ has no zero-divisors.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				We claim that $\mathbb{Z} \,/\, p \mathbb{Z}$ contains no zero divisors. Suppose for contradiction that there exists $a, b$ such that $ab \cong 0 \pmod{p}$. Then by Euclid's Lemma,
+				\begin{align*}
+					ab \equiv 0 \pmod{p} &\implies p \mid ab \\
+					&\implies p \mid a \text{ or } p \mid b \\
+					&\implies a \equiv 0 \pmod{p} \text{ or } b \equiv 0 \pmod{p}.
+				\end{align*}
+				Thus $\mathbb{Z} \,/\, p \mathbb{Z}$ contains no zero-divisors.
+				We now claim that
+			\end{proof}
+		\end{adjustwidth} 
+		\begin{adjustwidth}{0.5cm}{}
+			\begin{claim}
+				A finite ring $R$ with no zero divisors other than $p \in R$ is a field.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Let $R$ have $n$ elements. For each $a \in R$, consider the set
+				\[
+					a, a^{2}, \ldots, a^{n + 1}.
+				\]
+				It has $n + 1$ elements, all of which lie in $R$; then two must be equal. There exists $i, j \in \{ 1, \ldots, n + 1 \}$ with $i > j$ such that $a^{i} = a^{j}$. Then
+				\[
+					a^{i - j} = 1 \qquad \text{and} \qquad a^{i - j - 1} = a^{-1},
+				\]
+				Then each $a \in R$ is a unit, so $R$ is a field.
+			\end{proof}
+		\end{adjustwidth}
+	We conclude that $\mathbb{Z} \,/\, p \mathbb{Z}$ is a field.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Subrings}
+
+A \textbf{subring} of $R$ is a subset $S \subseteq R$ which is also a ring using the same operations and $1$.
+
+It is easy to verify that $S$ is a subring if and only if $S$ is closed under addition, subtraction, multiplication, and contains $1$. If $\Sigma \subseteq R$ is a subset, then the ring generated by $Sigma$ is the smallest subring of $R$ that contains $\Sigma$. Examples:
+
+\newpage
+
+\begin{enumerate}
+	\item \textbf{Gaussian Integers}: The set $\mathbb{Z}[i] = \{ a + bi \mid a, b \in \mathbb{Z} \}$ is a subring of $\mathbb{C}$. They are generated by $\mathbb{Z}$ and $i$.
+	\item \textbf{More Generally}: If $\alpha \in \mathbb{C}$, the set
+		\[
+			\mathbb{Z} [\alpha] = \left\{ \sum\limits_{j = 1}^{k} a_{j} \alpha^{j} \, \Big| \, a_{j} \in R \text{ for each } j \in \{ 1, \ldots, n \} \right\}
+		\]
+	is a subring of $\mathbb{C}$. There are two subcases to consider:
+	\begin{enumerate}
+		\item \textbf{Case 1}: If for some $n$, there exists $a_{n}, \ldots, a_{0}$ such that
+		\[
+			\sum\limits_{j = 1}^{n} a_{j} \alpha^{j},
+		\]
+		then $\alpha$ is an \textbf{algebraic number}.
+		\item \textbf{Case 2}: If no such $n$ exists, then $\alpha$ is \textbf{transcendental}.
+	\end{enumerate}
+	\item \textbf{Polynomial Rings (Informal)}: For a ring $R$, the set $R[x]$ is the set of all polynomials in $x$ with coefficents in $R$. An element $f \in R[x]$ is a formal linear combination of powers of powers of $x$ with coefficents in $R$:
+	\[
+		a_{n} x^{n} + \cdots + a_{1} x + a_{0}.
+	\]
+	\item \textbf{Polynomial Rings (Formal)}: We define the set \[
+		\overline{R} = \{ (a_{n}, \ldots, a_{1}, a_{0}) \mid a_{i} \in R \text{ for each } i \}.
+	\]
+	Elements of this set are \textit{functions} from $x$ to a ring $R$, expanding this into the expression in the informal definition.
+
+	Addition and multiplication are defined upon these objects as follows: for coefficents $c_{k}$ of the product of $(a_{n}, \ldots, a_{0})$ and $(b_{m}, \ldots, b_{0})$, we set
+	\[
+		c_{k} = \sum\limits_{i + j = k} a_{i}b_{j},
+	\]
+	for $k \in \{ 0, \ldots, n + m \}$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\section{Polynomial Rings}
+
+Recall that if $R$ is a ring, then $R[x]$ denotes the ring of polynomials in $x$ with coefficents in $R$. For a \text{nonzero} polynomial
+\[
+	f = a_{n} x^{n} + \cdots + a_{1}x + a_{0},
+\]
+
+\newpage
+
+Several definitions are in order:
+\begin{enumerate}
+	\item The \textbf{degree} of $f$ is the largest power with a nonzero coefficent.
+	\item The \textbf{leading coefficent} of $f$ is the coefficent of the term with the largest power.
+	\item A \textbf{monic polynomial} is a polynomial with leading coefficent $1$.
+	\item A \textbf{constant polynomial} is a polynomial $f$ such that $f = 0$ or $\deg f = 0$.
+\end{enumerate} 
+
+It is \textbf{not} true in general that $\deg f = n$ and $\deg g = m$ implies $\deg fg = n + m$ --- so long as the leading terms of $f$ and $g$ are $a_{n}x^{n}$ and $b_{m}x^{m}$ and $a_{n}b_{n} = 0$. If the leading coefficents of $f$ and $g$ are not zero divisors, we may write $\deg fg = n + m$.
+
+It is critical to distinguish between polynomials $f \in R[x]$ as \textit{functions} versus \textit{elements}. For some $\alpha \in R$, we may define $\Phi_{\alpha} : R[x] \to R$ by $\Phi_{\alpha}(f) = f(\alpha)$. We could also define for $f \in R[x]$ a mapping $\hat{f} : R \to R$ as $\hat{f}(x) = f(x)$. This function is not injective; the entirety of $\mathbb{Z} \,/\, 2 \mathbb{Z}$ by 
+\[
+	f = x^{2} + x
+\]
+For a ring $R$, the set $R[x_{1}, \ldots, x_{n}]$ denotes the set of \textbf{multivariate polynomials} in the variables $x_{1}, \ldots, x_{n}$ with coefficents in $R$. Addition and multiplication of these polynomials is similar to before.
+
+% --------------------------------------------- %
+
+\section{Homomorphisms and Ideals}
+
+% --------------------------------------------- %
+
+\subsection{Homomorphisms}
+
+% --------------------------------------------- %
+
+A \textbf{ring homomorphism} is a mapping $\varphi : R \to R'$ for rings $R$ and $R'$ such that the following properties are satisfied for any two $r, s \in R$:
+\begin{align*}
+	\varphi(r) + \varphi(s) &= \varphi(r + s) \\
+	\varphi(rs) &= \varphi(r) \varphi(s) \\
+	\varphi(1) &= 1.
+\end{align*}
+The first condition states that $\varphi$ is an Abelian group homorphism of the additive groups of $R$ and $R'$. The usual categories of morphisms apply here:
+
+\newpage
+
+\begin{enumerate}
+	\item A \textbf{monomorphim} $\varphi$ is a injective homomorphism.
+	\item An \textbf{epimorphism} $\varphi$ is a surjective homomorphism.
+	\item An \textbf{isomorphism} $\varphi$ is a bijective homomorphism.
+	\item An \textbf{endomorphism} $\varphi$ is a homomorphism $R \to R$.
+	\item An \textbf{automorphism} $\var_{w}
+		phi$ is an isomorphism $R \to R$.
+\end{enumerate}
+
+\begin{theorem}
+	If $R$ is a ring, then there is a unique homomorphism $\phi : \mathbb{Z} \to R$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		By definition, we have $\phi(1) = 1$. Then we may define for each $n \in \mathbb{Z}$:
+		\[
+			\phi(n) = \phi(1 + \cdots + 1) = 1 + \cdots + 1.
+		\]
+		A routine calculation verifies that this is a ring homomorphism.
+	\end{proof}
+\end{adjustwidth}
+
+In a similar veign, a homomorphism $\Phi : R[x] \to R'$ is determined exclusively by the images of the constant polynomial.
+
+\begin{theorem}[Substitution Principle]
+	If $\phi : R \to R'$ is a homomorphism and $\alpha \in R'$, then there exists a unique homomorphism $\Phi : R[x] \to R'$ such that $\Phi(x) = \alpha$ and
+	\[
+		\Phi (c) = \phi(c)
+	\]
+	for all constant polynomials $c \in R$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For uniqueness, it is easy to verify that
+		\[
+			\Phi(a_{n}x^{n} + \cdots + a_{0}) = \sum\limits_{i = 0}^{n} \Phi(a_{j}) \Phi(x)^{j} = \sum\limits_{i = 0}^{n} \Phi(a_{j}) \alpha^{j}.
+		\]
+		The rest of the proof is an exercise to the reader.
+	\end{proof}
+\end{adjustwidth}
+
+Artin calls this the \textbf{substitution principle}, although this term is not standard. As an example, suppose we apply the substitution principle to 
+\[
+	\Phi : \mathbb{Z}[x] \to \mathbb{Z}[i].
+\]
+For instance, if $\Phi(x) = i$ and $\Phi(m) = m$, the homomorphism $\Phi$ is surjective. The substitution principle also verifies that
+\[
+	R[x_{1}, x_{2}] \cong \left( R[x_{1}] \right) [x_{2}].
+\]
+
+\newpage
+
+The \textbf{kernel} of a ring homomorphism $\phi : R \to R'$ is the set $\Ker f = \{ a \in R \mid \phi(a) = 0 \}$. Kernels satisfy the following properties:
+\begin{enumerate}
+	\item The kernel is an additive subgroup of $R$.
+	\item For all $a \in \Ker f$ and $b \in R$, we have
+	\[
+		\phi(ab) = \phi(a) \phi(b) = 0 \phi(b) = 0,
+	\]
+	so $ab \in \Ker f$. The kernel is thus closed under multiplcation by arbitrary ring elements.
+\end{enumerate}
+
+This motivates the following definition:
+
+% --------------------------------------------- %
+
+\subsection{Ideals}
+
+An \textbf{ideal} in a ring $R$ is a nonempty set $\mathfrak{a} \subseteq R$ such that for all $a \in \mathfrak{a}$ and $r \in R$, we have
+\begin{itemize}
+	\item $\mathfrak{a}$ is an additve subgroup of $R$.
+	\item $ra \in \mathfrak{a}$.
+\end{itemize}
+All rings have at least two ideals: the zero ideal (denoted by $0$ by abuse of notation) and $R$ itself. The smallest ideal that contains $a_{1}, \ldots, a_{n} \in R$ is denoted 
+\[
+	(a_{1}, \ldots, a_{n}) = \{ r_{1} a_{1} + \cdots + r_{n} a_{n} \mid r_{1}, \ldots, r_{n} \in R \}.
+\]
+An ideal is \textbf{principal} if it is generated by a single element: if $\mathfrak{a} = (a)$ for some $a \in R$. The ring $R$ itself is a principal ideal generated by the multiplicative identity $1$.
+
+Subrings and ideals are almost always distinct: a subset $S$ is a subring and an ideal if and only if $S = R$ or $S = 0$. Subrings contain the multiplicative identity $1$, but ideals are closed under multplication by arbitrary ring elements.
+
+\begin{theorem}
+	$R$ has precisely two ideals if and only if $R$ is a field.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose $R$ is a field, and pick $\mathfrak{a} \ne 0$. Then if $a \in \mathfrak{a}$, there exists a multiplicative inverse $a^{-1} \in R$. Hence, for all $r \in R$,
+		\[
+			a a^{-1} = 1 \in \mathfrak{a} \implies r 1 = r \in \mathfrak{a} \implies \mathfrak{a} = R.
+		\]
+		Thus $R$ has two ideals: $0$ and $R$ itself.
+
+		Suppose $R$ has two ideals: $R$ itself and $0$. Then if $a \in R$ is nonzero, we have $(a) = R$; then $1 \in R \in (a)$, so there exists $r \in R$ such that $ar = 1$. Hence all nonzero $a \in R$ is invertible, so $R$ is a field.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+\begin{theorem}
+	Every ideal in $\mathbb{Z}$ is principal: if $\mathfrak{a} \ne 0$, then $\mathfrak{a} = (m)$, where $m$ is the smallest positive element of $I$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Let $n \in \mathfrak{a}$; we may use the divison algorithm to deduce that there exist $a, b \in R$ such that
+		\[
+			n = am + b,
+		\]
+		where $0 \le b < m$. Then $n - am \in R$, so $b \in R$; by the minimality of $m$, we have $b = 0$; thus $n = am$. We conclude that $\mathfrak{a} = (m)$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Applications to Polynomial Rings}
+
+\begin{theorem}[Division Algorithm]
+	Supppose that $R$ is a ring, $f, g \in R[x]$, and $f$ is monic. Then there exist unique $q, r \in R[x]$ such that
+	\[
+		g = qf + r,
+	\]
+	where $0 \le \deg r < \deg f$ or $r = 0$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		\textbf{Uniqueness}: Suppose there exist $r_{1}, r_{2}$ and $q_{1} \ne q_{2} \in R[x]$ such that
+		\[
+			g = q_{1}f + r_{1} = q_{2}f + r_{2}.
+		\]
+		where $\deg r_{1} < \deg f$ and $\deg r_{2} < \deg f$. Then
+		\[
+			(q_{1} - f_{1}) f = r_{1} + r_{2}.
+		\]
+		This is a contradiction, since the degrees of both sides are not equal: $\deg (q_{1} - q_{2}) f \ge \deg f > \deg r_{1} + r_{2}$. We conclude that $q_{1} = q_{2}$, so $r_{1} = r_{2}$ too.
+
+		\textbf{Existence}: Consider the following set:
+		\[
+			S = \{ g - q'f \mid q' \in R[x] \}.
+		\]
+		By the Well-Ordering Principle, there exists an element $r \in S$ of smallest degree. Define $q$ such that
+		\[
+			g = qf + r \implies r = g - qf.
+		\]
+    If we suppose that $\deg r \ge \deg f$, then it is possible to subtract $r$ by a multiple of $f$ to eliminate the leading coefficent of $f$, which contradicts its minimality. We conclude that $\deg r < \deg f$, which completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $R$ is a field, then ever ideal $\mathfrak{a} \subseteq R[x]$ is principal: if $\mathfrak{a} \ne 0$, then $\mathfrak{a} = (f)$, where $f$ is the monic polynomial in $\mathfrak{a}$ of smallest degree.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		The proof proceeds almost identally as before; suppose $g \in \mathfrak{a}$. Then there exists unique $q, r \in R[x]$ such that 
+		\[
+			g = qf + r,
+		\]
+		where $0 \le \deg r \le deg f$. Then $g = qf \in \mathfrak{a}$, so $r \in \mathfrak{a}$; by the minimality of $\deg f$, we conclude that $r = 0$. Hence $g = qf$; we conclude that $\mathfrak{a} = (f)$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{corollary}
+	Suppose $f \in R[x]$ and $\alpha \in R$. Then $f(\alpha) = 0$ if and only if $(x - \alpha) \mid f$.
+\end{corollary}
+
+% --------------------------------------------- %
+
+\section{Quotient Rings}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+Let $R$ be a ring with an ideal $\mathfrak{a}$. We can extend the notion of a quotient ring as follows, yielding a \textbf{quotient ring}:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The quotient group $R \,/\, \mathfrak{a}$ is a ring under the product $(a + \mathfrak{a})(b + \mathfrak{a}) = ab + \mathfrak{a}$ for $a, b \in R$.
+	\end{theorem}
+	\begin{proof}
+		The quotient group $R \,/\, \mathfrak{a}$ exists, since $\mathfrak{a}$ is an additive subgroup of $R$ and all subgroups of Abelian groups are normal. We must demonstrate that the product is well-defined.
+		
+		Suppose $a + \mathfrak{a} = a' + \mathfrak{a}$ and $b + \mathfrak{a} = b' + \mathfrak{a}$. Then since $a - a' \in \mathfrak{a}$ and $b - b' \in \mathfrak{a}$,
+		\[
+			ab - a'b \in \mathfrak{a} \qquad \text{and} \qquad a'b - a'b' \in \mathfrak{a}.
+		\]
+		Thus, $ab - a'b' \in \mathfrak{a}$ and $ab + \mathfrak{r} = a'b' + \mathfrak{a}$. Then the product is well-defined. Proving that the product is closed and associative is trivial; the multiplicative identity of $R \,/\, \mathfrak{a}$ is $1 + \mathfrak{a}$, and the distributivity with addition is trivial --- so $R \,/\, \mathfrak{r}$ is a ring.
+	\end{proof}
+\end{adjustwidth}
+
+There is a natural surjective homomorphism $\phi : R \to R \,/\, \mathfrak{a}$ defined by $\pi(a) = a + \mathfrak{a}$. This is called the \textbf{canonical surjection} with respect to the ideal $\mathfrak{a}$.
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Mapping Properties of Quotients}
+
+Suppose $\phi : R \to R'$ is a homomorphism such that $\mathfrak{k} = \ker \phi$, and let $\mathfrak{a}$ be an ideal such that $\mathfrak{a} \subseteq \mathfrak{k} \subseteq R$. Let $\pi : R \to R \,/\, \mathfrak{a}$ be the canonical surjection. Then two properties hold:
+\begin{enumerate}
+  \item There is a unique mapping $\bar{\varphi} : R \,/\, \mathfrak{a} \to R'$ such that $\phi = \bar{\varphi} \circ \pi$: for all $a \in R$, we have $\phi(a) = \bar{\varphi}(a + \mathfrak{a})$.
+  \item If $\phi$ is surjective, then $\mathfrak{k} = I$ and $\bar{\varphi} : R \,/\, \mathfrak{a} \to R'$ is an isomorphism.
+\end{enumerate}
+The idea is simple: simply define $\bar{\varphi}(a + \mathfrak{a}) = \phi(a)$, and demonstrate this mapping a well-defined homomorphism.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}[Correspondence Theorem]
+		There is a one-to-one correspondence between ideals of $\phi(R)$ and ideals of $R$ that contain $\mathfrak{k}$.
+	\end{theorem}
+	\begin{proof}
+		For an ideal $\mathfrak{a}'$ of $\phi(R)$, define $\mathfrak{a} = \{ a \in R \mid \phi(a) \in \mathfrak{a}' \}$. By the Correspondence Theorem for groups, $\mathfrak{a}$ is an additive subgroup of $R$. For all $a \in \mathfrak{a}$ and $b \in R$, we have $\phi(a) \in \mathfrak{a}'$; thus
+		\[
+			\phi(ab) = \phi(a) \phi(b) \in \mathfrak{a}'
+		\]
+		since $\mathfrak{a}'$ is an ideal. Thus $ab \in \mathfrak{a}$, so $\mathfrak{a}$ is an ideal of $R$. Since $0 \in R'$, we have that $\mathfrak{k}$ is a subideal of $\mathfrak{a}$. It is now relatively trivial to establish a one-to-one correspondence.
+	\end{proof}
+	\begin{corollary}
+		There is a one-to-one correspondence between ideals of $R \,/\, \mathfrak{a}$ and ideals of $R$ that contain $\mathfrak{a}$.
+	\end{corollary}
+\end{adjustwidth}
+
+The Correspondence Theorem expands upon the result of the First Isomorphism Theorem.
+
+% --------------------------------------------- %
+
+\subsection{Applications to Polynomials}
+
+Suppose that $R$ is a ring, and for $a \in R$, 
+\[
+  b_{n}a^{n} + \cdots + b_{1}a + b_{0} = 0.
+\]
+Consider the quotient ring $R \,/\, (b_{n}a^{n} + \cdots + b_{0})$: all $\bar{a}$ in the ring's zero ideal satisfy $b_{n} \bar{a}^{n} + \cdots + b_{0} = 0$.
+
+As an unrelated example, suppose $\varphi : \mathbb{Z}[x] \to \mathbb{Z}[i]$ substitutes $x$ for $i$. Question: what is the kernel of $\varphi$? Let $\phi(x) = i$ and $\phi(a) = a$ for all $a \in \mathbb{Z}$; observing that $i^{2} + 1 = 0$ leads us to propose the following:
+
+\newpage
+
+\begin{claim}
+	$\Ker \varphi = (x^{2} + 1)$, where $(x^{2} + 1)$ is a principal ideal.
+\end{claim}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Pick $g \in \Ker \varphi$. Then $\phi(g) = 0$ implies $g(i) = 0$, so $(x^{2} + 1) \mid g$; we conclude that $g \in (x^{2} + 1)$. The converse is easy to demonstrate as well, so $\Ker \varphi = (x^{2} + 1)$.
+	\end{proof}
+\end{adjustwidth}
+
+Therefore, we deduce that $\mathbb{Z}[x] \,/\, (x^{2} + 1) \cong \mathbb{Z}[i]$. By examining the homomorphism $\psi : \mathbb{Z}[x] \to \mathbb{Z}$ defined by $\psi(x) = a$ for $a \in \mathbb{Z}$, we find that $\mathbb{Z}[x] \,/\, (x - a) \cong \mathbb{Z}$; the same is true if we substitute $\mathbb{Z}$ for $\mathbb{R}$, or some other number system.
+
+% --------------------------------------------- %
+
+\section{Adjoining Elements}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+An \textbf{extension} of a ring $R$ is a ring $R'$ which contains $R$. Now, suppose we have a composition of mappings
+\[
+  R \to R[x] \to R[x] \,/\, \big( f_{1}(x), \ldots, f_{n}(x) \big);
+\]
+this is called \textbf{adjoining elements} to the ring $R$. In fact, we can use this to construct the complex numbers independenetly:
+\[
+  \mathbb{R} \cong \mathbb{R}[x] \,/\, (x^{2} + 1).
+\]
+The proof is relatively easy, defining $\phi : \mathbb{R}[x] \to \mathbb{C}$ by $\phi(x) = i$ and $\phi(a) = a$ for $a \in \mathbb{R}$. Naturally, $\phi$ is is a surjective homomorphism with kernel $(x^{2} + 1)$, so the First Isomorphism Theorem yields the desired isomorphism.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose $R$ is a ring, and $f(x) \in R[x]$ is monic of degree $n$: that $f$ is of the form
+    \[
+      f(x) = x^{n} + h_{n - 1}x^{n - 1} + \cdots + h_{0}.
+    \]
+    Then two claims about $R[x] \,/\, (f(x))$ are in order:
+    \begin{enumerate}
+      \item Any residue $\beta \in R[x] \,/\, (f(x))$ has a unique representation as $a_{n - 1}x^{n - 1} + \cdots + a_{1}x + a_{0}$.
+      \item If $g_{1}, g_{2} \in R[x]$, then the product of the residues in $R[x] \,/\, (f(x))$ is represented by $r(x)$, where
+      \[
+        g_{1}(x)g_{2}(x) = q(x)f(x) + r(x)
+      \]
+      such that $r = 0$ or $\deg r < deg f$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    (1) follows from the division algorithm, dividing $\beta$ by $f$; the desired representation is the remainder polynomial. (2) is natural.
+  \end{proof}
+\end{adjustwidth}
+
+As an example: if we set $f(x) = x^{2} + 1$, we attain the multiplication formula for complex numbers. 
+
+If we wished to adjoin $\mathbb{Z}_{5}$ by $\sqrt{3}$ to get $\bar{R}$, we adjoin $\delta$ such that $\delta^{2} = 3$; the desired ring $\bar{R}$ is isomorphic to
+\[
+  \mathbb{Z}_{5}[\delta] \,/\, (\delta^{2} - 3).
+\]
+We attain that the elements are of the form $a \delta + b$ for integers $a$ and $b$ by Theorem 9; there are $25$ elements. It is not difficult to demonstrate that $\bar{R}$ is a field.
+
+% --------------------------------------------- %
+
+\subsection{A Question}
+
+Suppose $f$ is a polynomial over $R$ with a leading coefficent which is not a unit: what if we adjoin $f$ to $R$? Let us consider an example:
+\begin{enumerate}
+  \item \textbf{Integers}: Suppose we would like to adjoint $\tfrac{1}{2}$ to the integers: since $\tfrac{1}{2}$ satisfies $2x - 1 = 0$, the ring we seek is
+  \[
+    \mathbb{Z}[x] \,/\, (2x - 1) \, \cong \, \mathbb{Z} \left[ \tfrac{1}{2} \right].
+  \]
+  The isomorphism shown above is quite easy: let $\phi(x) = \tfrac{1}{2}$ and $\phi(n) = n$ for $n \in \mathbb{Z}$. It is easy to demonstrate that $\phi$ is injective (well-ordering principle on the degree of a polynomial in the kernel) and surjective.
+  \item \textbf{Modulo 4}: Suppose we would like to adjoint $\tfrac{1}{2}$ to the integers modulo 4: then
+  \[
+    \mathbb{Z}_{4}[x] \,/\, (2x - 1) \cong 0,
+  \]
+  actualy. Be careful: adjoining elements can have strange consequences.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Direct Product}
+
+Suppose $R$ and $R'$ are rings. Then the \textbf{product ring} $R \times R'$ is defined as follows:
+\[
+  R \times R' = \{ (r, r') \mid r \in R, r' \in R' \},
+\]
+with componentwise addition and multiplication. The multiplicative identity of the product ring is $(1, 1)$. Properties of the Quotient Ring are as follows:
+\begin{enumerate}
+  \item \textbf{Projections}: The product induces homomorphisms $\pi : R \times R' \to R$ and $\pi' : R \times R' \to R'$ that isolate each coordinate. The kernel of these objects is easy to observe: they are $0 \times R'$ and $R \times 0$ respectively, which are principal ideals of $R \times R'$ and isomorphic to $R'$ and $R$ respectively. In fact,
+  \[
+    R \times R' = (R \times 0) + (0 \times R'),
+  \]
+  where that is the sum of ideals. We could further write
+  \[
+    R = (R \times R') \,/\, (0 \times R').
+  \]
+\end{enumerate}
+
+ How can we tell if a ring $R$ is isomorphic to a product? There are two approaches:
+ \begin{enumerate}
+   \item \textbf{Approach 1}: Look for idempotent elements (like $(1, 0)$ and $(0, 1)$ in the prior examples). Observe that if $e$ is idempotent, then $e' = 1 - e$ is idempotent too, and $ee' = 0$; then
+   \begin{adjustwidth}{0.5cm}{}
+     \begin{claim}
+       If $S_{e} = (e)$ and $S_{e'} = (e')$, then $R \cong S_{e} \times S_{e'}$.
+     \end{claim}
+   \end{adjustwidth}
+   Here is an example from Artin: suppose we would like to ``adjoin $\sqrt{3}$'' to $\mathbb{Z}_{11}$. Then the ring we seek is
+   \[
+     \mathbb{Z}_{11}[\delta] \,/\, (\delta^{2} - 3).
+   \]
+   Now, observe that
+   \[
+     (\delta^{2} - 3) = (\delta^{2} - 25) = (\delta + 5)(\delta - 5).
+   \]
+   It is relatively easy to verify that $\delta + 5$ and $\delta - 5$ are both idempotent. Utilizing principal ideals, we conclude that
+   \[
+     \mathbb{Z}_{11}[\delta] \,/\, (\delta^{2} - 3) \, \cong \, (\delta + 5) \times (\delta - 5)
+   \]
+   Those ideals $(\delta + 5)$ and $(\delta - 5)$ mod \textit{twice}. They are congruent to $\mathbb{Z}_{11} \,/\, (\delta - 5, \delta^{2} - 3) = \mathbb{Z}_{11} \,/\, (\delta - 5)$, so we actually have
+   \[
+     \mathbb{Z}_{11}[\delta] \,/\, (\delta^{2} - 3) \quad \cong \quad \Big( \mathbb{Z}_{11}[\delta] \,/\, (\delta + 5) \Big) \, \times \, \Big( \mathbb{Z}_{11}[\delta] \,/\, (\delta - 5) \Big).
+   \]
+ \end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Field of Fractions}
+
+Let $R$ be an integral domain. Then we define \textbf{fractions} as the two operations on $R \times (R \setminus 0)$, ordered pairs $(a, b) \sim \tfrac{a}{b}$, where $b \ne 0$, as shown:
+\[
+  (a, b) + (c, d) = (ad + bc, bd) \qquad \text{and} \qquad (a, b) \times (c, d)=  (ac, bd).
+\]
+We write that $(a, b) \sim (c, d)$ if and only if $ad = bc$. It is easy to verify that $R \times (R \setminus 0)$ under these operations is a field. Properties are as follows:
+
+\begin{enumerate}
+  \item \textbf{Embedding}: The embedding $\phi : R \to F$ defined by $\phi(r) = (r, 1)$ is an injective homomorphism. Hence, $R \cong \phi(R)$.
+  \item \textbf{Fractions of Polynomials}: Since $\mathbb{Q}[x]$ is an integral domain, we can defined the field of fractions on $\mathbb{Q}[x]$ --- the \textbf{field of rational functions}.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\section{Maximal Ideals}
+
+A \textbf{maximal ideal} $\mathfrak{m}$ of $R$ is a \textit{proper} ideal of $R$ such that no other ideals contain $\mathfrak{m}$, aside from $\mathfrak{m}$ itself and $R$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		An ideal $\mathfrak{m}$ of $R$ is maximal if and only if $R \,/\, \mathfrak{m}$ is a field.
+	\end{theorem}
+	\begin{proof}
+		By the Correspondence Theorem, there is a one-to-one correspondence between ideals of $R$ that contain $\mathfrak{m}$ and ideals of $R \,/\, \mathfrak{m}$. Then
+		\begin{align*}
+			\mathfrak{m} \text{ is maximal} &\iff \text{The only ideals of $R \,/\, \mathfrak{m}$ are $(0)$ and $R \,/\, \mathfrak{m}$ itself.} \\
+			&\iff R \,/\, \mathfrak{m} \text{ is a field},
+		\end{align*}
+		yielding the desired result
+	\end{proof}
+\end{adjustwidth}
+
+Examples of maximal ideals are as follows:
+\begin{enumerate}
+  \item \textbf{Integers}: The maximal ideals in $\mathbb{Z}$ are preisely the prime ideals, $(p)$ for prime $p$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\section{Factoring}
+
+Our goal is to substantially generalize the unique factorization of integers to a much more general setting.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $m > 1$ be an integer. Then we can express $m$ as $p_{1}^{e_{1}} \cdots p_{n}^{e_{n}}$ uniquely.
+  \end{theorem}
+  \begin{proof}
+    There are two components to the proof:
+    \begin{enumerate}
+      \item \textbf{Existence}: Strong induction. We just demonstrate that $m + 1$ is either prime, or a product of two numbers --- which are products of prime by the inductive hypothesis.
+      \item \textbf{Uniqueness}: Since $(p)$ is prime and $\mathbb{Z}$ is a Principal Ideal Domain, $(p)$ is maximal --- thus $\mathbb{Z} \, / \, (p)$ is a field. Now, suppose 
+        \[
+          p_{1}^{e_{1}} \cdots p_{n}^{e_{n}} = p_{1}'^{e_{1}'} \cdots p_{k}'^{e_{k}'}.
+        \]
+        Then since $p_{1}'^{e_{1}'} \cdots p_{k}'^{e_{k}'}$ is zero in the ring $\mathbb{Z} \, / \, (p_{1})$, it must lie in the ideal $(p_{1})$; since this ideal is prime, some $p_{j}'^{e_{j}'}$ must lie in $p$. Thus both sides are equal. 
+    \end{enumerate}
+  \end{proof}
+\end{adjustwidth}
+
+Let $F$ be a field. Then $f \in F[x]$ is \textbf{irreducible} if $f$ is nonconstant and does not factor as a product of nonconstant polynomials. In a ring $R$, two nonzero elements are \textbf{associative} if $a = ub$, where $u$ is a unit.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    If $f \in F[x]$ is nonconstant, then there exists a factorization 
+    \[
+      f = p_{1}^{e_{1}} \cdots p_{n}^{e_{n}},
+    \]
+    where each $p_{i}$ is irreducable, and this factorization is unique up to permutation and multiplication by constants.
+  \end{theorem}
+  \begin{proof}
+    There are two components to the proof:
+    \begin{enumerate}
+      \item \textbf{Existence}: Use strong induction on the degree of $f$. If $f$ is irreducible, we are done; otherwise, $f = gh$ and $g$ and $h$ factor into irreducible polynomials.
+      \item \textbf{Uniqueness}: Since each $p_{i}$ is irreducible and $F[x]$ is a principal ideal domain, $(p_{i})$ is a maximal ideal. The same argument as before applies.
+    \end{enumerate}
+    We encourage the reader to flesh out this skeleton of a proof.
+  \end{proof}
+  \begin{corollary}
+    Suppose $f \in \mathbb{R}[x]$ is irreducible. Then either $f$ is constant, $f = ax + b$, or $f = c(x + \alpha)(x - \alpha)$ for a complex number $\alpha \notin \mathbb{R}$.
+  \end{corollary}
+  \null
+  \begin{corollary}
+    A polynomial of degree $n$ has at most $n$ roots.
+  \end{corollary}
+  \null
+\end{adjustwidth}
+
+We now extend the notion of $\mathbb{Z}[i]$. We utilize the following lemma:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    $\alpha \in \mathbb{Z}[i]$ is a unit if and only if $\alpha \in \{ 1, i, -1, -i \}$.
+  \end{lemma}
+  \begin{proof}
+    If $\alpha$ is a unit, then there exists $\beta \in \mathbb{Z}[i]$ such that $\alpha \beta = 1$. Then
+    \[
+      \abs{\alpha} \abs{\beta} = 1;
+    \]
+    since the minimum of the absolute value is $1$, both $\alpha$ and $\beta$ must be on the unit circle. The rest of the proof is natural.
+  \end{proof}
+\end{adjustwidth}
+
+A nonzero $p \in \mathbb{Z}[i]$ is \textbf{prime} if $p$ is not a unit and $p$ cannot be expressed as a product of two nonunits --- if every factor is a unit or an associate.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Any nonzero $\alpha \in \mathbb{Z}[i]$ has a unique factorization $\alpha = p_{1}^{e_{1}} \cdots p_{n}^{e_{n}}$
+  \end{theorem}
+  \begin{proof}
+    An intuction argument similar to before demonstrates existence. To demonstrate uniqueness, we would like to prove that $\mathbb{Z}$ is a principal ideal domain.
+
+    We use the \textbf{division algorithm}: if $a, b \in \mathbb{Z}[i]$ where $a \ne 0$, there exist $q, r \in \mathbb{Z}[i]$ such that
+    \[
+      b = aq + r,
+    \]
+    where $r$ is either zero or $\abs{r} < \abs{a}$. To demonstrate that $\mathfrak{a} \subseteq \mathbb{Z}[i]$ is maximal, we pick $a \in \mathfrak{a}$ with minimal absolute value and apply the Division Algorithm. Thus the previous argument holds.
+  \end{proof}
+\end{adjustwidth}
+
+A ring $R$ is a \textbf{Principal Ideal Domain} if $R$ is an integral domain and all ideals of $R$ are principal. An integral domain is a \textbf{Euclidean Domain} if there is a function $\sigma : R \setminus \{ 0 \} \to \mathbb{Z}_{\ge 0}$ such that for all $a, b \in R$ with $a \ne 0$, there exists $q, r \in R$ such that
+\[
+  b = qa + r,
+\]
+where either $r = 0$ or $\sigma(r) < \sigma(a)$. It is clear that any Euclidean Domain is a Principal Ideal Domain, and that prime factoization in a PID is unique.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    If $R$ is an integral domain, then factoring terminates in $R$ if and only if there does not exist a strictly increasing sequence of principal ideals $(a_{1}) \subseteq (a_{2}) \subseteq \cdots$
+  \end{theorem}
+  \begin{proof}
+    Suppose factoring does not terminate: $a = a_{1}a_{2} = a_{1}(a_{21}a_{22}) = \\ a_{1}a_{21}(a_{31}a_{32}a_{33}) = \cdots$. Then it is easy to see that we can construct an infinite chain of principal ideals. The other direction is simple.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    If $R$ is a principal ideal domain, then factoring terminates.
+  \end{lemma}
+  \begin{proof}
+    Since each ideal in $R$ is generated by a single element, each ideal is finitely generated ---in other words, $R$ is Noetherian. Thus the ascending chain of strictly increasing ideals does not exist, so factoring terminates in $R$.
+  \end{proof}
+\end{adjustwidth}
+
+As an example, $\mathbb{Z} [\sqrt{-5}]$ satisfies factorization, but it is not unqiue: $6 = 2 \times 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})$
+
+
+
+% --------------------------------------------- %
+
+\end{document}

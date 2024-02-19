@@ -1,0 +1,419 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Homework 9}
+\author{James Pagan, November 2023}
+\date{Professor Serfaty}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Section 6.1}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 3}
+
+We claim the following linear transformation maps $D^{*}$ to $D$:
+\[
+	\boxed{T = \begin{bmatrix} 1 & 0 \\ -1/3 & 2/3 \end{bmatrix}}.
+\]
+This may be verified by the following computations:
+\begin{align*}
+	\begin{bmatrix} 1 & 0 \\ -1/3 & 2/3 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix}, \\
+	\begin{bmatrix} 1 & 0 \\ -1/3 & 2/3 \end{bmatrix} \begin{bmatrix} 1 \\ 2 \end{bmatrix} &= \begin{bmatrix} 1 + 0 \\ -1/3 + 4/3 \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \\
+	\begin{bmatrix} 1 & 0 \\ -1/3 & 2/3 \end{bmatrix} \begin{bmatrix} 1 \\ -1 \end{bmatrix} &= \begin{bmatrix} 1 + 0 \\ -1/3 - 2/3 \end{bmatrix} = \begin{bmatrix} 1 \\ -1 \end{bmatrix}, \\
+	\begin{bmatrix} 1 & 0 \\ -1/3 & 2/3 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} &= \begin{bmatrix} 2 + 0 \\ -2/3 + 2/3 \end{bmatrix} = \begin{bmatrix} 2 \\ 0 \end{bmatrix}.
+\end{align*}
+This transformation also preserves the order of the verticies of the parallelogram, which completes the proof.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 11}
+
+Clearly, $D = T(D^{*})$ is $\boxed{\text{the unit ball of $\mathbb{R}^{3}$}}$. $T$ is not one-to-one if one or more of the following occurs:
+\begin{itemize}
+	\item $\rho = 0$: in which case, $(0, \phi, \theta)$ = $(0, 0, 0)$ for all $\phi \in [0, \pi]$ and $\theta \in [0, 2\pi]$.
+	\item $\phi = 0$: in which case, $(\rho, 0, \theta) = (0, 0, \rho)$ for all $\theta \in [0, 2\pi]$.
+	\item $\phi = \pi$: in which case, $(\rho, \pi, \theta) = (0, 0, -\rho)$ for all $\theta \in [0, 2\pi]$.
+	\item $\theta \in \{ 0, 2\pi \}$: in which case, $(\rho, \phi, \theta) = (\rho, \phi, 2\pi - \theta)$ and $\theta \ne 2\pi - \theta$.
+\end{itemize}
+With this in mind, $T$ is one-to-one on the following subset of $D^{*}$:
+\[
+	\boxed{\{ (\rho, \phi, \theta) \mid \rho \in (0, 1], \phi \in (0, \pi), \theta \in [0, 2\pi) \}}
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 14}
+
+If $T$ is not injective, then $\operatorname{null} T$ contains a nonzero vector $\vec{v}$. As $\vec{0}$ lies on the span of $\vec{v}$, this vector would be an eigenvector with eigenvalue $0$. Hence, the determinant of $A$ --- the product of its eigenvalues --- would be $0$. 
+
+Conversely, if $A$ has determinant zero, one of its eigenvalues must be $0$; then a nonzero eigenvector $\vec{v}$ is mapped to zero, and $\operatorname{null} T \ne \{ \vec{0} \}$. Thus, $T$ is not injective.
+
+Taking the contrapositive yields the desired result: that $\det A \ne 0$ if and only if $T$ is injective.
+
+% --------------------------------------------- %
+
+\section{Section 6.2}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 4}
+
+Observe that
+\begin{align}
+	0 \le & u - v \le u + v \\
+	0 \le & u + v \le 1.
+\end{align}
+From $u - v \le u + v$, we find that $0 \le 2v$ and $0 \le v$. We also find from (1) that $v - u \le 0$ --- which when combined with $u + v \le 1$ from (2) yields $2v \le 1$, so $v \le \tfrac{1}{2}$.
+
+We deduce from (1) that $v \le u$ and from (2) that $u \le 1 - v$. We therefore have that all solutions to (1) and (2) satisfy the following set of equations:
+\begin{align*}
+	0 \le & v \le \frac{1}{2} \\
+	v \le & u \le 1 - v.
+\end{align*}
+A quick verification yields that all such $u$ and $v$ satisfy (1) and (2). These equations thus form our bounds of integration.
+
+Now clearly $x + y = 2u$; then
+\[
+	\begin{vmatrix} \pdv{x}{v} & \pdv{x}{u} \\ \pdv{y}{v} & \pdv{y}{u} \end{vmatrix} = \begin{vmatrix} 1 & 1 \\ -1 & 1 \end{vmatrix} = 2.
+\]
+
+\newpage
+
+We may now use the Change of Variables Theorem to integrate the function in terms of $u$ and $v$:
+\begin{align*}
+	\iint_{D}(x + y) \dd{x} \dd{y} &= \int_{0}^{\tfrac{1}{2}} \int_{v}^{1 - v} 2u (2) \dd{u} \dd{v} \\
+	&= 2 \int_{0}^{\tfrac{1}{2}} \Big[ u^{2} \Big]_{v}^{1 - v} \dd{u} \\
+	&= 2 \int_{0}^{\tfrac{1}{2}} (1 - v)^{2} - v^{2} \dd{v} \\
+	&= 2 \int_{0}^{\tfrac{1}{2}} 1 - 2v \dd{v} \\
+	&= 2 \Big[ v - v^{2} \Big]_{0}^{\tfrac{1}{2}} \\
+	&= 2 \left( \frac{1}{4} \right) \\
+	&= \boxed{\frac{1}{2}}. 
+\end{align*}
+This yields the same answer as standard integration:
+\begin{align*}
+	\iint_{D} (x + y) \dd{x} \dd{y} &= \int_{0}^{1} \int_{0}^{x} (x + y) \dd{y} \dd{x} \\
+	&= \int_{0}^{1} \Big[ \frac{(x + y)^{2}}{2} \Big]_{0}^{x} \dd{x} \\
+	&= \int_{0}^{1} \frac{(2x)^{2}}{2} - \frac{x^{2}}{2} \dd{x} \\
+	&= \int_{0}^{1} \frac{3x^{2}}{2} \dd{x} \\
+	&= \Big[ \frac{x^{3}}{2} \Big]_{0}^{1} \\
+	&= \boxed{\frac{1}{2}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 11}
+
+We evaluate the integral by polar substitution. Observe that if $(x, y) = (r, \theta)$, then $x^{2} + y^{2} \le 4$ is equiavalent to $r^{2} \le 4$, so $r \in [0, 2]$. Because the Jacobian determinant from polar to Cartesian coordinates is $r$, we may now use the Change of Variables Theorem to deduce that
+\begin{align*}
+	\iint_{D} (x^{2} + y^{2})^{\tfrac{3}{2}} \dd{x} \dd{y} &= \int_{0}^{2\pi} \int_{0}^{2} \left( r^{2} \right)^{\tfrac{3}{2}} (r) \dd{r} \dd{\theta} \\
+	&= 2\pi \int_{0}^{2} r^{4} \dd{r} \\
+	&= 2\pi \Big[ \frac{r^{5}}{5} \Big]_{0}^{2} \\
+	&= \boxed{\frac{64\pi}{5}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 16}
+
+We evaluate the integral by polar substitution. Observe that as $D$ is the unit disc --- and that the Jacobian determinant from polar to Cartesian coordinates is $r$ --- we can use the change of variables formula to find that
+\begin{align*}
+	\iint_{D} \left(1 + x^{2} + y^{2} \right)^{\tfrac{3}{2}} \dd{x} \dd{y} &= \int_{0}^{2\pi} \int_{0}^{1} \left( 1 + r^{2} \right)^{\tfrac{3}{2}} r \dd{r} \dd{\theta} \\
+	&= \pi \int_{0}^{1} 2r \left( 1 + r^{2} \right)^{\tfrac{3}{2}} \dd{r} \\
+	&= \pi \Big[ \frac{2}{5} \left( 1 + r^{2} \right)^{\tfrac{5}{2}} \Big]_{0}^{1} \\
+	&= \frac{2\pi(\sqrt{2^{5}} - 1)}{5} \\
+	&= \boxed{\frac{8\pi \sqrt{2} - 2\pi}{5}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 20}
+
+\textbf{Part (a)}: Observe that this equation converts spherical coordinates to Cartesian. Using a geometeric argument, we can see that any point on the unit sphere has a polar angle $v$ and an azimuth angle $w$ (letting $u = 1$) such that $T$ maps $(u, v, w)$ to the point. Therefore, $T$ is onto.
+
+\textbf{Part (b)}: Observe that $T(1, v, w) = T(1, v + 2n_{1} \pi, w + 2n_{2} \pi)$ for all integers $n_{1}$ and $n_{2}$ by the period of sine and cosine. Therefore, $T$ is \textit{nowhere} one-to-one on the unit sphere.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 25}
+
+We evaluate the integral by spherical substitution. Observe that the Jacobian determinant from spherical to Cartesian coordinates is $\rho^{2} \sin(\phi)$, so we can use the change of variables formula to find that
+\begin{align*}
+	\iiint_{W} \frac{\dd{x} \dd{y} \dd{z}}{\left( x^{2} + y^{2} + z^{2} \right)^{\tfrac{3}{2}}} &= \int_{0}^{\pi} \int_{0}^{2\pi} \int_{b}^{a} \frac{\rho^{2} \sin(\phi)}{\rho^{3}} \dd{\rho} \dd{\theta} \dd{\phi} \\
+	&= \left( \int_{0}^{\pi} \sin(\phi) \dd{\phi} \right) \left( 2\pi \right) \left( \int_{b}^{a} \frac{1}{\rho} \dd{\rho}  \right) \\
+	&= 4\pi \Big[ \ln \abs{\rho} \Big]_{b}^{a} \\
+	&= 4\pi (\ln(a) - \ln(b)) \\
+	&= \boxed{4\pi\ln \left( \tfrac{a}{b} \right)}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 29}
+
+We evaluate the integral by spherical substitution. Observe that the Jacobian determinant from spherical to Cartesian coordinates is $\rho^{2} \sin(\phi)$, so we can use the change of variables formula to find that (because $\rho$ is positive)
+\begin{align*}
+	\iiint_{W} \sqrt{x^{2} + y^{2} + z^{2}} e^{-(x^{2} + y^{2} + z^{2})} \dd{x} \dd{y} \dd{z} &= \int_{0}^{\pi} \int_{0}^{2\pi} \int_{b}^{a} \sqrt{\rho^{2}} e^{-\rho^{2}} (\rho^{2} \sin(\phi)) \dd{r} \dd{\theta} \dd{\phi} \\
+	&= \left( \int_{0}^{\pi} \sin(\phi) \dd{\phi} \right) (2\pi) \left( \int_{b}^{a} \rho^{3} e^{-\rho^{2}} \dd{\rho} \right) \\
+	&= 4\pi \Big[ -\tfrac{1}{2} \rho^{2} e^{-\rho^{2}} + \int_{b}^{a} \rho e^{\rho^{2}} \dd{\rho} \Big]_{b}^{a} \\
+	&= 4\pi \Big[ -\tfrac{1}{2} \rho^{2} e^{-\rho^{2}} - \tfrac{1}{2} e^{-\rho^{2}} \Big]_{b}^{a} \\
+	&= -4\pi \Big[ \frac{e^{-\rho^{2}}(r^{2} + 1)}{2} \Big]_{b}^{a} \\
+	&= \boxed{2\pi \left( e^{-b^{2}} (b^{2} + 1) - e^{-a^{2}} (a^{2} + 1) \right)}.
+\end{align*}
+
+
+% --------------------------------------------- %
+
+\subsection*{Problem 32}
+
+Realize that the linear map
+\[
+	T = \begin{bmatrix} 2 & 1 \\ -1 & 2 \end{bmatrix}
+\]
+transforms the unit square to the desired square, has determinant five, and preserves orientation. If the desired square is $B$ (and if we change the \textit{names} of the variables in the given integral), we may use the Change of Variables Theorem to deduce that
+\begin{align*}
+	\iint_{B} (u + v) \dd{u} \dd{v} &= \int_{0}^{1} \int_{0}^{1} (x + y) (5) \dd{x} \dd{y} \\
+	&= 5 \int_{0}^{1} \Big[ \frac{x^{2}}{2} + xy \Big]_{0}^{1} \\
+	&= 5 \int_{0}^{1} \frac{1}{2} + y \dd{y} \\
+	&= 5 \Big[ \frac{y}{2} + \frac{y^{2}}{2} \Big]_{0}^{1} \\
+	&= 5 (1) \\
+	&= \boxed{5}.
+\end{align*}
+
+
+% --------------------------------------------- %
+
+\section{Section 6.3}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 5}
+
+By the formula, the $x$-coordinate of the center of mass is
+\begin{align*}
+	\frac{\int_{0}^{1} \int_{x^{2}}^{x} x(x + y) \dd{y} \dd{x}}{\int_{0}^{1} \int_{x^{2}}^{x} (x + y) \dd{y} \dd{x}} &= \frac{\int_{0}^{1} \left(\int_{x^{2}}^{x} x^{2} \dd{y} + \int_{x^{2}}^{x} xy \dd{y} \right) \dd{x} }{\int_{0}^{1} \left(\int_{x^{2}}^{x} x \dd{y} + \int_{x^{2}}^{x} y \dd{y} \right) \dd{x}} \\
+	&= \frac{\int_{0}^{1} x^{2}(x - x^{2}) + \tfrac{1}{2}x(x^{2} - x^{4}) \dd{x}}{\int_{0}^{1} x(x - x^{2}) + \tfrac{1}{2}(x^{2} - x^{4}) \dd{x}} \\
+	&= \frac{\int_{0}^{1} -\tfrac{1}{2}x^{5} - x^{4} + \tfrac{3}{2}x^{3} \dd{x}}{\int_{0}^{1} -\tfrac{1}{2}x^{4} - x^{3} + \tfrac{3}{2}x^{2} \dd{x}} \\
+	&= \frac{\Big[ -\tfrac{1}{12} x^{6} - \tfrac{1}{5}x^{5} + \tfrac{3}{8}x^{4} \Big]_{0}^{1}}{\Big[ -\tfrac{1}{10} x^{5} - \tfrac{1}{4}x^{4} + \tfrac{1}{2}x^{3} \Big]_{0}^{1}} \\
+	&= \frac{11}{18}.
+\end{align*}
+By the formula, the $y$-coordinate of the center of mass is
+\begin{align*}
+	\frac{\int_{0}^{1} \int_{x^{2}}^{x} y(x + y) \dd{y} \dd{x}}{\int_{0}^{1} \int_{x^{2}}^{x} (x + y) \dd{y} \dd{x}} &= \frac{\int_{0}^{1} \left(\int_{x^{2}}^{x} xy \dd{y} + \int_{x^{2}}^{x} y^{2} \dd{y} \right) \dd{x} }{\int_{0}^{1} \left(\int_{x^{2}}^{x} x \dd{y} + \int_{x^{2}}^{x} y \dd{y} \right) \dd{x}} \\
+	&= \frac{\int_{0}^{1} \tfrac{1}{2}x (x^{2} - x^{4}) + \tfrac{1}{3}(x^{3} - x^{6}) \dd{x}}{\int_{0}^{1} x(x - x^{2}) + \tfrac{1}{2}(x^{2} - x^{4}) \dd{x}} \\
+	&= \frac{\int_{0}^{1} -\tfrac{1}{3}x^{6} - \tfrac{1}{2}x^{5} + \tfrac{5}{6}x^{3} \dd{x}}{\int_{0}^{1} -\tfrac{1}{2}x^{4} - x^{3} + \tfrac{3}{2}x^{2} \dd{x}} \\
+	&= \frac{\Big[ -\tfrac{1}{21} x^{7} - \tfrac{1}{12} x^{6} + \tfrac{5}{24} x^{4} \Big]_{0}^{1}}{\Big[ -\tfrac{1}{10}x^{5} - \tfrac{1}{4}x^{4} + \tfrac{1}{2}x^{3} \Big]_{0}^{1}} \\
+	&= \frac{65}{126}.
+\end{align*}
+Therefore, the coordinate of the center of mass is $\boxed{\left( \frac{11}{18}, \frac{65}{126} \right)}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 6}
+
+By the formula, the $x$-coordinate of the center of mass is
+\begin{align*}
+	\frac{\int_{0}^{\tfrac{1}{2}} \int_{0}^{x^{2}} x \dd{y} \dd{x}}{\int_{0}^{\tfrac{1}{2}} \int_{0}^{x^{2}} \dd{y} \dd{x}} &= \frac{\int_{0}^{\tfrac{1}{2}} x (x^{2}) \dd{x}}{\int_{0}^{\tfrac{1}{2}} x^{2} \dd{x}} \\
+	&= \frac{\Big[ \tfrac{1}{4} x^{4} \Big]_{0}^{\tfrac{1}{2}}}{\Big[ \tfrac{1}{3} x^{3} \Big]_{0}^{\tfrac{1}{2}}} \\
+	&= \frac{3}{8}.
+\end{align*}
+
+By the formula, the $x$-coordinate of the center of mass is
+\begin{align*}
+	\frac{\int_{0}^{\tfrac{1}{2}} \int_{0}^{x^{2}} y \dd{y} \dd{x}}{\int_{0}^{\tfrac{1}{2}} \int_{0}^{x^{2}} \dd{y} \dd{x}} &= \frac{\int_{0}^{\tfrac{1}{2}} \tfrac{1}{2} (x^{4}) \dd{x}}{\int_{0}^{\tfrac{1}{2}} x^{2} \dd{x}} \\ 
+	&= \frac{\Big[ \tfrac{1}{10} x^{5} \Big]_{0}^{\tfrac{1}{2}}}{\Big[ \tfrac{1}{3} x^{3} \Big]_{0}^{\tfrac{1}{2}}} \\
+	&= \frac{3}{30}.
+\end{align*}
+Therefore, the coordinate of the center of mass is $\boxed{\left( \frac{3}{8}, \frac{3}{30} \right)}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 11}
+
+We evaluate the integral by spherical substitution. Observe that the Jacobian determinant from spherical to Cartesian coordinates is $\rho^{2} \sin(\phi)$, so we can use the change of variables formula to find that (because $\rho$ is positive)
+\begin{align*}
+	\iiint_{B} \delta(x, y, z) \dd{x} \dd{y} \dd{z} &= \int_{0}^{\pi} \int_{0}^{2\pi} \int_{0}^{5} (2\rho^{2} + 1) (\rho^{2} \sin(\phi)) \dd{\rho} \dd{\theta} \dd{\phi} \\
+	&= \left( \int_{0}^{\pi} \sin(\phi) \dd{\phi} \right) (2\pi) \left( \int_{0}^{5} 2\rho^{4} + \rho^{2} \right) \\
+	&= 4\pi \Big[ \tfrac{2}{5} \rho^{5} + \tfrac{1}{3} \rho^{3} \Big]_{0}^{5} \\
+	&= \boxed{\frac{15500}{3} \pi}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\section{Section 7.1}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 5}
+
+We claim the parametrization we seek is $\boxed{\left( 3 \cos(\theta), 4 \sin(\theta), 3 \right) \text{ for } \theta \in [0, 2\pi)}$. It is trivial to verify that all such points in the parametriation lie on the curve, by substitution --- and a backwards construction may demonstate that all points that lie on the cylinder-plane intersection exist on the parametrization.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 11}
+
+\textbf{Part (a)}: Observe that $\vec{c}'(t) = (0, 0, 2t)$, so $\norm{\vec{c}'(t)} = \sqrt{0^{2} + 0^{2} + (2t)^{2}} = 2 \abs{t}$. Thus, we seek to evaluate the following integral:
+\begin{align*}
+	\int_{0}^{1} f(\vec{c}(t)) \norm{\vec{c}'(t)} \dd{t} &= \int_{0}^{1} e^{\abs{t}} (2\abs{t}) \dd{t} \\
+	&= 2 \int_{0}^{1} t e^{t} \dd{t} \\
+	&= 2 \Big[ t e^{t} - e^{t} \Big]_{0}^{1} \\
+	&= \boxed{2}.
+\end{align*}
+\textbf{Part (b)}: Observe that $\vec{c}'(t) = (1, 3, 2)$, so $\norm{\vec{c}'(t)} = \sqrt{1^{2} + 3^{2} + 2^{2}} = \sqrt{14}$. Thus, we seek to evaluate the following integral:
+\begin{align*}
+	\int_{1}^{3} f(\vec{c}(t)) \norm{\vec{c}'(t)} \dd{t} &= \int_{0}^{1} (3t)(2t) (\sqrt{14}) \dd{t} \\
+	&= 2 \sqrt{14} \Big[ t^{3} \Big]_{1}^{3} \\
+	&= \boxed{52 \sqrt{14}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 12}
+
+\textbf{Part (a)}: Note that $\vec{c}(t) = (t, t^{2}, 0)$, so $\vec{c}'(t) = (1, 2t, 0)$; thus $\norm{\vec{c}'(t)} = \sqrt{1^{2} + (2t)^{2} + 0^{2}} = \sqrt{1 + 4t^{2}}$. Therefore, we seek to evaluate the following integral:
+\begin{align*}
+	\int_{0}^{1} f(\vec{c}(t)) \norm{\vec{c}'(t)} \dd{t} &= \int_{0}^{1} t \cos(0) \sqrt{1 + 4t^{2}} \dd{t} \\
+	&= \frac{1}{8} \int_{0}^{1} 8t \sqrt{1 + 4t^{2}} \dd{t} \\
+	&= \frac{1}{8} \Big[ \frac{2}{3} \left( 1 + 4t^{2} \right)^{\tfrac{3}{2}} \Big]_{0}^{1} \\
+	&= \frac{1}{12} \left( 5^{\tfrac{3}{2}} - 1 \right) \\
+	&= \boxed{\frac{5 \sqrt{5} - 1}{12}}.
+\end{align*}
+\textbf{Part (b)}: Note that $\vec{c}(t) = \left( t, \tfrac{2}{3} t^{3/2}, t \right)$, so $\vec{c}'(t) = (1, t^{1/2}, 1)$; we deduce that $\norm{\vec{c}'(t)} = \sqrt{1^{2} + (t^{1/2})^{2} + 1^{2}} = \sqrt{t + 2}$. Therefore, we seek to evaluate the following integral:
+
+\begin{align*}
+	\int_{1}^{2} f(\vec{c}(t)) \norm{\vec{c}'(t)} \dd{t} &= \int_{1}^{2} \frac{t + \tfrac{2}{3}t^{3/2}}{\tfrac{2}{3}t^{3/2} + t} (\sqrt{2 + t}) \dd{t} \\
+	&= \int_{1}^{2} \sqrt{2 + t} \dd{t} \\
+	&= \Big[ \tfrac{2}{3} (2 + t)^{3/2} \Big]_{1}^{2} \\
+	&= \boxed{\frac{16}{3} - 2 \sqrt{3}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 19}
+
+Observing that $\vec{c}'(t) = (2t, 1, 0)$, we seek to evaluate the following integral:
+\begin{align*}
+	\int_{0}^{1} \norm{\vec{c}'(t)} \dd{t} = \int_{0}^{1} \sqrt{(2t)^{2} + 1^{2} + 0} \dd{t} 
+	&= \int_{0}^{1} \sqrt{4t^{2} + 1} \dd{t} 
+\end{align*}
+Performing the substitution $t = \tfrac{1}{2} \tan(u)$, we find (after a lengthy calculation) the answer
+\[
+	\boxed{\frac{2\sqrt{5} + \ln(2 + \sqrt{5})}{4}}.
+\]
+
+% --------------------------------------------- %
+
+\section{Section 7.2}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 4}
+
+\textbf{Part (a)}: As $\vec{c}(t)$ = $(\cos(t), \sin(t))$ and  $\vec{c}'(t) = (-\sin(t), \cos(t))$, we have that
+\begin{align*}
+	\int_{\vec{c}} x \dd{y} - y \dd{x} &= \int_{0}^{2\pi} \cos(t) (\cos(t)) - \sin(t) (-\sin(t)) \dd{t}  \\
+	&= \int_{0}^{2\pi} \cos^{2}(t) + \sin^{2}(t) \dd{t} \\
+	&= \int_{0}^{2\pi} \dd{t} \\
+	&= \boxed{2\pi}.
+\end{align*}
+
+\textbf{Part (b)}: As $\vec{c}(t) = (\cos(\pi t), \sin(\pi t))$ and $\vec{c}'(t) = (-\pi \sin(\pi t), \pi \cos(\pi t))$, we have that
+\begin{align*}
+	\int_{\vec{c}} x \dd{x} + y \dd{y} &= \int_{0}^{2} \cos(\pi t) (-\pi \sin(\pi t)) + \sin(\pi t) (\pi \cos(\pi t)) \dd{t} \\
+	&= \pi \int_{0}^{2} -\cos(\pi t) \sin(\pi t) + \sin(\pi t) \cos(\pi t) \dd{t} \\
+	&= \pi \int_{0}^{2} 0 \dd{t} \\
+	&= \boxed{0}.
+\end{align*}
+
+\textbf{Part (c)}: We may represent $\vec{c}$ by two different paths: $(1 - t, t, 0)$ for $t \in [0, 1]$ and $(0, 2 - t, t - 1)$ for $t \in [1, 2]$. It is trivial to verify that these two paths constitute the desired curve $\vec{c}$; therefore, we have that
+\begin{align*}
+	\int_{\vec{c}} yz \dd{x} + zx \dd{y} + xy \dd{z} =& \int_{0}^{1} (t)(0)(-1) + (0)(1 - t)(1) + (1 - t)(t)(0) \\
+	& + \int_{1}^{2} (2 - t)(t - 1)(0) + (t - 1)(0)(-1) + (0)(2 - t)(1) \dd{t} \\
+	=& \int_{0}^{1} 0 \dd{t}  + \int_{1}^{2} 0 \dd{t} \\
+	=& \text{ } \boxed{0}.
+\end{align*}
+
+\textbf{Part (d)} It is trivial to verify that the path $\vec{c} = (t, 0, t^{2})$ from $t \in [-1, 1]$ traces the given curve; we thus have from $\vec{c}'(t) = (1, 0, 2t)$ that
+\begin{align*}
+	\int_{\vec{c}} x^{2} \dd{x} - xy \dd{y} + \dd{z} &= \int_{-1}^{1} t^{2} (1) - t(0)(0) + 2t \dd{t} \\
+	&= \int_{-1}^{1} t^{2} + 2t \dd{t} \\
+	&= \Big[ \frac{t^{3}}{3} + t^{2} \Big]_{-1}^{1} \\
+	&= \boxed{\frac{2}{3}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 8}
+
+As $\vec{c}(t) = (t, t^{2}, t^{3})$ and $\vec{c}'(t) = (1, 2t, 3t^{2})$, we have that $\mat{F}(\vec{c}(t)) = (t^{2}, 2t, t^{2})$; hence,
+\begin{align*}
+	\int_{\vec{c}} \mat{F} \dd{\vec{s}} &= \int_{0}^{1}  \mat{F}(\vec{c}(t)) \cdot \vec{c}'(t) \dd{t} \\
+	&= \int_{0}^{1} (t^{2}, 2t, t^{2}) \cdot (1, 2t, 3t^{2}) \dd{t} \\
+	&= \int_{0}^{1} t^{2} + 4t^{2} + 3t^{4} \dd{t} \\
+	&= \int_{0}^{1} 3t^{4} + 5t^{2} \dd{t} \\
+	&= \Big[ \frac{3t^{5}}{5} + \frac{5t^{3}}{3} \Big]_{0}^{1} \\
+	&= \boxed{\frac{34}{15}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 17}
+
+Such a curve is $\vec{c}(t) = (1, t + 1, 3t + 1)$ for $t \in [0, 1]$. As $\vec{c}'(t) = (0, 1, 3)$, we have that
+\begin{align*}
+	\int_{C} 2xyz \dd{x} + x^{2}z \dd{y} + x^{2}y \dd{z} &= \int_{0}^{1} 2(t + 1)(3t + 1)(0) + (3t + 1) + (t + 1)(3) \dd{t} \\
+	&= \int_{0}^{1} 6t + 4 \dd{t} \\
+	&= \Big[ 3t^{2} + 4t \Big]_{0}^{1} \\
+	&= \boxed{7}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 19}
+
+Observe that $\mat{F}(x, y, z)$ is the gradient of the function $f(x, y, z) = \tfrac{1}{(x^{2} + y^{2} + z^{2})^{1/2}}$. Therefore, the work done is represented by the following integral, where $\vec{c}(t)$ for $t \in [0, 1]$ is a path between $(x_{1}, x_{2}, x_{3})$ and $(y_{1}, y_{2}, y_{3})$:
+\begin{align*}
+	\int_{\vec{c}} \mathbf{F} \dd{\vec{s}} &= \int_{\vec{c}} \grad f \dd{\vec{s}} \\ 
+	&= f(\vec{c}(1)) - f(\vec{c}(0)) \\
+	&= f(y_{1}, y_{2}, y_{3}) - f(x_{1}, x_{2}, x_{3}) \\
+	&= \frac{1}{(y_{1}^{2} + y_{2}^{2} + y_{3}^{2})^{1/2}} - \frac{1}{(x_{1}^{2} + x_{2}^{2} + x_{3}^{2})^{1/2}} \\
+	&= \frac{1}{R_{2}} - \frac{1}{R_{1}}
+\end{align*}
+Therefore, the work done depends only on the two radii $R_{1}$ and $R_{2}$.
+
+% --------------------------------------------- %
+
+\end{document}

@@ -1,0 +1,464 @@
+\documentclass[11pt]{article} 
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Differentiation}
+\author{James Pagan}
+\date{Septemper 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Continuity of Sequences and Functions}
+
+% --------------------------------------------- %
+
+\subsection{Limits of Multivariable Sequences}
+
+\textbf{Limit of a Sequence}: Let $\vec{x}_{r}$ for $r \in \mathbb{Z}_{> 0}$ be a sequence of vectors in $\mathbb{R}^{n}$ for $r \in \mathbb{N}$. We say that $\vec{x}_{r}$ \textit{converges} to the vector $\vec{L}$ if for all $\epsilon > 0$, there is $N > 0$ such that
+\[
+	N < i \implies \norm{\vec{x}_{i} - \vec{L}} < \epsilon.
+\]
+
+This is the definition of a limit via metric spaces. Before we can apply the usual limit rules to $\mathbb{R}^{n}$, we must verify that $\mathbb{R}^{n}$ is a complete metric space: 
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		$\mathbb{R}^{n}$ is a complete metric space under the canonical norm.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Clearly $\mathbb{R}^{n}$ is a metric space. Now, let $\vec{x}_{r} = (a_{r1}, \ldots, a_{rn})$ be a Cauchy sequence in $\mathbb{R}^{n}$; for all $\epsilon > 0$, there is $N > 0$ such that
+		\[ N < i \le j \implies \norm{\vec{x}_{i} - \vec{x}_{j}} < \epsilon.  \]
+		Now, see that for $k \in \{ 1, \ldots, n \}$,
+		\[
+			\abs{a_{ik} - a_{jk}} = \sqrt{(a_{ik} - a_{jk})^{2}} \le \sqrt{(a_{i1} - a_{j1})^{2} + \cdots + (a_{in} - a_{jn})^{2}} = \norm{\vec{x}_{i} - \vec{x}_{j}} < \epsilon,
+		\]
+		so the sequence $a_{rk}$ is a real Cauchy sequence; as all such sequences converge, we may define $N_{1}, \ldots, N_{n}$ and $L_{1}, \ldots, L_{n}$ such that
+		\begin{align*}
+			N_{1} < i \implies & \abs{a_{i, 1} - L_{1}} < \tfrac{\epsilon}{n}, \\
+			& \vdots \\
+			N_{n} < i \implies & \abs{a_{i, n} - L_{n}} < \tfrac{\epsilon}{n}.
+		\end{align*}
+		Define $\vec{L} = (L_{1}, \ldots, L_{n})$. Then for all $\max \{ N_{1}, \ldots, N_{n} \} < i$, we find that
+		\begin{align*}
+			\norm{\vec{x}_{i} - \vec{L}} &= \sqrt{(a_{i, 1} - L_{1})^{2} + \cdots + (a_{i, n} - L_{n})^{2}} \\ 
+			&\le \sqrt{(a_{i, 1} - L_{1})^{2}} + \cdots + \sqrt{(a_{i, n} - L_{n})^{2}} \\
+			&= \abs{a_{i, 1} - L_{1}} + \cdots + \abs{a_{i, n} - L_{n}} \\
+			&< \tfrac{\epsilon}{n} + \cdots + \tfrac{\epsilon}{n} \\
+			&= \epsilon,
+		\end{align*}
+		so $\vec{x}_{r}$ converges to $\vec{L}$, and $\mathbb{R}^{n}$ is a complete metric space.
+	\end{proof}
+\end{adjustwidth}
+
+\subsection{A Brief Topological Excursion: Open Sets}
+
+An \textbf{open disk} $D_{r} (\vec{x}_{0})$ of radius $r$ and center $\vec{x_{0}}$ is the set of all points $\vec{x}$ such that $\norm{\vec{x} - \vec{x}_{0}} < r$. A set $U \subseteq \mathbb{R}^{n}$ is an \textbf{open set} if for all $\vec{x}_{0} \in U$, there exists $r > 0$ such that $D_{r}(\vec{x}_{0}) \in U$ --- in other words, if it is possible to construct an open disc, no matter how small, around any point in $U$ that lies entirely in $U$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		Any open disc $D_{r}(\vec{x}_{0})$ for $r > 0$ and $\vec{x}_{0} \in \mathbb{R}^{n}$ is an open set.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $\vec{y}$ be any point in $D_{0}(\vec{x}_{0})$; note that $\vec{y}$ satisfies $\norm{\vec{y} - \vec{x}_{0}} < r$. We wish to construct an open disc centered at  $\vec{y}$ that lies inside $D_{r} (\vec{x}_{0})$.
+
+		Let $s = r - \norm{\vec{y} - \vec{x}_{0}}$. Consider an arbitrary point $\vec{z}$ in the the open disc $D_{r} (\vec{y})$ --- we have that $\norm{\vec{z} - \vec{y}} < s = r - \norm{\vec{y} - \vec{x_{0}}}$. Thus, the distance between $\vec{z}$ and $\vec{x}_{0}$ satisfies
+		\[
+			\norm{\vec{z} - \vec{x}_{0}} \leq \norm{\vec{z} - \vec{y}} + \norm{\vec{y} - \vec{x}_{0}} < r - \norm{\vec{y} - \vec{x}_{0}} + \norm{\vec{y} - \vec{x}_{0}} = r.
+		\]
+		Then $\vec{z}$ lies in $D_{r}(\vec{x}_{0})$; therefore, $D_{s} \subseteq D_{r} (x_{0})$. Every point $y \in D_{r}(\vec{x}_{0})$ is contained within the open disc $D_{s} (\vec{y})$, so $D_{r} (\vec{x}_{0})$ is an open set, as desired.
+	\end{proof}
+\end{adjustwidth}
+
+A \textbf{neighborhood} of $\vec{x} \in \mathbb{R}^{n}$ is a set that contains an open set that contains $\vec{x}$; neighborhoods need not be open sets at all. 
+
+A point $x \in \mathbb{R}^{n}$ is a \textbf{boundary point} of $U \subseteq \mathbb{R}^{n}$ if every neighborhood of $x$ contains a point in $U$ and a point not in $U$. The set of all boundary points of $U$ is denoted $\partial U$. We an now define:
+
+\subsection{Limits of Multivariable Functions}
+
+Let $U$ be an open subset of $\mathbb{R}^{n}$ and $f$ be a vector-valued function $f : U \to \mathbb{R}^{m}$, and consider $x \in U$ or $x \in \partial U$. There are two equivalent definitions of limits of multivariable functions taught in this class:
+
+\textbf{Limit of a Function}: We say that $\lim\limits_{\vec{x} \to \vec{x}_{0}} = \vec{L}$ for $\vec{L} \in \mathbb{R}^{m}$ if for all $\epsilon > 0$, there exists $\delta$ such that 
+\[
+	0 < \norm{\vec{x} - \vec{x}_{0}} < \delta \implies \norm{f(\vec{x}) - \vec{L}} < \epsilon.
+\]
+
+\textbf{Topological Limit of a Function}: We say that $\lim\limits_{\vec{x} \to \vec{x}_{0}} = \vec{L}$ if for all neighborhoods $\mathcal{N}$ of $\vec{L}$, there exists a neighborhood $U$ of $\vec{x_{0}}$ such that
+\[
+	\vec{x} \in U \setminus \vec{x}_{0} \implies f(\vec{x}) \in \mathcal{N}. 
+\]
+\textbf{Continuity}: In either definition, we say that $f$ is continuous at $\vec{x}_{0} \in U$ or $\vec{x}_{0} \in \partial U$ if $\lim\limits_{\vec{x} \to \vec{x}_{0}} f(\vec{x}) = f(\vec{x}_{0})$. $f$ \textit{itself} is continuous if $f$ is continuous at all $\vec{x}_{0} \in U$.
+
+% -------------------------------------------- %
+
+\section{Limits on Matricies}
+
+\subsection{Matrix Norm}
+Before we can perform calculus on matricies, we must define a metric: the matrix norm. As $\mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ is a vector space whose elements are matricies, we can define $\norm{T}$ for $T \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ as follows:
+\[
+	\norm{T} = \sup \{ \norm{T \vec{x}} \mid \vec{x} \in \mathbb{R}^{n}, \norm{\vec{x}} \le 1\}.
+\]
+Imposing that $\norm{\vec{x}} = 1$ yields an identical definition. We have that $T \left( \tfrac{\vec{x}}{\norm{\vec{x}}} \right) \le \norm{T}$ --- or more genearlly, that $\norm{T \vec{x}} \le \norm{T} \norm{\vec{x}}$. Fascinatingly, the matrix norm satisfies a host of convenient properties:
+\begin{itemize}
+	\item \textbf{Zero}: If $\norm{T}$ = 0, then $T \vec{x} = 0$ for all $\vec{x} \in \mathbb{R}^{n}$ such $\norm{\vec{x}} = 1$; we find that for \textit{all} $\vec{v} \in \mathbb{R}^{n}$,
+	\[
+		T \vec{v} = \norm{\vec{v}} (T \tfrac{\vec{\vec{v}}}{\norm{\vec{v}}}) = \norm{\vec{v}} (0) = 0,
+	\]
+	so $T = 0$.
+	\item \textbf{Positivity}: If $T, S \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ such that $T \ne S$, then by contraposition, $T - S \ne 0$ implies that $\norm{T - S} \ne 0$, so $\norm{T - S} > 0$.
+	\item \textbf{Additivity}: For matricies $T, S \in \mathcal{L} (\mathbb{R}^{n}, \mathbb{R}^{m})$, we define define the vector $\vec{x} = \sup \{ \norm{(T + S)\vec{x}} \mid \vec{x} \in \mathbb{R}^{n}, \norm{x} \le 1 \}$; we have that 
+	\[
+		\norm{T + S} = \norm{(T + S) \vec{x}} \le \norm{T \vec{x}} + \norm{S \vec{x}} \le \norm{T} \norm{\vec{x}} + \norm{S} \norm{\vec{x}} \le \norm{T} + \norm{S}.
+	\]
+	\item \textbf{Scalar Multiplication}: For all $\lambda \in \mathbb{R}$, let $\vec{x} = \sup \{ \norm{\lambda T \vec{x}} \mid \vec{x} \in \mathbb{R}^{n}, \norm{x} \le 1 \}$; then
+	\[
+		\norm{\lambda T} = \norm{\lambda T \vec{x}} = \lambda \norm{T \vec{x}} \le \lambda \norm{T} \norm{\vec{x}} \le \lambda \norm{T}.
+	\]
+	\item \textbf{Matrix Multiplication}: If $T \in \mathcal{L}(\mathbb{R}^{n}), \mathbb{R}^{m}$ and $S \in \mathcal{L}(\mathbb{R}^{m}, \mathbb{R}^{r})$, define the vector $\vec{x} = \sup \{ \norm{(TS) \vec{x}} \mid \vec{x} \in \mathbb{R}^{n}, \norm{x} \le 1 \}$. Then
+	\[
+		\norm{TS} = \norm{TS \vec{x}} \le \norm{T} \norm{S \vec{x}} \le \norm{T} \norm{S} \norm{\vec{x}} \le \norm{T} \norm{S}.
+	\]
+	\item \textbf{Triangle Inequality}: If $T, S, R \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$, then
+	\[
+		\norm{T - S} = \norm{(T - R) + (R - S)} \le \norm{T - R} + \norm{R - S}.
+	\]
+\end{itemize}
+
+We conclude that the matrix norm is a metric of $\mathcal{L} (\mathbb{R}^{n}, \mathbb{R}^{m})$.
+
+\subsection{Continuity of Linear Maps}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		If $T \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$, then $\norm{T} < \infty$ and $T$ is a uniformly continuous mapping of $\mathbb{R}^{n}$ into $\mathbb{R}^{m}$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Define $\vec{e}_{1}, \ldots, \vec{e}_{n}$ as the standard basis of $\mathbb{R}^{n}$, and let $\vec{x} = \sup \{ \norm{T \vec{x}} \mid \vec{x} \in \mathbb{R}^{n}, \norm{x} \le 1\}$ such that $\norm{T} = \norm{T \vec{x}}$ have the form $\vec{x} = (x_{1}, \ldots, x_{n})$. Clearly $\abs{x_{1}}, \ldots, \abs{x_{n}} \le 1$, so
+		\begin{align*}
+			\norm{T} &= \norm{T \vec{x}} = \norm{T(x_{1} \vec{e}_{1}) + \cdots + x_{n} \vec{e}_{n}} \\ 
+			&\le \abs{x_{1}} \norm{T \vec{e}_{1}} + \cdots + \abs{x_{n}} \norm{T \vec{e_{n}}} \\
+			&\le \norm{T \vec{e}_1} + \cdots + \norm{T \vec{e}_{n}} \\
+			&< \infty.
+		\end{align*}
+		Therefore, for all $\epsilon > 0$, we have that $0 < \norm{\vec{x} - \vec{y}} < \tfrac{\epsilon}{\norm{T}}$ implies that
+		\[
+			\norm{T \vec{x} - T \vec{y}} = \norm{T(\vec{x} - \vec{y})} \le \norm{T} \norm{\vec{x} - \vec{y}} < \norm{T} \tfrac{\epsilon}{\norm{T}} = \epsilon,
+		\]
+		so $T$ is uniformly continuous.
+	\end{proof}
+\end{adjustwidth}
+
+\subsection{A Neat Inequality}
+
+Suppose $\vec{e}_{1}, \ldots, \vec{e}_{n}$ and $\vec{e}_{1}, \ldots, \vec{e}_{m}$ are the standard bases of $\mathbb{R}^{n}$ and $\mathbb{R}^{m}$. Then if $\vec{v} = (v_{1}, \ldots, v_{n}) \in \mathbb{R}^{n}$ and $T \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$,
+\[
+	T \vec{v} = \sum_{i = 1}^{m} \left( \sum_{j = 1}^{n} a_{ij} v_{j} \right) \vec{e}_{i} = \left( \sum_{j = 1}^{n} a_{1j} v_{j}, \ldots, \sum_{j = 1}^{n} a_{mj} v_{j} \right).
+\]
+Then via the Cauchy-Schwarz Inequality, we have that for all $\vec{v} \in \mathbb{R}^{n}$,
+\begin{align*}
+	\norm{T \vec{v}}^{2} &= \left( \sum_{j = 1}^{n} a_{1j} v_{j} \right)^{2} + \cdots + \left( \sum_{j = 1}^{n} a_{mj} v_{j} \right)^{2} \\
+	& \le \left( \sum_{j = 1}^{n} a_{1j}^{2} \right) \left( \sum_{j = 1}^{n} v_{j}^{2} \right) + \cdots + \left( \sum_{j = 1}^{n} a_{mj}^{2} \right) \left( \sum_{j = 1}^{n} v_{j}^{2} \right) \\
+	&= \left( \sum_{j = 1}^{n} v_{j}^{2} \right) \left( \sum_{i = 1}^{m} \sum_{j = 1}^{n} a_{ij}^{2} \right) = \norm{\vec{v}}^{2} \left( \sum_{i = 1}^{m} \sum_{j = 1}^{n} a_{ij}^{2} \right).
+\end{align*}
+Combining this with the above inequality, we find that if $\vec{x} = \sup \{ \norm{T \vec{x}} \mid \vec{x} \in \mathbb{R}^{n}, \norm{\vec{x}} \le 1 \}$,
+\[
+	\norm{T} = \norm{T  \vec{x}} \le \norm{\vec{x}} \sqrt{\sum_{i = 1}^{m} \sum_{j = 1}^{n} a_{ij}^{2}} \le \sqrt{\sum_{i = 1}^{m} \sum_{j = 1}^{n} a_{ij}^{2}}.
+\]
+\subsection{Completeness of Matricies}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		$\mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ equipped with the matrix norm is a complete metric space.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let the sequence $T_{1}, T_{2}, \ldots \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ be a Cauchy sequence; declare that for all $\epsilon > 0$, there exists $N > 0$ such that
+		\[
+			N < i \le j \implies \norm{T_{i} - T_{j}} < \epsilon.
+		\]
+		Let $\vec{e}_{1}, \ldots, \vec{e}_{n}$ be the canonical basis of $\mathbb{R}^{n}$. Then for all $k \in \{ 1, \ldots, n \}$,
+		\[
+			N < i \le j \implies \norm{T_{i} \vec{e}_{k} - T_{j} \vec{e}_{k}} = \norm{(T_{i} - T_{j})\vec{e}_{k}} \le \norm{T_{i} - T_{j}} \norm{\vec{e}_{k}} = \norm{T_{i} - T_{j}} < \epsilon,
+		\]
+		so the sequences of vectors $T_{1} \vec{e}_{k}, T_{2} \vec{e}_{k}, \ldots \in \mathbb{R}^{m}$ for each $k \in \{ 1, \ldots, n \}$ are Cauchy sequences. Observe that these sequences are the $k$th column vectors of $T_{1}, T_{2}, \ldots \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$, and that as $\mathbb{R}^{m}$ is a complete metric space under the canonical norm, all Cauchy sequences of vectors converge to a unique vector. The coordinates of these vectors --- which are the entries of the matricies in the sequence --- thus converge.
+
+		We now define the limits of the entries of the matricies in our sequence. For notational convenience, define $S = \{ (a, b) \in \mathbb{Z}^{2} \mid a \in \{ 1, \ldots, m \}, b \in \{ 1, \ldots, n \} \}$. For all $(a, b) \in S$, and $i \in \mathbb{Z}_{> 0}$, let $_{i} t_{ab}$ be the entry in the $a$th row and $b$th column of $T_{i}$. Then for each $(a, b) \in S$, there exists $L_{ab} \in \mathbb{R}$ such that for all $\epsilon > 0$, there exist nexists a nonnegative integer $N_{ab}$ such that
+		\[
+			N_{ab} < i \implies \abs{_{i} t_{ab} - L_{ab}} < \frac{\epsilon}{\sqrt{mn}}.
+		\]
+		Define $L \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ as the matrix with entry $L_{ab}$ in the $a$th row and $b$th column for each $(a, b) \in S$. Then $\max \{ N_{ab} \mid (a, b) \in S\} < i$ implies that
+		\[
+			\norm{T_{i} - L} \le \sqrt{\sum_{a = 1}^{m} \sum_{b = 1}^{n} (_i t_{ab} - L_{ab})^{2}} < \sqrt{\sum_{b = 1}^{m} \sum_{a = 1}^{n}\left( \frac{\epsilon^{2}}{mn} \right)} = \sqrt{\epsilon^{2}} = \epsilon.
+		\]
+		All Cauchy sequence $T_{1}, T_{2}, \ldots \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ thus converges to some matrix $L$, which implies that $\mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ is a complete metric space.	
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Differentiation}
+
+\subsection{The Jacobian Matrix}
+
+Let $U$ be an open subset of $\mathbb{R}^{n}$, let $f: U : \to \mathbb{R}^{m}$, and let $\vec{x} \in U$. If there exists a linear map $J \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ such that 
+\[
+	\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - J\vec{h}}}{\norm{\vec{h}}} = 0,
+\] 
+we say that $f$ is \textbf{differentiable} at $\vec{x}$ and write $f'(\vec{x}) = J$, where $J$ is the \textbf{Jacobian matrix} of $f$ at $\vec{x}$ --- also called the matrix of partial derivatives, the differential, or the total derivative. If $f$ is differentiable at \textit{all} $\vec{x} \in U$, we say that $f$ itself is differentiable over $U$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		The Jacobian matrix is unique.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Define $f$ like above. Suppose that for contradiction that there exist two matricies $J \ne K$ such that
+		\[
+			\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - J\vec{h}}}{\norm{\vec{h}}}  = \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - K\vec{h}}}{\norm{\vec{h}}} = 0.
+		\]
+		See that $J - K \ne 0$, so $\norm{J - K} > 0$. Then there exist $d_{1}$ and $d_{2}$ such that
+		\begin{align*}
+			0 < \norm{\vec{h}} < \delta_{1} &\implies \frac{ \norm{-f(\vec{x} + \vec{h}) + f(\vec{x}) + J\vec{h}}}{\norm{\vec{h}}} < \frac{\norm{J - K}}{2} \\
+			0 < \norm{\vec{h}} < \delta_{2} &\implies \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - K\vec{h}}}{\norm{\vec{h}}} < \frac{\norm{J - K}}{2} \\
+		\end{align*}
+		For $0 < \norm{\vec{h}} < \min \{ \delta_{1}, \delta_{2} \}$, we have that
+		\begin{align*}	
+			\norm{J - K} &= \frac{\norm{J - K}}{2} + \frac{\norm{J - K}}{2} \\
+			&> \frac{ \norm{-f(\vec{x} + \vec{h}) + f(\vec{x}) + J\vec{h}}}{\norm{\vec{h}}} +\frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - K\vec{h}}}{\norm{\vec{h}}} \\
+			&\ge \frac{\norm{(-f(\vec{x} + \vec{h}) + f(\vec{x}) + J \vec{h}) + (f(\vec{x} + \vec{h}) - f(\vec{x}) - K \vec{h})}}{\vec{h}} \\
+			&= \frac{\norm{(J - K) \vec{h}}}{\vec{h}},
+		\end{align*}
+		so $\norm{J - K} \norm{\vec{h}} > \norm{(J - K) \vec{h}}$, which is our desired contradiction.
+	\end{proof}
+\end{adjustwidth}
+
+As an example, if $T \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ and $\vec{x} \in \mathbb{R}^{n}$, then the derivative of $T$ at $\vec{x}$ is $T$, as
+\[
+	\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{T(\vec{x} + \vec{h}) - T \vec{x} - T \vec{h}}}{\norm{\vec{h}}} = \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{\vec{0}}}{\norm{\vec{h}}} = 0.
+\]
+
+It is very intuitive to think of $J$ as an approimation of $f$ at $\vec{x}_{0}$ --- namely, that there exists $r(h)$ such that $f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) = J \vec{h} - r(\vec{h})$ and $\lim\limits_{\vec{h} \to \vec{0}} \tfrac{r(\vec{h})}{\vec{h}} = 0$. This strategy will be exhibited in the following proof:
+
+\subsection{Chain Rule}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem*}
+		Let $f : \mathbb{R}^{n} \to \mathbb{R}^{m}$ and $g : \mathbb{R}^{m} \to \mathbb{R}^{k}$. If $f$ is differentiable at $\vec{x}_{0}$ and $g$ is differentiable at $f(\vec{x}_{0})$ --- and if $\vec{x}_{0}$ and $f(\vec{x}_{0})$ are contained within open sets in the domains of $f$ and $g$ respectively --- then $g \circ f$ is differentiable at $\vec{x}_{0}$, and
+		\[
+			(g \circ f)' = g'(f(\vec{x}_{0})) f'(\vec{x}_{0}).
+		\]
+	\end{theorem*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $f'(\vec{x}_{0}) = J$ and $g'(f(\vec{x}_{0})) = K$. We have that
+		\[
+		\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}}}{\norm{\vec{h}}} = 0 = \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0}) + \vec{h}) - g(f(\vec{x}_{0})) - K \vec{h}}}{\norm{h}}.
+		\]
+		Define the function $\vec{k} = f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0})$; clearly, $\lim\limits_{\vec{h} \to \vec{0}} \vec{k} = 0$. We have that
+		\begin{align*}
+			& g(f(\vec{x}_{0} + \vec{h})) - g(f(\vec{x}_{0})) - (KJ) \vec{h} \\
+			=& g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K(J \vec{h} - f(\vec{x_{0} + \vec{h}}) - f(\vec{x}_{0}) + \vec{k}) \\
+			=& g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K \vec{k} + K(f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}).
+		\end{align*}
+		We now establish bounds for $\norm{\vec{k}}$: 
+		\[
+			\norm{\vec{k}} = \norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h} + J \vec{h}} \le \norm{\vec{h}} \left(\norm{J} + \frac{\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}}}{\norm{\vec{h}}}\right)
+		\]
+		Then using the composition rule for limits,
+		\begin{align*}
+			0 &\le \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0} - \vec{h})) - g(f(\vec{x}_{0})) - (KJ) \vec{h}}}{\norm{\vec{h}}} \\
+			&\le \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K \vec{k}}}{\norm{\vec{h}}} + \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{K}\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}}}{\norm{\vec{h}}} \\
+			&\le \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K \vec{k}}}{\norm{\vec{k}}} \lim\limits_{\vec{h} \to \vec{0}} \left( \norm{J} + \frac{\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}}}{\vec{h}}\right) \\
+			&= (0)(\norm{J} + 0) = 0.	
+		\end{align*}
+		so $g \circ f)'(\vec{x}_{0}) = KJ = g'(f(\vec{x}_{0})) f'(\vec{x}_{0})$ as required. Yes, that last step of Rudin's is nonrigorous --- define it as a piecewise expression equal to $0$ whenever $\vec{k} = \vec{0}$, etc.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{The Partial Derivative}
+
+Consider $f : U \subseteq \mathbb{R}^{n} \to \mathbb{R}^{m}$, where $U$ is an open subset of $\mathbb{R}^{n}$; let $\vec{e}_{1}, \ldots, \vec{e}_{n}$ and $\vec{e}_{1}, \ldots, \vec{e}_{m}$ be the standard bases of $\mathbb{R}^{n}$ and $\mathbb{R}^{m}$. The \textbf{components} of $f$ are the real functions $f_{1}, \ldots, f_{m}$ defined by
+\[
+	f(\vec{x}) = f_{1}(\vec{x}) \vec{e}_{1} + \cdots + f_{m}(\vec{x}) \vec{e}_{m},
+\]
+or equivalently by $f_{i}(\vec{x}) = f(\vec{x}) \cdot \vec{e}_{i}$ for each $i \in \{ 1, \ldots, m \}$. Then for $x \in U$, $i \in \{ 1, \ldots, m \}$, and $j \in \{ 1, \ldots, n \}$, we define the \textbf{partial derivative} of $f_{i}$ with respect to $x_{j}$ as
+\[
+	\pdv{f_{i}}{x_{j}} = \lim\limits_{t \to 0} \frac{f_{i}(\vec{x} + t \vec{e}_{j}) - f_{i}(\vec{x})}{t}.
+\]
+The fact this is a one-variable limit explains why the computation of partial derivatives aligns so closely with differentiation of univarite functions.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		The entries of the Jacobian matrix are the partial derivatives: namely, if $f: U \subseteq \mathbb{R}^{n} \to \mathbb{R}^{m}$ (where $U$ is open) and $f$ is differentiable at $x_{0}$, then the partial derivatives exist and 
+		\[
+			f'(\vec{x}_{0}) \vec{e}_{j} = \sum_{i = 1}^{m}\left(\pdv{f_{i}}{x_{j}}\right) (\vec{x})\vec{e}_{i} 
+		\]
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $j$ be any integer in the set $\{ 1, \ldots, n \}$. Since $f$ is differentiable at $\vec{x}$,
+		\[
+			\lim\limits_{t \to 0} \frac{f(\vec{x}_{0} + t \vec{e}_{j}) - f(\vec{x}_{0})}{t} - f'(\vec{x}) \vec{e}_{j} = \lim\limits_{t \to 0} \frac{\norm{f(\vec{x}_{0} + t \vec{e}_{j}) - f(\vec{x}_{0}) - f'(\vec{x}_{0})(t \vec{e}_{j})}}{\norm{t \vec{e}_{j}}} = 0.
+		\]
+		Therefore,
+		\begin{align*}
+			f'(\vec{x}) \vec{e}_{j} &= \lim\limits_{t \to 0} \frac{f(\vec{x}_{0} + t \vec{e}_{j}) -   f(\vec{x}_{0})}{t} \\
+			&= \lim\limits_{t \to 0} \frac{\sum_{i = 1}^{m} (f_{1}(\vec{x}_{0} + t \vec{e}_{j})\vec{e}_{i}) - \sum_{i = 1}^{m} (f_{i}(\vec{x}_{0})\vec{e}_{i})}{t} \\
+			&= \sum_{i = 1}^{m} \left(\lim\limits_{t \to 0} \frac{f(\vec{x}_{0} + t \vec{\vec{e}}_{j}) - f(\vec{x}_{0})}{t} \vec{e}_{i}\right) \\
+			&= \sum_{i = 1}^{m} \left(\pdv{f_{i}}{x_{j}}\right) (\vec{x}_{0}) \vec{e}_{i},
+		\end{align*}
+		as desired.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Special Cases}
+
+\subsection{Real-Valued Functions} 
+
+Let $f : \mathbb{R}^{n} \to \mathbb{R}$ be a differentiable real-valued function. Then $f'$ is a $1$-by-$n$ matrix:
+\[
+	f' = \begin{bmatrix} \pdv{f}{x_{1}} & \cdots & \pdv{f}{x^{n}} \end{bmatrix}.
+\]
+The transpose of this matrix is called the \textbf{gradient} of $f$;
+\[
+	\grad f = f'^{\top} = \begin{bmatrix} \pdv{f}{x_{1}} \\ \vdots \\ \pdv{f}{x_{n}} \end{bmatrix} = \pdv{f}{x_{1}} \vec{e}_{1} + \cdots + \pdv{f}{x_{n}} \vec{e}_{n},
+\]
+where $\vec{e}_{1}, \ldots, \vec{e}_{n}$ is the standard basis of $\mathbb{R}^{n}$. Observe that $f' \vec{v} = \grad f \cdot \vec{v}$ for all $\vec{v} \in \mathbb{R}^{n}$ --- so the gradient and the derivative of a real-valued function are dual concepts. We can define the derivative of $f$ as a vector $\grad f$ such that 
+\[
+	\lim\limits_{\vec{h} \to 0} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - \grad f \cdot \vec{h}}}{\norm{\vec{h}}} = 0.
+\]
+
+The \textbf{directional derivative} of $f$ at $\vec{x}$ along a unit vector $\vec{v}$ is defined as
+\[
+	\grad_{\vec{v}} f = \lim\limits_{t \to 0} \frac{f(\vec{x} + t \vec{v}) - f(\vec{x})}{t}
+\]
+Observe that $\grad_{\vec{e}_{i}} f = \pdv{f}{x_{i}} = \grad f \cdot \vec{e}_{i}$ for all $i \in \{ 1, \ldots, n \}$. This might lead us to conclude the following lemma:
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\vec{x}_{0}$, then $\grad_{\vec{v}} f = \vec{v} \cdot (\grad f)$ for all unit vectors $\vec{v}$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Observe that $f' \vec{v} = \grad f \cdot \vec{v}$, so we may express the definition of the Jacobian matrix in terms of the gradient of $f$:
+		\begin{align*}
+			\grad f_{\vec{v}} f &= \lim\limits_{t \to 0} \frac{f(\vec{x} + t \vec{v}) - f(\vec{x})}{t} \\ 
+			&= \lim\limits_{t \to 0} \frac{f(\vec{x} + t \vec{v}) - f(\vec{x}) - \grad f (t \vec{v})}{t} + \lim\limits_{t \to 0} \frac{\grad f \cdot (t \vec{v})}{t} \\
+			&= 0 + \lim\limits_{t \to 0} \grad f \cdot \vec{v} \\
+			&= \grad f \cdot \vec{v},
+		\end{align*}
+		as required.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\vec{x}_{0}$, then the maximum of $\grad_{\vec{v}} f(\vec{x}_{0})$ across all unit vectors $\vec{v}$ occurs when $\vec{v}$ points in the direction of $\grad f(\vec{x}_{0})$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		If $\vec{v}$ is a unit vector, then the Cauchy-Schwarz Inequality guarantees that
+		\[
+			\grad_{\vec{v}} f(\vec{x}_{0}) = \vec{v} \cdot \grad f(\vec{x}_{0}) \le \norm{\vec{v}} \norm{\grad f (\vec{x}_{0})} = \norm{\grad f(\vec{x}_{0})} = \left( \frac{\grad f(\vec{x}_{0})}{\norm{\vec{x}_{0}}} \right) \cdot \grad f (\vec{x}_{0})
+		\]
+		so the maximum of $\grad_{\vec{v}} f(\vec{x}_{0})$ occurs when $\vec{v}$ is the normalization of the gradient vector and points in the direction of $\grad f (\vec{x}_{0})$.
+	\end{proof}
+\end{adjustwidth}
+
+More generally, we have that if $\theta$ is the angle between the unit vector $\vec{v}$ and $\grad f$, then 
+\[
+	\grad_{\vec{v}} f = \vec{v} \cdot \grad f = \norm{\vec{v}} \norm{\grad f} \cos(\theta) = \norm{\grad f} \cos(\theta).
+\]
+The directional derivative oscilates like a sine wave as $\vec{v}$ walks around the unit hypersphere.
+
+% --------------------------------------------- %
+
+\subsection{Paths and Curves}
+
+A continuous function $\vec{c}: [a, b] \subseteq \mathbb{R} \to \mathbb{R}^{n}$ is called a \textbf{path} in $\mathbb{R}^{n}$. The set of all points on the path $\{ \vec{c}(t) \mid t \in [a, b] \}$ is called a \textbf{curve} with endpoints $\vec{c}(a)$ and $\vec{c}(b)$. The \textbf{components} of $\vec{c}(t)$ are the real functions $x_{1}(t), \ldots, x_{n}(t)$ defined by
+\[
+	\vec{c}(t) = x_{1}(t) \vec{e}_{1} + \cdots + x_{n}(t) \vec{e}_{n},
+\]
+where $\vec{e}_{1}, \ldots, \vec{e}_{n}$ is the standard basis of $\mathbb{R}^{n}$. If $\vec{c}$ is differentiable at $t \in [a, b]$, observe that the derivative of $\vec{c}$ is an $n$-by-$1$ matrix called the \textbf{velocity vector}: $\vec{c}'(t) = \left( \pdv{x_{1}}{t}, \ldots, \pdv{x_{n}}{t} \right)$. Infinitely many paths trace the same curve --- some may be differentiable, others not! 
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		Let $f: \mathbb{R}^{3} \to \mathbb{R}$ be a $C^{1}$ function, and define the level surface $S_{k}$ as $\{ \vec{x} \mid f(\vec{x}) = k \}$. Then $\grad f$ is normal to the level surface --- in particular, if $\vec{c}(t)$ is a path in $S$ such that $c(0) = \vec{x}$, then $\grad f (\vec{x}) \cdot \vec{c}'(t) = 0$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $\vec{c}$ be a path in $S_{k}$ such that $\vec{c}(0) = \vec{x}$. By definition, $f(\vec{c}(t)) = k$; the Chain Rule thus yields that
+		\[
+			0 = \dv{t} f(\vec{c}(0)) = f'(\vec{c}(0)) \vec{c}'(0) = \grad f (\vec{x}) \cdot \vec{c}'(0),
+		\]
+		as desired.
+	\end{proof}
+\end{adjustwidth}
+
+Paths allow us to examine tangent vectors to surfaces via an elegant framework, as exhibited in the above proof. 
+
+% --------------------------------------------- %
+
+\section{Linear Approximation}
+
+\subsection{The General Case}
+
+The linear approximation of a differentiable function $f : \mathbb{R}^{n} \to \mathbb{R}^{m}$ at $\vec{x}_{0} \in \mathbb{R}^{n}$ with derivative $J$ at $\vec{x}_{0}$ is given by the following equation:
+\[
+	f(\vec{x}) \approx f(\vec{x}_{0}) + J (\vec{x} - \vec{x}_{0}),
+\]
+where $f'(\vec{x}_{0})$ is a linear map that sends $\vec{x} - \vec{x}_{0}$ from $\mathbb{R}^{n}$ to $\mathbb{R}^{m}$. Observe that if we define $\vec{h} = \vec{x} - \vec{x}_{0}$, then 
+\[
+	\lim\limits_{\vec{x} \to \vec{x}_{0}} \frac{\norm{f(\vec{x}) - f(\vec{x}_{0}) - J(\vec{x} - \vec{x}_{0})}}{\norm{\vec{x} - \vec{x}_{0}}} = \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}}}{\norm{\vec{h}}} = 0,
+\]
+so the limit of the error of this approximation approaches $0$ as $\vec{x}$ approaches $\vec{x}_{0}$. In this sense, the derivative $J$ is \textit{precisely} the linear approximation of $f$ at $\vec{x}_{0}$ --- isn't it beautiful?
+
+\subsection{Special Cases}
+
+\textbf{For real-valued functions}: $f: \mathbb{R}^{n} \to \mathbb{R}$, the linear approximation at $\vec{x}_{0} \in \mathbb{R}^{n}$ is called the tangent hyperplane and is typically formulated via the gradient:
+\[
+	f(\vec{x}) \approx f(\vec{x}_{0}) + \grad f (\vec{x}_{0}) \cdot (\vec{x} - \vec{x}_{0}).
+\]
+\textbf{For implicit surfaces}: $f(\vec{x}) = k$ for differentiable $f: \mathbb{R}^{n} \to \mathbb{R}$, the linear approximation is the tangent hyperpla, precisely those vectors tangent to the level set --- and thus, normal to the gradient. The equation of the tangent plane at $\vec{x}_{0} \in \mathbb{R}^{n}$ is given by
+\[
+	\grad f (\vec{x}_{0}) \cdot (\vec{x} - \vec{x}_{0}) = 0.
+\]
+
+
+\textbf{For paths} $f: [a, b] \subseteq \mathbb{R} \to \mathbb{R}^{n}$, the linear approximation at $t_{0} \in [a, b]$ is called the tangent line:
+\[
+	\vec{c}(t) \approx \vec{c}(t_{0}) + \vec{c}'(t_{0}) (t - t_{0}).
+\]
+
+
+% --------------------------------------------- %
+
+\end{document}

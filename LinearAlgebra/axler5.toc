@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Invariant Subspaces}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Eigenvalues}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Polynomials Applied to Operators}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}The Minimal Polynomial}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Existence of Eigenvalues on Complex Vector Spaces}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Eigenvalues and the Minimal Polynomial}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Upper-Triangular Matricies}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Matrix Prerequisites}{8}{subsection.3.1}%

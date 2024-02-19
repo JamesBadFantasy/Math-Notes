@@ -1,0 +1,3 @@
+\contentsline {section}{\numberline {1}Construction of Rings of Fractions}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Equality of Fractions}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Operations on Fractions}{3}{subsection.1.2}%

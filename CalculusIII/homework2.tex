@@ -1,0 +1,449 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Homework Two}
+\author{James Pagan, September 2023}
+\date{Professor Serfaty}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Section 2.2}
+
+\subsection{Problem 3}
+
+\textbf{Part (a)} As $f: \mathbb{R}^{2} \to \mathbb{R}$ defined by $f(x, y) = x^{3}y$ is continuous, $\lim\limits_{(x, y) \to (0, 1)} x^{3}y = 0^{3} \times 1 = \textbf{0}$.
+
+\textbf{Part (b)} Apply L'Hôpital's Rule twice (it is trivial to prove that in each application, the numerator and denominator of the fraction are both $0$):
+\[
+	\lim\limits_{x \to 0} \frac{\cos(x) - 1}{x^{2}} = \lim\limits_{x \to 0} \frac{-\sin(x)}{2x} = \lim\limits_{x \to 0} \frac{-\cos(x)}{2} = \frac{-\cos(0)}{2} = \mathbf{- \frac{1}{2}}.
+\]
+
+\textbf{Part (c)} Observe that 
+\[
+	\lim\limits_{h \to 0} \frac{e^{h} - 1}{h} = \lim\limits_{h \to 0} \frac{e^{h} - e^{0}}{h - 0}, 
+\]
+which is the derivative of $e^{x}$ at $x = 0$. The answer is thus $e^{0} = \mathbf{1}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 5}
+
+\textbf{Part (a)} As $x^{2} - 3x + 5$ is a continuous function, $\lim\limits_{x \to 3} x^{2} - 3x + 5 = (3)^{2} - 3(3) + 5 = \mathbf{5}$.
+
+\textbf{Part (b)} As $\sin(x)$ is a continuous function, $\lim\limits_{x \to 0} \sin(x) = \sin(0) = \mathbf{0}$.
+
+\textbf{Part (c)} We have that 
+\[
+	\lim\limits_{h \to 0} \frac{(x + h)^{2} - x^{2}}{h} = \lim\limits_{h \to 0} \frac{(x^{2} + 2xh + h^{2}) - x^{2}}{h} = \lim\limits_{h \to 0} \frac{2xh + h^{2}}{h} = \lim\limits_{h \to 0} 2x + h = \textbf{2x}. 
+\]
+
+Alternatively, one could note that the expression computes the derivative of $x^{2}$, which is $\textbf{2x}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 8}
+
+\textbf{Part (a)} We have that 
+\begin{align*}
+	\lim\limits_{(x, y) \to (0, 0)} \frac{(x + y)^{2} - (x - y)^{2}}{xy} &= \lim\limits_{(x, y) \to (0, 0)} \frac{(x^{2} + 2x + y^{2}) - (x^{2} - 2xy - y^{2})}{xy} \\
+	&= \lim\limits_{(x, y) \to (0, 0)} \frac{4xy}{xy} = 4.
+\end{align*}
+
+\textbf{Part (b)} We have that
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{\sin(xy)}{y} = \left( \lim\limits_{(x, y) \to (0, 0)} \frac{\sin(xy)}{y} \right) \left( \lim\limits_{(x, y) \to (0, 0)} \frac{x}{x} \right) = \lim\limits_{(x, y) \to (0, 0)} \frac{x\sin(xy)}{xy}.
+\]
+Now, $\tfrac{\sin(xy)}{xy}$ is the function $f(x, y)$ transposed inside $g(x) = \tfrac{\sin(x)}{x}$, so 
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{\sin(xy)}{xy} = \lim\limits_{x \to 0} \frac{\sin{x}}{x} = 1.
+\]
+Therefore,
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{x\sin(xy)}{xy} = \left( \lim\limits_{(x, y) \to (0, 0)} x \right) \left( \lim\limits_{(x, y) \to (0, 0)} \frac{\sin(xy)}{xy} \right) = 0 \times 1 = 0.
+\]
+\textbf{Part (c)} We convert the given problem to polar coordiantes: we have that
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{x^{3} - y^{3}}{x^{2} + y^{2}} = \lim\limits_{r \to 0} \frac{r^{3} \cos^{3}(\theta) - r^{3} \sin^{3}(\theta)}{r^{2}\cos^{2}(\theta) + r^{2}\sin^{2}(\theta)} = \lim\limits_{r \to 0} r (\sin^{3}(\theta) - \cos^{3}(\theta)) = \textbf{0}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 9}
+
+\textbf{(a)} Before we solve the given problem, we invoke the following lemma:
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		$\lim\limits_{(x, y) \to (0, 0)} \frac{e^{xy} - 1}{xy}= 1$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Observe that this is the function $f(x, y) = xy$ transposed inside of $f(x) = \tfrac{e^{x} - 1}{x}$. Therefore (applying L'Hospital's rule, as the numerator and denominator of the fraction are both $0$),
+		\[
+			\lim\limits_{(x, y) \to (0, 0)} \frac{e^{xy} - 1}{xy} = \lim\limits_{x \to 0} \frac{e^{x} - 1}{x} = \lim\limits_{x \to 0} \frac{e^{x}}{1} = e^{0} = 1.
+		\]
+	\end{proof}
+\end{adjustwidth}
+
+We thus deduce that
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{e^{xy} - 1}{y} = \lim\limits_{(x, y) \to (0, 0)} \frac{e^{xy} - 1}{y} \times \frac{x}{x} = \left( \lim\limits_{(x, y) \to (0, 0)} x \right) \left( \lim\limits_{(x, y) \to (0, 0)} \frac{e^{xy} - 1}{xy} \right) = 1 \times 0,
+\]
+which is $\mathbf{0}$.
+
+\textbf{(b)} Observe that $\frac{\cos(xy) - 1}{x^{2}y^{2}}$ is the function $g(x, y) = xy$ composed inside the function $f(x) = \frac{\cos(x) - 1}{x^{2}}$, so
+\[
+	\lim\limits_{(x, y) \to 0} \frac{\cos(xy) - 1}{x^{2}y^{2}} = \lim\limits_{x \to 0} \frac{\cos(x) - 1}{x^{2}}.
+\]
+We may thus use l'Hospital's rule twice to find the limit (it is trivial to verify that in both applications, the numerator and denomianatior of the functions compute to $0$):
+\[
+	\lim\limits_{x \to 0} \frac{\cos(x) - 1}{x^{2}} = \lim\limits_{x \to 0} \frac{-\sin(x)}{2x} = \frac{-\cos(x)}{2} = -\frac{1}{2}.
+\]
+
+\textbf{(c)} Because the function is continuous, we may simply compute the limit as follows:
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{xy}{x^{2} + y^{2} + 2} = \frac{0 + 0}{0^{2} + 0^{2} + 2} = \frac{0}{2} = \mathbf{0}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 10}
+
+\textbf{(a)} Because the function is continuous, we may simply compute the limit as follows:
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{e^{xy}}{x + 1} = \frac{e^{0}}{0 + 1} = \mathbf{1}.
+\]
+
+\textbf{(b)} Consider if we approach $(0, 0)$ from $(x, 0)$: the function diverges to positive infinity (the intuition being that $\cos(x) - 1$ ``behaves'' like $0$, so the function approximates the divergent $\tfrac{1}{x^{2}}$).
+
+However, if we approach $(0, 0)$ from $(0, y)$, the function computes to $\tfrac{1 - 1 + 0}{0^{2} + y^{2}} = 0$, so the function approaches $0$.
+
+We conclude that the limit \textbf{does not exist}.
+
+\textbf{(c)} Consider if we approach $(0, 0)$ from $(x, 0)$: the function evaluates to $\tfrac{x^{2}}{x^{2}}$, so the function approaches $1$.
+
+However, if we approach $(0, 0)$ from $(x, x)$, the function computes to $\tfrac{0}{x^{2} + y^{2}} = 0$, so the function approaches $0$.
+
+We conclude that the limit \textbf{does not exist}.
+
+% --------------------------------------------- %
+
+\subsection{Problem 12}
+
+\textbf{(a)} We use L'Hôpital's Rule three times on the given limit (it is trivial to verify that in all three applications, the numerators and denominators of the fractions in the limit evaluate to $0$ at $x = 0$):
+
+\[
+	\lim\limits_{x \to 0} \frac{\sin(2x) - 2x}{x^{3}} = \lim\limits_{x \to 0} \frac{2\cos(2x) - 2}{3x^{2}} = \lim\limits_{x \to 0} \frac{-4\sin(2x)}{6x} = \lim\limits_{x \to 0} \frac{-8\cos(2x)}{6} = \frac{-8 \cos(0)}{6},
+\]
+which computes to $- \frac{4}{3}$.
+
+\textbf{Part (b)} Consider if we approach $\tfrac{\sin(2x) - 2 x + y}{x^{3} + y}$ from $(0, x)$ for $x \in \mathbb{R} \setminus \{ 0 \}$; then 
+\[
+	\lim\limits_{(x, y) \to (0, 0)} \frac{\sin(2 \times 0) - 2(0) + y}{0^{3} + y} = \lim\limits_{y \to 0} \frac{y}{y} = 1.
+\]
+However, consider approaching the function from $(x, 0)$ for $x \in \mathbb{R} \setminus \{ 0 \}$; if $x > 0$, then $\sin(2x) - 2x < 0$, so as $\tfrac{1}{x^{3}}$ is positive,
+\[
+	\frac{\sin(2x) - 2x}{x^{3}} < \frac{0}{x^{3}} = 0.
+\]
+And if $x < 0$, then $\sin(2x) - 2x > 0$, but as $\tfrac{1}{x^{3}}$ is negative,
+\[
+	\frac{\sin(2x) - 2x}{x^{3}} < \frac{0}{x^{3}} = 0.
+\]
+We conclude that $\tfrac{\sin(2x) - x^{2} + y}{x^{3} + y}$ is negative for all $x \in \mathbb{R} \setminus \{ 0 \}$, so $\lim\limits_{(x, 0) \to (0, 0)} \frac{\sin(2x) - x^{2} + y}{x^{3} + y}$ is nonpositive, if it exists at all. Then as approaching $(0, 0)$ from different directions yields different limits, the limit towards $(0, 0)$ is \textbf{does not exist}.
+
+\textbf{Part (c)}: Before we compute the limit, we invoke the following lemma:
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma*}
+		$\lim\limits_{(x, y) \to (0, 0)} \frac{x^{2}y}{x^{2} + y^{2}} = 0$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		We have that as $-\tfrac{1}{2}(x^{2} + y^{2}) \le xy \le \tfrac{1}{2}(x^{2} + y^{2})$, for all $(x, y) \ne (0, 0)$,
+		\[
+			-\frac{x}{2} = \frac{-\tfrac{x}{2}(x^{2} + y^{2})}{x^{2} + y^{2}} \le \frac{x^{2}y}{x^{2} + y^{2}} \le \frac{\tfrac{x}{2}(x^{2} + y^{2})}{x^{2} + y^{2}} = \frac{x}{2}.
+		\]
+		Then via the Squeeze Theorem,
+		\[
+			0 = \lim\limits_{(x, y) \to (0, 0)} -\frac{x}{2} \le \lim\limits_{(x, y) \to (0, 0)} \frac{x^{2}y}{x^{2} + y^{2}} < \lim\limits_{(x, y) \to (0, 0)} \frac{x}{2} = 0,
+		\]
+		so $\lim\limits_{x \to 0} \tfrac{x^{2}y}{x^{2} + y^{2}} = 0$.
+	\end{proof}
+\end{adjustwidth}
+From $-1 \le \cos(z) \le 1$, we find that for all $(x, y, z) \ne (0, 0, 0)$,
+\[
+	-\frac{x^{2}y}{x^{2} + y^{2}} \le \frac{x^{2}y\cos(z)}{x^{2} + y^{2}} \le \frac{x^{2}y}{x^{2} + y^{2}}.
+\]
+Then via the Squeeze Theorem,
+\[
+	0 = \lim\limits_{(x, y, z) \to (0, 0, 0)} -\frac{x^{2}y}{x^{2} + y^{2}} \le \lim\limits_{(x, y, z) \to (0, 0, 0)} \frac{x^{2}y\cos(z)}{x^{2} + y^{2}} \le \lim\limits_{(x, y, z) \to (0, 0, 0)} \frac{x^{2}y}{x^{2} + y^{2}} = 0.
+\]
+We conclude that $\lim\limits_{(x, y, z) \to (0, 0, 0)} \frac{x^{2}y \cos(z)}{x^{2} + y^{2}} = 0$.
+% --------------------------------------------- %
+
+\subsection{Problem 26}
+Because $\abs{x}, \abs{y}, \abs{z} \ge 0$, we may use the QM-GM Inequality to deduce that 
+\[
+	\sqrt{\frac{x^{2} + y^{2} + z^{2}}{3}} \ge \sqrt[3]{\abs{x}\abs{y}\abs{z}} = \sqrt[3]{\abs{xyz}},
+\]
+and so 
+\[
+	\sqrt{\frac{(x^{2} + y^{2} + z^{2})^{3}}{27}} \ge \abs{xyz}.
+\]
+
+Let $(x, y, z)$ be a vector in $\mathbb{R}^{3}$. For all $\epsilon > 0$, we have that $0 < \norm{(x, y, z) - (0, 0, 0)} < \sqrt{27} \epsilon$ implies that $0 < \sqrt{x^{2} + y^{2} + z^{2}} < \sqrt{27} \epsilon$, so 
+\[
+	\abs{\frac{xyz}{x^{2} + y^{2} + z^{2}} - 0}	=	\frac{\abs{xyz}}{\abs{x^{2} + y^{2} + z^{2}}}	\le \frac{\sqrt{\frac{(x^{2} + y^{2} + z^{2})^{3}}{27}}}{\sqrt{(x^{2} + y^{2} + z^{2}})^{2}} 
+	= \frac{\sqrt{x^{2} + y^{2} + z^{2}}}{\sqrt{27}} < \frac{\sqrt{27} \epsilon}{\sqrt{27}} = \epsilon.
+\]
+
+Therefore, $\lim\limits_{(x, y, z) \to (0, 0, 0)} \frac{xyz}{x^{2} + y^{2} + z^{2}}= 0$
+
+% --------------------------------------------- %
+
+\subsection{Problem 35}
+
+\textbf{Part (a)} Let $\abs{a} < \tfrac{1}{1000}$. Then $\abs{a}^{2} < \tfrac{1}{1000^{2}}$ and $\abs{a^{3}} < \tfrac{1}{1000^{3}}$, so
+\[
+	\abs{a^{3} + 3a^{2} + a} \le \abs{a}^{3} + 3 \abs{a}^{2} + \abs{a} = \frac{1}{1000^{3}} + \frac{3}{1000^{2}} + \frac{1}{1000} < \frac{1}{100}.
+\]
+One such $\delta$ we desire is thus $\mathbf{\tfrac{1}{1000}}$.
+
+\textbf{Part (b)} Let $\abs{x^{2} + y^{2}} < \tfrac{1}{10000^{2}}$; then $\abs{x}^{2} < \tfrac{1}{10000^{2}}$ and $\abs{x} < \tfrac{1}{10000}$. Similarly, $\abs{y} < \tfrac{1}{10000}$. Thus,
+\begin{align*}
+	\abs{x^{2} + y^{2} + 3xy + 180xy^{5}} &\le \abs{x^{2}} + \abs{y^{2}} + 3 \abs{xy} + 180 \abs{xy^{5}} \\
+	&< \frac{1}{10000^{2}} + \frac{1}{10000^{2}} + 3 \frac{1}{10000^{2}} + \frac{180}{10000^{6}} < \frac{1}{10000}.
+\end{align*}
+One such $\delta$ we desire is thus $\mathbf{\tfrac{1}{10000^{2}}}$
+
+% --------------------------------------------- %
+
+\section{Section 2.3}
+
+% --------------------------------------------- %
+
+\subsection{Problem 4}
+
+\textit{NOTE: Professor Serfaty told me she wanted us to find an extension of the domain of $f$ such that $f$ is continuous at the origin (or prove no such extension exists); if it does exist, we must prove if this extension is non-differentiable, differentiable but not continuously differentiable, or C1. She shared this with me in a private email, not to the whole class.}
+
+% --------------------------------------------- %
+
+\textbf{Part (a)} We claim that no extension of the domain of $f$ exists such that $f$ is continuous at $(0, 0)$.
+
+Consider approaching $f(x, y)$ from the direction $(x, x)$ for $x \in \mathbb{R} \setminus \{ 0 \}$; then 
+\[
+	\lim\limits_{(x, y) \to (0, 0)} f(x, x) = \lim\limits_{x \to 0} \frac{2x^{2}}{(2x^{2})^{2}} = \lim\limits_{x \to 0} \frac{1}{2x^{2}} = \infty.
+\]
+Then no matter what real we assign $f(0, 0)$ to be, $f(0, 0) \ne \lim\limits_{x \to 0} f(0, 0)$ --- so $f$ is \textbf{not continuous} at the origin. 
+
+% --------------------------------------------- %
+
+\textbf{Part (b)} We claim that no extension of the domain of $f$ exists such that $f$ is continuous.
+
+Consider approaching $f(x, y)$ from the direction $(x, x)$ for $x \in \mathbb{R} \setminus \{ 0 \}$; then 
+\[
+	\lim\limits_{(x, y) \to (0, 0)} f(x, y) = \lim\limits_{x \to 0} \frac{x}{x} + \frac{x}{x} = \lim\limits_{x \to 0} (1 + 1) = 2.
+\]
+Therefore, an extension of $f$ that preserves continuity at the origin must be $f(0, 0) = 2$. However, if we appproach $f(x, y)$ from the direction $(x, -x)$ for $x \in \mathbb{R} \setminus \{ 0 \}$, then 
+\[
+	\lim\limits_{(x, y) \to (0, 0)} f(x, -x) = \lim\limits_{x \to 0} \frac{x}{-x} + \frac{-x}{x} = \lim\limits_{x \to 0} -(1 - 1) = -2.
+\]
+Then this extension is not continuous at the origin. so $f$ is \textbf{not continuous} at the origin. Therefore, every extension of $f$ is \textbf{not continuous} at the origin.
+
+% --------------------------------------------- %
+
+\textbf{Part (c)} We must convert this function to Cartesian coordinates. Define $g: \mathbb{R}^{2} \setminus \{ (0, 0) \} \to \mathbb{R}$ by $g(x, y) = \tfrac{xy}{\sqrt{x^{2} + y^{2}}}$; observe that
+\[
+	g(x, y) = \frac{xy}{\sqrt{x^{2} + y^{2}}} = \frac{xy}{r} = \frac{r^{2}}{r} \sin(\theta) \cos(\theta) = \frac{r}{2} \sin(2\theta) = f(r, \theta).
+\]
+Extend the domain of this function to the origin by declaring that $g(0, 0) = 0$ --- or equivalently, that $f(0, \theta) = 0$ for all $\theta \in [0, 2\pi)$.
+
+\begin{adjustwidth}{1cm}{}
+    \begin{claim*}
+    	$g$ is continuous over $\mathbb{R}^{2}$.
+    \end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+    	If $(x, y) \ne (0, 0)$, then $\sqrt{x^{2} + y^{2}} \ne 0$; then
+		\[
+			\lim\limits_{(x, y) \to (0, 0)} \frac{xy}{\sqrt{x^{2} + y^{2}}} = \frac{\lim\limits_{(x, y) \to (0, 0) } xy}{\lim\limits_{(x, y) \to (0, 0)} \sqrt{x^{2} + y^{2}}} = \frac{xy}{\sqrt{x^{2} + y^{2}}},
+		\]
+		so $g$ is continuous. To handle the origin, observe that $-\tfrac{1}{2} (x^{2} + y^{2}) \le xy \le \tfrac{1}{2}(x^{2} + y^{2})$. Then if $(x, y) \ne 0$
+    	\begin{align*}
+			\tfrac{1}{2} \sqrt{(x^{2} + y^{2})} = \frac{\tfrac{1}{2}(x^{2} + y^{2})}{\sqrt{x^{2} + y^{2}}} \le \frac{xy}{\sqrt{x^{2} + y^{2}}} \le \frac{\tfrac{1}{2}(x^{2} + y^{2})}{\sqrt{x^{2} + y^{2}}} = \tfrac{1}{2} \sqrt{x^{2} + y^{2}}.
+    	\end{align*}
+		By the Squeeze Theorem,
+		\[
+			0 = \lim\limits_{(x, y) \to (0, 0)} \tfrac{1}{2} \sqrt{x^{2} + y^{2}} \le \lim\limits_{(x, y) \to (0, 0)} \frac{xy}{\sqrt{x^{2} + y^{2}}} \le \lim\limits_{(x, y) \to (0, 0)} \tfrac{1}{2} \sqrt{x^{2} + y^{2}} = 0.
+		\]
+		We conclude that $\lim\limits_{(x, y) \to (0, 0)} \frac{xy}{x^{2} + y^{2}} = 0 = g(0, 0)$. Then $g$ is continuous over all $\mathbb{R}^{2}$.
+	\end{proof}
+\end{adjustwidth}
+
+We now investigate whether $g$ is non-differentiable, differentiable but not continuously differentiable, or $C^{1}$. When $(x, y) \ne (0, 0)$, we have that
+\begin{align*}
+	\pdv{x} g(x, y) &= \pdv{x} \frac{xy}{\sqrt{x^{2} + y^{2}}} = \frac{-xy \left( \pdv{x} \sqrt{x^{2} + y^{2}} \right) + \sqrt{x^{2} + y^{2}} (\pdv{x} xy)}{(\sqrt{x^{2} + y^{2}})^{2}}, \\
+	&= \frac{-xy \left( - \frac{x}{\sqrt{x^{2} + y^{2}}} \right) + \sqrt{x^{2} + y^{2}}(y)}{x^{2} + y^{2}} = \frac{-x^{2}y + (x^{2} + y^{2})y}{(x^{2} + y^{2})\sqrt{x^{2} + y^{2}}}, \\
+	&= \frac{y^{3}}{(x^{2} + y^{2})\sqrt{x^{2} + y^{2}}}.
+\end{align*}
+To investigate whether this derivative is continuous or not, we examine: if $(a, b) \ne (0, 0)$
+\[
+	\lim\limits_{(x, y) \to (a, b)} \frac{y^{3}}{(x^{2} + y^{2} )\sqrt{x^{2} + y^{2}}} = \frac{\lim\limits_{(x, y) \to (a, b)} y^{3}}{\lim\limits_{(x, y) \to (a, b)} (x^{2} + y^{2}) \sqrt{x^{2} + y^{2}}} = \frac{a^{3}}{(a^{2} + b^{2}) \sqrt{a^{2} + b^{2}}},
+\]
+which is $g(a, b)$ --- thus, the partial derivative of $g$ with respect to $x$ exists and is continuous everywhere except potentially $(0, 0)$. 
+
+By symmetry, we find that $\pdv{y} g(x, y) = \tfrac{x^{3}}{(x^{2} + y^{2})\sqrt{x^{2} + y^{2}}}$, which is continuous at all points except potentially $(0, 0)$.
+
+\begin{adjustwidth}{1cm}{}
+    \begin{claim*}
+    	The partial derivatives of $g(x, y)$ at $(0, 0)$ with respect to $x$ and $y$ are both $0$.
+    \end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		We have that 
+		\[
+				\pdv{x} g(x, y) \Big|_{(x, y) = (0, 0)} = \lim\limits_{h \to 0} \frac{g(0 + h, 0)  - g(0, 0)}{h} = \lim\limits_{h \to 0} \frac{\tfrac{h \times 0}{\sqrt{h^{2} + 0^{2}}} - 0}{h} = \lim\limits_{h \to 0} \frac{0}{h} = 0.
+		\]
+		Similarly,
+		\[
+				\pdv{y} g(x, y) \Big|_{(x, y) = (0, 0)} = \lim\limits_{h \to 0} \frac{g(0, 0 + h)  - g(0, 0)}{h} = \lim\limits_{h \to 0} \frac{\tfrac{0 \times h}{\sqrt{0^{2} + h^{2}}} - 0}{h} = \lim\limits_{h \to 0} \frac{0}{h} = 0,
+		\]
+		which proves our claim.
+	\end{proof}
+\end{adjustwidth}
+
+Therefore, the partial derivatives of $g$ exist at all $(x, y) \in \mathbb{R}^{2}$. However,
+\begin{adjustwidth}{1cm}{}
+    \begin{claim*}
+    	The partial derivative of $g$ with respect to $y$ is disontinuous at $(0, 0)$.
+    \end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+    	We wish to prove that $\lim\limits_{(x, y) \to (0, 0)} \frac{x^{3}}{(x^{2} + y^{2})\sqrt{x^{2} + y^{2}}}$ does not exist. We approach the point $(0, 0)$ from $(x, 0)$ where $x \in \mathbb{R} \setminus \{ 0 \}$; more specifically,
+		\[
+			\lim\limits_{(x, y) \to (0, 0)} \frac{x^{3}}{(x^{2} + 0^{2})\sqrt{x^{2} + 0^{2}}} = \lim\limits_{x \to 0} \frac{x^{3}}{x^{2} \sqrt{x^{2}}} = \lim\limits_{x \to 0} \frac{x}{\abs{x}} = \lim\limits_{x \to 0} \operatorname{sign} (x).
+		\]
+		Clearly, this limit does not exist. We conclude that the partial derivative of $g$ with respect to $y$ is discontinuous at $(0, 0)$.
+    \end{proof}
+\end{adjustwidth}
+
+Therefore, $g$ is differentiable but not continuously differentiable --- likewise, $f$ itself is \textbf{differentiable but not continuously differentiable}.
+
+% --------------------------------------------- %
+
+\textbf{Part (d)} By our work in Part $(c)$, we find that $f$ extended by $f(0, 0) = 0$ is \textbf{differentiable but not continuously differentiable}.
+
+% --------------------------------------------- %
+
+\textbf{Part (e)} We claim that no extension of the domain of $f$ exists such that $f$ is continuous.
+
+Consider approaching $f(x, y)$ along $(x, x^{2})$ for $x \in \mathbb{R} \setminus \{ 0 \}$. We have that
+\[
+	\lim\limits_{(x, y) \to (0, 0)} f(x, x^{2}) = \lim\limits_{x \to 0} \frac{x^{2}(x^{2})}{x^{4} + x^{4}} = \lim\limits_{x \to 0} \frac{x^{2}}{2x^{2}} = \lim\limits_{x \to 0} \frac{1}{2} = \frac{1}{2}.	
+\]
+Therefore, an extension that preserves continuity must be $f(0, 0) = \tfrac{1}{2}$. However, consider approaching $f$ along $(x, 0)$ for $x \in \mathbb{R} \setminus \{ 0 \}$; we find that
+\[
+	\lim\limits_{(x, y) \to (0, 0)} f(x, 0) = \lim\limits_{x \to 0} \frac{x^{2} \times 0}{x^{4} + 0^{2}} = \lim\limits_{x \to 0} \frac{0}{x^{4}} = \lim\limits_{x \to 0} 0 = 0,
+\]
+so this extension is not continuous at the origin. Therefore, every extension of $f$ is \textbf{not continuous} at the origin.
+
+% --------------------------------------------- %
+
+\subsection{Problem 5}
+
+We have that
+\begin{align*}
+	\pdv{x}(x^{2} + y^{3}) \Big|_{(x, y) = (3, 1)} &= 2(3) = 6 \\
+	\pdv{y}(x^{2} + y^{3}) \Big|_{(x, y) = (3, 1)} &= 3(1)^{2} = 3.
+\end{align*}
+Therefore, the equation of the plane is $z = 10 + 6(x - 3) + 3(y - 1) = \mathbf{-11 + 6x + 3y}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 7}
+
+We have that
+\begin{align*}
+	\pdv{x} e^{x - y} \Big|_{(x, y) = (1, 1)} &= e^{1 - 1} = e^{0} = 1 \\
+	\pdv{y} e^{x - y} \Big|_{(x, y) = (1, 1)} &= -e^{1 - 1} = e^{0} = -1.
+\end{align*}
+As $z = e^{1 - 1} = e^{0} = 1$, the equation of the plane is $z = 1 + 1(x - 1) - 1(y - 1) = \mathbf{1 + x - y}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 9}
+
+\textbf{Part (a)}: The matrix of partial derivatives is 
+\[
+	\begin{bmatrix} \pdv{x} x & \pdv{y} x \\ \pdv{x} y & \pdv{y} y \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix},
+\]
+as expected.
+
+\textbf{Part (b)}: The matrix of partial derivatives is
+\[
+	\begin{bmatrix} \pdv{x} x e^{y} + \cos(y) & \pdv{y} x e^{y} + \cos(y) \\ \pdv{x} x & \pdv{y} x \\ \pdv{x} x + e^{y} & \pdv{y} x + e^{y} \end{bmatrix} = \begin{bmatrix}  e^{y} & x e^{y} - \sin(y) \\ 1 & 0 \\ 1 & e^{y} \end{bmatrix}.
+\]
+\textbf{Part (c)}: The matrix of partial derivatives is
+\[
+	\begin{bmatrix} \pdv{x} x + e^{z} + y & \pdv{y} x + e^{z} + y & \pdv{z} x + e^{z} + y \\ \pdv{x} yx^{2} & \pdv{y} yx^{2} & \pdv{z} yx^{w} \end{bmatrix} = \begin{bmatrix} 1 & 1 & e^{z} \\ 2xy & x^{2} & 0 \end{bmatrix}
+\]
+\textbf{Part (d)}: The matrix of partial derivatives is
+\[
+	\begin{bmatrix} \pdv{x} xy e^{xy} & \pdv{y} xy e^{xy} \\ \pdv{x} x \sin(y) & \pdv{y} x \sin(y) \\ \pdv{x} 5xy^{2} & \pdv{y} 5xy^{2} \end{bmatrix} = \begin{bmatrix} xy^{2} e^{xy} + y e^{xy} & x^{2}y e^{xy} + x e^{xy} \\ \sin(y) & x \cos(y) \\ 5y^{2} & 10xy \end{bmatrix}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 14} 
+
+We consider the graphs of $f$ and $g$ tangent because the \textit{tangent planes} at $(0, 0)$ of $f$ and $g$ are the same plane. In particular,
+\begin{align*}
+	\pdv{x} x^{2} + y^{2} = 2x \qquad & \text{and} \qquad  \pdv{y} x^{2} + y^{2} = 2y \\
+	\pdv{x} -x^{2} - y^{2} + xy^{3} = -2x + y^{3} \qquad & \text{and} \qquad  \pdv{y} -x^{2} - y^{2} + xy^{3} = -2y + 3xy^{2}
+\end{align*}
+As each of these partial derivatives computes to $0$ --- and $f(0, 0) = g(0, 0) = 0$ --- the tangent planes $f$ and $g$ at $(0, 0)$ are both $z = 0$. We conclude that the graphs of $f$ and $g$ are tangent at $(0, 0)$
+
+% --------------------------------------------- %
+
+\subsection{Problem 23}
+
+Observe that 
+\[
+	\pdv{x} x^{2}y^{3} \Big|_{(x, y, z) = (1, 2, 8)} = 2(1)(2)^{3} = 16 \qquad \text{and} \qquad \pdv{y} x^{2}y^{3} = 3(1)^{2}(2)^{2} = 12.
+\]
+Therefore, the equation of the tangent plane of $f(x, y) = x^{2} y^{3}$ is $z = 8 + 16(x - 1) + 12(y - 2) = 16x + 12y - 32$.
+
+The point directly above $(2, 1)$ on the plane has z-coordinate $2(16) + 12(1) - 32 = 12$, so the point is $(2, 1, 12)$. As $(1, 3, 20)$ clearly lies on the plane, the line we seek has equation 
+\[
+	\vec{v} = (2, 1, 12) + t(1, 3, 20)
+\]
+for $t \in \mathbb{R}$
+
+% --------------------------------------------- %
+
+\end{document}

@@ -1,0 +1,480 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+\newcommand{\conjugate}[1]{\overline{#1}}
+
+\title{MATH-UA 329: Honors Analysis II}
+\author{James Pagan}
+\date{January 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Exposition}
+
+MATH-UA 329 expands upon Honors Analysis I and will discuss two topics:
+\begin{enumerate}
+	\item The theory of differentiation and integration of multiavariable functions.
+	\item Measure Theory and Lebesgue integration
+\end{enumerate}
+The instructor is Sinan Gunturk, available at gunturk@cims.nyu.edu. Professor Gunturk's office hours are at WWH 829 in Courant from 2:00-3:30 PM. The TA is Keefer Rowan. The grade distribution is as follows:
+\begin{itemize}
+	\item 40\%: the final exam.
+	\item 20\%: the midterm exam.
+	\item 10-15\%: quizzes.
+	\item 15-20\%: homework assignments.
+\end{itemize}
+The course will not follow one particular textbook; potential textbooks are enumerated on Brightspace, with particular emphasis on Rudin's \textit{Principles of Mathematical Analysis}.
+
+% --------------------------------------------- %
+
+\section{Metric Spaces}
+
+% --------------------------------------------- %
+
+\subsection{Metric Spaces}
+
+% --------------------------------------------- %
+
+\subsubsection*{Definition}
+
+A \textbf{metric space} is a set $X$ equipped with a binary mapping $d : X \times X \to \mathbb{R}$ called a \textbf{metric} such that the following properties are satisfied for all $x, y, z \in X$:
+\begin{enumerate}
+	\item \textbf{Positivity}: $d(x, y) \ge 0$, with equality if and only if $x = y$.
+	\item \textbf{Symmetry}: $d(x, y) = d(y, x)$.
+	\item \textbf{Triangle Inequality}: $d(x, y) \le d(x, z) + d(z, y)$.
+\end{enumerate}
+Metric spaces generalize the notion of distance to arbitrary sets. 
+
+% --------------------------------------------- %
+
+\subsubsection*{Examples}
+
+\begin{enumerate}
+	\item \textbf{Euclidean Distance}: In $\mathbb{R}$, the Euclidean distance $d(x, y) = \abs{x - y}$ is a metric. The complex absolute value is also a metric of $\mathbb{C}$.
+
+	In general, the Euclidean distance over $\mathbb{R}^{n}$ is defined as follows: 
+	\[
+		d_{2}(\vec{x}, \vec{y}) = \norm{\vec{x} - \vec{y}} = \sqrt{\sum\limits_{i = 1}^{n} \abs{x_{i} - y_{i}}^{2}}
+	\]
+	\item \textbf{Taxicab Metric}: in $\mathbb{R}^{n}$, the taxicab metric is defined as follows for $\vec{x} = (x_{1}, \ldots, x_{n})$ and $\vec{y} = (y_{1}, \ldots, y_{n})$:
+	\[
+		d_{1}(x, y) = \sum\limits_{i = 1}^{n} \abs{x_{i} - y_{i}}.
+	\]
+	\item \textbf{Supremum Distance}: For $\mathbb{R}^{n}$, the $d_{\infty}$ metric is as follows:
+	\[
+		d_{\infty}(\vec{x}, \vec{y}) = \max \abs{x_{i} - y_{i} \mid i \in \{ 1, \ldots, n \}}.
+	\]
+	It is denoted by infinity since
+	\[
+		\lim\limits_{m \to \infty} d_{n}(x, y) = \lim\limits_{m \to \infty} \sqrt[m]{\sum\limits_{i = 1}^{n} \abs{x_{i} - y_{i}}^{m}} = d_{\infty}(x, y).
+	\]
+	\item \textbf{Discrete Metric} The discrete metric over any set $X$ is defined as follows:
+	\[
+		d(x, y) = 
+		\begin{cases}
+			0 & \text{if } x = y, \\
+			1 & \text{if } x \ne y
+		\end{cases}.
+	\]
+	It is easy to verify that the discrete metric is a metric; it is primarily used in examples. 
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsubsection*{Open Balls}
+
+For a metric space $X$, the \textbf{open ball} of radius $r$ centered at $x \in X$ is the set
+\[
+	B_{r}(\vec{x}) = \{ y \in X \mid d(x, y) \le 1 \}.
+\]
+Here are examples of the unit disc $B_{1}(0)$ in the above metrics in $\mathbb{R}^{2}$.
+\begin{itemize}
+	\item Under the Euclidean metric, the unit disc is the standard unit circle.
+	\item Under $d_{\infty}$, it is the unit square:
+	\[
+		B_{1}(0) = \{ \vec{y} \in \mathbb{R}^{2} \mid \max{y_{i}} < 1 \text{ for } i \in \{ 1, 2 \} \}.
+	\]
+	\item Under $d_{1}$, the unit disc is a diamond:
+	\[
+		B_{1}(0) = \{ \vec{y} \in \mathbb{R}^{2} \mid \abs{y} \le 1 \}.
+	\]
+	\item Open balls under the discrete metric are defined as follows:
+	\[
+		B_{r}(x) = 
+		\begin{cases}
+			\{ x \} & \text{if } r \le 1, \\
+			X & \text{if } r > 1.
+		\end{cases}
+	\]
+\end{itemize}
+
+We encourage the reader to graph these examples for further understanding.
+
+% --------------------------------------------- %
+
+\subsubsection**{Continuity}
+
+Let $X$ and $Y$ be metric spaces. A function $f: X \to Y$ is \textbf{continuous} at $x \in X$ if for all $\epsilon > 0$, there exists $\delta$ such that 
+\[
+	0 < d(x, y) < \delta \implies d(f(x) - f(y)) < \epsilon.
+\]
+$f$ itself is continuous on $X$ if it is continuous at every $x \in X$. 
+% --------------------------------------------- %
+
+\subsection{The Metric Space \texorpdfstring{$\mathcal{BC}(X)$}{BC(X)}}
+
+% --------------------------------------------- %
+
+\subsubsection*{On Metric Sets}
+
+The next section will utilize the following definition: 
+\[
+	\mathcal{C}(X) = \{ f : X \to \mathbb{R} \mid f \text{ is continuous on } X \}
+\]
+$\mathcal{C}(X)$ is a vector space over $\mathbb{R}$ under addition of functions and scalar multiplication. The natural question is: is $\mathcal{C}(X)$ a metric space? Since a norm on a vector space $V$ satisfies positivity, the symmetry Triangle Inequality, it induces a metric for $\vec{v}, \vec{w} \in V$:
+\[
+	d(\vec{v}, \vec{w}) = \norm{\vec{v} - \vec{w}}.
+\]
+$\mathcal{C}(X)$ does not possess a clear norm. We must define a subspace $B$ of $C(X)$ as follows:
+\[
+	\mathcal{BC}(X) = \{ f : X \to \mathbb{R} \, \mid \, f \text{ is continuous and bounded on } X \}.
+\]
+The natural norm of this space is the \textbf{supremum norm}, defined as follows:
+\[
+	\norm{f}_{X} = \sup\limits_{x \in X} \abs{f(x)}.
+\]
+This norm fashions $\mathcal{BC}(X)$ into a metric space. The supremum norm encapsulates the concept of uniform convergence quite precisely.
+
+% --------------------------------------------- %
+
+\subsubsection*{For General Sets}
+
+For any set $E$, we may define a similar function space:
+\[
+	\mathcal{B}(E) = \{ f : E \to \mathbb{R} \, \mid \, f \text{ is bounded on $E$}\}.
+\]
+This set $\mathcal{B}(E)$ is a normed vector space under the supremum norm:
+\[
+	\norm{f}_{E} = \sup\limits_{x \in E} \abs{f(x)}.
+\]
+\begin{theorem}
+	$\mathcal{B}(E)$ is a complete metric space --- hence a Banach space.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose $(f_{n})$ is a Cauchy sequence under the supremum norm: that for all $\epsilon > 0$, there exists $N_{\epsilon}$ such that
+		\[
+			N_{\epsilon} \le i, j \implies \norm{f_{i} - f_{j}}_{E} < \epsilon.
+		\]
+		Then for all $x \in E$,
+		\[
+			N_{\epsilon} \le i, j \implies \norm{f_{i}(x) - f_{j}(x)}_{E} < \epsilon.
+		\]
+		Then the sequence $f_{1}(x), f_{2}(x), \ldots$ is a Cauchy sequence in $\mathbb{R}$ under the supremum norm. Then let $f$ be the function that maps $x$ to the limit of $f_{1}(x), f_{2}(x), \ldots$. Clearly, $f \in \mathbb{R}^{E}$. We must demonstrate that this convergence is uniform.
+		
+		Now, let $N_{\epsilon} \le i, j$. Then
+		\begin{align*}
+			\abs{f(x) - f_{n}(x)} &\le \abs{f(x) - f_{m}(x)} + \abs{f_{m}(x) - f_{n}(x)}. \\
+			&< \abs{f(x) - f_{m}(x)} + \epsilon.
+		\end{align*}
+		Observe that $\inf\limits_{N_{\epsilon} \le m} \abs{f(x) - f_{m}(x)} = 0$ by the convergence. Therefore, we may take the infimum of both sides of the above equation:
+		\begin{align*}
+			\abs{f(x) - f_{n}(x)} &= \inf\limits_{N_{\epsilon} \le m} \abs{f(x) - f_{n}(x)} \\
+			&< \inf\limits_{N_{\epsilon} \le m} \abs{f(x) - f_{m}(x)} + \epsilon \\
+			&= \epsilon.
+		\end{align*}
+		Thus, $N_{\epsilon} < i$ implies $\norm{f - f_{n}} = \sup\limits_{x \in E} \abs{f(x) - f_{n}(x)}_{E} < \epsilon$. We conclude that $(f_{n})$ converges, so $\mathcal{B}(E)$ is complete.
+	\end{proof}
+\end{adjustwidth}
+
+If we would like to prove that $\mathcal{BC}(X)$ is continuous, we only need demonstrate that the limit of a Cauchy sequence $(f_{n})$ is continuous --- which is true, since $\mathcal{BC}(X)$ is a closed subspace of the complete metric space $\mathcal{B}(X)$.
+
+\subsubsection*{Uniform Continuity}
+
+Let $f : (X, d_{x}) \to (Y, d_{y})$ map between metric spaces. Then $f$ is \textbf{uniformly continuous} if for all $\epsilon > 0$, there exists $\delta > 0$ such that
+\[
+	d_{X}(x_{1}, x_{2}) < \delta \implies d_{Y}(f(x_{1}), f(x_{2})) < \epsilon.
+\]
+This now leads us to define the following two spaces:
+\begin{align*}
+	\mathcal{UC}(X) &= \{ f : X \to R \, \mid \, f \text{ is uniformly continuous on } X \}, \\
+	\mathcal{BUC}(X) &= \{ f : X \to R \, \mid \, f \text{ is bounded and uniformly continuous on } X \}.
+\end{align*}
+Both are subspaces of $\mathcal{C}(X)$, but only $\mathcal{BUC}(X)$ is a normed vector space. The exact same proof as Theorem 1 demonstrates that $\mathcal{BUC}(X)$ is a Banach space.
+
+\textbf{Special case}: When $X = K$ is compact, all continuous $f : K \to \mathbb{R}$ are bounded and uniformly continuous. Hence,
+\[
+	\mathcal{C}(K) = \mathcal{BC}(K) = \mathcal{BUC}(K)
+\]
+For non-compact $X$, we can only write 
+\[
+	\mathcal{C}(X) \supset \mathcal{BC}(X) \supset \mathcal{BUC}(X).
+\]
+
+% --------------------------------------------- %
+
+\subsection{Modulus of Continuity}
+
+% --------------------------------------------- %
+
+\subsubsection*{Definition}
+
+Let $f : (X, d_{X}) \to (Y, d_{Y})$ map between metric spaces. Then the \textbf{modulus of continuity} $\omega_{f} : [0, \infty) \to [0, \infty]$ is defined as
+\[
+	\omega_{f}(t) = \sup\limits_{d_{X}(x_{1}, x_{2}) \le t} d_{Y}(f(x_{1}), f(x_{2})).
+\]
+The modulus of continuity ``measures'' the uniform continuity of a function, as observed by the following facts:
+
+\newpage
+
+\begin{theorem}
+  $f$ is uniformly continuous if and only if $\lim\limits_{t \to 0^{+}} \omega_{f}(t) = 0$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    The line of reasoning is not particularly difficult; the two expressions communicate the same idea, buried under different notation. For all $\epsilon > 0$,
+    \begin{align*}
+      \text{$f$ is uniformly continuous} &\iff \exists \delta \text{ such that $d_{X}(x_{1}, x_{2}) \le \delta$ implies} \\
+      & \quad \qquad  d_{Y}(f(x_{1}), f(x_{2})) < \epsilon \text{ for all } x_{1}, x_{2} \in X. \\
+      &\iff \exists \delta \text{ such that $d_{X}(x_{1}, x_{2}) \le \delta$ implies} \\
+      & \quad \qquad  \sup \big( d_{Y}(f(x_{1}), f(x_{2})) \big) \le \epsilon \\
+      &\iff \exists \delta \text{ such that } \sup_{d_{X}(x_{1}, x_{2}) \le \delta} d_{Y}(f(x_{1}), f(x_{2})) \le \epsilon. \\
+      &\iff \exists \delta \text{ such that } \omega_{f}(\delta) \le \epsilon \\
+      &\iff \exists \delta \text{ such that } t < \delta \text{ implies } \abs{\omega_{f}(t)} \le \epsilon \\
+      &\iff \lim\limits_{t \to 0^{+}} \omega_{f}(t) = 0.
+    \end{align*}
+    We replaced $<$ by $\le$ wherever necessary; their presence or absence yields an equivalent $\epsilon - \delta$ definition of the limit.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+  $d_{Y}(f(x_{1}), f(x_{2})) \le \omega_{f} \big( d_{X}(x_{1}, x_{2}) \big)$ for all $x_{1}, x_{2} \in X$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Set $t = d_{X}(x_{1}, x_{2})$ when computing the modulus of continuity: we find that
+    \begin{align*}
+      d_{Y}(f(x_{1}), f(x_{2})) \le \sup_{d_{X}(y_{1}, y_{2}) < d_{X}(x_{1}, x_{2})} d_{Y}(f(y_{1}), f(y_{2})) = \omega_{f} \big( d_{X}(x_{1}, x_{2}) \big),
+    \end{align*}
+    as required.
+  \end{proof}
+\end{adjustwidth}
+
+To witness examples of the Modulus of Continuity, we encourage the reader to examine its implications for two types of continuity for a function $f$:
+
+\begin{enumerate}
+  \item \textbf{Hölder Continutiy}: If there exists $\alpha \in (0, 1]$ such that $\omega_{f}(t) \le C t^{\alpha}$. Setting $\alpha \ge 1$ actually implies $f$ is constant, by Problem 2 in Homework 1.
+\item \textbf{Lipschitz Continuity}: If $\omega_{f}(t) \le Ct$ for all $t \ge 0$, or if $d_{Y}(f(x_{1}), f(x_{2})) \le C d_{X}(x_{1}, x_{2})$ for all $x \in X$.
+\end{enumerate} 
+
+It is clear that all Lipschitz continuous functions are Hölder continuous, by setting $\alpha = 1$.
+
+% lhe2010@nyu.edu
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsubsection*{Piecewise Linear Approximation}
+
+Let $I = [a, b]$ and $f \in \mathcal{C}(I)$; clearly $f$ is bounded on $I$. Let $L$ be the affine function interpolating $f$ at the endpoints: $L(a) = f(a)$ and $L(b) = f(b)$.
+
+\begin{theorem}
+	If terms are defined like above, then
+	\[
+		\norm{f - L}_{I} \le \omega_{f} (b - a)
+	\]
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Recall the definition of the supremum norm:
+		\[
+			\norm{f - L}_{I} = \sup\limits_{x \in [a, b]} \abs{f(x) - L(x)}.
+		\]
+		Let $L(x) = y$. Observe that since $L$ is affine, $y$ lies between $L(a)$ and $L(b)$; therefore, between $f(a)$ and $f(b)$. The Intermediate Value Theorem implies the existence of $c \in [a, b]$ such that $f(c) = y$. Then by properties discuseed prior,
+		\[
+			\abs{f(x) - L(x)} = \abs{f(x) - f(c)} \le \omega_{f} \abs{c - x} \le \omega_{f}(b - a).
+		\]
+	\end{proof}
+\end{adjustwidth}
+\begin{corollary}
+	Every $f \in \mathcal{C}(I)$ can be approximated uniformly by piecewise linear continuous functions, with arbitrarily small modulus of continuity.
+\end{corollary}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Relatively trivial: divide $[b - a]$ into $n$ segments of length $\tfrac{b - a}{n}$, and observe how $n \to \infty$ implies $\omega_{f} \left( \tfrac{b - a}{n} \right) \to 0$.
+  \end{proof}
+\end{adjustwidth}
+
+We eventualy conclude that the set of piecewise linear continuous functions on $I$ is \textit{dense} in $\mathcal{C}(I)$. In fact, the set of such functions with rational values for break points is countable. 
+
+% --------------------------------------------- %
+
+\subsection{Separable Metric Spaces}
+
+% --------------------------------------------- %
+
+\subsubsection*{Definition and Examples}
+
+Suppose $(X, d)$ is a metric space and $Z \subseteq X$ is a subset. We say $Z$ is \textbf{dense} in $X$ if any of the equivalent definitions are defined:
+\begin{itemize}
+	\item For all $x \in X$ and $\epsilon > 0$, there exists $z \in Z$ such that $\abs{x - z} < \epsilon$.
+	\item For all $x \in X$ and $\epsilon > 0$, then $B_{\epsilon}(x) \cap Z \ne \varnothing$.
+	\item $\bar{Z} = X$, the closure of $Z$.
+	\item For all $x \in X$, there exists $(z_{n}) \in Z$ such that $\lim\limits_{n \to \infty} z_{n} = x$.
+\end{itemize}
+Densitiy is transitive: suppose $S \subseteq Z \subseteq X$, where $S$ is dense in $Z$ and $Z$ is dense in $X$; then $S$ is dense in $Z$. The metric space $(X, d)$ is \textbf{separable} if $X$ has a countable dense subset.
+
+\newpage
+
+Some examples of dense subsets include:
+
+\begin{enumerate}
+	\item $\mathbb{R}$ with the Euclidean metric, the countable dense subset being $\mathbb{Q}$. We could also conside rthe diatic rationals: $\{ \tfrac{n}{2^{m}} \}$.
+	\item $\mathbb{C}^{n}$ with the Euclidean metric, using the same methods as above. 
+  \item $\mathbb{R}^{n}$ with the Taxicab metric, using the product metric discussed below.
+  \item $\mathcal{C}(I)$, discussed prior. The set of all piecewise linear continuous functions with rational values at break points --- it is countable yet dense.
+\end{enumerate}
+
+For two metric spaces $(X, d_{X})$ and $(Y, d_{Y})$, the \textbf{product metric} is a metric over $X \times Y$ defined as follows:
+\[
+	(d_{1} \times d_{2})\big((x_{1}, y_{1}), (x_{2}, y_{2})\big) = d(x_{1}, x_{2}) + d(y_{1}, y_{2}).
+\]
+We could also consider $\mathbb{R}^{n}$ to be dense under the product metric, considering $\mathbb{R}^{n}$ as a direct product of $\mathbb{R}^{n}$. We would yield the taxicab metric, which is \text{equivalent}.
+
+% --------------------------------------------- %
+
+\subsection{Polynomial Approximation}
+
+\begin{theorem}[Weierstrauss Approximation Theorem]
+  The set of all polynomial functions is dense on $\mathcal{C}(I)$: if $f \in \mathcal{C}(I)$ and for all $\epsilon > 0$, there exists a polynomial $P$ of finite degree such that $\norm{f - P}_{I} < \epsilon$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    The proof was discovered by Bernstein in the 1910s, found in the file RealAnalysis/babyrudin7.tex.
+  \end{proof}
+\end{adjustwidth}
+
+Thus, polynomials are a countable dense subset of $I$.
+
+% --------------------------------------------- %
+
+\subsection{Normed Vector Space}
+
+A \textbf{normed vector space} is a complex vector space $X$ equipped with a mapping $\norm{\cdot} : X \to \mathbb{R}$ that satisfies the following properties:
+\begin{enumerate}
+	\item \textbf{Positivity}: $\norm{\vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
+	\item \textbf{Homogenity}: $\norm{\lambda \vec{x}} = \abs{\lambda} \norm{\vec{x}}$ for all $\lambda \in \mathbb{C}$.
+  \item \textbf{Triangle Inequality}: $\norm{\vec{x} + \vec{y}} \le \norm{\vec{x}} + \norm{\vec{y}}$
+\end{enumerate}
+It is clear that such a norm induces a metric on $X$. This metric is \textbf{translation invariant} --- namely, for all $z \in X$, we have $d(x, y) = d(x + z, y + z)$. In fact, we have $B_{r}(x) + z = B_{r}(x + z)$.
+
+An \textbf{inner product space} is a complex vector space $X$ equipped with a mapping $\ev{\cdot, \cdot} : X \times X \to \mathbb{C}$ that satisfies the following properties for all $\vec{x}, \vec{y}, \vec{z} \in \vec{X}$ and $\lambda \in \mathbb{C}$:
+\begin{enumerate}
+	\item \textbf{Conjugate Symmetry}: $\ev{\vec{x}, \vec{y}} = \conjugate{\ev{\vec{y}, \vec{x}}}$
+	\item \textbf{Positive-Definiteness}: $\ev{\vec{x}, \vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
+	\item \textbf{Additivity in First Argument}: $\ev{\vec{x} + \vec{y}, \vec{z}}$ = $\ev{\vec{x}, \vec{z}} + \ev{\vec{y}, \vec{z}}$.
+	\item \textbf{Homogenity in First Argument}: $\ev{\lambda \vec{x}, \vec{y}}$ = $\lambda \ev{\vec{x}, \vec{y}}$.
+\end{enumerate}
+More theorems about these spaces may be found in axler6.tex. It is clear that by setting $\norm{\vec{x}} = \ev{\vec{x}, \vec{x}}$, all inner product spaces are normed vector spaces. Hence,
+\[
+  \text{inner product spaces } \subseteq \text{ normed vector spaces } \subseteq \text{ metric spaces } \subseteq \text{ topological spaces}.
+\]
+A complete normed vector space is a \textbf{Banach space}< while a complete inner product space is a \textbf{Hilbert space}. These spaces need not be finite-dimensional.
+
+% --------------------------------------------- %
+
+\subsection{Equivalent Metrics}
+
+Two metrics $d$ and $\rho$ on $X$ are \textbf{equivalent} if there exists $0 < c \le C < \infty$ such that for all $x, y \in X$,
+\[
+	c \rho(x, y) \le d(x, y) \le C \rho(x, y).
+\]
+Density is invariant of equivalent metrics; in fact their topologies are the same. A set $S \subseteq X$ is open under $d$ if and only if $S$ is open under $\rho$. In particular, metrics in Banach spaces are equivalent if
+\[
+  c \norm{\vec{x}} \le \norm{\vec{x}}' \le C \norm{\vec{x}}
+\]
+for all $\vec{x} \in X$. As an example, the Power Mean Inequality yields in $\mathbb{C}^{n}$ that
+\[
+  \norm{\vec{x}}_{\infty} \, \le \, \norm{\vec{x}}_{2} \, \le \, \norm{\vec{x}}_{1} \, \le \, \sqrt{d} \, \norm{\vec{x}}_{2} \, \le \, d \, \norm{\vec{x}}_{\infty}.
+\]
+These relations do \textit{not} extend to infinite dimensional vector spaces, like $\ell_{p}(\mathbb{N})$ for $1 \le p \le \infty$. A counterexample is given by $(1, \ldots, 1, 0, 0, \ldots)$. As a reminder, this norm is defined as
+\[
+  \norm{\vec{x}}_{p} \quad \stackrel{\text{def}}{=} \quad  
+  \begin{cases}
+    \left( \sum\limits_{n = 1}^{\infty} \abs{x_{n}}^{p} \right)^{1/p} & \text{ if } 1 \le p < \infty \\
+    \sup\limits_{n \in \mathbb{N}} \abs{x_{n}} & \text{ if } p = \infty.
+  \end{cases}
+\]
+Hence $p$-norms are not equivalent on spaces of infinite sequences.
+
+\newpage
+
+Though worth noting, we do have the following:
+\[
+  c_{00} \subset \ell_{1}(\mathbb{N}) \subset \ell^{2}(\mathbb{N}) \subset c_{0} \subset c \subset \ell^{\infty}(\mathbb{N})
+\]
+All inclusions are clearly proper.
+
+\begin{theorem}
+  Let $X$ be a finite dimensional vector space over $\mathbb{C}$ (or $\mathbb{R}^{n}$). Then any two norms on $X$ are equivalent.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Let $\dim X = n$. We first prove the theorem for $\mathbb{C}^{n}$; let $\vec{e}_{1}, \ldots, \vec{e}_{n}$ be the canonical basis of $\mathbb{C}^{n}$, and suppose $\norm{\cdot}_{1} : \mathbb{C}^{n} \to [0, \infty)$ is a norm. We prove that $\norm{\vec{z}}_{1}$ is equivalent to the canonical norm $\norm{\vec{z}}$.
+    
+    Consider the boundary of the unit ball (in the canonica norm) in $\mathbb{C}^{n}$. Since $\norm{\cdot}_{1}$ is continuous, the Extreme Value Theorem guarantees that there exists $\vec{u}, \vec{s}$ with norms $1$ such that 
+    \[
+      \norm{\vec{u}}' = \inf\limits_{\norm{\vec{z}} = 1} \{  \norm{\vec{z}}' \} \qquad \text{and} \qquad \norm{\vec{s}}' = \sup\limits_{\norm{\vec{z}} = 1} \{ \norm{\vec{z}}' \}
+    \]
+    Then for all $\vec{z} \in \mathbb{C}^{n}$, the constants $\norm{\vec{u}}'$ and $\norm{\vec{s}}'$ allow for norm equivalence:
+    \[
+      \norm{\vec{u}}' \norm{\vec{z}} \, \le \, \norm{\frac{\vec{z}}{\norm{\vec{z}}}}' \norm{\vec{z}} \, = \, \norm{\vec{z}}' \, = \, \norm{\frac{\vec{z}}{\norm{\vec{z}}}}' \norm{\vec{z}} \, \le \, \norm{\vec{s}}' \norm{\vec{z}}.
+    \]
+    We conclude that all norms on $\mathbb{C}^{n}$ are equivalent to the canonical norm.
+
+
+  \end{proof}
+\end{adjustwidth}
+
+Since open sets are the same for equivalent metrics, we obtain that there is only one norm-based topology on $\mathbb{R}^{n}$ --- the Euclidean topology. This proof fails on $\ell^{p}(\mathbb{N})$, since the unit sphere is not compact. Realize that for all $\vec{e}_{i}$ for $i \in \mathbb{Z}_{> 0}$,
+\[
+  \norm{\vec{e}_{i} - \vec{e}_{j}} \ge 1.
+\]
+Thus the set of all $\vec{e}_{1}, \ldots$ contains no convergent subsequence, so it is not compact. Thus the Heine-Borel Theorem fails for $\ell^{p}(\mathbb{N})$.
+
+% --------------------------------------------- %
+
+\subsection{Linear Maps on Normed Vector Spaces}
+
+A linear map $T : (X, d_{X}) \to (Y, d_{Y})$ between normed vector spaces is continuous if and only if it is continuous at $0$.
+
+Also, $c_{00}$ is not continuous at $0$.
+
+% --------------------------------------------- %
+
+\end{document}

@@ -1,0 +1,297 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Homework 3}
+\author{James Pagan, October 2023}
+\date{Professor Serfaty}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Section 2.4}
+
+% --------------------------------------------- %
+
+\subsection{Problem 6}
+
+\textbf{Part (a)}: For $t \in \mathbb{R}$, the parametrization is trivially
+\[
+	\boxed{\vec{v} = (1, 2, 3) + t (-2, 0, 7)}.
+\]
+\textbf{Part (b)}: For $t \in \mathbb{R}$, the parametrization we seek is trivially
+\[
+	\boxed{\vec{v} = (t, t^{2})}.
+\]
+\textbf{Part (c)}: For $t \in \mathbb{R}$, define the fractional part of $t$ by $\{ t \} = t - \lfloor t \rfloor$. The parametrization we seek is given by a piecewise function:
+\[
+	\vec{v} = 
+	\begin{cases}
+		(\{ t \}, 0) & \text{If $\lfloor t \rfloor \equiv 0 \bmod{4}$} \\
+		(1, \{ t \}) & \text{If $\lfloor t \rfloor \equiv 1 \bmod{4}$} \\
+		(1 - \{ t \}, 1) & \text{If $\lfloor t \rfloor \equiv 2 \bmod{4}$} \\
+		(0, 1 - \{ t \}) & \text{If $\lfloor t \rfloor \equiv 3 \bmod{4}$} \\
+	\end{cases}
+\]
+It is trivial to verify that:
+\begin{itemize}
+	\item $\vec{v}$ attains all the vectors on the side $(0, 0)$ to $(0, 1)$ when $0 \le t \le 1$, 
+	\item $\vec{v}$ attains all the vectors on the side $(0, 1)$ to $(1, 1)$ when $1 \le t \le 2$,
+	\item $\vec{v}$ attains all the vectors on the side $(1, 1)$ to $(1, 0)$ when $2 \le t \le 3$,
+	\item $\vec{v}$ attains all the vectors on the side $(1, 0)$ to $(0, 0)$ when $3 \le t \le 4$.
+\end{itemize}
+
+Therefore, the curve of $v$ traced by all $0 \le t \le 4$ is the box we desire; $t$-values outside this range simply retrace the box, ensured by the modulo $4$ in the definition of $\vec{v}$.
+
+\textbf{Part (d)}: We claim the ellipse traced by $\tfrac{x^{2}}{9} + \tfrac{y^{2}}{25} = 1$ may be parametrized by the path $\vec{c}(t) = (3 \cos(t), 5 \sin(t))$ across all $t \in \mathbb{R}$. Observe that for all reals $t$,
+\[
+	\frac{(3 \cos(t))^{2}}{9} + \frac{(5 \sin(t))^{2}}{25} = \cos^{2} (t) + \sin^{2} (t) = 1,
+\]
+so all $\boxed{\vec{c}(t) = (3 \cos(t), 5 \sin(t))}$ lie on the ellipse. We wish to establih the converse --- that every point on the ellipse may be parametrized by our path.
+
+Let $(x_{0}, y_{0})$ lie on the ellipse such that $\tfrac{x_{0}^{2}}{9} + \tfrac{y_{0}^{2}}{25} = 1$. Observe that $x_{0}^{2} < 9$, so $-3 < x_{0} < 3$. Then we may define $t_{0} \in [0, 2\pi)$ such that two conditions hold: $3 \cos(t_{0}) = x_{0}$ and that $5 \sin{t_{0}}$ and $y_{0}$ have the same sign. Hence,
+\[
+	1 = \frac{x_{0}^{2}}{9} + \frac{y_{0}^{2}}{25} = \frac{(3\cos(t_{0}))^{2}}{9} + \frac{y_{0}^{2}}{25} = \cos^{2}(t_{0}) + \frac{y_{0}^{2}}{25},
+\]
+so
+\[
+	y_{0}^{2} = 25 - 25 \cos^{2} (t_{0}) = 25\sin^{2} (t_{0}).
+\]
+Then as we defined $t_{0}$ such that $y_{0}$ and $5\sin(t_{0}))$ have the same sign, we find that $y_{0} = 5 \sin(t_{0})$; hence, $(x_{0}, y_{0}) = (3 \cos(t_{0}), 5 \sin(t_{0})) = \vec{c}(t_{0})$. Every point on the ellipse may thus be paramtrized by our path; this completes the proof.
+
+% --------------------------------------------- %
+
+\subsection{Problem 11}
+
+The tangent vector to this path is
+\[
+	\vec{c}'(t) = \left( \dv{t} e^{t}, \dv{t} \cos(t) \right) = \boxed{(e^{t}, -\sin(t))}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 18}
+
+Observe that $\vec{c}(0) = (1, 0, 0)$. The tangent vector to the path across all $t$ is 
+\[
+	\vec{c}'(t) = \left( \dv{t} \cos^{2}(t), \dv{t} 3t - t^{2}, \dv{t} t \right) = (- 2 \sin(t) \cos(t), 3 - 2t, 1).
+\]
+Therefore, $\vec{c}'(0) = (0, 3, 1)$, and the equation of the tangent line for $t \in \mathbb{R}$ is 
+\[
+	\boxed{\vec{v} = (1, 0, 0) + t(0, 3, 1)}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 23}
+
+\textbf{Part (a)}: Observe that
+\[
+	\vec{c}'(t) = \left( \dv{t} \cos(t), \dv{t} \sin(t), \dv{t} t^{2} \right) = (-\sin(t), \cos(t), 2t).
+\]
+Thus, $\vec{c}'(4\pi) = (-\sin(4\pi), \cos(4\pi), 2(4\pi)) = (0, 1, 8\pi)$. The magnitude of this vector is the speed of the particle at $t_{0} = 4\pi$; namely,
+\[
+	\sqrt{0^{2} + 1^{2} + (8\pi)^{2}} = \boxed{\sqrt{64\pi^{2} + 1}}.
+\]
+\textbf{Part (b)}: We seek to solve the equation $\vec{c}'(t) \cdot \vec{c}(t) = 0$; namely,
+\[
+	(-\cos(t)\sin(t)) + (\sin(t)\cos(t)) + (2t^{3}) = 0,
+\]
+or $2t^{3} = 0$ and $t = 0$. Checking this solution, we find that
+\[
+	\vec{c}'(0) \cdot \vec{c}(0) = (-\sin(0), \cos(0), 2(0)) \cdot (\cos(0), \sin(0), (0)^{2}) = (0, 1, 0) \cdot (1, 0, 0) = 0.
+\]
+Thus, $\vec{c}'(0)$ is orthogonal to $\boxed{\vec{c}(t) \text{ at $t = 0$ only, so no}}$.
+
+\textbf{Part (c)}: Observe that $\vec{c}(4\pi) = (1, 0, 16\pi^{2})$. Then via our work in Part (a), the equation of the tangent line for $t \in \mathbb{R}$ is
+\[
+	\vec{v} = \vec{c}(4\pi) + t \vec{c}'(4\pi) = (1, 0, 16\pi^{2}) + t(0, 1, 8\pi).
+\]
+\textbf{Part (d)}: This line will intersect the $xy$-plane when $z = 0$; namely, when
+\[
+	16\pi^{2} + 8\pi t = 0,
+\]
+or when $\boxed{t = -2\pi}$, or at $(1, 0, 16\pi^{2}) - 2\pi (0, 1, 8\pi)= \boxed{(1, -2\pi, 0)}$.
+
+% --------------------------------------------- %
+
+\section{Section 2.5}
+
+% --------------------------------------------- %
+
+\subsection{Problem 3b}
+
+By considering $f \circ \vec{c}$ as a function of $t$, we have that
+\[
+	\dv{t} (f \circ \vec{c}) = \dv{t} e^{(3t^{2})t^{3}} = \dv{t} e^{3t^{5}} = 15t^{4} e^{3t^{5}}.
+\]
+We now seek to use the Chain Rule: observe that
+\begin{align*}
+	\pdv{x} e^{xy} &= y e^{xy} \\
+	\pdv{y} e^{xy} &= x e^{xy} \\
+	\vec{c}'(t) &= (6t, 3t^{2}).
+\end{align*}
+Then via the Chain Rule, the derivative of $f \circ \vec{c}$ is
+\[
+	\begin{bmatrix} t^{3} e^{3t^{5}} & 3t^{2}e^{3t^{5}} \end{bmatrix} \begin{bmatrix} 6t \\ 3t^{2} \end{bmatrix} = \begin{bmatrix} t^{3} e^{3t^{5}}(6t) + 3t^{2} e^{3t^{5}} (3t^{2}) \end{bmatrix} = \begin{bmatrix} 15t^{4} e^{3t^{5}} \end{bmatrix},
+\]
+which matches our prior computation.
+
+% --------------------------------------------- %
+
+\subsection{Problem 5}
+
+We have that
+\[
+	\grad (fg) = \begin{bmatrix} \pdv{x} fg \\ \pdv{y} fg \\ \pdv{z} fg \end{bmatrix} = \begin{bmatrix} f \left( \pdv{x} g \right) + g \left( \pdv{x} f \right) \\ f \left( \pdv{y} g \right) + g \left( \pdv{y} f \right) \\ f \left( \pdv{z} g \right) + g \left( \pdv{z} f \right) \end{bmatrix} = f \begin{bmatrix} \pdv{x} g \\ \pdv{y} g \\ \pdv{z} g \end{bmatrix} + g \begin{bmatrix} \pdv{x} f \\ \pdv{y} f \\ \pdv{z} f \end{bmatrix} = f \grad g + g \grad f.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 6}
+
+Define $g : \mathbb{R}^{3} \to \mathbb{R}^{3}$ as 
+\[
+	g(\rho, \theta, \phi) = \begin{bmatrix} x(\rho, \theta, \phi) \\ y(\rho, \theta, \phi) \\ z(\rho, \theta, \phi) \end{bmatrix} = \begin{bmatrix} \rho \cos(\theta) \sin(\phi) \\ \rho \sin(\theta) \sin(\phi) \\ \rho \cos(\theta) \end{bmatrix}.
+\]
+We then have that $f(x, y, z) = f(x(\rho, \theta, \phi), y(\rho, \theta, \phi), z(\rho, \theta, \phi)) = f \circ g$, so via the Chain Rule,
+\[
+	\begin{bmatrix} \pdv{f}{x} & \pdv{f}{y} & \pdv{f}{z} \end{bmatrix} \begin{bmatrix} \pdv{x}{\rho} & \pdv{x}{\theta} & \pdv{x}{\phi} \\ \pdv{y}{\rho} & \pdv{y}{\theta} & \pdv{y}{\phi} \\ \pdv{z}{\rho} & \pdv{z}{\theta} & \pdv{z}{\phi} \end{bmatrix} = \begin{bmatrix} \pdv{f}{\rho} & \pdv{f}{\theta} & \pdv{f}{\phi} \end{bmatrix}.
+\]
+Expanding this out, we find that
+\begin{align*}
+	\pdv{f}{\rho} &= \pdv{f}{x} \pdv{x}{\rho} + \pdv{f}{y} \pdv{y}{\rho} + \pdv{f}{z} \pdv{z}{\rho} \\
+	&= \left( \pdv{f}{x} \right) \cos(\theta) \sin(\phi) + \left( \pdv{f}{y} \right) \sin(\theta)\sin(\phi) + \left( \pdv{f}{z} \right) \cos(\phi), \\
+	\pdv{f}{\theta} &= \pdv{f}{x} \pdv{x}{\theta} + \pdv{f}{y} \pdv{y}{\theta} + \pdv{f}{z} \pdv{z}{\theta} \\
+	&= - \left( \pdv{f}{x} \right) \rho \sin(\theta) \sin(\phi) + \left( \pdv{f}{y} \right) \rho \cos(\theta) \sin(\phi), \\
+	\pdv{f}{\phi} &= \pdv{f}{x} \pdv{x}{\phi} + \pdv{f}{y} \pdv{y}{\phi} + \pdv{f}{z} \pdv{z}{\phi} \\
+	&= \left( \pdv{f}{x} \right) \rho \cos(\theta) \cos(\phi) + \left( \pdv{f}{y} \right) \rho \sin(\theta) \cos(\phi) - \left( \pdv{f}{z} \right) \rho \sin(\phi),
+\end{align*}
+as desired.
+
+% --------------------------------------------- %
+
+\subsection{Problem 11}
+
+\textbf{Part (a)}: The path we desire is
+\begin{align*}
+	f \circ \vec{c} &= f(\cos(t), \sin(t), t) \\
+	&= (3\sin(t) + 2, \cos^{2}(t) + \sin^{2}(t), \cos(t) + t^{2}) \\
+	&= (3\sin(t) + 2, 1, \cos(t) + t^{2}).
+\end{align*}
+The velocity vector of this path is
+\[
+	\vec{c}'(t) = \left(\dv{t} 3\sin(t) + 2, \dv{t} 1, \dv{t} \cos(t) + t^{2}\right) = (3\cos(t), 0, -\sin(t) + 2t).
+\]
+At $\pi$, this computes to $\boxed{(-3, 0, 2\pi)}$.
+
+\textbf{Part (b)}: We have that $\vec{c}(\pi) = (-1, 0, \pi)$; as it is trivial that $\vec{c}'(t) = (-\sin(t), \cos(t), 1)$, we find that $\vec{c}'(\pi) = (0, -1, 1)$. Now,
+\[
+	\mat{D}f = \begin{bmatrix} \pdv{x} 3y + 2 & \pdv{y} 3y + 2 & \pdv{z} 3y + 2 \\ \pdv{x} x^{2} + y^{2} & \pdv{y} x^{2} + y^{2} & \pdv{z} x^{2} + y^{2} \\ \pdv{x} x + z^{2} & \pdv{y} x + z^{2} & \pdv{z} x + z^{2} \end{bmatrix} = \begin{bmatrix} 0 & 3 & 0 \\ 2x & 2y & 0 \\ 1 & 0 & 2z \end{bmatrix}.
+\]
+At $(x, y, z) = (-1, 0, \pi)$, this matrix is
+\[
+	\begin{bmatrix} 0 & 3 & 0 \\ -2 & 0 & 0 \\ 1 & 0 & 2\pi \end{bmatrix}.
+\]
+\textbf{Part (c)}: We have that
+\[
+	\mat{D}f(-1, 0, \pi)(\vec{c}'(\pi)) = \begin{bmatrix} 0 & 3 & 0 \\ -2 & 0 & 0 \\ 1 & 0 & 2\pi \end{bmatrix} \begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix} = \begin{bmatrix} -3 \\ 0 \\ 2\pi \end{bmatrix}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 16}
+
+We have that
+\begin{align*}
+	\pdv{f}{x} &= \pdv{x} (x^{2} + y^{2})^{-\frac{1}{2}} = -\frac{1}{2} (x^{2} + y^{2})^{-\frac{3}{2}} (2x) = -\frac{x}{\sqrt{(x^{2} + y^{2})^{3}}}, \\
+	\pdv{f}{y} &= \pdv{y} (x^{2} + y^{2})^{-\frac{1}{2}} = -\frac{1}{2} (x^{2} + y^{2})^{-\frac{3}{2}} (2y) = -\frac{y}{\sqrt{(x^{2} + y^{2})^{3}}}.
+\end{align*}
+The gradient of $f$ is thus
+\[
+	\grad f = \begin{bmatrix} -\frac{x}{\sqrt{(x^{2} + y^{2})^{3}}} \\ -\frac{y}{\sqrt{(x^{2} + y^{2})^{3}}} \end{bmatrix}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 17}
+
+\textit{NOTE: In all cases, we assume that $f$ is a real-valued function}.
+
+\textbf{Part (a)}: Define $t(x, y) = x$, so that $h(x, y) = f( t(x, y), u(x, y))$; the Chain Rule gives that
+\[
+	\pdv{h}{x} = \pdv{f}{t} \pdv{t}{x} + \pdv{f}{u} \pdv{u}{x} = \pdv{f}{t} + \pdv{f}{u} \pdv{u}{x}.
+\]
+This comes from the matrix multiplication in the general case of the Chain Rule:
+\[
+	\begin{bmatrix} \pdv{f}{t} & \pdv{f}{u} \end{bmatrix} \begin{bmatrix} \pdv{t}{x} & \pdv{t}{y} \\ \pdv{u}{x} & \pdv{u}{y} \end{bmatrix} = \begin{bmatrix} \pdv{f}{x} & \pdv{f}{y} \end{bmatrix}
+\]
+
+\textbf{Part (b)}: Define $t(x) = x$ so that $h(x) = f(t(x), u(x), v(x))$; the Chain Rule gives that
+\[
+	\pdv{h}{x} = \pdv{f}{t} \pdv{t}{x} + \pdv{f}{u} \pdv{u}{x} + \pdv{f}{v} \pdv{v}{x} = \pdv{f}{t} + \pdv{f}{u} \pdv{u}{x} + \pdv{f}{v} \pdv{v}{x}.
+\]
+This comes from the matrix multiplication in the general case of the Chain Rule:
+\[
+	\begin{bmatrix} \pdv{f}{t} \pdv{f}{u} \pdv{f}{v} \end{bmatrix} \begin{bmatrix} \pdv{t}{x} & \pdv{t}{y} & \pdv{t}{z} \\ \pdv{u}{x} & \pdv{u}{y} & \pdv{u}{z} \\ \pdv{v}{x} & \pdv{v}{y} & \pdv{v}{z} \end{bmatrix} = \begin{bmatrix} \pdv{f}{x} & \pdv{f}{y} & \pdv{f}{z} \end{bmatrix}.
+\]
+
+\textbf{Part (c)}: The Chain Rule gives that
+\[
+	\pdv{h}{x} = \pdv{f}{u} \pdv{u}{x} + \pdv{f}{v} \pdv{v}{x} + \pdv{f}{w} \pdv{w}{x}.
+\]
+This comes from the matrix multiplication in the general case of the Chain Rule:
+\[
+	\begin{bmatrix} \pdv{f}{u} \pdv{f}{v} \pdv{f}{w} \end{bmatrix} \begin{bmatrix} \pdv{u}{x} & \pdv{u}{y} & \pdv{u}{z} \\ \pdv{v}{x} & \pdv{v}{y} & \pdv{v}{z} \\ \pdv{w}{x} & \pdv{w}{y} & \pdv{w}{z} \end{bmatrix} = \begin{bmatrix} \pdv{f}{x} & \pdv{f}{y} & \pdv{f}{z} \end{bmatrix}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 32}
+
+We have that
+\begin{align*}
+	\mat{D}g &= \begin{bmatrix} \pdv{u} e^{u} & \pdv{v} e^{u} \\ \pdv{u} u + \sin(v) & \pdv{v} u + \sin(v) \end{bmatrix} = \begin{bmatrix} e^{u} & 0 \\ 1 & \cos(v) \end{bmatrix} \\
+	\mat{D}f &= \begin{bmatrix} \pdv{x} xy & \pdv{y} xy & \pdv{z} xy \\ \pdv{x} yz & \pdv{y} yz & \pdv{z} yz \end{bmatrix} = \begin{bmatrix} y & x & 0 \\ 0 & z & y \end{bmatrix}.
+\end{align*}
+Then via the Chain Rule,
+\[
+	\mat{D}(g \circ f) = \begin{bmatrix} e^{xy} & 0 \\ 1 & \cos(yz) \end{bmatrix} \begin{bmatrix} y & x & 0 \\ 0 & z & y \end{bmatrix} = \begin{bmatrix} y e^{xy} & x e^{x} & 0 \\ y & x + z \cos(yz) & y \cos(yz) \end{bmatrix}.
+\]
+At $(x, y, z) = (0, 1, 0)$, this matrix is 
+\[
+	\begin{bmatrix} 1 & 0 & 0 \\ 1 & 0 & 1 \end{bmatrix}.
+\]
+% --------------------------------------------- %
+
+\end{document}

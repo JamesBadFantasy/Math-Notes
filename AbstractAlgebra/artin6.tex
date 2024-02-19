@@ -1,0 +1,464 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+\newtheorem{corollary}{Corollary}
+
+\title{Artin: Symmetry}
+\author{James Pagan}
+\date{January 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage 
+
+% --------------------------------------------- %
+
+\section{Isometries}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+An \textbf{isometry} of $\mathbb{R}^{n}$ is a distance preserving map $f$ from $\mathbb{R}^{n}$ to itself --- a map such that for all $\vec{v}, \vec{w} \in \mathbb{R}^{n}$,
+\[
+	\norm{f(\vec{v}) - f(\vec{w})} = \norm{\vec{v} - \vec{w}}.
+\]
+Isometries will map figures to congruent figures. It is easy to see that the composition of isometries is an isometry.
+
+% --------------------------------------------- %
+
+\subsection{Orthogonal Linear Operators}
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The following three conditions on a map $\varphi : \mathbb{R}^{n} \to \mathbb{R}^{n}$ are equivalent:
+		\begin{enumerate}
+			\item $\varphi$ is an isometry that fixes the origin: $\varphi(0) = 0$.
+			\item $\varphi$ preserves dot products: $\varphi(\vec{v}) \cdot \varphi(\vec{w}) = \vec{v} \cdot \vec{w}$ for all $\vec{v}, \vec{w} \in \mathbb{R}^{n}$.
+			\item $\varphi$ is an orthogonal linear operator.
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		Suppose (1). As $\varphi$ is an isometry, $\norm{\varphi(\vec{u})} = \norm{\vec{u}}$ for all $\vec{u} \in V$. Then for all $\vec{v}, \vec{w} \in \mathbb{R}^{n}$, we utilize an identity expressing the dot product as a norm:
+		\begin{align*}
+			\vec{v} \cdot \vec{w} &= \frac{\norm{\vec{v} - \vec{w}}^{2} - \norm{\vec{v}}^{2} - \norm{\vec{w}}^{2}}{2} \\
+			&= \frac{\norm{\varphi(\vec{v}) - \varphi(\vec{w})}^{2} - \norm{\varphi(\vec{v})}^{2} - \norm{\varphi(\vec{w})}^{2}}{2} \\
+			&= \varphi(\vec{v}) \cdot \varphi(\vec{w}),
+		\end{align*}
+		which implies (2). We now utilize the following claim:
+		\begin{claim}
+			If $\vec{a}, \vec{b} \in \mathbb{R}^{n}$ and $\vec{a} \cdot \vec{a} = \vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{b}$, then $\vec{a} = \vec{b}$.
+		\end{claim}
+		\begin{adjustwidth}{1cm}{}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+			Suppose $\vec{a}, \vec{b} \in \mathbb{R}^{n}$ such that $\vec{a} \cdot \vec{a} = \vec{a} \cdot \vec{b} = \vec{b} \cdot \vec{b}$. Then
+			\[
+				(\vec{a} - \vec{b}) \cdot (\vec{a} - \vec{b}) = (\vec{a} \cdot \vec{a}) - 2 (\vec{a} \cdot \vec{b}) + (\vec{b} \cdot \vec{b}) = 0.
+			\]
+			Hence, $\vec{a} - \vec{b} = \vec{0}$ and $\vec{a} = \vec{b}$.
+			\end{proof}
+		\end{adjustwidth}
+		Suppose (2). Let $\vec{v}, \vec{w}$ be arbitrary vectors in $\mathbb{R}^{n}$, and define $\vec{u} = \vec{v} + \vec{w}$. Then
+		\begin{align*}
+			\varphi(\vec{u}) \cdot \varphi(\vec{u}) &= \vec{u} \cdot \vec{u} \\
+			&= \vec{u} \cdot (\vec{v} + \vec{w}) \\
+			&= \vec{u} \cdot \vec{v} + \vec{u} \cdot \vec{w} \\
+			&= \varphi(\vec{u}) \cdot \varphi(\vec{v}) + \varphi(\vec{u}) \cdot \varphi(\vec{w}) \\
+			&= \varphi(\vec{u}) \cdot (\varphi(\vec{v}) + \varphi(\vec{w})).
+		\end{align*}
+		Similarly, we may deduce that
+		\begin{align*}
+			\varphi(\vec{u}) \cdot (\varphi(\vec{v}) + \varphi(\vec{w})) &= \vec{u} \cdot (\vec{v} + \vec{w}) \\
+			&= (\vec{v} + \vec{w}) \cdot (\vec{v} + \vec{w}) \\
+			&= (\vec{v} \cdot \vec{v}) + 2 (\vec{v} \cdot \vec{w}) + (\vec{w} \cdot \vec{w}) \\
+			&= \varphi(\vec{v}) \cdot \varphi(\vec{v}) + 2 \varphi(\vec{v}) \cdot \varphi(\vec{w}) + \varphi(\vec{w}) \cdot \varphi(\vec{w}) \\
+			&= (\varphi(\vec{v}) + \varphi(\vec{w})) \cdot (\varphi(\vec{v}) + \varphi(\vec{w})).
+		\end{align*}
+		Piecing these two equalities together, we conclude through our claim that $\varphi(\vec{v} + \vec{w}) = \varphi(\vec{u}) = \varphi(\vec{v}) + \varphi(\vec{w})$. Thus $\varphi$ is a linear operator; it is trivial to prove that $\varphi$ is orthogonal using the images of the canonical basis of $\mathbb{R}^{n}$, which yields (3).
+
+		Assume (3). For all $\vec{u} \in \mathbb{R}^{n}$, let $u_{1}, \ldots, u_{n} \in \mathbb{R}^{n}$ be unique scalars such that $\vec{u} = u_{1} \vec{e}_{1} + \cdots + u_{n} \vec{e}_{n}$. Then by the Pythagorean Theorem for inner product spaces,
+		\begin{align*}
+			\norm{\varphi(\vec{u})} &= \norm{\varphi(u_{1} \vec{e}_{1} + \cdots + u_{n} \vec{e}_{n})} \\
+			&= \norm{u_{1} \varphi(\vec{e}_{1}) + \cdots + u_{n} \varphi(\vec{e}_{n})} \\
+			&= \sqrt{\norm{u_{1} \vec{e}_{1}}^{2} + \cdots + \norm{u_{n} \vec{e}_{n}}^{2}} \\
+			&= \sqrt{u_{1}^{2} + \cdots + u_{n}^{2}} \\
+			&= \norm{\vec{u}}.
+		\end{align*}
+		For all $\vec{v}, \vec{w} \in \mathbb{R}^{n}$, we may substitute $\vec{u}$ for $\vec{v} - \vec{w}$ (and use the fact that $\varphi(\vec{v} - \vec{w}) = \varphi(\vec{v}) - \varphi(\vec{w})$) to yield that (1) --- that $\varphi$ is an isometry that fixes the origin.
+
+		We conclude that (1), (2), and (3) are equivalent conditions.
+	\end{proof}
+\end{adjustwidth}
+
+We conclude that isometries over $\mathbb{R}^{n}$ are compositions of an orthogonal linear operator and a translation. More precisely, if $f$ is an isometry and $f(\vec{1}) = \vec{a}$, then $f = t_{\vec{a}} \varphi$, where $t_{\vec{a}}$ is a translation and $\varphi$ is an orthogonal lienar operator.
+
+\newpage
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The expression $f = t_{\vec{a}} \varphi$ for an isometry is unique.
+	\end{theorem}
+	\begin{proof}
+		Let $f$ be an isometry. Define $f(\vec{0}) = \vec{a}$ and define $\varphi = t_{-\vec{a}} f$. There are two observations in order:
+		\begin{enumerate}
+			\item $\varphi$ is an isometry, since $\varphi$ is a composition of the two isometries $f$ and $t_{-\vec{a}}$.
+			\item $\varphi(\vec{0}) = \vec{0}$, since $\varphi(\vec{0}) = t_{-\vec{a}} f(\vec{0}) = t_{\vec{-a}} (\vec{a}) = \vec{0}$.
+		\end{enumerate}
+		Theorem 1 thus implies that $\varphi$ is an orthogonal linear operator; the unicity of $t_{\vec{a}}$ is apparent, and the expression $\varphi = t_{-\vec{a}} f$ guarantees that $\varphi$ is unique.
+	\end{proof}
+\end{adjustwidth}
+
+The composition of two such expressions is defined as follows: if $f = t_{\vec{a}} \varphi$ and $g = t_{\vec{b}} \psi$ are two isometries, then
+\[
+	t_{\vec{a}} t_{\vec{b}} = t_{\vec{a} + \vec{b}} \qquad \text{and} \qquad \varphi t_{\vec{a}} = t_{\varphi(\vec{a})} \varphi;
+\]
+the last expression is verified by $\varphi(t_{\vec{a}}(\vec{x})) = \varphi(\vec{x} + \vec{a}) = \varphi(\vec{x}) + \varphi(\vec{a}) = t_{\varphi(\vec{a})} \varphi(\vec{x})$ for all $\vec{x} \in \mathbb{R}^{n}$.
+
+\subsection{Properties}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The set $M_{n}$ of all isometries of $\mathbb{R}^{n}$ forms a group under the operation of composition of isometries.
+	\end{theorem}
+	\begin{proof}
+		We must perform four rather routine calculations:
+		\begin{enumerate}
+			\item \textbf{Closure}: We established earlier that if $f$ and $g$ are isometries, then $fg$ is an isometry
+			\item \textbf{Associativity}: The associativity of compositions of isometries follows from the associativity of funcition composition.
+			\item \textbf{Identity}: The identity mapping $f(\vec{x}) = \vec{x}$ is trivially an isometry.
+			\item \textbf{Inverse}: For all isometries $f = t_{\vec{a}} \varphi$, note that $f^{-1} = (t_{\vec{a}} \varphi)^{-1} = (\varphi)^{-1}(t_{\vec{a}})^{-1} = \varphi^{-1} t_{-\vec{a}} = t_{\varphi^{-1}(-\vec{a})} \varphi^{-1}$; as $\varphi^{-1}$ is an orthogonal linear operator and $t_{\varphi^{-1}(-\vec{a})}$ is a translation, $f^{-1}$ is an isometry.
+		\end{enumerate}
+		We conclude that $M_{n}$ is a group. We call the group of all orthogonal operators $O_{n}$
+	\end{proof}
+\end{adjustwidth}
+
+The form $f = t_{\vec{a}} \varphi$ depends on our choice of coordinates. If we wish to express $f$ under some coordinate change $\eta$, the formula is familiar to Linear Algebra (defining this variant of $f$ as $f'$):
+\[
+	f' = \eta^{-1} f \eta.
+\]
+
+The determinantn of an orthogonal operator on $\mathbb{R}^{n}$ is $\pm 1$. The operator is said to be \textbf{orientation-preserving} if its determinant is $1$ and \textbf{orientation-reversing} if its determinant is $-1$. Rather comically, the maping 
+\[
+	\sigma : M_{n} \to \{ -1, 1 \}
+\]
+that sends an isometry to the determinant of its orthogonal operator is a group homomorphism.
+
+% --------------------------------------------- %
+
+\subsection{The Homomorphism \texorpdfstring{$M_{n} \to O_{n}$}{from Mn to On}}
+
+There is an important homomorphism $\pi$ defined by dropping the translation of an isometry:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The mapping $\pi : M_{n} \to O_{n}$ for an isometry $f = t_{\vec{a}} \varphi$ defined by $\pi(f) = \varphi$ is a surjective homomorphism. Its kernel is the set $\{ t_{\vec{a}} \mid \vec{a} \in \mathbb{R}^{n} \}$, which is a normal subgroup of $M_{n}$.
+	\end{theorem}
+	\begin{proof}
+		Suppose that $f = t_{\vec{a}} \varphi$ and $g = t_{\vec{b}} \psi$ are two isometries. Then
+		\[
+			\pi(f) \pi(g) = \varphi \psi = \pi(t_{\vec{a}} t_{\varphi(\vec{b})} \varphi \psi) = \pi(t_{\vec{a}} \varphi t_{\vec{b}} \psi) = \pi(fg),
+		\]
+		so $\pi$ is a homomorphism. The surjectivity of $\pi$ follows from the fact that $\varphi \in O_{n}$ implies $\varphi \in M_{n}$ and $\pi(\varphi) = \varphi$. As for the kernel, $\pi(f) = I$ implies that $f = t_{\vec{a}}$ for some $\vec{a} \in \mathbb{R}^{n}$; the kernel of any homomorphism is a normal subgroup.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Isometries in \texorpdfstring{$\mathbb{R}^{2}$}{The Plane}}
+
+% --------------------------------------------- %
+
+\subsection{Algebraic Description}
+
+To compute in the group $M_{2}$, we choose some special isometries as generators and obtain relations between them. There are three generators of interest to us:
+\begin{enumerate}
+	\item \textbf{Translation}: $t_{\vec{a}}$ by a vector $\vec{a}$: $t_{\vec{a}}(\vec{x}) = \vec{x} + \vec{a} = \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix} + \begin{bmatrix} a_{1} \\ a_{2} \end{bmatrix}$.
+	\item \textbf{Rotation}: $\rho_{\theta}$ by an angle $\theta$ about the origin: $\rho_{\theta}(\vec{x}) = \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{bmatrix} \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix}$.
+	\item \textbf{Reflection}: $r$ about the $\vec{e}_{1}$ axis: $r(\vec{x}) = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix}$.
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Let $f$ be an isometry in $\mathbb{R}^{2}$. Then $m = t_{\vec{a}} \rho_{\theta}$ or $m = t_{\vec{a}} \rho(\theta) r$, for a uniquely determined vector $\vec{a}$ and angle $\theta$, both possibly zero.
+	\end{theorem}
+	\begin{proof}
+		It remains to be proven that all orthogonal linear operators in $\mathbb{R}^{2}$ are of the form $\rho_{\theta}$ or $\rho_{\theta} r$ for unique $\theta$. 
+
+		Suppose that $\varphi$ is an orthogonal operator. As its columns must have norm $1$, we may define:
+		\[
+			\mathcal{M}(\varphi) = \begin{bmatrix} \cos(\theta) & \cos(\phi) \\ \sin(\theta) & \sin(\phi) \end{bmatrix},
+		\]
+		for some $\theta, \phi \in [0, 2\pi)$. The determinant of this matrix must satisfy
+		\[
+			\begin{vmatrix} \cos(\theta) & \cos(\phi) \\ \sin(\theta) & \sin(\phi) \end{vmatrix} = \cos(\theta)\sin(\phi) - \sin(\theta)\sin(\phi) = \sin(\theta - \phi) \in \{ 1, -1 \}.
+		\]
+		Thus, $\theta - \phi \in \{ \tfrac{\pi}{2}, \tfrac{3\pi}{2} \}$. If $\theta - \phi = \tfrac{3 \pi}{2}$, then
+		\[
+			\mathcal{M}(\varphi) = \begin{bmatrix} \cos(\theta) & \cos(\theta - \tfrac{3\pi}{2}) \\ \sin(\theta) & \sin(\theta - \tfrac{3\pi}{2}) \end{bmatrix} = \begin{bmatrix} \cos(\theta) & - \sin(\theta) \\ \sin(\theta) &  \cos(\theta) \end{bmatrix}.
+		\]
+		If $\theta - \phi = \tfrac{\pi}{2}$, then
+		\[
+			\mathcal{M}(\varphi) = \begin{bmatrix} \cos(\theta) & \cos(\theta - \tfrac{\pi}{2}) \\ \sin(\theta) & \sin(\theta - \tfrac{\pi}{2}) \end{bmatrix} = \begin{bmatrix} \cos(\theta) & \sin(\theta) \\ \sin(\theta) &  - \cos(\theta) \end{bmatrix}.
+		\]
+		The first equation is $\rho_{\theta}$, while the second is $\rho_{\theta} r$. This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+\subsection{Geometric Description}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Every isometry of the plane has one of the following forms:
+		\begin{enumerate}
+			\item \textbf{Orientation-Preserving Isometries}:
+			\begin{enumerate}
+				\item \textbf{Translation}: A map $t_{\vec{a}}$ that sends $\vec{x}$ to $\vec{x} + \vec{a}$.
+				\item \textbf{Rotation}: Rotation of the plane through a nonzero angle $\theta$ about some point.
+			\end{enumerate}
+			\item \textbf{Orientation-Reversing Isometries}:
+			\begin{enumerate}
+				\item \textbf{Reflection}: A bilateral symmetry around a line $\ell$.
+				\item \textbf{Glide Reflection}: Reflection about a line $\ell$, followed by a translation by a nonzero vector parallel to $\ell$.
+			\end{enumerate}
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		We must first prove (1) (b): that if $f = t_{\vec{a}} \rho_{\theta}$ and $\theta \ne 0$, then $f$ is a rotation of the plane through a nonzero angle $\theta$ around some point.
+		\begin{adjustwidth}{1cm}{}
+			\begin{claim}
+				For all isometries $f = t_{\vec{a}} \rho_{\theta}$, where $\theta \ne 0$, there exists a fixed point of $f$: a vector $\vec{x}$ such that $f(\vec{x}) = \vec{x}$.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				If $t_{\vec{a}}(\rho_{\theta}(\vec{x})) = \vec{x}$, then $\rho_{\theta}(\vec{x}) = \vec{x} - \vec{a}$ and $(\rho_{\theta} - I) \vec{x} = \vec{a}$. This equation has a solution if $\rho_{\theta} - I$ is invertible, so we examine its determinant:
+				\begin{align*}
+					\det(\rho_{\theta} - I) &= \begin{vmatrix} \cos(\theta) - 1 & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) - 1 \end{vmatrix} \\
+					&= (\cos(\theta) - 1)^{2} + \sin^{2}(\theta) \\
+					&= 2 - 2 \cos(\theta) \\
+					&= 2(1 - \cos(\theta)).
+				\end{align*}
+				This equals zero when $\cos(\theta) = 1$, which occurs exclusively when $\theta = 0$ in the interval $[0, 2\pi)$. This value is excluded; thus $\rho_{\theta} - I$ has an inverse, and $\vec{x} = (\rho_{\theta} - I)^{-1} \vec{a}$. A quick computation verifies that $f(\vec{x}) = \vec{x}$.
+			\end{proof}
+		\end{adjustwidth}
+		Notice that $t_{-\vec{x}} \circ f \circ t_{\vec{x}}$ is an isometry and satisfies 
+		\[
+			t_{-\vec{x}} \circ f \circ t_{\vec{x}}(\vec{0}) = t_{\vec{-x}} \circ f (\vec{x}) = t_{-\vec{x}} (\vec{x}) = \vec{0}.
+		\]
+		Thus, Theorem 1 guarantees that $t_{-\vec{x}} \circ f \circ t_{\vec{x}} = \varphi$ for some orthogonal linear operator $\varphi$; as $\varphi$ is orientation-preserving, it is a rotation. Setting $f = t_{\vec{x}} \varphi t_{-\vec{x}}$ yields that $f$ is a rotation around some point.
+		
+		Now, we prove facts if $f$ is orientation-reversing: if $f = t_{\vec{a}} \rho_{\theta} r$.
+		\begin{adjustwidth}{1cm}{}
+			\begin{claim}
+				Isomtries of the form $f = \rho_{\theta} r$ consist of a reflection across some line through the origin.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				First, we prove that $f$ is constant along some line through the origin. Let $\vec{c}(t) = (\cos(t), \sin(t))$ for $t \in [0, 2\pi)$. Now, realize that 
+				\[
+					f(\vec{c}(0)) = f(\uvec{\i}) = -f(i \uvec{\i}) = - f(\vec{c}(\pi)).
+				\]
+				If $f(\vec{c}(0)) = 0$, then $f$ is constant along the $x$-axis; otherwise, $f(\vec{c}(\vec{0}))$ and $f(\vec{c}(\pi))$ have different signs, so the Intermediate Value Theorem guarantees that $f(\vec{c}(t))$ attains a zero at $s \in (0, \pi)$. Then $f$ is constant along $\operatorname{span}(\vec{c}(s))$.
+
+				Whatever the case, denote this line by $\ell$, and change coordiantes such that $\ell$ is the $\vec{e}_{1}$-axis. Then $f$ is an isometry which fixes the origin, so it is an orthogonal operator. As $\vec{e}_{1}$ is kept on its span, it is trivial that $\vec{e}_{2}$ must be mapped to its reflection across the $\vec{e}_{1}$-axis. This demonstrates that $f$ is the desired reflection.
+			\end{proof}
+		\end{adjustwidth}
+		For an isometry $f = t_{\vec{a} \rho_{\theta}} r$, let $\ell$ be the line through the origin that $\rho_{\theta} r$ reflects across; change coordinates such that $\ell$ is the $\vec{e}_{1}$-axis. Our isometry is now of the form $m = t_{\vec{b}} r$, where $\vec{b}$ is the vector $\vec{a}$ with coordinates changed. For $(x_{1}, x_{2})$, we have that
+		\[
+			m \left( \begin{bmatrix} x_{1} \\ x_{2} \end{bmatrix} \right) = t_{\vec{b}} \left( \begin{bmatrix} x_{1} \\ - x_{2} \end{bmatrix} \right) = \begin{bmatrix} x_{1} + b_{1} \\ - x_{2} + b_{2} \end{bmatrix}
+		\]
+		All points of the form $(\ast, \tfrac{1}{2} b_{2})$ keep their $y$-coordinate; thus the line $y = \tfrac{1}{2} b_{2}$ remains on its span. Via the same logic in our claim, we conclude that the plane is reflected across this line --- with a translation by the vector $b_{1} \vec{e}_{1}$. If $b_{1} = 0$, then $m$ is a reflection; otherwise, $m$ has glide symmetry.
+
+		This completes the proof of Theorem 6.
+	\end{proof}
+	\begin{corollary}
+		The glide line of the isometry $t_{\vec{a}} \rho_{\theta} r$ is parallel to the line of reflection of $\rho_{\theta} r$ .
+	\end{corollary}
+\end{adjustwidth}
+
+By similar logic invoked in Claim 2, the group of isometries that fix a vector $\vec{x}$ in the plane is the group $t_{\vec{x}} O_{2} t_{- \vec{x}}$.
+
+% --------------------------------------------- %
+
+\section{Finite Groups of \texorpdfstring{$O_{2}$ and $M_{2}$}{Orthogonal Operators and Isometries on the Plane}}
+
+The \textbf{dihedral group} $D_{n}$ has order $2n$ and is generated by two elements $x, y \in D_{n}$ that satisfy the relations
+\[
+	x^{n} = e, \quad y^{2} = e, \quad yx = x^{-1}y.
+\]
+The elements of $D_{n}$ are of the form $x^{i}y$, where $i \in \{ 0, \ldots, n - 1 \}$. When $n = 3$, the dihedral group is isomorphic to the symmetric group: that is,
+\[
+	D_{3} \cong S_{3}.
+\]
+This does not hold for $n > 3$, since $\abs{S_{n}} = n!$ and $\abs{D_{n}} = 2n$. The dihedral group encapsulates the symmetries of an $n$-gon.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		If $\rho_{\theta}$ is rotation by $\theta$ and $r$ is reflection across a line through the origin, then $r \rho_{\theta} = \rho_{-\theta} r$.
+	\end{theorem}
+	\begin{proof}
+		Change coordinates such that the line is the $\vec{e}_{1}$ axis. Then
+		\newpage
+		\[
+			r \rho_{\theta} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{bmatrix} = \begin{bmatrix} \cos(\theta) & \sin(\theta) \\ - \sin(\theta) & \cos(\theta) \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} = \rho_{-\theta} r,
+		\]
+		as desired.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Let $G$ be a finite group of $O_{2}$. Then there exists $n \in \mathbb{Z}_{> 0}$ such that $G$ is isomorphic to one of the following:
+		\begin{itemize}
+			\item The cyclic group $C_{n}$ generated by a rotation $\rho_{\theta}$,
+			\item The dihedral group $D_{n}$ generated by a rotation $\rho_{\theta}$ and a reflection $r$ across the $\vec{e}_{1}$-axis.
+		\end{itemize}
+	\end{theorem}
+	\begin{proof}
+		Let $S = \{ \theta \, \mid \, \theta \in (0, 2\pi), \rho_{\theta} \in G \}$. This set must be finite, since $\{ \rho_{\theta} \mid \theta \in S \}$ has the same cardinality and constitutes a subgroup of the finite group $G$.
+
+		If $S$ is nonempty, let $\phi = \min S$. Define $n$ as the order of $\phi$ as an element of $G$; then $n$ is the minimum integer such that $n \phi = 2 m \pi$ for some $m \in \mathbb{Z}_{> 0}$. By the closure of $G$, the elements
+		\[
+			\phi, 2\phi, \ldots, (n - 1) \phi
+		\]
+		are all elements of $S$.
+		\begin{adjustwidth}{1cm}{}
+			\begin{lemma}
+				If $\varphi \in S$, then $\varphi = k \phi$ for some $k \in \{ 1, \ldots, n - 1 \}$.
+			\end{lemma}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Suppose to the contrary that $\varphi \notin \{ \phi, 2\phi, \ldots, (n - 1) \phi \}$. Then for some $j \in \{ 0, \ldots, n - 1 \}$,
+				\[
+					j \phi < \varphi < (j + 1) \phi.
+				\]
+				Adding $(n - j) \phi = -j \phi$ to this inequality yields
+				\[
+					0 < \varphi - j \phi < \phi.
+				\]	
+				We conclude by the closure of $G$ that $\varphi - j \phi \in S$, contradicting the minimality of $\phi$. Thus $\varphi = k \phi$ for some $k \in \mathbb{Z}_{> 0}$.
+			\end{proof}
+		\end{adjustwidth}
+		Thus, $S = \{ \phi, \ldots, (n - 1) \phi \}$. We conclude that if $G$ contains no reflection, then 
+		\[
+			G = \{ \rho_{0}, \rho_{\phi}, \ldots, \rho_{(n - 1) \phi} \} \cong C_{n}
+		\]
+	if $G$ contains a reflection, then a trivial application of Theorem 7 yields that 
+	\[
+		G = \{ \rho_{0}, \ldots, \rho_{(n - 1) \phi}, r, \ldots, \rho_{(n - 1) \phi} r \} \cong D_{n}.
+	\]
+	\newpage
+	If $S$ is empty, then $G$ must contain $\rho_{0}$, and may contain terms of the form $\rho_{\theta} r$ or $r$ for $\theta \in (0, 2\pi)$. We are left with five cases:
+	\begin{enumerate}
+		\item If $G = \{ \rho_{0} \}$, then $G \cong C_{1}$.
+		\item If $G = \{ \rho_{0}, r \}$, then $G \cong C_{2} \cong D_{1}$.
+		\item If $G = \{ \rho_{0}, \rho_{\theta} r \}$ for some $\theta \in (0, 2\pi)$, then
+		\[
+			(\rho_{\theta} r)^{2} = \rho_{\theta} (r \rho_{\theta}) r = \rho_{\theta} (\rho_{-\theta} r) r = \rho_{0};
+		\]
+		thus, $G \cong C_{2} \cong D_{1}$
+		\item If $G$ contains $r$ and a term of the form $\rho_{\theta} r$ for $\theta \in (0, 2\pi)$, then the closure of $G$ yields that
+		\[
+			\rho_{\theta} = (\rho_{\theta} r) (r) \in G.
+		\]
+		This contradicts the emptiness of $S$, implying no such $G$ exists.
+		\item If $G$ contains two terms of the form $\rho_{\theta} r$ and $\rho_{\phi} r$ for distinct angles $\theta, \phi \in (0, 2\pi)$ such that $\theta > \phi$, then the closure of $G$ yields that
+		\[
+			\rho_{\theta - \phi} = \rho_{\theta} \rho_{-\phi} r r = \rho_{\theta} r \rho_{\phi} r \in G.
+		\]
+		This contradicts the emptiness of $S$, implying no such $G$ exists.
+	\end{enumerate}
+	We have discussed all possibile finite groups $G$ of $O_{2}$; in each ease, $G$ was isomorphic to $C_{n}$ or $D_{n}$ for some $n \in \mathbb{Z}_{> 0}$. This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+We could generalize the above result to \textit{any} line --- not just the $\vec{e}_{1}$-axis --- if we changed coordinates to the line that performs the reflection. Intuitively, we may be rest assured that dihedral groups would coninue possessing $2n$ elements: $n$ for rotations with preserved orientation and $n$ for rotations with reversed orientation.
+
+A subgroup $\Gamma$ of the additive subgroup $\mathbb{R}^{+}$ is called \textbf{discrete} if there exists $\epsilon > 0$ such that for all nonzero $c \in \Gamma$, we have $\abs{c} \ge \epsilon$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		A discrete subgroup of $\Gamma$ of $\mathbb{R}^{+}$ satisfies either $\Gamma = \{ 0 \}$ or $\Gamma = \mathbb{Z}r$ for some $r \in \mathbb{R}$.
+	\end{theorem}
+	\begin{proof}
+		If $\Gamma$, contains a nonzero element, then let $r = \sup \{ \epsilon \mid c \in \Gamma \implies \abs{c} \ge \epsilon \}$. The following lemma is unnecessary, but my analysis-loving heart enjoys the detour:
+		\newpage
+		\begin{adjustwidth}{1cm}{}
+			\begin{lemma}
+				$r$ is an element of $\Gamma$.
+			\end{lemma}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Suppose for contradiction that $r \notin \Gamma$. Then as $\tfrac{3}{2}r$ is not an lower bound, there exists $a \in \Gamma$ such that $r < \abs{a} < \tfrac{3}{2} r$. As $\abs{a}$ is not a lower bound, there similarly exists another element $\abs{b}$ such that $r < \abs{b} < \abs{a}$. As $\Gamma$ is a group, it contains $\abs{a}$ and $\abs{b}$. Thus,
+				\[
+					0 < \abs{a} - \abs{b} < \tfrac{3}{2}r - \abs{b} < \tfrac{3}{2}r - r = \tfrac{1}{2} < r.
+				\]
+				$\abs{a} - \abs{b}$ is an element of $\Gamma$ by its closure; this contradicts the minimality of $r$. We conclude that $r$ must be an element of $\Gamma$.
+			\end{proof}
+		\end{adjustwidth}
+		Thus, $r$ is the smallest positive element of $\Gamma$. If we suppose for contradiction that there exists $s \in \Gamma$ such that $s \ne rn$ for all $n \in \mathbb{Z}$, then there exists $m in \mathbb{Z}$ such that
+		\[
+			rm < s < r(m + 1).
+		\]
+		We deduce that
+		\[
+			0 < s - rm < r;
+		\]
+		this contradicts the minimality of $r$, implying that all elements of $\Gamma$ are of the form $rn$ for $n \in \mathbb{Z}$. Then $G = \mathbb{Z}r$.
+	\end{proof}
+\end{adjustwidth}
+
+The usage of this lemma dramatically simplifies Lemma 1 in Theorem 8. We now take a minute to extend our theorem about $O_{2}$ to any finite subgroup of $M_{2}$:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Let $G$ be a finite group of isometries in the plane. Then there exists a vector $\vec{x}$ such that $g(\vec{v}) = \vec{v}$ for all $g \in G$.
+	\end{theorem}
+	\begin{proof}
+		Let $\vec{x}$ be any point in the plane: the set $S = \{ g(\vec{x}) \mid g \in G \}$ is called the \textbf{orbit} of $\vec{x}$ for the action of $G$. Any element of $G$ will permute the orbit $S$; this is because each element of $G$ is injective and $G$ is closed under composition. 
+		\begin{adjustwidth}{1cm}{}
+			\begin{lemma}
+				If $S = \{ \vec{s}_{1}, \ldots, \vec{s}_{n} \}$ is a finite set of points in $\mathbb{R}^{n}$ with centroid $\vec{p}$, then the centroid of $f(S) = \{ f(\vec{s}_{1}), \ldots, f(\vec{s}_{n}) \}$ is $f(\vec{p})$.
+			\end{lemma}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Noting that $f = t_{\vec{a}} \varphi$ for a translation $t_{\vec{a}}$ and an orthogonal linear operator $\varphi$, we need only prove that these maps individually map centroids to centroids.
+				
+				For translations, we have that
+				\begin{align*}
+					t_{\vec{a}} (\vec{p}) &= \frac{\vec{s}_{1} + \cdots + \vec{s}_{n}}{n} + \vec{a} \\
+					&= \frac{(\vec{s}_{1} + \vec{a}) + \cdots + (\vec{s}_{n} + \vec{a})}{n} \\
+					&= \frac{t_{\vec{a}}(\vec{s}_{1}) + \cdots + t_{\vec{a}}(\vec{s}_{n})}{n}.
+				\end{align*}
+				For orthogonal linear operators, we have that
+				\[
+					\varphi(\vec{p}) = \varphi \left( \frac{\vec{s}_{1} + \cdots + \vec{s}_{n}}{n} \right) = \frac{\varphi(\vec{s}_{1}) + \cdots + \varphi(\vec{s}_{n})}{n}.
+				\]
+				Both $t_{\vec{a}}$ and $\varphi$ map centroids to centroids; their composition yields the desired result for all isometries.
+			\end{proof}
+		\end{adjustwidth}
+		Let $\vec{v}$ be the centroid of $S$. All elements of $G$ send $S$ to $S$, so they send $\vec{v}$ to $\vec{v}$; we conclude that $g(\vec{v}) = \vec{v}$ for all $g \in G$.
+	\end{proof}
+	\begin{corollary}
+		Let $G$ be a finite subgroup of $M_{2}$. Then $G$ is a finite subgroup of $O_{2}$ under a translation; if coordiantes are chosen suitably, $G$ becomes one of the groups $C_{n}$ or $D_{n}$ for $n \in \mathbb{Z}_{> 0}$.
+	\end{corollary}
+\end{adjustwidth}
+
+
+% --------------------------------------------- %
+
+\end{document}

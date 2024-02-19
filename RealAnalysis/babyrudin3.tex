@@ -1,0 +1,497 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\diam}{\operatorname{diam}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{Rudin: Numerical Sequences and Series}
+\author{James Pagan}
+\date{December 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Convergent Sequences}
+
+% --------------------------------------------- %
+
+\subsection{Defintion}
+
+We say that the sequence ${a_{n}}$ in a metric space $X$ \textbf{converges} to a point $A \in X$ if for all $\epsilon > 0$, there exists an integer $N$ such that
+\[
+	N \le n \implies d(a_{n}, A) < \epsilon.
+\]
+If $a_{n}$ converges to $A$, we write that $\lim\limits_{n \to \infty} a_{n} = A$. If $a_{n}$ fails to converge, we say it \textbf{diverges}.
+
+\begin{theorem}
+	The limit is unqiue.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose for contradiction that $\lim\limits_{n \to \infty} a_{n} = A$ and $\lim\limits_{n \to \infty} a_{n} = B$ such that $A \ne B$. Then $d(A, B) > 0$, so there exist $N_{1}$, $N_{2}$ such that
+		\begin{align*}
+			N_{1} \le n & \implies d(a_{n}, A) < \tfrac{d(A, B)}{2}  \\
+			N_{2} \le n & \implies d(a_{n}, B) < \tfrac{d(A, B)}{2}.
+		\end{align*}
+		Let $N = \max \{ N_{1}, N_{2} \}$. Then $N \le n$ implies that
+		\[
+			d(a_{n}, A) + d(a_{n}, B) < \tfrac{d(A, B)}{2} + \tfrac{d(A, B)}{2} = d(A, B).
+		\]
+		This violates the Triangle Inequality, implying that $A = B$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	$\lim\limits_{n \to \infty} a_{n} = A$ if and only if every neighborhood of $A$ contains $a_{n}$ for all but finitely many $n$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose $\lim\limits_{n \to \infty} a_{n} = A$. An arbitrary neighborhood $\mathcal{N}$ of $A$ must contain an open ball centered at $A$; let its radius be $r$. Then there exists $N$ such that
+		\[
+			N \le n \implies d(a_{n}, A) < r.
+		\]
+		Thus, $a_{n}$ for $N \le n$ lies inside $\mathcal{N}$; only finitely many $a_{n}$ from $n \in \{ 1, \ldots, n - 1 \}$ may lie outside $\mathcal{N}$.
+
+		Conversely, suppose every neighborhood of $A$ contains $a_{n}$ for all but finitely many $n$. Then define $\mathcal{N}_{r}$ as the open ball with radius $\epsilon$, and $N_{r} = \max \{ n \mid a_{n} \notin \mathcal{N}_{r} \} + 1$. Then
+		\[
+			N_{r} \ge n \implies d(a_{n}, A) < \epsilon,
+		\]
+		so $\lim\limits_{n \to \infty} a_{n} = A$.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+\begin{theorem}
+	If $\{ a_{n} \}$ converges, then $\{ a_{n} \}$ is bounded.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose $\lim\limits_{n \to \infty} a_{n = A}$. Then there exists $N$ such that
+		\[
+			N \le n \implies d(a_{n}, A) < 1.
+		\]
+		Thus, the maximum distance from $a_{n}$ to $A$ is less than or equal to
+		\[
+			M = \max \{ d(a_{1}, A), d(a_{2}, A), \ldots, d(a_{N - 1}, A), 1 \}.
+		\]
+		The open ball at $A$ with radius $M + 1$ thus bounds $a_{n}$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $E \subseteq X$ and if $A$ is a limit point of $E$, then there exists a sequence $a_{n}$ such that $\lim\limits_{n \to \infty} a_{n} = A$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For a positive integer $n$, let $\mathcal{N}_{n}$ be the open ball at $A$ with radius $\tfrac{1}{m}$. Because $A$ is a limit point, there exist $a_{n} \in X$ inside $\mathcal{N}_{n}$ for all integers $n$. Then for all $\epsilon > 0$,
+		\begin{align*}
+			\lfloor \tfrac{1}{\epsilon} \rfloor + 1 \le n \implies d(a_{n}, A) & < \frac{1}{\lfloor \tfrac{1}{\epsilon} \rfloor + 1} \\
+			                                                                   & < \frac{1}{\left( \tfrac{1}{\epsilon} \right)}      \\
+			                                                                   & = \epsilon.
+		\end{align*}
+		Thus, $\lim\limits_{n \to \infty} a_{n} = A$. I've condensed this quite a lot.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Normed Vector Spaces}
+
+A \textbf{normed vector space} is a vector A \textbf{normed vector space} is a vector space $X$ over $\mathbb{C}$ equipped with a mapping $\norm{\cdot} : X \to \mathbb{R}$ that satisfies the following properties:
+\begin{enumerate}
+	\item \textbf{Positivity}: $\norm{\vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
+	\item \textbf{Homogenity}: $\norm{\lambda \vec{x}} = \abs{\lambda} \norm{\vec{x}}$ for all $\lambda \in \mathbb{C}$.
+  \item \textbf{Triangle Inequality}: $\norm{\vec{x} + \vec{y}} \le \norm{\vec{x}} + \norm{\vec{y}}$
+\end{enumerate}
+It is clear that such a norm induces a metric on $X$. Unless otherwise stated, these theorems assume $\vec{x}_{n}$ and $\vec{y}_{n}$ are sequences in a normed vector space $X$.
+
+\newpage
+
+\begin{theorem}
+	$\lim\limits_{n \to \infty} (\vec{x}_{n} + \vec{y}_{n}) = \vec{X} + \vec{Y}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For all $\epsilon > 0$, there exist integers $N_{1}$ and $N_{2}$ such that
+		\begin{align*}
+			N_{1} \le n & \implies \norm{\vec{x}_{n} - \vec{X}} < \tfrac{\epsilon}{2} \\
+			N_{2} \le n & \implies \norm{\vec{y}_{n} - \vec{Y}} < \tfrac{\epsilon}{2}
+		\end{align*}
+		Define $N = \max \{ N_{1}, N_{2} \}$. Then for all $\epsilon > 0$, $N \le n$ implies that
+		\[
+			\norm{(\vec{x}_{n} + \vec{y}_{n}) - (\vec{X} + \vec{Y})} \le \norm{\vec{x}_{n} - \vec{X}} + \norm{\vec{y}_{n} - \vec{Y}} < \tfrac{\epsilon}{2} + \tfrac{\epsilon}{2} = \epsilon,
+		\]
+		as desired.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $\lambda \in \mathbb{C}$, then $\lim\limits_{n \to \infty} \lambda (\vec{x}_{n}) = \lambda (\vec{X})$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		If $c = 0$, then $\lim\limits_{n \to \infty} 0 (\vec{x}_{n}) = \vec{0} = 0 (\vec{X})$. Otherwise, for all $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N \le n \implies \norm{\vec{x}_{n} - \vec{X}} < \tfrac{\epsilon}{\abs{c}}.
+		\]
+		Then $N \le n$ implies that
+		\[
+			\norm{c(\vec{x}_{n}) - c(\vec{X})} = \abs{c} \norm{\vec{x}_{n} - \vec{X}} < \abs{c} \tfrac{\epsilon}{\abs{c}} = \epsilon,
+		\]
+		as required.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Inner Product Spaces}
+
+In the following theorems, suppose that $X$ is an \textbf{inner product space} (see LinearAlgebra/axler6.tex). For the following theorems, $\vec{x}_{n}$ and $\vec{y}_{n}$ be sequences of vectors in $X$.
+
+\begin{theorem}
+	If $\vec{c} \in X$, then $\lim\limits_{n \to \infty} \vec{c} \cdot \vec{x}_{n} = \vec{c} \cdot \vec{X}$ and $\lim\limits_{n \to \infty} \vec{x}_{n} \cdot \vec{c} = \vec{X} \cdot \vec{c}$ .
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		If $\vec{c} = \vec{0}$, then $\lim\limits_{n \to \infty} \vec{0} \cdot (\vec{x}_{n}) = 0 = \vec{0} \cdot (\vec{X})$. Otherwise, for all $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N \le n \implies \norm{\vec{x}_{n} - \vec{X}} < \tfrac{\epsilon}{\norm{\vec{c}}}.
+		\]
+		Then $N \le n$ implies that
+		\[
+			\abs{(\vec{c} \cdot \vec{x}_{n}) - (\vec{c} \cdot \vec{X})} = \abs{\vec{c} \cdot (\vec{x}_{n} - \vec{X})} \le \norm{\vec{c}} \norm{\vec{x}_{n} - \vec{X}} < \norm{\vec{c}} \tfrac{\epsilon}{\norm{\vec{c}}} = \epsilon.
+		\]
+		Similarly, $\abs{(\vec{x}_{n} \cdot \vec{c}) - (\vec{X} \cdot \vec{c})} \le \norm{\vec{x}_{n} - \vec{X}} \norm{\vec{c}}$, and the proof
+		follows like above.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+\begin{theorem}
+	$\lim\limits_{n \to \infty} (\vec{x}_{n} \cdot \vec{y}_{n}) = \vec{X} \cdot \vec{Y}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For all $\epsilon > 0$, there exist integers $N_{1}, N_{2}$ such that
+		\begin{align*}
+			N_{1} \le n & \implies \abs{\vec{x}_{n} - \vec{X}} < \sqrt{\epsilon}  \\
+			N_{2} \le n & \implies \abs{\vec{y}_{n} - \vec{Y}} < \sqrt{\epsilon}.
+		\end{align*}
+		Define $N = \max \{N_{1}, N_{2}\}$. Then $N \le n$ implies through Cauchy-Schwarz that
+		\[
+			\abs{(\vec{x}_{n} - \vec{X}) \cdot (\vec{y}_{n} - \vec{Y})} \le \norm{\vec{x}_{n} - \vec{X}} \norm{\vec{y}_{n} - \vec{Y}} < \sqrt{\epsilon}^{2} < \epsilon,
+		\]
+		so $\lim\limits_{n \to \infty} (\vec{x}_{n} - \vec{X}) \cdot  (\vec{y}_{n} - \vec{Y}) = 0$. Therefore,
+		\begin{align*}
+			0 & = \lim\limits_{n \to \infty} (\vec{x}_{n} - \vec{X}) \cdot (\vec{y}_{n} - \vec{Y}) \\
+			  & = \lim\limits_{n \to \infty}  (\vec{x}_{n} \cdot \vec{y}_{n} - \vec{X}_{n} \cdot \vec{Y} - \vec{X} \cdot \vec{y}_{n} + \vec{X} \cdot \vec{Y}) \\
+			  & = \lim\limits_{n \to \infty} (\vec{x}_{n} \cdot \vec{y}_{n}) - \lim\limits_{n \to \infty} (\vec{x}_{n} \cdot \vec{Y}) - \lim\limits_{n \to \infty} (\vec{X} \cdot \vec{y}_{n}) + \lim\limits_{n \to \infty} (\vec{X} \cdot \vec{Y}) \\
+			  & = \lim\limits_{n \to \infty} (\vec{x}_{n}\vec{y}_{n}) - (\vec{X} \cdot \vec{Y}) - (\vec{X} \cdot \vec{Y}) + (\vec{X} \cdot \vec{Y}) \\
+			  & = \lim\limits_{n \to \infty} (\vec{x}_{n} \cdot \vec{y}_{n}) - (\vec{X} \cdot \vec{Y}).
+		\end{align*}
+		Rearranging this equation yields $\lim\limits_{n \to \infty} (\vec{x}_{n} \cdot \vec{y}_{n}) = \vec{X} \cdot \vec{Y}$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Complex Vectors and Complex Numbers}
+
+We now turn our attention to the inner product spaces $\mathbb{C}^{k}$. Suppose that $\vec{z}_{n}$ is a sequence in $\mathbb{C}^{k}$ with coordinates $\vec{z}_{n} = (z_{n1}, \ldots, z_{nk})$ and suppose $\vec{Z} = (Z_{1}, \ldots, Z_{k})$
+
+\begin{theorem}
+  $\lim\limits_{n \to \infty} \vec{z}_{n} = \vec{Z}$ if and only if $\lim\limits_{n \to \infty} z_{nj} = Z_{j}$ for all $j \in \{ 1, \ldots, k \}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose that $\lim\limits_{n \to \infty} z_{nj} = Z_{j}$ for all $j \in \{ 1, \ldots, k \}$. Then for all $\epsilon > 0$, there exist integers $N_{1}, \ldots, N_{k}$ such that
+		\begin{align*}
+			N_{1} \le n & \implies \abs{z_{n1} - Z_{1}} < \tfrac{\epsilon}{\sqrt{k}} \\
+			            & \quad \vdots                                               \\
+			N_{k} \le n & \implies \abs{z_{nk} - Z_{k}} < \tfrac{\epsilon}{\sqrt{k}}
+		\end{align*}
+		Define $N = \max \{ N_{1}, \ldots, N_{k} \}$. Then $N \le n$ implies
+		\begin{align*}
+			\norm{\vec{z}_{n} - \vec{Z}} & = \sqrt{\abs{z_{n1} - Z_{1}}^{2} + \cdots + \abs{z_{nk} - Z_{k}}^{2}} \\
+			                             & < \sqrt{\tfrac{\epsilon^{2}}{k} + \cdots + \tfrac{\epsilon^{2}}{k}}   \\
+			                             & = \sqrt{\epsilon^{2}}                                                 \\
+			                             & = \epsilon,
+		\end{align*}
+		so $\lim\limits_{n \to \infty} \vec{z}_{n} = \vec{Z}$. Now, suppose that $\lim\limits_{n \to \infty} \vec{z}_{n} = \vec{Z}$. Then for all $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N \le n \implies \norm{\vec{z}_{n} - \vec{Z}} < \epsilon.
+		\]
+		Then $N \le n$ implies for each $j \in \{ 1, \ldots, k \}$ that
+		\begin{align*}
+			\abs{z_{nj} - Z_{j}} & = \sqrt{\abs{z_{nj} - Z_{j}}^{2}}                                       \\
+			                     & \le \sqrt{\abs{z_{n1} - Z_{1}}^{2} + \cdots + \abs{z_{nk} - Z_{k}}^{2}} \\
+			                     & = \norm{\vec{z}_{n} - \vec{Z}}                                          \\
+			                     & < \epsilon,
+		\end{align*}
+		so $\lim\limits_{n \to \infty} z_{nj} = Z_{j}$ for all $j \in \{ a, k \}$. This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+Now, we examine $\mathbb{C}$. Suppose that $\{ z_{n} \}$ and $\{ w_{n} \}$ are sequences in $\mathbb{C}$, that $\lim\limits_{n \to \infty} z_{n} = Z$, and that $\lim\limits_{n \to \infty} w_{n} = W$. The above results imply that:
+
+\begin{itemize}
+	\item $\lim\limits_{n \to \infty} (z_{n} + w_{n}) = Z + W$.
+	\item $\lim\limits_{n \to \infty} c (z_{n}) = c (Z)$ for all $c \in \mathbb{C}$.
+	\item $\lim\limits_{n \to \infty} z_{n}w_{n} = ZW$.
+\end{itemize}
+
+\begin{theorem}
+	If $Z \ne 0$, then $\lim\limits_{n \to \infty} \frac{1}{z_{n}} = \frac{1}{Z}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For all $\epsilon > 0$, there exist integers $N_{1}$, $N_{2}$, and $N_{3}$ such that
+		\begin{align*}
+			N_{1} \le n & \implies \abs{z_{n} - Z} < \epsilon \left(\tfrac{\abs{Z}^{2}}{2}\right) \\
+			N_{2} \le n & \implies \abs{z_{n} - Z} < \tfrac{\abs{Z}}{2}.
+		\end{align*}
+		Realize that for $N_{2} < N$,
+		\[
+			0 = \abs{z_{n} - Z} - \abs{z_{n} - Z} < \tfrac{\abs{Z}}{2} - \abs{z_{n} - Z} < \abs{Z} - \abs{z_{n} - Z} \le \abs{z_{n}}
+		\]
+		so $\frac{1}{z_{n}}$ is defined. We also find that $N_{2} \le n$ implies that $\tfrac{\abs{Z}}{2} < \abs{z_{n}}$. Then defining $N = \max \{ N_{1}, N_{2} \}$, we have that $N \le n$ implies that
+		\[
+			\abs{\frac{1}{z_{n}} - \frac{1}{Z}} = \frac{\abs{z_{n} - Z}}{\abs{z_{n}} \abs{Z}} < \frac{\epsilon \left( \tfrac{\abs{Z}^{2}}{2} \right)}{\left( \tfrac{\abs{Z}}{2} \right) \abs{Z}} = \epsilon,
+		\]
+		as required.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $W \ne 0$, then $\lim\limits_{n \to \infty} \frac{z_{n}}{w_{n}} = \frac{Z}{W}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Realize that
+		\[
+			\lim\limits_{n \to \infty} \frac{z_{n}}{w_{n}} = \lim\limits_{n \to \infty} = \left( \lim\limits_{n \to \infty} z_{n} \right) \left( \lim\limits_{n \to \infty} \frac{1}{w_{n}} \right)= Z \left( \frac{1}{W} \right) = \frac{Z}{W},
+		\]
+		as desired.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Some Special Sequences}
+
+\begin{theorem}
+	If $p > 0$, then $\lim\limits_{n \to \infty} \frac{1}{n^{p}} = 0$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For all $\epsilon > 0$, realize that
+		\begin{align*}
+			\left( \tfrac{1}{\epsilon} \right)^{\tfrac{1}{p}} < n \implies \abs{\frac{1}{n^{p}}} & < \abs{\frac{1}{\left(\left( \tfrac{1}{\epsilon} \right)^{\tfrac{1}{p}}\right)^{p}}} \\
+			                                                                                     & = \epsilon,
+		\end{align*}
+		as desired.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $p > 0$, then $\lim\limits_{n \to \infty} \sqrt[n]{p} = 1$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		If $p > 1$: For all $\epsilon > 0$, we have that $\log_{\epsilon + 1}(p) < n$ implies $\tfrac{1}{\log_{\epsilon + 1}(p)} > \tfrac{1}{n}$, so
+		\begin{align*}
+			\log_{\epsilon + 1}(p) < n \implies \abs{\sqrt[n]{p} - 1} & = p^{\tfrac{1}{n}} - 1                        \\
+			                                                          & < p^{\frac{1}{\log_{\epsilon + 1}(p)}} - 1    \\
+			                                                          & = p^{\log_{p} \left(\epsilon + 1 \right)} - 1 \\
+			                                                          & = \left( \epsilon + 1 \right) - 1             \\
+			                                                          & = \epsilon.
+		\end{align*}
+		If $p < 1$: then $\tfrac{1}{p} > 1$, so
+		\[
+			\lim\limits_{n \to \infty} \sqrt[n]{p} = \lim\limits_{n \to \infty} \frac{1}{\sqrt[n]{\tfrac{1}{p}}} = \frac{1}{\lim\limits_{n \to \infty} \sqrt[n]{\tfrac{1}{p}}} = \frac{1}{1} = 1.
+		\]
+		The case $p = 1$ is trivial.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	$\lim\limits_{n \to \infty} \sqrt[n]{n} = 1$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		See that $\sqrt[n]{n} - 1 > 0$ for $n > 1$. Then by the Binomial Theorem,
+		\[
+			n = (1 + (\sqrt[n]{n} - 1))^{n} \ge \frac{n(n - 1)}{2} (\sqrt[n]{n} - 1)^{2}.
+		\]
+		Therefore,
+		\[
+			\sqrt{\frac{2}{n - 1}} \ge \sqrt[n]{n} - 1 \ge 0.
+		\]
+		We now apply the Squeeze Theorem, which shall be proven at another time:
+		\[
+			\lim\limits_{n \to \infty} \sqrt{\frac{2}{n - 1}} \ge \lim\limits_{n \to \infty} \sqrt[n]{n} - 1 \ge 0.
+		\]
+		The left-hand side of this equation equals $0$ by Theorem 12; then $\lim\limits_{n \to \infty} (\sqrt[n]{n} - 1) = 0$, and we attain the desired $\lim\limits_{n \to \infty} \sqrt[n]{n} = 1$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $p > 0$ and $\alpha \in \mathbb{R}$, then $\lim\limits_{n \to \infty} \frac{n^{a}}{(p + 1)^{n}} = 0.$
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Let $k = \max \{ \lfloor \alpha \rfloor + 1, 1 \}$ so that $k > \alpha$. Then $n > 2k$ implies
+		\[
+			(1 + p)^{n} > \tbinom{n}{k} p^{k} = \frac{n(n-1) \cdots (n - k + 1)}{k!} p^{k} > \frac{n^{k}p^{k}}{2^{k}k!}.
+		\]
+		Hence,
+		\[
+			\frac{2^{k}k!}{p^{k}}n^{\alpha - k} > \frac{n^{\alpha}}{(1 + p)^{n}} > 0.
+		\]
+		Then by the Squeeze Theorem,
+		\[
+			\frac{2^{k}k!}{p^{k}} \lim\limits_{n \to \infty} n^{\alpha - k} \ge \lim\limits_{n \to \infty} \frac{n^{\alpha}}{(p + 1)^{n}} \ge 0.
+		\]
+		As $\alpha - k < 0$, the left-hand side of this equation equals $0$ by Theorem 12. We thus attain the desired $\lim\limits_{n \to \infty} \frac{n^{\alpha}}{(p + 1)^{n}} = 0$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	If $\abs{x} < 1$, then $\lim\limits_{n \to \infty} x^{n} = 0$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		If we let $p = \tfrac{1}{\abs{x}} - 1$ and $\alpha = 0$ in Theorem 15, we find that
+		\[
+			0 = \lim\limits_{n \to \infty} \frac{n^{\alpha}}{(1 + p)^{n}} = \lim\limits_{n \to \infty} \frac{1}{(1 + (\tfrac{1}{\abs{x}} - 1))^{n}} = \lim\limits_{n \to \infty} \abs{x}^{n}.
+		\]
+		We can remove the absolute value with no issues, as the limit evaluates to $0$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\newpage
+
+\section{Subsequences}
+
+Let $n_{i}$ be a sequence of positive integers such that $n_{1} < n_{2} < n_{3} < \cdots$. Then if $a_{n}$ is a sequence, $a_{n_{i}}$ is a \textbf{subsequence} of $a_{n}$. If $a_{n_{i}}$ converges, its limit is called a \textbf{subsequential limit} of $\{ a_{n} \}$.
+
+\begin{theorem}
+	$a_{n}$ converges to $A$ if and only if all subsequences of $a_{n}$ converge to $A$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose that $a_{n}$ converges to $A$. Then for all $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N \le n \implies \abs{a_{n} - A} < \epsilon.
+		\]
+		Let $a_{n_{i}}$ be a subsequence of $a_{n}$. For each $\epsilon > 0$ and $N$, define $I = \min \{ i \mid N \le n_{i} \}$ Then $I \le i$ implies $N \le n_{i}$, so
+		\[
+			I \le i \implies \abs{a_{n_{i}} - A} < \epsilon.
+		\]
+		We conclude that $\lim\limits_{i \to \infty} a_{n_{i}} = A$. If all subsequences of $a_{n}$ converge to $A$, then $\lim\limits_{n \to \infty} a_{n} = A$ since $a_{n}$ is a subsequence of itself.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}[Bolzano-Weierstrauss]
+	The following two results hold:
+	\begin{enumerate}
+		\item If $\{ a_{n} \}$ is a sequence in a compact metric space $X$, then some subsequence of $\{ p_{n} \}$ converges to a point $X$.
+		\item Every bounded sequence in $\mathbb{C}^{n}$ contains a convergent subsequence.
+	\end{enumerate}
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For (1), there are two cases. If $\{ a_{n} \}$ is finite, then there is an infinite subsequence of $\{ a_{n} \}$ that are all equal: a sequence $n_{1} < n_{2} < \cdots$ and and a point $A \in E$ such that
+		\[
+			a_{n_{1}} = a_{n_{2}} = \cdots = A.
+		\]
+		The subsequence $\{ a_{n_{i}} \}$ converges to $A$. If $\{ a_{n} \}$ is infinite, then the compactness of $X$ implies that there exists a limit point $A \in X$ of $\{ a_{n} \}$. 
+
+		If we select $n_{1}$ such that $d(a_{n_{1}}, A) < 1$, we can construct a sequence $n_{1} < n_{2} < \cdots$ such that $d(a_{n_{i}}, A) < \tfrac{1}{i}$ for $i \in \mathbb{Z}_{> 0}$. The convergence of this sequence to $A$ is a straightforwards calculation. We deduce that (1) holds.
+		
+		For (2), realize that each bounded sequence in $\mathbb{C}^{n}$ lies in a compact subset of $\mathbb{C}^{n}$ (an $n$-pseudocell!), from which (1) implies the existence of a convergent subsequence.
+	\end{proof}
+\end{adjustwidth}
+
+Isn't that lovely? The idea of the Bolzano-Weierstrauss Theorem in RealAnalysis/proofs.tex is a special case of the general result about the compactness of $k$-pseudocells.
+
+% --------------------------------------------- % 
+
+\subsection{Cauchy Sequences}
+
+A \textbf{Cauchy sequence} is a sequence $\{ a_{n} \}$ in a metric space $X$ such that for all $\epsilon > 0$, there is an integer $N$ such that
+\[
+	N \le n, m \implies d(a_{n} - a_{m}) < \epsilon.
+\]
+Let $E$ be a nonempty subset of a metric space $X$, and define the \textbf{diameter} of$S = \{ d(x, y) \mid x, y \in E \}$. Then $\sup\,  S$ is called the \textbf{diameter} of $E$. If we define $E_{N}$ for each $N \in \mathbb{Z}_{> 0}$ as $\{ a_{N}, a_{N + 1}, a_{N + 2}, \cdots \}$; then $\{ a_{n} \}$ is a Cauchy sequence if and only if
+\[
+	\lim\limits_{N \to \infty} \operatorname{diam} E_{N} = 0.
+\]
+
+\begin{theorem}
+	The following two results hold:
+	\begin{enumerate}
+		\item If $\overline{E}$ is the closure of a subset $E$ in a metric space $X$, then
+		\[
+			\diam \overline{E} = \diam E.
+		\]
+		\item If $K_{n}$ is a sequence of compact sets in $X$ such that $K_{n} \subseteq K_{n + 1}$ for each $n \in \mathbb{Z}_{> 0}$, and if
+		\[
+			\lim\limits_{n \to \infty} \diam K_{n} = 0,
+		\]
+		then $\bigcap_{n = 1}^{\infty} K_{n}$ consists of exactly one point.
+	\end{enumerate}
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		For (1): since $E \subseteq \overline{E}$, it is natural that $\diam E \le \diam \overline{E}$. For the converse, select $x, y \in \overline{E}$ such that $\diam $; then each $x, y$ is either a point of $E$ or a limit point of $E$. In either case, there exist points $x', y' \in E$ such that $d(x, x') < \epsilon$ and $d(y, y') < \epsilon$. Hence
+		\begin{align*}
+			d(x, y) &\le d(x, x') + d(x', y) \\
+			&\le d(x, x') + d(x', y') + d(y', y) \\ 
+			&< 2\epsilon + \diam E.
+		\end{align*}
+		Then $\diam E$ is an upper bound of $d(x, y)$, so $\diam \overline{E} \le \diam E$. This imples the desired $\diam \overline{E} = \diam E$
+
+		For (2): As discussed in RealAnalysis/babyrudin2.tex, $\bigcap_{n = 1}^{\infty} K_{n}$ is nonempty. Suppose that it contains two distinct elements $j \ne k$; then $d(j, k) > 0$ and
+		\[
+			d(j, k) < \diam K_{n}
+		\]
+		for each $n \in \mathbb{Z}_{> 0}$; we deduce that
+		\[
+			0 < d(j, k) \le \diam K_{n}.
+		\]
+		Taking the contrapositive yields the desired result.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+
+
+\end{document}

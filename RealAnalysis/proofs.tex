@@ -1,0 +1,170 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{Real Analysis: Self-Discovered Proofs}
+\author{James Pagan}
+\date{}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Bolzano-Weierstrauss Theorem}
+
+\begin{theorem*}
+	All bounded sequences $a_n$ in $\mathbb{R}$ contain a convergent subsequence.
+\end{theorem*}
+
+\begin{proof}
+
+Let the first term of $a_n$ be $a_{0}$, the lower bound of $a_{n}$ be $m$, and the upper bound of $a_{n}$ be $M$ such that $m \le a_n \le M$ for all $n \in \mathbb{Z}_{\ge 0}$. If $m = M$, then $a_n$ trivially converges.
+
+Otherwise, $m \ne M$; let the set $S_n$ for $n \in \mathbb{Z}_{\ge 0}$ be the $2^{n}$ closed intervals of size $\tfrac{M-m}{2^{n}}$ in the interval $[m, M]$, and $I_n$ for $n \in \mathbb{Z}_{\ge 0}$ be the unique interval --- of those in $S_n$ that contain infinitely many values of $a_n$ --- that has the greatest upper endpoint. 
+
+\begin{adjustwidth}{1cm}{}
+	\begin{claim*}
+		$I_N$ exists for all $\mathbb{Z}_{\ge 0}$
+	\end{claim*}
+	\begin{proof}\renewcommand{\qedsymbol}{}
+		Suppose for contradiction that all the intervals in $S_{n}$ for some $n \in \mathbb{Z}_{\ge 0}$ contain finitely many values of $a_n$. Then the union of all these intervals --- $[m, M]$ itself --- must contain finitely many values of $a_n$, which contradicts the definition of $a_n$. Hence, at least one interval in $S_{n}$ must contain infinitely many values of $a_n$ for all $n \in \mathbb{Z}_{\ge 0}$.
+
+		As all the intervals in $S_{n}$ for each $n$ have distinct upper endpoints, there exists a unique interval among those in $S_{n}$ that contains infinitely many values of $a_n$ that has the greatest upper endpoint. $I_n$ thus exists for all $n \in \mathbb{Z}_{\ge 0}$.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+We will now establish that $I_n$ meets the two conditions of the Nested Intervals Theorem. 
+
+\begin{adjustwidth}{1cm}{}
+	\begin{claim}
+		$I_{n+1} \subseteq I_n$ for all $n \in \mathbb{Z}_{\ge 0}$
+	\end{claim}
+	\begin{proof}\renewcommand{\qedsymbol}{}
+		Of all the intervals in $S_{n+1}$, it is trivial that no interval with upper endpoint greater than that of $I_n$ contains infinitely many values of $a_n$. Now, at least one of the two intervals of size $\tfrac{M-m}{2^{n+1}}$ inside $I_n$ must contain infinitely many values of $a_n$; therefore, one of these is $I_{n+1}$, and so $I_{n+1} \subseteq I_{n}$ for all $n \in \mathbb{Z}_{\ge 0}$ 
+	\end{proof}
+	\begin{claim}
+		The limit of the width of $I_n$ as $n$ approaches infinity is $0$.
+	\end{claim}
+	\begin{proof}\renewcommand{\qedsymbol}{}
+		$I_n$ has width $\tfrac{M-m}{2^{n}}$, which trivially approaches $0$ as $n$ approaches infinity.
+	\end{proof}
+\end{adjustwidth}
+
+Then by the Nested intervals Theorem, there exists a unique real number $x$ such that $x \in I_{n}$ for all $n \in \mathbb{Z}_{\ge 0}$. 
+
+We now construct an explicit convergent subsequence of $a_n$. Consider $a_{b_{n}}$, where $b_{n}$ is a sequence of integers defined for $n \in \mathbb{Z}_{\ge 0}$ recursively: $b_0 = 0$ and $b_n = \min \{ k \mid k \in \mathbb{Z}_{\ge 0}, a_k \in I_n, k > b_{n-1} \}$ for $n \in \mathbb{Z}_{>0}$. It is trivial to prove that $b_{n}$ always exists for $n \in \mathbb{Z}_{\ge 0}$, and that as $b_n$ is strictly increasing, $a_{b_{n}}$ is an infinite subsequence. By definition, $a_{b_{n}} \in I_n$ for all $n \in \mathbb{Z}_{\ge 0}$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{claim*}
+		$\displaystyle{\lim_{n \to \infty}} a_{b_{n}} = x$.
+	\end{claim*}
+	\begin{proof}\renewcommand{\qedsymbol}{}
+		For all $n \in \mathbb{Z}_{\ge 0}$, observe that $a_{b_{n}}$ and $x$ both lie inside $I_n$ --- so $\abs{a_{b_{n}} - x} < \tfrac{M-m}{2^{n}}$. Then for all $\epsilon > 0$, we have that $\log_2 (\tfrac{M-m}{\epsilon}) < n$ implies
+		
+		\[ \abs{a_{b_{n}} - x} < \frac{M-m}{2^n} < \frac{M-m}{2^{\log_2 \left(\tfrac{M-m}{\epsilon}\right)}} = \frac{M-m}{\tfrac{M-m}{\epsilon}} = \epsilon \].
+		
+		Hence, $\displaystyle{\lim_{n \to \infty}} a_{b_{n}} = x$. 
+	\end{proof}
+\end{adjustwidth}
+
+Therefore, if $a_n$ is a bounded sequence, it is always possible to construct $a_{b_{n}}$ --- a convergent subsequence of $a_n$.
+
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Boundedness Theorem}
+
+\begin{theorem*}
+	If $f \colon \mathbb{R} \to \mathbb{R}$ is continuous on $[a, b]$, then $f(x)$ is bounded on $[a, b]$.
+\end{theorem*}
+
+\begin{proof}
+
+If $a = b$, then $f(x)$ is bounded above by $f(a) + 1$ and below by $f(a) - 1$. If $a \ne b$, suppose for contradiction that $f(x)$ is not bounded on $[a, b]$ --- then for all $M \in \mathbb{Z}_{\ge 0}$, there exists a $y \in [a, b]$ such that $f(y) > M$. We will prove that this assumption implies the existence of a subinterval of $[a, b]$ that is both bounded and unbounded.
+
+Let $S_n$ for $n \in \mathbb{Z}_{\ge 0}$ be the set of the $2^{n}$ closed intervals of size $\tfrac{b-a}{2^{n}}$ between $a$ and $b$. Define $I_n$ as the unique closed interval that --- among those in $S_n$ such that $f(x)$ is not bounded on the interval --- has the largest possible upper endpoint.
+
+\begin{adjustwidth}{1cm}{}
+    \begin{claim*}
+    	$I_n$ exists for all $n \in \mathbb{Z}_{\ge 0}$.
+    \end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}	
+		Suppose for contradiction that $f(x)$ is bounded over all the closed intervals of $S_{n}$. Then $f(x)$ is bounded over the union of all these intervals --- $[a, b]$ itself --- which is a contradiction. Hence, $f(x)$ must be unbounded over least one closed interval in $S_{n}$.
+
+		As all the intervals in $S_n$ have distinct upper endpoints, there exists a unique interval that --- among those in $S_{n}$ such that $f(x)$ is not bounded --- has the largest possible upper endpoint. $I_n$ thus exists for all $n \in \mathbb{Z}_{\ge 0}$.
+    \end{proof}
+\end{adjustwidth}
+
+We will now establish that $I_n$ meets the two conditions of the Nested Intervals Theorem. 
+
+\begin{adjustwidth}{1cm}{}
+	\begin{claim*}
+		$I_{n+1} \subseteq I_n$ for all $n \in \mathbb{Z}_{\ge 0}$
+	\end{claim*}
+	\begin{proof}\renewcommand{\qedsymbol}{}
+		Of all the intervals in $S_{n+1}$, it is trivial that $f(x)$ is bounded over all interval with greater upper endpoint than $I_n$. Now, $f(x)$ must not be bounded over at least one of the two intervals of size $\tfrac{b-a}{2^{n+1}}$ inside $I_n$; therefore, one of these is $I_{n+1}$, and so $I_{n+1} \subseteq I_{n}$ for all $n \in \mathbb{Z}_{\ge 0}$ 
+	\end{proof}
+	\begin{claim*}
+		The limit of the width of $I_n$ as $n$ approaches infinity is $0$.
+	\end{claim*}
+	\begin{proof}\renewcommand{\qedsymbol}{}
+		$I_n$ has width $\tfrac{1}{2^{n}}$, which trivially approaches $0$ as $n$ approaches infinity.
+	\end{proof}
+\end{adjustwidth}
+
+Therefore, the Nested Intervals Theorem guarantees the existence of a unique real number $r$ such that $r \in I_{n}$ for all $n \in \mathbb{Z}_{\ge 0}$. 
+
+Because $f(x)$ is continuous at $r$, we have that there exists $\delta$ such that 
+\[  
+0 < |x - r | < \delta \implies \abs{f(x) - f(r)} < 1
+\]
+Therefore, the interval $(r - \delta, r + \delta)$ is bounded by $f(r) + 1$.
+
+\begin{adjustwidth}{1cm}{}
+    \begin{claim*}
+    	There exists $I_m$ for some $n \in \mathbb{Z}_{\ge 0}$ such that $I_m \subset (r - \delta, r+ \delta)$.
+    \end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{} 
+		Consider the closed interval $I_m$ for $m = \Bigl\lceil \log_2 \left( \tfrac{b-a}{\delta} \right) \Bigr\rceil + 1$. Note that the width of $I_m$ satisfies 
+		\[
+			\frac{b-a}{2^{\Bigl\lceil \log_2 \left( \tfrac{b-a}{\delta} \right) \Bigr\rceil + 1}} < \frac{b-a}{2^{\log_2 \left( \tfrac{b-a}{\delta} \right) }} = \frac{b-a}{\tfrac{b-a}{\delta}} = \delta.
+		\]
+		Suppose for contradiction that $I_m \not\subset (r - \delta, r + \delta)$. Then there is a real number $x$  such that $x \in I_m$ and $x \not\in (r - \delta, r + \delta)$.
+
+		As $r \in I_M$, the width of $I_m$ is greater than or equal to $\abs{x - r}$ --- however, the width of $I_M$ is less than $\delta$, so $\abs{x - r} < \delta$. Then $x$ is inside $(r - \delta, r + \delta)$, which contradicts the definition of $x$.
+		
+		Therefore, no such $x$ exists; $I_m \in (r - \delta, r + \delta)$.
+	\end{proof}
+\end{adjustwidth}
+
+Hence, $I_m$ is bounded by $f(r) + 1$ as well. This contradicts the definition if $I_m$ --- namely, that $f(x)$ is unbounded on $I_m$.
+
+We deduce that $f(x)$ has an upper bound over $[a, b]$. As $-f(x)$ also has an upper bound over $[a, b]$, $f(x)$ also has a lower bound over $[a, b]$. Therefore, $f(x)$ is bounded over $[a, b]$.
+
+\end{proof}
+
+% --------------------------------------------- %
+
+\end{document}

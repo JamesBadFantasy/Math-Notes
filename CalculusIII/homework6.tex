@@ -1,0 +1,351 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH UA-129: Homework 6}
+\author{James Pagan, October 2023}
+\date{Professor Serfaty}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Section 3.4}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 3}
+
+Using Lagrange multipliers, we have that for some $\lambda \in \mathbb{R}$,
+\[
+	\begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix} = \grad f = \lambda \grad g = \begin{bmatrix} 2\lambda x \\ 2\lambda y \\ 2 \lambda z \end{bmatrix}
+\]
+We thus have that $1 = 2\lambda x$, so $\tfrac{1}{2\lambda} = x$; similarly, $-\tfrac{1}{2\lambda} = y$ and $\tfrac{1}{2\lambda} = z$. Therefore,
+\[
+	2 = x^{2} + y^{2} + z^{2} = \left( \frac{1}{2\lambda} \right)^{2} + \left( -\frac{1}{2\lambda} \right)^{2} + \left( \frac{1}{2\lambda} \right)^{2} = \frac{3}{4\lambda^{2}}.
+\]
+We deducec that $\lambda^{2} = \tfrac{3}{8}$, so $\lambda = \pm \tfrac{\sqrt{6}}{4}$. Substituting for $x$, $y$, and $z$, we find two critical points of $f \mid S$:
+\[
+	(x, y, z) = \left( \frac{\sqrt{6}}{3}, -\frac{\sqrt{6}}{3}, \frac{\sqrt{6}}{3} \right) \qquad \text{and} \qquad  (x, y, z) = \left( -\frac{\sqrt{6}}{3}, \frac{\sqrt{6}}{3}, -\frac{\sqrt{6}}{3} \right) 
+\]
+Evaluating $x - y + z$ at these two points, we find that the first is greater than the second. Hence, $\boxed{\text{$\left( \frac{\sqrt{6}}{3}, -\frac{\sqrt{6}}{3}, \frac{\sqrt{6}}{3} \right)$ is the maximum and $\left( -\frac{\sqrt{6}}{3}, \frac{\sqrt{6}}{3}, -\frac{\sqrt{6}}{3} \right)$ is minimum of $f \mid S$}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 8}
+
+We have that all $(x, y) \in S$ satisfy $y = 2$, so if $(x, y) \in S$,
+\[
+	f(x, y) = x^{2} + y^{2} = x^{2} + 4.
+\]
+As the right-hand side is a quadratic, it has a minimum at $x = 0$ and is unbounded above. Therefore, $\boxed{\text{$(0, 2)$ is a minimum of $f \mid S$}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 10}
+
+We have that all $(x, y) \in S$ satisfy $y = \cos(x)$, so if $(x, y) \in S$,
+\[
+	f(x, y) = x^{2} - y^{2} = x^{2} - \cos^{2}(x).
+\]
+Dub the right-hand side $g(x)$; maximizing $f \mid S$ is equivalent to maximizing $g$. See that
+\begin{align*}
+	g'(x) &= 2x - 2 \sin(x) \cos(x) = 2x - \sin(2x), \\
+	g''(x) &= 2 + 2 \cos(2x).
+\end{align*}
+Then $g'(x) = 0$ implies that $2x = \sin(2x)$, which trivially happens exclusively when $x = 0$ (this may be proven using the tangent line trick or taylor series). 
+
+As $g''(0) = 2 + 2 \cos(0) = 4$, the second derivative test implies that $x = 0$ is a global minimum of $g$, so $\boxed{\text{$(0, 1)$ is a global minimum of $f \mid S$}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 11}
+
+Observe that across all $(x, y, z)$, 
+\[
+	\grad f = \vec{0} \implies \begin{bmatrix} 2x \\ 2y \\ 2z \end{bmatrix} = \vec{0},
+\]
+so the only critical point of $f$ is $(0, 0, 0)$, which does not lie within $S$. Therefore, any local extrema of $f$ must be attained on the boundary --- namely, all elements of $\{ (x, y, z) \in \mathbb{R}^{3} \mid z = 2 + x^{2} + y^{2} \}$.
+
+Defining $g(x, y, z) = x^{2} + y^{2} - z + 2$, we use Lagrange Multipliers to deduce that there exists $\lambda \in \mathbb{R}$ such that
+\[
+	\begin{bmatrix} 2x \\ 2y \\ 2z \end{bmatrix} = \grad f = \lambda \grad g = \begin{bmatrix} 2\lambda x \\ 2\lambda y \\ -\lambda \end{bmatrix} 
+\]
+If at least one of $x$ and $y$ is nonzero, then $\lambda = 1$, and $z = -\tfrac{1}{2}$. We conclude that
+\[
+	\frac{1}{2} = x^{2} + y^{2} + 2 \ge 0 + 0 + 2 > \frac{1}{2},
+\]
+a contradiction. Therefore, $x = y = 0$. As $z = -\tfrac{\lambda}{2}$,
+\[
+	-\frac{\lambda}{2} = x^{2} + y^{2} + 2 \implies \lambda = -4,
+\]
+and $z = 2$. Then $(0, 0, 2)$ is the only extrema of $f$ at $x$. A trivial calculation verifies that this is a minimum of $f$, so $\boxed{\text{$(0, 0, 2)$ is a minimum of $f \mid S$}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 12}
+
+Observe that
+\[
+	\grad f = \begin{bmatrix} 2x - 1 \\ 2y - 1 \end{bmatrix}.
+\]
+Thus, the only critical point of $f$ not on the boundary is $(x, y) = \left(\tfrac{1}{2}, \tfrac{1}{2}\right)$, where $f$ evaluates to $\tfrac{1}{2}$. On the boundary of the unit disc, define $g(x, y) = x^{2} + y^{2} - 1$; we have that for some $\lambda \in \mathbb{R}$,
+\[
+	\begin{bmatrix} 2x - 1 \\ 2y - 1 \end{bmatrix} = \grad f = \lambda \grad g = \begin{bmatrix} 2\lambda x \\ 2\lambda y \end{bmatrix}
+\]
+Thus, $2x - 1 = 2\lambda x$, and $x = \tfrac{1}{2 - 2\lambda}$. Similarly, $y = \tfrac{1}{2 - 2\lambda}$. Thus,
+\[
+	1 = x^{2} + y^{2} = 2x^{2} = 2y^{2},
+\]
+so our four points to consider are $\left(\pm \tfrac{\sqrt{2}}{2}, \pm \tfrac{\sqrt{2}}{2}\right)$. We find that
+\begin{align*}
+	f \left( \frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2} \right) &= 2 - \sqrt{2}, \\
+	f \left( \frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2} \right) &= 2, \\
+	f \left( -\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2} \right) &= 2, \\
+	f \left( -\frac{\sqrt{2}}{2}, -\frac{\sqrt{2}}{2} \right) &= 2 + \sqrt{2}.
+\end{align*}
+Comparing all of these, we find that the $\boxed{\text{$\left( \tfrac{1}{2}, \tfrac{1}{2} \right)$ is an absolute minimum}}$ and 
+
+$\boxed{\text{$\left( -\tfrac{\sqrt{2}}{2}, -\tfrac{\sqrt{2}}{2} \right)$ is an absolute maximum}}$ of $f$ on the unit disc.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 13}
+
+Trivially, the only critical point of $f$ outside the boundary is $(0, 0)$, in which $f$ evaluates to $0$. Defining $g(x) = x^{2} + y^{2} - 1$, Lagrange mulitpliers yield that there exists $\lambda \in \mathbb{R}$ such that
+\[
+	\begin{bmatrix} 2x + y \\ 2y + x \end{bmatrix} = \grad f = \lambda \grad g = \begin{bmatrix} 2\lambda x \\ 2\lambda y \end{bmatrix}.
+\]
+Thus, $(2 - 2\lambda)x + y = 0 = x + (2 - 2\lambda)y$. Adding these two equations, we find that
+\[
+	(3 - 2\lambda)(x + y) = 0.
+\]
+Either $\lambda = \tfrac{3}{2}$ --- in which case $x = y$ --- or $x = -y$. In each case, $x^{2} = y^{2}$, so
+\[
+	1 = x^{2} + y^{2} = 2x^{2}.
+\]
+Thus, we have four points on the boundary to consider: $\left( \tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{2}}{2} \right)$, $\left( -\tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{2}}{2} \right)$, $\left( \tfrac{\sqrt{2}}{2}, -\tfrac{\sqrt{2}}{2} \right)$, and $\left( \tfrac{-\sqrt{2}}{2}, -\tfrac{\sqrt{2}}{2} \right)$. Comparing these, we find that $\boxed{\text{$(0, 0)$ is an absolute minimum}}$ and $\boxed{\text{$\left( \tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{2}}{2} \right)$ and $\left( -\tfrac{\sqrt{2}}{2}, -\tfrac{\sqrt{2}}{2} \right)$ are absolute maxima}}$ of $f$ on the unit disc.
+
+% --------------------------------------------- % 
+
+\subsection*{Problem 21}
+
+We seek to minimize the surface area $2 \pi r^{2} + 2\pi rh$ of the cylinder under the constrant that its volume $\pi r^{2} h$ is $1000$. Letting the surface area be $S(r, h)$ and the volume be $V(r, h)$, Lagrange multipliers ensure that there is $\lambda \in \mathbb{R}$ such that
+\[
+	\begin{bmatrix} 4 \pi r + 2\pi h \\ 2\pi r \end{bmatrix} = \grad S = \lambda \grad V = \begin{bmatrix} 2\lambda \pi rh \\ \lambda \pi r^{2} \end{bmatrix}.
+\]
+From $2\pi r = \lambda \pi r^{2}$, we find that $2 = \lambda r$ (as clearly $r \ne 0$). Thus, the top equation yields that
+\[
+	4\pi r + 2\pi h = 4 \pi h,
+\]
+so $2r = h$. Therefore,
+\[
+	1000 = \pi r^{2} h = 2 \pi r^{3},
+\]
+so $\boxed{\text{$r = \sqrt[3]{\tfrac{1000}{2\pi}}$ centimeters}}$ and $\boxed{\text{$h = \tfrac{1}{2} \sqrt[3]{\tfrac{1000}{2\pi}}$ centimeters}}$.
+% --------------------------------------------- %
+
+\subsection*{Problem 31}
+
+\textbf{Part (a)}: We define
+\[
+	A = \begin{bmatrix} a & b & c \\ b & a & d \\ c & d & a \end{bmatrix} \qquad \text{and} \qquad \vec{x} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}.
+\]
+Then
+\begin{align*}
+	f(\vec{x}) &= \frac{1}{2}(A \vec{x}) \cdot \vec{x} \\ 
+	&= \frac{1}{2} \begin{bmatrix} ax + by + cz \\ bx + ay + dz \\ cx + dy + za \end{bmatrix} \cdot \begin{bmatrix} x \\ y \\ z \end{bmatrix} \\
+	&= \frac{1}{2} (ax^{2} + bxy + czx) + \frac{1}{2} (bxy + ay^{2} + dyz) + \frac{1}{2} (cxz + dyz + z^{2}a) \\
+	&= \tfrac{1}{2} ax^{2} + \tfrac{1}{2} by^{2} + \tfrac{1}{2} cz^{2} + bxy + dyz + czx.
+\end{align*}
+Thus,
+\[
+	\grad f = \begin{bmatrix} ax + by + cz \\ by + bx + dz \\ cz + dy + cx \end{bmatrix} = A \vec{x}.
+\]
+\textbf{Part (b)}: We have that by Lagrange multipliers, there exists $\lambda$ such that
+\[
+	A \vec{x} = \grad f = \lambda \grad g = \lambda \begin{bmatrix} 2x \\ 2y \\ 2z \end{bmatrix} = 2\lambda \vec{x}.
+\]
+Therefore, $A$ must have an eigenvalue $\vec{x}$ with eigenvalue $2\lambda$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 35}
+
+Let $x = 2$ and $z = \tfrac{1}{2}$. Then if we let $y = \tfrac{M}{2 + \tfrac{1}{2}}$ for any $M \in \mathbb{R}$,
+\[
+	xy + yz = y(x + z) = M
+\]
+so the expression $xy + yz$ can assume any real value. We conclude that it has no minimum or maximum.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 37}
+
+We wish to maximize the function
+\[
+	\sqrt{\cos^{2}(t) + \sin^{2}(t) + \sin^{2} \left( \tfrac{t}{2} \right)} = \sqrt{1 + \frac{1 - \cos(\theta)}{2}}.
+\]
+This function is clearly maximized whenever $\cos(t) = -1$, in which case the maximum is $\boxed{\sqrt{2}}$.
+
+% --------------------------------------------- %
+
+\section{Section 3.5}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 12}
+
+\textbf{Part (a)}: We have that
+\[
+	\pdv{(x, y)}{(r, \theta)} = \begin{vmatrix} \pdv{x}{r} & \pdv{x}{\theta} \\ \pdv{y}{r} & \pdv{y}{\theta} \end{vmatrix} = \begin{vmatrix} \cos(\theta) & -r \sin(\theta) \\ \sin(\theta) & r \cos(\theta) \end{vmatrix} = r \cos^{2}(x) + r \sin^{2}(\theta) = r.
+\]
+At $(r, \theta) = (r_{0}, \theta_{0})$, the Jacobian determininant evaluates to $r_{0}$.
+
+\textbf{Part (b)}: Clearly $f(r, \theta) = (r \cos(\theta), r\sin(\theta))$ is $C^{1}$. Then $f$ is invertible if the Jacobian determinant is nonzero --- at $\boxed{\text{all points except the origin}}$. Clearly, we cannont establish an inverse at the origin.
+ 
+\textbf{Part (c)}: Using the Rule of Sarrus, we have that
+\begin{align*}
+	\pdv{(x, y, z)}{(\rho, \phi, \theta)} &= \begin{vmatrix} \pdv{x}{\rho} & \pdv{x}{\phi} & \pdv{x}{\theta} \\ \pdv{y}{\rho} & \pdv{y}{\phi} & \pdv{y}{\theta} \\ \pdv{z}{\rho} & \pdv{z}{\phi} & \pdv{z}{\theta} \end{vmatrix} = \begin{vmatrix} \sin(\phi)\cos(\theta) & \rho \cos(\phi) \cos(\theta) & -\rho \sin(\phi) \sin(\theta) \\ \sin(\phi) \sin(\theta) & \rho \cos(\phi) \sin(\theta) & \rho \sin(\phi) \cos(\theta) \\ \cos(\phi) & -\rho \sin(\phi) & 0 \end{vmatrix}, \\
+	&= \rho^{2} \sin(\phi) \cos^{2}(\phi) \cos^{2}(\theta) + \rho^{2} \sin^{3}(\phi) \sin^{2}(\theta) + \rho^{2} \sin(\phi) \cos(\phi)^{2} \sin^{2}(\theta) \\ 
+	& \quad + \rho^{2} \sin^{3}(\phi) \cos^{2}(\theta), \\
+	&= \rho^{2} \sin(\phi) \cos^{2}(\phi) + \rho^{2} \sin^{3}(\phi), \\
+	&= \rho^{2} \sin(\phi).
+\end{align*}
+
+\textbf{Part (d)}: We can solve for $(\rho, \phi, \theta)$ whenever the Jacobian determininat is nonzero, which occurs for $\boxed{\text{all $(\rho, \phi, \theta)$ such that $\rho \ne 0$ and $\phi \notin \{ \pi n \mid n \in \mathbb{Z} \}$}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 17}
+
+\textbf{Part (a)}: We define
+\begin{align*}
+	F_{1}(x, y, u, v) &= x^{2} - y^{2} - u^{3} + v^{2} + 4, \\
+	F_{2}(x, y, u, v) &= 2xy + y^{2} - 2u^{2} + 3v^{4} + 8.
+\end{align*}
+We have that
+\[
+	\begin{vmatrix} \pdv{F_{1}}{u} & \pdv{F_{2}}{v} \\ \pdv{F_{2}}{u} & \pdv{F_{2}}{y} \end{vmatrix} = \begin{vmatrix} -3 u^{2} & 2v \\ -4u & 12v^{3} \end{vmatrix} = (-3u^{2})(12v^{3}) - (2v)(-4u) = -36 u^{2} v^{3} + 8 uv.
+\]
+At $(x, y, u, v) = (2, -1, 2, 1)$, this determiniant evaluates to $-128 \ne 0$. The Inverse Function Theorem thus gurantees that there exists functions $u(x, y)$ and $v(x, y)$ near the point $(2, -1, 2, 1)$.
+
+\textbf{Part (b)}: Using implicit differentiation,
+\begin{align*}
+	0 &= 2x - 3u^{2} \left( \pdv{u}{x} \right) + 2v \left( \pdv{v}{x} \right), \\
+	0 &= 2y - 4u \left( \pdv{u}{x} \right) + 12v^{3} \left( \pdv{v}{x} \right).
+\end{align*}
+Substituting $(x, y, u, v) = (2, -1, 2, 1)$ yields
+\begin{align*}
+	0 = 4 - 12 \left( \pdv{u}{x} \right) + 2 \left( \pdv{v}{x} \right), \\
+	0 = -2 - 8 \left( \pdv{u}{x} \right) + 12 \left( \pdv{v}{x} \right).
+\end{align*}
+Subtracting six times the top equation to the second equation, we find that
+\[
+	0 = -26 - 64 \pdv{u}{x},
+\]
+so $\boxed{\pdv{u}{x} = \frac{13}{32}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 19}
+
+Let the roots of $x^{3} + ax^{2} + bx + c$ for $a, b, c \in \mathbb{R}$ be $r$, $s$, and $t$. Vieta's Formulas return that
+\begin{align*}
+	a &= -r - s - t \\
+	b &= rs + st + tr \\
+	c &= -rst.
+\end{align*}
+Viewing $a$, $b$, and $c$ as functions of $r$, $s$, and $t$, we have that
+\begin{align*}
+	\begin{vmatrix} \pdv{a}{r} & \pdv{a}{s} & \pdv{a}{t}  \\ \pdv{b}{r} & \pdv{b}{s} & \pdv{b}{t} \\ \pdv{c}{r} & \pdv{c}{s} & \pdv{c}{t} \end{vmatrix} &= \begin{vmatrix} -1 & -1 & -1 \\ s + t & t + r & r + s \\ -st & -tr & -rs \end{vmatrix} \\
+	&= rs(t + r) + st(r + s) + tr(s + t) - st(t + r) - rs(s + t) - tr(r + s) \\
+	&= r^{2}s + s^{2}t + t^{2}r - rs^{2} - st^{2} - tr^{2} \\
+	&= (r - s)(s - t)(t - s).
+\end{align*}
+This determinant is nonzero if and only if $r$, $s$, and $t$ are all distinct. In this case, the Inverse Function Theorem guarantees that the vector-valued function $(a(r, s, t), b(r, s, t), c(r, s, t)$ has a smooth inverse --- namely, a function that maps $a$, $b$, and $c$ to the roots of the polynomial given by $x^{3} + ax^{2} + cx + d = 0$.
+
+% --------------------------------------------- %
+
+\section{Section 4.1}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 19}
+
+We assume the object lies in 3D space --- the argument here may be easily generalized to higher dimensions.
+
+If the velocity vector of the object is $\vec{v}(t) = (v_{1}(t), v_{2}(t), v_{3}(t))$ and the acceleration vector is $\vec{a}(t) = \vec{v}'(t)$, then we are given that
+\[
+	\vec{v} \cdot \vec{a} = v_{1}(t) v_{1}'(t) + v_{2}(t) + v_{2}'(t) + v_{3}(t) + v_{3}'(t) = 0.
+\]
+We thus calculate the derivative of the speed of the object, which is the norm of $\vec{v}$:
+\[
+	\dv{t} \norm{\vec{v}(t)} = \dv{t} \sqrt{v_{1}^{2}(t) + v_{2}^{2}(t) + v_{3}^{2}(t)} = \frac{v_{1}(t) v_{1}'(t) + v_{2}(t) v_{2}'(t) + v_{3}(t) v_{3}'(t)}{\sqrt{v_{1}^{2}(t) + v_{2}^{2}(t) + v_{3}^{2}(t)}} = 0.
+\]
+As the derivative of the speed is zero, the object's speed must be constant.
+% --------------------------------------------- %
+
+\subsection*{Problem 21}
+
+We have that if the period is $T$ in miles, the mass of the earth is $M$ , and the gravitational constant is $G$,
+\[
+	T \approx \sqrt{(6.436 \times 10^{6} + 500)^{3} \frac{(2\pi)^{2}}{GM}}.
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 23}
+
+The general solution of $\vec{c}'(t) = (t, e^{t}, t^{2})$ is $\vec{c} = (\tfrac{1}{2}t^{2} + c_{1}, e^{t} + c_{2}, \tfrac{1}{3}t^{3} + c_{3})$ for $c_{1}, c_{2}, c_{3} \in \mathbb{R}$. Solving for these constants, we have that at $t = 0$,
+\[
+	\begin{bmatrix} 0 \\ -5 \\ 1 \end{bmatrix} = \begin{bmatrix} \tfrac{1}{2}(0)^{2} + c_{1} \\ e^{0} + c_{2} \\ \tfrac{1}{3}(0)^{3} + c_{3}  \end{bmatrix} = \begin{bmatrix} c_{1} \\ 1 + c_{2} \\ c_{3} \end{bmatrix},
+\]
+so $c_{1} = 0$, $c_{2} = -6$, and $c_{3} = 1$. The path we desire is thus $\boxed{\vec{c}(t) = \left(\tfrac{1}{2}t^{2}, e^{t} - 6, \tfrac{1}{3}t^{3} + 1\right)}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 26}
+
+Defining $\vec{c}(t)$ as $(f_{1}(t), f_{2}(t), f_{3}(t))$, we have that
+\begin{align*}
+	\dv{t} (m \vec{c}(t) \times \vec{v}(t)) &= \dv{t} \left(m \begin{bmatrix} f_{2} f_{3}' - f_{2}'f_{3} \\ f_{3} f_{1}' - f_{1} f_{3}' \\ f_{1} f_{2}' - f_{2} f_{1}' \end{bmatrix}\right) \\
+	&= m \begin{bmatrix} (f_{2}' f_{3}' + f_{2} f_{3}'') - (f_{2}'' f_{3} + f_{2}' f_{3}') \\ (f_{3}' f_{1}' + f_{3} f_{1}'') - (f_{3}'' f_{1} + f_{3}' f_{1}') \\ (f_{1}' f_{2}' + f_{1} f_{2}'') - (f_{1}'' f_{2} + f_{1}' f_{2}') \\ \end{bmatrix} \\
+	&= m \begin{bmatrix} f_{2} f_{3}'' - f_{2}''f_{3} \\ f_{3} f_{1}'' - f_{1} f_{3}'' \\ f_{1} f_{2}'' - f_{2} f_{1}'' \end{bmatrix} \\
+	&= m(\vec{c}(t) \times \vec{a}(t)) \\
+	&= \vec{c}(t) \times \vec{F}(\vec{c}(t)),
+\end{align*}
+as desired.
+
+% --------------------------------------------- %
+
+\end{document}

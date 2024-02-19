@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\conjugate}[1]{\overline{#1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{MATH-UA 148: Homework 6}
+\author{James Pagan, January 2024}
+\date{Professor Weare}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Section 6A}
+
+% --------------------------------------------- %
+
+\subsection{Problem 4}
+
+\textbf{Part (a)}: As $V$ is a real vector space, $\ev{\vec{u}, \vec{v}} = \ev{\vec{v}, \vec{u}}$. Then
+\begin{align*}
+	\ev{\vec{u} + \vec{v}, \vec{u} - \vec{v}} &= \ev{\vec{u}, \vec{u} - \vec{v}} + \ev{\vec{v}, \vec{u} - \vec{v}} \\
+	&= \ev{\vec{u}, \vec{u}} - \ev{\vec{u}, \vec{v}} + \ev{\vec{v}, \vec{u}} - \ev{\vec{v}, \vec{v}} \\
+	&= \ev{\vec{u}, \vec{u}} - \ev{\vec{u}, \vec{v}} + \ev{\vec{u}, \vec{v}} - \ev{\vec{v}, \vec{v}} \\
+	&= \ev{\vec{u}, \vec{u}} - \ev{\vec{v}, \vec{v}} \\
+	&= \norm{\vec{u}}^{2} - \norm{\vec{v}}^{2}.
+\end{align*}
+
+\textbf{Part (b)}: Suppose that $\norm{\vec{v}} = \norm{\vec{u}}$. Then by Part (a),
+\[
+	\ev{\vec{u} + \vec{v}, \vec{u} - \vec{v}} = \norm{\vec{u}}^{2} - \norm{\vec{v}}^{2} = 0.
+\]
+We conclude that $\vec{u} + \vec{v}$ and $\vec{u} - \vec{v}$ are orthogonal.
+
+\textbf{Part (c)}: If we translate a rhombus such that one of its verticies is zero, we may represent all four of its verticies in order as $\vec{0}$, $\vec{u}$, $\vec{u} + \vec{v}$, and $\vec{v}$ for some $\vec{u}, \vec{v} \in \mathbb{R}^{n}$.
+
+Then its diagonals are $\vec{v} - \vec{u}$ (or $\vec{u} - \vec{v}$) and $\vec{u} + \vec{v}$; by the result of Part (b), these diagonals are orthogonal --- and thus, perpendicular under the Euclidean norm.
+
+% --------------------------------------------- %
+
+\subsection{Problem 11}
+
+Let $\vec{v} = \left( \sqrt{a}, \sqrt{b}, \sqrt{c}, \sqrt{d} \right)$ and $\vec{w} = \left( \tfrac{1}{\sqrt{a}}, \tfrac{1}{\sqrt{b}}, \tfrac{1}{\sqrt{c}}, \tfrac{1}{\sqrt{d}} \right)$. Then by Cauchy-Schwarz under the dot product,
+\begin{align*}
+	(a + b + c + d) \left( \frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d} \right) &= \norm{\vec{v}}^{2} \norm{\vec{w}}^{2} \\
+	&\ge \abs{\vec{v} \cdot \vec{w}}^{2} \\
+	&= \abs{a \left( \frac{1}{a} \right) + b \left( \frac{1}{b} \right) + c \left( \frac{1}{c} \right) + d \left( \frac{1}{d} \right)}^{2} \\ 
+	&= \abs{1 + 1 + 1 + 1}^{2} \\
+	&= 16,
+\end{align*}
+as desired.
+
+% --------------------------------------------- %
+
+\subsection{Problem 20}
+
+\begin{lemma}
+	For all $\vec{a}, \vec{b} \in V$,
+	\[
+		\norm{\vec{a} + \vec{b}}^{2} - \norm{\vec{a} - \vec{b}}^{2} = \ev{2 \vec{a}, \vec{b}} + \ev{2 \vec{b}, \vec{a}}
+	\]
+\end{lemma}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}\renewcommand{\qedsymbol}{}
+		We have that 
+		\begin{align*}
+			\norm{\vec{a} + \vec{b}}^{2} - \norm{\vec{a} - \vec{b}}^{2} &= \ev{\vec{a} + \vec{b}, \vec{a} + \vec{b}} - \ev{\vec{a} - \vec{b}, \vec{a} - \vec{b}} \\
+			&= \ev{\vec{a} + \vec{b}, \vec{a}} + \ev{\vec{a} + \vec{b}, \vec{b}} - \ev{\vec{a} - \vec{b}, \vec{a}} + \ev{\vec{a} - \vec{b}, \vec{b}} \\
+			&= \ev{(\vec{a} + \vec{b}) - (\vec{a} - \vec{b}), \vec{a}} + \ev{(\vec{a} + \vec{b}) + \ev{\vec{a} - \vec{b}}, \vec{b}} \\
+			&= \ev{2 \vec{b}, \vec{a}} + \ev{2 \vec{a}, \vec{b}},
+		\end{align*}
+		as required.
+	\end{proof}
+\end{adjustwidth}
+
+Using our lemma, we deduce that
+\begin{align*}
+	& \quad \frac{\norm{\vec{u} + \vec{v}}^{2} - \norm{\vec{u} - \vec{v}}^{2} + \norm{\vec{u} + i \vec{v}}^{2} i - \norm{\vec{u} - i \vec{v}}^{2} i}{4} \\
+		  &= \frac{\ev{2 \vec{u}, \vec{v}} + \ev{2 \vec{v}, \vec{u}} + i \ev{2 \vec{u}, i \vec{v}} + i \ev{2i \vec{v}, \vec{u}}}{4} \\
+		  &= \frac{2 \ev{\vec{u}, \vec{v}} + 2 \ev{\vec{v}, \vec{u}} + (-2 i^{2}) \ev{\vec{u}, \vec{v}} + (2i^{2}) \ev{\vec{v}, \vec{u}}}{4} \\
+		  &= \frac{2 \ev{\vec{u}, \vec{v}} + 2 \ev{\vec{v}, \vec{u}} + 2\ev{\vec{u}, \vec{v}} - 2 \ev{\vec{v}, \vec{u}}}{4} \\
+		  &= \frac{4 \ev{\vec{u}, \vec{v}}}{4} \\
+		  &= \ev{\vec{u}, \vec{v}},
+\end{align*}
+as desired.
+
+% --------------------------------------------- %
+
+\subsection{Problem 24}
+
+We must demonstrate that $\ev{\cdot, \cdot}_{1}$ satisfies the four criteria to be an inner product:
+\begin{enumerate}
+	\item \textbf{Conjugate Symmetry}: For all $\vec{u}, \vec{v} \in V$, $\ev{\vec{u}, \vec{v}}_{1} = \ev{S \vec{u}, S \vec{v}} = \conjugate{\ev{S \vec{v}, S \vec{u}}} = \conjugate{\ev{\vec{v}, \vec{u}}_{1}}$.
+	\item \textbf{Positive-Definiteness}: We have for all $\vec{v} \in V$ that $\ev{\vec{v}, \vec{v}}_{1} = \ev{S \vec{v}, S \vec{v}} \ge 0$. Equality occurs if and only if $S \vec{v} = \vec{0}$, which occurs exclusively when $\vec{v} = \vec{0}$ by the injectivity of $S$.
+	\item \textbf{Additivity in First Argument}: We have for all $\vec{u}, \vec{v}, \vec{w} \in V$ that $\ev{\vec{u} + \vec{v}, \vec{w}}_{1} = \ev{S (\vec{u} + \vec{v})}, S(\vec{w}) = \ev{S \vec{u} + S \vec{v}, S \vec{w}} = \ev{S \vec{u}, S \vec{w}} + \ev{S \vec{v}, S \vec{w}} = \ev{\vec{u}, \vec{w}}_{1} + \ev{\vec{v}, \vec{w}}_{1}$.
+	\item \textbf{Homogenity in First Argument}: We have for all $\vec{u}, \vec{v} \in V$ and $\lambda \in \mathbb{F}$ that $\ev{\lambda \vec{u}, \vec{v}}_{1} = \ev{S (\lambda \vec{u}), S \vec{v}} = \ev{\lambda (S \vec{u}), S \vec{v}} = \lambda \ev{S \vec{u}, S \vec{v}} = \lambda \ev{\vec{u}, \vec{v}}_{1}$.
+\end{enumerate}
+Therefore, $\ev{\cdot, \cdot}_{1}$ is an inner product over $V$.
+
+% --------------------------------------------- %
+
+\section{Section 6B}
+
+% --------------------------------------------- %
+
+\subsection{Problem 2}
+
+% --------------------------------------------- %
+
+\subsection{Problem 3}
+
+% --------------------------------------------- %
+
+\subsection{Problem 12}
+
+% --------------------------------------------- %
+
+\subsection{Problem 16}
+
+% --------------------------------------------- %
+
+\end{document}

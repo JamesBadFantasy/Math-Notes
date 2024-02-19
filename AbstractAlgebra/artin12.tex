@@ -1,0 +1,221 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\title{Artin: Factoring}
+\author{James Pagan}
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Unique Factorization Domains}
+
+% --------------------------------------------- %
+
+\subsection{Terminology}
+
+% --------------------------------------------- %
+
+Let $R$ be an integral domain. Before we introduce unique factorization domains, we must define several terms for $a, b \in R$:
+
+\begin{enumerate}
+  \item $a$ \textbf{divides} $b$ if $(b) \subseteq (a)$.
+  \item $a$ is a \textbf{proper divisor} if $b$ if $(b) \subset (a) \subset R$.
+  \item $a$ and $b$ are \textbf{associates} if $(a) = (b)$.
+  \item $a$ is \textbf{irreducible} if $(a) \subset R$ and there is no principal ideal $(c)$ such that $(a) \subset (c) \subset R$.
+  \item $p$ is a \textbf{prime element} if $p \ne 0$ and $(p)$ is prime.
+\end{enumerate}
+
+These may be equivalently expressed ideal-free (AbstractAlgebra/homework3.tex):
+\begin{enumerate}
+  \item $a$ \textbf{divides} $b$ if $b = aq$ for some $q \in R$.
+  \item $a$ is a \textbf{proper divisor} of $b$ if $b = aq$ and neither $a$ nor $q$ is a unit.
+  \item $a$ and $b$ are \textbf{associates} if each divides the other --- that is, $b = ua$ for some unit $u$.
+  \item $a$ is \textbf{irreducible} if it has no proper divisors --- its only divisors are units and associates.
+  \item $p$ is a \textbf{prime element} if $p \ne 0$ and $p$ divides $ab$ implies $p$ divides $a$ or $p$ divides $b$.
+\end{enumerate}
+
+A \textbf{size function} is a mapping $\sigma : R \setminus \{ 0 \} \to \mathbb{Z}_{\ge 0}$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $R$ be an integral domain. Then all prime elements of $R$ are irreducible.
+  \end{theorem}
+  \begin{proof}
+    Suppose that $p$ is prime and that $(p) \subseteq (c) \subset R$. Hence there exists $x$ such that $p = cx$, so $cx \in (p)$. We have two possibilities: $c \in (p)$ or $x \in (p)$.
+
+    Suppose for contradiction that $x \in (p)$. Then $x = py$ for some $y$ --- substituting into the above equality yields
+    \[
+      p = c(py) \implies p(1 - cy) = 0.
+    \]
+    Since $p \ne 0$, we have $1 = cy$ --- hence $c$ is a unit and $(c) = R$, a contradiction. We must have $c \in (p)$, so $(c) = (p)$. We conclude that $(p)$ is irreducible.
+  \end{proof}
+\end{adjustwidth}
+
+
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{unique factorization domain} $R$ is an integral domain if for every nonzero $x \in R$, there exists a unit $u$ and irreducible elements $p_{1}, \ldots, p_{n}$ such that
+\[
+  x \, = \, u p_{1} \cdots p_{n},
+\]
+and this factorization is unique in the following sense: if there exists a second factorization
+\[
+  x \, = \, w q_{1} \cdots q_{m},
+\]
+then $n = m$ and there exists a bijection such that $(p_{i}) = (q_{j})$ for each paired $i, j$ (that is, $p_{i}$ and $q_{j}$ associate).
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Every irreducible element in a unique factorization domain is prime.
+  \end{theorem}
+  \begin{proof}
+    Suppose that $(p)$ is not prime --- then there exist $a, b \notin (p)$ such that $ab \in (p)$. Thus we have $(p) \subset (a)$. Since $a$ is a nonunit, $(a) \subset R$, so
+    \[
+      (p) \subset (a) \subset R.
+    \]
+    Hence $(p)$ is not irreducible. Taking the contrapositive yields the desired result.
+  \end{proof}
+\end{adjustwidth}
+
+Hence, we could equivalently define unique factorization as decomposition to \textit{prime} elements.
+
+% --------------------------------------------- %
+
+\section{Principal Ideal Domains}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{principal ideal domain} is an integral domain in which all ideals are principal. It is clear that all such domains are Noetherian.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		Let $R$ be a principal ideal domain. Then all nonzero prime ideals of $R$ are maximal.
+	\end{theorem}
+	\begin{proof}
+    Let $(p)$ be a prime ideal contained in the maximal ideal $(m)$. Supposing for contradiction that
+    \[
+      (p) \subset (m) \subset R,
+    \]
+    we obtain that $(p)$ is not irreducible, which contradicts Theorem 1. Hence $(p) = (m)$, so $(p)$ is maximal.
+	\end{proof}
+\end{adjustwidth}
+Three helpful facts about principal ideal domains are as follows:
+\begin{enumerate}
+  \item If $\mathfrak{a}_{1} = (a_{1})$ and $\mathfrak{a}_{2} = (a_{2})$ are principal ideals, then $\mathfrak{a}_{1} \mathfrak{a}_{2} = (a_{1}a_{2})$. This holds in any commutative ring.
+  \item Prime ideals cannot contain other prime ideals: if $(p_{1}) \subset (p_{2})$ are prime, then the fact
+  \[
+    (p_{1}) \, \subset \, (p_{2}) \, \subset \, R
+  \]
+  implies that $(p_{1})$ is not irreducible --- a contradiction.
+  \item All prime ideals are relatively prime. This is because if $(p_{1})$ and $(p_{2})$ are prime, we have
+  \[
+    (p_{1}) \, \subseteq \, (p_{1}) + (p_{2}) \, \subseteq \, R
+  \]
+  We cannot have $(p_{1}) = (p_{1}) + (p_{2})$ by Fact 2; thus since $(p_{1})$ to be irreducible, we conclude that $(p_{1}) + (p_{2}) = R$.
+  \item If $(p_{1}), \ldots, (p_{n})$ are prime ideals, then
+  \[
+    (p_{1}) \cap \cdots \cap (p_{n}) \, = \, (p_{1}) \times \cdots \times (p_{n}) \, = \, (p_{1} \cdots p_{n}).
+  \]
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Relation with Unique Factorization Domains}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    All principal ideal domains are unique factorization domains.
+  \end{theorem}
+  \begin{proof}
+    Let $R$ be a principal ideal domain and let $x \in R$. We claim that $x$ is contained in finitely many prime ideals: suppose that $x$ is contained in prime ideals $(p_{1}), (p_{2}), \ldots$ in which case the chain
+    \[
+      x \quad \subseteq \quad \bigcap\limits_{i = 1}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 2}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 3}^{\infty} \, (p_{i}) \quad \subseteq \quad \cdots
+    \]
+    must be stationary. Hence, let $(p_{1}), \ldots, (p_{n})$ be the prime ideals which contain $x$. By Fact 4, we deduce that $x \in (p_{1}p_{2} \cdots p_{n})$. Thus we can write $x$ in the form
+    \[
+      x \, = \, u_{1} p_{1} \cdots p_{n}.
+    \]
+    If $u_{1}$ is contained in prime ideals, then they must be among $(p_{1}), \ldots, (p_{n})$. Hence we can express $u_{1}$ as a product of some $p_{1}, \ldots, p_{n}$ times $u_{2}$. Repeating at nauseum, we obtain a sequence $u_{1}, u_{2}, \ldots$ which yields the stationary chain
+    \[
+      (x) \subseteq (u_{1}) \subseteq (u_{2}) \subseteq \cdots.
+    \]
+    Hence there must exist $n \in \mathbb{Z}_{> 0}$ such that $(u_{n}) = (u_{n + 1}) = \cdots$. Thus we have $u_{n} = u \cdot u_{n + 1}$ for some unit $u$. Recursive substitution into our expression for $x$ yields
+    \[
+      x = u p_{1}^{e_{1}} \cdots p_{n}^{e_{n}},
+    \]
+    which completes the existence portion of the proof. As per uniqueness, suppose that
+    \[
+      u p_{1} \cdots p_{n} \, = \, x \, = \, w q_{1} \cdots q_{m}
+    \]
+    A quick induction on $\max{m, n}$ yields that since two primes on either side must be adjoints, we can divide and yield a number which factors uniquely. This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Euclidean Domain}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+An integral domain $R$ is a  \textbf{Euclidean domain} if there exists a size function $\sigma$ such that $a, b \in R$ implies the existence of $q, r \in R$ such that $a = bq + r$, where $\sigma(r) < \sigma(b)$. It is clear that $\mathbb{Z}$ is a Euclidean domain.
+
+% --------------------------------------------- %
+
+\subsection{Examples}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    $\mathbb{Z}[i]$ is a Euclidean domain.
+  \end{theorem}
+  \begin{proof}
+    Using the norm $\norm{a + bi} = a^{2} + b^{2}$, we will divide $a + bi$ by $c + di$. It is easy to deduce that there exist rationals $r, s$ such that
+    \[
+      \frac{a + bi}{c + di} \, = \, r + si.
+    \]
+    Approximate $r$ and $s$ by integers: namely define $n, m 
+    \in \mathbb{Z}$ such that $\abs{r - n} \le \tfrac{1}{2}$ and $\abs{s - m} \le \tfrac{1}{2}$. Then we can express the above as
+    \[
+      r + si  = (n + mi ) \, + \, (r - n) + i(s - m).
+    \]
+    Expanding this out, we obtain a rather messy equation:
+    \[
+      a + bi \quad = \quad (n + ni )(c + di ) \quad + \quad \big( (r - n) + i(s - m)  \big)(c + di ).
+    \]
+    All that remains to be proven is that the right-most term has a norm less than $c + di$, which is equivalent to showing that $(r - n) + i (s - m) $ has a norm less than one:
+    \[
+      \norm{(r - n) + i(s - m) } = (r - n)^{2} + (s - m)^{2} \le \frac{1}{4} + \frac{1}{4} < 1.
+    \]
+    This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+
+\end{document}

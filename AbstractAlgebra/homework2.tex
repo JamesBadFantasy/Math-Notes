@@ -1,0 +1,348 @@
+% 3B (optional)
+
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\title{MATH-UA 349: Homework 2}
+\author{James Pagan, February 2024}
+\date{Professor Kleiner}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 1}
+
+Let $\alpha$ be algebraic, and suppose $n$ is the smallest integer for which there exist $b_{n}, \ldots, b_{0} \in \mathbb{C}$ such that
+\[
+  b_{n} (\alpha)^{n} + \cdots + b_{1} (\alpha) + b_{0} \, = \, 0.
+\]
+Consider the complex vector space $\mathbb{C}[\alpha] \, / \, (b_{n} (\alpha)^{n} + \cdots + b_{1}(\alpha) + b_{0})$. We claim that all polynomials $p \in \mathbb{C}[\alpha]$ with $\deg p \ge n$ are equivalent to some $p \in \mathbb{C}[\alpha]$, which is either zero or has degree smaller than $n$. We prove this via the division algorithm: there exists polynomials $q$ and $r$ such that
+\begin{align*}
+  p &= q \big( b_{n} (\alpha)^{n} + \cdots + b_{1} (\alpha) + b_{0} \big) + r  \\.
+    &= q(0) + r \\
+    &= r,
+\end{align*}
+where $r = 0$ or $\deg r < n$. Thus the elements of $\mathbb{C}[\alpha] \, / \, (b_{n} (\alpha)^{n} + \cdots + b_{1}(\alpha) + b_{0})$ are of the form
+\[
+  c_{n - 1} (\alpha)^{n - 1} + \cdots + c_{1} (\alpha) + c_{0}
+\]
+for $c_{n - 1}, \ldots, c_{0} \in \mathbb{C}$. None of these polynomials are zero by the minimality of $n$. It is clear that this space is spanned the linearly independent list $1, \alpha, \ldots, \alpha^{n - 1}$ --- thus it has dimension $n$. 
+
+The proof ends here, since the finite-dimensional vector space $\mathbb{C}[\alpha] \, / \, (b_{n} (\alpha)^{n} + \cdots + b_{1}(\alpha) + b_{0})$ is spanned by $\{ \alpha_{n} \}_{n \ge 0}$.
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+  Let $\mathfrak{a}$ and $\mathfrak{b}$ be ideals of $R$. Let us verify the conditions that $\mathfrak{a} + \mathfrak{b}$ is an ideal:
+  \begin{enumerate}
+    \item \textbf{Additive}: Since $(R, +)$ is an Abelian group with subgroups $(\mathfrak{a}, +)$ and $(\mathfrak{b}, +)$, $\\ \mathfrak{a} + \mathfrak{b}$ is an additive subgroup of $R$.
+    \item \textbf{Multiplicative}: Let $r \in R$ and $a + b \in \mathfrak{a} + \mathfrak{b}$ (with $a \in \mathfrak{a}$ and $b \in \mathfrak{b}$). Then $ra \in \mathfrak{a}$ and $rb \in \mathfrak{b}$, so $r(a + b) = ra + rb \in \mathfrak{a + \mathfrak{b}}$.
+  \end{enumerate}
+  We conclude that $\mathfrak{a} + \mathfrak{b}$ is an ideal of $R$. To see that $\mathfrak{a} \cap \mathfrak{b}$ is an ideal, we have the following:
+  \begin{enumerate}
+    \item \textbf{Additive}: Since $(R, +)$ is an Abelian group with subgroups $(\mathfrak{a}, +)$ and $(\mathfrak{b}, +)$, $\\ \mathfrak{a} \cap \mathfrak{b}$ is an additive subgroup of $R$.
+    \item \textbf{Multiplicative}: Let $r \in R$ and $x \in \mathfrak{a} \cap \mathfrak{b}$. Then $x \in \mathfrak{a}$ and $x \in \mathfrak{b}$, so $rx \in \mathfrak{a}$ and $rx \in \mathfrak{b}$. We deduce that $rx \in \mathfrak{a} \cap \mathfrak{b}$.
+  \end{enumerate}
+  Hence, $\mathfrak{a} \cap \mathfrak{b}$ is an ideal of $R$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+
+\begin{proof}
+  Suppose $\mathfrak{a} = (a)$ and $\mathfrak{b} = (b)$ are ideals of $R$. We claim that $\mathfrak{ab} = (ab)$ by the following:
+  \begin{enumerate}
+    \item Suppose $x \in \mathfrak{ab}$; then $x = a_{0}b_{0}$ for some $a_{0} \in (a)$ and $b_{0} \in (b)$. In turn, $a_{0} = ra$ and $b_{0} = sb$ for some $r, s \in R$. Hence $x = rsab$, so $x \in (ab)$. We deduce that $\mathfrak{ab} \subseteq (ab)$.
+    \item Suppose $x \in (ab)$; then $x = rab$ for some $r \in R$. Since $ra \in (a)$ and $b \in (b)$, we see that $x = (ra)(b) \in \mathfrak{ab}$. We deduce that $(ab) \subseteq \mathfrak{ab}$.
+  \end{enumerate}
+  Hence $\mathfrak{ab} = (ab)$, so $\mathfrak{ab}$ is an ideal. This result is false in general: consider the product of ideals
+  \[
+    \boxed{(x, y) \times (z) \, \subseteq \, \mathbb{Z}[x, y, z]}.
+  \]  
+  It is clear that $z(x + y)$ and $z^{2}(x)$ lie in $(x, y) \times (z)$. However, their sum has the factorization
+  \[
+    z(x + y) + z^{2}(x) = z (zx + x + y),
+  \]
+  which does not belong to $(x, y) \times (z)$ since no factor lies in $(x, y)$. We conclude that $(x, y) \times (z)$ is not an ideal.
+
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+ % --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+  Select $x \in [0, 1]$ arbitrarily. Define $F$ as the set containing the sets $S_{a} \, \stackrel{\text{def}}{=} \, \{ f \in \mathcal{C} \big( [0, 1] \big) \, \mid \, f(0) = a\}$ for all $a \in \mathbb{R}$, endowed with the following operations:
+  \[
+    S_{a} + S_{b} = S_{a + b} \qquad \text{and} \qquad S_{a}S_{b} = S_{ab}.
+  \]
+  It is trivial that $F$ is a field under these operations. The nontrivial properties of this verification are elaborated upon below:
+  \begin{enumerate}
+    \item \textbf{Additive Conditions}: The additive identity is clearly $S_{0}$, and the additive inverse of $S_{a}$ for $a \in \mathbb{R}$ is $S_{-a}$.
+    \item \textbf{Multiplicative Conditions}: The multiplicative identity is clearly $S_{1}$, and the multiplicative inverse of $S_{a}$ for nonzero $a \in \mathbb{R}$ is $S_{1 / a}$.
+    \item \textbf{Distributive Laws}: The distributive laws on $F$ follow from those on $\mathbb{R}$.
+  \end{enumerate}
+  Thus $F$ is a field. Define a mapping $\phi : \mathcal{C} \big( [0, 1] \big) \to F$ by $\phi(f) = S_{f(x)}$. Observe that for all $f, g \in \mathcal{C} \big( [0, 1] \big)$, we have
+  \begin{align*}
+    \phi(f + g) = S_{f(x) + g(x)} &= S_{f(x)} + S_{g(x)} = \phi(f) + \phi(g) \\
+    \phi(fg) = S_{f(x)g(x)} &= S_{f(x)} S_{g(x)} = \phi(f) \phi(g).
+  \end{align*}
+  Noting that $\phi(1) = S_{1}$, yields that $\phi$ is a homomorphism. The kernel of $\phi$ is $I_{x}$: all $f \in \mathcal{C} \big( [0, 1] \big)$ such that $f(x) = 0$. Thus $I_{x}$ is an ideal of $\mathcal{C} \big( [0, 1] \big)$, and
+  \[
+    \mathcal{C} \big( [0, 1] \big) \, / \, I_{x} \cong F
+  \]
+  is an isomorphism. Thus $\mathcal{C} \big( 0, 1 \big) \, / \, I_{x}$ is a field, so $I_{x}$ must be maximal.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 4}
+
+\begin{proof}
+  It is clear that $\alpha^{4} + \alpha^{3} + \alpha^{2} + \alpha + 1 = 0$, so 
+  \[
+    \alpha^{5} - 1 = (\alpha - 1)(\alpha^{4} + \alpha^{3} + \alpha^{2} + \alpha + 1) = (\alpha - 1)(0) = 0
+  \]
+  and $\alpha^{5} = 1$. Therefore,
+  \[
+    (\alpha^{3} + \alpha^{2} + \alpha)(\alpha^{5} + 1) \, = \, (\alpha^{3} + \alpha^{2} + \alpha)2 = \boxed{2\alpha^{3} + 2\alpha^{2} + 2\alpha}.
+  \]
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 5}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+  Suppose that $\beta \in \overline{R}$ has the representation $\beta = r_{n} \alpha^{n} + \cdots + r_{1} \alpha + r_{0}$ for some $r_{0}, \ldots, r_{n} \in R$. Then
+  \begin{align}
+    a^{n} \beta &= r_{n} (a^{n} \alpha^{n}) + \cdots + r_{1} (a^{n} \alpha) + r_{0} (a^{n}) \\
+              &= r_{0} a_{n} + r_{1} a^{n - 1} + \cdots + r_{n},
+  \end{align}
+  which is a constant polynomial. Then there exists $b$ such that $\overline{b}$ is the expression $(2)$, which is $a^{n} \beta$. We conclude that $\beta = \alpha^{n} \overline{b}$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+
+\begin{proof}
+  A clear corollary of Part (a) is that $\phi(b) = \alpha^{k} \overline{b}$ for some integer $k$. Therefore,
+  \begin{align*}
+    \phi(b) = 0 & \iff \alpha^{k}b = 0 \quad \text{for some $k$} \\
+                & \iff \alpha^{k}b (a^{2k}) = 0(a^{2k}) = 0 \quad \text{for some $k$} \\
+                & \iff a^{k}b = 0 \quad \text{for some $k$},
+  \end{align*}
+  as desired.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (c)}
+
+\begin{proof}
+  Using the result from Part (b), we utilize the following chain of equivalencies: for all $b \in R$,
+  \begin{align*}
+    \phi(b) = 0 \quad \text{for all $b \in R$} & \iff a^{k}b = 0 \quad \text{for all $b \in R$ and some $k$} \\
+                      & \iff a^{k}(1) = 0 \quad \text{for some $k$} \\
+                      & \iff \text{$a$ is nilpotent}.
+  \end{align*}
+  This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 6}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+  Suppose that $\mathfrak{a}$ and $\mathfrak{b}$ are disjoint relateively prime ideals of $R$. We claim that
+  \[
+    R \, \cong \, (R \, / \, \mathfrak{b}) \times (r \, / \, \mathfrak{a})
+  \]
+  by the following isomorphism: if $x \in R$ and $x = a + b$ for $a \in \mathfrak{a}$ and $b \in \mathfrak{b}$, then $\phi(a + b) = (a, b)$.
+  
+  \begin{adjustwidth}{1cm}{}
+    \begin{claim}
+      $\phi$ is a homomorphism.
+    \end{claim}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+  
+    We are ready to prove the two homomorphism identities. If we let $x = a_{1} + b_{1}$ and $y = a_{2} + b_{2}$, we have
+    \begin{align*}
+      \phi(x + y) &= \phi(a_{1} + a_{2} + b_{1} + b_{2}) \\
+                  &= (a_{1} + a_{2}, b_{1} + b_{2}) \\
+                  &= (a_{1}, b_{1}) + (a_{2}, b_{2}) \\
+                  &= \phi(x) + \phi(y).
+    \end{align*}
+    As for the multiplicative condition, observe that $a_{1}b_{2} \in \mathfrak{a}$ and $a_{1}b_{2} \in \mathfrak{b}$, so $a_{1}b_{2} = 0$. Similarly $b_{1}a_{2} = 0$, so
+    \begin{align*}
+      \phi(xy) &= \phi \big( (a_{1} + b_{1})(a_{2} + b_{2}) \big) \\
+               &= \phi(a_{1}a_{2} + a_{1}b_{2} + b_{1}a_{2} + b_{1}b_{2}) \\
+               &= \phi(a_{1}a_{2} + b_{1}b_{2}) \\
+               &= (a_{1}a_{2}, b_{1}b_{2}) \\
+               &= (a_{1}, b_{1})(a_{2}, b_{2}) \\
+               &= \phi(x) \phi(y).
+    \end{align*}
+    Since the unital condition is trivial, we conclude that $\phi$ is a homomorphism.
+    \end{proof}
+  \end{adjustwidth}
+  
+  It is clear that $\phi$ is surjective: for all $(a, b) \in (R \, / \, \mathfrak{b}) \times (R \, / \, \mathfrak{a})$, we have $\phi(a + b) = (a, b)$. Injectivity follows from the fact the representation $x = a + b$ is unique. Suppose we set $x = a_{1} + b_{1} = a_{2} + b_{2}$ (for $a_{1}, a_{2} \in \mathfrak{a}$ and $b_{1}, b_{2} \in \mathfrak{b}$).  Then $a_{1} - a_{2} = b_{1} - b_{2}$ thus each side must be zero, implying $a_{1} = a_{2}$ and $b_{1} = b_{2}$. We deduce that $\phi$ is the desired isomorphism.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+
+\begin{proof}
+  The idempotents that generate $(R \, / \, \mathfrak{b}) \times (R \, / \, \mathfrak{a})$ are the elements $(0, 1)$ and $(1, 0)$ --- which if we let $a + b = 1$, are
+  \[
+    \boxed{\text{$b$ and $a$}} \,,
+  \]
+  or equivalently $1 - a$ and $1 - b$.  This may be verified by a quick computation.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 7}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+  Let $\mathfrak{a}$ and $\mathfrak{b}$ be two ideals of $R$ such that $\mathfrak{a} + \mathfrak{b} = R$. We make two claims:
+  \begin{enumerate}
+    \item Suppose $ab \in \mathfrak{ab}$ for $a \in \mathfrak{a}$ and $b \in \mathfrak{b}$. Then as $\mathfrak{a}$ is an ideal, $ab \in \mathfrak{a}$; likewise, $ab \in \mathfrak{b}$. We deduce that $ab \in \mathfrak{a} \cap \mathfrak{b}$, so $\mathfrak{ab} \subseteq \mathfrak{a} \cap \mathfrak{b}$.
+    \item Suppose $x \in \mathfrak{a} \cap \mathfrak{b}$; then $x \in \mathfrak{a}$ and $x \in \mathfrak{b}$. If we define $a \in \mathfrak{a}$ and $b \in \mathfrak{b}$ such that $a + b = 1$, we obtain $xa \in \mathfrak{ba}$ and $xb \in \mathfrak{ab}$. Thus $x = xa + xb \in \mathfrak{ab}$, so $\mathfrak{a} \cap \mathfrak{b} \subseteq \mathfrak{ab}$.
+  \end{enumerate}
+  We conclude that $\mathfrak{ab} = \mathfrak{a} \cap \mathfrak{b}$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+
+\begin{proof}
+  Suppose $\mathfrak{a} + \mathfrak{b} = R$, and $c, d \in R$. Let $a + b = 1$ (where $a \in \mathfrak{a}$ and $b \in \mathfrak{b}$); we claim $\boxed{ad + bc}$ lies in $c + \mathfrak{a}$ and $d + \mathfrak{b}$. For the first relation, we have
+  \[
+    ad + bc \, \equiv \, bc \, \equiv \, (1 - a)c \equiv c \pmod{\mathfrak{a}}
+  \]
+  and for the second relation, we have
+  \[
+    ad + bc \, \equiv \, ad \, \equiv \, (1 - b)d \, \equiv \, d \pmod{\mathfrak{b}}.
+  \]
+  This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 8}
+
+\begin{proof}
+  The answer is $\boxed{\text{false}}$\,; there are no integral domains of order $15$. Suppose for contradiction that such an ring $R$ exists. We utilze the following claim:
+  \begin{adjustwidth}{1cm}{}
+	  \begin{claim}
+		  All finite domains are fields.
+	  \end{claim}
+	  \begin{proof}\renewcommand{\qedsymbol}{}
+		  Let $R$ be a finite domain. Then for nonzero $a \in R$, consider the set
+		  \[
+			  \{ a, a^{2}, \ldots, a^{\abs{R} + 1} \}.
+		  \]
+		  By the Pigeonhole Principle, two elements of this set must be equal: $a^{i} = a^{j}$ for $i, j \in \{ 1, \ldots, n \}$ with $i < j$. Then $a^{i - j} = 1$ and $a^{i - j - 1} = a^{-1}$, so all nonzero elements of $R$ are invertible. We conclude that $R$ is a field.
+	  \end{proof}
+  \end{adjustwidth}
+  Thus, $R$ is a field. We attain the desired contradiction noting that no finite field of order $15$ exists.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 9}
+
+% --------------------------------------------- %
+
+\begin{proof}
+  Let $R$ be a ring of order $10$. The additive group $(R, +)$ is a finite Abelian group of order ten, of which there is one possibility: $C_{10}$. Then $R$ has four additive generators ---  namely, elements of order $10$.
+
+  \begin{claim}
+    The multiplicative identity $e$ of $R$ has additive order $10$.
+  \end{claim}
+  \begin{adjustwidth}{1cm}{}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+    Let $g \in R$ have additive order $10$. Lagrange's Theorem ensures that the additive order of $e$ must divide ten; if $e$ has order $2$, then
+    \[
+      0 \ne g + g = g(e + e) = e(0) = 0,
+    \]
+    a contradiction. Assuming that $e$ has order $5$ yields similar nonsense: 
+    \[
+      0 \ne g + g + g + g + g = g(1 + 1 + 1 + 1 + 1) = g(0) = 0.
+    \]
+    We conclude that $e$ must have additive order $10$.
+    \end{proof}
+  \end{adjustwidth}
+  Then we can define an isomorphism $R \, \cong \, \mathbb{Z}_{10}$ that maps the additive identity to $0$ and the multiplicative identity to $1$. Hence $\boxed{\text{all rings of order $10$ are isomorphic to $\mathbb{Z}_{10}$}}$ \,.
+\end{proof} 
+
+% --------------------------------------------- %
+
+\section{Problem 10}
+
+\begin{proof}
+  The elements of the commutative ring $\mathbb{Z}_{2} [x] \, / \, (x^{3} + x + 1)$ are precisely the eight polynomials in $\mathbb{Z}_{2}[x]$ of degree $2$ or smaller, as ensured by the Division Algorithm. We must demonstrate that the seven nonzero polynomials are units: we have that
+  \begin{enumerate}
+    \item $1 \times 1 = 1$.
+    \item $x(x^{2} + 1) \, = \, x^{3} + x \, = \, 1$.
+    \item $(x + 1)(x^{2} + x) \, = \, x^{3} + 2x^{2} + x \, = \, x^{3} + x \, = \, 1$.
+    \item $(x^{2} + x + 1)(x^{2}) \, = \, x^{4} + x^{3} + 1 \, = \, (x + 1)(x^{3} + x + 1) - 2x - 1 \, = \, 1$.
+  \end{enumerate}
+  We conclude that $\mathbb{Z}_{2}[x] \, / \, (x^{3} + x + 1)$ is a field. Likewise, $\mathbb{Z}_{3}[x] \, / \, (x^{3} + x + 1)$ consists of polynomials of degree two or smaller --- however,
+  \[
+    (x - 1)(x^{2} + x - 1) \, = \, x^{3} - 2x + 1 \, = \, x^{3} + x + 1 \, = \, 0.
+  \]
+  Thus $\mathbb{Z}_{3}[x] \, / \, (x^{3} + x + 1)$ is not an integral domain, so it cannot be a field.
+\end{proof}
+
+% --------------------------------------------- %
+
+\end{document}

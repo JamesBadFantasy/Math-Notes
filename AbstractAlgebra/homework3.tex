@@ -1,0 +1,280 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\title{MATH-UA 349: Homework 3}
+\author{James Pagan, February 2024}
+\date{Professor Kleiner}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 1}
+
+\begin{proof}
+  The following six proofs demonstrate that the \textit{first} proofs imply the \textit{second}:
+  \begin{enumerate}
+    \item \textbf{Units}: Suppose that $u$ has a multiplicative inverse $v$. Then $1 = uv \in (v)$, so for all $a \in R$, we obtain $a = a1 \in (v)$. Thus $(u) = R$.
+  
+    Suppose that $(u) = R$. Then $1 \in (u)$, so there exists $v$ such that $uv = 1$. Thus $u$ has a multiplicative inverse.
+    \item \textbf{Divisors}: Suppose that $b = aq$. Then for all $bx \in (b)$, we have that $bx = aqx \in (a)$ --- hence $(b) \subseteq (a)$.
+
+    Suppose that $(b) \subseteq (a)$. Then $b \in (a)$, so there exists $q$ such that $b = aq$.
+    \item \textbf{Proper Divisors}: Suppose that $b = aq$ and neither $a$ nor $q$ are units. Then $(b) \subseteq (a)$. If we suppose for contradiction that $(b) = (a)$, then there exists $x$ such that $bx = a$. Hence $a = axq$; since $R$ is an integral domain, $q$ is a unit. Thus we conclude $(b) \subset (a)$.
+
+    Suppose that $(b) \subset (a)$. Then $b = aq$ for some $q$; if $q$ was a unit, then $a = bq^{-1}$ and $(b) = (a)$. Thus $u$ is not a unit.
+ 
+    \item \textbf{Associates}: Suppose that $a = ub$ for some unit $u$. Then for all $ax \in (a)$, we have $ax = bux \in (b)$ --- and for all $bx \in (b)$, we have $bx = au^{-1}x \in (a)$. Thus $(a) = (b)$.
+
+    Suppose that $(a) = (b)$. Then there exists $u, v$ such that $a = ub$ and $b = va$, so $a = uva$. Since $R$ is an integral domain, this implies that $u$ is a unit.
+    \item \textbf{Irreducible Elements}: The proof follows from Parts (1) and (2):
+    \begin{align*}
+      a \text{ is a nonunit } & \iff (a) \subset R \\
+      a \text{ has no proper divisors } & \iff \text{ there does not exist $(b)$ such that } (a) \subset (b) \subset R.
+    \end{align*}
+    
+    \item \textbf{Prime Elements}: Using Part (2), we find that
+    \begin{align*}
+      p \mid ab \text{ implies } p \mid a \text{ or } p \mid b & \iff (ab) \subseteq (p) \text{ implies } (a) \subseteq (p) \text{ or } (b) \subseteq (p) \\
+                                                       & \iff ab \in (p) \text{ implies } a \in (p) \text{ or } b \in (p),
+    \end{align*}
+    as desired.
+  \end{enumerate}
+  This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+  Since $R \subseteq \mathbb{Z}[i]$ is a subring, the units of $R$ are units of $\mathbb{Z}_{i}$ --- namely, they must be among $1$, $i$, $-1$, and $-i$. It is clear that only $\boxed{\text{$1$ and $-1$}}$ are elements of $R$ and are both units.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+\begin{proof}
+  Realize that elements $a + bi \sqrt{5} \in R$ have norm squared
+  \[
+    \abs{a + bi \sqrt{5}}^{2} = a^{2} + 5 b^{2}.
+  \]
+  Thus if an element $x \in R$ factors into nonunits $y, z \in R$, then $\abs{x}^{2}$ factors into two numbers of the form $a^{2} + 5b^{2} > 1$ for integers $a, b$. The absolute values of the required elements are as follows:
+  \begin{enumerate}
+    \item $\abs{2}^{2} = 4$.
+    \item $\abs{3}^{2} = 9$. 
+    \item $\abs{1 + i\sqrt{5}}^{2} = 6$.
+    \item $\abs{1 - i\sqrt{5}}^{2} = 6$.
+  \end{enumerate}
+  By listing integers of the form $a^{2} + 5b^{2}$, we obtain that none of these factor as desired. Hence they are all irreducible.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (c)}
+
+\begin{proof}
+  Observe that the element $6 \in R$ factors into two products of irreducible elements:
+  \[
+    2 \times 3 \, = \, 6 \, = \, (1 + i\sqrt{5})(1 - i\sqrt{5}).
+  \]
+  Neither of the terms on the right-hand side are adjoints with the left-hand side, since the units of $R$ are $1$ and $-1$. Hence $R$ is not a Unique Factorization Domain.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+$F[x_{1}, x_{2}]$ is not a principal ideal domain because the ideal
+\[
+  (x_{1}, x_{2})
+\]
+is not principal: otherwise since $(x_{1}, x_{2}) \ne R$ there would exist a nonunit generator that divides the polynomials $x_{1}$ and $x_{2}$, but both such elements are irreducible.
+
+% --------------------------------------------- %
+
+\section{Problem 4}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+	Suppose that $\mathfrak{p}$ is a prime ideal of $R$, and define $\phi : R \to R \,/\, \mathfrak{p}$ by $\phi(a) = a + \mathfrak{p}$. Since the kernel of $\phi$ is $\mathfrak{p}$, we have that
+	\[
+		\phi(ab) = 0 \implies ab \in \mathfrak{p} \implies a \in \mathfrak{p} \text{ or } b \in \mathfrak{p} \implies \phi(a) = 0 \text{ or } \phi(b) = 0.
+	\]
+	Conversely, suppose that $R \,/\, \mathfrak{p}$ is an integral domain. Then
+	\[
+		ab \in \mathfrak{p} \implies \phi(ab) = 0 \implies \phi(a) = 0 \text{ or } \phi(b) = 0 \implies a \in \mathfrak{p} \text{ or } b \in \mathfrak{p}.
+	\]
+	This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+\begin{proof}
+  Using the result from Problem 1, we have
+  \begin{align*}
+    \text{$(p) \ne (0)$ is prime} & \iff \text{$p \ne (0)$, $p \ne R$, and $ab \in (p)$ implies $a \in (p)$ or $b \in (p)$} \\
+                          & \iff \text{$p \ne 0$ is not a unit, and $p \mid ab$ implies $p \mid a$ or $p \mid b$} \\
+                          & \iff \text{$p$ is a prime element},
+  \end{align*}
+  as required.
+\end{proof}
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 5}
+
+We use elementary Number Theory. It is clear that $\gcd(ab, a + b) = 1$: using the fact that $\gcd(w, y) = 1$ implies that $\gcd(x, y) = \gcd(xw, y)$ for all $x$, we have
+\begin{align*}
+  \gcd(a, b) = 1 & \implies \gcd(a, a + b) = 1 \text{ and } \gcd(b, a + b) = 1 \\
+                 & \implies \gcd(ab, a + b) = 1.
+\end{align*}
+We may thus use Euler's theorem on $a + b$ modulo $ab$. Let $\varphi(a + b) = n$, where $\varphi$ is Euler's totient function. Then
+\begin{align*}
+  a^{n} + b^{n} & \equiv a^{n} \, + \, \tbinom{n}{1} a^{n - 1}b \, + \, \cdots \, + \, \tbinom{n}{n - 1} a b^{n - 1} \pmod{ab} \\
+                & \equiv (a + b)^{n} \pmod{ab} \\
+                & \equiv 1 \pmod{ab}.
+\end{align*}
+This completes the proof.
+
+% --------------------------------------------- %
+
+\section{Problem 6}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+\begin{proof}
+  Let $P \, / \, Q$ be a rational function in $\mathbb{C}(x)$. We use strong induction on the degree of $Q$; clearly the cases where $\deg Q = 1$ or $Q$ is constant are trivial.
+  
+  \textbf{Inductive Step}: Let the hypothesis be true for $\deg Q \le n - 1$, and consider when $\deg Q = n$. There exist polynomials $A, R$ such htat
+  \[
+    \frac{P}{Q} = \frac{AQ + R}{Q} = A + \frac{R}{Q},
+  \]
+  where $\deg R < \deg Q$ or $R$ is zero. Let $Q = c(x - q_{1}) \cdots (x - q_{n})$. Again by polynomial division, there exists a polynomials $B$ and a constant $d$ such that
+  \[
+    \frac{R}{Q} = \frac{B(x - q_{1}) + d}{Q} = \frac{B}{c(x - q_{2}) \cdots (x - q_{n})} + \frac{d}{q}.
+  \]
+  Our inductive hypothesis applies to $B \, / \, c(x - q_{2}) \cdots (x - q_{n})$; we need only demonstrate that $d \, / \, Q$ is of the required form. If $q_{1} = \cdots = q_{n}$, we are done; otherwise, the GCD of all $(x - q_{i})$ is $1$, so Bezout's Identity guarantees that there exist constants $a_{1}, \ldots, a_{n}$ such that
+  \[
+    a_{1}(x - q_{1}) + \cdots + a_{n}(x - q_{n}) \, = \, 1.
+  \]
+  Therefore, we have
+  \[
+    \frac{d}{q} = \frac{da_{1} (x - q_{1}) + \cdots + da_{n}(x - q_{n})}{q}.
+  \]
+  Expanding this polynomial out, we get a sum of polynomials with denominator degree $n - 1$; hence the inductive hypothesis applies. We conclude that $P \, / \, Q$ is expressable in the given form.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+
+\begin{proof}
+  Since $\{ 1, x, x^{2}, x^{3}, \ldots \}$ is a basis of $\mathbb{C}[x]$, a basis of $\mathbb{C}(x)$ is
+  \[
+    \boxed{\text{$1, x, x^{2}, x^{3}, \ldots$ and every term $\frac{1}{(x - a)^{i}}$ for $a \in \mathbb{C}$ and $i \in \mathbb{Z}_{> 0}$}}.
+  \]
+\end{proof}
+
+
+% --------------------------------------------- %
+
+\section{Problem 7}
+
+\textit{Note: My solutions for these problems are parts, differing only at the final equation}
+
+% --------------------------------------------- %
+
+\subsection*{Part (a)}
+
+\begin{proof}
+  
+
+Using the norm $\norm{a + b \omega} = a^{2} + ab + b^{2}$, we will divide $a + b \omega$ by $c + d \omega$. It is easy to deduce that there exist rationals $r, s$ such that
+  \[
+    \frac{a + b \omega}{c + d \omega} \, = \, r + s \omega.
+  \]
+  Approximate $r$ and $s$ by integers: namely define $n, m 
+  \in \mathbb{Z}$ such that $\abs{r - n} \le 1$ and $\abs{s - m} \le 1$. Then we can express the above as
+  \[
+    r + s \omega = (n + m \omega) \, + \, (r - n) + (s - m) \omega.
+  \]
+  Expanding this out, we obtain a rather messy equation:
+  \[
+    a + bi \quad = \quad (n + n \omega)(c + d \omega) \quad + \quad \big( (r - n) + (s - m) \omega \big)(c + d \omega).
+  \]
+  All that remains to be proven is that the right-most term has a norm less than $c + di$, which is equivalent to showing that $(r - n) + i (s - m) \sqrt{2}$ has a norm less than one:
+  \[
+    \norm{(r - n) + (s - m) \omega} = (r - n)^{2} + (r - n)(s - m) + (s - m)^{2} \le \frac{3}{4} < 1.
+  \]
+  This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection*{Part (b)}
+
+\begin{proof}
+  Using the norm $\norm{a + bi \sqrt{2}} = a^{2} + 2b^{2}$, we will divide $a + bi \sqrt{2}$ by $c + di \sqrt{2}$. It is easy to deduce that there exist rationals $r, s$ such that
+  \[
+    \frac{a + bi \sqrt{2}}{c + di \sqrt{2}} \, = \, r + s i \sqrt{2}.
+  \]
+  Approximate $r$ and $s$ by integers: namely define $n, m 
+  \in \mathbb{Z}$ such that $\abs{r - n} \le 1$ and $\abs{s - m} \le 1$. Then we can express the above as
+  \[
+    r + si \sqrt{2} = (n + mi \sqrt{2}) \, + \, (r - n) + i(s - m) \sqrt{2}.
+  \]
+  Expanding this out, we obtain a rather messy equation:
+  \[
+    a + bi \quad = \quad (n + ni \sqrt{2})(c + di \sqrt{2}) \quad + \quad \big( (r - n) + i(s - m) \sqrt{2} \big)(c + di \sqrt{2}).
+  \]
+  All that remains to be proven is that the right-most term has a norm less than $c + di$, which is equivalent to showing that $(r - n) + i (s - m) \sqrt{2}$ has a norm less than one:
+  \[
+    \norm{(r - n) + i(s - m) \sqrt{2}} = (r - n)^{2} + 2(s - m)^{2} \le \frac{1}{4} + 2 \left( \frac{1}{4} \right) = \frac{3}{4} < 1.
+  \]
+  This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 8}
+
+Let $\psi_{1} : \mathbb{Z}[x] \to \mathbb{F}_{c_{1}}[x]$ and $\psi_{2} : \mathbb{Z}[x] \to \mathbb{F}_{c_{2}}[x]$ be the natural homomorphisms. It is clear by the properties of modular arithmetic that $\psi_{1} \circ \psi_{2} = \psi_{2} \circ \psi_{1}$: hence we have
+\[
+  \phi_{2} \circ \phi_{1} (f_{1}f_{2}) = \phi_{2}(\phi_{1}(f_{1})) \phi_{1}(\phi_{2}(f_{2})) = 0,
+\]
+so $c_{1}c_{2}$ divides every coefficent of $f_{1}f_{2}$. It is easy to see that if $c$ contains a prime power which is bigger (or different) than one in $c_{1}c_{2}$, then we attain a contradiction divvying up the prime power between $f_{1}$ and $f_{2}$ in $\mathbb{F}_{p^{n}}$.
+
+% --------------------------------------------- %
+
+\end{document}

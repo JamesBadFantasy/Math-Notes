@@ -1,0 +1,945 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+\newcommand{\Spec}{\operatorname{Spec}}
+
+\title{Atiyah-MacDonald: Rings and Ideals}
+\author{James Pagan}
+\date{January 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Rings}
+
+% --------------------------------------------- %
+
+\subsection{Ring Axioms}
+
+A \textbf{ring} $R$ is a set endowed with two binary operations, here denoted ``$+$'' and ``$\times$'', such that if $a, b, c \in R$, the following ten axioms are satisfied:
+
+\begin{itemize}
+	\item \textbf{Additive Axioms}
+	\begin{enumerate}
+		\item \textbf{Closure}: $a + b \in R$.
+		\item \textbf{Associativity}: $a + (b + c) = (a + b) + c$.
+		\item \textbf{Identity}: There is $0 \in R$ such that $a + 0 = 0 + a = a$.
+		\item \textbf{Invertability}: There is $-a \in R$ such that $a + (-a) = (-a) + a = 0$.
+		\item \textbf{Commutativity}: $a + b = b + a$.
+	\end{enumerate}
+	\item \textbf{Multiplicative Axioms}
+	\begin{enumerate}\addtocounter{enumi}{5}
+		\item \textbf{Closure}: $ab \in R$.
+		\item \textbf{Associativity}: $a(bc) = (ab)c$.
+		\item \textbf{Identity}: There is $1 \in R$ such that $a1 = 1a = a$.
+	\end{enumerate}
+	\item \textbf{Distributive Axioms}
+	\begin{enumerate}\addtocounter{enumi}{8}
+		\item \textbf{Left Distributivity}: $a(b + c) = ab + ac$.
+		\item \textbf{Right Distributivity}: $(a + b)c = ac + bc$.
+	\end{enumerate}
+\end{itemize}
+
+Since $(R, +)$ is an Abelian group, the following properties hold for $a, b \in R$: the additive identity $0$ is unique, the additive inverse $-a$ is unique, $-(-a) = a$, and $-(a + b) = -a - b$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The following properties hold for any ring $R$ and $a, b \in R$:
+		\begin{enumerate}
+			\item $1$ is the unique multiplicative inverse of $R$.
+			\item If $a$ has a multiplicative inverse $a^{-1}$, it is unique.
+			\item $a0 = 0a = a$.
+			\item $-a$ = $(-1)a$.
+			\item $a(-b) = (-a)b = -ab$.
+			\item $(-a)(-b) = ab$.
+		\end{enumerate}
+	\end{theorem}
+	\newpage
+	\begin{proof}
+		(1) and (2) follow from the monoid/group axioms. For the rest:
+		\begin{enumerate}\addtocounter{enumi}{2}
+			\item As $0 + 0 = 0$, we have that $a0 = a(0 + 0) = a0 + a0$; subtracting by $a0$ yields $a0 = 0$. Similarly, $0a = 0$.
+			\item We have that 
+			\[
+				(-1)a + a = (-1)a + 1a = (-1 + 1)a = 0a = 0,
+			\]
+			so $(-1)a = -a$.
+			\item See that
+			\[
+				a(-b) + ab = a(-b + b) = a0 = 0,
+			\]
+			so $a(-b) = -ab$. Similarly, $(-a)b = -ab$.
+			\item Using (5), we find that
+			\[
+				(-a)(-b) = -(a)(-b) = -(-ab) = ab,
+			\]
+			as desired.
+		\end{enumerate}
+		This yields the desired six properties.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Subrings and Ideals}
+
+A \textbf{subring} $R'$ of $R$ is a subset of $R$ that is also a ring. This relation is denoted $R' \subseteq R$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		A subset $R'$ of $R$ is a subring if it is nonempty, closed under addition and multiplication, contains additive inverses, and contains the multiplicative identity.
+	\end{theorem}
+	\begin{proof}
+		The conditions that $(R', +)$ is nonempty, closed, and contains inverses ensures that it is a group. Note that $(R', \times)$ is closed and contains the multiplicative identity. 
+
+		The final properties are implied by the fact $R'$ is a subset of $R$; all the elements of $R'$ satisfy both associative and distributive laws, plus additive commutativity. We deduce that $R'$ is a subring.
+	\end{proof}
+\end{adjustwidth}
+
+All rings contain at least two subrings: the $0$ ring and $R$ itself.
+
+\newpage
+
+A \textbf{ideal} $\mathfrak{a}$ of $R$ is a subset of $R$ that satisfies the following twokproperties:
+\begin{enumerate}
+	\item \textbf{Additive}: $\mathfrak{a}$ is an additive subgroup of $R$.
+	\item \textbf{Multiplicative}: For all $a \in \mathfrak{a}$ and $x \in R$, we have $ax, xa \in \mathfrak{a}$.
+\end{enumerate}
+
+All rings contain at least two ideals: one is $R$ itself, one is a maximal ideal (Section 2.3).
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		If $R'$ is both a subring and an ideal of $R$ if and only if $R'$ is $R$ or $0$.
+	\end{theorem}
+	\begin{proof}
+		Suppose that $R' \ne 0$ is both a subring and an ideal of $R$. As $R'$ is a subring, $1 \in R'$; as $R'$ is an ideal, $a = a1 \in R'$ for all $a \in R$. Then $R' = R$. Clearly, $R$ itself and $0$ are both ideals and subrings --- which yields the desired result.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Ring Homomorphisms}
+
+A \textbf{ring homomorphism} between two rings $R$ and $R'$ is a mapping $\phi : R \to R'$ such that for all $a, b \in R$,
+\begin{align*}
+	\phi(a + b) &= \phi(a) + \phi(b) \\
+	   \phi(ab) &= \phi(a) \phi(b) \\
+	   	\phi(1) &= 1.
+\end{align*}
+By the group axioms, $\phi(-a) = -\phi(a)$ and $\phi(0) = 0$ for all $a \in R$. If $a$ has a multiplicative inverse $a^{-1}$, then $\phi(a^{-1}) = \phi(a)^{-1}$.
+
+The \textbf{image} of $R$ under $\phi$ is the set $\{ \phi(a) \mid a \in R \}$, and is denoted $\phi(R)$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The image of any ring homomorphism $\phi : R \to R'$ is a subring of $R'$.
+	\end{theorem}
+	\begin{proof}
+		Realize that $\phi(R)$ is nonempty, and for all $\phi(a), \phi(b) \in \phi(R)$, we have that 
+		\begin{enumerate}
+			\item $\phi(a) + \phi(b) = \phi(ab) \in \phi(R)$.
+			\item $\phi(a) \phi(b) = \phi(ab) \in \phi(R)$.
+			\item $-\phi(a) = \phi(-a) \in \phi(R)$.
+			\item $\phi(1) \in R$.
+		\end{enumerate}	
+		Hence, $\phi(R)$ is a subring of $R'$.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+The \textbf{kernel} of $R$ under $\phi$ is the set $\{ a \in R\mid \phi(r) = 0 \}$ and is denoted $\Ker \phi$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		$\Ker \phi$ is an ideal of $R.$
+	\end{theorem}
+	\begin{proof}
+		Since $\phi$ is a homomorphism of the Abelian groups $(R, +)$ and $(R', +)$, the kernel of $\phi$ is an Abelian group with respect to addition. We need only verify the multiplicative condition; for all $a \in R$ and $k \in \Ker \phi$,
+		\[
+			\phi(ak) = \phi(a) \phi(k) = 0 \phi(a) = 0 = \phi(a) 0 = \phi(a) \phi(k) = \phi(ak).
+		\]
+		Then $ak \in \Ker \phi$. Thus, $\Ker \phi$ is an ideal.
+	\end{proof}
+\end{adjustwidth}
+
+Categories of group homomorphisms --- like monomorphisms, epimorphisms, isomorphisms, endomorphisms, automorphisms --- have equivalent formulations for ring homomorphisms. An isomorphism between $R$ and $R'$ is denoted the same as groups:
+\[
+	R \cong R'.
+\]
+We can extend the notion of a quotient group to a ring $R$ with an ideal $\mathfrak{a}$ as follows, yielding a \textbf{quotient ideal}:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The quotient group $R \,/\, \mathfrak{a}$ is a ring under the product $(a + \mathfrak{a})(b + \mathfrak{a}) = ab + \mathfrak{a}$ for $a, b \in R$.
+	\end{theorem}
+	\begin{proof}
+		The quotient group $R \,/\, \mathfrak{a}$ exists, since $\mathfrak{a}$ is an additive subgroup of $R$ and all subgroups of Abelian groups are normal. We must demonstrate that the product is well-defined.
+		
+		Suppose $a + \mathfrak{a} = a' + \mathfrak{a}$ and $b + \mathfrak{a} = b' + \mathfrak{a}$. Then since $a - a' \in \mathfrak{a}$ and $b - b' \in \mathfrak{a}$,
+		\[
+			ab - a'b \in \mathfrak{a} \qquad \text{and} \qquad a'b - a'b' \in \mathfrak{a}.
+		\]
+		Thus, $ab - a'b' \in \mathfrak{a}$ and $ab + \mathfrak{a} = a'b' + \mathfrak{a}$. Then the product is well-defined. Proving that the product is closed and associative is trivial; the multiplicative identity of $R \,/\, \mathfrak{a}$ is $1 + \mathfrak{a}$, and the distributivity with addition is trivial --- so $R \,/\, \mathfrak{a}$ is a ring.
+	\end{proof}
+\end{adjustwidth}
+
+The canonical mapping $\phi : R \to R \,/\, \mathfrak{a}$ is thus a surjective homomomorphism with kernel $\mathfrak{a}$. A similar definition exists for the quotient of two ideals --- say, $\mathfrak{a} \,/\, \mathfrak{b}$ for $\mathfrak{a} \supseteq \mathfrak{b}$.
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Isomorphism Theorems}
+
+All three Isomorphism Theorems and the Correspondence Theorem have their equivalencies for rings.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}[First Isomorphism Theorem]
+		For all homomorphisms $\phi : R \to R'$ with kernel $\mathfrak{k}$,
+		\[
+			R \,/\, \mathfrak{k} \cong \phi(R)
+		\]
+		by the mapping $\psi(a + \mathfrak{k}) = \phi(a)$.
+	\end{theorem}
+	\begin{proof}
+		We must first demonstrate that $\psi$ is a homomorphism. If $a, b \in R$, then the following three identities hold:
+		\begin{enumerate}
+			\item $\psi(a + b + \mathfrak{k}) = \phi(a + b) = \phi(a) + \phi(b) = \psi(a + \mathfrak{k}) + \psi(b + \mathfrak{k})$.
+			\item $\psi(ab + \mathfrak{k}) = \phi(ab) = \phi(a) \phi(b) = \psi(a + \mathfrak{k}) \psi(b + \mathfrak{k})$.
+			\item $\psi(1 + \mathfrak{k}) = \phi(1)$.
+		\end{enumerate}
+		Thus, $\psi$ is a homomorphism. For all $\phi(a) \in \phi(R)$, realize that $\psi(a + \mathfrak{k}) = \phi(a)$; thus $\psi$ is surjective. Finally, let $\psi(a + \mathfrak{k}) = \psi(b + \mathfrak{k})$; then $\phi(a) = \phi(b)$, so
+		\[
+			\phi(a - b) = \phi(a) - \phi(b) = 0.
+		\]
+		Hence, $a - b \in \mathfrak{k}$ and $a + \mathfrak{k} = b + \mathfrak{k}$. We conclude that $\psi$ is injective, implying the desired isomorphism.
+	\end{proof}
+\end{adjustwidth}
+
+The Correspondence Theorem expands upon the result of the First Isomorphism Theorem.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}[Correspondence Theorem]
+		There is a one-to-one correspondence between ideals of $\phi(R)$ and ideals of $R$ that contain $\mathfrak{k}$.
+	\end{theorem}
+	\begin{proof}
+		For an ideal $\mathfrak{a}'$ of $\phi(R)$, define $\mathfrak{a} = \{ a \in R \mid \phi(a) \in \mathfrak{a}' \}$. By the Correspondence Theorem for groups, $\mathfrak{a}$ is an additive subgroup of $R$. For all $a \in \mathfrak{a}$ and $b \in R$, we have $\phi(a) \in \mathfrak{a}'$; thus
+		\[
+			\phi(ab) = \phi(a) \phi(b) \in \mathfrak{a}'
+		\]
+		since $\mathfrak{a}'$ is an ideal. Thus $ab \in \mathfrak{a}$, so $\mathfrak{a}$ is an ideal of $R$. Since $0 \in R'$, we have that $\mathfrak{k}$ is a subideal of $\mathfrak{a}$. It is now relatively trivial to establish a one-to-one correspondence.
+	\end{proof}
+	\begin{corollary}
+		There is a one-to-one correspondence between ideals of $R \,/\, \mathfrak{a}$ and ideals of $R$ that contain $\mathfrak{a}$.
+	\end{corollary}
+\end{adjustwidth}
+
+The two remaining Isomorphism Theorems will be proven at another time.
+
+% --------------------------------------------- %
+
+\subsection{Assorted Rings}
+
+We will consider the following three types of rings in this section:
+\begin{enumerate}
+	\item A \textbf{commutative ring} is a ring $R$ such that $ab = ba$ for all $a, b \in R$.
+	\item An \textbf{integral domain} is a nonzero commutative ring $R$ such that $ab = 0$ implies $a = 0$ or $b = 0$ for all $a, b \in R$.
+	\item A \textbf{field} is a commutative division ring.
+\end{enumerate}
+
+Note that integral domains and fields must be nonzero. \textbf{Henceforth, all rings we shall define are commutative unless stated otherwise.}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		All finite domains are fields.
+	\end{theorem}
+	\begin{proof}
+		Let $R$ be a finite domain. Then for nonzero $a \in R$, consider the set
+		\[
+			\{ a, a^{2}, \ldots, a^{\abs{R} + 1} \}.
+		\]
+		By the Pigeonhole Principle, two elements of this set must be equal: $a^{i} = a^{j}$ for $i, j \in \{ 1, \ldots, n \}$ with $i < j$. Thus $a^{j}(a^{i - j} - 1) = 0$, so $a^{i - j} = 1$ and $a^{i - j - 1} = a^{-1}$. Since all nonzero elements of $R$ are invertible, we conclude that $R$ is a field.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		$R$ is a field if and only if the only ideals of $R$ are $0$ and $R$ itself.
+	\end{theorem}
+	\begin{proof}
+		Let $R$ be a field and let $\mathfrak{a}$ be nonzero ideal of $R$. Then for $a \in \mathfrak{a}$,
+		\[
+			R = (a) \subseteq \mathfrak{a} \subseteq R.
+		\]
+		Thus, $\mathfrak{a} = R$. Now, suppose that the only ideals of $R$ are $0$ and $R$ itself; then for all nonzero $a \in R$,
+		\[
+			(a) = R,
+		\]
+		where $(a)$ denotes the principal ideal (Section 2.1). Thus, there exists $a^{-1} \in R$ such that $a a^{-1} = 1$, so $R$ is a field.
+	\end{proof}
+\end{adjustwidth}
+
+An element $a \in R$ is a \textbf{unit} if it is invertible. It is trivial to verify that all the units of $R$ constitute a multiplicative Abelian group (non-units form a commutative semigroup!)
+
+% --------------------------------------------- %
+
+\section{Types of Ideals}
+
+% --------------------------------------------- %
+
+\subsection{Principal Ideals}
+
+For an $x \in R$, the \textbf{principal ideal} of $x$ is the ideal given by $(x) = \{ ax \mid a \in R \}$. We may alternatively denote $(x)$ by $Rx$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		Principal ideals are ideals.
+	\end{theorem}
+	\begin{proof}
+		Let $x$ be ay element of $R$. We must perform two rather routine calculations:
+		\begin{enumerate}
+			\item \textbf{Additivity}: For all $ax, bx \in (x)$, we have that $ax + bx = (a + b)x \in (x)$.
+			\item \textbf{Multiplicativity}: For all $ax \in (x)$ and $b \in R$ we have $b(ax) = (ba)x \in (x)$.
+		\end{enumerate}
+		We conclude that $(x)$ is an ideal.
+	\end{proof}
+\end{adjustwidth}
+
+The principal ideal is the smallest ideal that contains $(x)$, in the following sense: if $x \in \mathfrak{a}$ for an ideal $\mathfrak{a}$ of $R$, then $rx \in \mathfrak{a}$ for all $a \in R$, so $(x) \subseteq \mathfrak{a}$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		$(x) = R$ for $x \in R$ if and only if $x$ is a unit.
+	\end{theorem}
+	\begin{proof}
+		Suppose that $(x) = R$. Then $1 \in (x)$, so there exists $x^{-1} \in R$ such that $xx^{-1} = x^{-1}x = 1$; $x$ is a unit. If we suppose that $x$ is a unit, then $x \in (x)$ implies $1 = x^{-1}x \in (x)$ implies $a = a 1 \in (x)$ for all $a \in R$; thus $(x) = R$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Prime Ideals}
+
+A \textbf{prime ideal} $\mathfrak{p}$ of $R$ is a principal ideal such that $ab \in \mathfrak{p}$ implies $a \in \mathfrak{p}$ or $b \in \mathfrak{p}$. This condition generalizes to a finite amount of elements; $a_{1} \cdots a_{n} \in \mathfrak{p}$ if and only if $a_{i} \in \mathfrak{p}$ for some $i$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		An ideal $\mathfrak{p}$ of $R$ is prime if and only if $R \,/\, \mathfrak{p}$ is an integral domain.
+	\end{theorem}
+	\begin{proof}
+		Suppose that $\mathfrak{p}$ is prime, and define $\phi : R \to R \,/\, \mathfrak{p}$ by $\phi(a) = a + \mathfrak{p}$. Since the kernel of $\phi$ is $\mathfrak{p}$, we have that
+		\[
+			\phi(ab) = 0 \implies ab \in \mathfrak{p} \implies a \in \mathfrak{p} \text{ or } b \in \mathfrak{p} \implies \phi(a) = 0 \text{ or } \phi(b) = 0.
+		\]
+		Conversely, suppose that $R \,/\, \mathfrak{p}$ is an integral domain. Then
+		\[
+			ab \in \mathfrak{p} \implies \phi(ab) = 0 \implies \phi(a) = 0 \text{ or } \phi(b) = 0 \implies a \in \mathfrak{p} \text{ or } b \in \mathfrak{p}.
+		\]
+		This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Maximal Ideals}
+
+A \textbf{maximal ideal} $\mathfrak{m}$ of $R$ is a proper ideal such that the only ideals of $R$ that contain $\mathfrak{m}$ are itself and $R$. Maximal ideals (along with prime and proper ideals) need not be mutually exclusive; they do not partition the non-units of $R$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		An ideal $\mathfrak{m}$ of $R$ is maximal if and only if $R \,/\, \mathfrak{m}$ is a field.
+	\end{theorem}
+	\begin{proof}
+		By the Correspondence Theorem, there is a one-to-one correspondence between ideals of $R$ that contain $\mathfrak{m}$ and ideals of $R \,/\, \mathfrak{m}$. Then using Theorem 10,
+		\begin{align*}
+			\mathfrak{m} \text{ is maximal} &\iff \text{The only ideals of $R \,/\, \mathfrak{m}$ are $(0)$ and $R \,/\, \mathfrak{m}$ itself.} \\
+			&\iff R \,/\, \mathfrak{m} \text{ is a field},
+		\end{align*}
+		yielding the desired result
+	\end{proof}
+\end{adjustwidth}
+
+All maximal ideals are prime. The following theorem ensures a wealth of maximal ideals:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}[Krull's Theorem]
+		Every nonzero ring has a maximal ideal.
+	\end{theorem}
+	\begin{proof}
+		The set of all proper ideals under $\subseteq$ forms a partially ordered set --- it is nonempty, as $(0)$ is an ideal. To construct upper bounds, define $(\mathfrak{a}_{n})$ as a chain of ideals such that for indicies $\alpha$ and $\beta$, we have $\mathfrak{a}_{\alpha} \subseteq \mathfrak{a}_{\beta}$ or $\mathfrak{a}_{\alpha} \supseteq \mathfrak{a}_{\beta}$.
+		\begin{adjustwidth}{0.5cm}{}
+			\begin{claim}
+				$\bigcup \mathfrak{a}_{n}$ is an ideal. 
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				We must perform two rather routine calculations:
+				\begin{enumerate}
+					\item \textbf{Additivity}: If $x, y \in \bigcup \mathfrak{a}_{n}$, let $x \in \mathfrak{a}_{\alpha}$ and $y \in \mathfrak{a}_{\beta}$ for indicies $\alpha$ and $\beta$. Without loss of generality, let $\mathfrak{a}_{\alpha} \subseteq \mathfrak{a}_{\beta}$; then $x \in \mathfrak{a}_{\beta}$. Thus $x + y \in \mathfrak{a}_{\beta} \subseteq \bigcup \mathfrak{a}_{n}$.
+					\item \textbf{Multiplicativity}: Suppose $x \in \bigcup \mathfrak{a}_{n}$ and $a \in R$. Then $x \in \mathfrak{a}_{\alpha}$ for some index; we have $ax \in \mathfrak{a}_{\alpha} \subseteq \bigcup \mathfrak{a}_{n}$.
+				\end{enumerate}
+				We deduce that $\bigcup \mathfrak{a}_{n}$ is an ideal.
+			\end{proof}
+		\end{adjustwidth}
+		Zorn's Lemma thus applies. The set of all proper ideals contains a maximal element with respect to inclusion --- namely, a maximal ideal.
+	\end{proof}
+\end{adjustwidth}
+
+Two corollaries follow from Krull's Theorem:
+
+\newpage
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{corollary}
+		All proper ideals $\mathfrak{a}$ are contained within some maximal ideal $\mathfrak{m}$.
+	\end{corollary}
+	\begin{proof}
+		If $\mathfrak{a}$ is a proper ideal, then the quotient ring $R \,/\, \mathfrak{a}$ is nonzero --- hence it contains a maximal ideal $\mathfrak{a}'$. By the Correspondence Theorem, there exists a corresponding ideal $\mathfrak{a}$ in $R$ that contains $\mathfrak{a}$. The maximality of $\mathfrak{m}$ is ensured by the maximality of $\mathfrak{m}'$ (say, via a contradiction argument).
+	\end{proof}
+	\begin{corollary}
+		Each non-unit $a \in R$ lies within some maximal ideal of $R$.
+	\end{corollary}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Special Rings and Ideals}
+
+% --------------------------------------------- %
+
+\subsection{Local Rings}
+
+A \textbf{local ring} is a ring with exactly one maximal ideal. They may have an arbitrary number of prime ideals. The following two theorems test whether $R$ is local with maximal ideal $\mathfrak{m}$:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		$R$ is a local ring if and only if $R - \mathfrak{m}$ consists of units.
+	\end{theorem}
+	\begin{proof}
+		Suppose that $R - \mathfrak{m}$ consists of units. Then $\mathfrak{m}$ constitues all units of $R$; as all ideals are composed of non-units, ideals of $R$ must lie within $\mathfrak{m}$. Then $\mathfrak{m}$ is the sole maximal ideal of the local ring $R$.
+
+		Suppose that $R - \mathfrak{m}$ contains a non-unit $a \in R$. Then $(a)$ is a proper ideal, and lies within some maximal ideal $\mathfrak{n}$. As $a \in \mathfrak{n}$ and $a \notin \mathfrak{m}$, the ring $R$ has two maximal ideals and is not local.
+	\end{proof}
+	\begin{theorem}
+		$R$ is a local ring if and only if $\mathfrak{m} + 1$ consists of units for maximal $\mathfrak{m}$.
+	\end{theorem}
+	\begin{proof}
+		Suppose that $R$ is a local ring. Then if $m \in \mathfrak{m}$, we must have $m + 1 \notin \mathfrak{m}$; otherwise, $1 \in \mathfrak{m}$ implies that $\mathfrak{m}$ is not a proper ideal. Hence, $\mathfrak{m} + 1 \subseteq R - \mathfrak{m}$, so $\mathfrak{m} + 1$ consists of units.
+
+		Suppose that $\mathfrak{m} + 1$ consists of units for maximal $\mathfrak{m}$. Let $a \notin \mathfrak{m}$; then $(a) + \mathfrak{m} = R$, so there exists $ab \in (a)$ and $m \in \mathfrak{m}$ such that $ab + m = 1$. Then $1 - m$ is a unit, so
+		\[
+			R = (1 - m) = (ab) \subseteq (a) \subseteq R
+		\]
+		We deduce that $(a) = R$, so $a$ is a unit. As $R - \mathfrak{m}$ consists of non-units, Theorem 16 implies that $R$ is a local ring with maximal ideal $\mathfrak{m}$.
+	\end{proof}
+\end{adjustwidth}
+
+A \textbf{semilocal ring} is a ring with a finite number of maximal ideals.
+
+% --------------------------------------------- %
+
+\subsection{Principal Ideal Domain}
+
+A \textbf{principal ideal domain} is an integral domain in which all ideals are principal.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		Let $R$ be a principal ideal domain. Then all nonzero prime ideals of $R$ are maximal.
+	\end{theorem}
+	\begin{proof}
+		Let $(a) \ne 0$ be prime and define $(b)$ as the maximal ideal that contains $(a)$. Then $a \in (b)$, so there exists $x \in R$ such that $a = bx$. We have $bx \in (a)$; then either $b \in (a)$ or $x \in (a)$.
+		
+		Suppose for contradiction that $x \in (a)$. Then there exists $y \in R$ such that $x = ay$; substituting this into our earlier equation,
+		\[
+			a = b(ay) \implies a(1 - by) = 0.
+		\]
+		Since $R$ is an integral domain --- and since $a \ne 0$ --- we must have $1 = by$. Then $b$ is a unit, so $(b) = R$; this contradicts the fact that the maximal ideal $(b)$ is proper.
+
+		Thus, $b \in (a)$ and $(a) = (b)$. We conclude that $(a)$ is maximal.
+	\end{proof}
+\end{adjustwidth}
+
+These domains are unique factorization domains, and thus the techniques discussed in AbstractAlgebra/artin12.tex apply.
+
+% --------------------------------------------- %
+
+\subsection{The Nilradical}
+
+An element $a \in R$ is a \textbf{zero divisor} if there exists nonzero $b \in R$ such that $ab = 0$. A zero divisor $a$ is \textbf{nilpotent} if $a^{n} = 0$ for some positive integer $n$. the set of all nonzero nilpotent elements of $R$ is called the \textbf{nilradical} of $R$, often denoted by $\mathfrak{R}$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The nilradical $\mathfrak{R}$ of $R$ is ideal of $R$.
+	\end{theorem}
+	\begin{proof}
+		First, we must verify that $\mathfrak{R}$ is an additive subgroup of $\mathfrak{R}$. Since $0 \in \mathfrak{R}$, we need only verify two conditions:
+		\begin{enumerate}
+			\item \textbf{Closure}: For $a, b \in \mathfrak{R}$, let $n, m \in \mathbb{Z}$ such that $a^{n} = b^{m} = 0$. Then
+			\[
+				(ab)^{nm} = a^{nm} b^{nm} = (a^{n})^{m}(b^{m})^{n} = 0^{m}0^{n} = 0,
+			\]
+			so $ab \in \mathfrak{R}$.
+			\item \textbf{Inverses}: If $a^{n} = 0$, then $(-a)^{n} = 0$ as well; thus $-a \in \mathfrak{R}$.
+		\end{enumerate}
+		Now, we need only verify the multiplicative condition. For $a \in \mathfrak{R}$, define $n \in \mathbb{Z}$ such that $a^{n} = 0$; then for all $b \in R$,
+		\[
+			(ab)^{n} = a^{n}b^{n} = 0b^{n} = 0,
+		\]
+		so $ab \in \mathfrak{R}$. We deduce that $\mathfrak{R}$ is an ideal.
+	\end{proof}
+\end{adjustwidth}
+
+The following proof is my favorite in this document:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The nilradical $\mathfrak{R}$ of a commutative ring $R$ is the intersection of all the prime ideals of $R$.
+	\end{theorem}
+	\begin{proof}
+		Suppose $a^{n} = 0$ and $\mathfrak{p}$ is a prime ideal of $R$. Then $a^{n} \in \mathfrak{p}$, so one of $aa \cdots a$ must be in $\mathfrak{p}$ (the prime condition inducts!).
+
+		Now, suppose that $a^{n} \ne 0$ for all $n \in \mathbb{Z}_{> 0}$. Let $S$ be the set of all ideals $\mathfrak{a}$ such that $a^{n} \notin \mathfrak{a}$ for all $n \in \mathbb{Z}_{> 0}$. This set is nonempty, since $0 \in S$; then $S$ is a partialy ordered set under inclusion. 
+
+		Using identical logic as in Theorem 15, we deduce that this set must have a maximal element $\mathfrak{p}$ --- however, $\mathfrak{p}$ may not be maximal in the scale of \textit{all} ideals of $R.$
+		\begin{adjustwidth}{0.5cm}{}
+			\begin{claim}
+				$\mathfrak{p}$ is a prime ideal of $R$.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Suppose $b,c \notin \mathfrak{p}$. Then $(b) + \mathfrak{p}$ and $(c) + \mathfrak{p}$ are ideals that contain $\mathfrak{p}$, so they do not lie within $S$. Then they contain a power of $a$; for some $m, n \in \mathbb{Z}_{> 0}$, for some $x, y \in R$, and for some $p_{1}, p_{2}$ in $\mathfrak{p}$,
+				\[
+					a^{m} = bx + p_{1} \qquad \text{and} \qquad a^{n} = cy + p_{2}.
+				\]
+				Then $a^{mn} = bcxy + bx p_{2} + cy p_{1} + p_{1}p_{2}$. As $\mathfrak{p}$ is an ideal, the entire expression $bx p_{2} + cy p_{1} + p_{1}p_{2}$ lies within $\mathfrak{p}$; thus $a^{mn} \in (bc) + \mathfrak{p}$. Then $(bc) + \mathfrak{p}$ cannot lie within $S$; thus $bc \notin \mathfrak{p}$. 
+
+				Taking the contrapositive yields that $bc \in \mathfrak{p}$ implies $b \in \mathfrak{p}$ or $c \in \mathfrak{p}$.
+			\end{proof}
+		\end{adjustwidth}
+		Then as $a$ is absent from the prime ideal $\mathfrak{p}$, it cannot lie within the intersection of all the prime ideals of $R$.
+	\end{proof}
+\end{adjustwidth}
+
+If $R$ is an integral domain, then $\mathfrak{N}$ is the zero ideal. 
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{The Jacobson Radical}
+
+The \textbf{Jacobson radical} $\mathfrak{J}$ is the intersection of all the maximal ideals of $R$. As an intersection of ideals, $\mathfrak{J}$ is an ideal (Section 4.1) --- so it is a subideal of the nilradical.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		$j$ lies in the Jacobson radical $\mathfrak{J}$ if and only if $1 - ja$ is a unit across all $a \in R$.
+	\end{theorem}
+	\begin{proof}
+		Suppose that there $b \in R$ such that $1 - jb$ is not a unit. Then there is a maximal ideal $\mathfrak{m}$ that contains $(1 - jb)$; such an ideal cannot contain $b$, or else it contains $jb$ and thus $1$. Hence $b \notin \mathfrak{J}$.
+		
+		Suppose that $j$ is not in the Jacobson radical. Then $j \notin \mathfrak{m}$ for some maximal ideal $\mathfrak{m}$ of $R$; thus $(j) + \mathfrak{m} = R$, so there exists $b \in R$ such that $jb + m = 1$ for an arbitrary nonzero $m \in M$. Then $1 - jb \in \mathfrak{m}$, so it cannot be a unit.
+
+		Taking the contrapositive yields the desired result.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Operations on Rings and Ideals}
+
+% --------------------------------------------- %
+
+\subsection{Sum, Intersection, Product}
+
+If $\mathfrak{a}$ and $\mathfrak{b}$ are ideals of a ring $R$, we may perform the following operations upon them to yield three new ideals.
+\begin{enumerate}
+	\item \textbf{Sum}: $\mathfrak{a} + \mathfrak{b} = \{ a + b \mid a \in \mathfrak{a}, b \in \mathfrak{b} \}$, the smallest ideal of $R$ that contains $\mathfrak{a}$ and $\mathfrak{b}$.
+	\item \textbf{Intersection}: $\mathfrak{a} \cap \mathfrak{b}$, the largest ideal of $R$ contained within both $\mathfrak{a}$ and $\mathfrak{b}$. In fact an infinite intesection of ideals is an ideal.
+	\item \textbf{Product}: $\mathfrak{a} \mathfrak{b} = \{ \sum\limits a_{i}b_{i} \mid a_{i} \in \mathfrak{a}, b_{i} \in \mathfrak{b} \}$. We denote $\mathfrak{a} \mathfrak{a} \cdots \mathfrak{a}$ as $\mathfrak{a}^{n}$ and set $\mathfrak{a}^{0} = R$.
+\end{enumerate}
+
+Ideals under sums and intersections form a complete lattice. Sums may be infinite; products must be finite. All of the above are commutative and associative; products and sums of ideals satisfy the distributive law. $\mathfrak{a}\mathfrak{b} \subseteq \mathfrak{a} \cap \mathfrak{b}$, with equality if $\mathfrak{a} + \mathfrak{b} = R$ (Theorem 22).
+
+% --------------------------------------------- %
+
+\subsection{Relatively Prime Ideals}
+
+Two ideals $\mathfrak{a}$ and $\mathfrak{b}$ are \textbf{relatively prime} if $\mathfrak{a} + \mathfrak{b} = R$. Clearly, this holds if and only if there exists $a \in \mathfrak{a}$ and $b \in \mathfrak{b}$ such that $a + b = 1$. 
+
+We have invokea facts about relatively prime ideals several times thus far throughout this document --- notably that if $\mathfrak{m}$ is maximal and $a \notin \mathfrak{m}$, then $\mathfrak{m} + (a) = R$.
+
+\newpage
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		Let $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$ be ideals of $R$. If $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$ are coprime whenever $i \ne j$, then $\prod \mathfrak{a}_{i} = \cap \mathfrak{a}_{i}$
+	\end{theorem}
+	\begin{proof}
+		\textbf{Base case}: Consider ideals $\mathfrak{a}$ and $\mathfrak{b}$ of $R$. and let $ab \in \mathfrak{a}\mathfrak{b}$. Then as $\mathfrak{a}$ is an ideal, $ab \in \mathfrak{a}$; likewise, $ab \in \mathfrak{b}$. Them $ab \in \mathfrak{a} \cap \mathfrak{b}$. Now if $x \in \mathfrak{a} \cap \mathfrak{b}$, then $x \in \mathfrak{a}$ and $x \in \mathfrak{b}$. Let $a + b = 1$; then $xa \in \mathfrak{b}\mathfrak{a}$ and $xb \in \mathfrak{a}\mathfrak{b}$, so $x = xa + xb \in \mathfrak{a}\mathfrak{b}$. We conclude that $\mathfrak{a}\mathfrak{b} = \mathfrak{a} \cap \mathfrak{b}$ (this proof is wrong, $\mathfrak{ab}$ is consists of sums).
+
+		\textbf{Inductive step}: Let the theorem be true for $n$; we wish to prove that if $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}, \mathfrak{b}$ are all pairwise coprime, then
+		\[
+			\left( \bigcup\limits_{i = 1}^{n} \mathfrak{a}_{i} \right) \mathfrak{b} = \left( \bigcup\limits_{i = 1}^{n} \mathfrak{a}_{i} \right) \cap \mathfrak{b}
+		\]
+		We have a sequence of equations from $a_{1} + b_{1} = 1$ to $a_{n} + b_{n} = 1$, where $a_{i} \in \mathfrak{a}_{i}$ and $b_{i} \in \mathfrak{b}$ ($i \in \{ 1, \ldots, n \}$). We argue by cosets:
+		\[
+			\left( \prod\limits_{x = 1}^{n} a_{i} \right) + \mathfrak{b} = \left( \prod\limits_{x = 1}^{n} (1 - b_{i}) \right) + \mathfrak{b} = 1 +  \mathfrak{b}.
+		\]
+		Thus there exists $b \in \mathfrak{b}$ such that $a_{1} \cdots a_{n} + b = 1$; thus $\mathfrak{b}$ is coprime to $\prod \mathfrak{a}_{i}$, which implies the given result by the base case.
+	\end{proof}
+\end{adjustwidth}
+
+A rather trivial result is that if $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$ are principal ideals, then their product is the ideal of all products $a_{1} \cdots a_{n}$ --- no summations required.
+
+% --------------------------------------------- %
+
+\subsection{Direct Product of Rings}
+
+For rings $R_{1}, \ldots, R_{n}$, their \textbf{direct product} 
+\[
+	R = \prod\limits_{i = 1}^{n} R_{i}
+\]
+is the set of all sequences $a = (a_{1}, \ldots, a_{n})$ with $a_{i} \in R_{i}$ for $i \in \{ 1, \ldots, n \}$, endowed with componentwise addition and multiplication. It is a commutative ring; the mappings $\phi : R \to R_{i}$ defined by $\phi(a_{1}, \ldots, a_{n})$ are homomorphisms.
+
+In the following theorem, let $R$ be a ring with ideals $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$; define a homomorphism
+\[
+	\phi : R \to \prod_{i = 1}^{n} R \,/\, \mathfrak{a}_{i}
+\]
+by $\phi(a) = (a + \mathfrak{a}_{1}, \ldots, a + \mathfrak{a}_{n})$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The following two properties of $\phi$ hold:
+		\begin{enumerate}
+			\item $\phi$ is injective if and only if $\cap \mathfrak{a}_{i} = 0$.
+			\item $\phi$ is surjective if and only if $\mathfrak{a}_{i}$ and $\mathfrak{a_{i}}$ are relatively prime whenever $i \ne j$.
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		For (1), the following sequence of claims is easy to verify:
+		\begin{align*}
+			k \in \Ker \phi &\iff \phi(k) = 0 \\
+			&\iff k \in \mathfrak{a}_{i} \text{ for each } i \in \{ 1, \ldots, n \} \\
+			&\iff k \in \mathfrak{a}_{1} \cap \cdots \cap \mathfrak{a}_{n}.
+		\end{align*}
+		 Thus, $\Ker f = 0$ if and only if $\cup \mathfrak{a}_{i} = 0$. Now for (2): suppose that $\phi$ is surjective. For $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$, there exists $a \in R$ such that $\phi(a)$ returns $(\ldots, 0, 1, 0, \ldots)$, where $1$ is in the $i$-th place. Then $a - 1 \in \mathfrak{a}_{i}$ and $a \in \mathfrak{a}_{j}$, so
+		 \[
+		 	1  = (1 - a) + a \in (\mathfrak{a}_{i} + \mathfrak{a}_{j}),
+		 \]
+		so $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$ are relatively prime. Now, suppose that $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$ are relatively prime for each $i \ne j$. We need only show that the element $(\ldots, 0, 1, 0, \ldots)$ lies in the image of $\phi$; the $1$ may be anywhere by similarity, so we can generate all elements of $\prod R \,/\, \mathfrak{a}_{i}$.
+
+		For each $i \in \{ 1, \ldots, n \}$, we have $\mathfrak{a}_{i}$ and $\prod_{j \ne i} \mathfrak{a}_{j}$ are coprime; thus there exists $a_{i}$ in the former and $a$ in the latter such that
+		\[
+			a_{i} + a = 1.
+		\]
+		Thus, $a \in (1 + \mathfrak{a}_{i})$. We conclude that $\phi(a) = (\ldots, 0, 1, 0, \ldots,)$, from which we construct as aforementioned and demonstrate the surjectivity of $\phi$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Inclusion and Prime Ideals}
+
+In general, the union of ideals is rarely an ideal --- yet there is much to be said about them:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		Let $\mathfrak{p}_{1}, \ldots, \mathfrak{p}_{n}$ be prime ideals in $R$ and let $\mathfrak{a}$ be an ideal contained in $\bigcup_{i = 1}^{n} \mathfrak{p}_{i}$. Then $\mathfrak{a} \subseteq \mathfrak{p}_{i}$ for some $i \in \{ 1, \ldots, n \}$.
+	\end{theorem}
+	\begin{proof}
+		We prove the contrapositive --- that if $\mathfrak{a} \nsubseteq \mathfrak{p}_{i}$ for each $i$, then $\mathfrak{a} \nsubseteq \bigcup \mathfrak{p}_{i}$. The result is clearly true for $n = 1$, so we utilize induction: let the result be true for $n - 1$, and consider the prime ideals $\mathfrak{p}_{1}, \ldots, \mathfrak{p}_{n}$.
+
+		We have that $\mathfrak{a} \nsubseteq \bigcup_{i = 1}^{n - 1} \mathfrak{p}_{i}$ by our inductive hypothesis, and $\mathfrak{a} \nsubseteq \mathfrak{p}_{n}$. Suppose for contradiction that $\mathfrak{a} \subseteq \bigcup_{i = 1}^{n} \mathfrak{p}_{n}$; then there exists $a_{1}, a_{2} \in \mathfrak{a}$ such that
+		\begin{align*}
+			&\text{$a_{1} \in \bigcup_{i = 1}^{n - 1} \mathfrak{p}_{i}$ but $a_{1} \notin \mathfrak{p}_{n}$}, \\
+			&\text{$a_{2} \in \mathfrak{p}_{n}$ but $a_{2} \notin \bigcup_{i = 1}^{n - 1} \mathfrak{p}_{i}$}.
+		\end{align*}
+		Their sum lies in neither; thus $a_{1} + a_{2} \notin \bigcup_{i = 1}^{n} \mathfrak{p}_{i}$, which yields the desired contradiction. We conclude that $\mathfrak{a} \nsubseteq \bigcup_{i = 1}^{n} \mathfrak{p}_{i}$; taking the contrapositive yields the required result.
+	\end{proof}
+\end{adjustwidth}
+
+The following theorem does not concern unions, but it recasts the formulation of the above: 
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		Let $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$ be ideals and let $\mathfrak{p}$ be a prime ideal containing $\bigcap \mathfrak{a}_{i}$. Then $\mathfrak{p} \supseteq \mathfrak{a}_{i}$ for some $i$. 
+	\end{theorem}
+	\begin{proof}
+		Suppose $\mathfrak{p} \nsupseteq \mathfrak{a}_{i}$ for all $i \in \{ 1, \ldots, n \}$. Then there exist $a_{i} \in \mathfrak{a}_{i}$ for each $i$ that all do not belong to $\mathfrak{p}$; the product
+		\[
+			a = \prod\limits_{i = 1}^{n} a_{i}
+		\]
+		lies inside every $\mathfrak{a}_{i}$, so $a \in \bigcap \mathfrak{a}_{i}$; the primality of $\mathfrak{p}$ yields $a \notin \mathfrak{p}$, so $\mathfrak{p} \nsupseteq \bigcap \mathfrak{a}_{i}$.
+	\end{proof}
+	\begin{corollary}
+		Let $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$ be ideals. If $\bigcap \mathfrak{a}_{i}$ is prime, then $\bigcap \mathfrak{a}_{i} = \mathfrak{a}_{j}$ for some $j$.
+	\end{corollary}
+\end{adjustwidth}
+
+
+
+% --------------------------------------------- %
+
+\subsection{The Ideal Quotient}
+
+For ideals $\mathfrak{a}, \mathfrak{b}$ of $R$, their \textbf{ideal quotient} (which is trivially an ideal) is
+\[
+	(\mathfrak{a} : \mathfrak{b}) = \{ x \,\mid\, x \in R, \, x \mathfrak{b} \subseteq \mathfrak{a} \},
+\]
+The most important ideal quotient is the \textbf{annihalator}, defined as $(0 : \mathfrak{b})$ --- the set of all $x \in R$ such that $x (\mathfrak{b}) = 0$ --- and denoted as $\Ann \mathfrak{b}$. In this notation, the set $D$ of all zero-divisors of $R$ is
+\[
+	D = \bigcup\limits_{a \ne 0} \Ann \, (a).
+\]
+If $(b)$ is a principal ideal, we write $(\mathfrak{a} : b)$ in place of $(\mathfrak{a} : (b))$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		For all ideals $\mathfrak{a}_{i}$, $\mathfrak{b}_{i}$ and $\mathfrak{c}$ of $R$ for indicies $i \in I$, the following five properties hold:
+		\begin{enumerate}
+			\item $\mathfrak{a} \subseteq (\mathfrak{a} : \mathfrak{b})$.
+			\item $(\mathfrak{a} : \mathfrak{b}) \mathfrak{b} \subseteq \mathfrak{a}$.
+			\item $\big( (\mathfrak{a} : \mathfrak{b}) : \mathfrak{c} \big) = (\mathfrak{a} : \mathfrak{bc}) = \big( (\mathfrak{a} : \mathfrak{c}) : \mathfrak{b} \big)$.
+			\item $\big( \bigcap_{i} \mathfrak{a}_{i} : \mathfrak{b} \big) = \bigcap_{i} (\mathfrak{a}_{i} : \mathfrak{b})$.
+			\item $\left( \mathfrak{a} : \sum_{i} \mathfrak{b}_{i} \right) = \bigcap_{i} (\mathfrak{a} : \mathfrak{b}_{i})$.
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		The proofs are as follows:
+		\begin{enumerate}
+			\item Let $a \in \mathfrak{a}$. Then $ab \in \mathfrak{a}$ for all $b \in \mathfrak{b}$, so $a(\mathfrak{b}) \subseteq \mathfrak{a}$; hence $a \in (\mathfrak{a} : \mathfrak{b})$. We conclude that $\mathfrak{a} \subseteq (\mathfrak{a} : \mathfrak{b})$.
+			\item Let $x \in (\mathfrak{a} : \mathfrak{b})$. By definition, $x \mathfrak{b} \subseteq \mathfrak{a}$; thus $(\mathfrak{a} : \mathfrak{b}) \mathfrak{b} \subseteq \mathfrak{a}$.
+			\item The two sets are equivalent, since 
+			\begin{align*}
+				x \in \big( (\mathfrak{a} : \mathfrak{b}) : \mathfrak{c} \big) &\iff x \mathfrak{c} \subseteq (\mathfrak{a} : \mathfrak{b}) \\
+				&\iff x \mathfrak{bc} \subseteq \mathfrak{a} \\
+				&\iff x \in (\mathfrak{a} : \mathfrak{bc}).
+			\end{align*}
+			Using this very identity yields $(\mathfrak{a} : \mathfrak{bc}) = (\mathfrak{a} : \mathfrak{cb}) = \big( (\mathfrak{a} : \mathfrak{c}) : \mathfrak{b} \big)$.
+			\item The two sets are equivalent, since
+			\begin{align*}
+				x \in \left( \bigcap_{i} \mathfrak{a}_{i} : \mathfrak{b} \right) &\iff x \mathfrak{b} \subseteq \bigcap\limits_{i} \mathfrak{a}_{i} \\
+				&\iff x \mathfrak{b} \subseteq \mathfrak{a}_{i} \text{ for each } i \\
+				&\iff x \in (\mathfrak{a}_{i} : \mathfrak{b}) \text{ for each } i \\
+				&\iff x \in \bigcap\limits_{i} (\mathfrak{a}_{i} : \mathfrak{b}).
+			\end{align*}
+			\item The two sets are equivalent, since
+			\begin{align*}
+				x \in \left( \mathfrak{a} : \sum\limits_{i} \mathfrak{b}_{i} \right) &\iff x \left( \sum\limits_{i} \mathfrak{b}_{i} \right) \subseteq \mathfrak{a} \\
+				&\iff x \mathfrak{b}_{i} \subseteq \mathfrak{a} \text{ for each } i \\
+				&\iff x \in (\mathfrak{a} : \mathfrak{b}_{i}) \text{ for each } i \\
+				&\iff x \in \bigcap\limits_{i} (\mathfrak{a} : \mathfrak{b}_{i}).
+			\end{align*}
+		\end{enumerate}
+		This concludes the proof of all five properties.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Radicals of Ideals}
+
+The \textbf{radical} of an ideal $\mathfrak{a}$ of $R$
+\[
+	r(\mathfrak{a}) = \{ x \in R \,\mid\, x^{n} \in \mathfrak{a} \text{ for some } n \in \mathbb{Z}_{> 0} \}.
+\]
+If $\phi : R \to R \,/\, \mathfrak{a}$ is the canonical surjection, then $\phi(r(\mathfrak{a})) = \mathfrak{R}_{R / \mathfrak{a}}$, the nilradical of $R \,/\, \mathfrak{a}$; the Correspondence Theorem thus ensures that $r(\mathfrak{a})$ is an ideal.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		For all ideals $\mathfrak{a}$ and $\mathfrak{b}$ of $R$, the following six properties hold:
+		\begin{enumerate}
+			\item $\mathfrak{a} \subseteq r(\mathfrak{a})$.
+			\item $r(r(\mathfrak{a})) = r(\mathfrak{a})$.
+			\item $r(\mathfrak{a}\mathfrak{b}) = r(\mathfrak{a} \cap \mathfrak{b}) = r(\mathfrak{a}) \cap r(\mathfrak{b})$.
+			\item $r(\mathfrak{a}) = R$ if and only if $\mathfrak{a} = R$.
+			\item $r(\mathfrak{a} + \mathfrak{b}) = r(r(\mathfrak{a}) + r(\mathfrak{b}))$.
+			\item If $\mathfrak{p}$ is prime, then $r(\mathfrak{p}^{n}) = \mathfrak{p}$ for all $n \in \mathbb{Z}_{> 0}$.
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		Since (1) is trivial, the proofs are as follows:
+		\begin{enumerate}\addtocounter{enumi}{1}
+			\item Observe that $x \in r(r(\mathfrak{a})) \implies x^{n} \in r(\mathfrak{a})$ for some $n \implies x^{mn} \in \mathfrak{a}$ for some $m$; thus $x \in r(\mathfrak{a})$. If we suppose $x \in r(\mathfrak{a})$ and $r(r(\mathfrak{a})) \subseteq r(\mathfrak{a})$, then a usage of (1) yields $r(r(\mathfrak{a})) = \mathfrak{a}$.
+			\item \textbf{First Equality}: Since $\mathfrak{ab} \subseteq \mathfrak{a} \cap \mathfrak{b}$, we have $r(\mathfrak{ab}) \subseteq r(\mathfrak{a} \cap \mathfrak{b})$. If $x \in r(\mathfrak{a} \cap \mathfrak{b})$, then $x^{n} \in \mathfrak{a} \cap \mathfrak{b}$ for some $n$; then $x^{n + 1} \in \mathfrak{a}\mathfrak{b}$, so $r(\mathfrak{ab}) = r(\mathfrak{a} \cap \mathfrak{b})$.
+
+			\textbf{Second Equality}: Clearly $x \in r(\mathfrak{a} \cap \mathfrak{b})$ implies $x \in r(\mathfrak{a})$ and $x \in r(\mathfrak{b})$, so $x \in r(\mathfrak{a}) \cap r(\mathfrak{b})$. If we assume the latter, then let $x^{n} \in \mathfrak{a}$ and $x^{m} \in \mathfrak{b}$; then $x^{nm} \in \mathfrak{a} \cap \mathfrak{b}$, so $x \in r(\mathfrak{a} \cap \mathfrak{b})$. Hence, $r(\mathfrak{a} \cap \mathfrak{b}) = r(\mathfrak{a}) \cap r(\mathfrak{b})$.
+			\item Realize that
+			\begin{align*}
+				r(\mathfrak{a}) = R &\iff 1 \in r(\mathfrak{a}) \\
+				&\iff 1^{n} \in \mathfrak{a} \text{ for some } n \\
+				&\iff 1 \in \mathfrak{a} \\
+				&\iff \mathfrak{a} = R.
+			\end{align*}
+			\item We have $r(\mathfrak{a} + \mathfrak{b}) \subseteq r(r(\mathfrak{a}) + r(\mathfrak{b}))$ by (1); the other direction is simple.
+			\item Realize that since
+			\[
+				x \in r(\mathfrak{p}) \iff x^{n} \in \mathfrak{p} \text{ for some } n \iff x \in \mathfrak{p},
+			\]
+			we have $r(\mathfrak{p}) = \mathfrak{p}$. The powers come from repeated application of (3).
+		\end{enumerate}
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+More generally, we can define the radical $r(E)$ for any subset $E \subseteq R$. It is not an ideal in general; it satisfies $r(\bigcup_{i} E) = \bigcup_{i} r(E)$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The radical of an ideal $\mathfrak{a}$ is the intersection of the prime ideals that contain $\mathfrak{a}$.
+	\end{theorem}
+	\begin{proof}
+		Using the canonical surjection $\phi : R \to R \,/\, \mathfrak{a}$, we have for prime $\mathfrak{p}$ that
+		\[
+			\text{$\mathfrak{p}$ contains the radical of $\mathfrak{a}$ in $R$ $\iff$ $\phi(\mathfrak{p})$ contains the nilradical in $R \,/\, \mathfrak{a}$}.
+		\]
+		The latter is guaranteed by Theorem 20. It is easy to verify that $\phi(\mathfrak{p})$ is prime.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The set $D$ of zero-divisors of $R$ is equal to $\bigcup\limits_{a \ne 0} r(\Ann (a))$.
+	\end{theorem}
+	\begin{proof}
+		The key is to realize that $D = r(D)$. This is because Theorem 27 ensures $D \subseteq r(D)$; now if if $x \in r(D)$, then $x^{n} \in D$, so $x^{n}y = x(x^{n - 1}y) = 0$ for some $n \in \mathbb{Z}_{> 0}$, and $x \in D$. Hence $D = r(D)$.
+
+		Now, we simply utilize the properties discussed in Section 4.5 and this page:
+		\[
+			D = r(D) = r \left( \bigcup\limits_{a \ne 0} \Ann (a) \right) = \bigcup\limits_{a \ne 0} r (\Ann (a)).
+		\]
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		If $\mathfrak{a}$ and $\mathfrak{b}$ are ideals of $R$, then $\mathfrak{a}$ and $\mathfrak{b}$ are relatively prime if and only if $r(\mathfrak{a})$ and $r(\mathfrak{b})$ are relatively prime.
+	\end{theorem}
+	\begin{proof}
+		Using (4) and (5) from Theorem 27, we have that
+		\begin{align*}
+			\mathfrak{a} + \mathfrak{b} = R &\iff r(\mathfrak{a} + \mathfrak{b}) = R \\
+			&\iff r(r(\mathfrak{a}) + r(\mathfrak{b})) = R \\
+			&\iff r(\mathfrak{a}) + r(\mathfrak{b}) = R,
+		\end{align*}
+		as required.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Extension and Contraction}
+
+For a ring homomorphism $\phi : R \to S$ and an ideal $\mathfrak{a}$ of $R$, the image $\phi(\mathfrak{a})$ need not be an ideal of $S$. We define the \textbf{extension} $\mathfrak{a}^{e}$ as the principal ideal generated by $A$: namely, $\sum_{a \in R} (f(a))$. If $\mathfrak{b}$ is an ideal of $S$, then the Correspondence Theorem ensures that $\{ a \in R \mid \phi(a) \in \mathfrak{b} \}$ is an ideal, called the \textbf{contraction} of $\mathfrak{b}$ and denoted by $\mathfrak{b}^{c}$.
+
+To motivate these definitions, factorize $\phi$ as follows:
+\[
+	R \stackrel{p}{\longrightarrow}\phi(R) \stackrel{j}{\longrightarrow} S
+\]
+The behavior of ideals under $p$ is very simple: ideals of $\phi(R)$ correspond precisely with ideals of $R$ that contain the kernel of $\phi$. The situation with ideals under $j$ is very complicated --- in fact, it is among the central problems of Algebraic Number Theory.
+
+\textbf{Example}: Consider the embedding $\mathbb{Z} \to \mathbb{Z}[i]$. For a prime ideal $(p)$ of $\mathbb{Z}$, what is the extension of $(p)$ in $\mathbb{Z}[i]$? Well, $\mathbb{Z}[i]$ is a principal ideal domain, and the situation is:
+\begin{enumerate}
+	\item $(2)^{e}$ is the principal ideal $\Big( (1 + i)^{2} \Big)$, the \textit{square} of the principal ideal $(1 + i)$
+	\item If $p \equiv 1 \pmod{4}$, then $(p)^{e}$ is the product of two distinct prime ideals.
+	\item If $p \equiv 3 \pmod{4}$, then $(p)^{e}$ is prime in $\mathbb{Z}[i]$.
+\end{enumerate}
+Observe the similarity between (2) and Fermat's theorem on sums of two squares.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		For a homomorphism $\phi : R \to S$ and ideals $\mathfrak{a}$ and $\mathfrak{b}$ like before:
+		\begin{enumerate}
+			\item $\mathfrak{a} \subseteq \mathfrak{a}^{ec}$ and $\mathfrak{b} \supseteq \mathfrak{b}^{ce}$.
+			\item $\mathfrak{a}^{e} = \mathfrak{a}^{ece}$ and $\mathfrak{b}^{c} = \mathfrak{b}^{cec}$.
+			\item If $C$ is the set of contracted ideals in $R$ and $E$ is the set of extended ideals in $S$, then $C = \{ \mathfrak{a} \mid \mathfrak{a}^{ec} = \mathfrak{a} \}$ and $E = \{ \mathfrak{b} \mid \mathfrak{b}^{ce} = \mathfrak{b} \}$. Furthermore, $\mathfrak{a} \to \mathfrak{a}^{e}$ is a bijection from $C$ to $E$ with inverse $\mathfrak{b} \to \mathfrak{b}^{c}$.
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		These proofs are ommitted, in the interest of remaining productive. I will comment: (1) is quite trivial, and (2) follows directly afterward.
+	\end{proof}
+\end{adjustwidth}
+
+In the interest of remaining productive, we will not prove the following fomulas:
+\begin{align*}
+	(\mathfrak{a}_{1} + \mathfrak{a}_{2})^{e} = \mathfrak{a}_{1}^{e} + \mathfrak{a}_{2}^{e} \qquad &\text{and} \qquad (\mathfrak{b}_{1} + \mathfrak{b}_{2})^{c} \supseteq \mathfrak{b}_{1}^{c} + \mathfrak{b}_{2}^{c} \\
+	(\mathfrak{a}_{1} \cap \mathfrak{a}_{2})^{e} \subseteq \mathfrak{a}_{1}^{e} \cap \mathfrak{a}_{2}^{e} \qquad &\text{and} \qquad (\mathfrak{b}_{1} \cap \mathfrak{b}_{2})^{c} = \mathfrak{b}_{1}^{c} \cap \mathfrak{b}_{2}^{c}  \\
+	(\mathfrak{a}_{1}\mathfrak{a}_{2})^{e} = \mathfrak{a}_{1}^{e}\mathfrak{a}_{2}^{e} \qquad &\text{and} \qquad (\mathfrak{b}_{1}\mathfrak{b}_{2})^{c} \supseteq \mathfrak{b}_{1}^{c}\mathfrak{b}_{2}^{c} \\
+	(\mathfrak{a}_{1} : \mathfrak{a}_{2})^{e} \subseteq (\mathfrak{a}_{1}^{e} : \mathfrak{a}_{2}^{e}) \qquad &\text{and} \qquad (\mathfrak{b}_{1} : \mathfrak{b}_{2})^{c} \subseteq (\mathfrak{b}_{1}^{c} : \mathfrak{b}_{2}^{c}) \\
+	r(\mathfrak{a})^{e} \subseteq r(\mathfrak{a}^{e}) \qquad &\text{and} \qquad r(\mathfrak{b})^{c} = r(\mathfrak{b})^{c}.
+\end{align*}
+The set of ideals $E$ is thus closed under sum and product, while $C$ is closed under ideal quotients, radicals, and intersections.
+
+% --------------------------------------------- %
+
+\section{The Zariski Topology}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+Let $R$ be a ring and let $X$ denote the set of prime ideals of $R$. For each subset $E \subseteq R$, let $V(E)$ denote the set of prime ideals which contain $E$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $(E_{\alpha}) \subseteq R$, let $E_{1}, E_{2} \subseteq R$. Define $\mathfrak{a}_{\alpha}$, $\mathfrak{a}_{1}$, and $\mathfrak{a}_{2}$ as the ideals generated by these sets. Then the following holds:
+    \begin{enumerate}
+      \item $V(E) = V(\mathfrak{a}) = V(r(\mathfrak{a}))$.
+      \item $\bigcap\limits_{\alpha} V(\mathfrak{a}_{\alpha}) = V \big( \bigcup\limits_{\alpha} \mathfrak{a}_{\alpha} \big)$.
+      \item $V(\mathfrak{a}_{1}) \cup V(\mathfrak{a}_{2}) = V(\mathfrak{a}_{1}\mathfrak{a}_{2}) = V(\mathfrak{a}_{1} \cap \mathfrak{a}_{2})$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    For (1), it is clear that
+    \[
+      \mathfrak{p} \in V(E) \iff E \subseteq \mathfrak{p} \iff \mathfrak{a} \subseteq \mathfrak{p} \iff \mathfrak{p} \in V(\mathfrak{a}).
+    \]
+    For (2), we similarly utilize such convenient chains of equivalencies:
+    \begin{align*}
+      \mathfrak{p} \in \bigcap\limits_{\alpha} V(\mathfrak{a}_{\alpha}) & \iff \mathfrak{a}_{\alpha} \subseteq \mathfrak{p} \text{ for each } \alpha. \\
+                                                             & \iff \bigcup\limits_{\alpha} \mathfrak{a}_{\alpha} \subseteq \mathfrak{p} \\
+                                                             & \iff \mathfrak{p} \in V \left( \bigcup\limits_{\alpha} \mathfrak{a}_{\alpha} \right).
+    \end{align*}
+    The story for (3) is again quite similar: we have that
+    \begin{align*}
+      \mathfrak{p} \in V(\mathfrak{a}_{1}) \cup V(\mathfrak{a}_{2}) &\iff \mathfrak{a}_{1} \subseteq \mathfrak{p} \text{ or } \mathfrak{a}_{2} \subseteq \mathfrak{p} \\
+                                                                                        &\iff \mathfrak{a}_{1} \cap \mathfrak{a}_{2} \subseteq \mathfrak{p} \iff \mathfrak{p} \in V(\mathfrak{a}_{1} \cap \mathfrak{a}_{2}) \\
+                                                                                                                                                                                & \iff \mathfrak{a}_{1}\mathfrak{a}_{2}A \subseteq \mathfrak{p} \iff \mathfrak{p} \in V(\mathfrak{a}_{1}\mathfrak{a}_{2}).
+    \end{align*}
+    This last step follows from the fact $r(\mathfrak{a}_{1} \cap \mathfrak{a}_{2}) = r(\mathfrak{a}_{1}\mathfrak{a}_{2})$. This completes the proof. 
+  \end{proof}
+\end{adjustwidth}
+
+Further observe that $V(0) = X$ and $V(1) = \varnothing$. Thus the sets $V(\mathfrak{a})$ across all $\mathfrak{a} \in X$ satisfy the closed set axioms of a toplogical space. The resulting topology is called the \textbf{Zariski topology}, and the set $X$ is called the \textbf{prime spectrum} of $R$, denoted $\Spec R$.
+
+
+
+% --------------------------------------------- %
+
+\end{document}

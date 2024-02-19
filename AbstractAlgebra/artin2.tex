@@ -1,0 +1,445 @@
+% To-do:
+% - Subgroups of G / N
+% - Operations on Subgroups
+% - The Homomorphism Theorem
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\newcommand{\nsg}{\mathrel{\lhd}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+
+\title{Artin: Groups}
+\author{James Pagan}
+\date{February 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Group Axioms}
+
+A \textbf{group} $G$ is a set endowed with a binary operation, here denoted ``$\times$'', such that for all $a, b, c \in G$, the following four axioms are satisfied:
+\begin{enumerate}
+  \item \textbf{Closure}: $ab \in G$.
+  \item \textbf{Associativity}: $a(bc) = (ab)c$.
+  \item \textbf{Identity}: There is $e \in G$ such that $ae = ea = a$.
+  \item \textbf{Invertability}: There is $a^{-1} \in G$ such that $aa^{-1} = a^{-1}a = e$.
+\end{enumerate}
+
+If the operation is commutative --- that is, if $ab = ba$ for all $a, b \in G$ --- then $G$ is said to be an \textbf{Abelian group}. The generalized associative law ensures that for all $a_{1}, \ldots, a_{n} \in G$, the product $a_{1} \cdots a_{n}$ is independent of bracketing.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $G$ be a group. Then the following properties hold for any $a, b \in G$:
+    \begin{enumerate}
+      \item The identity is unique.
+      \item Inverses are unique.
+      \item $(a^{-1})^{-1} = a$.
+      \item $(ab)^{-1} = b^{-1}a^{-1}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    The proofs are as follows:
+    \begin{enumerate}
+      \item If $e$ and $f$ are identities of $G$, then $e = ef = f$ by the identity axiom.
+      \item If $b$ and $c$ are inverses of $a$ --- that is, $ab = ba = e = ac = ca$ --- we have
+      \[
+        b = be = b(ac) = (ba)c = ec = c.
+      \]
+      \item As $a^{-1}(a^{-1})^{-1} = e$ and $a a^{-1} = e$,
+      \[
+        a = ae = a(a^{-1}(a^{-1})^{-1}) = (a a^{-1})(a^{-1})^{-1} = e(a^{-1})^{-1} = (a^{-1})^{-1}.
+      \]
+      \item Using the Generalized Associative Law, we have
+      \begin{align*}
+        (ab)(b^{-1}a^{-1}) &= a(b b^{-1})a^{-1} = ae a^{-1} = a a^{-1} = e \\
+        (b^{-1}a^{-1})(ab) &= b^{-1}(a^{-1}a)b = b^{-1}eb = b^{-1}b = e.
+      \end{align*}
+      Thus $b^{-1}a^{-1}$ is $(ab)^{-1}$, the unique inverse of $ab$.
+    \end{enumerate}
+    This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+\newpage
+
+These axioms induce equation-like manipulations worth enumerating, for $a, b, c, d, x \in G$:
+\begin{enumerate}
+  \item \textbf{Linear Equations}: If $ax = b$ or $xa = b$, multiplying by $a^{-1}$ yields the unique solutions $x = a^{-1}b$ and $x = ba^{-1}$.
+  \item \textbf{Division}: If $ac = bc$ or $ca = ba$, we can multiply by $c^{-1}$ to yield $a = b$.
+  \item \textbf{Multiplying Equations}: If $a = b$ and $c = d$, then $ac = bc$ and $bc = bd$ --- hence $ac = bd$. Similarly, it implies $ad = bc$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\section{Subgroups and Cosets}
+
+% --------------------------------------------- %
+
+\subsection{Subgroups}
+
+A subset $H \subseteq G$ is a \textbf{subgroup} if it is a group under the operation of $G$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    If $H \subseteq G$ is nonempty, closed, and contains multiplicative inverses, it is a subgroup.
+  \end{theorem}
+  \begin{proof}
+    Let $a \in H$. Since $a^{-1} \in H$ too, we have $e = a^{-1}a \in H$ --- thus $H$ contains a multiplicative identity. Multiplication is associative for all elements of $H$ (as elements of $G$), so the axioms are indeed verified.
+  \end{proof}
+\end{adjustwidth}
+
+A group is \textbf{finite} if $G$ contains finitely many elements and \textbf{infinite} otherwise. If $G$ is a finite group, the \textbf{order} of $G$ --- denoted $\abs{G}$ --- is the number of elements of $G$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose $G$ is finite. If $H \subseteq G$ is nonempty and closed, it is a subgroup.
+  \end{theorem}
+  \begin{proof}
+    Let $\abs{G} = n$ and select $a \in H$. Consider the list
+    \[
+      a, \, a_{2}, \, \ldots, \, a^{n}, \, a^{n + 1}.
+    \]
+    Since this list in $G$ (a set with $n$ elements) contains $n + 1$ elements, the Pigeonhole Principle guarantees that there exist $i, j \in \{ 1, \ldots, n + 1 \}$ with $i < j$ such that
+    \[
+      a^{i} = a^{j}.
+    \]
+    Then $a^{i - j} = e$, and $a^{-1} = a^{i - j - 1} \in H$ by closure. Hence $H$ contains multiplicative inverses, so Theorem 2 establishes that $H$ is a subgroup.
+  \end{proof}
+\end{adjustwidth}
+
+The subgroup relation is transitive. If $M$ is a subgroup of $H$ and $H$ is a subgroup of $G$, then $M$ is a subgroup of $G$.
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Cosets and Lagrange's Theorem}
+
+Let $H \subseteq G$ be a subgroup. Then for $a \in G$, the \textbf{left coset} $aH$ and \textbf{right coset} $Ha$ are defined as follows:
+\[
+  aH = \{ ah \, \mid \, h \in H \} \qquad \text{and} \qquad Ha = \{ ha \, \mid \, h \in H \}.
+\]
+For the remainder of this document, ``coset'' will refer to left cosets unless otherwise specified. Realize that $b \in aH$ if and only if $a^{-1}b \in H$. Thus for $a, b \in G$, the relation $a \sim b$ if $a^{-1}b \in H$ biconditionally implies that $a$ and $b$ lie in some common coset.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $H \subseteq G$ be a subgroup. Then the relation $a \sim b$ for $a, b \in G$ is an equivalence relation.
+  \end{theorem}
+  \begin{proof}
+    We must verify three properties, for all $a, b, c \in G$:
+    \begin{enumerate}
+      \item \textbf{Reflexivity}: We have that $a^{-1}a = e \in H$, so $a \sim a$.
+      \item \textbf{Symmetry}: This follows from the fact $H$ contains inverses:
+      \[
+        a \sim b \iff a^{-1}b \in H \iff b^{-1}a \in H \iff b \sim a.
+      \]
+      \item \textbf{Transitivity}: Suppose that $a \sim b$ and $b \sim c$ --- that is, $a^{-1}b$ and $b^{-1}c$ lie in $H$. Then
+      \[
+        a^{-1}c = a^{-1}ec = (a^{-1}b)(b^{-1}c) \in H;
+      \]
+      thus we find $a \sim c$.
+    \end{enumerate}
+    We conclude that $\sim$ is an equivalence relation.
+  \end{proof}
+\end{adjustwidth}
+
+It is easy to demonstrate that equivalence classes are cosets themselves, which leads to a sharper proof of the following Theorem:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose that $a, b \in G$ and $H \subseteq G$ is a subgroup. Then $aH = bH$ or $aH \cap bH = \varnothing$.
+  \end{theorem}
+  \begin{proof}
+    Suppose that $aH \cap bH \ne 0$; then there exists $c \in G$ and $h_{1}, h_{2} \in H$ such that
+    \[
+      c = ah_{1} = bh_{2}.
+    \]
+    Thus the conversion factors $a = b h_{2} h_{1}^{-1}$ and $b = a h_{1} h_{2}^{-1}$ imply that all elements of $aH$ are elements of $bH$ and vice versa. We conclude that $aH = bH$.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    For all $a \in G$, we have $\abs{aH} = \abs{H}$.
+  \end{theorem}
+  \begin{proof}
+    Define a \textit{mapping} $\phi : aH \to H$ by the rule $f(ah) = h$. We wish to prove that $f$ is a bijection.
+    \begin{enumerate}
+      \item \textbf{Injectivity}: Suppose that $f(ah_{1}) = f(ah_{2})$ --- that is, $h_{1} = h_{2}$. Multiplying by $a$ yields $ah_{1} = ah_{2}$.
+      \item \textbf{Surjectivity}: For all $h \in H$, we have that $f(ah) = h$.
+    \end{enumerate}
+    Hence $f$ is bijective. We conclude that $\abs{aH} = \abs{H}$.
+  \end{proof}
+\end{adjustwidth}
+
+Therefore, the cosets of $H$ partition the group $G$ into equivalence classes of size $\abs{H}$. For this reason, we sometimes denote $aH$ by $[a]$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Lagrange's Theorem]
+    Let $H$ be a subgroup of the finite group $G$. Then the order of $H$ divides the order of $G$.
+  \end{theorem}
+  \begin{proof}
+    Let the distinct cosets of $H$ be $a_{1}H, \ldots, a_{k}H$ for $a_{1}, \ldots, a_{k} \in G$; then
+    \[
+      a_{1}H \, \cap \, \cdots \, \cap \, a_{k}H \, = \, G.
+    \]
+    If we let $\abs{H} = m$ and $\abs{G} = n$, the above formula implies that $mk = n$ and $m \mid n$.
+  \end{proof}
+\end{adjustwidth}
+
+There are two more trivial assertions that bear coset manipulation a striking resemblance to manipulation of elements:
+\begin{enumerate}
+  \item $a(bH) = (ab)H \,$ and $\, (Ha)b = H(ab)$.
+  \item $aH = bH \, $ if and only if $\, H = a^{-1}bH$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Normal Subgroups}
+
+A subgroup $N \subseteq G$ is \textbf{normal} if $aN = Na$ for all $a \in G$. Equivalently, $N$ is normal if $aNa^{-1} = N$ or if $ana^{-1} \in N$ for each $n \in N$. This relation is denoted $N \nsg G$. All groups have at least two normal subgroups: $G$ itself and the \textbf{trivial group}, $\{ e \}$.
+
+Normality is \textit{not} transitive. $M \nsg N$ and $N \nsg G$ does not always entail that $N \nsg G$.
+
+% --------------------------------------------- %
+
+\subsection{Quotient Groups}
+
+Suppose $N \nsg G$. Then the \textbf{quotient group} $G \, / \, N$ is the group of equivalence classes $[a] = aN$ under the operation $[a][b] = [ab]$ or equivalently $aN \times bN = abN$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $N \nsg G$. Then $G \, / \, N$ is a group.
+  \end{theorem}
+  \begin{proof}
+    Suppose that $N$ is normal. We first prove that $\times$ is well-defined; let $aN = bN$ and $cN = dN$. Then
+    \[
+      aNc = bNc \implies acN = bcN \qquad \text{and} \qquad bcN = bdN,
+    \]
+    so $acN = bdN$. It is clear that $G \, / \, N$ is closed and associative by the relevant properties of $G$. The identity of $G \, / \, N$ is $N$ itself, since
+    \[
+      aN \times N \, = \, aN \times eN \, = \, (ae)N \, = \, N \, = \, (ea)N \, = \, eN \times aN \, = \, N \times aN.
+    \]
+    Finally, $G \, / \, N$ contains inverses: we have
+    \[
+      aN \times a^{-1}N = (a a^{-1})N = eN = N = eN = (a^{-1}a)N = a^{-1}N \times aN.
+    \]
+    Thus the inverse of $aN$ is $a^{-1}N$. We conclude that $G \, / \, N$ is a group. 
+  \end{proof}
+\end{adjustwidth}
+
+Indeed, $G \, / \, N$ is a group if and \textit{only} if $N$ is normal:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $H \subseteq G$ be a subgroup. If $G \, / \, H$ is a group, then $H$ is normal.
+  \end{theorem}
+  \begin{proof}
+    Select $h \in H$ arbitrarily. For all $a \in G$, we have that $[ah] = [a]$; thus
+    \[
+      [e] = [a^{-1} a] = [a^{-1}] [a] = [a^{-1}] [ah] = [a^{-1}ha].
+    \]
+    Hence $a^{-1}ha \in H$. We deduce that $H$ is a normal subgroup.
+  \end{proof}
+\end{adjustwidth}
+
+The \textbf{canonical epimorphism} $\pi : G \to G \, / \, N$ is the surjective homomorphism defined by $\pi(a) = aN$. It is clear that $\pi$ is a homomorphism, since
+\[
+  \pi(ab) \, = \, abN \, = \, aN \times bN \, = \, \pi(a) \pi(b).
+\]
+Applying the Correspondence Theorem to the canonical surjection yields that subgroups in $G \, / \, N$ correspond one-to-one with subgroups in $G$ that contain $N$.
+
+% --------------------------------------------- %
+
+\section{Homomorphisms}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{group homomorphism} between two groups $G$ and $H$ is a mapping $\phi : G \to H$  such that for all $a, b \in G$,
+\[
+  \phi(ab) = \phi(a) \phi(b).
+\]
+There are several types of homomorphisms to consider:
+\begin{enumerate}
+  \item A surjective homomorphism is an \textbf{epimorphism}, an injective homomorphism is a \textbf{monomorphism}, and a bijetive homomorphism is an \textbf{isomorphism}.
+  \item A homomorphism $\phi : G \to G$ is an \textbf{epimorphism}, and an isomorphic epimorphism is an \textbf{automorphism}.
+\end{enumerate}
+
+If there exists an isomorphism between $G$ and $H$, their structures are equivalent: we say $G$ and $H$ are \textbf{isomorphic} and write $G \cong H$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    If $\phi : G \to H$ is a homomorphism, then the following properties hold for all $a \in G$:
+    \begin{enumerate}
+      \item $\phi(e_{G}) = e_{H}$.
+      \item $\phi(a^{-1}) = \phi(a)^{-1}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    Let us divide our proof into two parts:
+    \begin{enumerate}
+      \item Let $a \in G$. Then $\phi(e_{G}) \phi(a) = \phi(e_{G}a) = \phi(a)$. Multiplying by $\phi(a)^{-1}$ yields that $\phi(e_{G}) = e_{H}$.
+      \item We have that
+        \[
+          \phi(a) \phi(a^{-1}) = \phi(a a^{-1}) = \phi(e_{G}) = e_{H} = \phi(e_{G}) = \phi(a^{-1}a) = \phi(a^{-1}) \phi(a).
+        \]
+      The uniqueness of inverses in $H$ ensures that $\phi(a)^{-1} = \phi(a^{-1})$.
+    \end{enumerate}
+    This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Kernel, Image, Cokernel}
+
+Let $\phi : G \to H$ be a homomorphism. The structure of this homomorpism is encapsulated by three different groups:
+
+\begin{enumerate}
+  \item \textbf{Kernel}: The set $\Ker \phi \, = \, \{ k \mid \phi(k) = e \}$.
+  \item \textbf{Image}: The set $\Im \phi \, = \, \{ \phi(a) \mid a \in G \}$, often denoted $\phi(G)$.
+\end{enumerate}
+
+If $\Im \phi$ is a normal subgroup, then the \textbf{cokernel} of $\phi$ is the quotient group $\Coker \phi = H \, / \, \Im \phi$. This object is only explored when $H$ is an Abelian group.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $\phi : G \to H$ be a homomorphism. Then the folowing two results hold:
+    \begin{enumerate}
+      \item $\Ker \phi$ is a normal subgroup of $G$.
+      \item $\Im \phi$ is a subgroup of $H$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    $\Ker \phi$ is nonempty since $\phi(e) = e$. We now verify that $\Ker \phi$ is normal:
+    \begin{enumerate}
+      \item \textbf{Closure}: If $a, b \in \Ker \phi$, then $\phi(a) = \phi(b) = e$; therefore $\phi(ab) = \phi(a) \phi(b) = e$, so $ab \in \Ker \phi$.
+      \item \textbf{Invertability}: Suppose $\phi(a) \in \Ker \phi$. Then $\phi(a^{-1}) = \phi(a)^{-1} = e^{-1} = e$, so $a^{-1} \in \Ker \phi$
+      \item \textbf{Normality}: Let $k \in \Ker \phi$ and $a \in G$. Then
+      \[
+        \phi(a^{-1}ka) = \phi(a)^{-1} \phi(k) \phi(a) = \phi(a)^{-1} \phi(a) = e;
+      \]
+      hence $a^{-1}ka \in \Ker \phi$. We conclude that $\Ker \phi$ is normal. 
+    \end{enumerate}
+    Thus $\Ker \phi$ is a normal subgroup. Since it is clear that $\Im \phi$ is nonempty, we must verify:
+    \begin{enumerate}
+      \item \textbf{Closure}: If $\phi(a), \phi(b) \in \Im \phi$, then we have $\phi(a) \phi(b) = \phi(ab) \in \Im \phi$.
+      \item \textbf{Invertability}: If $\phi(a) \in \Im \phi$, then we have $\phi(a)^{-1} = \phi(a^{-1}) \in \Im \phi$.
+    \end{enumerate}
+    We conclude that $\Im \phi$ is a subgroup. This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+The reason normal subgroups are critical is precisely because the kernel of $\phi$ is normal.
+
+\newpage
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $\phi : G \to H$ be a homomorphism. The following two theorems hold:
+    \begin{enumerate}
+      \item $\phi$ is a monomorphism if and only if $\Ker \phi = \{ e \}$.
+      \item $\phi$ is an epimorphism if and only if $\Im \phi = H$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    Suppose that $\phi$ is a monomorphism. Thus
+    \begin{align*}
+      \phi(a) = e \implies \phi(a) = \phi(e) \implies a = e,
+    \end{align*}
+    so $\Ker \phi = \{ e \}$. If we suppose that $\Ker \phi = \{ e \}$, we have that
+    \[
+      \phi(a) = \phi(b) \implies \phi(ab^{-1}) = e \implies ab^{-1} = e \implies a = g,
+    \]
+    so $\phi$ is a monomorphism. The story with epimorphisms is quite simple.
+  \end{proof}
+\end{adjustwidth}
+
+The following theorem explores a special case of the Correspondence Theorem.
+
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $\Ker \phi = K$. Then $a \in G$ implies $\{ b \mid \phi(b) = \phi(a) \} = aK$.
+  \end{theorem}
+  \begin{proof}
+    We utilize the following chain of equivalencies:
+    \begin{align*}
+      \phi(b) = \phi(a) \iff \phi(ba^{-1}) = e \iff b a^{-1} \in K \iff b \in aK.
+    \end{align*}
+    We conclude the desired set equality:
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{The Isomorphism Theorems}
+
+For the remainder of this section, let $\phi : G \to H$ be a homomorphism.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[First Isomorphism Theorem]
+     $G \, / \, \Ker \phi \, \cong \, \Im \phi$.
+  \end{theorem}
+  \begin{proof}
+    Let $K = \Ker \phi$, and define a morphism $\psi : G \, / \, K \to \Im \phi$ by $\psi(aK) = \phi(a)$. We have for arbitrary $a, b \in G$ that
+    \[
+      \psi(aK \times bK) \, = \, \psi(abK) \, = \, \pi(ab) \, = \, \phi(a) \phi(b) \, = \, \psi(aK) \psi(bK).
+    \]
+    Hence $\psi$ is a homomorphism. For injectivity, suppose that $\Psi(aK) = \Psi(bK)$ --- that is, $\phi(a) = \phi(b)$. Then
+    \[
+      \phi(a^{-1}b) \, = \, \phi(a)^{-1} \phi(b) \, = \, e_{H},
+    \]
+    so $a^{-1}b \in K$. Thus $aK = bK$. For surjectivity, it is clear that for all $\phi(a) \in \Im \phi$ we have $\psi(aK) = \phi(a)$. We conclude that $\psi$ is the desired isomorphism.
+  \end{proof}
+\end{adjustwidth}
+
+\newpage
+
+Let $\phi : G \to H$ be a homomorphism. Here are two special cases of the prior theorem:
+\begin{enumerate}
+  \item If $\phi$ is a monomorphism, them $G \, \cong \, \Im \phi$.
+  \item If $\phi$ is an epimorphism, then $G \, / \, \Ker \phi \, \cong \, H$.
+\end{enumerate}
+
+For a subgroup $M' \subseteq H$, define the \textbf{contraction group} $M = \{ a \in G \, \mid \, \phi(a) \in M' \}$. This terminology is self-invented, but mirrors the contraction and extension of ideals.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Correspondence Theorem]
+    Subgroups of $G$ which contain $\Ker \phi$ correspond one-to-one with subgroups of $H$.
+  \end{theorem}
+  \begin{proof}
+    
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\end{document}

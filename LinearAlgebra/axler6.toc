@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}Inner Products and Norms}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Inner Products}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Norms}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Orthonormal Bases}{6}{section.2}%

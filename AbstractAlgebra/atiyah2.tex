@@ -1,0 +1,546 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{tikz-cd}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+
+\title{Atiyah-MacDonald: Modules}
+\author{James Pagan}
+\date{January 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Modules}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+An $\mathbf{R}$\textbf{-module} over a commutative ring $R$ is an abelian group $M$ (with operation written additively) endowed with a mapping $\mu : A \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
+\begin{enumerate}
+	\item $1x = x$;
+	\item $(ab)x = a(bx)$;
+	\item $a(x + y) = ax + ay$;
+	\item $(a + b)x = ax + bx$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Examples of Modules}
+
+\begin{itemize}
+	\item If $R$ is a ring, $R[x]$ is a module.
+	\item All ideals $\mathfrak{a}$ of $R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
+	\item If $R$ is a field, $R$-modules are $R$-vector spaces. In fact, the axioms above are identical to the vector axioms, defined over commutative rings instead of fields.
+	\item Abelian groups $G$ are precisely the modules over $\mathbb{Z}$.
+\end{itemize}
+
+% --------------------------------------------- %
+
+\subsection{Homomorphisms of Modules}
+
+A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an $\mathbf{R}$\textbf{-module homomorphism} (or is $R$-linear) if for all $a \in R$ and $x, y \in M$,
+\begin{align*}
+	f(x + y) & = f(x) + f(y) \\
+	f(ax)    & = a f(x).
+\end{align*}
+Thus, an $R$-module homomorphism $f$ is a homomorphism of abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear transformation. A bijective $R$-homomorphism is called an $R$-isomorphism.
+
+\newpage
+
+The set $\Hom_{R}(M, N)$ denotes the set of all $R$-module homomorphisms from $M$ to $N$, and is a module if we define the following operations for $a \in R$ and $f, g \in \Hom_{R}(M, N)$:
+\begin{align*}
+	(f + g)(x) & = f(x) + g(x) \\
+	(rf)(x)    & = r f(x).
+\end{align*}
+We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if there is no ambiguity about the commutative ring $R$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		$\Hom_{R}(R, M) \cong M$
+	\end{theorem}
+	\begin{proof}
+		Consider the mapping $\phi : \Hom_{R}(R, M)$ defined by $\phi(f) = f(1)$ for $f \in \Hom_{R}(R, M)$. See that for all $f, g \in \Hom_{R}(R, M)$,
+		\[
+			\phi(f + g) = (f + g)(1) = f(1) + g(1) = \phi(f) + \phi(g)
+		\]
+		and for all $a \in R$,
+		\[
+			\phi(af) = (af)(1) = a f(1) = a \phi(f),
+		\]
+		so $\phi$ is an $R$-homomorphism. Now, suppose that $\phi(f) = \phi(g)$; then $f(1) = g(1)$. For all $a \in R$, we deduce that $f(a) = a f(1) = a g(1) = g(a)$, so $h = g$ and $\phi$ is injective.
+
+		For all $x \in M$, consider the mapping $h : R \to M$ defined by $h(a) = ax$. As $h(ab) = abx = a h(b)$ for all $a, b \in R$, and
+		\[
+			h(a + b) = (a + b) h(1) = a h(1) + b h(1) = h(a) + h(b),
+		\]
+		we find that $h \in \Hom_{R}(R, M)$. Thus $\phi$ is surjective, as $\phi(h) = h(1) = m$, which establishes the desired isomrphism.
+	\end{proof}
+\end{adjustwidth}
+
+Further observe that homomorphisms $u : M' \to M$ and $v : N \to N''$ induce mappings $\bar{u} : \Hom(M, N) \to \Hom(M', N)$ and $\bar{v} : \Hom(M, N) \to \Hom(M, N'')$ defined for $f \in \Hom(M, N)$ as follows
+\[
+	\bar{u}(f) = f \circ u \qquad \text{and} \qquad \bar{v}(f) = v \circ f.
+\]
+These identities translate between the landscapes of $R$-modules and homomorphisms between them. We will elaborate on this duality in Section 5.2.
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Submodules and Quotient Modules}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{submodule} $M'$ of $M$ is an abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. The following proof outlines a construction of \textbf{quotient modules}:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The abelian quotient group $M / M'$ is an $R$-module under the opreation $r(x + M') = rx + M'$.
+	\end{theorem}
+	\begin{proof}
+		We must perform four rather routine calculations:
+		\begin{enumerate}
+			\item For all $x \in M$, we have that $1(x + M') = 1x + M' = x + M'$.
+			\item For all $r, s \in R$ and $x \in M$, we have that $r(s(x + M')) = r(sx + M') = rsx + M' = (rs)(x + M')$.
+			\item For all $r, s \in R$ and $x \in M$, we have that $(r + s)(x + M') = (r + s)x + M' = (rx + sx) + M' = (rx + M') + (sx + M') = r(x + M') + s(x + M')$.
+			\item For all $r \in R$ and $x, y \in M$, we have that $r((x + M') + (y + M')) = r((x + y) + M') = r(x + y) + M' = (rx + M') + (ry + M') = r(x + M') + r(y + M)'$.
+		\end{enumerate}
+		Therefore, $M / M'$ is an $R$-module.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Assorted Submodules}
+
+Let $f : M \to N$ be an $R$-module homomorphism. Then the \textbf{kernel} and \textbf{image} of $f$ are defined as follows:
+\[
+	\Ker f = \{ x \mid x \in M, f(x) = 0 \} \qquad \text{and} \qquad \Im f = f(M),
+\]
+and are submodules of $M$ and $N$ respectively. The \textbf{cokernel} of $f$ is defined as follows:
+\[
+	\Coker f = N \,/\, \Im f.
+\]
+If $M'$ is a submodule of $M$ such that $M' \subseteq \Ker f$, then $f$ induces a natural homomorphism $\bar{f} : M / M' \to N$ defined by $\bar{f}(x + M') = f(x)$. The kernel of $\bar{f}$ is $\Ker f \,/\, M'$ --- the distinct cosets of $M'$ in the kernel of $f$. Taking $M' = \Ker f$ yields the First Isomorphism Theorem for $R$-modules:
+\[
+	M \,/\, \Ker f \cong \Im f.
+\]
+
+% --------------------------------------------- %
+
+\section{Operations on Submodules}
+
+% --------------------------------------------- %
+
+\subsection{Sums, Intersections, Products}
+
+Let $M$ be an $R$-module with submodules $M_{1}, \ldots, M_{n}$. We can consider two crucial operations on these submodules:
+\begin{enumerate}
+	\item \textbf{Sum}: The sum $M_{1} + \cdots + M_{n}$ is the set of all sums $m_{1} + \cdots + m_{n}$, where $m_{i} \in M_{i}$ ($i \in \{ 1, \ldots, n \}$). It is the smallest submodule of $M$ that contains all $M_{1}, \ldots, M_{n}$.
+	\item \textbf{Intersecrtion}: The intersection $M_{1} \cap \cdots \cap M_{n}$ is the largest submodule of $M$ that is contained inside each $M_{1}, \ldots, M_{n}$.
+\end{enumerate}
+
+The following result proves the Third Isomorphism Theorem for modules:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		If $N \subseteq M \subseteq L$ are $R$-modules, then
+		\[
+			(L \,/\, N) \,/\, (M \,/\, N) \cong (L \,/\, M).
+		\]
+	\end{theorem}
+	\begin{proof}
+		Define the mapping $f : L \,/\, N \to L \,/\, M$ by $f(x + N) = x + M$. First, we prove $\phi$ is well-defined; if $x + N = y + N$ for $x, y \in L$, then $x - y \in N \subset M$, so $x + M = y + M$. Therefore,
+		\[
+			x + N = y + N \implies f(x + N) = f(y + N).
+		\]
+		It is trivial to verify that $f$ is a surjective $R$-homomorphism with kernel $M \,/\, N$ (the cosets of $N$ contained within $M$). We find by the First Isomorphism Theorem that $(L \,/\, N) \,/\, (M \,/\, N) \cong L \,/\, M$.
+	\end{proof}
+\end{adjustwidth}
+
+For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{product} $\mathfrak{r} M$ as all finite sums $r_{1}x_{1} + \cdots + r_{n}x_{n}$ for $r_{i} \in \mathfrak{r}$ and $x_{i} \in M$  for each $i \in \{ 1, \ldots, n \}$. It is a submodule of $M$.
+
+% --------------------------------------------- %
+
+\subsection{The Annihilator}
+
+If $N$ and $P$ are $R$-submodules of $M$, we define $(N : P)$ to be the set of all $r \in R$ such that $rP \subseteq N$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		$(N : P)$ is an ideal of $R$.
+	\end{theorem}
+	\begin{proof}
+		If $r, s \in (N : P)$, then $rP, sP \subseteq N$; we must have that $rP + sP \subseteq N$. $(N : P)$ is nonempty, as $0P = (0) \subseteq N$; and clearly if $rP \in N$, then $-rP \in N$ as $N$ is an abelian group. Clearly $(N : P)$ satifies the multiplicative condition too.
+	\end{proof}
+\end{adjustwidth}
+
+The \textbf{annihilator} of a module $M$ is $(0 : M)$, the ideal of all $r$ such that $rM = 0$, and is denoted $\Ann M$. If $I \subseteq \Ann M$, we may regard $M$ as an $R / I$-module. In particular, observe that if $\bar{r} \in R / I$, then $\bar{r}x$ is invariant by elements of $\bar{r}$; if $r_{1}$ and $r_{2}$ are any two elements of $\bar{r}$, then $r_{i} = r_{2} + i$ for some $i \in I \subseteq \Ann M$, so $r_{i}x = (r_{2} + i)x = r_{2}x + ix = r_{2}x$.
+
+An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihalator of $R$ may change depending on the ring --- if $\Ann M = I$, then $M$ is faithful as an $R / I$ module.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		If $M_{1}$ and $M_{2}$ are submodules of $M$, then $\Ann(M_{1} + M_{2}) = \Ann M_{1} \cap \Ann M_{2}$
+	\end{theorem}
+	\begin{proof}
+		If $r \in \Ann M_{1} \cap \Ann M_{2} $, then for all $x_{1} + x_{2} \in M_{1} + M_{2}$, $r$ annihalates $x_{1}$ and $x_{2}$, so $r(x_{1} + x_{2}) = 0.$ Thus $r \in \Ann(M_{1} + M_{2})$.
+
+		Now, suppose $r \notin \Ann M_{1} \cap \Ann M_{2} $. Then $r$ must fail to annnihilate an element in either $M_{1}$ or $M_{2}$ (or both) --- without loss of generality, let there exist $x_{1} \in M_{1}$ such that $rx_{1} \ne 0$.
+
+		Then as $rx_{1} \in M_{1} + M_{2}$, we find that $r \notin \Ann(M_{1} + M_{2})$. By contraposition, we find that if $r \in \Ann(M_{1} + M_{2})$, then $r \in \Ann M_{1} \cap \Ann M_{2}$. This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Direct Sum and Product}
+
+If $M$ and $N$ are $R$-modules, their \textbf{direct sum} $M \oplus N$ is the set of all pairs $(x, y)$ (with $x \in M$ and $y \in N$) endowed with the natural operations:
+\begin{align*}
+	(x_{1}, y_{1}) + (x_{2}, y_{2}) & = (x_{1} + x_{2}, y_{1} + y_{2}) \\
+	r(x, y)                         & = (rx, ry)
+\end{align*}
+More generally, for a family of $R$-modules $(M_{j})_{j \in J}$ , we define their \textbf{direct sum} $\bigoplus_{j \in J} M_{j}$ as the families $(x_{j})_{j \in J}$ such that $x_{j} \in M_{j}$ for all $j \in J$, with the restriction that only finitely many $x_{j}$ are nonzero.
+
+If we allow infinitely many $x_{j}$ to be nonzero, we attain the family's \textbf{direct product} $\prod_{j \in J} M_{j}$. Direct sums and direct products are equivalent if $J$ is finite, but not otherwise.
+
+\newpage
+
+\subsection{Direct Sums on Rings}
+
+Suppose that a commutative ring $R$ is a direct product $R = R_{1} \times \cdots \times R_{n}$. Then $R$ has $n$ ideals of the form
+\[
+	\mathfrak{a}_{j} = (0, \ldots, 0, r_{j}, 0, \ldots, 0),
+\]
+where $r_{i} \in R_{i}$ for each $i \in \{ 1, \ldots, n \}$. Viewing this relation in terms of modules,
+\[
+	R \cong \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{r}_{n}
+\]
+by the isomorphism $f(r_{1}, \ldots, r_{n}) = ((r_{1}, 0, \ldots), \ldots, (\ldots, 0, r_{n}))$.
+
+Similarly, suppose $R$ is a commutative ring with ideals $\mathfrak{a}_{1}, \ldots, \mathfrak{r}_{n}$, and
+\[
+	R = \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{r}_{n}.
+\]
+Then define $\mathfrak{s}_{i} = \bigoplus_{j \ne i} \mathfrak{a}_{j}$ for each $i \in \{ 1, \ldots, n \}$. We find that
+\[
+	R \cong (R \,/\, \mathfrak{s}_{1}) \times \cdots \times (R \,/\, \mathfrak{s}_{n})
+\]
+by the isomorphism $f(r_{1}, \ldots, r_{n}) = (r_{1} + \mathfrak{s}_{1}, \ldots, r_{n} + \mathfrak{s}_{n})$. We conclude that direct sums of ideals and direct products of subrings are dual notions. This is a critical strength of modules: it treats ideals and rings on equal footing, resulting in clarity and simplicity.
+
+% --------------------------------------------- %
+
+\section{Finitely Generated Modules}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set of \textbf{generators} $x_{1}, \ldots, x_{n}$ such that $M = Rx_{1} + \cdots + Rx_{n}$, where $Rx_{i}$ denotes the set $\{ rx_{i} \mid r \in R \}$ ($i \in \{ 1, \ldots, n \}$). In the following theorem, we denote $R \oplus \cdots \oplus R$ by $R^{n}$.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		$M$ is a finitely-generated $R$-module if and only if $M$ is isomorphic to a quotient of $R^{n}$.
+	\end{theorem}
+	\begin{proof}
+		Suppose $M$ is a finitely-generated $R$-module. Let $x_{1}, \ldots, x_{n} \in M$ generate $M$, and define $f : R^{n} \to M$ by $f(r_{1}, \ldots, r_{n}) = r_{1}x_{1} + \cdots + r_{n}x_{n}$. Then if $(r_{1}, \ldots, r_{n}), (s_{1}, \ldots, s_{n}) \in R^{n}$,
+		\begin{align*}
+			f(r_{1} + s_{1}, \ldots, r_{n} + s_{n}) &= (r_{1} + s_{1}) x_{1} + \cdots(r_{n} + s_{n}) \\
+			&= (r_{1}x_{1} + \cdots + r_{n}x_{n}) + (s_{1}x_{1} + \cdots + s_{1}x_{1}) \\
+			&= f(r_{1}, \ldots, r_{n}) + f(s_{1}, \ldots, s_{n}),
+		\end{align*}
+		and if $s \in R$,
+		\[
+			f(s r_{1}, \ldots, s r_{n}) = s r_{1} x_{1} + \cdots + s r_{n} x_{n} = s f(r_{1}, \ldots, r_{n}).
+		\]
+		Thus $f$ is a homomorphism; its surjectivity follows from the generation of $M$ by $x_{1}, \ldots, x_{n}$. Then if we set $\Ker f = \mathfrak{a}$, the First Isomorphism Theorem yields that
+		\[
+			R^{n} \,/\, \mathfrak{a} \, \cong \, M.
+		\]
+		Now, suppose that $R^{n} \,/\, \mathfrak{a} \cong M$ for some submodule $\mathfrak{r}$ of $R^{n}$ by the mapping $f$. The natural homomorphism $g : R^{n} \to R^{n} \,/\, \mathfrak{r}$ defined by $g(r_{1}, \ldots r_{n}) = (r_{1}, \ldots, r_{n}) + \mathfrak{r}$ is surjective, so $f \circ g : R^{n} \to M$ is a surjective $R$-module homomorhism.
+
+		Denote $x_{i} = (f \circ g) (0, \ldots, 0, 1, 0, \ldots 0)$ for $i \in \{ 1, \ldots, n \}$. Then for all $x \in M$, there exist $r_{1}, \ldots, r_{n}$ such that
+		\begin{align*}
+			x &= (f \circ g)(r_{1}, \ldots, r_{n}) \\
+			&= (f \circ g)(r_{1}, 0, \ldots, 0) + \cdots + (f \circ g)(0, \ldots, 0, r_{n}) \\
+			&= r_{1} (f \circ g)(1, 0, \ldots, 0) + \cdots + r_{n} (f \circ g)(0, \ldots, 0, 1) \\
+			&= r_{1} x_{1} + \cdots r_{n} x_{n}.
+		\end{align*}
+		We conclude that $x_{1}, \ldots, x_{n}$ generate $M$.
+	\end{proof}
+\end{adjustwidth}
+
+The following proof is a transcription from Atiyah-MacDonald:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Let $M$ be a finitely-generated $R$-module, let $\mathfrak{a}$ be an ideal of $R$, and let $f : M \to M$ be an $R$-module endomorphism of $M$ such that $f(M) \subset \mathfrak{r}M$. Then $\phi$ satisfies an equation of the form
+		\[
+			f^{n} + r_{n - 1} f^{n - 1} + \cdots + r_{0} f^{0} = 0,
+		\]
+		where the $r_{i}$ are in $\mathfrak{a}$.
+	\end{theorem}
+	\begin{proof}
+		Let $x_{1}, \ldots, x_{n}$ generate $M$. Then each $f(x_{i}) \in \mathfrak{a} M$, so we may define $r_{ij} \in \mathfrak{r}$ for $i, j \in \{ 1, \ldots, n \}$ by $f(x_{i}) = \sum_{j = 1}^{n} r_{ij}x_{j}$. This equation may be equivalently written for each $i \in \{ 1, \ldots, n \}$ as
+		\[
+			\sum\limits_{j = 1}^{n} (\delta_{ij} f - a_{ij} f^{0}) x_{j} = 0,
+		\]
+		where $\delta_{ij}$ is the Kronecker delta. By multiplying the left by the adjoint of the matrix $\delta_{ij} f - a_{ij} f^{0}$, it follows that $\det(\delta_{ij} f - a_{ij} f^{0})$ annihilates each $x_{ij}$ --- hence, it is the zero endomorphism of $M$. Expanding out the determinant yields an equation of the required form.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{corollary}
+		Let $M$ be a finitely-generated $R$-module and let $\mathfrak{a}$ be an ideal of $R$ such that $\mathfrak{r} M = M$. Then there exists $r \in (1 + \mathfrak{r})$ such that $rM = 0$.
+	\end{corollary}
+	\begin{proof}
+		Consider Theorem 7 under the identity transformation --- namely $f^{0}$ for some nonzero endomorphism $f$. Then there exist $r_{n - 1}, \ldots, r_{0} \in \mathfrak{a}$ such that
+		\begin{align*}
+			0 &= f^{n} + r_{n - 1} f^{n - 1} + \cdots + r_{0} f^{0} \\
+			&= f^{0} + r_{n - 1} f^{0} + \cdots + r_{0} f^{0} \\
+			&= (1 + r_{n - 1} + \cdots + r_{0}) f^{0}.
+		\end{align*}
+		Setting $r = 1 + r_{n - 1} + \cdots + r_{0}$ yields that $r f^{0}$ is the zero endomorphism, so $r f^{0}(x) = rx = 0$ for each $x \in M$. We conclude that $rM = 0$.
+	\end{proof}
+\end{adjustwidth}
+
+A \textbf{free R-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} M_{j}$, where $M_{j} \cong R$ for each $j \in J$. A finitely generated module $M$ is therefore free if $M$ is isomorphic to $R^{n}$ itself. 
+\subsection{Relation to the Jacobson Radical}
+
+% --------------------------------------------- %
+
+The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma}[Nakayama's Lemma]
+		Let $M$ be a finitely generated $R$-module and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{J}$ of $R$. Then $\mathfrak{r}M = M$ implies $M = 0$.
+	\end{lemma}
+	\begin{proof}
+		By Corollary 1, there exists $r \in 1 + j$ for $j \in \mathfrak{a}$ such that $rM = 0$. By the properties of the Jacobson radical, $1 + j$ (and thus $r$) is a unit. Hence,
+		\[
+			M = (r^{-1}r)M = r^{-1}(rM) = r^{-1}(0) = 0,
+		\]
+		as desired.
+	\end{proof}
+	\begin{proof}
+		Suppose for contradiction that $\mathfrak{a}M = M$ and $M \ne 0$; let $x_{1}, \ldots, x_{n}$ be a set of generators of $M$ of shortest length. Then $x_{n} \in \mathfrak{r}M$, so $x_{n}$ satisfies an equation of the form
+		\[
+			 x_{n} = r_{1} x_{1} + \cdots + r_{n} x_{n}
+		\]
+		for $r_{1}, \ldots, r_{n} \in \mathfrak{a}$. None of these are $1$, since the Jacobson Radical is the intersection of maximal ideals, of which none contain $1$. We can therefore eliminate $x_{n}$;
+		\[
+			(1 - r_{n})x_{n} = r_{1}x_{1} + \cdots + r_{n - 1}x_{n - 1}.
+		\]
+		Since $r_{n}$ is in the Jacobson radical, $(1 - r_{n})$ is a unit. We may therefore multiply this equation by the inverse of $(1 - r_{n})$ to express $x_{n}$ as a linear combination of $x_{1}, \ldots, x_{n - 1}$. 
+
+		Then $x_{1}, \ldots, x_{n - 1}$ generate $M$. This contradicts the minimality of the length of $x_{1}, \ldots, x_{n}$; we conclude that if $\mathfrak{a} M = M$, then $M = 0$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{corollary}
+		Let $M$ be a finitely-generated $R$-module, $N$ a submodule of $M$, and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{R}$ of $R$. Then $M = IM + N$ implies $M = N$.
+	\end{corollary}
+	\begin{proof}
+		Suppose $M = \mathfrak{a} M + N$. Realize that for \textit{all} ideals $\mathfrak{r}$ of $R$,
+		\[
+			\mathfrak{a}(M \,/\, N) = (\mathfrak{r}M) \,/\, N = (\mathfrak{r}M + N) \,/\, N.
+		\]
+		Therefore, $\mathfrak{a}(M \,/\, N) = M \,/\, N$. By Nakayama's Lemma, $M \,/\, N = 0$, so $M = N$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Relation to Local Rings}
+
+Consider a finitely-generated module $M$ over a local ring $R$ with maximal ideal $\mathfrak{m}$. 
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The elements of the $R$-module $M \,/\, \mathfrak{m} M$ and the $(R \,/\, \mathfrak{m})$-module $M$ are identical.
+	\end{theorem}
+	\begin{proof}
+		It is relatively simple to verify that the function $f : M \,/\, \mathfrak{m} M \to M$ defined by
+		\[
+			f(r_{1} x_{1} + \cdots + r_{n} x_{n} + \mathfrak{m}M) = (r_{1} + \mathfrak{m})x_{1} + \cdots + (r_{n} + \mathfrak{m})x_{n}
+		\]
+		is bijective. It further satisfies $f(x + y) = f(x) + f(y)$ --- and $f(rx) = s f(x)$, where $s$ is the image of $r$ under the canonical surjection $\phi : R \to R \,/\, \mathfrak{m}$.
+	\end{proof}
+\end{adjustwidth}
+
+This realization arises naturally, as $\mathfrak{m}$ annihalates the quotient module $M \,/\, \mathfrak{m} M$. Since $R \,/\, \mathfrak{m}$ is a field, $M \,/\, \mathfrak{m} M$ is actually a vector space.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		Let $M$ be a module over a local ring. Then $x_{1}, \ldots, x_{n} \in M$ generate $M$ if and only if the images of $x_{1}, \ldots, x_{n}$ span the the vector space $M \,/\, \mathfrak{m} M$.
+	\end{theorem}
+	\begin{proof}
+		Let $f : M \to M \,/\, \mathfrak{m} M$ be the natural homomorphism. Then
+		\begin{align*}
+			\text{$x_{1}, \ldots, x_{n}$ generate $M$} &\iff \text{$x_{1}, \ldots, x_{n}$ generate $M \,/\, \mathfrak{m} M$} \\
+			&\iff \text{$x_{1}, \ldots, x_{n}$ are a basis of $M \,/\, \mathfrak{m} M$ over $R \,/\, \mathfrak{m}$}.
+		\end{align*}
+		The ommitted details are relatively simple to verify.
+	\end{proof}
+\end{adjustwidth}
+
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Exact Sequences}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A sequence of $R$-modules and $R$-homomorphisms
+\begin{equation}
+	\cdots \longrightarrow M_{i - 1} \stackrel{f_{i}}{\longrightarrow} M_{i} \stackrel{f_{i + 1}}{\longrightarrow} M_{i + 1} \xrightarrow{\hspace*{1cm}} \cdots 
+\end{equation}
+is \textbf{exact} at $M_{i}$ if $\Im f_{i} = \Ker f_{i + 1}$. The sequence is \textbf{exact} if it is exact at each $M_{i}$. Such sequences induce a wealth of identities relating the modules and their images, kernels, and cokernels. Three examples of exact sequences are as follows:
+\begin{align*}
+	0 \to M' \stackrel{f}{\to} M \text{ is exact } &\iff \text{$f$ is injective, so $M' \cong \Im f$} \\
+	M \stackrel{g}{\to} M'' \to 0 \text{ is exact } &\iff \text{$g$ is surjective, so $M \,/\, \Ker g \cong M'$.} \\
+	0 \to M' \stackrel{f}{\to} M \stackrel{g}{\to} M'' \to 0 \text{ is exact} &\iff \text{$f$ is injective, $g$ is surjective, and} \\
+	& \quad \qquad \text{$\Coker f = M \,/\, \Ker g \cong M'$}.
+\end{align*}
+
+An exact sequence of this third type is called a \textbf{short exact sequence}. Any long exact sequence, like that in equation (1), can be broken into numerous short exact sequences:
+\[
+	0 \longrightarrow \Coker f_{i - 1} \stackrel{f_{i}'}{\longrightarrow} M_{i} \stackrel{f_{i + 1}}{\longrightarrow} \Im f_{i + 1} \longrightarrow 0,
+\]
+where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, we will often write that $0 \to N_{i} \to M_{i} \to N_{i + 1} \to 0$ for some modules $N_{i}$ and $N_{i + 1}$ instead.
+
+% --------------------------------------------- %
+
+\subsection{Exact Sequences of Homomorphisms}
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The sequence
+		\begin{equation}
+			M' \stackrel{u}{\longrightarrow} M \stackrel{v}{\longrightarrow} M'' \longrightarrow 0
+		\end{equation}
+		of $R$-modules and $R$-module homomorphisms is exact if and only if for all $R$-modules $N$, the sequence
+		\begin{equation}
+			0 \longrightarrow \Hom(M'', N) \stackrel{\bar{v}}{\longrightarrow} \Hom(M, N) \stackrel{\bar{u}}{\longrightarrow} \Hom(M', N)
+		\end{equation}
+		is exact, where $\bar{u}$ and $\bar{v}$ are as in Section 1.3.
+	\end{theorem}
+	\newpage
+	\begin{proof}
+		The exactness of (2) is equivalent to $\Im u = \Ker v$ and the surjectivity of $v$, while the exactness of (3) is equivalent to the injectivity of $\bar{v}$ and $\Im \bar{v} = \Ker \bar{u}$.
+		\begin{adjustwidth}{1cm}{}
+			\begin{claim}
+				$v$ is surjective if and only if $\bar{v}$ is injective.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Suppose that $v$ is surjective, and suppose $f \in \Ker \bar{v}$ for any $N$. Then $f$ is in $\Hom(M, M'')$ and
+				\[
+					\bar{v}(f) = f \circ v = 0.
+				\]
+				Since $v$ is surjective, $f$ must map the entirety of $M$ to zero; thus $f = 0$, and $\bar{v}$ is injective.
+
+				Now, suppose that $v$ is not surjective. Then set $N = M'' \,/\, \Im v$ and let $f \in \Hom(M'', N)$ be the natural homomorphism; both are nonzero. Then
+				\[
+					\bar{v}(f)(M) = (f \circ v)(M) = f(\Im v) = 0.
+				\]
+				Then $f$ is a nonzero element of $\Ker \bar{v}$, so $\bar{v}$ is not surjective.
+			\end{proof}
+		\end{adjustwidth}
+		The second claimed biconditional relation requires proof of the following claim.
+		\begin{adjustwidth}{1cm}{}
+			\begin{claim}
+				$\Im u = \Ker v$ for surjective $v$ implies that $\Im \bar{v} = \Ker \bar{u}$.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Suppose $\Im u = \Ker v$, so $v \circ u = 0$. Let $f \in \Im \bar{v}$; then there exists $g$ such that $\bar{v}(g) = g \circ v = f$. We conclude that
+				\[
+					\bar{u}(f) = f \circ u = g \circ v \circ u = g \circ 0 = 0,
+				\]
+				so $f \in \Ker \bar{u}$. Now, suppose $f \in \Ker \bar{u}$, so $\bar{u}(f) = f \circ u = 0$. Since $v$ is surjective, $m'' \in M''$ implies the existence of $m \in M$ such that $v(m) = m''$. Then define $g \in \Hom(M'', N)$ such that $g(m'') = f(m)$; it is relatively easy to demonstrate that $g$ is well-defined and a homomorphism. Thus, $f = g(u) = \bar{u}(g)$, so $f \in \Im \bar{v}$, so $\Im \bar{v} = \Ker \bar{u}$.
+			\end{proof}
+		\end{adjustwidth}
+		If we suppose $\Im \bar{v} = \Ker \bar{u}$, then $\bar{u} \circ \bar{v} = 0$ --- that is, $v \circ u \circ f = 0$ for all $f \in \Hom(M'', N)$. This is equivalent to $\Im u = \Ker v$ in the start of Claim 2, with some added work to demonstrate that $\Im u \supseteq \Ker v$.
+	\end{proof}
+\end{adjustwidth}
+
+Really, the natural language for these proofs is Homosexual Agenda and Abelian categories. Thus we will state the lemmas from this chapter without proof.
+
+\newpage
+
+The following theorem is asserted without proof, because I value my sanity.
+
+\begin{adjustwidth}{1cm}{}
+  \begin{theorem}
+		The sequence
+		\[
+			0 \longrightarrow N' \stackrel{u}{\longrightarrow} N \stackrel{v}{\longrightarrow} N''
+    \]
+		of $R$-modules and $R$-module homomorphisms is exact if and only if for all $R$-modules $N$, the sequence
+		\[
+			0 \longrightarrow \Hom(M, N') \stackrel{\bar{u}}{\longrightarrow} \Hom(M, N) \stackrel{\bar{v}}{\longrightarrow} \Hom(M, N'')
+    \]
+		is exact, where $\bar{u}$ and $\bar{v}$ are as in Section 1.3.
+  \end{theorem}
+\end{adjustwidth}
+
+The following theorem is called the Snake Lemma, a special case of exact homology sequences in Homosexual Agenda:
+
+\begin{adjustwidth}{1cm}{}
+  \begin{theorem}[Snake Lemma]
+    Suppose that
+    \[ \begin{tikzcd}
+      0 \arrow[r] & M' \arrow[r, "u"] \arrow[d, "f'"] & M \arrow[r, "v"] \arrow[d, "f"] & M'' \arrow[r] \arrow[d, "f''"] & 0 \\
+      0 \arrow[r] & N' \arrow[r, "u'"]                & N \arrow[r, "v'"]               & N'' \arrow[r]                  & 0
+    \end{tikzcd} \]
+    is a commutative diagram of $R$-modules and homomorphisms, with the rows exact. Then there exists an exact sequence
+    \[ \begin{tikzcd}
+      0 \arrow[r] & \Ker(f') \arrow[r, "\bar{u}"] & \Ker(f) \arrow[r, "\bar{v}"]     & \Ker(f'') \arrow[ld, "d"']      &                       &   \\
+                  &                               & \Coker(f') \arrow[r, "\bar{u}'"] & \Coker(f) \arrow[r, "\bar{v}'"] & \Coker(f'') \arrow[r] & 0
+    \end{tikzcd} \]
+    in which $\bar{u}$ and $\bar{v}$ are restrictions of $u$ and $v$, and in which $\bar{u}'$ and $\bar{v}'$ induced by $u'$ and $v'$. The \textbf{boundary homomorphism} $d$ is defined in Atiyah-MacDonald page 23.
+  \end{theorem}
+\end{adjustwidth}
+
+We encourage the reader to adopt these results on faith. Homosexual Agenda is a complex subject of math that deserves its own set of notes.
+
+% --------------------------------------------- %
+
+\end{document}

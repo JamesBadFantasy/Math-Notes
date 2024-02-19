@@ -1,0 +1,338 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+
+\renewcommand{\grad}{\nabla}
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+
+\title{MATH-UA 329: Homework 1}
+\author{James Pagan, February 2023}
+\date{Professor Güntürk}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 1}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+\begin{proof}
+  Let $\ev{\cdot, \cdot} : V \times V \to V$ be an inner product over a vector space $V$. Then for all $\vec{v}, \vec{w} \in V$, we have
+  \begin{align*}
+    \norm{\vec{v} + \vec{w}}^{2} &= \ev{\vec{v} + \vec{w}, \vec{v} + \vec{w}} \\
+                                 &= \ev{\vec{v}, \vec{v} + \vec{w}} + \ev{\vec{w}, \vec{v} + \vec{w}} \\
+                                 &= \ev{\vec{v}, \vec{v}} + \ev{\vec{v}, \vec{w}} + \ev{\vec{w}, \vec{v}} + \ev{\vec{w}, \vec{w}} \\
+                                 &= \norm{\vec{v}}^{2} + 2\ev{\vec{v}, \vec{w}} + \norm{\vec{w}}^{2}.
+  \end{align*}
+  We now demonstrate that the Triangle Inequality and Cauchy-Schwarz Inequality are equivalent. Suppose the Triangle Inequality holds; for all $\vec{v}, \vec{w} \in V$, we have
+  \begin{align*}
+   \norm{\vec{v}} \norm{\vec{w}} &= \frac{(\norm{\vec{v}} + \norm{\vec{w}})^{2} - \norm{\vec{v}}^{2} - \norm{\vec{w}}^{2}}{2} \\
+                                 &\ge \frac{\norm{\vec{v} + \vec{w}}^{2} - \norm{\vec{v}}^{2} - \norm{\vec{w}}^{2}}{2} \\
+                                 &= \frac{\big( \norm{\vec{v}}^{2} + 2 \ev{\vec{v}, \vec{w}} + \norm{\vec{w}}^{2} \big) - \norm{\vec{v}}^{2} - \norm{\vec{w}}^{2}}{2} \\
+                                 &= \ev{\vec{v}, \vec{w}}.
+  \end{align*}
+  Now, suppose the Cauchy-Schwarz Inequality; for all $\vec{v}, \vec{w} \in V$, we have
+  \begin{align*}
+    \norm{\vec{v} + \vec{w}}^{2} &= \norm{\vec{v}^{2}} + 2 \ev{\vec{v}, \vec{w}} + \norm{\vec{w}}^{2} \\
+                                 &\le \norm{\vec{v}}^{2} + 2 \norm{\vec{v}} \norm{\vec{w}} + \norm{\vec{w}}^{2} \\
+                                 &= \big( \norm{\vec{v}} + \norm{\vec{w}} \big)^{2}.
+  \end{align*}
+  Taking the square root yields the Triangle Equality.
+\end{proof}
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+\begin{proof}
+ Suppose $\vec{z} = (z_{1}, \ldots, z_{n})$ and $\vec{w} \in (w_{1}, \ldots, w_{n})$ are vectors in $\mathbb{C}^{n}$ and $c \in \mathbb{C}$. Then 
+  \[
+    \norm{c\vec{z} - \vec{w}}^{2} = \sum\limits_{i = 1}^{n} (c z_{1} + w_{1})^{2} = c^{2} \left( \sum\limits_{i = 1}^{n} z_{i}^{2} \right) + c \left( 2 \sum\limits_{i = 1}^{n} z_{i}w_{i} \right) + \left( \sum\limits_{i = 1}^{n} w_{i}^{2} \right)
+  \]
+  is a quadratic which has at most one root. Its discriminant must be nonnegative:
+  \[
+    0 \le \left( 2 \sum\limits_{i = 1}^{n} z_{i}w_{i} \right)^{2} - 4 \left( \sum\limits_{i = 1}^{n} z_{i}^{2} \right) \left( \sum\limits_{i = 1}^{n} w_{i}^{2} \right) = 4 (\vec{z} \cdot \vec{w})^{2} - 4 \norm{\vec{z}}^{2} \norm{\vec{w}}^{2}.
+  \]
+  Diving by $4$ and rearranging yields that $(\vec{z} \cdot \vec{w})^{2} \le \norm{\vec{z}}^{2} \norm{\vec{w}}^{2}$; taking the square root yields the Cauchy-Schwarz Inequality in $\mathbb{C}^{n}$. This proof implies Cauchy-Schwarz in $\mathbb{R}^{n}$ as well.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+\begin{proof}
+  We must first unravel the notation of the expression $\tfrac{\omega_{f}(t)}{t}$. For all $\epsilon > 0$,
+  \begin{align*}
+    \lim\limits_{t \to 0^{+}} \frac{\omega_{f}(t)}{t} = 0 &\implies \exists \delta \text{ such that } 0 < t < \delta \text{ implies } \frac{\omega_{f}(t)}{t} < \epsilon \\
+    &\implies \exists \delta \text{ such that } 0 < t < \delta \text{ implies } \frac{\sup\limits_{\abs{x_{1} - x_{2}} \le t} \abs{f(x_{1}), f(x_{2})}}{t} \le \epsilon \\
+    &\implies \exists \delta \text{ such that } 0 < \abs{x_{1} - x_{2}} \le t < \delta \text{ for } x_{1}, x_{2} \in I \text{ implies } \\
+    & \, \, \, \, \qquad \frac{\abs{f(x_{1}) - f(x_{2})}}{t} \le \epsilon. 
+  \end{align*}
+  Set $t = \abs{x_{1} - x_{2}}$. Then $\lim\limits_{t \to 0^{+}} \frac{\omega_{f}(t)}{t} = 0$ implies the existence of $\delta$ such that
+  \[
+    0 < \abs{x_{1} - x_{2}} < \delta \implies \abs{\frac{f(x_{1}) - f(x_{2})}{x_{1} - x_{2}}} \le \epsilon.
+  \]
+  We conclude that $\lim\limits_{x_{2} \to x_{1}} \frac{f(x_{1}) - f(x_{2})}{x_{1} - x_{2}} = f'(x_{1}) = 0$ for all $x_{1} \in I$, so $f$ is constant on $I$.
+\end{proof}
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+\begin{proof}
+  Let $s$ be any point in $S$. For all $\epsilon > 0$, there exists $z \in Z$ such that
+  \[
+    d(s, z) < \frac{\epsilon}{2}.
+  \]
+  Since $Z$ is dense in $X$: for all $\epsilon > 0$, there exists $x \in X$ corresponding to $z$ such that
+  \[
+    d(z, x) < \frac{\epsilon}{2}.
+  \]
+  Then we deduce that
+  \[
+    d(s, x) \le d(s, z) + d(z, x) = \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon,
+  \]
+  so $S$ is dense in $X$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+\begin{proof}
+  We address each part separately:
+
+  \textbf{Part (i)}: We must perform rather routine calculations to verify that $d_{1} \times d_{2}$ is a metric:
+  \begin{enumerate}
+    \item \textbf{Positivity}: Since $(d_{1} \times d_{2}) \big( (x_{1}, x_{2}), (y_{1}, y_{2}) \big)$ is a sum of two distances, it is nonnegative. Equality is obtained precisely when $d_{1}(x_{1}, y_{1}) = d_{2}(x_{2}, y_{2}) = 0$ --- that is, when $(x_{1}, x_{2}) = (y_{1}, y_{2})$.
+    \item \textbf{Symmetry}: We have that
+    \begin{align*}
+      (d_{1} \times d_{2}) \big( (x_{1}, x_{2}), (y_{1}, y_{2}) \big) &= d_{1}(x_{1}, y_{1}) + d_{2}(x_{2}, y_{2}) \\
+                                                                      &= d_{1}(y_{1}, x_{1}) + d_{2}(y_{2}, x_{2}) \\
+                                                                      &= (d_{1} \times d_{2}) \big( (y_{1}, y_{2}), (x_{1}, x_{2}) \big).
+    \end{align*}
+    \item \textbf{Triangle Inequality}: For all $(x_{1}, x_{2})$, $(y_{1}, y_{2})$, and $(z_{1}, z_{2})$ in $X_{1} \times X_{2}$, observe that
+    \begin{align*}
+      (d_{1} \times d_{2}) \big( (x_{1}, x_{2}), (y_{1}, y_{2}) \big) &= d_{1}(x_{1}, y_{1}) + d_{2}(x_{2}, y_{2}) \\
+                                                                      &\le d_{1}(x_{1}, z_{1}) + d_{1}(z_{1}, y_{1}) + d_{2}(x_{2}, z_{2}) + d_{2}(z_{2}, y_{2}) \\
+                                                                      &= (d_{1} \times d_{2}) \big( (x_{1}, x_{2}), (z_{1}, x_{2}) \big) \\
+                                                                      & \quad + (d_{1} \times d_{2}) \big( (z_{1}, z_{2}), (y_{1}, y_{2}) \big),
+    \end{align*}
+    which is the triangle inequality.
+  \end{enumerate}
+  We conclude that $d_{1} \times d_{2}$ is a metric of $X_{1} \times X_{2}$.
+
+  \newpage
+
+  \textbf{Part (ii)}: Select $(z_{1}, z_{2}) \in Z_{1} \times Z_{2}$ arbitrarily. For all $\epsilon > 0$, there exists $x_{1} \in X_{1}$ and $x_{2} \in X_{2}$ such that
+  \begin{align*}
+    d_{1}(x_{1}, z_{1}) &< \frac{\epsilon}{2} \\
+    d_{2}(x_{2}, z_{2}) &< \frac{\epsilon}{2}.
+  \end{align*}
+  Considering the pair $(x_{1}, x_{2})$, we deduce that
+  \[
+    (d_{1} \times d_{2}) \big( (z_{1}, z_{2}), (x_{1}, x_{2}) \big) = d_{1}(z_{1}, x_{1}) + d_{2}(z_{2}, x_{2}) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon,
+  \]
+  so $Z_{1} \times Z_{2}$ is dense in $X_{1} \times X_{2}$.
+
+  \textbf{Part (iii)}: If $X_{1}$ and $X_{2}$ are separable, then there exist (at most) countable and dense subsets $Z_{1} \subset X_{1}$ and $Z_{2} \subset X_{2}$. Then the product $Z_{1} \times Z_{2}$ is (at most) countable; the prior lemma establishes it is dense in $X_{1} \times X_{2}$. We deduce that $X_{1} \times X_{2}$ is separable.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection{Part (c)}
+
+\begin{proof} Let $X$ be a discrete metric space. We utilize the following claim:
+  \begin{claim}
+    Let $S \subset X$. Then $S$ is dense in $X$ if and only if $S = X$.
+  \end{claim}
+  \begin{adjustwidth}{1cm}{}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+      Suppose $S$ is dense in $X$. Then for all $x \in X$, there exists $s \in S$ such that
+      \[
+        d(x, s) < \frac{1}{2}.
+      \]
+      Since the discrete metric is either $0$ or $1$, we find $d(x, s) = 0$ and $x = s$. Then $x \in S$, so $S = X$. The proof concludes by noting that $S = X$ implies $S$ is dense in $X$.
+    \end{proof}
+  \end{adjustwidth}
+  We use our claim in the following chain of equivalecies:
+  \begin{align*}
+    \text{$X$ is separable} &\iff \text{there exists dense $S \subseteq X$ which is countable} \\
+                            &\iff \text{$X$ is (at most) countable},
+  \end{align*}
+  as desired.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 4}
+
+\begin{proof}
+  Suppose that $(X, d)$ is a metric space. Then the following holds for all $x \in X$:
+  \begin{align*}
+    \text{$(X, d)$ is separable} & \iff \text{$X$ has a countable dense subset} \\
+                               & \iff \text{There is $(x_{n})_{1}^{\infty} \subseteq X$ which is dense in $X$} \\
+                               & \iff \text{For every $x \in X$ and all $\epsilon > 0$, there is $x_{m} \in (x_{n})_{1}^{\infty}$ such that} \\
+                               & \qquad  \quad  d(x_{m}, x) < \epsilon \\
+                               & \iff \text{For every $x \in X$, we have }\liminf\limits_{n \to \infty} d(x_{n}, x) = 0,
+  \end{align*}
+  as required.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 5}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+\begin{proof}
+  Suppose that $S$ is a dense subset of $\ell^{\infty}(\mathbb{N})$. We will prove that $D$ is uncountable.
+  \begin{claim}
+    $\{ 0, 1 \}^{\mathbb{N}}$ is an uncountable set to which $\ell^{\infty}(\mathbb{N})$ reduces to the discrete metric.
+  \end{claim}
+  \begin{adjustwidth}{1cm}{}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+      Cantor's diagonal argument implies that $\{ 0, 1 \}^{\mathbb{N}}$ is an uncountable set. Let $x = (x_{1}, x_{2}, \ldots)$ and $y = (y_{1}, y_{2}, \ldots)$ be sequences in $\{ 0, 1 \}^{\mathbb{N}}$. It is clear that $d_{\infty}(x, y)$ is $0$ or $1$; we have
+      \begin{align*}
+        \text{$d_{\infty}(x, y) = 0$} &\iff \text{$\abs{x_{i} - y_{i}} = 0$ for all $i \in \mathbb{N}$} \\
+                                    &\iff \text{$x_{i} = y_{i}$ for all $i \in \mathbb{N}$} \\
+                                    &\iff x = y.
+      \end{align*}
+      Thus $d_{\infty}$ is the discrete metric on $\{ 0, 1 \}^{\mathbb{N}}$, which completes the proof of our claim.
+    \end{proof}
+  \end{adjustwidth}
+  Associate to each $x \in \{ 0, 1 \}^{\mathbb{N}}$ the following set:
+  \[
+    I_{x} \, \stackrel{\text{def}}{=} \, \left\{ s \in S \, \, \, \Big| \, \, \, d(x, s) < \frac{1}{2} \right\}.
+  \]
+  Each $I_{x}$ is infinite since $x$ is a limit point of $D$. Observe that $I_{x}$ and $I_{y}$ for $x \ne y$ are disjoint. If we suppose otherwise, there would exist $s \in S$ such that $d(x, s) < \tfrac{1}{2}$ and $d(y, s) < \tfrac{1}{2}$, which yields the following contradiction:
+
+  \[
+    1 \, = \, d(x, y) \, \le \, d(x, s) + d(s, y) \, < \, \frac{1}{2} + \frac{1}{2} \, = \, 1
+  \]
+  By the Axiom of Choice, we may form a set $I$ consisting of one element of $I_{x}$ for each $x \in \{ 0, 1 \}^{\mathbb{N}}$. Observe that $I$ and $\{ 0, 1 \}^{\mathbb{N}}$ are in bijection, so $I$ is uncountable; then $I \subseteq D$, implies that $D$ is uncountable.
+
+  We conclude that $\ell^{\infty}(\mathbb{N})$ is not separable. Once an uncountable subset reduced to the discrete metric is identified, \textbf{the argument above applies to any metric space} and will be reinvoked in Problem 6.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+\textit{(Aside: We assume $\mathbb{N}$ does not include $0$; this choice is irrelevant to the proof)}
+
+\begin{proof}
+  We address each part separately:
+
+  \textbf{Part (i)}: We define the family of sets $S_{1} = (q_{1}, 0, 0, 0, \ldots)$, $S_{2} = (q_{1}, q_{2}, 0, 0, \ldots)$, $S_{3} = (q_{1}, q_{2}, q_{3}, 0, \ldots)$ so on for all $q_{1}, q_{2}, \ldots \in \mathbb{Q}$. Let $S_{1} \cup S_{2} \cup \cdots = S$; since each $S_{n}$ is countable, $S$ is countable.
+
+  Select $\{ x_{n} \} = (x_{1}, x_{2}, \ldots, x_{m}, 0, 0, \ldots) \in c_{00}$ arbitrarily, where $m$ is the largest integer such that $x_{m}$ is nonzero. For all $\epsilon > 0$, there exist rationals $q_{1}, \ldots, q_{m}$ such that
+  \begin{align*}
+    \abs{x_{1} - q_{1}} &< \epsilon \\
+                        & \, \, \, \vdots \\
+    \abs{x_{m} - q_{m}} &< \epsilon. \\
+  \end{align*}
+  Set $\{ q_{n} \} = (q_{1}, q_{2}, \ldots, q_{m}, 0, 0, \ldots)$. Then
+  \[
+    d_{\infty} \big( \{ x_{n} \}, \{ q_{n} \} \big) = \max\limits_{n \in \mathbb{Z}_{> 0}} \abs{q_{n} - s_{n}} < \epsilon,
+  \]
+  Since $\{ q_{n} \} \in S$, we deduce that $S$ is dense in $c_{00}$ and countable --- so $c_{00}$ is a separable metric space.
+
+  \textbf{Part (ii)}: Select $\epsilon > 0$ and $\{ x_{n} \} \in c_{0}$ arbitrarily. Since $\lim\limits_{n \to \infty} x_{n} = 0$, there exists $N$ such that
+  \[
+    N \le n \implies \abs{x_{n}} < \epsilon.
+  \]
+  Now, define $\{ y_{n} \} \in c_{00}$ such that $y_{n} = x_{n}$ if $N > n$ and $y_{n} = 0$ if $N \le n$. Then
+  \[
+    d_{\infty} \big( \{ x_{n} \}, \{ y_{n} \} \big) = \sup\limits_{n \in \mathbb{Z}_{> 0}} \abs{q_{n} - s_{n}} \le \epsilon.
+  \]
+  Thus $c_{00}$ is dense in $c_{0}$. Since density is transitive, we conclude that $S$ is dense in $c_{0}$, so $c_{0}$ is separable.
+
+  \textbf{Part (iii)}: Let $T$ be the set of eventually constant rational sequences, and select $\{ x_{n} \} \in c$ arbitrarily with components $(x_{1}, x_{2}, \ldots)$ and limit $L$. It is clear that $T$ is countable.
+
+  Let $\epsilon > 0$ be arbitrary. Since $\{ x_{n} \}$ converges and $\mathbb{Q}$ is dense in $\mathbb{R}$, there exists an integer $N$ and rationals $q_{1}, q_{2}, \ldots q_{N - 1}$ such that
+  \begin{align}
+    N \le n &\implies \abs{x_{n} - L} < \frac{\epsilon}{2} \\
+    j \in \{ 1, \ldots, n - 1 \} &\implies \abs{x_{j} - q_{j}} < \epsilon.
+  \end{align}
+  Let $Q$ be a rational such that $\abs{Q - L} < \tfrac{\epsilon}{2}$. Then define $\{ q_{n} \}$ as the sequence in $T$ with terms $(q_{1}, \ldots, q_{N - 1}, Q, Q, Q, \ldots)$. We claim that $\abs{x_{j} - q_{j}} < \epsilon$ for each $j \in \mathbb{Z}_{> 0}$, as verified by examining two cases:
+  \begin{enumerate}
+    \item If $j \in \{ 1, \ldots, N - 1 \}$, then $\abs{x_{j} - q_{j}} < \epsilon$ by equation (2).
+    \item If $j \ge N$, then $\abs{x_{j} - q_{j}} = \abs{x_{j} - Q} \le \abs{x_{j} - L} + \abs{L - Q} < \tfrac{\epsilon}{2} + \tfrac{\epsilon}{2} = \epsilon$.
+  \end{enumerate}
+  We deduce that $\sup\limits_{j \in \mathbb{Z}_{> 0}} \big( \{ x_{n} \}, \{ q_{n} \} \big) \le \epsilon$. Thus $T$ is dense in $c$, so $c$ is separable.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 6}
+
+\begin{proof}
+  We construct a mapping $\phi : \{ 0, 1 \}^{\mathbb{N}} \to \mathcal{BUC}(\mathbb{R})$ be defined recursively. For all $s = (s_{1}, s_{2}, \ldots) \in \{ 0, 1 \}^{\mathbb{N}}$, set $s_{0} = 0$. Let $\phi_{s}(x)$ be zero for $x \le 0$, and define $\phi_{s}$ on each interval $(n - 1, n]$ for $n \in \mathbb{Z}$ as follows:
+  \[
+    \phi_{s}(x) = \begin{cases}
+      0 &\text{ if } s_{n - 1} = s_{n} = 0 \\
+      x - (n - 1) & \text{ if } s_{n - 1} = 0 \text{ and } s_{n} = 1 \\
+      1 &\text{ if } s_{n - 1} = s_{n} = 1 \\
+      n - x & \text{ if } s_{n - 1} = 0 \text{ and } s_{n} = 1 \\
+    \end{cases}
+  \]
+  Two facts about $\phi_{s}$ follow: that $\phi_{s}(n) = s_{n}$ for each $n \in \mathbb{Z}_{> 0}$ and that $\phi_{s}$ is continuous. Unless $s$ is exclusively zeros or ones, $\phi_{s}$ has a maximum of $1$ and a minimum of $0$; the derivative of $\phi_{s}(x)$ for when $x \notin \mathbb{Z}_{\ge 0}$ is either $-1$, $0$, or $1$.
+  \begin{claim}
+    $\phi_{s}$ is Lipschitz continuous: $\abs{\phi_{s}(x) - \phi_{s}(y)} \le \abs{x - y}$.
+  \end{claim}
+  \begin{adjustwidth}{1cm}{}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+      If $x < 0$ or $y < 0$, the desired relation is trivial/ If $x, y \ge 0$, we have three cases to consider:
+      \begin{enumerate}
+        \item  If $\abs{x - y} \ge 1$, then the boundedness of $\phi_{s}$ implies $\abs{\phi_{s}(x) - \phi_{s}(y)} \le 1 \le \abs{x - y}$. 
+        \item If $\abs{x - y} < 1$ and $\lfloor x \rfloor = \lfloor y \rfloor$, then $\phi$ is a linear function between $x$ and $y$ with slope $\pm 1$, so $\abs{\phi_{s}(x) - \phi_{s}(y)} = \abs{x - y}$.
+        \item If $\abs{x - y} < 1$ and $\lfloor x \rfloor \ne \lfloor y \rfloor$, then without loss of generality, let $x \in (n - 1, n)$ and $y \in (n, n + 1)$. There are precisely eight cases for the function $\phi_{s}$ on the interval $[n - 1, n + 1]$; in each case, it is trivial that $\abs{f(x) - f(y)} \ge \abs{x - y}$.
+      \end{enumerate}
+      We conclude that $\abs{\phi_{s}(x) - \phi_{s}(y)} \le \abs{x - y}$, so $\phi_{s}$ is Lipschitz continuous.
+    \end{proof}
+  \end{adjustwidth}
+  Thus, $\phi_{s}$ is uniformly continuous, so $\phi_{s} \in \mathcal{BUC}(\mathbb{R})$ for each $\phi_{s}$. From here, it is trivial that the supremum norm reduces $\phi \big( \{ 0, 1 \}^{\mathbb{N}} \big)$ to the discrete metric. Then the proof in Problem 5, Part (a) applies here: we may construct the same open balls of radius $\tfrac{1}{2}$ and utilize the Axiom of Choice to deduce that all dense subsets of $\mathcal{BUC}(\mathbb{R})$ are uncountable.
+\end{proof}
+
+% --------------------------------------------- %
+
+\end{document}

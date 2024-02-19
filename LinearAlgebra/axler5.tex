@@ -1,0 +1,371 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\Span}{\operatorname{span}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{Axler: Eigenvalues and Eigenvectors}
+\author{December 2023}
+\date{James Pagan}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Invariant Subspaces}
+
+% --------------------------------------------- %
+
+\subsection{Eigenvalues}
+
+Suppose $\mat{T} \in \mathcal{L}(V)$. A subspace $U$ of $V$ is called \textbf{invariant} under $\mat{T}$ if $\mat{T} \vec{u} \in U$ for all $\vec{u} \in U$. A number $\lambda \in \mathbb{F}$ is called an \textbf{eigenvalue} of $\mat{T} \in \mathcal{L}(V)$ if there exists $\vec{v} \in V$ such that $\mat{T} \vec{v} = \lambda \vec{v}$.
+
+\begin{theorem}
+	Suppose $V$ is finite-dimensional, $\mat{T} \in \mathcal{L}(V)$, and $\lambda \in \mathbb{F}$. Then the following are equivalent:
+	\begin{enumerate}
+		\item $\lambda$ is an eigenvalue of $T$.
+		\item $\mat{T} - \lambda \mat{I}$ is not injective.
+		\item $\mat{T} - \lambda \mat{I}$ is not surjective.
+		\item $\mat{T} - \lambda \mat{I}$ is not bijective.
+	\end{enumerate}
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Conditions (1) and (2) are equivalent, as $\mat{T} \vec{v} = \lambda \vec{v}$ if and only if $(\mat{T} - \lambda \mat{I}) \vec{v} = \vec{0}$. Conditions (2), (3), and (4) are equivalent by the fact $V$ is finite-dimensional.
+	\end{proof}
+\end{adjustwidth}
+ 
+Suppose $\mat{T} \in \mathcal{L}(V)$ and $\lambda \in \mathbb{F}$ is an eigenvalue of $\mat{T}$. A vector $\vec{v} \in V$ is called an \textbf{eigenvector} of $\mat{T}$ corresponding to $\lambda$ if $\vec{v} \ne \vec{0}$ and $\mat{T} \vec{v} = \lambda \vec{v}$. Such eigenvectors biconditionally satisfy $\vec{v} \in \nll (\mat{T} - \lambda \mat{I})$.
+
+\begin{theorem}
+	Suppose $\mat{T} \in \mathcal{L}(V)$. Then every list of eigenvectors of $\mat{T}$ corresponding to distinct eigenvalues of $\mat{T}$ is linearly independent.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+    \begin{proof}
+		Suppose the desired result is false. Let $m$ be the smallest positive integer such that the list of eigenvectors $\vec{v}_{1}, \ldots, \vec{v}_{m}$ corresponding to distinct eigenvalues $\lambda_{1}, \ldots, \lambda_{m}$ is dependent. As $m > 1$, there exist $\mu_{1}, \ldots, \mu_{m} \in \mathbb{F}$ --- none of which are zero, by the minimality of $m$ --- such that
+		\[
+			\mu_{1} \vec{v}_{1} + \cdots + \mu_{m} \vec{v}_{m} = \vec{0}.
+		\]
+		Applying $\mat{T} - \lambda \mat{I}$ to this equation, we find that
+		\[
+			\mu_{1} (\lambda_{1} - \lambda_{m}) \vec{v}_{1} + \cdots + \mu_{m - 1} (\lambda_{m - 1} - \lambda_{m}) \vec{v}_{m} = \vec{0}.
+		\]
+		None of the coefficents above equal zero, as the eigenvalues are distinct and $\mu_{1}, \ldots, \mu_{m}$ are nonzero. Thus, $\vec{v}_{1}, \ldots \vec{v}_{m - 1}$ are linearly dependent --- which violates the minimality of $m$, yielding our desired contradiction.
+	\end{proof}
+\end{adjustwidth}
+
+The proof above is beautiful, yielding a swift execution to the following theorem:
+
+\begin{theorem}
+	Suppose $V$ is finite-dimensional. Then each operator on $V$ has at most $\dim V$ distinct eigenvalues.	
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+    \begin{proof}
+		Suppose $\mat{T}$ has distinct eigenvalues $\lambda_{1}, \ldots, \lambda_{m}$. Let $\vec{v}_{1}, \ldots, \vec{v}_{m}$ be nonzero vectors that correspond to these eigenvalues; by Lemma 2, they are independent. Then $m \le \dim V$, as desired.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Polynomials Applied to Operators}
+
+Suppose $\mat{T} \in \mathcal{L}(V)$ and $m \in \mathbb{Z}_{> 0}$. Then
+\begin{itemize}
+	\item $\mat{T}^{m} \in \mathcal{L}(V)$ is defined to be $\mat{T} \cdots \mat{T}$ ($m$ times).
+	\item $\mat{T}^{0} \in \mathcal{L}(V)$ is defined to be $\mat{I}$.
+	\item $\mat{T}^{-m} \in \mathcal{L}(V)$ is defined to be $(\mat{T}^{-1})^{m}$, if $\mat{T}$ is invertible.
+\end{itemize}
+
+It is easy to verify that $\mat{T}^{n + m} = \mat{T}^{n} \mat{T}^{n}$ and $(\mat{T}^{n})^{m} = \mat{T}^{nm}$. Now, suppose $\mat{T} \in \mathcal{L}(V)$ and $p \in \mathcal{P}(\mathbb{F})$ is a polynomial of the form
+\[
+	p(z) = a_{m} p^{m} + \cdots + a_{1} p + a_{0}.
+\]
+Then $p(\mat{T})$ is the operator on $V$ defined by
+\[
+	p(\mat{T}) = a_{m} \mat{T}^{m} + \cdots + a_{1} \mat{T} + a_{0} \mat{I}.
+\]
+If $p, q \in \mathcal{P}(\mathbb{F})$, we further define $pq (z) = p(z)q(z)$ for all $z \in \mathbb{F}$. Order here is irrelevant:
+
+\begin{theorem}
+	$(pq)(\mat{T}) = p(\mat{T})q(\mat{T})$ and $p(\mat{T})q(\mat{T}) = q(\mat{T})p(\mat{T})$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+    \begin{proof}
+		Suppose $p(z) = \sum\limits_{i = 0}^{n} a_{i}z_{i}$ and $q(z) = \sum\limits_{j = 0}^{m} b_{j}z_{j}$. Then $(pq)(z) = \sum\limits_{i = 0}^{n} \sum\limits_{j = 0}^{m} a_{i}b_{j}z^{i + j}$, so
+		\begin{align*}
+			(pz)(\mat{T}) &= \sum_{i = 0}^{n} \sum_{j = 0}^{m} a_{i}b_{j}\mat{T}^{i + j} \\
+			&= \left( \sum_{i = 0}^{n} a_{i} \mat{T}^{i} \right) \left( \sum_{j = 0}^{m} b_{j} \mat{T}^{j} \right) \\
+			&= p(\mat{T})q(\mat{T}).
+		\end{align*}
+		For the second result, see that $p(\mat{T})q(\mat{T}) = (pq)(\mat{T}) = (qp)(\mat{T}) = q(\mat{T})p(\mat{T})$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	Suppose $\mat{T} \in \mathcal{L}(V)$ and $p \in \mathcal{P}(\mathbb{F})$. Then $\nll p(\mat{T})$ and $\range p(\mat{T})$ are invariant subspaces under $\mat{T}$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+    \begin{proof}
+		Clearly, $\nll \mat{T}$ and $\range \mat{T}$ are invariant under the operator $\mat{T}$. Now, suppose $\vec{u} \in \nll p(\mat{T})$; then
+		\[
+			(p(\mat{T}))(\mat{T} \vec{u}) = \mat{T} (p(\mat{T})(\vec{u})) = \mat{T} (\vec{0}) = \vec{0},
+		\]
+		so $\mat{T} \vec{u} \in \nll p(\mat{T})$, and $\nll p(\mat{T})$ is invariant. Clearly $\vec{u} \in \range p(\mat{T})$ implies that 
+		\[
+			p(\mat{T})(\mat{T}\vec{u}) = \mat{T} (p(\mat{T}) \vec{u}) \in \range \mat{T};
+		\]
+		we conclude that the null space and range of $p(\mat{T})$ are invariant under $\mat{T}$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{The Minimal Polynomial}
+
+% --------------------------------------------- %
+
+\subsection{Existence of Eigenvalues on Complex Vector Spaces}
+
+\begin{theorem}
+	Every operator on a nonzero complex vector space $V$ with finite dimension $n$ has an eigenvalue.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Choose $\vec{v} \in V$, such that $\vec{v} \ne 0$. Then
+		\[
+			\vec{v}, \mat{T} \vec{v}, \mat{T}^{2} \vec{v}, \ldots, \mat{T}^{n} \vec{v}
+		\]
+		is a dependent list. Hence there exists a linear combination of these vectors equal to $\vec{0}$. Simplifying, we find a nonconstant polynomial $p$ of \textit{smallest degree} such that
+		\[
+			p(\mat{T}) \vec{v} = \vec{0}.
+		\]
+		By the Fundamental Theorem of Algebra, this polynomial has a root $\lambda$. Then 
+		\[
+			p(z) = (z - \lambda) q(z)
+		\]
+		for some polynomial $q$. Then using the multiplicative properties of polynomials,
+		\[
+			\vec{0} = p(\mat{T}) \vec{v} = (\mat{T} - \lambda \mat{I}) (q(\mat{T}) \vec{v}).
+		\]
+		 As $q$ has degree smaller than $p$, the expression $q(\mat{T}) \vec{v}$ is never the zero vector. Thus, the above equation implies that $\lambda$ is an eigenvector of $\mat{T}$ with eigenvector $q(\mat{T}) \vec{v}$. 
+	\end{proof}
+\end{adjustwidth} 
+
+The theorem above fails if $\mathbb{C}$ is replaced with $\mathbb{R}$ or if $V$ is infinite dimensional.
+
+% --------------------------------------------- %
+
+\subsection{Eigenvalues and the Minimal Polynomial}
+
+\begin{theorem}
+	Suppose $V$ is finite-dimensional and $\mat{T} \in \mathcal{L}(V)$. Then there is a unique monic polynomial $p \in \mathcal{P}(\mathbb{F})$ of smallest degree such that $p(\mat{T}) = \mat{0}$. Furthermore, $\deg p \le \dim V$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		We proceed via strong induction. If $\dim V = 0$, then the constant polynomial $1$ suffices -- thus, we assume the existence, uniqueness, and degree of the polynomial $p$ for $\dim V \in \{ 0, \ldots, n - 1 \}$.
+
+		Let $\dim V = n$ and select some nonzero $\vec{v} \in V$. Consider the family of vectors
+		\[
+			\vec{v}, \mat{T} \vec{v}, \mat{T}^{2} \vec{v}, \ldots, \mat{T}^{n} \vec{v}.
+		\]
+		It has length $n + 1$, so it must be dependent. Then by the Linear Dependence Lemma, there exists an integer $m$ such that $\vec{v}, \mat{T} \vec{v}, \ldots \mat{T}^{m - 1} \vec{v}$ is independent but $\vec{v}, \mat{T} \vec{v}, \ldots, \mat{T}^{m} \vec{v}$ is not --- namely, that there exist scalars $c_{0}, \ldots, c_{m - 1} \in \mathbb{F}$ such that
+		\[
+			\mat{T}^{m} \vec{v} + c_{m - 1} \mat{T}^{m - 1} \vec{v} + \cdots + c_{1} \mat{T} \vec{v} + c_{0} \vec{v} = \vec{0}.
+		\]
+		Define the monic polynomial $q \in \mathcal{P}_{m}(\mathbb{F})$ by $q(z) = z^{m} + c_{m - 1}z^{m - 1} + \cdots + c_{1}z + c_{0}$; then the above equation reads $q(\mat{T}) \vec{v} = \vec{0}$. Now, realize that for all $k \in \{ 0, \ldots, m - 1 \}$,
+		\[
+			q(\mat{T}) (\mat{T}^{k} \vec{v}) = \mat{T}^{k} (q(\mat{T}) \vec{v}) = \mat{T}^{k} \vec{0} = \vec{0}.
+		\]
+		Hence, $\dim \nll q(\mat{T}) \ge m$. Then by the Fundamental Theorem of Linear Maps,
+		\[
+			\dim \range q(\mat{T}) = \dim V - \dim \nll q(\mat{T}) \le n - m.
+		\]
+		Then because $\dim \range q(\mat{T}) < n$, our inductive hypothesis applies to the vector space $\dim \range q(\mat{T})$ and the operator $T \mid_{\range q(\mat{T})}$. We deduce the existence of a unique monic polynomial $s$ of smallest degree with 
+		\[
+			s(\mat{T} \mid_{\range q(\mat{T})}) = \mat{0} \qquad \text{and} \qquad \deg s \le n - m.
+		\]
+		We claim that $(sq)(\mat{T}) = \mat{0}$. For all $\vec{v} \in V$, realize that $q(\mat{T}) \vec{v} \in \range q(\mat{T})$; thus, 
+		\[
+			(sq)(\mat{T}) \vec{v} = s(\mat{T}) (q(\mat{T}) \vec{T}) = \vec{0}.
+		\]
+		Furthermore, the degree of $sq$	satisfies the desired requirement:
+		\[
+			\deg sq = \deg s + \deg q \le (n - m) + m = n.
+		\]
+		We have identified a monic polynomial of degree at most $n$ which when applied to $T$ returns the zero operator. Thus, there exist a monic polynomial of \textit{smallest degree} with this property; all that remains to be proven is its uniqueness.
+
+		Suppose $p, q \in \mathcal{P}(\mathbb{F})$ are two monic polynomials of the smallest degree $m$ such that $p(\mat{T}) = q(\mat{T}) = \mat{0}$. Then $(p - q)(\mat{T}) = \mat{0}$ and $\deg(p - q) < m$; if we simply divide $p - q$ by its leading coefficent, weis a polynomial multiple of the minimal polynomial of find a monic polynomial that contradicts the minimality of $m$. Hence $p = q$, which completes the proof.
+	\end{proof}
+\end{adjustwidth}
+ 
+For a finite-dimensional vector space $V$ and operator $\mat{T} \in \mathcal{L}(V)$, the \textbf{minimal polynomial} of $\mat{T}$ is the unique monic polynomial $p \in \mathcal{P}(\mathbb{F})$ such that $p(\mat{T}) = \mat{0}$.
+
+\begin{theorem}
+	The zeroes of the minimal polynomial of $\mat{T}$ are the eigenvalues of $\mat{T}$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $p$ be the minimal polynomial of $\mat{T}$. Suppose that $\lambda \in \mathbb{F}$ is a zero of $p$; then for some monic polynomial $p \in \mathcal{P}(\mathbb{F})$, 
+		\[
+			p(z) = (z - \lambda)q(z).
+		\]
+		Because $p(\mat{T}) = \mat{0}$, we have that for all $\vec{v} \in V$,
+		\[
+			\vec{0} = (\mat{T} - \lambda \mat{I})(q(\mat{T}) \vec{v}).
+		\]
+		As $q$ has smaller degree than the minimal polynomial, there exists $\vec{w} \in V$ such that $q(\mat{T}) \vec{w} \ne \vec{0}$; the above equation implies that $q(\mat{T}) \vec{w}$ must be an eigenvector of $\mat{T}$ with eigenvalue $\lambda$.
+
+		Now, suppose that $\lambda \in \mathbb{F}$ is an eigenvalue of $\mat{T}$. Then for some $\mat{T} \vec{v} = \lambda \vec{v}$ for some nonzero $\vec{v} \in V$; iterated applications yield that $\mat{T}^{k} \vec{v} = \lambda^{k} \vec{v}$ for all $k \in \mathbb{Z}_{\ge 0}$, so
+		\[
+			p(\mat{T}) \vec{v} = p(\lambda) \vec{v}.
+		\]
+		the left-hand side is $\vec{0}$; then $p(\lambda)$ must be zero, and $\lambda$ is a root of the minimal polynomial.
+	\end{proof}
+\end{adjustwidth}
+
+If $V$ is a finite-dimensional vector space over $\mathbb{C}$ and $\mat{T} \in \mathcal{L}(\mathbb{F})$, then the minimal polynomial of $\mat{T}$ has the form
+\[
+	(z - \lambda_{1}) \cdots (z - \lambda_{m}),
+\]
+where $\lambda_{1}, \ldots, \lambda_{n}$ are the eigenvalues of $\mat{T}$, possibly with repetitions.
+
+\newpage
+
+\begin{theorem}
+	Suppose $V$ is finite dimensional, $\mat{T} = \mathcal{L}(V)$, and $q \in \mathcal{P}(\mathbb{F})$. Then $q(\mat{T}) = \mat{0}$ if and only if $q$ is a polynomial multiple of the minimal polynomial of $\mat{T}$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let the minimal polynomial of $\mat{T}$ be $p$. As $\deg q \ge \deg p$, we may divide them to deduce the existence of $s, r \in \mathcal{P}(\mathbb{F})$ such that
+		\[
+			q = ps + r,
+		\]
+		where $\deg r < \deg p$. Then $q(\mat{T}) = p(\mat{T})s(\mat{T}) + r(\mat{T})$. Because $q(\mat{T}) = p(\mat{T}) = \mat{0}$, this equation simplifies to
+		\[
+			\mat{0} = r(\mat{T}).
+		\]
+		If $r$ was nonzero, then we could divide by its leading coefficent to yield a polynomial that contradics the minimality of $p$. Thus $r = 0$.
+
+		If $q$ is a polynomial multiple of $p$, then there exists $s \in \mathcal{P}(\mathbb{F})$ such that $q = ps$. Then
+		\[
+			\mat{0} = p(\mat{T})s(\mat{T}) = q(\mat{T}),
+		\]
+		which completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+The next result is a nice consequence of the above.
+
+\begin{theorem}
+	Suppose $V$ is finite-dimensional, $\mat{T} \in \mathcal{L}(V)$, and $U$ is an invariant subspace of $V$. Then the minimal polynomial of $\mat{T}$ is a polynomial multiple of the minimal polynomial of $\mat{T} \mid_{U}$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $p$ be the minimal polynomial of $\mat{T}$. Then for all $\vec{u} \in U$, 
+		\[
+			p(\mat{T}) \vec{u} = \vec{0}.
+		\]
+		We conclude that $p(\mat{T} \mid_{U}) = \mat{0}$, so $p$ is a polynomial multiple of the minimal polynomial of $\mat{T} \mid_{U}$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	Suppose $V$ is finite-dimensional and $\mat{T} \in \mathcal{L}(V)$. Then $T$ is not invertible if and only if the constant term of the minimal polynomial of $T$ is $0$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		If $\mat{T}$ is not invertible, then $0$ must be an eigenvalue of $\mat{T}$. Then $0$ is a root of $p$, which implies that $0$ does not have a constant term. The reverse of our steps holds as well.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Upper-Triangular Matricies}
+
+% --------------------------------------------- %
+
+\subsection{Matrix Prerequisites}
+
+Suppose $\mat{T} \in \mathcal{L}(V)$. The \textbf{matrix} of $\mat{T}$ with respect to a basis $\vec{v}_{1}, \ldots, \vec{v}_{n}$ is the $n$-by-$n$ matrix 
+\[
+	\mathcal{M}(\mat{T}) = \begin{bmatrix} A_{11} & \cdots & A_{1n} \\ \vdots & \ddots & \vdots \\ A_{n1} & \cdots & A_{nn} \end{bmatrix},
+\]
+whose entries $A_{}$ are defined by
+\[
+	\mat{T} \vec{v}_{k} = A_{1k} \vec{v}_{1} + \cdots + A_{nk} \vec{v}_{n}.
+\]
+Thus, the $k$-th column of the matrix $\mathcal{M}(\mat{T})$ is formed from the coefficents used to write $\mat{T} \vec{v}_{k}$ as a linear combination of the basis $\vec{v}_{1}, \ldots, \vec{v}_{n}$.
+
+The \textbf{diagonal} of a square matrix consists of all the entries $A_{kk}$ for each $k \in \{ 1, \ldots, n \}$. If all the entires below the diagonal are $0$, the square matrix is called $\textbf{upper triangular}$.
+
+\begin{theorem}
+	If $\mat{T} \in \mathcal{L}(V)$ and $\vec{v}_{1}, \ldots, \vec{v}_{n}$ is a basis of $V$, then the following conditions are equivalent:
+	\begin{enumerate}
+		\item The matrix of $\mat{T}$ with respect to $\vec{v}_{1}, \ldots, \vec{v}_{n}$ is upper triangular.
+		\item $\Span (\vec{v}_{1}, \ldots, \vec{v}_{k})$ is invariant under $\mat{T}$ for each $k \in \{ 1, \ldots, n \}$.
+		\item $\mat{T} \vec{v}_{k} \in \Span (\vec{v}_{1}, \ldots, \vec{v}_{k})$ for each $k \in \{ 1, \ldots, n \}$
+	\end{enumerate}
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose that $(1)$ holds. Then for each $i \in \{ 1, \ldots, n \}$,
+		\[
+			\mat{T} \vec{v}_{i} = A_{1i} \vec{v}_{1} + \cdots + A_{ii} \vec{v}_{i}.
+		\]
+		Let $k \in \{ 1, \ldots, n \}$. For all $\vec{w} \in \Span(\vec{v}_{1}, \ldots, \vec{v}_{k})$, there exist scalars $\lambda_{1}, \ldots, \lambda_{k}$ such that $\vec{w} = \lambda_{1} \vec{v}_{1} + \cdots + \lambda_{k} \vec{v}_{k}$. Therefore,
+		\begin{align*}
+			\vec{T} \vec{w} &= \sum\limits_{i = 1}^{k} \mat{T} (\lambda_{i}\vec{v}_{i}) \\
+							&= \sum\limits_{i = 1}^{k} \lambda_{1} (A_{1i} \vec{v}_{1} + \ldots + A_{ii} \vec{v}_{i}) \\
+							&= (\lambda_{1} A_{11} + \ldots + \lambda_{k}A_{1k}) \vec{v}_{1} + \cdots + (\lambda_{k} A_{kk}) \vec{v}_{k}  \\
+							&\in \Span(\vec{v}_{1}, \ldots, \vec{v}_{k}). 
+		\end{align*}
+		Then $\Span(\vec{v}_{1}, \ldots, \vec{v}_{k})$ is invariant under $\mat{T}$ for each $k \in \{ 1, \ldots, n \}$. If $(2)$ holds, then setting $\vec{w} = \vec{v}_{k}$ achieves $(3)$.
+
+		Now, suppose $(3)$ holds. Then for each $k \in \{ 1, \ldots, n \}$, there exist scalars such that
+		\[
+			\mat{T} \vec{v}_{k} = A_{1k} \vec{v}_{1} + \cdots + A_{kk} \vec{v}_{k}.
+		\]
+		As $\vec{v}_{1}, \ldots, \vec{v}_{n}$ constitute a basis of $V$, we conclude that the unique scalars that express $\mat{T}_{k}$ as a linear combination of $\vec{v}_{k}$ are $A_{1k}, \ldots, A_{kk}, 0, \ldots$ respectively. Thus, the entries of $\mathcal{M}(\mat{T})$ are zero below the main diagonal, implying (1).
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	For some $\mat{T} \in \mathcal{L}(V)$, suppose that there exists a basis $\vec{v}_{1}, \ldots, \vec{v}_{n}$ such that $\mathcal{M}(\mat{T})$ is upper triangular. Then if $\lambda_{1}, \ldots, \lambda_{n}$ are its diagonal entries, $\mat{T}$ satisfies the equation
+	\[
+		(\mat{T} - \lambda_{1} \mat{I}) \cdots (\mat{T} - \lambda_{n} \vec{I}) = \mat{0}.
+	\]
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\end{document}

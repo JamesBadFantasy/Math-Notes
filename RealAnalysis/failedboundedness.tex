@@ -1,0 +1,158 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{Real Analysis: Boundedness Theorem Attempt}
+\author{James Pagan}
+\date{August 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{INCORECT Boundedness Theorem}
+
+\begin{theorem*}
+	If $f \colon \mathbb{R} \to \mathbb{R}$ is continuous on $[a, b]$, then $f(x)$ is bounded on $[a, b]$.
+\end{theorem*}
+
+\begin{proof}
+
+Suppose for contradiction that $f(x)$ is not bounded on $[a, b]$; that is, for all $M \in \mathbb{R}$, there is some $y \in [a, b]$ such that $f(y) > M$. We will prove that this implies the existence of a real number inside $[a, b]$ outside the domain of $f(x)$.
+
+For all $M \in \mathbb{Z}_{\ge 0}$, let $S_M = \{ x \mid x \in [a, b], f(x) \ge M \}$ --- we supposed that $S_M$ is nonempty.
+
+% --------------------------------------------- %
+
+\begin{adjustwidth}{1cm}{}
+	\begin{claim*}
+		$S_M$ contains a closed proper interval for all $M \in \mathbb{Z}_{\ge 0}$.
+	\end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		For some $M \in \mathbb{Z}_{\ge 0}$, let $c$ be a real number belonging to $S_{M+1}$. Observe that $c \in [a, b]$ and $f(c) > M+1$.
+
+		If all reals in $x \in [a, c)$ satisfy $f(x) > M$, then $[a, c] \subseteq S_{M}$ --- and likewise, if all $x \in (c, b]$ satisfy $f(x) > M$, then $[c, b] \subseteq S_{M}$. Otherwise, there exist real numbers $\alpha \in [a, c)$ and $\beta \in (c, b]$ such that $f(\alpha) \le M$ and $f(\beta) \le M$.
+
+		Let $p = \sup \{ x \mid x \in [\alpha, c), f(x) = M \}$ and $q = \inf \{ x \mid x \in (c, \beta], f(x) = M \}$. The Intermediate Value Theorem guarantees that both sets are nonempty, so each set possess a supremum and infimum --- furthermore, it trivially guarantees that $f(x) \ge M$ for all $x \in [p, c]$ and $x \in [c, q]$. Then $[p, q] \subseteq S_M$, and $S_M$ contains a closed interval for all $M \in \mathbb{Z}_{\ge 0}$.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+=== PLEASE READ ===
+
+There is a flaw in my definition of a characteristic of an interval --- it's literally just the floor of p (or floor of q). Every point is contained within at most one maximal interval \textit{for a given $S_M$, where $M$ is a nonnegative integer}. Oops!
+
+Suppose we have that $f(x)$ is defined on $[0, 1]$ and is continuous on all points that \textit{are not} the reciprocals of powers of three; all these points have infinite limits. Our iterative ($2^n$ slices) idea would converge on $0$ --- which is actually defined! Oops!
+
+Yes, the limit of $0$ is not defined --- but that's not how I originally conceived of this proof :)
+
+=== THE FOLLOWING PROOF IS HIGHLY FLAWED ===
+
+We now develop the notion of a \textit{maximal interval of $S_{n}$}, which we define to be a closed proper interval in $S_{n}$ that satisfies three criteria:
+
+\begin{enumerate}
+	\item Its endpoints $p < q$ satisfy $f(p) = f(q) = M$;
+	\item Either $p = a$ or there exists $\epsilon_{1} > 0$ such that $0 < p - x < \epsilon_{1}$ implies $f(x) < M$.
+	\item Either $q = b$ or there exists $\epsilon_{2} > 0$  such that $0 < x - q < \epsilon_{2}$ implies $f(x) < M$.
+\end{enumerate}
+
+Maximal intervals satisfy key proprties that enable us to construct a real number inside $[a, b]$ that lies outside the domain of $f(x)$:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{claim*}
+		WRONG! WRONG! WRONG! WRONG! At most one maximal interval contains any real $r \in [a, b]$.
+	\end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $[p, q]$ and $[s, t]$ be distinct maximal intervals that contain $r$.
+
+		Suppose for contradiction that $q > t$. If $q \notin [s, t]$, then $[p, q]$ and $[s, t]$ are entirely disjoint, which contradicts the definition of $r$. Otherwise, $q \in [s, t]$. Now as $q \ne b$, $0 < x - q < \min \{ \tfrac{\epsilon_{2}}{2}, t \}$, implies $f(x) < M$. These $x$-values are contained within $[s, t]$ --- therefore, $[s, t]$ is not maximal, a contradiction. An identical argument shows that $s < t$ leads to contradiction. Thus, we must have that $t = s$.
+
+
+		Suppose for contradiction that $p < s$. If $s \notin [p, q]$, then $[p, q]$ and $[s, t]$ are entirely disjoint, which contradicts the definition of $r$. Otherwise, $s \in [p, q]$. Now as $s \ne a$, $0 < s - x < \min \{ \tfrac{\epsilon_{2}}{2}, q \}$, implies $f(x) < M$. These $x$-values are contained within $[p, q]$ --- therefore, $[p, q]$ is not maximal, a contradiction. An identical argument shows that $p > s$ leads to a contradiction. Thus, w must have that $p = s$.
+
+		Then $[p, q]$ and $[s, t]$ are the same interval --- at most one maximal interval contains $r$.
+	\end{proof}
+\end{adjustwidth}
+
+We thus have that maximal intervals are non-overlapping; most notably, they have distinct endpoints.
+
+\begin{adjustwidth}{1cm}{}
+    \begin{claim*}
+    	Any interval is $S_M$ is contained within a unique maximal interval of $S_M$.
+    \end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $[p, q]$ be an interval contained within $S_M$. Then the interval \[ [ \max \{ a, \sup \{ x \mid x \ge M, x \le p \} \}, \min \{ b, \inf \{ x \mid x \ge M, x \ge q \} \}] \] exists by the Intermediate Value Theorem, contains $[p, q]$ --- and if we define $s$ and $t$ such that the interval is $[s, t]$ --- we have that $f(s) = f(t) = M$.
+	\end{proof}
+\end{adjustwidth}
+
+We deduce from our claims that $S_M$ contains a maximal interval for all $M \in \mathbb{Z_{\ge 0}}$. Define the \textit{characteristic} of a maximal interval with endpoints $p$ and $q$ as $\lfloor p \rfloor$ --- or equivalently, $\lfloor q \rfloor$.
+
+For $n \in \mathbb{Z}_{\ge 0}$, consider the $2^{N}$ closed intervals of size $\tfrac{b-a}{2^N}$ between $a$ and $b$. Let $I_N$ be unique interval that these that --- among those that contain \textit{maximal subintervals} of arbitrarily large characteristic --- with the greatest upper bound.
+
+\begin{adjustwidth}{1cm}{}
+    \begin{claim*}
+    	$I_N$ exists for all $n \in \mathbb{Z}_{\ge 0}$.
+    \end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+
+    \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+
+
+We now have two cases --- one in which there exists an $M \in \mathbb{Z}_{\ge 0}$ such that $S_n$ contains finitely many maximal intervals for all integers $M < n$, or whether no such $n$ exists. We will refer to these as the \textit{finite case} and \textit{infinite case}. We wish to prove that in both cases, there exists a real number $x$ that lies inside intervals of arbitrarily large characteristic.
+
+\begin{adjustwidth}{1cm}{}
+	\begin{lemma}
+		If $f(x)$ satisfies the finite case on $[a, b]$ for $M \in \mathbb{Z}$, then there exists a real number $x$ that lies inside maximal intervals of arbitrarily large characteristic.
+	\end{lemma}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Suppose for contradiction that all maximal intervals have finite characteristic. Then there does not exist a maximal interval with characteristic \\ $\max \{ f(I_1), f(I_2), f(I_3), \ldots f(I_j) \} + 1$. This contradicts our finding that there exists a maximal interval for every $M \in \mathbb{Z}_{\ge 0}$, so some maximal interval must have infinite characteristic.
+
+		Furthermore, note that the maximal intervals of
+	\end{proof}
+\end{adjustwidth}
+
+
+
+
+
+\begin{adjustwidth}{1cm}{}
+	\begin{claim*}
+		There exists a sequence of closed intervals $I_M$ such that $I_M \subseteq S_M$ and $I_{M+1} \subseteq I_M$ for all $M \in \mathbb{Z}_{>0}$.
+	\end{claim*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Suppose for contradiction that no such sequence exists. The prior claim establishes the existence of a sequence of closed intervals $I_M$ for all $M \in \mathbb{Z}_{>0}$ such that $I_M \subseteq S_M$ --- thus, all such sequences must fail to satisfy the second requirement. For each sequence, there is a positive integer $q$ such that $I_q < I_n$.i
+
+		closed interval interval inside $S_M$ for all $M \in \mathbb{Z}_{>0}$, so the second condition must be false --- namely, that all closed intervals in $S_{M+1}$ are not contained within $S_M$ for some positive integer $M$.
+
+		However, \textit{all} closed intervals of $S_{M+1}$ lie inside intervals of $S_{M}$ ---
+
+	\end{proof}
+\end{adjustwidth}
+
+\end{proof} 
+
+\end{document}

@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{MATH-UA 129: Vectors}
+\author{James Pagan}
+\date{September 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Introduction}
+
+In the context of Calculus III, a vector is an arrow in $\mathbb{R}^{n}$, notated as follows:
+\[ \mathbf{v} = \begin{pmatrix} v_{1} \\ v_{2} \\ \vdots \\ v_{n} \end{pmatrix} \]
+Note that $\mathbb{R}^{n}$ possess a vector space structure, and obey the standard vector axioms as defined over my physical notebook; I don't feel the need to rearticulate the vector axioms here.
+
+the \textbf{canonical basis} of $\mathbb{R}^n$ consist of the unit vectors as follows:
+\[ \mathbf{e_{1}} = \begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}, \mathbf{e_{2}} = \begin{pmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{pmatrix}, \cdots, \mathbf{e_{n}} = \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{pmatrix} \]
+Decomposing a vector into a linear combination of the canonical basis of $\mathbb{R}^{n}$ is trivial. Vectors are said to be collinear if one is a scalar multiple of the other --- or if the two are linearly dependent. The dot product (as you know it) for vectors in $\mathbb{R}^{n}$ is called the \textit{canonical inner product} --- likewise for the \textit{Euclidean norm}.
+
+You already know about the parametric representation of a line --- namely, that $\mathbf{u} + t \mathbf{v}$ crap. $v$ is called the \textit{direction vector} or \textit{velocity vector}, while $u$ is just a starting vector.
+
+For a vector $\mathbf{v}$, the \textit{normed vector} of $\mathbf{v}$ is \[ \frac{\mathbf{v}}{\norm{\mathbf{v}}}. \] Clearly it has length $1$.
+
+% --------------------------------------------- %
+
+\section{Dot and Cross Products}
+
+The (canonical) dot product is said to \textit{encode} the geometry of $\mathbb{R}^{n}$ due to several ubuitous formulas:
+\begin{itemize}
+	\item $\mathbf{u} \cdot \mathbf{v} = \norm{\mathbf{u}} \norm{\mathbf{v}} \cos (\theta)$,
+	\item $\norm{\mathbf{v}}^2 = \mathbf{v} \cdot \mathbf{v}$,
+	\item $\mathbf{u} \cdot \mathbf{v} = \operatorname{Proj}_{\mathbf{u}} (\mathbf{v}) = \operatorname{Proj}_{\mathbf{v}} (\mathbf{u}).$
+\end{itemize}
+The dot product is thus particularly essential in higher geometry (like topology or differential geometry).
+
+The cross product of two three-dimensional vectors $\mathbf{u} \times \mathbf{v}$ is a vector that that --- if you ignore the weird determinant notation --- computes a vector orthogonal to $\mathbf{u}$ and $\mathbf{v}$ with length of the determinant of the parallelogram formed by $\mathbf{u}$ and $\mathbf{v}$ as follows:
+\[
+	\mathbf{v} \cross \mathbf{u} =
+	\begin{vmatrix}
+		\mathbf{i} & v_{1} & u_{1} \\
+		\mathbf{j} & v_{2} & u_{2} \\
+		\mathbf{k} & v_{3} & u_{3}
+	\end{vmatrix},
+\]
+where $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$ are the basis vectors of $\mathbb{R}^{3}$. The computation of $2 \cross 2$ and $3 \cross 3$ determinants is standard; higher-dimensional computation will be covered in the future. Cross products satisfy the essential identity 
+\[ 
+	\norm{\mathbf{u} \times \mathbf{v}} = \norm{\mathbf{u}} \norm{\mathbf{v}} \abs{\sin(\theta)}.
+\]
+Clearly $\mathbf{c} = \mathbf{a} \cross \mathbf{b}$ implies $\mathbf{c} \cdot \mathbf{a} = \mathbf{c} \cdot \mathbf{b} = 0$ We also have the cutesy identity $\norm{\mathbf{u} \cross \mathbf{v}}^2 + (\mathbf{u} \cdot \mathbf{v})^2 = \norm{\mathbf{u}}^2 \norm{\mathbf{v}}^2$. Clearly also, through a really nice proof involving projection, we have that
+for all vectors $\mathbf{u}$, $\mathbf{v}$, $\mathbf{w} \in \mathbb{R}^{3}$,
+\[
+	\begin{vmatrix}
+		u_{1} & v_{1} & w_{1} \\
+		u_{2} & v_{2} & w_{2} \\
+		u_{3} & v_{3} & w_{3}
+	\end{vmatrix}
+	= \mathbf{u} \cdot (\mathbf{v} \cross \mathbf{w}) = \mathbf{v} \cdot (\mathbf{w} \cross \mathbf{u}) = \mathbf{w} \cdot (\mathbf{u} \cross \mathbf{v})
+\]
+Ah, skipping planes and distance formulas is really coming back to bite you. Have fun with that over the weekend.
+
+% --------------------------------------------- %
+
+\section{Planes and Lines in 3-D}
+
+\textbf{Distance between Lines}: Suppose we would like to compute the distance between two lines $\ell_{1} = \vec{v}_{1} + t\vec{w}_{1}$ and $\ell_{2} = \vec{v}_{2} + t \vec{w}_{2}$. If we suppose \textit{the lines are nonparallel}, here's how:
+
+\begin{enumerate}
+	\item Construct a plane that contains $\ell_{1}$ and is parallel to $\ell_{2}$ --- namely, the plane $t \vec{w}_{1} + s \vec{w}_{2} + \vec{v}_{1}$.
+	\item Compute the distance between a point $\ell_{2}$ and the plane. (there exists a point on $\ell_{2}$ that projects to a point on $\ell_{2}$, as we assumed $\ell_{1}$ and $\ell_{2}$ are nonparallel).
+\end{enumerate}
+
+From such a process emerges the formula: if $\vec{v_{1}}$ and $\vec{v}_{2}$ are vectors from the lines, and $\vec{a}_{1}, \vec{a}_{2}$ are any two nonparallel vectors on the plane, the distance is
+\[
+	\frac{\abs{(\vec{v}_{1} - \vec{v}_{2}) \vec{a}_{1} \times \vec{a}_{2}}}{\norm{\vec{a}_{1} \times \vec{a}_{2}}}.
+\]
+
+\textbf{Distance between Planes}: If we wish to compute the distance between two \textit{parallel} planes, we can use the following steps:
+
+\begin{enumerate}
+	\item Select a point on one of the planes.
+	\item Find the distance of the point to the other plane, \textit{using the formula}.
+\end{enumerate}
+
+Performing this process yields the formula
+\[
+	\frac{\abs{D_{1} - D_{2}}}{\sqrt{A^{2} + B^{2} + C^{2}}},
+\]
+where $A, B, C$ are the coefficents in the equations and $D_{1}, D_{2}$ are the differing constant terms in their equations.
+
+% --------------------------------------------- %
+
+\section{Cylindrical and Spherical Coordinates}
+
+You're already intimately familiar with polar coordinates --- including their complex representations. Below are its analogues in $\mathbb{R}^{3}$.
+
+\textbf{Cylindrical Coordinates}: Representing a point $(x, y, z)$ as $r, \theta, z$, where $r$ and $\theta$ are just like in polar coordinates. Converting between these coordinates is straightfowards, no memorization required.
+
+\textbf{Spherical Coordinates}: Representing a point $(x, y, z)$ as $(\rho, \theta, \varphi)$, where $\rho$ denotes the distance of the point to the origin, $\theta$ the angle with the $x$-axis if the point is projected onto the $xy$-plane, and $\varphi$ the angle made from the $z$-axis.
+
+The following formulas articulate the conversion from spherical to cylindrical or Cartesian coordiantes:
+
+\begin{itemize}
+	\item $x = \rho \cos(\theta) \sin(\varphi)$.
+	\item $y = \rho \sin(\theta) \sin(\varphi)$.
+	\item $z = \rho \cos(\varphi)$.
+	\item $r = \rho \sin(\varphi)$.
+\end{itemize}
+
+I remember this as the $y$-coordinate ``liking'' sines, and the rest of the three formulas follow.
+
+% --------------------------------------------- %
+
+\section{Multivariable Functions}
+
+A real-valued multivariable function can be of many types, for $A \subset \mathbb{R}^{n}$:
+\begin{itemize}
+	\item \textbf{Scalar-Valued}: A function $f: A \to \mathbb{R}$, mapping vectors to scalars.
+	\item \textbf{Vector-Valued}: A function $f: A \to \mathbb{R}^{n}$, mapping vectors to vectors.
+\end{itemize}
+We say $f$ maps its \textit{domain space} to its \textit{target space}. The graph of a function $f: A \to \mathbb{R}^{n}$ is a surface defined as the set of points $(x_{1}, x_{2}, \ldots x_{n-1}$, 
+\[
+	f(x_{1}, x_{2}, \ldots, x_{n-1})) \in \mathbb{R}^{n}
+\]
+\textbf{Level Set}: For $f: A \to \mathbb{R}^{n}$ and $c \in \mathbb{R}$, the \textit{level set} of $f$ for the value $c$ is the set of points $\{ x \in A \mid f(x) = c \}$. The level set is a critical way to visualize a multivariable function.
+
+% --------------------------------------------- %
+
+\end{document}

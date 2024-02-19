@@ -1,0 +1,347 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Homework 4}
+\author{James Pagan, October 2023}
+\date{Professor Serfaty}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Section 2.6}
+
+% --------------------------------------------- %
+
+\subsection{Problem 2}
+
+\textbf{Part (a)}: The gradient of $f$ is
+\[
+	\grad f = \begin{bmatrix} \pdv{x} (x + 2xy - 3y^{2}) \\ \pdv{y} (x + 2xy - 3y^{2}) \end{bmatrix} = \begin{bmatrix} 1 + 2y \\ 2x - 6y \end{bmatrix}.
+\]
+At $(x_{0}, y_{0}) = (1, 2)$, this vector evaluates to $(5, -10)$. Therefore, the directional derivative we seek is
+\[
+	\begin{bmatrix} 5 \\ -10 \end{bmatrix} \cdot \begin{bmatrix} \tfrac{3}{5} \\ \tfrac{4}{5} \end{bmatrix} = 5 \left( \tfrac{3}{5} \right) - 10 \left( \tfrac{4}{5} \right) = \boxed{-5}.
+\]
+\textbf{Part (b)}: Assuming the logarithm is base $e$, the gradient of $f$ is
+\[
+	\grad f = \begin{bmatrix} \pdv{x} \ln \sqrt{x^{2} + y^{2}} \\ \pdv{y} \ln \sqrt{x^{2} + y^{2}} \end{bmatrix} = \begin{bmatrix} \frac{x}{x^{2} + y^{2}} \\ \frac{y}{x^{2} + y^{2}} \end{bmatrix}.
+\]
+At $(x_{0}, y_{0}) = (1, 0)$, this vector evaluates to $(1, 0)$. Therefore, the directional derivative we seek is
+\[
+	\begin{bmatrix} 1 \\ 0 \end{bmatrix} \cdot \begin{bmatrix} \tfrac{2}{\sqrt{5}} \\ \tfrac{1}{\sqrt{5}} \end{bmatrix} = \frac{2}{\sqrt{5}} = \boxed{\frac{2 \sqrt{5}}{5}}.
+\]
+\textbf{Part (c)}: The gradient of $f$ is 
+\[
+	\grad f = \begin{bmatrix} \pdv{x} e^{x} \cos(\pi y) \\ \pdv{y} e^{x} \cos(\pi y) \end{bmatrix} = \begin{bmatrix} e^{x} \cos(\pi y) \\ - \pi e^{x} \sin(\pi y) \end{bmatrix}.
+\]
+At $(x_{0}, y_{0}) = (0, -1)$, this vector evaluates to $(-1, 0)$. Therefore, the directional derivative we seek is 
+\[
+	\begin{bmatrix} -1 \\ 0 \end{bmatrix} \cdot \begin{bmatrix} -\frac{1}{\sqrt{5}} \\ \frac{1}{\sqrt{5}} \end{bmatrix} \boxed{\frac{\sqrt{5}}{5}}.
+\]
+
+\textbf{Part (d)}: The gradient of $f$ is
+\[
+	\grad f = \begin{bmatrix} \pdv{x} xy^{2} + x^{3}y \\ \pdv{y} xy^{2} + x^{3}y \end{bmatrix} = \begin{bmatrix} y^{2} + 3x^{2}y \\ 2xy + x^{3} \end{bmatrix}.
+\]
+At $(x_{0}, y_{0}) = (4, -2)$, this evaluates to $(-20, 48)$. Therefore, the directional derivative we seek is
+\[
+	\begin{bmatrix} -92 \\ -24 \end{bmatrix} \cdot \begin{bmatrix} \frac{1}{\sqrt{10}} \\ \frac{3}{\sqrt{10}} \end{bmatrix} = -\frac{164}{\sqrt{10}} = \boxed{-\frac{82\sqrt{10}}{5}}.
+\]
+% --------------------------------------------- %
+
+\subsection{Problem 5}
+
+\textbf{Part (a)}: We have that if the angle between $\vec{x}_{0}$ and $\grad f (\vec{v})$ is $\theta$
+\[
+	\grad_{\vec{v}} f = \vec{v} \cdot \grad f = \norm{v} \norm{\grad f} \cos(\theta) = \norm{\grad f} \cos(\theta) \le \norm{\grad f}.
+\]
+The maximum possible value of $\grad_{\vec{v}} f$ is thus $\norm{\grad f}$, attained when $\cos(\theta) = 1$ or $\theta = 0$.
+
+\textbf{Part (b)}: Via our work in Part (a), the maximum value of the directional derivative of $f$ is the gradient of $f$. Observe that
+\[
+	\grad f = \begin{bmatrix} \pdv{x} x^{3} - y^{3} + z^{3} \\ \pdv{y} x^{3} - y^{3} + z^{3} \\ \pdv{z} x^{3} - y^{3} + z^{3} \end{bmatrix} = \begin{bmatrix} 3x^{2} \\ -3y^{2} \\ 3z^{2} \end{bmatrix},
+\]
+which evaluates to $(3, -12, 27)$ when $(x, y, z) = (1, 2, 3)$. The maximum is thus
+\[
+	\norm{\grad f} = \sqrt{3^{2} + (-12)^{2} + 27^{2}} = \boxed{21 \sqrt{2}}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 10}
+
+\textbf{Part (a)}: The gradient of $f$ is
+\[
+	\grad f = \begin{bmatrix} \pdv{x} \frac{1}{\sqrt{x^{2} + y^{2} + z^{2}}} \\ \pdv{y} \frac{1}{\sqrt{x^{2} + y^{2} + z^{2}}} \\ \pdv{z} \frac{1}{\sqrt{x^{2} + y^{2} + z^{2}}} \end{bmatrix} = \begin{bmatrix} -\frac{x}{\sqrt{(x^{2} + y^{2} + z^{2})^{3}}} \\ -\frac{y}{\sqrt{(x^{2} + y^{2} + z^{2})^{3}}} \\ -\frac{z}{\sqrt{(x^{2} + y^{2} + z^{2})^{3}}} \end{bmatrix}.
+\]
+\textbf{Part (b)}: The gradient of $f$ is
+\[
+	\grad f = \begin{bmatrix} \pdv{x} xy + yz + zx \\ \pdv{y} xy + yz + zx \\ \pdv{z} xy + yz + zx \end{bmatrix} = \begin{bmatrix} y + z \\ z + x \\ x + y \end{bmatrix}.
+\]
+\textbf{Part (c)}: The gradient of $f$ is
+\[
+	\grad f = \begin{bmatrix} \pdv{x} \frac{1}{x^{2} + y^{2} + z^{2}} \\ \pdv{y} \frac{1}{x^{2} + y^{2} + z^{2}} \\ \pdv{z} \frac{1}{x^{2} + y^{2} + z^{2}} \end{bmatrix} = \begin{bmatrix} -\frac{2x}{(x^{2} + y^{2} + z^{2})^{2}} \\ -\frac{2y}{(x^{2} + y^{2} + z^{2})^{2}} \\ -\frac{2z}{(x^{2} + y^{2} + z^{2})^{2}} \end{bmatrix}.
+\]
+
+% --------------------------------------------- %
+
+\subsection{Problem 13}
+
+Let $w = \cos(xy) - e^{z}$. Then
+\[
+	\grad w = \begin{bmatrix} \pdv{x} \cos(xy) - e^{z} \\ \pdv{y} \cos(xy) - e^{z} \\ \pdv{z} \cos(xy) - e^{z} \end{bmatrix} = \begin{bmatrix} -y \sin(xy) \\ -x \sin(xy) \\ -e^{z} \end{bmatrix}
+\]
+At the point $3$
+
+% --------------------------------------------- %
+
+\subsection{Problem 16}
+
+Several level curves are graphed via Desmos on a second file attatched to this submission. We have that
+\[
+	\grad T = \begin{bmatrix} \pdv{x} x \sin(y) \\ \pdv{y} x \sin(y) \end{bmatrix} = \begin{bmatrix} \sin(y) \\ x \cos(y) \end{bmatrix}.
+\]
+The direction of this vector is the direction in which traveling from $(x, y)$ `'increases the value of $T$ the most''; its norm is the amount by which the $T$-value changes instantaneously.
+
+% --------------------------------------------- %
+
+\subsection{Problem 17}
+
+\textbf{Part (a)}: We have that
+\[
+	\grad f = \begin{bmatrix} \pdv{x} xy + yz + zx \\ \pdv{y} xy + yz + zx \\ \pdv{z} xy + yz + zx \end{bmatrix} = \begin{bmatrix} y + z \\\ z + x \\ x + y \end{bmatrix}
+\]
+and
+\[
+	\mat{g}' = \begin{bmatrix} \dv{t} e^{t} \\ \dv{t} \cos(t) \\ \dv{t} \sin(t) \end{bmatrix} = \begin{bmatrix} e^{t} \\ -\sin(t) \\ \cos(t) \end{bmatrix}.
+\]
+Observing that $\mat{g}(1) = (e, \cos(1), \sin(1))$ and $\mat{g}'(1) = (e, -\sin(1), \cos(1))$, we find that $\grad f$ at $\mat{g}(1)$ is $(\cos(1) + \sin(1), \sin(1) + e, e + \cos(1))$. Therefore,
+\[
+	(f \circ \mat{g})' = \grad f (\mat{g}) \cdot \mat{g}' = \begin{bmatrix} \cos(1) + \sin(1) \\ \sin(1) + e \\ e + \cos(1) \end{bmatrix} \cdot \begin{bmatrix} e \\ -\sin(1) \\ \cos(1) \end{bmatrix} = \boxed{\cos(1)^{2} - \sin(1)^{2} + 2e \cos(1)}.
+\]
+\textbf{Part (b)}: We have that
+\[
+	\grad f = \begin{bmatrix} \pdv{x} e^{xyz} \\ \pdv{y} e^{xyz} \\ \pdv{z} e^{xyz} \end{bmatrix} = \begin{bmatrix} yz e^{xyz} \\ zx e^{xyz} \\ xy e^{xyz} \end{bmatrix}
+\]
+and
+\[
+	\mat{g}' = \begin{bmatrix} \pdv{t} 6t \\ \pdv{t} 3t^{2} \\ \pdv{t} t^{3} \end{bmatrix} = \begin{bmatrix} 6 \\ 6t \\ 3t^{2} \end{bmatrix}
+\]
+Observing that $\mat{g}(1) = (6, 3, 1)$ and $\mat{g}'(1) = (6, 6, 3)$, we find that $\grad f$ at $\mat{g}(1)$ evaluates to $(3 e^{18}, 6 e^{18}, 18 e^{18})$. Therefore,
+\[
+	(f \circ \mat{g})' = \grad f (\mat{g}) \cdot \mat{g}' = \begin{bmatrix} 3 e^{108} \\ 6 e^{108} \\ 18 e^{108} \end{bmatrix} \cdot \begin{bmatrix} 6 \\ 6 \\ 3 \end{bmatrix} = \boxed{324 e^{108}}.
+\]
+\textbf{Part (c)}: We have that
+\[
+	\grad f = \begin{bmatrix} \pdv{x} (x^{2} + y^{2} + z^{2}) \ln(\sqrt{x^{2} + y^{2} + z^{2}}) \\ \pdv{y} \ln(\sqrt{x^{2} + y^{2} + z^{2}}) \\ \pdv{z} (x^{2} + y^{2} + z^{2}) \ln(\sqrt{x^{2} + y^{2} + z^{2}})\end{bmatrix} = \begin{bmatrix} x \ln(x^{2} + y^{2} + z^{2}) \\ y \ln(x^{2} + y^{2} + z^{2}) + y \\ z \ln(x^{2} + y^{2} + z^{2}) + z \end{bmatrix}.
+\]
+and
+\[
+	\mat{g}' = \begin{bmatrix} \dv{t} e^{t} \\ \dv{t} e^{-t} \\ \dv{t} t \end{bmatrix} = \begin{bmatrix} e^{t} \\ -e^{-t} \\ 1 \end{bmatrix}.
+\]
+Observing that $\mat{g}(1) = (e, \tfrac{1}{e}, 1)$ and $\mat{g}'(1) = (e, -\tfrac{1}{e}, 1)$, we have that $\grad f (\mat{g}(1)) = $
+
+% --------------------------------------------- %
+
+\subsection{Problem 20}
+
+
+
+% --------------------------------------------- %
+
+\subsection{Problem 21}
+
+We have that
+\begin{align*}
+	\grad \left( \frac{1}{r} \right) &= \grad \left( \frac{1}{\sqrt{x^{2} + y^{2} + z^{2}}} \right) = \begin{bmatrix} \pdv{x} \frac{1}{\sqrt{x^{2} + y^{2} + z^{2}}} \\ \pdv{y} \frac{1}{\sqrt{x^{2} + y^{2} + z^{2}}} \\ \pdv{z} \frac{1}{\sqrt{x^{2} + y^{2} + z^{2}}} \end{bmatrix} = \begin{bmatrix} -\frac{x}{\sqrt{(x^{2} + y^{2} + z^{2})^{3}}} \\ -\frac{y}{\sqrt{(x^{2} + y^{2} + z^{2})^{3}}} \\ -\frac{z}{\sqrt{(x^{2} + y^{2} + z^{2})^{3}}} \end{bmatrix} \\
+	&= -\frac{1}{\sqrt{(x^{2} + y^{2} + z^{2})^{3}}} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = -\frac{\mathbf{r}}{r^{3}},
+\end{align*}
+as desired.
+
+% --------------------------------------------- %
+
+\subsection{Problem 24}
+
+We prove the contrapositive --- that if $S_{r} = \{ \vec{x} \mid x \in \mathbb{R}^{3} \norm{x} = r \}$ is not a level set for some $r \in \mathbb{R}_{> 0}$, then there exists some $\vec{x}_{0} \in \mathbb{R}^{2}$ such that $\grad f (\vec{x}_{0}) \ne g(\vec{x}_{0}) \vec{x}_{0}$
+
+Suppose for contradiction that $S_{r}$ is not a level set and for all $\vec{x} \in \mathbb{R}^{2}$ with $\norm{x} = r$,
+\[
+	\grad f(\vec{x}) = g(\vec{x}) \vec{x}. 
+\]
+
+Let $\vec{c}$ be a tangent vector of $S_{r}$ at $\vec{x}_{0}$, and let $\vec{d}$ be a tangent vector of $f$ at $\vec{x}_{0}$ --- such that $\vec{d}$ lies in the plane formed by $\vec{x}_{0}$ and $\vec{c}$ (we may do this as there exist tangent vectors in every direction at $f$ and $S_{r}$). if $\vec{c}$ and $\vec{d}$ are collinear, it implies that $S_{r}$ is indeed the level set of $f$. We have that
+\[
+	\vec{d} \cdot \vec{x}_{0} = \vec{d} \cdot \frac{\grad f(\vec{x}_{0})}{g(\vec{x}_{0})} = \frac{1}{g(\vec{x}_{0})} (\vec{d} \cdot \grad f(\vec{x}_{0})) = 0,
+\]
+and
+\[
+	\vec{c} \cdot \vec{x_{0}} = 0.
+\]
+This --- combined with the fact that $\vec{c}$ and $\vec{d}$ are coplanar --- implies that $\vec{c}$ and and $\vec{d}$ are collinear. As $f$ and $S_{r}$ are $C_{1}$, then this implies that the level set of $f$ is precisely $S_{r}$. This contradicts our original assumption.
+
+Taking the contrapositive yields the desired result.
+
+% --------------------------------------------- %
+
+\section{Section 3.1}
+
+% --------------------------------------------- %
+
+\subsection{Problem 7}
+
+\textbf{Part (a)}: We have that
+\begin{align*}
+	\pdv[2]{f}{x} \Big|_{\vec{x}_{0} = (1, \pi)} = - y^{2} \sin(xy) \Big|_{\vec{x}_{0} = (1, \pi)} = \boxed{0}, \\
+	\pdv[2]{f}{x}{y} \Big|_{\vec{x}_{0} = (1, \pi)} = \pdv[2]{f}{y}{x} \Big|_{\vec{x}_{0} = (1, \pi)} = -xy \sin(xy) + \cos(xy) \Big|_{\vec{x}_{0} = (1, \pi)} = \boxed{-1}, \\
+	\pdv[2]{f}{y} \Big|_{\vec{x}_{0} = (1, \pi)} = - x^{2} \sin(xy) \Big|_{\vec{x}_{0} = (1, \pi)} = \boxed{0}.
+\end{align*}
+\textbf{Part (b)}: We have that
+\begin{align*}
+	\pdv[2]{f}{x} \Big|_{\vec{x}_{0} = (2, -1)} = 2  \Big|_{\vec{x}_{0} = (2, -1)} = \boxed{2}, \\
+	\pdv[2]{f}{x}{y} \Big|_{\vec{x}_{0} = (2, -1)} = 	\pdv[2]{f}{y}{x} \Big|_{\vec{x}_{0} = (2, -1)} = 8y^{7} \Big|_{\vec{x}_{0} = (2, -1)} = \boxed{-8}, \\
+	\pdv[2]{f}{y} \Big|_{\vec{x}_{0} = (2, -1)} = 56xy^{6} + 12y^{2}  \Big|_{\vec{x}_{0} = (2, -1)} = \boxed{124}.
+\end{align*}
+
+\textbf{Part (c)}: All the terms in the second partial derivatives of $e^{xyz}$ will be $e^{xyz}$ times some product of $x$, $y$, and/or $z$ (at least one of these variables will be present). This guarantees that at $(x, y, z) = (0, 0, 0)$, $\boxed{\text{all partial derivatives of $f$ are $0$}}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 9}
+
+Suppose for contradiction that such a $C^{2}$ function $f$ exists. Then the mixed second partial derivatives of $f$ should be equal; however,
+\[
+	\pdv{y} f_{x} = \pdv{y} 2x - 5y = -5 \ne 4 = \pdv{x} 4x + y = \pdv{x} f_{y}.
+\]
+Thus, $\boxed{\text{no such $f$ exists}}$.
+
+% --------------------------------------------- %
+
+\subsection{Problem 15}
+
+We have that
+\begin{align*}
+	\pdv[2]{f}{x}{y} = \pdv{y} y^{2} + 2xy = \boxed{2x + 2y}, \\
+	\pdv[2]{f}{y}{z} = \pdv{z} x^{2} + 2xy + z^{2} = \boxed{2z}, \\
+	\pdv[2]{f}{z}{x} = \pdv{x} 2yz = \boxed{0}, \\
+	\pdv[3]{f}{x}{y}{z} = \pdv{z} 2x + 2y = \boxed{0}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection{Problem 21}
+
+\textbf{Part (a)}: The partial derivatives are as follows:
+\begin{align*}
+	f_{x} = \boxed{\arctan \left( \frac{x}{y} \right) + \frac{xy}{x^{2} + y^{2}}}, \\
+	f_{y} = \boxed{-\frac{x^{2}}{x^{2} + y^{2}}}, \\
+	f_{xx} = \pdv{x} \left( \arctan \left( \frac{x}{y} \right) + \frac{xy}{x^{2} + y^{2}} \right) = \boxed{\frac{2y^{3}}{(x^{2} + y^{2})^{2}}}, \\
+	f_{xy} = - \pdv{x} \left( \frac{x^{2}}{x^{2} + y^{2}} \right) = \boxed{ - \frac{2xy^{2}}{(x^{2} + y^{2})^{2}}}, \\
+	f_{yy} = \pdv{y} \left( -\frac{x^{2}}{x^{2} + y^{2}} \right) = \boxed{\frac{2x^{2}y}{(x^{2} + y^{2})^{2}}}.
+\end{align*}
+\textbf{Part (b)}: We have that
+\begin{align*}
+	f_{x} = \boxed{\frac{x}{\sqrt{x^{2} + y^{2}}}}, \\
+	f_{y} = \boxed{\frac{y}{\sqrt{x^{2} + y^{2}}}}, \\
+	f_{xx} = \pdv{x} \left( \frac{x}{\sqrt{x^{2} + y^{2}}} \right) = \boxed{\frac{y^{2}}{(x^{2} + y^{2})\sqrt{x^{2} + y^{2}}}}, \\
+	f_{xy} = \pdv{y} \left( \frac{x}{\sqrt{x^{2} + y^{2}}} \right) = \boxed{- \frac{xy}{\sqrt{(x^{2} + y^{2})^{3}}}}, \\
+	f_{yy} = \pdv{y} \left( \frac{y}{\sqrt{x^{2} + y^{2}}} \right) = \boxed{\frac{x^{2}}{(x^{2} + y^{2})\sqrt{x^{2} + y^{2}}}},
+\end{align*}
+\textbf{Part (c)}: We have that
+\begin{align*}
+	f_{x} = \boxed{-2x e^{-x^{2} - y^{2}}}, \\
+	f_{y} = \boxed{-2y e^{-x^{2} - y^{2}}}, \\
+	f_{xx} = \pdv{x} \left( -2x e^{-x^{2} - y^{2}} \right) = \boxed{4 x^{2} e^{-x^{2} - y^{2}} - 2 e^{-x^{2} - y^{2}}}, \\
+	f_{xy} = \pdv{y} \left( -2y e^{-x^{2} - y^{2}} \right) = \boxed{4xy e^{-x^{2} - y^{2}}}, \\
+	f_{yy} = \pdv{y} \left( -2y e^{-x^{2} - y^{2}} \right) = \boxed{4 y^{2} e^{-x^{2} - y^{2}} - 2 e^{-x^{2} - y^{2}}}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection{Problem 23}
+
+
+
+% --------------------------------------------- %
+
+\subsection{Problem 25}
+
+We have that
+\[
+	\pdv[2]{u}{x} + \pdv[2]{u}{y} = 6x -6x = 0,
+\]
+so $u$ is a harmonic function.
+
+% --------------------------------------------- %
+
+\subsection{Problem 26}
+
+\textbf{Part (a)}: We have that
+\[
+	\pdv[2]{f}{x} + \pdv[2]{f}{y} = 2 - 2 = 0,
+\]
+so $\boxed{\text{$f$ is harmonic}}$.
+
+\textbf{Part (b)}: We have that
+\[
+	\pdv[2]{f}{x} + \pdv[2]{f}{y} = 2 + 2 = 4,
+\]
+so $\boxed{\text{$m$ is not harmonic}}$
+
+\textbf{Part (c)}: We have that
+\[
+	\pdv[2]{f}{x} + \pdv[2]{f}{y} = 0 + 0 = 0,
+\]
+so $\boxed{\text{$f$ is harmonic}}$.
+
+\textbf{Part (d)}: We have that
+\[
+	\pdv[2]{f}{x} + \pdv[2]{f}{y} = 6y + 6y = 0,
+\]
+so $\boxed{\text{$f$ is not harmonic}}$.
+
+\textbf{Part (e)}: We have that
+\[
+	\pdv[2]{f}{x} + \pdv[2]{f}{y} = -\sin(x)\cosh(y) + \sin(x)\cosh(y) = 0,
+\]
+so $\boxed{\text{$f$ is harmonic}}$.
+
+\textbf{Part (f)}: We have that
+\[
+	\pdv[2]{f}{x} + \pdv[2]{f}{y} = e^{x} \sin(y) - e^{x}\sin(y) = 0,
+\]
+so $\boxed{\text{$f$ is harmonic}}$.
+
+% --------------------------------------------- %
+
+\end{document}

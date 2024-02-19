@@ -1,0 +1,252 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\title{MATH-UA 329: Lecture 1}
+\author{James Pagan}
+\date{January 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Exposition}
+
+MATH-UA 329 expands upon the topics of Honors Analysis I and will discuss two topics:
+\begin{enumerate}
+	\item The theory of differentiation and integration of multiavariable functions.
+	\item Measure Theory and Lebesgue integration
+\end{enumerate}
+The instructor is Sinan Gunturk, available at gunturk@cims.nyu.edu. Professor Gunturk's office hours are at WWH 829 in Courant from 2:00-3:30 PM. The TA is Keefer Rowan. The grade distribution is as follows:
+\begin{itemize}
+	\item 40\%: the final exam.
+	\item 20\%: the midterm exam.
+	\item 10-15\%: quizzes.
+	\item 15-20\%: homework assignments.
+\end{itemize}
+The course will not follow one particular textbook; potential textbooks are enumerated on Brightspace, with particular emphasis on Rudin's \textit{Principles of Mathematical Analysis}.
+
+% --------------------------------------------- %
+
+\section{L1: Metric Spaces}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{metric space} is a set $X$ equipped with a binary mapping $d : X \times X \to \mathbb{R}$ called a \textbf{metric} such that the following properties are satisfied for all $x, y, z \in X$:
+\begin{enumerate}
+	\item \textbf{Positivity}: $d(x, y) \ge 0$, with equality if and only if $x = y$.
+	\item \textbf{Symmetry}: $d(x, y) = d(y, x)$.
+	\item \textbf{Triangle Inequality}: $d(x, y) \le d(x, z) + d(z, y)$.
+\end{enumerate}
+Metric spaces generalize the notion of distance to arbitrary sets. 
+
+% --------------------------------------------- %
+
+\subsection{Examples}
+
+\begin{enumerate}
+	\item \textbf{Euclidean Distance}: In $\mathbb{R}$, the Euclidean distance $d(x, y) = \abs{x - y}$ is a metric. The complex absolute value is also a metric of $\mathbb{C}$.
+
+	In general, the Euclidean distance over $\mathbb{R}^{n}$ is defined as follows: 
+	\[
+		d_{2}(\vec{x}, \vec{y}) = \norm{\vec{x} - \vec{y}} = \sqrt{\sum\limits_{i = 1}^{n} \abs{x_{i} - y_{i}}^{2}}
+	\]
+	\item \textbf{Taxicab Metric}: in $\mathbb{R}^{n}$, the taxicab metric is defined as follows for $\vec{x} = (x_{1}, \ldots, x_{n})$ and $\vec{y} = (y_{1}, \ldots, y_{n})$:
+	\[
+		d_{1}(x, y) = \sum\limits_{i = 1}^{n} \abs{x_{i} - y_{i}}.
+	\]
+	\item \textbf{Supremum Distance}: For $\mathbb{R}^{n}$, the $d_{\infty}$ metric is as follows:
+	\[
+		d_{\infty}(\vec{x}, \vec{y}) = \max \abs{x_{i} - y_{i} \mid i \in \{ 1, \ldots, n \}}.
+	\]
+	It is denoted by infinity since
+	\[
+		\lim\limits_{m \to \infty} d_{n}(x, y) = \lim\limits_{m \to \infty} \sqrt[m]{\sum\limits_{i = 1}^{n} \abs{x_{i} - y_{i}}^{m}} = d_{\infty}(x, y).
+	\]
+\end{enumerate}
+
+\subsection{Open Balls}
+
+For a metric space $X$, the \textbf{open ball} of radius $r$ centered at $x \in X$ is the set
+\[
+	B_{r}(\vec{x}) = \{ y \in X \mid d(x, y) \le 1 \}.
+\]
+Here are examples of the unit disc $B_{1}(0)$ in the above metrics in $\mathbb{R}^{2}$.
+\begin{itemize}
+	\item Under the Euclidean metric, the unit disc is the standard unit circle.
+	\item Under $d_{\infty}$, it is the unit square:
+	\[
+		B_{1}(0) = \{ \vec{y} \in \mathbb{R}^{2} \mid \max{y_{i}} < 1 \text{ for } i \in \{ 1, 2 \} \}.
+	\]
+	\item Under $d_{1}$, the unit disc is a diamond:
+	\[
+		B_{1}(0) = \{ \vec{y} \in \mathbb{R}^{2} \mid \abs{y} \le 1 \}.
+	\]
+\end{itemize}
+
+We encourage the reader to graph these examples for further understanding.
+
+% --------------------------------------------- %
+
+\subsection{Discrete Metric}
+
+We also must discuss the \textbf{discrete metric} over any set $X$, defined as follows:
+\[
+	d(x, y) = 
+	\begin{cases}
+		0 & \text{if } x = y, \\
+		1 & \text{if } x \ne y
+	\end{cases}.
+\]
+It is easy to verify that the discrete metric is a metric; it is primarily used in examples. Open balls in under the discrete metric are as follows:
+\[
+	B_{r}(x) = 
+	\begin{cases}
+		\{ x \} & \text{if } r \le 1, \\
+		X & \text{if } r > 1.
+	\end{cases}
+\]
+
+% --------------------------------------------- %
+
+\section{L1: Analysis in Metric Spaces}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+Let $X$ and $Y$ be metric spaces. A function $f: X \to Y$ is \textbf{continuous} at $x \in X$ if for all $\epsilon > 0$, there exists $\delta$ such that 
+\[
+	0 < d(x, y) < \delta \implies d(f(x) - f(y)) < \epsilon.
+\]
+$f$ itself is continuous on $X$ if it is continuous at every $x \in X$. The next section will utilize the following definition: 
+\[
+	C(X) = \{ f : X \to \mathbb{R} \mid f \text{ is continuous on } X \}
+\]
+
+% --------------------------------------------- %
+
+\subsection{An Excursion to Linear Algebra}
+
+$C(X)$ is a vector space over $\mathbb{R}$ under addition of functions and scalar multiplication. For a vector space $V$, recall the definition of an inner product space; any norm $\norm{\cdot}_{V} : V \to \mathbb{R}$ satisfies positivity, symmetry, and the Triangle Inequality. 
+
+We deduce that every norm induces a metric on an inner product spaces for $\vec{v}, \vec{w} \in V$:
+\[
+	d(\vec{v}, \vec{w}) = \norm{\vec{v} - \vec{w}}.
+\]
+Define a subset $B$ of $C(X)$ as follows:
+\[
+	BC(X) = \{ f : X \to \mathbb{R} \, \mid \, f \text{ is continuous and bounded on } X \}.
+\]
+Under this space, we may define a norm:
+\[
+	\norm{f}_{\infty} = \sup\limits_{x \in X} \abs{f(x)}.
+\]
+We encourage that the reader perform the routine calculations that verify $\norm{f}_{\infty}$ is indeed a norm --- hence a metric over $BC$.
+
+Recall the \textbf{extreme value theorem}: that if $X$ is compact, then every bounded and continuous $f : X \to \mathbb{R}$ is odd. This is because $C(X) = BC(X)$ when $X$ is compact. 
+
+\textbf{START OF LECTURE 2}: More generally: for any set $E$, we may define
+\[
+	B(E) = \{ f : E \to \mathbb{R} \, \mid \, f \text{ is bounded on $E$}\}.
+\]
+This set $B(E)$ is an inner product space under the supremum norm discussed prior:
+\[
+	\norm{f}_{B(E)} = \sup\limits_{x \in E} \abs{f(x)}.
+\]
+There is an equivalent way to write this: that there exists a sequence of functions $f_{1}, f_{2}, \ldots$ such that $\lim\limits_{n \to \infty} \norm{f_{n} - f} = \limsup\limits_{n \to \infty} \abs{f_{n} - f} = 0$. Thus, this norm induced a metric that allows $B(E)$ to be a metric space. (Also, the set $\mathbb{R}^{E}$ denotes $\{ f : E \to \mathbb{R} \}$). 
+
+\begin{theorem}
+	$B(E)$ is a complete metric space --- hence a Banach space.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose $(f_{n})$ is a Cauchy sequence under the supremum norm: that for all $\epsilon > 0$, there exists $N_{\epsilon}$ such that
+		\[
+			N_{\epsilon} \le i, j \implies \norm{f_{i} - f_{j}}_{E} < \epsilon.
+		\]
+		Then for all $x \in E$,
+		\[
+			N_{\epsilon} \le i, j \implies \norm{f_{i}(x) - f_{j}(x)}_{E} < \epsilon.
+		\]
+		Then the sequence $f_{1}(x), f_{2}(x), \ldots$ is a Cauchy sequence in $\mathbb{R}$ under the supremum norm. Then let $f$ be the function that maps $x$ to the limit of $f_{1}(x), f_{2}(x), \ldots$. Clearly, $f \in \mathbb{R}^{E}$. We must demonstrate that this convergence is uniform.
+		
+		Now, let $N_{\epsilon} \le i, j$. Then
+		\begin{align*}
+			\abs{f(x) - f_{n}(x)} &\le \abs{f(x) - f_{m}(x)} + \abs{f_{m}(x) - f_{n}(x)}. \\
+			&< \abs{f(x) - f_{m}(x)} + \epsilon.
+		\end{align*}
+		Observe that $\inf\limits_{N_{\epsilon} \le m} \abs{f(x) - f_{m}(x)} = 0$ by the convergence. Therefore, we may take the infimum of both sides of the above equation:
+		\begin{align*}
+			\abs{f(x) - f_{n}(x)} &= \inf\limits_{N_{\epsilon} \le m} \abs{f(x) - f_{n}(x)} \\
+			&< \inf\limits_{N_{\epsilon} \le m} \abs{f(x) - f_{m}(x)} + \epsilon \\
+			&= \epsilon.
+		\end{align*}
+		Thus, $N_{\epsilon} < i$ implies $\norm{f - f_{n}} = \sup\limits_{x \in E} \abs{f(x) - f_{n}(x)}_{E} < \epsilon$. We conclude that $(f_{n})$ converges, so $B(E)$ is complete.
+	\end{proof}
+\end{adjustwidth}
+
+If we would like to prove that $BC(X)$ is continuous, we only need demonstrate that the limit of a Cauchy sequence $(f_{n})$ is continuous --- which is true, since $BC(X)$ is a closed subspace of the complete metric space $B(X)$.
+
+\subsection{Uniform Continuity}
+
+Let $f : (X, d_{x}) \to (Y, d_{y})$ map between metric spaces. Then $f$ is \textbf{uniformly continuous} if for all $\epsilon > 0$, there exists $\delta > 0$ such that
+\[
+	d_{X}(x_{1}, x_{2}) < \delta \implies d_{Y}(f(x_{1}), f(x_{2})) < \epsilon.
+\]
+This now leads us to define the following two spaces:
+\begin{align*}
+	UC(X) &= \{ f : X \to R \, \mid \, f \text{ is uniformly continuous on } X \}, \\
+	BUC(X) &= \{ f : X \to R \, \mid \, f \text{ is bounded and uniformly continuous on } X \}.
+\end{align*}
+Both are subspaces of $C(X)$. However, only $BUC(X)$ is a normed vector space under the supremum norm. The exact same proof as Theorem 1 demonstrates that $BUC(X)$ is a Banach space.
+
+\textbf{Special case}: When $X = K$ is compact, all continuous $f : K \to \mathbb{R}$ are bounded and uniformly continuous. For compact $K$, in fact
+\[
+	C(K) = BC(K) = BUC(K)
+\]
+For non compact $X$, we can only write 
+\[
+	C(X) \supset BC(X) \supset BUC(X).
+\]
+
+% --------------------------------------------- %
+
+\subsection{Modulus of Continuity}
+
+Let $f : (X, d_{x}) \to (Y, d_{y})$ map between metric spaces. Then the \textbf{modulus of continuity} $\omega_{f} : [0, \infty) \to [0, \infty]$ is defined as
+\[
+	\omega_{f}(t) = \sup\limits_{d_{X}(x_{1}, x_{2}) \le t} d_{Y}(f(x_{1}), f(x_{2})).
+\]
+Two simple facts are in order:
+\begin{enumerate}
+	\item $f$ is uniformly continuous if and only if $\lim\limits_{t \to 0^{+}} \omega_{f}(t) = 0$, which itself occurs if $\omega_{f}$ is continuous at $0$.
+	\item $d_{Y}(f(x_{1}), f(x_{2})) \le \omega_{f} d_{X}(x_{1}, x_{2})$, a fact observed by setting $d_{X}(x_{1}, x_{2})$ to $t$.
+\end{enumerate}
+As an example, consider a Lipschitz continuous function $f$: namely, a function $f$ such that $d_{y}(f(x_{1}), f(x_{2}) \le C d_{X}(x_{1}, x_{2})$ for some constant $C$. It is clear that $\omega_{f}(t) \le Ct$. As an example, $f(x) = \sqrt{\abs{x}}$ is uniformly continuous but not Lipschitz continuous.
+% --------------------------------------------- %
+
+lhe2010@nyu.edu
+
+\end{document}

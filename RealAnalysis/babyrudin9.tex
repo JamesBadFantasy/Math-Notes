@@ -1,0 +1,572 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\title{Rudin: Functions of Several Variables}
+\author{James Pagan}
+\date{October 2023}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Limits of Linear Operators}
+
+% --------------------------------------------- %
+
+\subsection{Matrix Norm}
+
+The \textbf{norm} of a linear map $\mat{T} \in \mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ is defined as follows:
+\[
+	\norm{\mat{T}} = \sup \{ \norm{\mat{T} \vec{z}} \, \mid \, \vec{z} \in \mathbb{C}^{n}, \norm{\vec{z}} \le 1\}.
+\]
+Notice that the matrix norm is nonnegative. The \textbf{critical vector} of $\mat{T}$ is the vector $\vec{z} \in \mathbb{C}^{n}$ such that $\norm{\vec{z}} \le 1$ and $\norm{\mat{T} \vec{z}} = \norm{\mat{T}}$; the critical vector always has norm $1$. Naturally, $\norm{\mat{T} \vec{z}} \le \norm{\mat{T}} \cdot \norm{\vec{z}}$; since equality is attained, $\norm{\mat{T} \vec{z}} \le \lambda \vec{z}$ for $\lambda \in \mathbb{R}^{n}$ implies $\norm{\vec{T}} \le \lambda$.
+
+\begin{theorem}
+	If $\mat{T}, \mat{S} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$, then $\norm{\mat{T} + \mat{S}} \le \norm{\mat{T}} + \norm{\mat{S}}$ and $\norm{\mat{TS}} \le \norm{\mat{T}} \norm{\mat{S}}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Let $\vec{z}$ be the critical vector of $\mat{T} + \mat{S}$. Then
+		\[
+			\norm{\mat{T} + \mat{S}} = \norm{(\mat{T} + \mat{S})\vec{z}} \le \norm{\mat{T} \vec{z}} + \norm{\mat{S} \vec{z}} \le \norm{\mat{T}} \norm{\vec{z}} + \norm{\mat{S}} \norm{\vec{z}} = \norm{\mat{T}} + \norm{\mat{S}}.
+		\]
+		Now, let $\vec{w}$ be the critical vector of $\mat{TS}$. Then
+		\[
+			\norm{\mat{TS}} = \norm{\mat{TS} \vec{w}} \le \norm{\mat{T}} \norm{\mat{S} \vec{w}} \le \norm{\mat{T}} \norm{\mat{S}} \norm{\vec{w}} = \norm{\mat{T}} \norm{\mat{S}}.
+		\]
+		This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	The matrix norm is a metric of $\mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose $\mat{T}, \mat{S} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$. We must perform four rather routine calculations:
+		\begin{enumerate}
+			\item \textbf{Positivity}: The matrix norm is nonnegative. If $\norm{\mat{T} - \mat{S}} = 0$, then $\norm{\vec{z}} = 1$ implies $(\mat{T} - \mat{S}) \vec{z} = \vec{0}$; hence for \textit{all} $\vec{z} \in \mathbb{C}^{n}$,
+			\[
+				(\mat{T} - \mat{S}) \vec{z} = \norm{\vec{z}} \left( (\mat{T} - \mat{S}) \left( \frac{\vec{\vec{z}}}{\norm{\vec{z}}} \right) \right) = \norm{\vec{z}} (0) = 0;
+			\]	
+			thus $\mat{T} - \mat{S} = \mat{0}$ and $\mat{T} = \mat{T}$.
+			\item \textbf{Symmetry}: Notice that $(\mat{T} - \mat{S}) \vec{z} = - (\mat{S} - \mat{T}) \vec{z}$ for all $\vec{z} \in \mathbb{C}^{n}$. Naturally if $\vec{w}$ is the critical vector of $\mat{T} - \mat{S}$, then $- \vec{w}$ is the critical vector of $\mat{S} - \mat{T}$; thus
+			\[
+				\norm{\mat{T} - \mat{S}} = \norm{\vec{w}} = \norm{-\vec{w}} = \norm{\mat{S} - \mat{T}}.
+			\]	
+			\item \textbf{Triangle Inequality}: For all $\mat{R} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$,
+			\[
+				\norm{\mat{T - S}} = \norm{\mat{(T - R) + (R - S)}} \le \norm{\mat{T - R}} + \norm{\mat{R - S}}.
+			\]
+		\end{enumerate}
+		We conclude that the matrix norm is a metric of $\mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$.
+	\end{proof}
+\end{adjustwidth}
+
+It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}}$ for all $\lambda \in \mathbb{C}$ as well.
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Properties of Linear Maps}
+
+We will denote the canonical basis of $\mathbb{C}^{n}$ as $\vec{e}_{1}, \ldots, \vec{e}_{n}$.
+
+\begin{theorem}
+	If $\mat{T} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$, then $\norm{\mat{T}} < \infty$ and $\mat{T}$ is a uniformly continuous mapping of $\mathbb{R}^{n}$ into $\mathbb{R}^{n}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+    \begin{proof}
+		Let $\vec{z} = (z_{1}, \ldots z_{n})$ be the critical vector of $\mat{T}$. Then $\abs{z_{i}} \le 1$ for each $i$, so
+		\begin{align*}
+			\norm{\mat{T}} &= \norm{\mat{T} \vec{z}} \\
+			&\le \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \\
+			&\le \norm{\mat{T} \vec{e}_{1}} + \cdots + \norm{\mat{T} \vec{e}_{n}} \\
+			&< \infty.
+		\end{align*}
+		As per uniform continuity: realize that if $\epsilon > 0$, then $0 \le \norm{\vec{z} - \vec{w}} < \tfrac{\epsilon}{\norm{\mat{T}}}$ implies
+		\begin{align*}
+			\norm{\mat{T} \vec{z} - \mat{T} \vec{w}} &\le \norm{\mat{T}} \cdot \norm{\vec{z} - \vec{w}} < \norm{\mat{T}} \left( \frac{\epsilon}{\norm{\mat{T}}} \right) = \epsilon.
+		\end{align*}
+		Thus, $\mat{T}$ is uniformly continuous.
+	\end{proof}
+\end{adjustwidth}
+
+Let $\Omega$ be the set of all linear operators on $\mathbb{C}^{n}$. Recall from Linear Algebra that an operator $\mat{T} \in \mathcal{L}(\mathbb{C}^{n})$ is invertible if and only if $\range \mat{T} = \mathbb{C}^{n}$.
+
+\begin{theorem}
+	If $\mat{T} \in \Omega$, and $\mat{S} \in \mathcal{L}(\mathbb{C}^{n})$, then
+	\[
+		\norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}} < 1
+	\]
+	implies $\mat{S} \in \Omega$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose $\mat{S} \notin \Omega$. Then there exists $\vec{z} \in \mathbb{C}^{n}$ of norm $1$ such that $\mat{S} \vec{z} = \vec{0}$, so
+		\begin{align*}
+			1 &= \norm{\vec{z}} \\
+			&= \norm{\mat{T}^{-1}\mat{T} \vec{z}} \\
+			&\le \norm{\mat{T}^{-1}} \cdot \norm{\mat{T} \vec{z}} \\
+			&= \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} \vec{z} - \mat{T} \vec{z}} \\
+			&\le \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}} \cdot \norm{\vec{z}} \\
+			&= \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}}.
+		\end{align*}
+		Taking the contrapositive yields the desired result.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+\begin{theorem}
+	$\Omega$ is an open subset of $\mathcal{L}(\mathbb{C}^{n})$, and the bijection $f : \mat{T} \to \mat{T}^{-1}$ is continuous on $\Omega$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Let $\mat{T} \in \Omega$. Since $\norm{\mat{T}^{-1}}$ is nonzero, we may consider the open ball at $\mat{T}$ of radius $\tfrac{1}{\norm{\mat{T}^{-1}}}$; more specifically, all $\mat{S} \in \mathcal{L}(\mathbb{C}^{n})$ such that
+		\[
+			\norm{\mat{T} - \mat{S}} < \tfrac{1}{\norm{\mat{T}^{-1}}}.
+		\]
+		Since $\norm{\mat{T}}$ is nonzero, $\norm{\mat{T} - \mat{S}} \cdot \norm{\mat{T}^{-1}} < 1$; hence $\mat{S} \in \Omega$. The open ball is contained within $\Omega$, so the set $\Omega$ is open. As per continuity, realize that
+		\[
+			\lim\limits_{S \to T^{-1}} \norm{\mat{T} - \mat{S}}
+		\]
+		As per continuity: \textbf{Rudin's proof is nonrigorous}, and I don't know how to rectify it. The basic idea is that
+		\[
+			\norm{\mat{T}^{-1} - \mat{S}^{-1}} = \norm{\mat{T}^{-1}\mat{SS}^{-1} - \mat{T}^{-1}\mat{TS}^{-1}} \le \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}} \cdot \norm{\mat{S}^{-1}},
+		\]
+		\textit{but} using this to bound $\epsilon$ depends on $\mat{T}^{-1}$ and $\mat{S}^{-1}$. \textbf{I will leave this unfinished until instructor clarificiation}.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Completeness of \texorpdfstring{$\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$}{Matricies}}
+
+Before we discuss the completeness of $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$, we must uncover an important inequality. Let $\vec{z} = (z_{1}, \ldots, z_{n}) \in \mathbb{C}^{n}$; for any $\mat{T} \in \mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$, define the components of $\mat{T}$ as $t_{ij}$ for $i \in \{ 1, \ldots, n \}$ and $j \in \{ 1, \ldots, m \}$. Then
+\[
+	\mat{T} \vec{z} = \left( \sum\limits_{j = 1}^{n} t_{1j}z_{j} \right) \vec{e}_{1} + \cdots + \left( \sum\limits_{j = 1}^{n} t_{mj} z_{j} \right) \vec{e}_{m}.
+\]
+Then via the Cauchy-Schwarz Inequality,
+\begin{align*}
+	\norm{\mat{T} \vec{z}}^{2} &= \left( \sum_{j = 1}^{n} t_{1j} z_{j} \right)^{2} + \cdots + \left( \sum_{j = 1}^{n} t_{mj} z_{j} \right)^{2} \\
+	& \le \left( \sum_{j = 1}^{n} t_{1j}^{2} \right) \left( \sum_{j = 1}^{n} z_{j}^{2} \right) + \cdots + \left( \sum_{j = 1}^{n} t_{mj}^{2} \right) \left( \sum_{j = 1}^{n} z_{j}^{2} \right) \\
+	&= \left( \sum_{j = 1}^{n} z_{j}^{2} \right) \left( \sum_{i = 1}^{m} \sum_{j = 1}^{n} t_{ij}^{2} \right) = \norm{\vec{z}}^{2} \left( \sum_{i = 1}^{m} \sum_{j = 1}^{n} t_{ij}^{2} \right).
+\end{align*}
+Let $\vec{w}$ be the critical vector of $\mat{T}$. Then
+\[
+	\norm{\mat{T}} = \norm{\mat{T} \vec{w}} \le \norm{\vec{z}} \sqrt{\sum\limits_{i = 1}^{m} \sum\limits_{j = 1}^{n} t_{ij}^{2}} = \sqrt{\sum\limits_{i = 1}^{m} \sum\limits_{j = 1}^{n} t_{ij}^{2}}.
+\]
+
+While $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ and $\mathbb{C}^{n + m}$ may be isomorphic, the relevant bijection is \textit{not} an isometry. 
+
+
+\begin{theorem}
+	$\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ equipped with the matrix norm is a complete metric space.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+    \begin{proof}
+		Let the sequence $\mat{T}_{1}, \mat{T}_{2}, \ldots$ be a Cauchy sequence in $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$; declare that for all $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N < i, j \implies \norm{\mat{T}_{i} - \mat{T}_{j}} < \epsilon.
+		\]
+		Observe that if $k \in \{ 1, \ldots, n \}$, then $N \le i, j$ implies
+		\[
+			\norm{\mat{T}_{i} \vec{e}_{k} - \mat{T}_{j} \vec{e}_{k}} \le \norm{\vec{e}_{k}} \cdot \norm{\mat{T}_{i} - \mat{T}_{j}} = \norm{\mat{T}_{i} - \mat{T}_{j}} < \epsilon.
+		\]
+		Thus $\mat{T}_{1} \vec{e}_{k}, \mat{T}_{2} \vec{e}_{k}, \cdots$ is a Cauchy Sequence in $\mathbb{C}^{n}$. We may thus define $\mat{T}$ as the unique matrix that maps $\vec{e}_{k}$ to the limit of $\mat{T}_{1} \vec{e}_{k}, \mat{T}_{2} \vec{e}_{k}, \ldots$ in $\mathbb{C}^{m}$.
+		
+		For $i \in \mathbb{Z}_{> 0}$, let $_{i} t_{jk}$ be the components of $\mat{T}_{i}$ and let $t_{jk}$ be the components of $\mat{T}$. It is straightforward that $\lim\limits_{i \to \infty} \null_{i} t_{jk} = t_{jk}$; then there exist $N_{jk}$ such that
+		\[
+			N_{jk} < i \implies \abs{_{i} t_{jk} - t_{jk}} < \frac{\epsilon}{\sqrt{mn}}.
+		\]
+		Set $N = \max \{ N_{11}, \ldots, N_{jk} \}$. Then $N < i$ implies that
+		\[
+			\norm{\mat{T}_{i} - \mat{T}} \le \sqrt{\sum\limits_{j = 1}^{m} \sum\limits_{k = 1}^{n} \abs{_{i} t_{jk} - t_{jk}}^{2}} < \sqrt{\sum\limits_{j = 1}^{m} \sum\limits_{k = 1}^{n} \frac{\epsilon^{2}}{mn}} = \epsilon.
+		\]
+		We conclude that $\mat{T}_{1}, \mat{T}_{2}, \ldots$ converges to $\mat{T}$, so $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ is a complete metric space.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{corollary}
+	If the components of $\mat{T} \in \mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ are continuous functions from a metric space $X$ to $\mathbb{R}$, then the mapping $X \to \mat{T}$ is continuous.
+\end{corollary}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Let the continuous components be $f_{ij}$. For all $\epsilon > 0$, there are $N_{ij}$ such that
+		\[
+			0 < d(x, y) < \delta_{ij} \implies \abs{f_{ij}(x) - f_{ij}(y)} < \frac{\epsilon}{\sqrt{mn}}.
+		\]
+		Then identical means as Theorem 6 demonstrate that the mapping $X \to \mat{T}$ is continuous.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+% --------------------------------------------- %
+
+\section{Differentiation}
+
+% --------------------------------------------- %
+
+\subsection{The Derivative}
+
+Let $f : E \to \mathbb{R}^{m}$ for an open set $E \subset \mathbb{R}^{n}$. Then $f$ is \textbf{differentiable} at $\vec{x} \in E$ if there exists a linear map $D \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ such that
+\[
+	\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - \mat{J}\vec{h}}}{\norm{\vec{h}}} = 0,
+\] 
+we say that $f$ is \textbf{differentiable} at $\vec{x}$ and write $f'(\vec{x}) = \mat{J}$, where $J$ is the \textbf{total derivative} of $f$ at $\vec{x}$ --- also called the matrix of partial derivatives, the differential, or the total derivative. If $f$ is differentiable at \textit{all} $\vec{x} \in U$, we say that $f$ itself is differentiable over $U$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{lemma}
+		The total derivative is unique.
+	\end{lemma}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Define $f$ like above. Suppose that for contradiction that there exist two matricies $\mat{J} \ne K$ such that
+		\[
+			\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - \mat{J}\vec{h}}}{\norm{\vec{h}}}  = \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - K\vec{h}}}{\norm{\vec{h}}} = 0.
+		\]
+		See that $\mat{J} - K \ne 0$, so $\norm{J - K} > 0$. Then there exist $d_{1}$ and $d_{2}$ such that
+		\begin{align*}
+			0 < \norm{\vec{h}} < \delta_{1} &\implies \frac{ \norm{-f(\vec{x} + \vec{h}) + f(\vec{x}) + \mat{J}\vec{h}}}{\norm{\vec{h}}} < \frac{\norm{J - K}}{2} \\
+			0 < \norm{\vec{h}} < \delta_{2} &\implies \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - K\vec{h}}}{\norm{\vec{h}}} < \frac{\norm{\mat{J} - K}}{2} \\
+		\end{align*}
+		For $0 < \norm{\vec{h}} < \min \{ \delta_{1}, \delta_{2} \}$, we have that
+		\begin{align*}	
+			\norm{\mat{J} - K} &= \frac{\norm{J - K}}{2} + \frac{\norm{J - K}}{2} \\
+			&> \frac{ \norm{-f(\vec{x} + \vec{h}) + f(\vec{x}) + \mat{J}\vec{h}}}{\norm{\vec{h}}} +\frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - K\vec{h}}}{\norm{\vec{h}}} \\
+			&\ge \frac{\norm{(-f(\vec{x} + \vec{h}) + f(\vec{x}) + \mat{J} \vec{h}) + (f(\vec{x} + \vec{h}) - f(\vec{x}) - K \vec{h})}}{\vec{h}} \\
+			&= \frac{\norm{(\mat{J} - K) \vec{h}}}{\vec{h}},
+		\end{align*}
+		so $\norm{\mat{J} - K} \norm{\vec{h}} > \norm{(J - K) \vec{h}}$, which is our desired contradiction.
+	\end{proof}
+\end{adjustwidth}
+
+As an example, if $T \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$ and $\vec{x} \in \mathbb{R}^{n}$, then the derivative of $T$ at $\vec{x}$ is $T$, as
+\[
+	\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{T(\vec{x} + \vec{h}) - T \vec{x} - T \vec{h}}}{\norm{\vec{h}}} = \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{\vec{0}}}{\norm{\vec{h}}} = 0.
+\]
+
+It is very intuitive to think of $\mat{J}$ as an approimation of $f$ at $\vec{x}_{0}$ --- namely, that there exists $r(\vec{h})$ such that $f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) = J \vec{h} - r(\vec{h})$ and $\lim\limits_{\vec{h} \to \vec{0}} \tfrac{r(\vec{h})}{\vec{h}} = 0$. This strategy will be exhibited in the following proof:
+
+\subsection{Chain Rule}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem*}
+		Let $f : \mathbb{R}^{n} \to \mathbb{R}^{m}$ and $g : \mathbb{R}^{m} \to \mathbb{R}^{k}$. If $f$ is differentiable at $\vec{x}_{0}$ and $g$ is differentiable at $f(\vec{x}_{0})$ --- and if $\vec{x}_{0}$ and $f(\vec{x}_{0})$ are contained within open sets in the domains of $f$ and $g$ respectively --- then $g \circ f$ is differentiable at $\vec{x}_{0}$, and
+		\[
+			(g \circ f)' = g'(f(\vec{x}_{0})) f'(\vec{x}_{0}).
+		\]
+	\end{theorem*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $f'(\vec{x}_{0}) = \mat{J}$ and $g'(f(\vec{x}_{0})) = K$. We have that
+		\[
+		\lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - \mat{J} \vec{h}}}{\norm{\vec{h}}} = 0 = \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0}) + \vec{h}) - g(f(\vec{x}_{0})) - K \vec{h}}}{\norm{h}}.
+		\]
+		Define the function $\vec{k} = f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0})$; clearly, $\lim\limits_{\vec{h} \to \vec{0}} \vec{k} = 0$. We have that
+		\begin{align*}
+			& g(f(\vec{x}_{0} + \vec{h})) - g(f(\vec{x}_{0})) - (K\mat{J}) \vec{h} \\
+			=& g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K(\mat{J} \vec{h} - f(\vec{x_{0} + \vec{h}}) - f(\vec{x}_{0}) + \vec{k}) \\
+			=& g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K \vec{k} + K(f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - \mat{J} \vec{h}).
+		\end{align*}
+		We now establish bounds for $\norm{\vec{k}}$: 
+		\[
+			\norm{\vec{k}} = \norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - \mat{J} \vec{h} + J \vec{h}} \le \norm{\vec{h}} \left(\norm{J} + \frac{\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}}}{\norm{\vec{h}}}\right)
+		\]
+		Then using the composition rule for limits,
+		\begin{align*}
+			0 &\le \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0} - \vec{h})) - g(f(\vec{x}_{0})) - (K\mat{J}) \vec{h}}}{\norm{\vec{h}}} \\
+			&\le \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K \vec{k}}}{\norm{\vec{h}}} + \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{K}\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - \mat{J} \vec{h}}}{\norm{\vec{h}}} \\
+			&\le \lim\limits_{\vec{h} \to \vec{0}} \frac{\norm{g(f(\vec{x}_{0}) + \vec{k}) - g(f(\vec{x}_{0})) - K \vec{k}}}{\norm{\vec{k}}} \lim\limits_{\vec{h} \to \vec{0}} \left( \norm{\mat{J}} + \frac{\norm{f(\vec{x}_{0} + \vec{h}) - f(\vec{x}_{0}) - J \vec{h}}}{\vec{h}}\right) \\
+			&= (0)(\norm{\mat{J}} + 0) = 0.	
+		\end{align*}
+		so $(g \circ f)'(\vec{x}_{0}) = K\mat{J} = g'(f(\vec{x}_{0})) f'(\vec{x}_{0})$ as required. Yes, that last step of Rudin's is nonrigorous --- define it as a piecewise expression equal to $0$ whenever $\vec{k} = \vec{0}$, etc.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{The Partial Derivative}
+
+Consider $f : U \subset \mathbb{R}^{n} \to \mathbb{R}^{m}$, where $U$ is an open subset of $\mathbb{R}^{n}$; let $\vec{e}_{1}, \ldots, \vec{e}_{n}$ and $\vec{e}_{1}, \ldots, \vec{e}_{m}$ be the standard bases of $\mathbb{R}^{n}$ and $\mathbb{R}^{m}$. The \textbf{components} of $f$ are the real functions $f_{1}, \ldots, f_{m}$ defined by
+\[
+	f(\vec{x}) = f_{1}(\vec{x}) \vec{e}_{1} + \cdots + f_{m}(\vec{x}) \vec{e}_{m},
+\]
+or equivalently by $f_{i}(\vec{x}) = f(\vec{x}) \cdot \vec{e}_{i}$ for each $i \in \{ 1, \ldots, m \}$. Then for $x \in U$, $i \in \{ 1, \ldots, m \}$, and $j \in \{ 1, \ldots, n \}$, we define the \textbf{partial derivative} of $f_{i}$ with respect to $x_{j}$ as
+\[
+	\pdv{f_{i}}{x_{j}} = \lim\limits_{t \to 0} \frac{f_{i}(\vec{x} + t \vec{e}_{j}) - f_{i}(\vec{x})}{t}.
+\]
+The fact this is a one-variable limit explains why the computation of partial derivatives aligns so closely with differentiation of univarite functions.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{lemma*}
+		The entries of the total derivative are the partial derivatives: namely, if $f: U \subset \mathbb{R}^{n} \to \mathbb{R}^{m}$ (where $U$ is open) and $f$ is differentiable at $x_{0}$, then the partial derivatives exist and 
+		\[
+			f'(\vec{x}_{0}) \vec{e}_{j} = \sum_{i = 1}^{m}\left(\pdv{f_{i}}{x_{j}}\right) (\vec{x})\vec{e}_{i} 
+		\]
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $j$ be any integer in the set $\{ 1, \ldots, n \}$. Since $f$ is differentiable at $\vec{x}$,
+		\[
+			\lim\limits_{t \to 0} \frac{f(\vec{x}_{0} + t \vec{e}_{j}) - f(\vec{x}_{0})}{t} - f'(\vec{x}) \vec{e}_{j} = \lim\limits_{t \to 0} \frac{\norm{f(\vec{x}_{0} + t \vec{e}_{j}) - f(\vec{x}_{0}) - f'(\vec{x}_{0})(t \vec{e}_{j})}}{\norm{t \vec{e}_{j}}} = 0.
+		\]
+		Therefore,
+		\begin{align*}
+			f'(\vec{x}) \vec{e}_{j} &= \lim\limits_{t \to 0} \frac{f(\vec{x}_{0} + t \vec{e}_{j}) -   f(\vec{x}_{0})}{t} \\
+			&= \lim\limits_{t \to 0} \frac{\sum_{i = 1}^{m} (f_{1}(\vec{x}_{0} + t \vec{e}_{j})\vec{e}_{i}) - \sum_{i = 1}^{m} (f_{i}(\vec{x}_{0})\vec{e}_{i})}{t} \\
+			&= \sum_{i = 1}^{m} \left(\lim\limits_{t \to 0} \frac{f(\vec{x}_{0} + t \vec{\vec{e}}_{j}) - f(\vec{x}_{0})}{t} \vec{e}_{i}\right) \\
+			&= \sum_{i = 1}^{m} \left(\pdv{f_{i}}{x_{j}}\right) (\vec{x}_{0}) \vec{e}_{i},
+		\end{align*}
+		as desired.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+We denote $D_{21}$ as the double partial derivative of $f$ with respect to the first, \textit{then the second}, variable.
+
+\subsection{Mixed Partial Derivatives}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{lemma*}
+		Suppose $f$ is defined in an open set $U \subset R^{2}$ and $D_{1}$ and $D_{21}$ exist at every point of $U$. Let $Q \subset U$ be a closed rectangle with sides parallel to the coordinate exes with opposite verticies $(a, b)$ and $(a + h, b + k)$ for $h, k \ne 0$, and define
+		\[
+			\triangle (f, Q) = f(a + h, b - k) - f(a + h, b) - f(a, b + k) + f(a, b).
+		\]
+		Then there is a point $(x, y)$ in the interior of $Q$ such that
+		\[
+			\triangle(f, Q) = hk(D_{21}f)(x, y).
+		\]
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Define $u(t) = f(t, b + k) - f(t, b)$. Then by the Mean Value Theorem, there exists a $x$ between $a$ and $a + h$ and $y$ between $b$ and $b + K$ such that
+		\begin{align*}
+			\triangle (f, Q) &= u(a + h) - u(a) \\
+ 							 &= h u'(x) \\
+							 &= h(D_{1}f(x, b + k) - D_{1}f(x, b)) \\
+							 &= hk D_{21}f(x, y).
+		\end{align*}
+	\end{proof}
+\end{adjustwidth}
+\begin{theorem}
+	Suppose $f$ is defined in an open set $U \in \mathbb{R}^{2}$, that $D_{1}$ and $D_{2}$ exist at all points of $U$, and that $D_{21}$ is continuous at some point $(a, b) \in U$. Then $D_{12}$ exists at $(a, b)$,and
+	\[
+		D_{12} f(a, b) = D_{21} f(a, b).
+	\]
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		
+	\end{proof}
+\end{adjustwidth}
+% --------------------------------------------- %
+
+\subsection{Real-Valued Functions} 
+
+Let $f : \mathbb{R}^{n} \to \mathbb{R}$ be a differentiable real-valued function. Then $f'$ is a $1$-by-$n$ matrix:
+\[
+	f' = \begin{bmatrix} \pdv{f}{x_{1}} & \cdots & \pdv{f}{x^{n}} \end{bmatrix}.
+\]
+The transpose of this matrix is called the \textbf{gradient} of $f$;
+\[
+	\grad f = f'^{\top} = \begin{bmatrix} \pdv{f}{x_{1}} \\ \vdots \\ \pdv{f}{x_{n}} \end{bmatrix} = \pdv{f}{x_{1}} \vec{e}_{1} + \cdots + \pdv{f}{x_{n}} \vec{e}_{n},
+\]
+where $\vec{e}_{1}, \ldots, \vec{e}_{n}$ is the standard basis of $\mathbb{R}^{n}$. Observe that $f' \vec{v} = \grad f \cdot \vec{v}$ for all $\vec{v} \in \mathbb{R}^{n}$ --- so the gradient and the derivative of a real-valued function are dual concepts. We can define the derivative of $f$ as a vector $\grad f$ such that 
+\[
+	\lim\limits_{\vec{h} \to 0} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - \grad f \cdot \vec{h}}}{\norm{\vec{h}}} = 0.
+\]
+
+The \textbf{directional derivative} of $f$ at $\vec{x}$ along a unit vector $\vec{v}$ is defined as
+\[
+	\grad_{\vec{v}} f = \lim\limits_{t \to 0} \frac{f(\vec{x} + t \vec{v}) - f(\vec{x})}{t}
+\]
+Observe that $\grad_{\vec{e}_{i}} f = \pdv{f}{x_{i}} = \grad f \cdot \vec{e}_{i}$ for all $i \in \{ 1, \ldots, n \}$. This might lead us to conclude the following lemma:
+\begin{adjustwidth}{0.5cm}{}
+	\begin{lemma*}
+		If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\vec{x}_{0}$, then $\grad_{\vec{v}} f = \vec{v} \cdot (\grad f)$ for all unit vectors $\vec{v}$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Observe that $f' \vec{v} = \grad f \cdot \vec{v}$, so we may express the definition of the total derivative in terms of the gradient of $f$, and that $\norm{t \vec{v}}$ = $\abs{t}$:
+		\begin{align*}
+			\grad_{\vec{v}} f &= \lim\limits_{t \to 0} \frac{f(\vec{x} + t \vec{v}) - f(\vec{x})}{t} \\ 
+			&= \lim\limits_{t \to 0} \frac{f(\vec{x} + t \vec{v}) - f(\vec{x}) - \grad f \cdot (t \vec{v})}{t} + \lim\limits_{t \to 0} \frac{\grad f \cdot (t \vec{v})}{t} \\
+			&= 0 + \lim\limits_{t \to 0} \grad f \cdot \vec{v} \\
+			&= \grad f \cdot \vec{v},
+		\end{align*}
+		as required.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{lemma*}
+		If $f: \mathbb{R}^{n} \to \mathbb{R}$ is differentiable at $\vec{x}_{0}$, then the maximum of $\grad_{\vec{v}} f(\vec{x}_{0})$ across all unit vectors $\vec{v}$ occurs when $\vec{v}$ points in the direction of $\grad f(\vec{x}_{0})$.
+	\end{lemma*}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		If $\vec{v}$ is a unit vector, then the Cauchy-Schwarz Inequality guarantees that
+		\[
+			\grad_{\vec{v}} f(\vec{x}_{0}) = \vec{v} \cdot \grad f(\vec{x}_{0}) \le \norm{\vec{v}} \norm{\grad f (\vec{x}_{0})} = \norm{\grad f(\vec{x}_{0})} = \left( \frac{\grad f(\vec{x}_{0})}{\norm{\vec{x}_{0}}} \right) \cdot \grad f (\vec{x}_{0})
+		\]
+		so the maximum of $\grad_{\vec{v}} f(\vec{x}_{0})$ occurs when $\vec{v}$ is the normalization of the gradient vector and points in the direction of $\grad f (\vec{x}_{0})$.
+	\end{proof}
+\end{adjustwidth}
+
+More generally, we have that if $\theta$ is the angle between the unit vector $\vec{v}$ and $\grad f$, then 
+\[
+	\grad_{\vec{v}} f = \vec{v} \cdot \grad f = \norm{\vec{v}} \norm{\grad f} \cos(\theta) = \norm{\grad f} \cos(\theta).
+\]
+The directional derivative oscilates like a sine wave as $\vec{v}$ walks around the unit hypersphere.
+
+% --------------------------------------------- %
+
+\section{The Inverse Function Theorem}
+
+% --------------------------------------------- %
+
+\subsection{The Contraction Principle}
+
+Let $X$ be a metric space with metric $d$. If $\varphi : X \to X$ and there exists a real $c < 1$ such that
+\[
+	d(\varphi(x), \varphi(y)) \le c \cdot d(x, y)
+\]
+for all $x, y \in X$, then $\varphi$ is a \textbf{contraction} of $X$ into $X$.
+
+\begin{theorem*}
+	If $X$ is a complete metric space and if $\varphi$ is a contraction of $X$ into $X$, then there exists a unique element $x \in X$ such that $\varphi(x) = x$
+\end{theorem*}
+\begin{adjustwidth}{0.5cm}{}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $c$ be a constant such that $d(\varphi(x), \varphi(y)) \le c \cdot d(x, y)$ for all $x, y \in X$, and select from $X$ some element $x_{0}$. We define the sequence $x_{0}, x_{1}, \ldots$ recursively by setting
+		\[
+			x_{n + 1} = \varphi(x_{n}) 
+		\]
+		for all $n \in \mathbb{Z}_{\ge 0}$. We have via induction that
+		\[
+			d(x_{n + 1}, x_{n}) = d(\varphi(x_{n}), \varphi(x_{n - 1})) = c \cdot d(x_{n}, x_{n - 1}) = \cdots = c^{n} \cdot d(x_{1}, x_{0}).
+		\]
+		We seek to invoke the completeness of $X$. Observe that for all $N < n < m$, 
+		\begin{align*}
+			d(x_{m}, x_{n}) &\le d(x_{n+1}, x_{n}) + d(x_{n + 2}, x_{n + 1}) + \cdots + d(x_{m}, x_{m - 1}) \\
+			&\le (c^{n} + c^{n+1} + \cdots + c^{m-1}) d(x_{1}, x_{0}) \\
+			&= c^{n} (1 + \cdots + c^{m - n - 1}) d(x_{1}, x_{0}) \\
+			&= \left( \frac{c^{m} - c^{n}}{c - 1} \right) d(x_{1}, x_{0})
+		\end{align*}
+		As the right-hand side of this equation gets arbitrarily small (select $N = \log_{c}(\epsilon)$ and let magic happen), we find that $x_{0}, x_{1}, \ldots$ is a Cauchy sequence. By completeness, it converges to some $x \in X$. Therefore,
+		\[
+			x = \lim\limits_{n \to \infty} x_{n} = \lim\limits_{n \to \infty} \varphi(x_{n}) = \varphi(f).
+		\]
+		To prove that $f$ is unique, note that if $\varphi(x) = x$ and $\varphi(y) = y$ for $x, y \in X$, then
+		\[
+			d(x, y) = d(\varphi(x), \varphi(y)) \le c \cdot  d(x, y).
+		\]
+		As $c < 1$, we must have that $d(x, y) = 0$, so $x = y$.
+	\end{proof}
+\end{adjustwidth}
+
+\subsection{The Inverse Function Theorem}
+
+\begin{theorem*}
+	Suppose that $C$ is a $C^{1}$ mapping of an open set $E \subset \mathbb{R}^{n}$ to $\mathbb{R}^{n}$, that the matrix $f'(\vec{a})$ is invertible for $\vec{a} \in E$, and define $\vec{b} = f(\vec{a})$ --- then there exist open sets $U, V \in \mathbb{R}^{n}$ such that $\vec{a} \in U$, $\vec{b} \in V$, and $f$ is a bijective mapping from $U$ to $V$ --- and the inverse $g: V \to U$ of $f$ defined by $g(f(\vec{x})) = \vec{x}$ for all $\vec{x} \in U$ is $C^{1}$.
+\end{theorem*}
+\begin{adjustwidth}{0.5cm}{}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+		Let $f'(\vec{a}) = \mat{J}$, and let $\lambda = \tfrac{1}{2 \norm{J^{-1}}}$, and let $U$ be the open ball defined by all vectors $\vec{x}$ such that
+		\[
+			\norm{f'(\vec{x}) - \mat{J}} < \lambda.
+		\]
+		Further define $V = f(U)$ (or more formally, $\vec{y} \in \mathbb{R}^{m} \mid \exists \vec{x} \in U, \vec{x} = \vec{y}$). We must prove that $f$ is invertible, that $V$ is open, and that $g$ is $C^{1}$.
+
+		\textbf{Invertability of $f$}: We now associate to each $y \in \mathbb{R}^{n}$ a function $\varphi_{\vec{y}}$ defined by
+		\[
+			\varphi_{\vec{y}}(\vec{x}) = \vec{x} + \mat{J}^{-1} (\vec{y} - f(\vec{x})).
+		\]
+		Clearly, $f(\vec{x}) = \vec{y}$ if and only if $\varphi_{\vec{y}}(\vec{x}) = \vec{x}$. Since $\varphi_{\vec{y}}'(\vec{x}) = I - \mat{J}^{-1} f'(\vec{x}) = J^{-1}(J - f'(\vec{x})$ for all $\vec{x}$), we find that
+		\[
+			\norm{\varphi_{\vec{y}}'(\vec{x})} = \norm{\mat{J}^{-1}(J - f'(\vec{x}))} \le \norm{J^{-1}} \norm{J - f'(\vec{x})} < \norm{J^{-1}} \lambda = \frac{1}{2}.
+		\]
+		We use an above theorem to conclude that for all $x_{1}, x_{2} \in U$,
+		\[
+			\norm{\varphi_{\vec{y}}(\vec{x}_{1}) - \varphi_{\vec{y}}(\vec{x}_{2})} < \tfrac{1}{2} \norm{\vec{x}_{1} - \vec{x}_{2}}.
+		\]
+		We conclude that the Contraction Principle guarantees that $\varphi_{\vec{y}}(\vec{x}) = \vec{x}$ has exactly one solution --- so $f(\vec{x}) = \vec{y}$ has exactly one solution. We conclude that $f$ is bijective (and thus invertible) over $U$.
+
+		\textbf{Openness of $V$}: For all $\vec{y}_{0} \in V$, select $\vec{x}_{0}$ such that $f(\vec{x}_{0}) = \vec{y}_{0}$, and let $r$ be the radius of an open ball $B_{\vec{x}_{0}}$ centered at $\vec{x}_{0}$ contained within $U$. We claim that if $\norm{\vec{y} - \vec{y}_{0}} < \lambda r$, then $\vec{y} \in V$. 
+
+		We must construct $\vec{x} \in U$ such that $f(\vec{x}) = \vec{y}$, which we do by proving that $\varphi_{\vec{y}}$ is a contraction of $B_{\vec{x}_{0}}$ into $U$. If $\norm{\vec{y} - \vec{y}_{0}} < \lambda r$, observe that
+		\[
+			\norm{\varphi_{\vec{y}}(\vec{x}_{0}) - \vec{x}_{0}} = \norm{\mat{J}^{-1}(\vec{y} - \vec{y}_{0})} < \norm{J^{-1}} \lambda r < \frac{r}{2}.
+		\]
+		Then if $\vec{x} \in B$, $\norm{\vec{x} - \vec{x}_{0}} < r$, so
+		\[
+			\norm{\varphi_{\vec{y}}(\vec{x}) - \vec{x}_{0}} \le \norm{\varphi_{\vec{y}}(\vec{x}) - \varphi_{\vec{y}}(\vec{x}_{0})} + \norm{\varphi_{\vec{y}}(\vec{x}_{0}) - \vec{x}_{0}} < \tfrac{1}{2} \norm{\vec{x} - \vec{x}_{0}} + \frac{r}{2} \le r,
+		\]
+		so $\varphi_{\vec{y}}(\vec{x}) \in B_{\vec{x}_{0}}$. We conclude that $\varphi_{\vec{y}}$ is a contraction of the complete metric space $B_{\vec{x}_{0}}$ into itself, so it must have some fixed point $\vec{x} \in B_{\vec{x}_{0}}$ such that $\varphi_{\vec{y}}(\vec{x}) = \vec{x}$. Then $f(\vec{x}) = \vec{y}$, so $\vec{y} \in f(B_{\vec{x}_{0}}) \subset f(U) = V$. Thus $V$ is an open set.
+
+		\textbf{Smoothness of Inverse}: For all $\vec{y} \in V$ and $\vec{y + k} \in V$, there exists $\vec{x}$ and $\vec{x} + \vec{h} \in U$ such that $\vec{y} = f(\vec{x})$ and $\vec{y} + \vec{k} = f(\vec{x} + \vec{h})$. Then
+		\begin{align*}
+			\norm{\vec{h} - \mat{J}^{-1} \vec{k}} &= \norm{\vec{h} + J^{-1} (f(\vec{x} + \vec{h}) - f(\vec{x}))} \\
+			&= \norm{\varphi_{\vec{y}}(\vec{x} + \vec{h}) - \varphi_{\vec{y}}(\vec{x})} \\
+			&\le \tfrac{1}{2} \norm{\vec{x} + \vec{h} - \vec{x}} \\
+			&= \tfrac{1}{2} \norm{\vec{h}}.
+		\end{align*}
+		Then $\norm{\mat{J}^{-1} \vec{k}} \ge \tfrac{1}{2} \norm{\vec{h}}$, so $\vec{h} \le 2 \norm{J^{-1}} \vec{k} = \tfrac{1}{\lambda} \vec{k}$. We begin to now investigate the derivative: see that as
+		\[
+			\norm{f'(\vec{a}) - \mat{J}} \norm{J^{-1}} < \lambda \norm{J^{-1}} = \frac{1}{2} < 1
+		\]
+		$f'(\vec{a})$ is invertible. Since 
+		\[
+			g(\vec{y} + \vec{k}) - g(\vec{y}) - f'(\vec{x})^{-1} \vec{k} = \vec{h} - f'(\vec{x}) \vec{k} = -f'(\vec{x})^{-1} (f(\vec{x} + \vec{h}) - f(\vec{x}) - f'(\vec{x}) \vec{h}),
+		\]
+		we have that
+		\[
+			\frac{\norm{g(\vec{y} + \vec{k}) - g(\vec{y}) - f'(\vec{x})^{-1} \vec{k}}}{\norm{\vec{k}}} \le \frac{\norm{f'(\vec{x})^{-1}}}{\lambda} \frac{\norm{f(\vec{x} + \vec{h}) - f(\vec{x}) - f'(\vec{x}) \vec{h}}}{\vec{h}}.
+		\]
+		As $\vec{k} \to \vec{0}$, we have that $\vec{h} \to \vec{0}$ (this is nonrigorous; we'd need to define a piecewise function in the instance that $\vec{k} = 0$). Then as the right-hand side of this inequality tends to $0$, the left-hand side does by the Squeeze Theorem. Thus,
+		\[
+			g'(\vec{y}) = f'(\vec{x})^{-1} = f(g(\vec{y}))^{-1}
+		\]
+		Finally, note that as $g$ is a continuous mapping of $V$ onto $U$, that $f'$ is a continuous mapping of $U$ into $\Omega$, then $(f')^{-1}$ is a continuous mapping of $U$ into $\Omega$, so $g'(\vec{y})$ is a continuous mapping of $V$ into $\Omega$. This completes the proof of the most complex (and beautiful) theorem I've ever studied.
+	\end{proof}
+\end{adjustwidth}
+
+If we lessen the restriction that $f$ need be $C^{1}$, the only part of the Inverse Function Theorem that fails is that $g$ is $C^{1}$; if $f$ is merely differentiable, we may derive that $g$ is differentiable too.
+
+% --------------------------------------------- %
+
+\subsection{The Implicit Function Theorem}
+
+% --------------------------------------------- %
+
+\end{document}

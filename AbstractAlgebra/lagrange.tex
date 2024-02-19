@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\title{Lagrange's Theorem}
+\author{James Pagan}
+\date{}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	I found this proof in about nine hours in June, knowing nothing except the group axioms. The key was, rather than analyzing subgroups directly, to focus on constructing possible groups around a given subgroup. The idea of cosets --- or as I called them, ``projections'' --- arised naturally. The following is my old proof verbatim, although I changed my older projection notation; my current proofwriting style is more mature.
+\end{abstract}
+
+
+
+
+\section{Lagrange's Theorem}
+
+\begin{theorem}
+	If $H$ is a subgroup of the finite group $G$, then $\abs{H}$ divides $\abs{G}$.
+\end{theorem}
+\begin{proof}
+	Let the elements of $G$ be $x_{1}, x_{2}, \ldots, x_{\abs{G}}$; for any $x \in G$, we define the \textbf{projection} of $H$ by $x$ as $Hx = \{ hx \mid h \in H \}$.
+	\begin{adjustwidth}{1cm}{}
+		\begin{lemma}
+			If $a$ and $b$ are elements of $G$, then either $Ha = Hb$ or $Ha \cap Hb = \varnothing$.
+		\end{lemma}
+		\begin{proof}\renewcommand{\qedsymbol}{}
+			Suppose that $Ha$ and $Hb$ are not disjoint --- namely, there exist some $h, g \in G$ such that $ha$ = $gb$. We thus have that $a = h^{-1}gb$, and $b = g^{-1}ha$; as H is a subgroup, $h^{-1}g$ and $g^{-1}h$ are in $H$.
+
+			Now, let $fa$ and $fb$ be any elements of $Ha$ and $Hb$ respectively. We have that $fa = fh^{-1}gb$, so every element in $Ha$ is an element of $Hb$, and $fb = fg^{-1}ha$, so every element of $Hb$ is an element of $Ha$. Then $Ha = Hb$, as desired.
+		\end{proof}
+	\end{adjustwidth}
+	Thus, projections are either equal or disjoint.
+	\begin{adjustwidth}{1cm}{}
+		\begin{lemma}
+			For any element $x \in G$, $\abs{Hx} = \abs{H}$.
+		\end{lemma}
+		\begin{proof}\renewcommand{\qedsymbol}{}
+			We establish a bijection between $Hx$ and $H$. For any $x \in G$, let $f_{x} :H \to Hx$ be $f_{x}(h) = hx$. By the definition of $Hx$, $fx$ is surjective. Now suppose that for any $a, b \in H$, we have $ax = bx$. Multiplying by $x^{-1}$ yields $ha = hb$, so $f_{x} $is injective. Then there is a bijection between $Hx$ and $H$, which implies $\abs{Hx} = \abs{h}$.
+		\end{proof}
+	\end{adjustwidth}
+	We claim that $Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{\abs{G}} = G$.
+	\begin{adjustwidth}{1cm}{}
+		\begin{proof}\renewcommand{\qedsymbol}{}
+			We show that both sides are subsets of each other. Note that every element of $Hx$ is an element of $G$ (by $G's$ closure), so $Hx_{1} \cup \cdots \cup Hx_{\abs{g}} \subseteq G$. Now, note that G's identity $e$ is in $H$; then for all $x$ in G, $x = ex$ is in $Hx$. Then every element of $G$ is contained in some projection of $H$, and the $G \subseteq Hx_{1} \cup \cdots \cup Hx_{\abs{G}}$. Therefore, both sides are equal.
+		\end{proof}
+	\end{adjustwidth}
+	We now claim that the order of $Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{\abs{G}}$ is a multiple of $\abs{H}$. We prove this by induction.
+	\begin{adjustwidth}{1cm}{}
+
+		\textbf{Base case}: By Lemma 2, $Hx_{1}$ has order $H$ --- it is thus a multiple of $\abs{H}$.
+
+		\textbf{Inductive step}: Suppose $Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{n}$ is a multiple of $H$ for some integer $n \in \{ 1, 2, \ldots, \abs{G} - 1 \}$. These bounds guarantee that $Hx_{n + 1}$ exists. Now, if there exists an integer $r$ such that $Hx_{r} = Hx_{n + 1}$, we have that
+		\[
+			\abs{Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{n} \cup Hx_{n + 1}} = \abs{Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{n}}.
+		\]
+		If no such $r$ exists, Lemma 1 guarantees that $Hx_{n + 1}$ is disjoint from every single $Hx_{1}, Hx_{2}, \ldots, Hx_{n}$. Therefore,
+		\[
+			\abs{Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{n} \cup Hx_{n + 1}} = \abs{Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{n}} + \abs{H}.
+		\]
+		In either case, our inductive hypothesus guarantees that $Hx_{1} \cup Hx_{2} \cup \cdots \cup Hx_{n} \cup Hx_{n + 1}$ is a multiple of $\abs{H}$.
+
+	\end{adjustwidth}
+ 	We thus have that the order of $Hx_{1} \cup Hx_{2} \cup \cdots Hx_{\abs{G}}$ is a multiple of $H$. This may be equivalently stated as $\abs{G}$ is a multiple of $\abs{H}$. Therefore, if $H$ is a subgroup of the finite group $G$, $\abs{H}$ divides $\abs{G}$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\title{Atiyah-MacDonald: Rings and Modules of Fractions}
+\author{James Pagan}
+\date{February 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Construction of Rings of Fractions}
+
+% --------------------------------------------- %
+
+\subsection{Equality of Fractions}
+
+Let $R$ be a ring. A \textbf{multiplicatively closed subset} $S \subseteq R$ is a subset that contains $1$ and is closed under multiplication --- that is, if $(S, \times)$ is a submonoid of $(R, \times)$. 
+
+\begin{adjustwidth}{1cm}{}
+  \begin{lemma}
+    Define a relation $\equiv$ on $R \times S$ as follows:
+    \[
+      (a, s) \equiv (b, t) \iff (at - bs)x = 0 \text{ for some } x \in S.
+    \]
+    Then $\equiv$ is an equivalence relation.
+  \end{lemma}
+  \begin{proof}
+    Let $(a, s)$, $(b, t)$, and $(c, u)$ be any elements of $R \times S$. We must verify three properties:
+    \begin{enumerate}
+      \item \textbf{Reflexivity}: It is clear that $(a, b) 
+        \equiv (a, b)$, since $(ab - ab)1 = 0$.
+      \item \textbf{Symmetry}: The proof is as simple as multiplying by $-1$:
+      \begin{align*}
+        (a, s) \equiv (b, t) &\iff (at - bs)x = 0 \text{ for some } x \in S \\
+                             &\iff (bs - at)x = 0 \text{ for some } x \in S \\
+                             &\iff (b, t) \equiv (a, s).
+      \end{align*}
+      \item \textbf{Transitivity}: Suppose $(a, s) \equiv (b, t)$ and $(b, t) \equiv (c, u)$. Then there exists $x, y \in S$ such that
+      \[
+        (at - bs)x = 0 \qquad \text{and} \qquad (bu - ct)y = 0.
+      \]
+      Muliplying these equations by $uy$ and $sx$ respectively and add them: we obtain that $(aut - cts)xy = 0$. Hence $(au - cs)xyt = 0$; since $xyt \in S$ by closure, we find $(a, s) \equiv (c, u)$. 
+    \end{enumerate}
+    Therefore, $\equiv$ is an equivalence relation.
+  \end{proof}
+\end{adjustwidth}
+
+The equivalence class of $(a, s)$ is denoted $\tfrac{a}{s}$ and called a \textbf{fraction}. The set $S^{-1}R$ denotes all the equivalence classes on $S \times R$. Observe that we do not impose $0 \notin S$; if $S$ contains zero, then all fractions are equivalent and $S^{-1}R = 0$.
+
+\subsection{Operations on Fractions}
+
+We endow $S^{-1}R$ with ring structure by defining addition and multiplication of fractions:
+\begin{align*}
+  \frac{a}{s} + \frac{b}{t} &= \frac{at + bs}{st} \\
+  \frac{a}{s} \times \frac{b}{t} &= \frac{ab}{st}.
+\end{align*}
+\begin{adjustwidth}{1cm}{}
+  \begin{lemma}
+    Addition and multiplication of fractions is well-defined.
+  \end{lemma}
+  \begin{proof}
+    Suppose $\tfrac{a}{s} = \tfrac{c}{u}$ and $\tfrac{b}{t} = \tfrac{d}{v}$. First, we demonstrate that $\tfrac{a}{s} + \tfrac{b}{t} = \tfrac{c}{u} + \tfrac{d}{v}$; there exist $x, y \in S$ such that
+    \begin{equation}
+      (au - cs)x = 0 \qquad \text{and} \qquad (bv - dt)y = 0.
+    \end{equation}
+    Multiply these equations by $tvy$ and $sux$ respectively and add them: we obtain that $(atuv + bsuv - cvst - dust)xy = 0$. Thus
+    \[
+      \frac{a}{s} + \frac{b}{s} \, = \, \frac{at + bs}{st} \, = \, \frac{cv + du}{uv} \, = \, \frac{c}{u} + \frac{d}{v}.
+    \]
+    Demonstrating that $\tfrac{a}{s} \times \tfrac{b}{t} = \tfrac{c}{u} \times \tfrac{d}{v}$ is a simpler story. Multiplying our equations in (1) by $bvy$ and $csx$ respectively and adding yields $(abuv - cdst)xy = 0$, so
+    \[
+      \frac{a}{s} \times \frac{b}{s} \, = \, \frac{ab}{st} \, = \, \frac{cd}{uv} \, = \, \frac{c}{u} \times \frac{d}{v};
+    \]
+    hence addition and multiplication of fractions is well-defined. 
+  \end{proof}
+\end{adjustwidth}
+
+Naturally, $S^{-1}R$ is a commutative ring. The proof of this assertion is identical to the verification that $\mathbb{Q}$ is a field --- with one exception. It may not be true that each fraction has a multiplicative inverse.
+
+\begin{adjustwidth}{1cm}{}
+  \begin{corollary}
+    If $R$ is an integral domain and $S = R \setminus \{ 0 \}$, then $S^{-1}R$ is the field of fractions of $R$.
+  \end{corollary}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+
+
+% --------------------------------------------- %
+
+\end{document}

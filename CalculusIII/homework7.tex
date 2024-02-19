@@ -1,0 +1,322 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{claim*}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\mathbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+\renewcommand{\grad}{\nabla}
+\renewcommand{\laplacian}{\nabla^{2}}
+
+\title{MATH-UA 129: Homework 7}
+\author{James Pagan, November 2023}
+\date{Professor Serfaty}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+% --------------------------------------------- %
+
+\section{Secction 4.2}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 4}
+
+If we define $\vec{c}(t) = (2 \cos(t), 2 \sin(t), t)$, then we seek 
+\[
+	\int_{0}^{2\pi} \norm{\vec{c}'(t)} \dd{t} = \int_{0}^{2\pi} \sqrt{(-2 \sin(t))^{2} + (2 \cos(t))^{2} + 1^{2}} \dd{t} = \int_{0}^{2\pi} \sqrt{5} \dd{t} = t \sqrt{5} \Big|_{0}^{2\pi} = \boxed{2\pi\sqrt{5}}.
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 6}
+
+If we define $\vec{c}(t) = (t, t \sin(t), t \cos(t))$, then we seek
+\[
+	\int_{0}^{2\pi} \norm{\vec{c}'(t)} \dd{t} = \int_{0}^{2\pi} \sqrt{t^{2} + (t \sin(t))^{2} + (t \cos(t))^{2}} \dd{t} = \int_{0}^{2\pi} \sqrt{2t^{2}} \dd{t} = \int_{0}^{2\pi} 2 \abs{t} \dd{t} = \boxed{4\pi}.
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 14}
+
+We seek to compute two integrals:
+\[
+	\int_{0}^{t} \norm{\vec{\alpha}'(\tau)} \dd{\tau} \qquad \text{and} \qquad \int_{0}^{t} \norm{\vec{\beta}'(t)} \dd{\tau} 
+\]
+For the first integral, observe that the arc length is
+\[
+	\int_{0}^{t} \norm{\vec{\alpha}'(t)} \dd{\tau} = \int_{0}^{t} \sqrt{\sinh^{2}(\tau) + \cosh^{2}(\tau) + \tau^{2}} \dd{\tau} = \boxed{ \int_{0}^{t} \sqrt{2 \cosh^{2}(\tau) - 1 + \tau^{2}} \dd{\tau}}.
+\]
+For the second integral,
+\[
+	\int_{0}^{t} \norm{\vec{\beta}'(t)} \dd{\tau} = \int_{0}^{t} \sqrt{\cos^{2}(\tau) + \sin^{2}(\tau) + \tau^{2}} \dd{\tau} = \boxed{\int_{0}^{t} \sqrt{1 + \tau^{2}} \dd{\tau}}.
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 15}
+
+% --------------------------------------------- %
+
+\section{Section 4.3}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 9}
+
+\textbf{Part (a)}: Clearly, $\vec{V}(x, y) = x \vec{i} + y \vec{j}$ is represented by $\boxed{\text{Graph (ii)}}$.
+
+\textbf{Part (b)}: Clearly, $\vec{V}(x, y) = y \vec{i} - x \vec{x}$ is respresented by $\boxed{\text{Graph (i)}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 10}
+
+\textbf{Part (a)}: Clearly, $\vec{V}(x, y) = \tfrac{y}{\sqrt{x^{2} + y^{2}}} \vec{i} - \tfrac{x}{\sqrt{x^{2} + y^{2}}} \vec{j}$ is represented by $\boxed{\text{Graph (i)}}$.
+
+\textbf{Part (a)}: Clearly, $\vec{V}(x, y) = \tfrac{x}{\sqrt{x^{2} + y^{2}}} \vec{i} + \tfrac{y}{\sqrt{x^{2} + y^{2}}} \vec{j}$ is represented by $\boxed{\text{Graph (ii)}}$.
+
+\textbf{Part (c)}: These two fields are the $\boxed{\text{normalized vector fields of Problem $9$}}$. They are thus not defined at $\boxed{(x, y) = (0, 0)}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 15} 
+
+We have that
+\[
+	\vec{c}'(t) = \left( \dv{t} e^{2t}, \dv{t} \ln \abs{t}, \dv{t} \tfrac{1}{t} \right) = \left( 2 e^{2t}, \tfrac{1}{t}, -\tfrac{1}{t^{2}} \right) = \mathbf{F}(e^{2t}, \ln \abs{t}, \tfrac{1}{t}) = \mathbf{F}(\vec{c}(t)).
+\]
+Thus, $\vec{c}(t)$ is a flow line of the given velocity vector field $\mathbf{F}(x, y, z)$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 20}
+
+We have that
+\begin{align*}
+	\vec{c}'(t) &= \left( \dv{t} a \cos(t) - b \sin(t), \dv{t} a \sin(t) - b \cos(t) \right) \\
+	&= \left( -a \sin(t) - b \cos(t), a \cos(t) - b \sin(t) \right) \\
+	&= \mathbf{F}(a \cos(t) - b \sin(t), a \sin(t) + b \cos(t)) \\
+	&= \mathbf{F}(\vec{c}(t)).
+\end{align*}
+Thus, $\vec{c}(t)$ is a flow line of the given velocity vector field $\mathbf{F}(x, y, z)$.
+
+% --------------------------------------------- %
+
+\section{Section 4.4}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 2}
+
+If we let $\vec{V}(x, y, z) = u(x, y, z) \vec{i} + v(x, y, z) \vec{j} + w(x, y, z) \vec{k}$, then 
+\begin{align*}
+	\grad \cdot \vec{V}(x, y, z) &= \pdv{u}{x} + \pdv{v}{y} + \pdv{w}{z} \\
+	&= \pdv{x} yz + \pdv{y} zx + \pdv{z} xy \\
+	&= 1 + 1 + 1 \\
+	&= \boxed{3}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 4}
+
+If we let $\vec{V}(x, y, z) = u(x, y, z) \vec{i} + v(x, y, z) \vec{j} + w(x, y, z) \vec{k}$, then 
+\begin{align*}
+	\grad \cdot \vec{V}(x, y, z) &= \pdv{u}{x} + \pdv{v}{y} + \pdv{w}{z} \\
+	&= \pdv{x} x^{2} + \pdv{y} (x + y)^{2} + \pdv{z} (x + y + z)^{2} \\
+	&= 2x + 2(x + y) + 2(x + y + z) \\
+	&= \boxed{6x + 4y + 2z}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 17}
+
+If we let $\vec{F}(x, y) = f(x, y) \vec{i} + g(x, y) \vec{j}$, then the scalar curl is as follows:
+\[
+	\grad \times \vec{F} = \left( \pdv{g}{x} - \pdv{f}{y} \right) \vec{k} = \left( \pdv{x} \cos(x) - \pdv{y} \sin(x) \right) \vec{k} = \left( -\sin(x) - 0 \right) \vec{k} = \boxed{- \sin(x) \vec{k}}.
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 18}
+
+If we let $\vec{F}(x, y) = f(x, y) \vec{i} + g(x, y) \vec{j}$, then the scalar curl is as follows:
+\[
+	\grad \times \vec{F} = \left( \pdv{g}{x} - \pdv{f}{y} \right) \vec{k} = \left( \pdv{x} (-x) - \pdv{y} y \right) \vec{k} = \left( -1 - 1 \right) \vec{k} = \boxed{-2 \vec{k}}.
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 21}
+
+\textbf{Part (a)}: If we let $F(x, y, z) = f(x, y, z) \vec{i} + g(x, y, z) \vec{j} + h(x, y, z) \vec{k}$, then
+\[
+	\grad \times f(x, y, z) = \begin{bmatrix} \pdv{h}{y} - \pdv{g}{z} \\ \pdv{f}{z} - \pdv{h}{x} \\ \pdv{g}{x} - \pdv{f}{y} \end{bmatrix} = \begin{bmatrix} \pdv{y} (z + zx) - \pdv{z} x^{2} y \\ \pdv{z} x^{2} - \pdv{x} (z + zx) \\ \pdv{x} x^{2}y - \pdv{y} x^{2} \end{bmatrix} = \begin{bmatrix} 0 \\ -z \\ 2xy \end{bmatrix}.
+\]
+Therefore,
+\[
+	\grad \cdot (\grad \times f) = \grad \cdot \begin{bmatrix} 0 \\ -z \\ 2xy \end{bmatrix} = \pdv{x} 0 - \pdv{y} z + \pdv{z} 2xy = 0.
+\]
+\textbf{Part (b)}: Suppose for contradiction that there exists a function $f : \mathbb{R}^{3} \to \mathbb{R}$ such that $\vec{F} = \grad f$. Then 
+\begin{align*}
+	\pdv{f}{x} &= x^{2} \\
+	\pdv{f}{y} &= x^{2} y \\
+	\pdv{f}{z} &= z + zx
+\end{align*}
+We may integrate each of these equations with respect to $x$, $y$, and $z$ respectively to yield that
+\begin{align*}
+	f &= \frac{x^{3}}{3} + P(y, z) \\
+	f &= \frac{x^{2}y^{2}}{2} + Q(z, x) \\
+	f &= \frac{z^{2}}{2} + \frac{z^{2}x}{2} + S(x, y)
+\end{align*}
+for some functions $P(y, z)$, $Q(z, x)$, and $S(x, y)$. Observe the term $\tfrac{z^{2}x}{2}$ in the third equation; it cannot be cancelled by $S(x, y)$, as $S$ does not contain terms with $z$. Therefore, $\tfrac{z^{2}x}{2}$ is a term of $f$.
+
+However, the first equation reveals that $f$ cannot contain any terms with both $z$ and $x$ --- the only term with an $x$ is $\tfrac{x^{3}}{3}$, and all other terms exclusively contain $y$ and $z$. This implies that $\tfrac{z^{2}x}{2}$ cannot be a term of $f$, which yields the desired contradiction.
+
+We conclude that $\boxed{\text{$f$ does not exist}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 24}
+
+Observe that $\grad f$ maps $\mathbb{R}^{3}$ to $\mathbb{R}^{3}$, $\grad \cdot f$ maps $\mathbb{R}^{3}$ to $\mathbb{R}$, and $\grad \times f$ is not defined.
+
+\textbf{Part (a)}: The expression $\grad \times (\grad f)$ is $\boxed{\text{a meaningful vector-valued function}}$.
+
+\textbf{Part (b)}: The expression $\grad (\grad \times f)$ is $\boxed{\text{not meaningful}}$, as $\grad \times f$ is only defined if $f$ maps to $\mathbb{R}^{3}$.
+
+\textbf{Part (c)}: The expression $\grad \cdot (\grad f)$ is $\boxed{\text{a meaningful scalar-valued function}}$.
+
+\textbf{Part (d)}: The expression $\grad (\grad \cdot f)$ is $\boxed{\text{a meaningful vector-valued function}}$. 
+
+\textbf{Part (e)}: The expression $\grad \times (\grad \cdot f)$ is $\boxed{\text{not meaningul}}$, as the curl accepts 3-D vectors and $\grad \cdot f$ maps to $\mathbb{R}$.
+
+\textbf{Part (f)}: The expression $\grad \cdot (\grad \times f)$ is $\boxed{\text{not meaningful}}$, as $\grad \times f$ is only defined if $f$ maps to $\mathbb{R}^{3}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 25}
+
+Observe that $\grad f$ does not exist, $\grad \cdot f$ maps $\mathbb{R}^{3}$ to $\mathbb{R}$, and $\grad \times f$ maps $\mathbb{R}$ to $\mathbb{R}^{3}$.
+
+\textbf{Part (a)}: The expression $\grad \times (\grad f)$ is $\boxed{\text{not meaningful}}$, as the gradient only accepts scalar-valued functions.
+
+\textbf{Part (b)}: The expression $\grad (\grad \times f)$ is $\boxed{\text{not meaningful}}$.
+
+\textbf{Part (c)}: The expression $\grad \cdot (\grad f)$ is $\boxed{\text{not meaningful}}$, as the gradient only accepts scalar-valued functions.
+
+\textbf{Part (d)}: The expression $\grad (\grad \cdot f)$ is $\boxed{\text{a meaningful vector-valued function}}$.
+
+\textbf{Part (e)}: The expression $\grad \times (\grad \cdot f)$ is $\boxed{\text{not meaningful}}$, as the curl accepts 3-D vectors and $\grad \cdot f$ maps to $\mathbb{R}$.
+
+\textbf{Part (f)}: The expression $\grad \cdot (\grad \times f)$ is $\boxed{\text{a meaningful scalar-valued function}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 31}
+
+We have that
+\[
+	\grad f = \begin{bmatrix} \pdv{x} \tfrac{1}{x^{2} + y^{2} + z^{2}} \\ \pdv{y} \tfrac{1}{x^{2} + y^{2} + z^{2}} \\ \pdv{z} \tfrac{1}{x^{2} + y^{2} + z^{2}} \end{bmatrix} = \begin{bmatrix} - \tfrac{2x}{(x^{2} + y^{2} + z^{2})^{2}} \\ -\tfrac{2y}{(x^{2} + y^{2} + z^{2})^{2}} \\ -\tfrac{2z}{(x^{2} + y^{2} + z^{2})} \end{bmatrix} = -\frac{2}{(x^{2} + y^{2} + z^{2})^{2}} \begin{bmatrix} x \\ y \\ z \end{bmatrix}.
+\]
+Therefore,
+\begin{align*}
+	\grad \times (\grad f) &= \grad \times \left( -\frac{2}{(x^{2} + y^{2} + z^{2})^{2}} \begin{bmatrix} x \\ y \\ z \end{bmatrix} \right) \\
+	&= -\frac{2}{(x^{2} + y^{2} + z^{2})^{2}} \left( \grad \times \begin{bmatrix} x \\ y \\ z \end{bmatrix} \right) - \left( \grad \frac{2}{x^{2} + y^{2} + z^{2}} \right) \times \begin{bmatrix} x \\ y \\ z \end{bmatrix} \\
+	&= -\frac{2}{(x^{2} + y^{2} + z^{2})^{2}} \left( \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \right) + \frac{4}{(x^{2} + y^{2} + z^{2})^{2}} \left( \begin{bmatrix} x \\ y \\ z \end{bmatrix} \times \begin{bmatrix} x \\ y \\ z \end{bmatrix} \right). \\
+	&= \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} + \frac{4}{(x^{2} + y^{2} + z^{2})^{2}} \left( \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \right) \\
+	&= \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
+\end{align*}
+
+% --------------------------------------------- %
+
+\subsection*{Problem 34}
+
+Suppose for contradiction that there exists $f : \mathbb{R}^{3} \to \mathbb{R}$ such that $\mathbf{F} = \grad f$. Then
+\begin{align*}
+	\pdv{f}{x} = x^{2} + y^{2} \\
+	\pdv{f}{y} = -2xy.
+\end{align*}
+However,
+\[
+	\pdv[2]{f}{x}{y} = \pdv{x} -2xy = -2y \ne 2y = \pdv{y} (x^{2} + y^{2}) = \pdv[2]{f}{y}{x}.
+\]
+This violates the equality of mixed partial derivatives, implying the given result.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 36}
+
+\textbf{Part (a)}: We have that
+\[
+	\grad (\mathbf{F} + \mathbf{G}) = \grad \mathbf{F} + \grad \mathbf{G} = 0,
+\]
+so the divergence of $\mathbf{F} + \mathbf{G}$ $\boxed{\text{necessarily zero}}$.
+
+\textbf{Part (b)}: The divergence of $\mathbf{F} \times \mathbf{G}$ is $\boxed{\text{not necessarily zero}}$.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 37}
+
+\textbf{Part (a)}: We have that
+\[
+	\grad f = \begin{bmatrix} 2xy \\ x^{2} \end{bmatrix}
+\]
+\textbf{Part (d)}: We have that
+\[
+	\mathbf{F} \cdot (\grad f) = F \cdot \begin{bmatrix} 2xy  \\ x^{2} \end{bmatrix} = \pdv{x} 2xy + \pdv{y} x^{2} = 2y.
+\]
+
+% --------------------------------------------- %
+
+\subsection*{Problem 39}
+
+$\boxed{\text{No}}$, it is not true that the curl of a vector field is perpendicular to the vector field. This is because the curl describes the activity of the vectors \textit{around} a vector --- this can be rigorously demonstrated using a counterexample.
+
+% --------------------------------------------- %
+
+\subsection*{Problem 40}
+
+\textbf{Part (a)}: We have that
+\[
+	\grad \times f = \begin{bmatrix} \pdv{y} 0 - \pdv{z} (x^{3} + y^{3}) \\ \pdv{z} (3x^{2}y) - \pdv{x} 0 \\ \pdv{x} (x^{3} + y^{3}) - \pdv{y} (3x^{2}y) \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
+\]
+\textbf{Part (b)}: The function $f(x, y) = x^{3}y + \tfrac{1}{4}y^{4}$ is one such function, as
+\[
+	\pdv{f}{x} = 3x^{2}y
+\]
+and
+\[
+	\pdv{f}{y} = x^{3} + y^{3}.
+\]
+
+% --------------------------------------------- %
+
+\end{document}

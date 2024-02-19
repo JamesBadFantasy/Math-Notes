@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint, accents}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\O}{\mathcal{O}}
+
+\title{Jänich: Fundamental Concepts}
+\author{February 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{The Concept of a Topological Space}
+
+We proceed assuming baisc familiarity with sets, as seen in RealAnalysis/babyrudin2.tex.
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{topological space} $(X, \O)$ is a set $X$ and a set $\O$ of subsets of $X$, called \textbf{open sets}, such that the following three axioms hold:
+\begin{enumerate}
+  \item Any arbitrary union of open sets in $\O$ lies in $\O$.
+  \item Any finite intersection of open sets in $\O$ lies in $\O$.
+  \item $X$ itself and $\varnothing$ are open sets in$\O$.
+\end{enumerate}
+The set $\O$ is a \textbf{topology} in $X$. Henceforth, we will speak of a topological space $X$ instead of the pair $(X, \O)$. The following concepts are critical to Point-Set Topology:
+\begin{enumerate}
+  \item A set $F \subseteq X$ is \textbf{closed} if its complement is open; that is, if $F^{\complement} \subset \O$.
+  \item A set $N \subset X$ is a \textbf{neighborhood} of $x$ if $N$ contains an open set $U$ which contains $x$.
+  \item A point $x$ is an \textbf{interior}, \textbf{exterior}, or \textbf{boundary point} of a set $S$ according to whether $S$, $S^{\complement}$, or neither is a neighborhood of $x$.
+  \item The set $\mathring{S}$ of all the interior points of $S$ is the \textbf{interior} of $S$.
+  \item The set $\overline{S}$ of all the interior and boundary points of $S$ is the \textbf{closure} of $S$.
+\end{enumerate}
+
+Naturally, exterior points of $S$ are interior points of $\overline{S}$ and the complement of $\mathring{S}$ is $\overline{S^{\complement}}$.
+
+% --------------------------------------------- %
+
+\subsection{Basic Consequences}
+
+The following theorem allows for an alternative definition of topological spaces $(X, \O)$ by \textit{closed sets}:
+
+\begin{theorem}
+  Let $X$ be a topological space. Then
+  \begin{enumerate}
+    \item Any arbitrary intersection of closed sets is closed.
+    \item Any finite union of closed sets is closed.
+    \item $X$ itself and $\varnothing$ are closed.
+  \end{enumerate}
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Let $F_{\alpha}$ be a collection of closed sets. Since their compliments are open, we have
+    \[
+      F_{\alpha}^{\complement} \text{ are open} \implies \bigcup\limits_{\alpha} F_{\alpha}^{\complement} \text{ is open} \implies \left( \bigcup\limits_{\alpha} F_{\alpha}^{\complement} \right)^{\complement} \text{ is closed} \implies \bigcap\limits_{\alpha} F_{\alpha} \text{ is closed}.
+    \]
+    If we let $F_{n}$ be closed for $n \in \{ 1, \ldots, k \}$, a similar argument follows:
+    \[
+      F_{n}^{\complement} \text{ are open} \implies \bigcap\limits_{n = 1}^{k} F_{n}^{\complement} \text{ is open} \implies \left( \bigcap\limits_{n = 1}^{k} F_{n}^{\complement} \right)^{\complement} \text{ is closed} \implies \bigcup\limits_{n = 1}^{k} F_{n} \text{ is closed}.
+    \]
+    The sets $X$ and $\varnothing$ are clearly closed, which completes the proof. 
+  \end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+  A set is open if and only if all of its points are interior.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    If each point of $S$ is interior, then $x \in S$ implies the existence of an open set $U_{x}$ such that $x \in U_{x} \subseteq S$. Thus we define:
+    \[
+      U = \bigcap\limits_{x \in \mathring{S}} U_{x}.
+    \]
+    Observe that $U$ is open. We claim that $S = U$ by a two-part argument:
+    \begin{enumerate}
+      \item Suppose $x \in S$. Then clearly $x \in U_{x} \subseteq U$, so $S \subseteq U$.
+      \item Suppose $x \in U$. Then $x \in U_{y}$ for some $y$; since $U_{y} \subseteq S$, we have $x \in S$. Thus $U \subseteq S$.
+    \end{enumerate}
+    Hence $S$ is open. The reverse direction follows naturally: if $S$ is open and $x \in S$, then $S$ is a neighborhood of all $x$. Hence all $x$ is interior.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+  The interior of $S$ is the union of all open sets contained in $S$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Let $U$ be the union of all open sets contained in $S$. We claim that $\mathring{S} = U$ by a two-part argument:
+    \begin{enumerate}
+      \item Suppose $x \in \mathring{S}$. Then there exists an open set $U_{x}$ such that $x \subseteq U_{x} \subseteq S$ --- hence $x \in U_{x} \in U$.
+      \item Suppose $x \in U$. Then $x$ lies in an open set contained in $S$, so $x \in S$.
+    \end{enumerate}
+    Hence $\mathring{S} = U$
+  \end{proof}
+\end{adjustwidth}
+
+\begin{corollary}
+  The interior of a set is open.
+\end{corollary}
+
+\newpage
+
+By taking complements of these results about open sets and interiors, we find:
+\begin{enumerate}
+  \item A set is closed if and only if all of its points are interior or boundary points.
+  \item The closure of $S$ is the intersection of all closed sets containing $S$.
+  \item The closure of a set is closed.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\section{Metric Spaces}
+
+
+% --------------------------------------------- %
+
+\end{document}

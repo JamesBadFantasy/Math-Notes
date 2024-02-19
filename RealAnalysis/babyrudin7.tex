@@ -1,0 +1,430 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\title{Rudin: Sequences and Series of Functions}
+\author{James Pagán}
+\date{January 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Discussion of the Main Problem}
+
+% --------------------------------------------- %
+
+\subsection{Exposition}
+
+Suppose $\{ f_{n} \}$ is a sequence of functions defined on a set $E$. If the sequence of numbers $\{ f_{n}(x) \}$ converges for each $x \in E$, we may define a function
+\[
+	f(x) = \lim\limits_{n \to \infty} f_{n}(x).
+\]
+We say that $\{ f_{n} \}$ converges to $f$ \textbf{pointwise} on $E$. An important special case is series of functions: where if $\sum f_{n}(x)$ converges for eac $x \in E$, we may define
+\[
+	f = \sum\limits_{n = 1}^{\infty} f_{n}(x).
+\]
+The critical question posed by this question is: which properties of functions are preserved under the limit operation? If each $f_{n}$ is continuous or differentiable, is the same true of $f$? For continuity: recall that $f$ is continuous at $x$ if
+\[
+	\lim\limits_{t \to x} f(t) = f(x);
+\]
+then the continuity of $f$ is equivalent to
+\[
+	\lim\limits_{t \to x} \lim\limits_{n \to \infty} f_{n}(t) = \lim\limits_{n \to \infty} \lim\limits_{t \to x} f_{n} (t).
+\]
+The following examples will illustrate how this question fails in a general context.
+
+% --------------------------------------------- %
+
+\subsection{Motivating Examples}
+
+\textbf{Example 1}: For $m, n \in \mathbb{Z}_{> 0}$, define
+\[
+	a_{m, n} = \frac{m}{m + n}.
+\]
+This example fails to satisfy the continuity condition established above, as demonstrated by the following computation:
+\[
+	\lim\limits_{n \to \infty} \lim\limits_{m \to \infty} \left( \frac{m}{m + n} \right) \, = \, \lim\limits_{n \to \infty} 1 \, = \, 1 \, \ne \, 0 \, = \, \lim\limits_{m \to \infty} 0 \, = \, \lim\limits_{m \to \infty} \lim\limits_{n \to \infty} \left( \frac{m}{m + n} \right)
+\]
+
+\textbf{Example 2}: For $x \in \mathbb{R}$ and $n \in \mathbb{Z}_{\ge 0}$, let
+\[
+	f_{n}(x) = \frac{x^{2}}{(1 + x^{2})^{n}}.
+\]
+and consider the infinite series
+\[
+	f(x) = \sum\limits_{n = 0}^{\infty} f_{n}(x) = \sum\limits_{n = 0}^{\infty} \frac{x^{2}}{(x^{2} + 1)^{n}}.
+\]
+Since $f_{n}(0) = 0$ for all $n$, we have $f(0) = 0$. For nonzero $n$, this is a geometric series that converges to $x^{2} + 1$. We deduce from pointwise convergence that
+\[
+	f(x) = 
+	\begin{cases}
+		0 & \text{ if } x = 0, \\
+		x^{2} + 1 & \text{ if } x \ne 0.
+	\end{cases}
+\]
+Then $f$ is continuous everywhere \textit{except} the origin.
+
+\textbf{Example 3}: For $n \in \mathbb{Z}_{> 0}$, consider the functions
+\[
+	f_{n}(x) = \lim\limits_{m \to \infty} (\cos \pi n! x )^{2m} \qquad \text{and} \qquad f(x) = \lim\limits_{n \to \infty} f_{n}(x).
+\]
+If $x$ is rational, let $x = \tfrac{p}{q}$. Then $m > q$ implies $m! x$ is an integer, so $f_{n}(x) = 1$; hence $f(x) = 1$. If $x$ is irrational, then $n! x$ is never an integer. Thus $\cos \pi n! x < 1$, so (by nontrivial but irrelevant techniques) $f_{n}(0) = 0$ and $f(x) = 0$. We deduce that
+\[
+	f(x) = 
+	\begin{cases}
+		1 & \text{ if } x \in \mathbb{Q}, \\
+		0 & \text{ if } x \notin \mathbb{Q}.
+	\end{cases}
+\]
+We have obtained a limit function which is \textit{nowhere continuous}. It thus fails to be Riemann integral --- though the Lebesgue integral returns $0$, as will be determined in Chapter 11.
+
+% --------------------------------------------- %
+
+\section{Uniform Convergence}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+Let $\{ f_{n} \}$ be a sequence of functions from $E$ to a metric space $X$. We say the sequence \textbf{converges uniformly} to a function $f$ if for all $\epsilon > 0$, there is an integer $N$ such that
+\[
+	N \le n \implies d \big( f_{n}(x) - f(x) \big) < \epsilon
+\]
+for \text{all} $x \in E$. It is natural that each uniformly convergent sequnce is pointwise convergent.
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Uniform Cauchy Criterion}
+
+\begin{theorem}
+	Suppose $\{ f_{n} \}$ is a uniformly continuous sequence of functions from $E$ to a metric space $X$. Then $\{ f_{n} \}$ satisfies the uniform Cauchy criterion.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $\lim\limits_{n \to \infty} f_{n}(x) = f(x)$ for each $x \in E$. For all $\epsilon > 0$, there exists integers $N_{1}$ and $N_{2}$ such that
+		\begin{align*}
+			N_{1} \le n &\implies d \big( f_{n}(x), f(x) \big) < \frac{\epsilon}{2} \\
+			N_{2} \le m &\implies d \big( f_{m}(x), f(x) \big) < \frac{\epsilon}{2}
+		\end{align*}
+		for all $x \in E$. Let $N = \max \{ N_{1}, N_{2} \}$; then $N \le n, m$ implies that
+		\[
+			d \big( f_{n}(x) - f_{m}(x) \big) \, \le \, d \big( f_{n}(x), f(x) \big) + d \big( f_{m}(x), f(x) \big) \, < \, \frac{\epsilon}{2} + \frac{\epsilon}{2} \, = \, \epsilon.
+		\]
+		for all $x \in E$. We conclude that $\{ f_{n} \}$ satisfies the Cauchy criterion.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	Suppose $\{ f_{n} \}$ is a sequence of functions from $E$ to a complete metric space $Y$ that satisfies the uniform Cauchy criterion. Then $\{ f_{n} \}$ converges uniformly.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Since $Y$ is complete, $\{ f_{n} \}$ converges pointwise for each $x \in E$. We must demonstrate that this convergence is uniform.
+		\begin{adjustwidth}{1cm}{}
+			\begin{claim}
+				Suppose that $\{ a_{n} \}$ is a Cauchy sequence in a metric space $Y$ with limit $A$: that for all $\epsilon > 0$, there exists an integer $N$ such that
+				\[
+					N \le n, m \implies d(a_{n}, a_{m}) < \epsilon.
+				\]
+				Then $N \le n$ implies that $d(a_{n}, A) < \epsilon$.
+			\end{claim}
+			\begin{proof}\renewcommand{\qedsymbol}{}
+				Suppose for contradiction that some $N \le k$ that $d(a_{k}, A) \ge \epsilon$. Then $N \le n$ implies
+				\[
+					d(a_{n}, a_{k}) \ge d(a_{k}, A) - d(a_{n}, A) \ge d(a_{k}, A) \ge \epsilon,
+				\]
+				which yields the desired contradiction.
+			\end{proof}
+		\end{adjustwidth}
+		By definition, for all $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N \le n, m \implies d(f_{n}(x), f_{m}(x)) < \epsilon
+		\]
+		for all $x \in E$. Then via our claim, the same choice of $N$ demonstrates uniform continuity: namely, $N \le n$ implies $d(f_{n}(x), f(x)) < \epsilon$ for all $x \in E$.
+	\end{proof}
+\end{adjustwidth}
+\begin{corollary}
+	A sequence of functions $\{ f_{n} \}$ from a set $E$ to a Banach space $Y$ converges uniformly if and only if it satisfies the uniform Cauchy criterion.
+\end{corollary}
+
+% --------------------------------------------- %
+
+\subsection{Uniform Convergence of Series}
+
+\begin{theorem}
+	Suppose $\{ \vec{f}_{n} \}$ is a sequence of functions from $E$ to a Banach space $Y$ such that
+	\[
+		\norm{\vec{f}_{n}(x)} \le M_{n}
+	\]
+	for all $x \in E$ and $n \in \mathbb{Z}_{> 0}$. If $\sum M_{n}$ converges, then $\sum \vec{f}_{n}$ converges uniformly.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Suppose that $\sum M_{n}$ converges. Then it satisfies the Cauchy criterion: for each $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N \le n, m \implies \sum\limits_{i = n + 1}^{m} M_{i} < \epsilon.
+		\] 
+		We deduce that
+		\[
+			\norm{\sum\limits_{i = n + 1}^{m} \vec{f}_{i}(x)} \le \sum\limits_{i = n + 1}^{m} M_{i} < \epsilon
+		\]
+		for all $x \in E$ as well, so $\vec{f}_{n}$ satisfies the uniform Cauchy criterion. Its uniform convergence is hence guaranteed by Theorem 2.
+	\end{proof}
+\end{adjustwidth}
+
+If $E$ is $\mathbb{C}^{n}$, and $Y$ is $\mathbb{C}^{m}$, then functions $\{ \vec{f}_{n} \}$ are matricies.
+
+% --------------------------------------------- %
+
+\subsection{The Metric Space \texorpdfstring{$\mathcal{C}$(X)}{C(X)}}
+
+If $X$ is a metric space, we denote by $\mathcal{C}(X)$ the set of continuous and bounded functions from $X$ to a Banach space $Y$. If $X$ is compact, then the boundedness condition is redundant. We associate with each $\vec{f} \in \mathcal{C}(X)$ its \textbf{supremum norm}
+\[
+	\norm{\vec{f}}_{X} = \sup\limits_{x \in X} \norm{\vec{f}(x)}.
+\]
+Since $f$ is assumed to be bounded, $\norm{\vec{f}}_{X} < \infty$. A similar definition exists if $Y$ is substituted with any metric space; only a few properties about $\mathcal{C}(X)$ hold in such a setting.
+
+\begin{theorem}
+	$\mathcal{C}(X)$ equipped with the supremum norm is a metric space.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		We must perform three rather routine calculations:
+		\begin{itemize}
+			\item \textbf{Positivity}: It is natural that $\norm{\vec{f} - \vec{g}}_{X} \ge 0$, with equality if and only if $\vec{f} = \vec{g}$.
+			\item \textbf{Symmetry}: For all $\vec{f}, \vec{g} \in \mathcal{C}(X)$, we have
+			\[
+				\norm{\vec{f} - \vec{g}}_{X} = \sup\limits_{x \in X} \norm{\vec{f}(x) - \vec{f}(x)} = \sup\limits_{x \in X} \norm{\vec{g}(x) - \vec{f}(x)} = \norm{\vec{g} - \vec{f}}_{X}.
+			\]
+			\item \textbf{Triangle Inequality}: For all $\vec{f}, \vec{g}, \vec{h} \in \mathcal{C}(X)$, we have
+			\begin{align*}
+				\norm{\vec{f} - \vec{g}}_{X} &= \norm{\vec{f} - \vec{h} + \vec{h} - \vec{g}}_{X} \\
+				&= \sup\limits_{x \in X} \norm{\vec{f}(x) - \vec{h}(x) + \vec{h}(x) - \vec{g}(x)} \\
+				&\le \sup\limits_{x \in X} \Big( \norm{\vec{f}(x) - \vec{h}(x)} + \norm{\vec{h}(x) - \vec{g}(x)} \Big) \\
+				&\le \sup\limits_{x \in X} \norm{\vec{f}(x) - \vec{h}(x)} + \sup\limits_{x \in X} \norm{\vec{h}(x) - \vec{g}(x)} \\
+				&= \norm{\vec{f} - \vec{h}}_{X} + \norm{\vec{h} - \vec{g}}_{X}.
+			\end{align*}
+		\end{itemize}
+		We conclude that $\mathcal{C}(X)$ is a metric space with respect to the supremum norm.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	A series of functions $\{ \vec{f}_{n} \}$ from $X$ to a Banach space $Y$ uniformly converges to $\vec{f}$ if and only if $\{ \vec{f}_{n} \}$ converges to $\vec{f}$ in $\mathcal{C}(X)$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		We have the following: for all $\epsilon > 0$,
+		\begin{align*}
+			\{ \vec{f}_{n} \} \to \vec{f} \text{ is uniform } &\iff \exists N \text{ such that } N \le n \implies \norm{\vec{f}_{n}(x) - \vec{f}(x)} < \epsilon  \\
+			& \, \, \, \, \qquad \text{ for all $x \in X$} \\
+			&\iff \exists N \text{ such that } N \le n \implies \sup_{x \in X} \norm{\vec{f}_{n}(x) - \vec{f}(x)} \le \epsilon \\ 
+			&\iff \exists N \text{ such that } N \le n \implies \norm{\vec{f}_{n} - \vec{f}}_{X} \le \epsilon \\
+			&\iff \{ \vec{f}_{n} \} \text{ converges to $\vec{f}$ in } \mathcal{C}(X).
+		\end{align*}
+		A corollary is that $\{ \vec{f}_{n} \}$ uniformly converges to $\vec{f}$ if and only if $\lim\limits_{n \to \infty} \norm{\vec{f}_{n} - \vec{f}}_{X} = 0$.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+	$\mathcal{C}(X)$ under the supremum norm is complete --- hence a Banach space.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+	\begin{proof}
+		Let $\{ \vec{f}_{n} \}$ be a Cauchy sequence in $\mathcal{C}(X)$: for all $\epsilon > 0$, there exists an integer $N$ such that
+		\[
+			N \le n, m \implies \norm{\vec{f}_{n} - \vec{f}_{m}}_{X} < \epsilon.
+		\]
+		This implies that
+		\[
+			N \le n, m \implies d \big( \vec{f}_{n}(x) - \vec{f}_{m}(x) \big) < \epsilon
+		\]
+		for all $x \in X$. By Theorem 2, such a uniform Cauchy sequence in $Y$ converges uniformly; by Theorem 5, $\{ \vec{f}_{n} \}$ converges in $\mathcal{C}(X)$. The continuity of $\vec{f}$ is ensured by Theorem 7, and $\vec{f}$ is bounded since there is $n$ such that
+		\[
+			\norm{\vec{f}(x) - \vec{f}_{n}(x)} < 1
+		\]
+		for all $x \in X$, and $\vec{f}_{n}$ is bounded. This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+
+% --------------------------------------------- %
+
+\section{Uniform Convergence and Continuity}
+
+% --------------------------------------------- %
+
+\subsection{The Theorem}
+
+\begin{theorem}
+  Suppose $\{ f_{n} \}$ is a sequence of functions from $E$ to a metric space $X$ that converges uniformly to $f$. If $x$ is a limit point of $E$ and 
+  \[
+    \lim\limits_{t \to x} f_{n}(t) = F_{n}
+  \]
+  for each $n$, then $\{ F_{n} \}$ converges and $\lim\limits_{t \to x} f(t) = \lim\limits_{n \to \infty} F_{n}$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+  \begin{proof}
+    Since $\{ f_{n} \}$ is uniformly continuous, it satisfies the uniform Cauchy sequence. For all $\epsilon > 0$, there exist $\delta_{2}$, $\delta_{3}$, and an integer $N$ such that each of the following is satisfied:
+    \begin{align*}
+      0 < d(x, t) < \delta_{1} &\implies d(f_{i}(t), F_{i}) < \frac{\epsilon}{3} \\
+      0 < d(x, t) < \delta_{2} &\implies d(f_{j}(t), F_{j}) < \frac{\epsilon}{3}. \\
+      N \le i, j &\implies d(f_{i}(t), f_{j}(t)) < \frac{\epsilon}{3}.
+    \end{align*}
+    Suppose we consider $0 < d(x, t) < \min \{ \delta_{1}, \delta_{2} \}$. Then $N \le i, j$ implies
+    \begin{align*}
+      d(F_{i}, F_{j}) &\le d(F_{i}, f_{i}(t)) \,+\, d(f_{i}(t), f_{j}(t)) \,+\, d(f_{j}(t), F_{j}) \\
+                      &< \frac{\epsilon}{3} \,+\, \frac{\epsilon}{3} \,+\, \frac{\epsilon}{3} \\
+                      &= \epsilon.
+    \end{align*}
+    Let $\{ F_{n} \}$ converge to $F$. For all $\epsilon > 0$, there exist $\delta_{1}$ and $\delta_{2}$ such that
+    \begin{align*}
+      t \in E, \quad N_{1} \le n &\implies d(f(t), f_{n}(t)) < \frac{\epsilon}{3} \\
+      0 < d(x, y) \le \delta &\implies d(f_{n}(t), F_{n}) < \frac{\epsilon}{3} \\
+      N_{2} \le n &\implies d(F_{n}, F) < \frac{\epsilon}{3}.
+    \end{align*}
+    Then $\max \{ N_{1}, N_{2} \} \le N$ and $0 < d(x, y) < \delta$ implies that
+    \begin{align*}
+        d(f(t), F) &\le d(f(t), f_{n}(t)) \, + \, (f_{n}(t), F_{n}) \, + \, d(F_{n}, F) \\
+                 &< \frac{\epsilon}{3} \,+\, \frac{\epsilon}{3} \,+\, \frac{\epsilon}{3} \\
+                 &= \epsilon.
+    \end{align*}
+    We conclude that $\lim\limits_{t \to x} f(t) = F$.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{corollary}
+  Suppose that $\{ f_{n} \}$ converges uniformly to $f$. Then $f$ is continuous.
+\end{corollary}
+
+% --------------------------------------------- %
+
+\section{The Stone-Weierstrauss Theorem}
+
+% --------------------------------------------- %
+
+\subsection{Bernstein's Proof}
+
+\begin{theorem}[Weierstrauss Approximation Theorem]
+  Let $f : [a, b] \to \mathbb{C}$ be continuous. Then there exists a sequenece of polynomials that uniformly converges to $f$.
+\end{theorem}
+\begin{adjustwidth}{1cm}{}
+  \begin{proof}
+    For any nonnegative integer $n$, define
+    \[
+      B_{n}(f)(x) \quad \stackrel{\text{def}}{=} \quad  \sum\limits_{k = 0}^{n} f \left( \frac{k}{n} \right) \binom{n}{k} x^{k} (1 - x)^{n - k}.
+    \]
+    Denote the component $\binom{n}{k} x^{k} (1 - x)^{n - k}$ by $P_{n, k}(x)$. Then the $(P_{n, k})_{k = 0}^{n}$ satisfy the following properties for all $x \in [0, 1]$:
+    \begin{enumerate}
+      \item $P_{n, k}(x) \ge 0$ for all $x \in [0, 1]$
+      \item $\sum\limits_{k = 0}^{n} P_{n, k}(x) = \big( x + (1 - x) \big)^{n} = 1$, hence $(P_{n, k})_{k = 0}^{n}$ is a partition of unity.
+      \item $P_{n, k}$ attains its maximum on $[0, 1]$ at $\tfrac{k}{n}$; simply compute its derivative.
+      \item $(P_{n, k})_{k = 0}^{n}$ is a basis of the vector space of polynomials of degree $n$ or smaller.
+    \end{enumerate}
+    For all $x \in [0, 1]$ and $n \in \mathbb{Z}_{> 0}$, we have using Property 2 that 
+    \begin{align*}
+      f(x) - B_{n}(f)(x) \, &= \, \sum\limits_{k = 0}^{n} f(x) P_{n, k}(x) \, - \, \sum\limits_{k = 0}^{n} f \left( \frac{k}{n} \right) P_{n, k}(x) \\
+                            &= \, \sum\limits_{k = 0}^{n} \left( f(x) - f \left( \frac{k}{n} \right) \right) P_{n, k}(x)
+    \end{align*}
+    so that using the Triangle Inequality and Property 1 yields that
+    \begin{equation}
+      \abs{f(x) - B_{n}(f)(x)} \, \le \, \sum\limits_{k = 0}^{n} \abs{f(x) - f \left( \frac{k}{n} \right)}P_{n, k}(x).
+    \end{equation}
+    Select $\delta > 0$ arbitrarily. We will bound $\abs{f(x) - f \left( \tfrac{k}{n} \right)}$ as follows:
+    \begin{enumerate}
+      \item When $\abs{x - \tfrac{k}{n}} \le \delta$, we will invoke the bound $\abs{f(x) - f \left( \tfrac{k}{n} \right)} \le \omega_{f}(\delta)$.
+      \item When $\abs{x - \tfrac{k}{n}} > \delta$, we will invoke the bound $\abs{f(x) - f \left( \tfrac{k}{n} \right)} \le 2 \norm{f}_{[0, 1]}$.
+    \end{enumerate}
+    We may use the modulus of continuity, since the Heine-Cantor Theorem guarantees that continuous functions are uniformly continuous on closed intervals.
+    \newpage
+    Hence equation (1) reduces to
+    \begin{align*}
+      \abs{f(x) - B_{n}(f)(x)} &\le \sum\limits_{k : \abs{x - \tfrac{k}{n}} \le \delta} \omega_{f}(\delta) P_{n, k}(x) \, + \, \sum\limits_{k : \abs{x - \tfrac{k}{n}} > \delta}  2 \norm{f}_{[0, 1]} P_{n, k}(x) \\
+                               &= \omega_{f}(\delta) \sum\limits_{k : \abs{x - \tfrac{k}{n}} \le \delta} P_{n, k}(x) \, + \, 2 \norm{f}_{[0, 1]} \sum\limits_{k : \abs{x - \tfrac{k}{n}} > \delta} P_{n, k}(x) \\
+                               &\le \omega_{f}(\delta) \, + \, 2 \norm{f}_{[0, 1]} \sum\limits_{k : \abs{x - \tfrac{k}{n}} > \delta} P_{n, k}(x)
+    \end{align*}
+    Note that $\left( \frac{\abs{x \, - \, k/n}}{\delta} \right)^{2} \ge 1$ whenever $\abs{k - \tfrac{k}{n}} > \delta$. Thus
+    \begin{align*}
+      \abs{f(x) - B_{n}(f)(x)} &\le \omega_{f}(\delta) \, + \, 2 \norm{f}_{[0, 1]} \sum\limits_{k : \abs{x - \tfrac{k}{n}}} \left( \frac{\abs{x - \tfrac{k}{n}}}{\delta} \right)^{2} P_{n, k}(x) \\
+                               &\le \omega_{f}(\delta) + 2 \norm{f}_{[0, 1]} \sum\limits_{k = 0}^{n} \left( \frac{\abs{x - \tfrac{k}{n}}}{\delta} \right)^{2} P_{n, k}(x) \\
+                               &\le \omega_{f}(\delta) + \frac{2 \norm{f}_{[0, 1]}}{n^{2} \delta^{2}} \sum\limits_{k = 0}^{n} (nx - k)^{2} P_{n, k}(x).
+    \end{align*}
+    \begin{lemma}
+      $\sum\limits_{k = 0}^{n} (nx - k)^{2} P_{n, k}(x) = nx(1 - x)$.
+    \end{lemma}
+    \begin{adjustwidth}{1cm}{}
+      \begin{proof}\renewcommand{\qedsymbol}{}
+        Güntürk gives a slick probibalistic proof; we will use algebra, as unenlightening as this may be. We have that
+        \begin{align*}
+          \sum\limits_{k = 0}^{n} (nx - k)^{2} P_{n, k}(x) \, &= \, n^{2} x^{2} \sum\limits_{k = 0}^{n} P_{n, k}(x) \, - \, 2nx \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, + \, \sum\limits_{k = 0}^{n} k^{2} P_{n, k}(x) \\
+                                                           &= \, n^{2} x^{2} \, - \, 2nx \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, + \, \sum\limits_{k = 0}^{n} k^{2} P_{n, k}(x)
+        \end{align*}
+        Our task is to simply these summations. We have
+        \begin{align*}
+          \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, &= \, \sum\limits_{k = 0}^{n} k \left( \frac{n!}{k! (n - k)!} \right) x^{k} (1 - x)^{n - k} \\
+                                                &= \, nx \sum\limits_{k = 1}^{n} \binom{n - 1}{k - 1} x^{k - 1} (1 - x)^{(n - 1) - (k - 1)} \\
+                                                &= \, nx \sum\limits_{k = 0}^{n - 1} \binom{n - 1}{k} x^{k} (1 - x)^{(n - 1) - k} \\
+                                                &= \, nx \big( x + (1 - x) \big)^{n - 1} \\
+                                                &= \, nx,
+        \end{align*}
+        For the summation $k^{2}$, we find it is easier to work with $k(k - 1)$ due to the factorial:
+        \begin{align*}
+          \sum\limits_{k = 0}^{n} k^{2} P_{n, k}(x) \, &= \, \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, + \, \sum\limits_{k = 0}^{n} k(k - 1) P_{n, k}(x) \\
+                                                       &= \, nx \, + \, \sum\limits_{k = 0}^{n} k(k - 1) P_{n, k}(x) \\
+                                                       &= \, nx \, + \, \sum\limits_{k = 0}^{n} k(k - 1) \left( \frac{n!}{k!(n - k)!} \right) x^{k}(1 - x)^{n - k} \\
+                                                       &= nx \, + \, n(n - 1)x^{2} \sum\limits_{k = 2}^{n} \binom{n - 2}{k - 2} x^{k - 2}(1 - x)^{(n - 2) - (k - 2)} \\
+                                                       &= nx + n(n - 1)x^{2} \sum\limits_{k = 0}^{n - 2} \binom{n - 2}{k} x^{k} (1 - x)^{(n - 2) - k} \\
+                                                       &= nx + n(n - 1)x^{2} \big( x + (1 - x) \big)^{n - 2} \\
+                                                       &= nx + n(n - 1)x^{2}. 
+        \end{align*}
+        We are ready to return to our original series: we have that
+        \begin{align*}
+          \sum\limits_{k = 0}^{n} (nx - k)^{2} P_{n, k}(x) &= n^{2}x^{2} \, - \, 2nx (nx) \, + \, \big( nx + n(n - 1)x^{2} \big) \\
+                                                           &= n^{2}x^{2} - 2n^{2}x^{2} + nx + n^{2}x^{2} - nx^{2} \\
+                                                           &= nx - nx^{2} \\
+                                                           &= nx(1 - x),
+        \end{align*}
+        completing the proof of our lemma.
+      \end{proof}
+    \end{adjustwidth}
+    Returning to our original series, we have that
+    \begin{align*}
+      \abs{f(x) - B_{n}(f)(x)} \, &\le \, \omega_{f}(\delta) \, + \, \frac{2 \norm{f}_{[0, 1]}}{n^{2} \delta^{2}} \big( nx(1 - x) \big) \\
+                                  &\le \, \omega_{f}(\delta) + \frac{2 \norm{f}_{[0, 1]}}{n \delta^{2}} (x^{2} - x) \\
+                                  &\le \omega_{f}(\delta) + \frac{\norm{f}_{[0, 1]}}{2n \delta^{2}}
+    \end{align*}
+    This holds for all $\delta > 0$. To proceed, we select $\delta_{n}$ such that $\delta_{n} \to 0$ and $\tfrac{1}{n \delta_{n}^{2}} \to 0$ as well. The choice we will use is $\delta_{n} = n^{-1/3}$. Then for all $x \in [0, 1]$, we have
+    \[
+      \abs{f(x) - B_{n}(f)(x)} \, \le \, \omega_{f}(n^{-1/3}) \, + \, \frac{\norm{f}_{[0, 1]}}{2} n^{-1 / 3}.
+    \]
+    Both terms on the right-hand side converge to $0$ as $n \to \infty$. We may therefore select $N$ such that the right-hand side is less than $\epsilon$. This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+We invoked properties of the modulus of continuity in our proof. If desired, we encourage the reader to explore RealAnalysis/gunturk.tex for more.
+
+% --------------------------------------------- %
+
+\end{document}

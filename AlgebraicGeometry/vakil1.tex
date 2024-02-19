@@ -1,0 +1,149 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint, mathrsfs}
+\usepackage{tikz-cd}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+\newcommand{\Mor}{\operatorname{Mor}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\obj}{\operatorname{obj}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\h}{\operatorname{h}}
+\newcommand{\A}{\mathscr{A}}
+\newcommand{\B}{\mathscr{B}}
+\newcommand{\C}{\mathscr{C}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+
+\title{Vakil: Some Category Theory}
+\author{February 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Categories and Functors}
+
+% --------------------------------------------- %
+
+\subsection{Definition of a Category}
+
+A \textbf{cagetory} $\C$ is a collection of \textbf{objects} and a collection of \textbf{morphisms} between pairs of objects. Morphisms are written $f : A \to B$, where $A$ is the \textbf{source} of $f$ and $B$ is the \textbf{target} of $f$. A category must further contain a product $\Mor(A, B) \times \Mor(B, C) \, \to \, \Mor(A, C)$; if $f \in \Mor(A, B)$ and $g \in \Mor(B, C)$, their composition is denoted $g \circ f \in \Mor(A, C)$. The following properties must also be satisfied:
+\begin{enumerate}
+  \item Composition of morphisms is associative: $(f \circ g) \circ h \, = \, f \circ (g \circ h)$.
+  \item Identity morphisms must exist: If $f : A \to B$, then we must have $\id_{B} \circ f = f$ and $f \circ \id_{A} = f$.
+\end{enumerate}
+Morphisms form a monoid under composition; the identity morphisms are thus unique. The usual types of morphisms have definitions in categories, too:
+\begin{enumerate}
+  \item A morphism $f : A \to B$ is an \textbf{isomorphism} if there exists a morphism $g : B \to A$ such that $g \circ f = \id_{A}$ and $f \circ g = \id_{B}$.
+  \item A morphism $f : A \to A$ is an \textbf{epimorphism}.
+  \item An isomorphic epimorphism is an \textbf{automorphism}.
+\end{enumerate}
+
+We do not impose that the classes of objects and morphisms form sets --- for instance, consider the cateogry \textbf{Set} of all sets under set mappings. Its objects do not form a set, or else both Cantor's and Russel's paradoxes arise. In general, we will avoid foundational issues by neglecting to perform set theory on classes.
+
+% --------------------------------------------- %
+
+\subsection{Examples}
+
+Let $A$ be an object in a category $\C$. The \textbf{automorphism group} $\Aut(A)$ of $A$ is the group of all invertible elements of $f \in \Mor(A, A)$. If two objects $A$ and $B$ are isomorphic, then there exists a group isomorphism $\Aut(A) \, \cong \, \Aut(B)$.
+
+Two particularly critical examples of categories are \textbf{Ab} and $\mathbf{Mod}_{R}$ --- the categories of Abelian groups and modules over a (commutative) ring $R$. These two categories constitute the chief examples of an Abelian category. It is clear that $\mathbf{Mod}_{k} = \mathbf{Vec}_{k}$ (the category of vector spaces) when $k$ is a field, and $\mathbf{Mod}_{\mathbb{Z}} = \mathbf{Ab}$.
+
+Familiar categories are \textbf{Grp} and \textbf{Ring}, groups and rings with homomorphisms, and \textbf{Top}, topological spaces with continuous maps.
+
+\newpage
+
+Recall that a partially ordered set $(S, \ge)$ is a set $S$ endowed with a relation $\ge$ such that
+\begin{enumerate}
+  \item \textbf{Reflexivity}: $x \ge x$ for all $x \in S$.
+  \item \textbf{Antisymmetry}: If $x \ge y$ and $y \ge x$, then $x = y$.
+  \item \textbf{Transitivity}: If $x \ge y$ and $y \ge z$, then $x \ge z$.
+\end{enumerate}
+We can describe $S$ as a category --- one where objects are the elements of $S$ and where a single morphism $f : x \to y$ exists if and only if $y \ge x$. The reflexivity of $\ge$ ensures the existence of identity mappings, while transitivity ensures composition of morphisms is associative. As an example, here is a partially ordered set with four elements:
+\[ \begin{tikzcd}
+  x \arrow[loop, distance=2em, in=125, out=55]            & y \arrow[l] \arrow[loop, distance=2em, in=35, out=325]                                  \\
+  w \arrow[u] \arrow[loop, distance=2em, in=215, out=145] & z \arrow[l] \arrow[lu] \arrow[lu] \arrow[u] \arrow[loop, distance=2em, in=305, out=235]
+\end{tikzcd} \]
+in which $x \ge y \ge z$ and $x \ge w \ge z$. A totally ordered set would look like this:
+\[ \begin{tikzcd}
+  \cdots \arrow[r] & z \arrow[r] \arrow[loop, distance=2em, in=125, out=55] \arrow[rr, bend right] & y \arrow[r] \arrow[loop, distance=2em, in=125, out=55] & x \arrow[r] \arrow[loop, distance=2em, in=125, out=55] & \cdots
+\end{tikzcd} \]
+in which $x \ge y \ge z$. If $X$ is a set, then the subsets of $X$ are partially ordered by inclusion --- thus such a category may be constructed. Most notably, one can construct a category modeling the open sets of a topological space by inclusion.
+
+A \textbf{subcategory} $\A$ of a category $\B$ is a category whose objects lie in $\B$ and whose morphisms include the identities of its objects and are closed under composition. For instance, the category $A \to B$ (with identity morphisms ommitted) is a subcategory of $A \to B \to C$. There is also the \textbf{inclusion functor} defined as the embedding $i : \A \to \B$.
+
+% --------------------------------------------- %
+
+\subsection{Functors}
+
+Let $\A$ and $\B$ be categories. A \textbf{covariant functor} $\F : \A \to \B$ is a map $\F : \obj(A) \to \obj(B)$ that ``preserves morphisms'' in the following sense: for all morphisms $f_{1} : A_{1} \to A_{2}$ and $f_{2} : A_{2} \to A_{3}$,
+\begin{enumerate}
+  \item There exists a morphism $\F(f_{1}) : \F(A) \to \F(B)$ in $\B$.
+  \item $\F$ maps identities in $\A$ to identities: $\F(\id_{A}) = \id_{\F(A)}$.
+  \item $\F$ preserves morphism structure: $\F(f_{2} \circ f_{1}) = \F(f_{2}) \circ \F(f_{1})$.
+\end{enumerate}
+
+\newpage
+
+An obvious example of a functor is the \textbf{identity functor} $\id : \A \to \A$. Some more examples: 
+
+\begin{enumerate}
+  \item A \textbf{forgetful functor} is a functor that loses additional structure of the source category. One example is the functor $\mathbf{Vec}_{k} \to \mathbf{Set}$ that maps each vector space to its underlying set; another is the mapping $\mathbf{Mod}_{R} \to \mathbf{Ab}$ by isolating each module's additive structure.
+  % I don't know topology, so the following example is gibberish
+  \item Let $X$ be a topological space, and select $x_{0} \in X$ arbitrarily. The fundamental group functor $\phi_{1}$ maps the topological space $X$ to the group $\phi_{1}(X, x_{0})$, and the $i$-th homology functor $\mathbf{Top} \to \mathbf{Ab}$ sends all topological spaces $X$ to their $i$-th homology group $H_{i}(X, \mathbb{Z})$.
+  \item Suppose $A$ is an object in a category $\C$. There is a functor $\h^{A} : \mathcal{C} \to \mathbf{Set}$ that sends each object $B \in \C$ to $\Mor(A, B)$ and each morphism $f : B_{1} \to B_{2}$ to $\Mor(A, B_{1}) \to \Mor(A, B_{2})$ described by
+  \[
+    [g : A \to B_{1}] \quad \mapsto \quad [f \circ g : A \to B_{1} \to B_{2}].
+  \]
+  This little guy ends up becoming surprisingly important.
+\end{enumerate}
+The \textbf{composition} of functors $\F : \A \to \B$ and $\G : \B \to \C$ is denoted $\G \circ \F : \A \to \C$, and is defined in the obvious way. Composition of functors is associative in an evident sense. The following terms describe the extent to which a covariant functor $\F : \A \to \B$ respects the morphisms of $\B$:
+\begin{enumerate}
+  \item $\F$ is \textbf{faithful} if the mapping $\Mor_{\A}(A_{1}, A_{2}) \to \Mor_{\B}(\F(A_{1}), \F(A_{2}))$ is injective.
+  \item $\F$ is \textbf{full} if the mapping $\Mor_{\A}(A_{1}, A_{2}) \to \Mor_{\B}(\F(A_{1}), \F(A_{2}))$ is surjective.
+  \item $\F$ is \textbf{fully faithful} if the mapping $\Mor_{\A}(A_{1}, A_{2}) \to \Mor_{\B}(\F(A_{1}), \F(A_{2}))$ is bijective.
+\end{enumerate}
+Let $i : \A \to \B$ be a subcategory. Since inclusions are always faithful, we need not use the phrase ``faithful subcategory''. $\A$ is a \textbf{full subcategory} if $i$ is full. For instance, the category of finitely-generated $R$ modules is a full subcategory of $\mathbf{Mod}_{R}$; the mapping $\mathbf{Vec}_{k} \to \mathbf{Set}$ is faithful but not full.
+
+A \textbf{contravariant functor} $\F : \A \to \B$ is defined equivalently to covariant functors, except morphisms are reversed; a morphism $f : A_{1} \to A_{2}$ induces a morphism $\F(f) : \F(A_{2}) \to \F(A_{1})$. The composition law is also reversed: $\F(f_{2} \circ f_{1}) = \F(f_{1}) \circ \F(f_{2})$.
+
+For a category $\A$, the \textbf{opposite category} $\A^{\text{opp}}$ of $A$ is the category formed by reversing the arrows of $\A$. Hence contravariant functors $\F : \A to \B$ are equivalent to covariant functors $\F : \A^{\text{opp}} \to \B$.
+
+\newpage
+
+For examples: there is a contravariant functor $\mathbf{Top} \to \mathbf{Ring}$ mapping a topological space $X$ to the ring of real-valued functions on $X$. A morphism of topological spaces $X \to Y$ induces the pullback map from functions on $Y$ to functions on $X$. In fact the $i$-th cohomology functor $\mathcal{H}_{i}(\cdot, \mathbb{Z}) : \mathbf{Top} \to \mathbf{Ab}$ is a contravariant functor.
+
+In the category $\mathbf{Vec}_{k}$, taking duals gives the contravariant functor $(\cdot)^{\vee} : \mathbf{Vec}_{k} \to \mathbf{Vec}_{k}$. It induces upon each linear transformation $\mat{T} : V \to W$ a dual transformation $\mat{T}^{\vee} : W^{\vee} \to V^{\vee}$, with $(g \circ f)^{\vee} = f^{\vee} \circ g^{\vee}$.
+
+A critical example is the \textbf{functor of points}: suppose $A$ is an object of $\C$. There is a contravariant functor $h_{A} : \C \to \mathbf{Set}$ sending each $B \in \C$ to $\Mor(B, A)$, and sending the morpshim $f : B_{1} \to B_{2}$ to the morphism $\Mor(B_{2}, A) \to \Mor(B_{1}, A)$ via
+\[
+  [g : B_{2} \to A] \quad \mapsto \quad [g \circ f : B_{1} \to B_{2} \to A].
+\]
+This looks quite weird, but the examples from linear algebra and the functor $\mathbf{Top} \to \mathbf{Ring}$ are merely special cases of the functor of points. A more natural name would be the ``functor of maps'', but alas --- it is too late to change it.
+
+
+
+% --------------------------------------------- %
+
+\end{document}
