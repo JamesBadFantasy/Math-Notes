@@ -19,8 +19,8 @@
 \newcommand{\Ker}{\operatorname{Ker}}
 \newcommand{\Coker}{\operatorname{Coker}}
 \newcommand{\Ann}{\operatorname{Ann}}
-\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
 \newcommand{\Spec}{\operatorname{Spec}}
+\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
 
 \title{Atiyah-MacDonald: Rings and Ideals}
 \author{James Pagan}
@@ -492,27 +492,27 @@ These domains are unique factorization domains, and thus the techniques discusse
 
 \subsection{The Nilradical}
 
-An element $a \in R$ is a \textbf{zero divisor} if there exists nonzero $b \in R$ such that $ab = 0$. A zero divisor $a$ is \textbf{nilpotent} if $a^{n} = 0$ for some positive integer $n$. the set of all nonzero nilpotent elements of $R$ is called the \textbf{nilradical} of $R$, often denoted by $\mathfrak{R}$.
+An element $a \in R$ is a \textbf{zero divisor} if there exists nonzero $b \in R$ such that $ab = 0$. A zero divisor $a$ is \textbf{nilpotent} if $a^{n} = 0$ for some positive integer $n$. the set of all nonzero nilpotent elements of $R$ is called the \textbf{nilradical} of $R$, often denoted by $\mathfrak{N}$.
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		The nilradical $\mathfrak{R}$ of $R$ is ideal of $R$.
+		The nilradical $\mathfrak{N}$ of $R$ is ideal of $R$.
 	\end{theorem}
 	\begin{proof}
-		First, we must verify that $\mathfrak{R}$ is an additive subgroup of $\mathfrak{R}$. Since $0 \in \mathfrak{R}$, we need only verify two conditions:
+		First, we must verify that $\mathfrak{N}$ is an additive subgroup of $\mathfrak{R}$. Since $0 \in \mathfrak{R}$, we need only verify two conditions:
 		\begin{enumerate}
-			\item \textbf{Closure}: For $a, b \in \mathfrak{R}$, let $n, m \in \mathbb{Z}$ such that $a^{n} = b^{m} = 0$. Then
+			\item \textbf{Closure}: For $a, b \in \mathfrak{N}$, let $n, m \in \mathbb{Z}$ such that $a^{n} = b^{m} = 0$. Then
 			\[
 				(ab)^{nm} = a^{nm} b^{nm} = (a^{n})^{m}(b^{m})^{n} = 0^{m}0^{n} = 0,
 			\]
-			so $ab \in \mathfrak{R}$.
-			\item \textbf{Inverses}: If $a^{n} = 0$, then $(-a)^{n} = 0$ as well; thus $-a \in \mathfrak{R}$.
+			so $ab \in \mathfrak{N}$.
+			\item \textbf{Inverses}: If $a^{n} = 0$, then $(-a)^{n} = 0$ as well; thus $-a \in \mathfrak{N}$.
 		\end{enumerate}
-		Now, we need only verify the multiplicative condition. For $a \in \mathfrak{R}$, define $n \in \mathbb{Z}$ such that $a^{n} = 0$; then for all $b \in R$,
+		Now, we need only verify the multiplicative condition. For $a \in \mathfrak{N}$, define $n \in \mathbb{Z}$ such that $a^{n} = 0$; then for all $b \in R$,
 		\[
 			(ab)^{n} = a^{n}b^{n} = 0b^{n} = 0,
 		\]
-		so $ab \in \mathfrak{R}$. We deduce that $\mathfrak{R}$ is an ideal.
+		so $ab \in \mathfrak{N}$. We deduce that $\mathfrak{R}$ is an ideal.
 	\end{proof}
 \end{adjustwidth}
 
@@ -520,7 +520,7 @@ The following proof is my favorite in this document:
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		The nilradical $\mathfrak{R}$ of a commutative ring $R$ is the intersection of all the prime ideals of $R$.
+		The nilradical $\mathfrak{N}$ of a commutative ring $R$ is the intersection of all the prime ideals of $R$.
 	\end{theorem}
 	\begin{proof}
 		Suppose $a^{n} = 0$ and $\mathfrak{p}$ is a prime ideal of $R$. Then $a^{n} \in \mathfrak{p}$, so one of $aa \cdots a$ must be in $\mathfrak{p}$ (the prime condition inducts!).
@@ -768,7 +768,7 @@ The \textbf{radical} of an ideal $\mathfrak{a}$ of $R$
 \[
 	r(\mathfrak{a}) = \{ x \in R \,\mid\, x^{n} \in \mathfrak{a} \text{ for some } n \in \mathbb{Z}_{> 0} \}.
 \]
-If $\phi : R \to R \,/\, \mathfrak{a}$ is the canonical surjection, then $\phi(r(\mathfrak{a})) = \mathfrak{R}_{R / \mathfrak{a}}$, the nilradical of $R \,/\, \mathfrak{a}$; the Correspondence Theorem thus ensures that $r(\mathfrak{a})$ is an ideal.
+If $\phi : R \to R \,/\, \mathfrak{a}$ is the canonical surjection, then $\phi(r(\mathfrak{a})) = \mathfrak{N}_{R / \mathfrak{a}}$, the nilradical of $R \,/\, \mathfrak{a}$; the Correspondence Theorem thus ensures that $r(\mathfrak{a})$ is an ideal.
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
@@ -852,6 +852,8 @@ More generally, we can define the radical $r(E)$ for any subset $E \subseteq R$.
 	\end{proof}
 \end{adjustwidth}
 
+It is easy to see that $r(\mathfrak{a}) = r(\mathfrak{b})$ if and only if $\mathfrak{a} \subseteq \mathfrak{p}$ biconditionally implies $\mathfrak{b} \subseteq \mathfrak{p}$ --- this is because all such $\mathfrak{p}$ satisfy $r(\mathfrak{a}) \subseteq \mathfrak{p}$.
+
 % --------------------------------------------- %
 
 \subsection{Extension and Contraction}
@@ -904,14 +906,14 @@ The set of ideals $E$ is thus closed under sum and product, while $C$ is closed 
 
 \subsection{Definition}
 
-Let $R$ be a ring and let $X$ denote the set of prime ideals of $R$. For each subset $E \subseteq R$, let $V(E)$ denote the set of prime ideals which contain $E$.
+Let $R$ be a ring and let $X$ denote the set of prime ideals of $R$. For each subset $E \subseteq R$, let $V(E)$ denote the set of prime ideals which contain $E$. This construction should remind one of the radical $R(E)$.
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
     Let $(E_{\alpha}) \subseteq R$, let $E_{1}, E_{2} \subseteq R$. Define $\mathfrak{a}_{\alpha}$, $\mathfrak{a}_{1}$, and $\mathfrak{a}_{2}$ as the ideals generated by these sets. Then the following holds:
     \begin{enumerate}
       \item $V(E) = V(\mathfrak{a}) = V(r(\mathfrak{a}))$.
-      \item $\bigcap\limits_{\alpha} V(\mathfrak{a}_{\alpha}) = V \big( \bigcup\limits_{\alpha} \mathfrak{a}_{\alpha} \big)$.
+      \item $\bigcap\limits_{\alpha} V(E_{\alpha}) = V \big( \bigcup\limits_{\alpha} E_{\alpha} \big)$.
       \item $V(\mathfrak{a}_{1}) \cup V(\mathfrak{a}_{2}) = V(\mathfrak{a}_{1}\mathfrak{a}_{2}) = V(\mathfrak{a}_{1} \cap \mathfrak{a}_{2})$.
     \end{enumerate}
   \end{theorem}
@@ -922,10 +924,12 @@ Let $R$ be a ring and let $X$ denote the set of prime ideals of $R$. For each su
     \]
     For (2), we similarly utilize such convenient chains of equivalencies:
     \begin{align*}
-      \mathfrak{p} \in \bigcap\limits_{\alpha} V(\mathfrak{a}_{\alpha}) & \iff \mathfrak{a}_{\alpha} \subseteq \mathfrak{p} \text{ for each } \alpha. \\
-                                                             & \iff \bigcup\limits_{\alpha} \mathfrak{a}_{\alpha} \subseteq \mathfrak{p} \\
-                                                             & \iff \mathfrak{p} \in V \left( \bigcup\limits_{\alpha} \mathfrak{a}_{\alpha} \right).
+      \mathfrak{p} \in \bigcap\limits_{\alpha} V(E_{\alpha}) & \iff E_{\alpha} \subseteq \mathfrak{p} \text{ for each } \alpha. \\
+                                                             & \iff \bigcup\limits_{\alpha} E_{\alpha} \subseteq \mathfrak{p} \\
+                                                             & \iff \mathfrak{p} \in V \left( \bigcup\limits_{\alpha} E_{\alpha} \right).
     \end{align*}
+    We could also write this as $\bigcup\limits_{\alpha} V(\mathfrak{a}_{a}) = V \big( \sum\limits_{\alpha} \mathfrak{a}_{a} \big)$.
+    \newpage
     The story for (3) is again quite similar: we have that
     \begin{align*}
       \mathfrak{p} \in V(\mathfrak{a}_{1}) \cup V(\mathfrak{a}_{2}) &\iff \mathfrak{a}_{1} \subseteq \mathfrak{p} \text{ or } \mathfrak{a}_{2} \subseteq \mathfrak{p} \\
@@ -938,7 +942,86 @@ Let $R$ be a ring and let $X$ denote the set of prime ideals of $R$. For each su
 
 Further observe that $V(0) = X$ and $V(1) = \varnothing$. Thus the sets $V(\mathfrak{a})$ across all $\mathfrak{a} \in X$ satisfy the closed set axioms of a toplogical space. The resulting topology is called the \textbf{Zariski topology}, and the set $X$ is called the \textbf{prime spectrum} of $R$, denoted $\Spec R$.
 
+% --------------------------------------------- %
 
+\subsection{Open Sets in the Zariski Topology}
+
+Let $f \in R$ and $X = \Spec R$. We define the open set $X_{f}$ as the complement of $V(f)$ in $X$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    The sets $X_{f}$ form a basis of the Zariski topology.
+  \end{theorem}
+  \begin{proof}
+    Let $V(\mathfrak{a})^{\complement}$ be an arbitrary open set in $X$. If $f_{\alpha}$ are the elements of $\mathfrak{a}$, then
+    \begin{align*}
+      \bigcup\limits_{\alpha} X_{f_{\alpha}} &= \bigcup\limits_{\alpha} V(f_{\alpha})^{\complement} = \left( \bigcap\limits_{\alpha} V(f_{\alpha}) \right)^{\complement} = V \left( \sum\limits_{\alpha} (f_{a})  \right)^{\complement} = V(\mathfrak{a})^{\complement}.
+    \end{align*}
+    This completes the proof.
+  \end{proof} 
+\end{adjustwidth}
+
+Thus the sets $X_{f}$ are the \textbf{basic open sets} of $\Spec R$. There are many more properties of open sets in the Zariski topology, including the following: since $(f) \cap (g) = (fg)$,
+\[
+  X_{f} \cap X_{g} \, = \, V(f)^{\complement} \cap V(g)^{\complement} \, = \, \big( V(f) \cup V(g) \big)^{\complement} \, = \, V(fg)^{\complement} \, = \, X_{fg}.
+\]
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    The following properties of $X_{f}$ hold:
+    \begin{enumerate}
+      \item $X_{f} = \varnothing$ if and only if $f \in \mathfrak{N}$.
+      \item $X_{f} = X$ if and only if $x$ is a unit.
+      \item $X_{f} = X_{g}$ if and only if $r \big( (f) \big) = r \big( (g) \big)$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    (1) follows from the properties of the Nilradical:
+    \[
+      X_{f} = \varnothing \, \iff \, V(f) = X \, \iff \, f \in \mathfrak{N}.
+    \]
+    For (2), the answer follows from Krull's Theorem:
+    \[
+      X_{f} = X \, \iff \, V(f) = \varnothing \, \iff \, (f) = R \, \iff \, f \text{ is a unit}.
+    \]
+    Part (3) is relatively trivial from the definition of the radical:
+    \[
+      X_{f} = X_{g} \iff V(f) = V(g) \iff r \big( (f) \big) = r \big( (g) \big).
+    \]
+    This completes the proof. 
+  \end{proof}
+  \begin{corollary}
+    $V(f) = V(g)$ if and only if $r \big( (f) \big) = r \big( (g) \big). \\ \text{ }$  
+    % Absolutely troll way to fix that spacing
+  \end{corollary}
+\end{adjustwidth}
+
+In the Zariski topology, a set $S \subseteq X$ is \textbf{quasi-compact} if each open covering of $S$ contains a finite sub-covering. The term ``compact'' is reserved for sets with additional structure.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    The following three facts about quasi-compactness hold:
+    \begin{enumerate}
+      \item $X$ is quasi-compact.
+      \item Each $X_{f}$ is quasi-compact.
+      \item An open subset $S \subseteq X$ is quasi-compact if and only if $S$ is a finite union of $X_{f}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    We start with (2). Suppose that $X_{f_{\alpha}}$ is an open cover of $X_{f}$. Then 
+    \[
+      V \left( \sum\limits_{\alpha} f_{\alpha}  \right)^{\complement} \, = \, \left( \bigcap\limits_{\alpha} V(f_{\alpha}) \right)^{\complement} \, = \, \bigcup\limits_{\alpha} X_{f_{\alpha}} \, = \, X_{f}.
+    \]
+    Then $\sum\limits_{\alpha} f_{\alpha}$ contains a unit, so there exist indicies $\alpha_{1}, \ldots, \alpha_{n}$ and contants $r_{1}, \ldots, r_{n} \in R$ such that
+    \[
+      1 \, = \, r_{1} f_{\alpha_{1}} + \cdots + r_{n} f_{\alpha_{n}},
+    \]
+    so $(f_{\alpha_{1}}, \ldots, f_{\alpha_{n}}) = R$. Therefore,
+    \[
+      V \left( \sum\limits_{i = 1}^{n} f_{\alpha_{i}} \right)^{\complement} \, = \, \bigcup\limits_{i = 1}^{n} X_{f_{\alpha_{i}}} \, = \, X,
+    \]
+    so $X$ is quasi-compact.
+  \end{proof}
+\end{adjustwidth}
 
 % --------------------------------------------- %
 
