@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1707939844 "kleiner.tex" "kleiner.pdf" "kleiner" 1707939845 0
+["pdflatex"] 1708444121 "kleiner.tex" "kleiner.pdf" "kleiner" 1708444121 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1704400182 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -67,6 +67,7 @@
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb" 1704400182 154600 ea54091d31de803b613ba9e80ca51709 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb" 1704400182 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb" 1704400182 135942 859a90cad7494a1e79c94baf546d7de5 ""
+  "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb" 1704400182 164227 3df942b4ff2124425d8fb1b6d3e01c7a ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb" 1704400182 145929 f25e56369a345c4ff583b067cd87ce8e ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb" 1704400182 136101 f533469f523533d38317ab5729d00c8a ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb" 1704400182 131438 3aa300b3e40e5c8ba7b4e5c6cebc5dd6 ""
@@ -133,10 +134,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "kleiner.aux" 1707939845 3277 073e542ceb70119d65f9288279e61b58 "pdflatex"
-  "kleiner.out" 1707939845 2907 dc160cdb582f471db5182d35e30354f3 "pdflatex"
-  "kleiner.tex" 1707939844 38752 975e052a6ccc7fb72c9ab6e95497584b ""
-  "kleiner.toc" 1707939845 1779 51b5947addca98a8572da82544cf54fc "pdflatex"
+  "kleiner.aux" 1708444121 4148 a6adbfaa7b987ae203849b22b57ee074 "pdflatex"
+  "kleiner.out" 1708444121 3945 ee6be397da2e38089c40e6189996d455 "pdflatex"
+  "kleiner.tex" 1708444119 43322 b2054c31582c18ecdf9311cb627a3911 ""
+  "kleiner.toc" 1708444121 2363 71f1cfc8f533614ce4698fcfa0e1f962 "pdflatex"
   (generated)
   "kleiner.aux"
   "kleiner.log"

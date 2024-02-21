@@ -99,7 +99,11 @@ then $n = m$ and there exists a bijection such that $(p_{i}) = (q_{j})$ for each
   \end{proof}
 \end{adjustwidth}
 
-Hence, we could equivalently define unique factorization as decomposition to \textit{prime} elements.
+Hence, we could equivalently define unique factorization as decomposition to \textit{prime} elements. In this sense, factoriation in $R$ ``terminates'' if and only if $R$ satisfies the ascending chain condition for principal ideals; namely, the chain
+\[
+  x \quad \subseteq \quad \bigcap\limits_{i = 1}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 2}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 3}^{\infty} \, (p_{i}) \quad \subseteq \quad \cdots
+\]
+is stationary.
 
 % --------------------------------------------- %
 
@@ -110,6 +114,8 @@ Hence, we could equivalently define unique factorization as decomposition to \te
 \subsection{Definition}
 
 A \textbf{principal ideal domain} is an integral domain in which all ideals are principal. It is clear that all such domains are Noetherian.
+
+\newpage
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
@@ -151,11 +157,9 @@ Three helpful facts about principal ideal domains are as follows:
     All principal ideal domains are unique factorization domains.
   \end{theorem}
   \begin{proof}
-    Let $R$ be a principal ideal domain and let $x \in R$. We claim that $x$ is contained in finitely many prime ideals: suppose that $x$ is contained in prime ideals $(p_{1}), (p_{2}), \ldots$ in which case the chain
-    \[
-      x \quad \subseteq \quad \bigcap\limits_{i = 1}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 2}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 3}^{\infty} \, (p_{i}) \quad \subseteq \quad \cdots
-    \]
-    must be stationary. Hence, let $(p_{1}), \ldots, (p_{n})$ be the prime ideals which contain $x$. By Fact 4, we deduce that $x \in (p_{1}p_{2} \cdots p_{n})$. Thus we can write $x$ in the form
+    Let $R$ be a principal ideal domain and select $x \in R$. Then since $R$ is Noetherian, factoring terminates: each ascending chain of principal ideals is stationary.
+
+    Let $(p_{1}), \ldots, (p_{n})$ be the prime ideals which contain $x$. By Fact 4, we deduce that $x \in (p_{1}p_{2} \cdots p_{n})$. Thus we can write $x$ in the form
     \[
       x \, = \, u_{1} p_{1} \cdots p_{n}.
     \]
@@ -171,7 +175,7 @@ Three helpful facts about principal ideal domains are as follows:
     \[
       u p_{1} \cdots p_{n} \, = \, x \, = \, w q_{1} \cdots q_{m}
     \]
-    A quick induction on $\max{m, n}$ yields that since two primes on either side must be adjoints, we can divide and yield a number which factors uniquely. This completes the proof.
+    A quick induction on $\max \{ m, n \}$ yields that since two primes on either side must be adjoints, we can divide and yield a number which factors uniquely. This completes the proof.
   \end{proof}
 \end{adjustwidth}
 
@@ -183,7 +187,7 @@ Three helpful facts about principal ideal domains are as follows:
 
 \subsection{Definition}
 
-An integral domain $R$ is a  \textbf{Euclidean domain} if there exists a size function $\sigma$ such that $a, b \in R$ implies the existence of $q, r \in R$ such that $a = bq + r$, where $\sigma(r) < \sigma(b)$. It is clear that $\mathbb{Z}$ is a Euclidean domain.
+An integral domain $R$ is a  \textbf{Euclidean domain} if there exists a size function $\sigma$ such that $a \in R$ and \textit{nonzero} $b \in R$ implies the existence of $q, r \in R$ such that $a = bq + r$, where $\sigma(r) < \sigma(b)$. It is clear that $\mathbb{Z}$ is a Euclidean domain.
 
 % --------------------------------------------- %
 
@@ -212,6 +216,65 @@ An integral domain $R$ is a  \textbf{Euclidean domain} if there exists a size fu
       \norm{(r - n) + i(s - m) } = (r - n)^{2} + (s - m)^{2} \le \frac{1}{4} + \frac{1}{4} < 1.
     \]
     This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+For a field $F$, the ring $F[x]$ is a field. I proved this in my contest algebra notes.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    All fields are Euclidean domains.
+  \end{theorem}
+  \begin{proof}
+    Let $R$ be a field, and select $a, b \in F$. Then
+    \[
+      a = b \left( \tfrac{a}{b} \right) + 0.
+    \]
+    If $\sigma$ is an arbitrary size function on $R$, then the caveat of remainder zero ensures that the above equations dictate a valid Euclidean division.
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Relation with Principal Ideal Domains}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    All Euclidean domains are principal ideal domains.
+  \end{theorem}
+  \begin{proof}
+    Let $R$ be a Euclidean domain with size function $\sigma$ and let $\mathfrak{a} \subseteq R$ be an ideal. If $\mathfrak{a} = 0$, then $\mathfrak{a}$ is principal; otherwise, the Well-Ordering Theorem guarantees that there exists a nonzero element $a \in \mathfrak{a}$ of minimal size.
+
+    Let $b \in \mathfrak{a}$. Then there exist $q, r \in R$ such that
+    \[
+      b = aq + r,
+    \]
+    where $\sigma(r) < \sigma(a)$. Since $a$ is minimal, we must have $r = 0$, in which case $b \in (a)$. We conclude that $\mathfrak{a} = (a)$, so all ideals of $R$ are principal.
+  \end{proof}
+\end{adjustwidth}
+
+We have thus attained a sequence of types of rings:
+\[
+  \text{rings} \, \subseteq \, \text{commutative rings} \, \subseteq \, \text{integral domains} \, \subseteq \, \text{UFDs} \, \subseteq \, \text{PIDs} \, \subseteq \, \text{GDs} \, \subseteq \, \text{fields}.
+\]
+
+% --------------------------------------------- %
+
+\section{Greatest Common Divisor}
+
+Let $R$ be an integral domain, and select $a, b \in R$. A \textbf{greatest common divisor} of $a$ and $b$ is an element $d \in R$ such that:
+\begin{enumerate}
+  \item $d \mid a$ and $d \mid b$.
+  \item $c \mid a$ and $c \mid b$ implies $c \mid d$.
+\end{enumerate}
+It is clear that GCDs are unique up to association by Condition 2 --- thus we can speak of \textit{the} GCD. If the only greatest common divisors of $a$ and $b$ are units, we set $\gcd(a, b) = 1$ and call $a, b$ \textbf{relatively prime}.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose $R$ is a principal ideal domain. Then the generator of the ideal $(a, b)$ is the greatest common divisor of $a, b$.
+  \end{theorem}
+  \begin{proof}
+    It is clear that $a, b \in (d)$ implies $d \mid a$ and $d \mid b$.
   \end{proof}
 \end{adjustwidth}
 

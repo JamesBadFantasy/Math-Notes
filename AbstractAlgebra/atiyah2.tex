@@ -45,7 +45,7 @@
 
 \subsection{Definition}
 
-An $\mathbf{R}$\textbf{-module} over a commutative ring $R$ is an abelian group $M$ (with operation written additively) endowed with a mapping $\mu : A \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
+An \textbf{R-module} over a commutative ring $R$ is an abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
 \begin{enumerate}
 	\item $1x = x$;
 	\item $(ab)x = a(bx)$;
@@ -68,7 +68,7 @@ An $\mathbf{R}$\textbf{-module} over a commutative ring $R$ is an abelian group 
 
 \subsection{Homomorphisms of Modules}
 
-A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an $\mathbf{R}$\textbf{-module homomorphism} (or is $R$-linear) if for all $a \in R$ and $x, y \in M$,
+A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is $R$-linear) if for all $a \in R$ and $x, y \in M$,
 \begin{align*}
 	f(x + y) & = f(x) + f(y) \\
 	f(ax)    & = a f(x).
@@ -190,7 +190,7 @@ The following result proves the Third Isomorphism Theorem for modules:
 	\end{proof}
 \end{adjustwidth}
 
-For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{product} $\mathfrak{r} M$ as all finite sums $r_{1}x_{1} + \cdots + r_{n}x_{n}$ for $r_{i} \in \mathfrak{r}$ and $x_{i} \in M$  for each $i \in \{ 1, \ldots, n \}$. It is a submodule of $M$.
+For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{product} $\mathfrak{a} M$ as all finite sums $a_{1}x_{1} + \cdots + a_{n}x_{n}$ for $a_{i} \in \mathfrak{a}$ and $x_{i} \in M$  for each $i \in \{ 1, \ldots, n \}$. It is a submodule of $M$.
 
 % --------------------------------------------- %
 
@@ -245,21 +245,21 @@ Suppose that a commutative ring $R$ is a direct product $R = R_{1} \times \cdots
 \[
 	\mathfrak{a}_{j} = (0, \ldots, 0, r_{j}, 0, \ldots, 0),
 \]
-where $r_{i} \in R_{i}$ for each $i \in \{ 1, \ldots, n \}$. Viewing this relation in terms of modules,
+where $a_{i} \in R_{i}$ for each $i \in \{ 1, \ldots, n \}$. Viewing this relation in terms of modules,
 \[
-	R \cong \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{r}_{n}
+	R \cong \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}
 \]
 by the isomorphism $f(r_{1}, \ldots, r_{n}) = ((r_{1}, 0, \ldots), \ldots, (\ldots, 0, r_{n}))$.
 
-Similarly, suppose $R$ is a commutative ring with ideals $\mathfrak{a}_{1}, \ldots, \mathfrak{r}_{n}$, and
+Similarly, suppose $R$ is a commutative ring with ideals $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$, and
 \[
-	R = \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{r}_{n}.
+	R = \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}.
 \]
-Then define $\mathfrak{s}_{i} = \bigoplus_{j \ne i} \mathfrak{a}_{j}$ for each $i \in \{ 1, \ldots, n \}$. We find that
+Then define $\mathfrak{b}_{i} = \bigoplus_{j \ne i} \mathfrak{a}_{j}$ for each $i \in \{ 1, \ldots, n \}$. We find that
 \[
-	R \cong (R \,/\, \mathfrak{s}_{1}) \times \cdots \times (R \,/\, \mathfrak{s}_{n})
+	R \cong (R \,/\, \mathfrak{b}_{1}) \times \cdots \times (R \,/\, \mathfrak{b}_{n})
 \]
-by the isomorphism $f(r_{1}, \ldots, r_{n}) = (r_{1} + \mathfrak{s}_{1}, \ldots, r_{n} + \mathfrak{s}_{n})$. We conclude that direct sums of ideals and direct products of subrings are dual notions. This is a critical strength of modules: it treats ideals and rings on equal footing, resulting in clarity and simplicity.
+by the isomorphism $f(a_{1}, \ldots, a_{n}) = (a_{1} + \mathfrak{b}_{1}, \ldots, a_{n} + \mathfrak{b}_{n})$. We conclude that direct sums of ideals and direct products of subrings are dual notions. This is a critical strength of modules: it treats ideals and rings on equal footing, resulting in clarity and simplicity.
 
 % --------------------------------------------- %
 
@@ -337,7 +337,8 @@ The following proof is a transcription from Atiyah-MacDonald:
 	\end{proof}
 \end{adjustwidth}
 
-A \textbf{free R-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} M_{j}$, where $M_{j} \cong R$ for each $j \in J$. A finitely generated module $M$ is therefore free if $M$ is isomorphic to $R^{n}$ itself. 
+A \textbf{free R-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} M_{j}$, where $M_{j} \cong R$ for each $j \in J$. A finitely generated module $M$ is therefore free if $M$ is isomorphic to $R^{n}$ itself, in which case $M$ has a ``basis''.
+
 \subsection{Relation to the Jacobson Radical}
 
 % --------------------------------------------- %
@@ -501,7 +502,7 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 	\end{proof}
 \end{adjustwidth}
 
-Really, the natural language for these proofs is Homosexual Agenda and Abelian categories. Thus we will state the lemmas from this chapter without proof.
+Really, the natural language for these proofs is Homosexual Algebra and Abelian categories. Thus we will state the lemmas from this chapter without proof.
 
 \newpage
 
@@ -521,7 +522,7 @@ The following theorem is asserted without proof, because I value my sanity.
   \end{theorem}
 \end{adjustwidth}
 
-The following theorem is called the Snake Lemma, a special case of exact homology sequences in Homosexual Agenda:
+The following theorem is called the Snake Lemma, a special case of exact homology sequences in Homosexual Algebra: 
 
 \begin{adjustwidth}{1cm}{}
   \begin{theorem}[Snake Lemma]
@@ -539,7 +540,7 @@ The following theorem is called the Snake Lemma, a special case of exact homolog
   \end{theorem}
 \end{adjustwidth}
 
-We encourage the reader to adopt these results on faith. Homosexual Agenda is a complex subject of math that deserves its own set of notes.
+We encourage the reader to adopt these results on faith. Homosexual Algebra is a complex subject of math that deserves its own set of notes.
 
 % --------------------------------------------- %
 

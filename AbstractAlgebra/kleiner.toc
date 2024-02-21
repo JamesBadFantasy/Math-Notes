@@ -21,3 +21,10 @@
 \contentsline {subsection}{\numberline {6.4}Field of Fractions}{16}{subsection.6.4}%
 \contentsline {section}{\numberline {7}Maximal Ideals}{17}{section.7}%
 \contentsline {section}{\numberline {8}Factoring}{17}{section.8}%
+\contentsline {section}{\numberline {9}Modules}{20}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Definition}{20}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Examples}{20}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Homomorphisms of Modules}{20}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Submodules and Quotient Modules}{21}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Assorted Submodules}{21}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Finitely-Generated Modules}{22}{subsection.9.6}%

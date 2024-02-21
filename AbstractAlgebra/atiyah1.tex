@@ -648,7 +648,7 @@ by $\phi(a) = (a + \mathfrak{a}_{1}, \ldots, a + \mathfrak{a}_{n})$.
 			&\iff k \in \mathfrak{a}_{i} \text{ for each } i \in \{ 1, \ldots, n \} \\
 			&\iff k \in \mathfrak{a}_{1} \cap \cdots \cap \mathfrak{a}_{n}.
 		\end{align*}
-		 Thus, $\Ker f = 0$ if and only if $\cup \mathfrak{a}_{i} = 0$. Now for (2): suppose that $\phi$ is surjective. For $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$, there exists $a \in R$ such that $\phi(a)$ returns $(\ldots, 0, 1, 0, \ldots)$, where $1$ is in the $i$-th place. Then $a - 1 \in \mathfrak{a}_{i}$ and $a \in \mathfrak{a}_{j}$, so
+		 Thus, $\Ker f = 0$ if and only if $\cap \mathfrak{a}_{i} = 0$. Now for (2): suppose that $\phi$ is surjective. For $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$, there exists $a \in R$ such that $\phi(a)$ returns $(\ldots, 0, 1, 0, \ldots)$, where $1$ is in the $i$-th place. Then $a - 1 \in \mathfrak{a}_{i}$ and $a \in \mathfrak{a}_{j}$, so
 		 \[
 		 	1  = (1 - a) + a \in (\mathfrak{a}_{i} + \mathfrak{a}_{j}),
 		 \]
@@ -950,7 +950,7 @@ Let $f \in R$ and $X = \Spec R$. We define the open set $X_{f}$ as the complemen
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
-    The sets $X_{f}$ form a basis of the Zariski topology.
+    The sets $X_{f}$ form a base of the Zariski topology.
   \end{theorem}
   \begin{proof}
     Let $V(\mathfrak{a})^{\complement}$ be an arbitrary open set in $X$. If $f_{\alpha}$ are the elements of $\mathfrak{a}$, then
@@ -1007,7 +1007,7 @@ In the Zariski topology, a set $S \subseteq X$ is \textbf{quasi-compact} if each
     \end{enumerate}
   \end{theorem}
   \begin{proof}
-    We start with (2). Suppose that $X_{f_{\alpha}}$ is an open cover of $X_{f}$. Then 
+    We start with (1). Suppose that $X_{f_{\alpha}}$ is an open cover of $X_{f}$. Then 
     \[
       V \left( \sum\limits_{\alpha} f_{\alpha}  \right)^{\complement} \, = \, \left( \bigcap\limits_{\alpha} V(f_{\alpha}) \right)^{\complement} \, = \, \bigcup\limits_{\alpha} X_{f_{\alpha}} \, = \, X_{f}.
     \]
@@ -1019,7 +1019,13 @@ In the Zariski topology, a set $S \subseteq X$ is \textbf{quasi-compact} if each
     \[
       V \left( \sum\limits_{i = 1}^{n} f_{\alpha_{i}} \right)^{\complement} \, = \, \bigcup\limits_{i = 1}^{n} X_{f_{\alpha_{i}}} \, = \, X,
     \]
-    so $X$ is quasi-compact.
+    so $X$ is quasi-compact. For (2), realize that an open cover of $X_{f}$ is an open cover of $\Spec R \, / \, r(f)$, from which (1) ensures the existence of some finite subcover. 
+
+    We need now demonstrate (3); it is clear that a finite union of $X_{f}$ is compact. Suppose that $S$ is not a finite union of $X_{f}$, and set
+    \[
+      S \, = \, \bigcup\limits_{\alpha} X_{f_{\alpha}}.
+    \]
+    By definition, this set has no finite subcovering --- hence $S$ is not compact.
   \end{proof}
 \end{adjustwidth}
 

@@ -1,0 +1,469 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+
+\newcommand{\s}{\\ \text{ }}
+
+\title{Artin: Rings}
+\author{James Pagan}
+\date{February 2024}
+
+% --------------------------------------------- %
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Rings}
+
+% --------------------------------------------- %
+
+\subsection{Ring Axioms}
+
+A \textbf{ring} $R$ is a set endowed with two binary operations, here denoted ``$+$'' and ``$\times$'', such that if $a, b, c \in R$, the following ten axioms are satisfied:
+
+\begin{itemize}
+	\item \textbf{Additive Axioms}
+	\begin{enumerate}
+		\item \textbf{Closure}: $a + b \in R$.
+		\item \textbf{Associativity}: $a + (b + c) = (a + b) + c$.
+		\item \textbf{Identity}: There is $0 \in R$ such that $a + 0 = 0 + a = a$.
+		\item \textbf{Invertability}: There is $-a \in R$ such that $a + (-a) = (-a) + a = 0$.
+		\item \textbf{Commutativity}: $a + b = b + a$.
+	\end{enumerate}
+	\item \textbf{Multiplicative Axioms}
+	\begin{enumerate}\addtocounter{enumi}{5}
+		\item \textbf{Closure}: $ab \in R$.
+		\item \textbf{Associativity}: $a(bc) = (ab)c$.
+		\item \textbf{Identity}: There is $1 \in R$ such that $a1 = 1a = a$.
+	\end{enumerate}
+	\item \textbf{Distributive Axioms}
+	\begin{enumerate}\addtocounter{enumi}{8}
+		\item \textbf{Left Distributivity}: $a(b + c) = ab + ac$.
+		\item \textbf{Right Distributivity}: $(a + b)c = ac + bc$.
+	\end{enumerate}
+\end{itemize}
+
+Since $(R, +)$ is an Abelian group, the following properties hold for $a, b \in R$: the additive identity $0$ is unique, the additive inverse $-a$ is unique, $-(-a) = a$, and $-(a + b) = -a - b$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The following properties hold for any ring $R$ and $a, b \in R$:
+		\begin{enumerate}
+			\item $1$ is the unique multiplicative inverse of $R$.
+			\item If $a$ has a multiplicative inverse $a^{-1}$, it is unique.
+			\item $a0 = 0a = a$.
+			\item $-a$ = $(-1)a$.
+			\item $a(-b) = (-a)b = -ab$.
+			\item $(-a)(-b) = ab$.
+		\end{enumerate}
+	\end{theorem}
+	\newpage
+	\begin{proof}
+		(1) and (2) follow from the monoid/group axioms. For the rest:
+		\begin{enumerate}\addtocounter{enumi}{2}
+			\item As $0 + 0 = 0$, we have that $a0 = a(0 + 0) = a0 + a0$; subtracting by $a0$ yields $a0 = 0$. Similarly, $0a = 0$.
+			\item We have that 
+			\[
+				(-1)a + a = (-1)a + 1a = (-1 + 1)a = 0a = 0,
+			\]
+			so $(-1)a = -a$.
+			\item See that
+			\[
+				a(-b) + ab = a(-b + b) = a0 = 0,
+			\]
+			so $a(-b) = -ab$. Similarly, $(-a)b = -ab$.
+			\item Using (5), we find that
+			\[
+				(-a)(-b) = -(a)(-b) = -(-ab) = ab,
+			\]
+			as desired.
+		\end{enumerate}
+		This yields the desired six properties.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Subrings and Ideals}
+
+A \textbf{subring} $R'$ of $R$ is a subset of $R$ that is also a ring. This relation is denoted $R' \subseteq R$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		A subset $R'$ of $R$ is a subring if it is nonempty, closed under addition and multiplication, contains additive inverses, and contains the multiplicative identity.
+	\end{theorem}
+	\begin{proof}
+		The conditions that $(R', +)$ is nonempty, closed, and contains inverses ensures that it is a group. Note that $(R', \times)$ is closed and contains the multiplicative identity. 
+
+		The final properties are implied by the fact $R'$ is a subset of $R$; all the elements of $R'$ satisfy both associative and distributive laws, plus additive commutativity. We deduce that $R'$ is a subring.
+	\end{proof}
+\end{adjustwidth}
+
+All rings contain at least two subrings: the $0$ ring and $R$ itself.
+
+\newpage
+
+A \textbf{ideal} $\mathfrak{a}$ of $R$ is a subset of $R$ that satisfies the following twokproperties:
+\begin{enumerate}
+	\item \textbf{Additive}: $\mathfrak{a}$ is an additive subgroup of $R$.
+	\item \textbf{Multiplicative}: For all $a \in \mathfrak{a}$ and $x \in R$, we have $ax, xa \in \mathfrak{a}$.
+\end{enumerate}
+
+All rings contain at least two ideals: one is $R$ itself, one is a maximal ideal (Section 2.3).
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		If $R'$ is both a subring and an ideal of $R$ if and only if $R'$ is $R$ or $0$.
+	\end{theorem}
+	\begin{proof}
+		Suppose that $R' \ne 0$ is both a subring and an ideal of $R$. As $R'$ is a subring, $1 \in R'$; as $R'$ is an ideal, $a = a1 \in R'$ for all $a \in R$. Then $R' = R$. Clearly, $R$ itself and $0$ are both ideals and subrings --- which yields the desired result.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Ring Homomorphisms}
+
+A \textbf{ring homomorphism} between two rings $R$ and $R'$ is a mapping $\phi : R \to R'$ such that for all $a, b \in R$,
+\begin{align*}
+	\phi(a + b) &= \phi(a) + \phi(b) \\
+	   \phi(ab) &= \phi(a) \phi(b) \\
+	   	\phi(1) &= 1.
+\end{align*}
+By the group axioms, $\phi(-a) = -\phi(a)$ and $\phi(0) = 0$ for all $a \in R$. If $a$ has a multiplicative inverse $a^{-1}$, then $\phi(a^{-1}) = \phi(a)^{-1}$.
+
+The \textbf{image} of $R$ under $\phi$ is the set $\{ \phi(a) \mid a \in R \}$, and is denoted $\phi(R)$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The image of any ring homomorphism $\phi : R \to R'$ is a subring of $R'$.
+	\end{theorem}
+	\begin{proof}
+		Realize that $\phi(R)$ is nonempty, and for all $\phi(a), \phi(b) \in \phi(R)$, we have that 
+		\begin{enumerate}
+			\item $\phi(a) + \phi(b) = \phi(ab) \in \phi(R)$.
+			\item $\phi(a) \phi(b) = \phi(ab) \in \phi(R)$.
+			\item $-\phi(a) = \phi(-a) \in \phi(R)$.
+			\item $\phi(1) \in R$.
+		\end{enumerate}	
+		Hence, $\phi(R)$ is a subring of $R'$.
+	\end{proof}
+\end{adjustwidth}
+
+\newpage
+
+The \textbf{kernel} of $R$ under $\phi$ is the set $\{ a \in R \mid \phi(r) = 0 \}$ and is denoted $\Ker \phi$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		$\Ker \phi$ is an ideal of $R.$
+	\end{theorem}
+	\begin{proof}
+		Since $\phi$ is a homomorphism of the Abelian groups $(R, +)$ and $(R', +)$, the kernel of $\phi$ is an Abelian group with respect to addition. We need only verify the multiplicative condition; for all $a \in R$ and $k \in \Ker \phi$,
+		\[
+			\phi(ak) = \phi(a) \phi(k) = 0 \phi(a) = 0 = \phi(a) 0 = \phi(a) \phi(k) = \phi(ak).
+		\]
+		Then $ak \in \Ker \phi$. Thus, $\Ker \phi$ is an ideal.
+	\end{proof}
+\end{adjustwidth}
+
+Categories of group homomorphisms --- like monomorphisms, epimorphisms, isomorphisms, endomorphisms, automorphisms --- have equivalent formulations for ring homomorphisms. An isomorphism between $R$ and $R'$ is denoted the same as groups:
+\[
+	R \cong R'.
+\]
+We can extend the notion of a quotient group to a ring $R$ with an ideal $\mathfrak{a}$ as follows, yielding a \textbf{quotient ideal}:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The quotient group $R \,/\, \mathfrak{a}$ is a ring under the product $(a + \mathfrak{a})(b + \mathfrak{a}) = ab + \mathfrak{a}$ for $a, b \in R$.
+	\end{theorem}
+	\begin{proof}
+		The quotient group $R \,/\, \mathfrak{a}$ exists, since $\mathfrak{a}$ is an additive subgroup of $R$ and all subgroups of Abelian groups are normal. We must demonstrate that the product is well-defined.
+		
+		Suppose $a + \mathfrak{a} = a' + \mathfrak{a}$ and $b + \mathfrak{a} = b' + \mathfrak{a}$. Then since $a - a' \in \mathfrak{a}$ and $b - b' \in \mathfrak{a}$,
+		\[
+			ab - a'b \in \mathfrak{a} \qquad \text{and} \qquad a'b - a'b' \in \mathfrak{a}.
+		\]
+		Thus, $ab - a'b' \in \mathfrak{a}$ and $ab + \mathfrak{a} = a'b' + \mathfrak{a}$. Then the product is well-defined. Proving that the product is closed and associative is trivial; the multiplicative identity of $R \,/\, \mathfrak{a}$ is $1 + \mathfrak{a}$, and the distributivity with addition is trivial --- so $R \,/\, \mathfrak{a}$ is a ring.
+	\end{proof}
+\end{adjustwidth}
+
+The canonical mapping $\phi : R \to R \,/\, \mathfrak{a}$ is thus a surjective homomomorphism with kernel $\mathfrak{a}$. A similar definition exists for the quotient of two ideals --- say, $\mathfrak{a} \,/\, \mathfrak{b}$ for $\mathfrak{a} \supseteq \mathfrak{b}$.
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Isomorphism Theorems}
+
+All three Isomorphism Theorems and the Correspondence Theorem have their equivalencies for rings.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}[First Isomorphism Theorem]
+		For all homomorphisms $\phi : R \to R'$ with kernel $\mathfrak{k}$,
+		\[
+			R \,/\, \mathfrak{k} \cong \phi(R)
+		\]
+		by the mapping $\psi(a + \mathfrak{k}) = \phi(a)$.
+	\end{theorem}
+	\begin{proof}
+		We must first demonstrate that $\psi$ is a homomorphism. If $a, b \in R$, then the following three identities hold:
+		\begin{enumerate}
+			\item $\psi(a + b + \mathfrak{k}) = \phi(a + b) = \phi(a) + \phi(b) = \psi(a + \mathfrak{k}) + \psi(b + \mathfrak{k})$.
+			\item $\psi(ab + \mathfrak{k}) = \phi(ab) = \phi(a) \phi(b) = \psi(a + \mathfrak{k}) \psi(b + \mathfrak{k})$.
+			\item $\psi(1 + \mathfrak{k}) = \phi(1)$.
+		\end{enumerate}
+		Thus, $\psi$ is a homomorphism. For all $\phi(a) \in \phi(R)$, realize that $\psi(a + \mathfrak{k}) = \phi(a)$; thus $\psi$ is surjective. Finally, let $\psi(a + \mathfrak{k}) = \psi(b + \mathfrak{k})$; then $\phi(a) = \phi(b)$, so
+		\[
+			\phi(a - b) = \phi(a) - \phi(b) = 0.
+		\]
+		Hence, $a - b \in \mathfrak{k}$ and $a + \mathfrak{k} = b + \mathfrak{k}$. We conclude that $\psi$ is injective, implying the desired isomorphism.
+	\end{proof}
+\end{adjustwidth}
+
+The Correspondence Theorem expands upon the result of the First Isomorphism Theorem.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}[Correspondence Theorem]
+		There is a one-to-one correspondence between ideals of $\phi(R)$ and ideals of $R$ that contain $\mathfrak{k}$.
+	\end{theorem}
+	\begin{proof}
+		For an ideal $\mathfrak{a}'$ of $\phi(R)$, define $\mathfrak{a} = \{ a \in R \mid \phi(a) \in \mathfrak{a}' \}$. By the Correspondence Theorem for groups, $\mathfrak{a}$ is an additive subgroup of $R$. For all $a \in \mathfrak{a}$ and $b \in R$, we have $\phi(a) \in \mathfrak{a}'$; thus
+		\[
+			\phi(ab) = \phi(a) \phi(b) \in \mathfrak{a}'
+		\]
+		since $\mathfrak{a}'$ is an ideal. Thus $ab \in \mathfrak{a}$, so $\mathfrak{a}$ is an ideal of $R$. Since $0 \in R'$, we have that $\mathfrak{k}$ is a subideal of $\mathfrak{a}$. It is now relatively trivial to establish a one-to-one correspondence.
+	\end{proof}
+	\begin{corollary}
+		There is a one-to-one correspondence between ideals of $R \,/\, \mathfrak{a}$ and ideals of $R$ that contain $\mathfrak{a}$.
+	\end{corollary}
+\end{adjustwidth}
+
+The two remaining Isomorphism Theorems will be proven at another time.
+
+% --------------------------------------------- %
+
+\subsection{Assorted Rings}
+
+We will consider the following three types of rings in this section:
+\begin{enumerate}
+	\item A \textbf{commutative ring} is a ring $R$ such that $ab = ba$ for all $a, b \in R$.
+	\item An \textbf{integral domain} is a nonzero commutative ring $R$ such that $ab = 0$ implies $a = 0$ or $b = 0$ for all $a, b \in R$.
+	\item A \textbf{field} is a commutative division ring.
+\end{enumerate}
+
+Note that integral domains and fields must be nonzero. \textbf{Henceforth, all rings we shall define are commutative unless stated otherwise.}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		All finite domains are fields.
+	\end{theorem}
+	\begin{proof}
+		Let $R$ be a finite domain. Then for nonzero $a \in R$, consider the set
+		\[
+			\{ a, a^{2}, \ldots, a^{\abs{R} + 1} \}.
+		\]
+		By the Pigeonhole Principle, two elements of this set must be equal: $a^{i} = a^{j}$ for $i, j \in \{ 1, \ldots, n \}$ with $i < j$. Thus $a^{j}(a^{i - j} - 1) = 0$, so $a^{i - j} = 1$ and $a^{i - j - 1} = a^{-1}$. Since all nonzero elements of $R$ are invertible, we conclude that $R$ is a field.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		$R$ is a field if and only if the only ideals of $R$ are $0$ and $R$ itself.
+	\end{theorem}
+	\begin{proof}
+		Let $R$ be a field and let $\mathfrak{a}$ be nonzero ideal of $R$. Then for $a \in \mathfrak{a}$,
+		\[
+			R = (a) \subseteq \mathfrak{a} \subseteq R.
+		\]
+		Thus, $\mathfrak{a} = R$. Now, suppose that the only ideals of $R$ are $0$ and $R$ itself; then for all nonzero $a \in R$,
+		\[
+			(a) = R,
+		\]
+		where $(a)$ denotes the principal ideal (Section 2.1). Thus, there exists $a^{-1} \in R$ such that $a a^{-1} = 1$, so $R$ is a field.
+	\end{proof}
+\end{adjustwidth}
+
+An element $a \in R$ is a \textbf{unit} if it is invertible. It is trivial to verify that all the units of $R$ constitute a multiplicative Abelian group (non-units form a commutative semigroup!)
+
+% --------------------------------------------- %
+
+\section{Miscellaneous Artin Shenanigans}
+
+% --------------------------------------------- %
+
+\subsection*{Polynomial Rings}
+
+Let $R$ be a ring. The \textbf{polynomial ring} $R[x_{1}, \ldots, x_{n}]$ denotes the ring of all polynomials with variables $x_{1}, \ldots, x_{n}$ and coefficents in $R$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose $R$ is a ring, and let $f, g \in R[x]$ such that the leading coefficent of $g$ is a unit. Then there exists $q, r \in R[x]$ such that
+    \[
+      f(x) = g(x)q(x) + r(x),
+    \]
+    with $\deg r < \deg g$. $ \s$
+  \end{theorem}
+  \begin{corollary}
+    If $F$ is a field, then $F[x]$ is a Euclidean domain. $ \s$
+  \end{corollary}
+\end{adjustwidth}
+
+If $R$ is a Unique Factorization Domain, then so is $R[x]$. The Remainder Theorm holds in a general ring: the remainder dividing $f(x)$ by $(x - \alpha)$ is $f(\alpha)$.
+
+% --------------------------------------------- %
+
+\subsection*{Homomorphisms and Ideals}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Substitution Principle]
+    Let $\phi : R \to R'$ be a homomorphism, and select $\alpha_{1}, \ldots, \alpha_{n} \in R'$ arbitrarily. Then there exists a unique homomorphism
+    \[
+      \Phi : R[x_{1}, \ldots, x_{n}] \to R'
+    \]
+    that agrees with $\phi$ on constant polynomials and sends $x_{i}$ to $\alpha_{i}$.
+  \end{theorem}
+  \begin{proof}
+    Defining $\Phi$ as the map which sends $1$ to $1$ and $x_{i}$ to $\alpha_{i}$, it is easy to show that $\Phi$ is a homomorphism. The unqiueness of $\Phi$ follows from the fact these elements generate the totality of $R[x_{1}, \ldots, x_{i}]$, hence its image is unique.
+  \end{proof}
+\end{adjustwidth}
+
+The next theorem illustrates the use of the Substitution Principle:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $x = (x_{1}, \ldots, x_{n})$ and $y = (y_{1}, \ldots, y_{m})$ be sets of variables. Then $R[x, y] \cong R[x][y]$ which sends the variables to themselves.
+  \end{theorem}
+  \begin{proof}
+    Let $\phi : R \to R[x][y]$ be an embedding. The Substitution Principle guarantees that there exists a homomorphism $\Phi : R[x, y] \to R[x][y]$ by mapping each variable to itself. To demonstrate that $\Phi$ is bijective, we may simply demonstrate an inverse.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $R$ be a ring. There exists a unique homomorphism $\phi : \mathbb{Z} \to R$ defined by $\phi(n) = 1 + \cdots + 1$, added $n$ times, and $\phi(-n) = - \phi(n)$. $ \s$
+  \end{theorem}
+\end{adjustwidth}
+
+The proof of the above assertion is relatively trivial. Here are some neat fun facts:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Any homomorphism $\phi : F \to R$ is injective.
+  \end{theorem}
+  \begin{proof}
+    The kernel of $\phi$ is an ideal of $F$. It cannot be $F$ itself, since $\phi$ must map $1$ to $1$; thus $\Ker \phi = 0$, so $\phi$ is injective.
+  \end{proof}
+\end{adjustwidth}
+
+The next result concerns adjoining elements:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose the leading coefficent of $f \in R[x]$ is a unit. Then $R[x] \, / \, (f)$ contains constants and polynomials of degree strictly less than $f$.
+  \end{theorem}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection*{Product Rings}
+
+In the following theorem, let $R$ be a ring with ideals $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$; define a homomorphism
+\[
+	\phi : R \to \prod_{i = 1}^{n} R \,/\, \mathfrak{a}_{i}
+\]
+by $\phi(a) = (a + \mathfrak{a}_{1}, \ldots, a + \mathfrak{a}_{n})$.
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The following two properties of $\phi$ hold:
+		\begin{enumerate}
+			\item $\phi$ is injective if and only if $\cap \mathfrak{a}_{i} = 0$.
+			\item $\phi$ is surjective if and only if $\mathfrak{a}_{i}$ and $\mathfrak{a_{i}}$ are relatively prime whenever $i \ne j$.
+		\end{enumerate}
+	\end{theorem}
+	\begin{proof}
+		For (1), the following sequence of claims is easy to verify:
+		\begin{align*}
+			k \in \Ker \phi &\iff \phi(k) = 0 \\
+			&\iff k \in \mathfrak{a}_{i} \text{ for each } i \in \{ 1, \ldots, n \} \\
+			&\iff k \in \mathfrak{a}_{1} \cap \cdots \cap \mathfrak{a}_{n}.
+		\end{align*}
+		 Thus, $\Ker f = 0$ if and only if $\cap \mathfrak{a}_{i} = 0$. Now for (2): suppose that $\phi$ is surjective. For $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$, there exists $a \in R$ such that $\phi(a)$ returns $(\ldots, 0, 1, 0, \ldots)$, where $1$ is in the $i$-th place. Then $a - 1 \in \mathfrak{a}_{i}$ and $a \in \mathfrak{a}_{j}$, so
+		 \[
+		 	1  = (1 - a) + a \in (\mathfrak{a}_{i} + \mathfrak{a}_{j}),
+		 \]
+		so $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$ are relatively prime. Now, suppose that $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$ are relatively prime for each $i \ne j$. We need only show that the element $(\ldots, 0, 1, 0, \ldots)$ lies in the image of $\phi$; the $1$ may be anywhere by similarity, so we can generate all elements of $\prod R \,/\, \mathfrak{a}_{i}$.
+
+		For each $i \in \{ 1, \ldots, n \}$, we have $\mathfrak{a}_{i}$ and $\prod_{j \ne i} \mathfrak{a}_{j}$ are coprime; thus there exists $a_{i}$ in the former and $a$ in the latter such that
+		\[
+			a_{i} + a = 1.
+		\]
+		Thus, $a \in (1 + \mathfrak{a}_{i})$. We conclude that $\phi(a) = (\ldots, 0, 1, 0, \ldots,)$, from which we construct as aforementioned and demonstrate the surjectivity of $\phi$.
+	\end{proof}
+\end{adjustwidth}
+
+In other words, one can express $R$ is a direct product if relatively prime, mutually exclusive ideals may be located.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $e \in R$ be idempotent. Then $e' = 1 - e$ is idempotent, $e' + e = 1$, and $e e' = 0$. $\s$
+  \end{theorem}
+\end{adjustwidth}
+
+The proof of the above is trivial. It is easy to deduce that $(e)$ is a ring with identity $e$; it is \textit{not} a subring unless $e = 1$. Thus we can demonstrate that $R \cong (e) \times (e')$.
+
+Artin describes the process by which fields of fractions may be constructed. We leave such technical machinery out of this document; I have already proven that $S^{-1}R$ is a ring of fractions.
+
+% --------------------------------------------- %
+
+\subsection*{Maximal Ideals}
+
+In the interest of time, I will not prove Krull's Theorem here. It is clear that the maximal ideals of $\mathbb{Z}$ are $(p)$ for prime $p$. The following theorem is relatively easy to observe:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $R[x]$ be a Principal Ideal Domain. Then the maximal ideals of $R[x]$ are precisely the ideals generated by monic irreducible polynomials. $\s$
+  \end{theorem}
+\end{adjustwidth}
+
+Since the irreducible polynomials in $\mathbb{C}[x]$ are $(x -\alpha)$ for $\alpha \in \mathbb{C}$, there is a bijection between maximal ideals in $\mathbb{C}[x]$ and points in $\mathbb{C}$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Weak Nullstellensatz]
+    There exists a bijection between maximal ideals of $\mathbb{C}[x_{1}, \ldots, x_{n}]$ and points in $\mathbb{C}^{n}$.
+  \end{theorem}
+  \begin{proof}
+    Select $(\alpha_{1}, \ldots, \alpha_{n}) \in \mathbb{C}^{n}$ abitrarily. We may use the substitution map from $\mathbb{C}[x_{1}, \ldots, x_{n}] \to \mathbb{C}$ defined by $x_{1} \to \alpha_{1}$; it is easy to prove that the map is surjective, so its kernel is a maximal ideal.
+
+    It is harder to prove that all maximal ideals are the kernel of such a map. We ommmit the proof from here in the interest of brevity.
+  \end{proof}
+\end{adjustwidth}
+
+
+% --------------------------------------------- %
+
+\end{document}

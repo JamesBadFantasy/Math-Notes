@@ -47,22 +47,22 @@
 
 \subsection{Matrix Norm}
 
-The \textbf{norm} of a linear map $\mat{T} \in \mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ is defined as follows:
+Let $X$ and $Y$ be normed vector spaces. If $\mat{T}$ is bounded, the \textbf{norm} of $\mat{T}$ is as follows:
 \[
-	\norm{\mat{T}} = \sup \{ \norm{\mat{T} \vec{z}} \, \mid \, \vec{z} \in \mathbb{C}^{n}, \norm{\vec{z}} \le 1\}.
+	\norm{\mat{T}} = \sup \{ \norm{\mat{T} \vec{x}} \, \mid \, \vec{x} \in X, \norm{\vec{x}} \le 1\}.
 \]
-Notice that the matrix norm is nonnegative. The \textbf{critical vector} of $\mat{T}$ is the vector $\vec{z} \in \mathbb{C}^{n}$ such that $\norm{\vec{z}} \le 1$ and $\norm{\mat{T} \vec{z}} = \norm{\mat{T}}$; the critical vector always has norm $1$. Naturally, $\norm{\mat{T} \vec{z}} \le \norm{\mat{T}} \cdot \norm{\vec{z}}$; since equality is attained, $\norm{\mat{T} \vec{z}} \le \lambda \vec{z}$ for $\lambda \in \mathbb{R}^{n}$ implies $\norm{\vec{T}} \le \lambda$.
+The \textbf{critical vector} of $\mat{T}$ is the vector $\vec{x} \in X$ such that $\norm{\vec{x}} \le 1$ and $\norm{\mat{T} \vec{x}} = \norm{\mat{T}}$; the critical vector always has norm $1$. Naturally, $\norm{\mat{T} \vec{x}} \le \norm{\mat{T}} \cdot \norm{\vec{x}}$; since equality is attained, $\norm{\mat{T} \vec{x}} \le \lambda \vec{x}$ implies $\norm{\vec{T}} \le \lambda$.
 
 \begin{theorem}
-	If $\mat{T}, \mat{S} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$, then $\norm{\mat{T} + \mat{S}} \le \norm{\mat{T}} + \norm{\mat{S}}$ and $\norm{\mat{TS}} \le \norm{\mat{T}} \norm{\mat{S}}$.
+	If $\mat{T}, \mat{S} \in \mathcal{B}(X, Y)$, then $\norm{\mat{T} + \mat{S}} \le \norm{\mat{T}} + \norm{\mat{S}}$. $X = Y$ entails $\norm{\mat{TS}} \le \norm{\mat{T}} \norm{\mat{S}}$.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
 	\begin{proof}
-		Let $\vec{z}$ be the critical vector of $\mat{T} + \mat{S}$. Then
+		Let $\vec{x}$ be the critical vector of $\mat{T} + \mat{S}$. Then
 		\[
-			\norm{\mat{T} + \mat{S}} = \norm{(\mat{T} + \mat{S})\vec{z}} \le \norm{\mat{T} \vec{z}} + \norm{\mat{S} \vec{z}} \le \norm{\mat{T}} \norm{\vec{z}} + \norm{\mat{S}} \norm{\vec{z}} = \norm{\mat{T}} + \norm{\mat{S}}.
+			\norm{\mat{T} + \mat{S}} = \norm{(\mat{T} + \mat{S})\vec{x}} \le \norm{\mat{T} \vec{x}} + \norm{\mat{S} \vec{x}} \le \norm{\mat{T}} \norm{\vec{x}} + \norm{\mat{S}} \norm{\vec{x}} = \norm{\mat{T}} + \norm{\mat{S}}.
 		\]
-		Now, let $\vec{w}$ be the critical vector of $\mat{TS}$. Then
+		Now suppose $X = Y$ and let $\vec{w}$ be the critical vector of $\mat{TS}$. Then
 		\[
 			\norm{\mat{TS}} = \norm{\mat{TS} \vec{w}} \le \norm{\mat{T}} \norm{\mat{S} \vec{w}} \le \norm{\mat{T}} \norm{\mat{S}} \norm{\vec{w}} = \norm{\mat{T}} \norm{\mat{S}}.
 		\]
@@ -71,27 +71,27 @@ Notice that the matrix norm is nonnegative. The \textbf{critical vector} of $\ma
 \end{adjustwidth}
 
 \begin{theorem}
-	The matrix norm is a metric of $\mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$.
+  The matrix norm is a metric of all bounded linear maps in $\mathcal{B}(X, Y)$.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
 	\begin{proof}
-		Suppose $\mat{T}, \mat{S} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$. We must perform four rather routine calculations:
+		Suppose $\mat{T}, \mat{S} \in \mathcal{B}(X, Y)$ are bounded. We must perform four rather routine calculations:
 		\begin{enumerate}
-			\item \textbf{Positivity}: The matrix norm is nonnegative. If $\norm{\mat{T} - \mat{S}} = 0$, then $\norm{\vec{z}} = 1$ implies $(\mat{T} - \mat{S}) \vec{z} = \vec{0}$; hence for \textit{all} $\vec{z} \in \mathbb{C}^{n}$,
+			\item \textbf{Positivity}: The matrix norm is nonnegative. If $\norm{\mat{T} - \mat{S}} = 0$, then $\norm{\vec{x}} = 1$ implies $(\mat{T} - \mat{S}) \vec{x} = \vec{0}$; hence for \textit{all} $\vec{x} \in X$,
 			\[
-				(\mat{T} - \mat{S}) \vec{z} = \norm{\vec{z}} \left( (\mat{T} - \mat{S}) \left( \frac{\vec{\vec{z}}}{\norm{\vec{z}}} \right) \right) = \norm{\vec{z}} (0) = 0;
+				(\mat{T} - \mat{S}) \vec{x} = \norm{\vec{x}} \left( (\mat{T} - \mat{S}) \left( \frac{\vec{\vec{x}}}{\norm{\vec{x}}} \right) \right) = \norm{\vec{x}} (0) = 0;
 			\]	
 			thus $\mat{T} - \mat{S} = \mat{0}$ and $\mat{T} = \mat{T}$.
-			\item \textbf{Symmetry}: Notice that $(\mat{T} - \mat{S}) \vec{z} = - (\mat{S} - \mat{T}) \vec{z}$ for all $\vec{z} \in \mathbb{C}^{n}$. Naturally if $\vec{w}$ is the critical vector of $\mat{T} - \mat{S}$, then $- \vec{w}$ is the critical vector of $\mat{S} - \mat{T}$; thus
+			\item \textbf{Symmetry}: Notice that $(\mat{T} - \mat{S}) \vec{x} = - (\mat{S} - \mat{T}) \vec{x}$ for all $\vec{x} \in X$. Naturally if $\vec{w}$ is the critical vector of $\mat{T} - \mat{S}$, then $- \vec{w}$ is the critical vector of $\mat{S} - \mat{T}$; thus
 			\[
 				\norm{\mat{T} - \mat{S}} = \norm{\vec{w}} = \norm{-\vec{w}} = \norm{\mat{S} - \mat{T}}.
 			\]	
-			\item \textbf{Triangle Inequality}: For all $\mat{R} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$,
+			\item \textbf{Triangle Inequality}: For all bounded $\mat{R} \in \mathcal{L}(X, Y)$,
 			\[
 				\norm{\mat{T - S}} = \norm{\mat{(T - R) + (R - S)}} \le \norm{\mat{T - R}} + \norm{\mat{R - S}}.
 			\]
 		\end{enumerate}
-		We conclude that the matrix norm is a metric of $\mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$.
+		We conclude that the matrix norm is a metric of the bounded matricies of $\mathcal{L}(X, Y)$.
 	\end{proof}
 \end{adjustwidth}
 
@@ -103,32 +103,37 @@ It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}
 
 \subsection{Properties of Linear Maps}
 
-We will denote the canonical basis of $\mathbb{C}^{n}$ as $\vec{e}_{1}, \ldots, \vec{e}_{n}$.
+\begin{theorem}
+  All linear maps in $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ are bounded.
+\end{theorem}  
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    It suffices to show that $\mat{T}$ is bounded on the closed unit ball. Suppose that $\vec{z} = (z_{1}, \ldots, z_{n})$ has norm $1$ or smaller; then $\abs{z_{i}} \le 1$ for each $i$, so
+		\begin{align*}
+      \norm{\mat{T} \vec{z}} &\le \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \\
+			&\le \norm{\mat{T} \vec{e}_{1}} + \cdots + \norm{\mat{T} \vec{e}_{n}}.
+		\end{align*}
+    The right-hand side is a constant, so $\mat{T}$ is bounded on the closed unit ball.
+  \end{proof}
+\end{adjustwidth}
 
 \begin{theorem}
-	If $\mat{T} \in \mathcal{L}(\mathbb{R}^{n}, \mathbb{R}^{m})$, then $\norm{\mat{T}} < \infty$ and $\mat{T}$ is a uniformly continuous mapping of $\mathbb{R}^{n}$ into $\mathbb{R}^{n}$.
+	If $\mat{T} \in \mathcal{L}(X, Y)$ is bounded, then $\mat{T}$ is uniformly continuous.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
     \begin{proof}
-		Let $\vec{z} = (z_{1}, \ldots z_{n})$ be the critical vector of $\mat{T}$. Then $\abs{z_{i}} \le 1$ for each $i$, so
+		Let $\mat{T}$ be bounded. For all $\epsilon > 0$, then $0 \le \norm{\vec{x} - \vec{y}} < \tfrac{\epsilon}{\norm{\mat{T}}}$ implies
 		\begin{align*}
-			\norm{\mat{T}} &= \norm{\mat{T} \vec{z}} \\
-			&\le \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \\
-			&\le \norm{\mat{T} \vec{e}_{1}} + \cdots + \norm{\mat{T} \vec{e}_{n}} \\
-			&< \infty.
-		\end{align*}
-		As per uniform continuity: realize that if $\epsilon > 0$, then $0 \le \norm{\vec{z} - \vec{w}} < \tfrac{\epsilon}{\norm{\mat{T}}}$ implies
-		\begin{align*}
-			\norm{\mat{T} \vec{z} - \mat{T} \vec{w}} &\le \norm{\mat{T}} \cdot \norm{\vec{z} - \vec{w}} < \norm{\mat{T}} \left( \frac{\epsilon}{\norm{\mat{T}}} \right) = \epsilon.
+			\norm{\mat{T} \vec{x} - \mat{T} \vec{y}} &\le \norm{\mat{T}} \cdot \norm{\vec{x} - \vec{y}} < \norm{\mat{T}} \left( \frac{\epsilon}{\norm{\mat{T}}} \right) = \epsilon.
 		\end{align*}
 		Thus, $\mat{T}$ is uniformly continuous.
 	\end{proof}
 \end{adjustwidth}
 
-Let $\Omega$ be the set of all linear operators on $\mathbb{C}^{n}$. Recall from Linear Algebra that an operator $\mat{T} \in \mathcal{L}(\mathbb{C}^{n})$ is invertible if and only if $\range \mat{T} = \mathbb{C}^{n}$.
+Let $\Omega$ be the set of all bounded, invertible linear operators on $X$. Recall from Linear Algebra that an operator $\mat{T} \in \mathcal{L}(\mathbb{C}^{n})$ is invertible if and only if $\range \mat{T} = \mathbb{C}^{n}$.
 
 \begin{theorem}
-	If $\mat{T} \in \Omega$, and $\mat{S} \in \mathcal{L}(\mathbb{C}^{n})$, then
+	If $\mat{T} \in \Omega$ and $\mat{S} \in \mathcal{L}(X)$ are both bounded, then
 	\[
 		\norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}} < 1
 	\]
@@ -136,13 +141,13 @@ Let $\Omega$ be the set of all linear operators on $\mathbb{C}^{n}$. Recall from
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
 	\begin{proof}
-		Suppose $\mat{S} \notin \Omega$. Then there exists $\vec{z} \in \mathbb{C}^{n}$ of norm $1$ such that $\mat{S} \vec{z} = \vec{0}$, so
+		Suppose $\mat{S} \notin \Omega$. Then there exists $\vec{x} \in X$ of norm $1$ such that $\mat{S} \vec{x} = \vec{0}$, so
 		\begin{align*}
-			1 &= \norm{\vec{z}} \\
-			&= \norm{\mat{T}^{-1}\mat{T} \vec{z}} \\
-			&\le \norm{\mat{T}^{-1}} \cdot \norm{\mat{T} \vec{z}} \\
-			&= \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} \vec{z} - \mat{T} \vec{z}} \\
-			&\le \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}} \cdot \norm{\vec{z}} \\
+			1 &= \norm{\vec{x}} \\
+			&= \norm{\mat{T}^{-1}\mat{T} \vec{x}} \\
+			&\le \norm{\mat{T}^{-1}} \cdot \norm{\mat{T} \vec{x}} \\
+			&= \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} \vec{x} - \mat{T} \vec{x}} \\
+			&\le \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}} \cdot \norm{\vec{x}} \\
 			&= \norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}}.
 		\end{align*}
 		Taking the contrapositive yields the desired result.

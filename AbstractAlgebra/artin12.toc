@@ -7,3 +7,5 @@
 \contentsline {section}{\numberline {3}Euclidean Domain}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Definition}{5}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Examples}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Relation with Principal Ideal Domains}{6}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Greatest Common Divisor}{7}{section.4}%

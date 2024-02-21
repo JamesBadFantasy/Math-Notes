@@ -18,7 +18,10 @@
 \newcommand{\Ker}{\operatorname{Ker}}
 \newcommand{\Coker}{\operatorname{Coker}}
 \newcommand{\Ann}{\operatorname{Ann}}
+
 \renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
 
 \title{MATH-UA 349: Honors Algebra II}
 \author{James Pagan}
@@ -763,7 +766,105 @@ where either $r = 0$ or $\sigma(r) < \sigma(a)$. It is clear that any Euclidean 
 
 As an example, $\mathbb{Z} [\sqrt{-5}]$ satisfies factorization, but it is not unqiue: $6 = 2 \times 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})$
 
+\newpage
 
+% --------------------------------------------- %
+
+\section{Modules}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+An \textbf{R-module} over a commutative ring $R$ is an abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
+\begin{enumerate}
+	\item $1x = x$;
+	\item $(ab)x = a(bx)$;
+	\item $a(x + y) = ax + ay$;
+	\item $(a + b)x = ax + bx$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Examples}
+
+\begin{itemize}
+	\item If $R$ is a ring, $R[x]$ is a module.
+	\item All ideals $\mathfrak{a}$ of $R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
+	\item If $R$ is a field, $R$-modules are $R$-vector spaces. In fact, the axioms above are identical to the vector axioms, defined over commutative rings instead of fields.
+	\item Abelian groups $G$ are precisely the modules over $\mathbb{Z}$.
+  \item Given a $F$-vector space $V$ and $\mat{T} \in \mathcal{L}(\mathbb{F})$, we may regard $V$ as an $F[x]$-module as follows: if $f(x) = a_{n}x^{n} + \cdots + a_{0}$, we have
+  \[
+    f(x) \, \vec{v} \quad \stackrel{\text{def}}{=} \quad  a_{n} \mat{T}^{n}\vec{v} + \cdots + a_{n} \vec{v}.
+  \]
+\end{itemize}
+
+% --------------------------------------------- %
+
+\subsection{Homomorphisms of Modules}
+
+A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is $R$-linear) if for all $a \in R$ and $x, y \in M$,
+\begin{align*}
+	f(x + y) & = f(x) + f(y) \\
+	f(ax)    & = a f(x).
+\end{align*}
+Thus, an $R$-module homomorphism $f$ is a homomorphism of abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear transformation. A bijective $R$-homomorphism is called an $R$-isomorphism.
+
+% --------------------------------------------- %
+
+\subsection{Submodules and Quotient Modules}
+
+A \textbf{submodule} $M'$ of $M$ is an abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. The following proof outlines a construction of \textbf{quotient modules}:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The abelian quotient group $M / M'$ is an $R$-module under the opreation $r(x + M') = rx + M'$.
+	\end{theorem}
+	\begin{proof}
+		We must perform four rather routine calculations:
+		\begin{enumerate}
+			\item For all $x \in M$, we have that $1(x + M') = 1x + M' = x + M'$.
+			\item For all $r, s \in R$ and $x \in M$, we have that $r(s(x + M')) = r(sx + M') = rsx + M' = (rs)(x + M')$.
+			\item For all $r, s \in R$ and $x \in M$, we have that $(r + s)(x + M') = (r + s)x + M' = (rx + sx) + M' = (rx + M') + (sx + M') = r(x + M') + s(x + M')$.
+			\item For all $r \in R$ and $x, y \in M$, we have that $r((x + M') + (y + M')) = r((x + y) + M') = r(x + y) + M' = (rx + M') + (ry + M') = r(x + M') + r(y + M)'$.
+		\end{enumerate}
+		Therefore, $M / M'$ is an $R$-module.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Assorted Submodules}
+
+Let $f : M \to N$ be an $R$-module homomorphism. Then the \textbf{kernel} and \textbf{image} of $f$ are defined as follows:
+\[
+	\Ker f = \{ x \mid x \in M, f(x) = 0 \} \qquad \text{and} \qquad \Im f = f(M),
+\]
+and are submodules of $M$ and $N$ respectively. The \textbf{cokernel} of $f$ is defined as follows:
+\[
+	\Coker f = N \,/\, \Im f.
+\]
+If $M'$ is a submodule of $M$ such that $M' \subseteq \Ker f$, then $f$ induces a natural homomorphism $\bar{f} : M / M' \to N$ defined by $\bar{f}(x + M') = f(x)$. The kernel of $\bar{f}$ is $\Ker f \,/\, M'$ --- the distinct cosets of $M'$ in the kernel of $f$. Taking $M' = \Ker f$ yields the First Isomorphism Theorem for $R$-modules:
+\[
+	M \,/\, \Ker f \cong \Im f.
+\]
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Finitely-Generated Modules}
+
+An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set of \textbf{generators} $x_{1}, \ldots, x_{n}$ such that $M = Rx_{1} + \cdots + Rx_{n}$, where $Rx_{i}$ denotes the set $\{ rx_{i} \mid r \in R \}$ ($i \in \{ 1, \ldots, n \}$).
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose $(m_{1}, \ldots, m_{k}) \in M^{k}$, and define $\phi$
+  \end{theorem}
+  \begin{proof}
+    
+  \end{proof}
+\end{adjustwidth}
 
 % --------------------------------------------- %
 

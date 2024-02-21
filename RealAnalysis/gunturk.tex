@@ -19,6 +19,9 @@
 
 \newcommand{\conjugate}[1]{\overline{#1}}
 
+\newcommand{\s}{$\\ \text{ }$}
+
+
 \title{MATH-UA 329: Honors Analysis II}
 \author{James Pagan}
 \date{January 2024}
@@ -467,13 +470,130 @@ Since open sets are the same for equivalent metrics, we obtain that there is onl
 \]
 Thus the set of all $\vec{e}_{1}, \ldots$ contains no convergent subsequence, so it is not compact. Thus the Heine-Borel Theorem fails for $\ell^{p}(\mathbb{N})$.
 
+\newpage
+
 % --------------------------------------------- %
 
 \subsection{Linear Maps on Normed Vector Spaces}
 
-A linear map $T : (X, d_{X}) \to (Y, d_{Y})$ between normed vector spaces is continuous if and only if it is continuous at $0$.
+Let $(X, d_{X})$ and $(Y, d_{Y})$ be normed vector spaces. The set $\mathcal{L}(X, Y)$ denotes the set of all linear maps between normed vector spaces $X$ and $Y$. With the following operations, $\mathcal{L}(X, Y)$ is a vector space: for $\mat{T}_{1}, \mat{T}_{2} \in \mathcal{L}(X, Y)$,
+\begin{align*}
+  (\mat{T}_{1} + \mat{T}_{2})\vec{x} &= \mat{T}_{1} \vec{x} + \mat{T}_{2} \vec{x} \\
+           (\lambda \mat{T}) \vec{x} &= \lambda (\mat{T} \vec{x}).
+\end{align*}
 
-Also, $c_{00}$ is not continuous at $0$.
+Linear maps between normed vector spaces are not necessarily continuous!
+
+\begin{theorem}
+  Let $(X, d_{X})$ and $(Y, d_{Y})$ be normed vector spaces. A linear map $\mat{T} \in \mathcal{L}(X, Y)$ is continuous if and only if it is continuous at $\vec{0}_{X}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Suppose that $\mat{T}$ is continuous at $\vec{0}$. Then
+    \[
+      \lim\limits_{\vec{x} \to \vec{y}} \mat{T} \vec{x} \, = \,  \lim\limits_{\vec{x} - \vec{y} \to \vec{0}} \mat{T} \vec{x} \, = \, \lim\limits_{\vec{x} - \vec{y} \to \vec{0}} (\mat{T}(\vec{x} - \vec{y})) + \mat{T} \vec{y} \, = \, \vec{0} + \mat{T}\vec{y} \, = \, \mat{T} \vec{y}.
+    \]
+    Therefore, $\mat{T}$ is continuous at all $\vec{x} \in X$.
+  \end{proof}
+\end{adjustwidth}
+\begin{corollary}
+  $\mat{L} \in \mathcal{L}(X, Y)$ is continuous if and only if it is uniformly continuous.
+\end{corollary}
+
+\subsubsection{Bounded Linear Operators}
+
+Nonzero linear maps are never ``bounded''; if $\mat{T} \in \mathcal{L}(X, Y)$ is nonzero, let $\mat{T} \vec{x} \ne 0$; then nonzero $\lambda \in \mathbb{C}$ implies
+\[
+  \norm{\lambda \mat{T}\vec{x}} = \abs{\lambda} \norm{\mat{T} \vec{x}} \ge 0
+\]
+can attain any nonzero complex value. Thus we formulate an alternative, relaxed condition of boundedness: $\mat{T}$ is \textbf{bounded} if it maps bounded sets in $X$ to bounded sets in $Y$. Equivalently, $\mat{T}$ is bounded if for a bounded set $\Omega \subseteq X$, there exists $r > 0$ such that
+\[
+  \mat{T}(\Omega) \subseteq B_{R}[0],
+\]
+where $B_{r}[0]$ is the closed ball of radius $r$. It is clear that $\mat{T}$ is bounded if and only if $\mat{T}$ is bounded over the unit ball.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    All linear maps in $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ are bounded.
+  \end{theorem}  
+  \begin{proof}
+    It suffices to show that $\mat{T}$ is bounded on the closed unit ball. Suppose that $\vec{z} = (z_{1}, \ldots, z_{n})$ has norm $1$ or smaller; then $\abs{z_{i}} \le 1$ for each $i$, so
+		\begin{align*}
+      \norm{\mat{T} \vec{z}} &\le \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \\
+			&\le \norm{\mat{T} \vec{e}_{1}} + \cdots + \norm{\mat{T} \vec{e}_{n}}.
+		\end{align*}
+    Letting this constant be $r$ yields that $\mat{T}$ is bouned on the closed unit ball.
+  \end{proof}
+\end{adjustwidth}
+
+\subsection{Matrix Norm}
+
+If $\mat{T}$ is bounded, the \textbf{norm} of $\mat{T}$ is as follows:
+\[
+	\norm{\mat{T}} = \sup \{ \norm{\mat{T} \vec{z}} \, \mid \, \vec{z} \in \mathbb{C}^{n}, \norm{\vec{z}} \le 1\}.
+\]
+Notice that the matrix norm is nonnegative. The \textbf{critical vector} of $\mat{T}$ is the vector $\vec{z} \in X$ such that $\norm{\vec{z}} \le 1$ and $\norm{\mat{T} \vec{z}} = \norm{\mat{T}}$; the critical vector always has norm $1$. Naturally, $\norm{\mat{T} \vec{z}} \le \norm{\mat{T}} \cdot \norm{\vec{z}}$; since equality is attained, $\norm{\mat{T} \vec{z}} \le \lambda \vec{z}$ implies $\norm{\vec{T}} \le \lambda$.
+
+\begin{theorem}
+	If $\mat{T}, \mat{S} \in \mathcal{L}(X, Y)$, then $\norm{\mat{T} + \mat{S}} \le \norm{\mat{T}} + \norm{\mat{S}}$. If $X = Y$, then $\norm{\mat{TS}} \le \norm{\mat{T}} \norm{\mat{S}}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Let $\vec{z}$ be the critical vector of $\mat{T} + \mat{S}$. Then
+		\[
+			\norm{\mat{T} + \mat{S}} = \norm{(\mat{T} + \mat{S})\vec{z}} \le \norm{\mat{T} \vec{z}} + \norm{\mat{S} \vec{z}} \le \norm{\mat{T}} \norm{\vec{z}} + \norm{\mat{S}} \norm{\vec{z}} = \norm{\mat{T}} + \norm{\mat{S}}.
+		\]
+		Now suppose $X = Y$ and let $\vec{w}$ be the critical vector of $\mat{TS}$. Then
+		\[
+			\norm{\mat{TS}} = \norm{\mat{TS} \vec{w}} \le \norm{\mat{T}} \norm{\mat{S} \vec{w}} \le \norm{\mat{T}} \norm{\mat{S}} \norm{\vec{w}} = \norm{\mat{T}} \norm{\mat{S}}.
+		\]
+		This completes the proof.
+	\end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+  The matrix norm is a metric of all bounded linear maps in $\mathcal{B}(X, Y)$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+	\begin{proof}
+		Suppose $\mat{T}, \mat{S} \in \mathcal{B}(X, Y)$ are bounded. We must perform four rather routine calculations:
+		\begin{enumerate}
+			\item \textbf{Positivity}: The matrix norm is nonnegative. If $\norm{\mat{T} - \mat{S}} = 0$, then $\norm{\vec{x}} = 1$ implies $(\mat{T} - \mat{S}) \vec{x} = \vec{0}$; hence for \textit{all} $\vec{x} \in X$,
+			\[
+				(\mat{T} - \mat{S}) \vec{x} = \norm{\vec{x}} \left( (\mat{T} - \mat{S}) \left( \frac{\vec{\vec{x}}}{\norm{\vec{x}}} \right) \right) = \norm{\vec{x}} (0) = 0;
+			\]	
+			thus $\mat{T} - \mat{S} = \mat{0}$ and $\mat{T} = \mat{T}$.
+			\item \textbf{Symmetry}: Notice that $(\mat{T} - \mat{S}) \vec{x} = - (\mat{S} - \mat{T}) \vec{x}$ for all $\vec{x} \in X$. Naturally if $\vec{w}$ is the critical vector of $\mat{T} - \mat{S}$, then $- \vec{w}$ is the critical vector of $\mat{S} - \mat{T}$; thus
+			\[
+				\norm{\mat{T} - \mat{S}} = \norm{\vec{w}} = \norm{-\vec{w}} = \norm{\mat{S} - \mat{T}}.
+			\]	
+			\item \textbf{Triangle Inequality}: For all bounded $\mat{R} \in \mathcal{L}(X, Y)$,
+			\[
+				\norm{\mat{T - S}} = \norm{\mat{(T - R) + (R - S)}} \le \norm{\mat{T - R}} + \norm{\mat{R - S}}.
+			\]
+		\end{enumerate}
+		We conclude that the matrix norm is a metric of the bounded matricies of $\mathcal{L}(X, Y)$.
+	\end{proof}
+\end{adjustwidth}
+
+It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}}$ for all $\lambda \in \mathbb{C}$ as well.
+
+\newpage
+
+\begin{theorem}
+	If $\mat{T} \in \mathcal{L}(X, Y)$ is bounded, then $\mat{T}$ uniformly continuous.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Let $\mat{T}$ be bounded. If $\epsilon > 0$, then $0 \le \norm{\vec{z} - \vec{w}} < \tfrac{\epsilon}{\norm{\mat{T}}}$ implies
+		\begin{align*}
+			\norm{\mat{T} \vec{z} - \mat{T} \vec{w}} &\le \norm{\mat{T}} \cdot \norm{\vec{z} - \vec{w}} < \norm{\mat{T}} \left( \frac{\epsilon}{\norm{\mat{T}}} \right) = \epsilon.
+		\end{align*}
+		Thus, $\mat{T}$ is uniformly continuous.
+	\end{proof}
+\end{adjustwidth}
+
+\textbf{BOUNDED IF AND ONLY IF ITS CONTINUOUS!}
 
 % --------------------------------------------- %
 
