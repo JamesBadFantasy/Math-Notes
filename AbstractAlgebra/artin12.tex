@@ -14,13 +14,20 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{claim}{Claim}
 
+\newcommand{\s}{$\\ \text{ }$}
+
 \title{Artin: Factoring}
 \author{James Pagan}
 \date{February 2024}
 
+% --------------------------------------------- %
+
 \begin{document}
 
 \maketitle
+\begin{abstract}
+  The goal of this section is to characterize the polynomial ring $R[x_{1}, \ldots, x_{n}]$. In pursuit of this, we explore the properties of three special types of integral domains: Unique Factorization Domains, Principal Ideal Domains, and Euclidean Domains.
+\end{abstract}
 \tableofcontents
 \newpage
 
@@ -181,6 +188,40 @@ Three helpful facts about principal ideal domains are as follows:
 
 % --------------------------------------------- %
 
+\subsection{Greatest Common Divisor}
+
+Let $R$ be an integral domain, and select $a, b \in R$. A \textbf{greatest common divisor} of $a$ and $b$ is an element $d \in R$ such that:
+\begin{enumerate}
+  \item $d \mid a$ and $d \mid b$.
+  \item $c \mid a$ and $c \mid b$ implies $c \mid d$.
+\end{enumerate}
+It is clear that GCDs are unique up to association by Condition 2 --- thus we can speak of \textit{the} GCD. If the only greatest common divisors of $a$ and $b$ are units, we set $\gcd(a, b) = 1$ and call $a, b$ \textbf{relatively prime}.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose $R$ is a principal ideal domain. Then the generator of the ideal $(a, b)$ is the greatest common divisor of $a, b$.
+  \end{theorem}
+  \begin{proof}
+    It is clear that $a, b \in (d)$ implies $d \mid a$ and $d \mid b$. We need only demonstrate the second condition.  Thus, suppose $c \mid a$ and $c \mid b$ --- hence $(a) \subseteq (c)$ and $(b) \subseteq (c)$. Thus
+    \[
+      (d) \, = \, (a) + (b) \subseteq (c),
+    \]
+    so $c \mid d$. We conclude that $\gcd(a, b) = d$.
+  \end{proof}
+\end{adjustwidth}
+
+It is now easy to demonstrate that $\gcd(a_{1}, a_{2}, \ldots, a_{n}) = \gcd(a_{1}, \gcd(a_{2}, \ldots, a_{n}))$. This yields the following lemma:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}[Bezout's Identity]
+    If $R$ is a principal ideal domain and $\gcd(a_{1}, \ldots, a_{n}) = d$, there exist integers $b_{1}, \ldots, b_{n}$ such that $d \, = \, a_{1}b_{1} + \cdots + a_{n}b_{n}$. \s
+  \end{lemma}
+\end{adjustwidth}
+
+Much simpler than the proof in your 2nd Conest Math Notebook, right?
+
+% --------------------------------------------- %
+
 \section{Euclidean Domain}
 
 % --------------------------------------------- %
@@ -260,25 +301,19 @@ We have thus attained a sequence of types of rings:
 
 % --------------------------------------------- %
 
-\section{Greatest Common Divisor}
+\section{The Polynomial Ring \texorpdfstring{$\mathbb{Z}[x]$}{Z[x]}}
 
-Let $R$ be an integral domain, and select $a, b \in R$. A \textbf{greatest common divisor} of $a$ and $b$ is an element $d \in R$ such that:
+We have proved the following facts about polynomial rings:
 \begin{enumerate}
-  \item $d \mid a$ and $d \mid b$.
-  \item $c \mid a$ and $c \mid b$ implies $c \mid d$.
+  \item $F[x]$ is a Euclidean domain.
+  \item $F[x_{1}, \ldots, x_{n}]$ is a unique factorization domain and Noetherian.
 \end{enumerate}
-It is clear that GCDs are unique up to association by Condition 2 --- thus we can speak of \textit{the} GCD. If the only greatest common divisors of $a$ and $b$ are units, we set $\gcd(a, b) = 1$ and call $a, b$ \textbf{relatively prime}.
-
-\begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}
-    Suppose $R$ is a principal ideal domain. Then the generator of the ideal $(a, b)$ is the greatest common divisor of $a, b$.
-  \end{theorem}
-  \begin{proof}
-    It is clear that $a, b \in (d)$ implies $d \mid a$ and $d \mid b$.
-  \end{proof}
-\end{adjustwidth}
+Polynomial rings over arbitrary commutative rings obey significantly fewer restrictions. This section characterizes the polynomial ring $\mathbb{Z}[x]$.
 
 % --------------------------------------------- %
 
+\subsection{Primative Polynomials}
+
+% --------------------------------------------- %
 
 \end{document}
