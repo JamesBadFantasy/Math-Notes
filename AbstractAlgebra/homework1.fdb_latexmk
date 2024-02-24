@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1706892831 "homework1.tex" "homework1.pdf" "homework1" 1706892832 0
+["pdflatex"] 1708611389 "homework1.tex" "homework1.pdf" "homework1" 1708611390 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbi1095.tfm" 1704400182 3072 19a65fbc725cfc66f5a5fc183b9d418b ""
@@ -131,10 +131,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "homework1.aux" 1706892832 2079 d7b51d2ddbb229fc4f6b1fd0709cce48 "pdflatex"
-  "homework1.out" 1706892832 1345 1bd23df4f371601557149870b193e3ee "pdflatex"
-  "homework1.tex" 1706892827 19933 cdd99a31281b6a2fc41524a04a5d4f96 ""
-  "homework1.toc" 1706892832 950 baf20843018fcccf0a9b9e49480c7bb3 "pdflatex"
+  "homework1.aux" 1708611390 2079 d7b51d2ddbb229fc4f6b1fd0709cce48 "pdflatex"
+  "homework1.out" 1708611390 1345 1bd23df4f371601557149870b193e3ee "pdflatex"
+  "homework1.tex" 1707344308 19914 0692679e7794c4168595bac0d047acd3 ""
+  "homework1.toc" 1708611390 950 baf20843018fcccf0a9b9e49480c7bb3 "pdflatex"
   (generated)
   "homework1.aux"
   "homework1.log"

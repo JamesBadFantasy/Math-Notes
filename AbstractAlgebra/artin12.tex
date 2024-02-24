@@ -303,16 +303,59 @@ We have thus attained a sequence of types of rings:
 
 \section{The Polynomial Ring \texorpdfstring{$\mathbb{Z}[x]$}{Z[x]}}
 
-We have proved the following facts about polynomial rings:
+We have proved the following facts about polynomial rings: for any field $F$,
 \begin{enumerate}
   \item $F[x]$ is a Euclidean domain.
   \item $F[x_{1}, \ldots, x_{n}]$ is a unique factorization domain and Noetherian.
 \end{enumerate}
-Polynomial rings over arbitrary commutative rings obey significantly fewer restrictions. This section characterizes the polynomial ring $\mathbb{Z}[x]$.
+Polynomial rings over arbitrary commutative rings obey significantly fewer restrictions. This section characterizes the polynomial ring $\mathbb{Z}[x]$. There are two main tools in its study: first is the embedding
+\[
+  \mathbb{Z}[x] \subset \mathbb{Z}[x],
+\]
+and second is reduction modulo some prime $p$: the mappings $\psi : \mathbb{Z}[x] \to \mathbb{F}_{p}[x]$.
 
 % --------------------------------------------- %
 
 \subsection{Primative Polynomials}
+
+The following lemma is quite obvious:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    Let $f(x) = a_{n}x^{n} + \cdots + a_{0}$ have integer coefficents. Then the following are equivalent:
+    \begin{enumerate}
+      \item $p$ divides each $a_{i}$.
+      \item $p$ divides $f$ in $\mathbb{Z}[x]$
+      \item $f$ lies in the kernel of $\psi_{p}$. \s
+    \end{enumerate}
+  \end{lemma}
+\end{adjustwidth}
+
+A polynomial $f \in \mathbb{Z}[x]$ is called \textbf{primative} if the GCD of its coefficents is $1$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    Let $f(x) = a_{n}x^{n} + \cdots + a_{0}$ have integer coefficents. Then the following are equivalent:
+    \begin{enumerate}
+      \item $f$ is primative.
+      \item $f$ is not divisible by any prime $p$.
+      \item $\psi_{p}(f) \ne 0$ for all primes $p$. \s
+    \end{enumerate}
+  \end{lemma}
+\end{adjustwidth}
+
+Observe that an integer $n \in \mathbb{Z}[x]$ is a prime element if and only if it is prime. Thus $fg \in (p)$ implies that $f \in (p)$ or $g \in (p)$: stated differently, $p \mid fg$ implies $p \mid f$ or $p \mid g$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}[Gauss' Lemma]
+    The product of primative polynomials is primative.
+  \end{lemma}
+  \begin{proof}
+    Suppose that $fg$ is not primative; then $p \mid fg$ for some prime integer $p$. Thus $p \mid f$ or $p \mid g$, so one of $f$ and $g$ must not be primative. Taking the contrapositive yields the desired result.
+  \end{proof}
+\end{adjustwidth}
+
+That would be an insanely long number theory problem, in terms of a crazy sequence of equations --- and yet it falls so elegantly to the properties of prime ideals!
 
 % --------------------------------------------- %
 

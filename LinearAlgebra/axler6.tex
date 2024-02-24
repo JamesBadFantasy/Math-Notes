@@ -53,16 +53,16 @@ An \textbf{inner product} over a complex (or real) vector space $V$ is a map $\e
 \end{enumerate}
 As $z = \conjugate{z}$ if and only if $z$ is real, $(1)$ implies that $\ev{\vec{v}, \vec{v}} \in \mathbb{R}$; hence, $(3)$ is a valid condition. An \textbf{inner product space} is a vector space $V$ over $\mathbb{R}$ or $\mathbb{C}$. We will exclusively prove theorems about complex vector spaces; proofs for inner product spaces over $\mathbb{R}$ are identical.
 
-\begin{theorem}
-	Suppose $V$ is an inner product space. Then the following five properties hold: for each $\vec{u}, \vec{v}, \vec{w} \in V$ and $\lambda \in \mathbb{C}$:
-	\begin{enumerate}
-		\item The function $f(\vec{v}) = \ev{\vec{v}, \vec{w}}$ is a linear map from $V$ to $\mathbb{C}$.
-		\item $\ev{\vec{0}, \vec{v}} = \ev{\vec{v}, \vec{0}} = 0$.
-		\item $\ev{\vec{u}, \vec{v} + \vec{w}} = \ev{\vec{u}, \vec{v}} + \ev{\vec{u}, \vec{w}}$.
-		\item $\ev{\vec{v}, \lambda \vec{w}} = \conjugate{\lambda} \ev{\vec{v}, \vec{w}}$
-	\end{enumerate}
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+	  Suppose $V$ is an inner product space. Then the following five properties hold: for each $\vec{u}, \vec{v}, \vec{w} \in V$ and $\lambda \in \mathbb{C}$:
+	  \begin{enumerate}
+		  \item The function $f(\vec{v}) = \ev{\vec{v}, \vec{w}}$ is a linear map from $V$ to $\mathbb{C}$.
+		  \item $\ev{\vec{0}, \vec{v}} = \ev{\vec{v}, \vec{0}} = 0$.
+		  \item $\ev{\vec{u}, \vec{v} + \vec{w}} = \ev{\vec{u}, \vec{v}} + \ev{\vec{u}, \vec{w}}$.
+		  \item $\ev{\vec{v}, \lambda \vec{w}} = \conjugate{\lambda} \ev{\vec{v}, \vec{w}}$
+	  \end{enumerate}
+  \end{theorem}
 	\begin{proof}
 		Let $\vec{u}$, $\vec{v}$, and $\vec{w}$ be arbitrary vectors of $V$ and let $\lambda$ be an arbitrary scalar of $\mathbb{C}$. For (1), note that
 		\[
@@ -92,14 +92,15 @@ The \textbf{norm} of a vector $\vec{v}$ in an inner product space $V$ is defined
 \[
 	\norm{\vec{v}} = \sqrt{\ev{\vec{v}, \vec{v}}}.
 \]
-\begin{theorem}
-	Suppose $V$ is an inner product space. Then the following properties hold for all $\vec{v} \in V$ and $\lambda \in \mathbb{C}$:
-	\begin{itemize}
-		\item $\norm{\vec{v}} = 0$ if and only if $\vec{v} = \vec{0}$.
-		\item $\norm{\lambda \vec{v}} = \abs{\lambda} \norm{\vec{v}}$.
-	\end{itemize}
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+We may also define normed vector spaces, which utilize a norm without an inner product---but this lies beyond the scope of this document.
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+	  Suppose $V$ is an inner product space. Then the following properties hold for all $\vec{v} \in V$ and $\lambda \in \mathbb{C}$:
+	  \begin{itemize}
+		  \item $\norm{\vec{v}} = 0$ if and only if $\vec{v} = \vec{0}$.
+		  \item $\norm{\lambda \vec{v}} = \abs{\lambda} \norm{\vec{v}}$.
+	  \end{itemize}
+  \end{theorem}
 	\begin{proof}
 		$(1)$ follows from the fact that
 		\begin{align*}
@@ -117,13 +118,13 @@ The \textbf{norm} of a vector $\vec{v}$ in an inner product space $V$ is defined
 
 Two vectors $\vec{v}$ and $\vec{w}$ in an inner product space $V$ are \textbf{orthogonal} if $\ev{\vec{v}, \vec{w}} = 0$. Clearly, every vector is orthogonal to $\vec{0}$ --- and the only vector orthogonal to itself is also $\vec{0}$.
 
-\begin{theorem}
-	Suppose $V$ is an inner product space. Then if $\vec{v}, \vec{w} \in V$ are orthogonal, then
-	\[
-		\norm{\vec{v} + \vec{w}}^{2} = \norm{\vec{v}}^{2} + \norm{\vec{w}}^{2}.
-	\]
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Pythagorean Theorem]
+	  Suppose $V$ is an inner product space. Then if $\vec{v}, \vec{w} \in V$ are orthogonal, then
+	  \[
+		  \norm{\vec{v} + \vec{w}}^{2} = \norm{\vec{v}}^{2} + \norm{\vec{w}}^{2}.
+	  \]
+  \end{theorem}
 	\begin{proof}
 		Suppose $\ev{\vec{v}, \vec{w}} = 0$. Then
 		\begin{align*}
@@ -136,13 +137,13 @@ Two vectors $\vec{v}$ and $\vec{w}$ in an inner product space $V$ are \textbf{or
 	\end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-	Suppose $\vec{v} \ne \vec{0}$ and $\vec{w}$ are vectors in an inner product space. Then setting $c = \frac{\ev{\vec{v}, \vec{w}}}{\norm{\vec{w}}^{2}}$ and $\vec{u} = \vec{v} - \frac{\ev{\vec{v}, \vec{w}}}{\norm{\vec{w}}^{2}} \vec{w}$ yields
-	\[
-		\vec{v} = c \vec{w} + \vec{u} \qquad \text{and} \qquad \ev{\vec{u}, \vec{w}} = 0.
-	\]
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+	  Suppose $\vec{v} \ne \vec{0}$ and $\vec{w}$ are vectors in an inner product space. Then setting $c = \frac{\ev{\vec{v}, \vec{w}}}{\norm{\vec{w}}^{2}}$ and $\vec{u} = \vec{v} - \frac{\ev{\vec{v}, \vec{w}}}{\norm{\vec{w}}^{2}} \vec{w}$ yields
+	  \[
+		  \vec{v} = c \vec{w} + \vec{u} \qquad \text{and} \qquad \ev{\vec{u}, \vec{w}} = 0.
+	  \]
+  \end{theorem}
 	\begin{proof}
 		The result is a mere computation. Clearly $\vec{v} = c \vec{w} + \vec{u}$; as for the orthogonality,
 		\begin{align*}
@@ -157,14 +158,16 @@ Two vectors $\vec{v}$ and $\vec{w}$ in an inner product space $V$ are \textbf{or
 	\end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-	Suppose $V$ is an inner product space. Then for all $\vec{v}, \vec{w} \in V$,
-	\[
-		\abs{\ev{\vec{v}, \vec{w}}} \le \norm{\vec{v}} \norm{\vec{w}},
-	\]
-	with equality if and if one of $\vec{v}, \vec{w}$ is a scalar multiple of the other. 
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+The following inequality is the most important in all of mathematics.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Cauchy-Schwarz Inequality]
+	  Suppose $V$ is an inner product space. Then for all $\vec{v}, \vec{w} \in V$,
+	  \[
+		  \abs{\ev{\vec{v}, \vec{w}}} \le \norm{\vec{v}} \norm{\vec{w}},
+	  \]
+	  with equality if and if one of $\vec{v}, \vec{w}$ is a scalar multiple of the other. 
+  \end{theorem}
 	\begin{proof}
 		Enabled by Theorem 4, we consider the orthogonal decomposition below, defining $\vec{u}$ in the process:
 		\[
@@ -179,18 +182,18 @@ Two vectors $\vec{v}$ and $\vec{w}$ in an inner product space $V$ are \textbf{or
 			&= \abs{\ev{\vec{v}, \vec{w}}}^{2} + \norm{\vec{u}}^{2} \norm{\vec{w}}^{2} \\
 			&\ge \abs{\ev{\vec{v}, \vec{w}}}^{2}.
 		\end{align*} 
-		We achieve equality at the last ste if $\vec{w} = \vec{0}$ or if $\vec{u} = \vec{0}$; that is, if there exists $c \in \mathbb{C}$ such that $\vec{v} = c \vec{w}$. In either case, $\vec{v}$ and $\vec{w}$ are scalar multiples of each other. This proves the Cauchy-Schwarz Inequality.
+		We achieve equality at the last step if $\vec{w} = \vec{0}$ or if $\vec{u} = \vec{0}$; that is, if there exists $c \in \mathbb{C}$ such that $\vec{v} = c \vec{w}$. In either case, $\vec{v}$ and $\vec{w}$ are scalar multiples of each other. This proves the Cauchy-Schwarz Inequality.
 	\end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-	Suppose $V$ is an inner product space and $\vec{v}, \vec{w} \in V$. Then
-	\[
-		\norm{\vec{v}} + \norm{\vec{w}} \ge \norm{\vec{v} + \vec{w}},
-	\]
-	with equality if and only if one of $\vec{v}, \vec{w}$ is a nonnegative real multiple of the other.
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Triangle Inequality]
+	  Suppose $V$ is an inner product space and $\vec{v}, \vec{w} \in V$. Then
+	  \[
+		  \norm{\vec{v}} + \norm{\vec{w}} \ge \norm{\vec{v} + \vec{w}},
+	  \]
+	  with equality if and only if one of $\vec{v}, \vec{w}$ is a nonnegative real multiple of the other.
+  \end{theorem}
 	\begin{proof}
 		We have that
 		\begin{align*}
@@ -204,34 +207,29 @@ Two vectors $\vec{v}$ and $\vec{w}$ in an inner product space $V$ are \textbf{or
 			&= \sqrt{\norm{\vec{v} + \vec{w}}^{2}} \\
 			&= \norm{\vec{v} + \vec{w}}^{2},
 		\end{align*}
-		as required. Equality holds in the first inequality if and only if one of $\vec{v}, \vec{w}$ is a scalar multiple of the other; if this is the case, then $\ev{\vec{v}, \vec{w}}$ is a scalar multiple of $\vec{v}, \vec{v}$. The second inequality holds if this scalar multiple is positive --- proving the Triangle Inequality.
+		as required. Equality holds in the first inequality if and only if one of $\vec{v}, \vec{w}$ is a scalar multiple of the other; if this is the case, then $\ev{\vec{v}, \vec{w}}$ is a scalar multiple of $\ev{\vec{v}, \vec{v}}$. The second inequality holds if this scalar multiple is positive --- proving the Triangle Inequality.
 	\end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-		Suppose $V$ is an inner product space and $\vec{v}, \vec{w} \in V$. Then 
-		\[
-			\norm{\vec{v} + \vec{w}}^{2} + \norm{\vec{v} - \vec{w}}^{2} = 2 \left( \norm{\vec{v}}^{2} + \norm{\vec{w}}^{2} \right).
-		\]
-		This is called the Parallelogram Equality.
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Parallelogram Equality]
+		  Suppose $V$ is an inner product space and $\vec{v}, \vec{w} \in V$. Then 
+		  \[
+			  \norm{\vec{v} + \vec{w}}^{2} + \norm{\vec{v} - \vec{w}}^{2} = 2 \left( \norm{\vec{v}}^{2} + \norm{\vec{w}}^{2} \right).
+		  \]
+  \end{theorem}
 	\begin{proof}
 		We have that
 		\begin{align*}
 			\norm{\vec{v} + \vec{w}}^{2} + \norm{\vec{v} - \vec{w}}^{2} &= \ev{\vec{v} + \vec{w}, \vec{v} + \vec{w}} + \ev{\vec{v} - \vec{w}, \vec{v} - \vec{w}} \\ 
 			&= \ev{\vec{v}, \vec{v}} + \ev{\vec{v}, \vec{w}} + \ev{\vec{w}, \vec{v}} + \ev{\vec{w}, \vec{w}} \\
 			& \quad + \ev{\vec{v}, \vec{v}} - \ev{\vec{v}, \vec{w}} - \ev{\vec{w}, \vec{v}} + \ev{\vec{w}, \vec{w}} \\
-			&= 2 \left( \ev{\vec{v}, \vec{v}} + \ev{\vec{w}, \vec{w}} \right) \\
-			&= 2 \left( \norm{\vec{v}}^{2} + \norm{\vec{w}}^{2} \right),
+			&= 2 \ev{\vec{v}, \vec{v}} + 2 \ev{\vec{w}, \vec{w}} \\
+			&= 2 \norm{\vec{v}}^{2} + 2 \norm{\vec{w}}^{2},
 		\end{align*}
 		as required.
 	\end{proof}
 \end{adjustwidth}
-
-I'm gonna be honest, I think notes like these would look much prettier if I hand-wrote them. Admittedly, it's less efficent.
-
-\newpage
 
 % --------------------------------------------- %
 
@@ -249,13 +247,13 @@ A list of vectors is called \textbf{orthonormal} if each vector in the list has 
 \]
 for all $j, k \in \{ 1, \ldots, m \}$.
 
-\begin{theorem}
-	Suppose $\vec{e}_{1}, \ldots, \vec{e}_{n} \in V$ is an orthonormal list. Then for all $\lambda_{1}, \ldots, \lambda_{m} \in \mathbb{C}$,
-	\[
-		\norm{\lambda_{1} \vec{e}_{1} + \cdots + \lambda_{m} \vec{e}_{m}}^{2} = \abs{\lambda_{1}}^{2} + \cdots + \abs{\lambda_{m}}^{2}.
-	\]
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+	  Suppose $\vec{e}_{1}, \ldots, \vec{e}_{n} \in V$ is an orthonormal list. Then for all $\lambda_{1}, \ldots, \lambda_{m} \in \mathbb{C}$,
+	  \[
+		  \norm{\lambda_{1} \vec{e}_{1} + \cdots + \lambda_{m} \vec{e}_{m}}^{2} = \abs{\lambda_{1}}^{2} + \cdots + \abs{\lambda_{m}}^{2}.
+	  \]
+  \end{theorem}
 	\begin{proof}
 		Realize that $\ev{\lambda_{j} \vec{e}_{j}, \lambda_{k} \vec{e}_{k}} = \lambda_{j} \conjugate{\lambda_{k}} \ev{\vec{e}_{j}, \vec{e}_{k}} = 0$ for all $j, k \in \{ 1, \ldots, m \}$ and $j \ne k$. Then by the Pythagorean Theorem,
 		\[
@@ -265,10 +263,10 @@ for all $j, k \in \{ 1, \ldots, m \}$.
 	\end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-	Every orthonormal list of vectors is linearly independent.
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+	  Every orthonormal list of vectors is linearly independent.
+  \end{theorem}
 	\begin{proof}
 		Let $\vec{e}_{1}, \ldots, \vec{e}_{m} \in V$ be an orthonormal list of vectors. Suppose for contradiction that there exist $\lambda_{1}, \ldots, \lambda_{m} \in \mathbb{C}$, not all zero, such that
 		\[
@@ -282,13 +280,13 @@ for all $j, k \in \{ 1, \ldots, m \}$.
 	\end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-	Suppose $\vec{e}_{1}, \ldots, \vec{e}_{m} \in V$ is an orthonormal list of vectors. Then for all $\vec{v} \in V$,
-	\[
-		\abs{\ev{\vec{v}, \vec{e}_{1}}}^{2} + \cdots + \abs{\ev{\vec{v}, \vec{e}_{m}}}^{2} \le \norm{\vec{v}}^{2}.
-	\]
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+	  Suppose $\vec{e}_{1}, \ldots, \vec{e}_{m} \in V$ is an orthonormal list of vectors. Then for all $\vec{v} \in V$,
+	  \[
+		  \abs{\ev{\vec{v}, \vec{e}_{1}}}^{2} + \cdots + \abs{\ev{\vec{v}, \vec{e}_{m}}}^{2} \le \norm{\vec{v}}^{2}.
+	  \]
+  \end{theorem}
 	\begin{proof}
 		I am not sure, but I would like to think of a proof myself.
 	\end{proof}
@@ -300,15 +298,15 @@ An \textbf{orthonormal basis} of $V$ is an orthonormal list of vectors in $V$ th
 
 Each $\ev{\vec{v}, \vec{e}_{i}}$ for $i \in \{ 1, \ldots, n \}$ equals the $i$-th coordinate of $\vec{v}$ as written as a lienar combination of $\vec{e}_{1}, \ldots, \vec{e}_{n}$ --- an idea expanded upon in the following theorem:
 
-\begin{theorem}
-	Suppose $\vec{e}_{1}, \ldots, \vec{e}_{n} \in V$ is an orthonormal basis of $V$ and $\vec{v}, \vec{w} \in V$. Then the following three identities hold:
-	\begin{enumerate}
-		\item $\vec{v} = \ev{\vec{v}, \vec{e}_{1}} \vec{e}_{1} + \cdots + \ev{\vec{v}, \vec{e}_{n}} \vec{e}_{n}$.
-		\item $\norm{\vec{v}}^{2} = \abs{\ev{\vec{v}, \vec{e}_{1}}}^{2} + \cdots + \abs{\ev{\vec{v}, \vec{e}_{n}}}^{2}$.
-		\item $\ev{\vec{v}, \vec{w}} = \ev{\vec{v}, \vec{e}_{1}} \conjugate{\ev{\vec{w}, \vec{e_{1}}}} + \cdots + \ev{\vec{v}, \vec{e}_{n}} \conjugate{\ev{\vec{w}, \vec{e_{n}}}}$
-	\end{enumerate}
-\end{theorem}
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+	  Suppose $\vec{e}_{1}, \ldots, \vec{e}_{n} \in V$ is an orthonormal basis of $V$ and $\vec{v}, \vec{w} \in V$. Then the following three identities hold:
+	  \begin{enumerate}
+		  \item $\vec{v} = \ev{\vec{v}, \vec{e}_{1}} \vec{e}_{1} + \cdots + \ev{\vec{v}, \vec{e}_{n}} \vec{e}_{n}$.
+		  \item $\norm{\vec{v}}^{2} = \abs{\ev{\vec{v}, \vec{e}_{1}}}^{2} + \cdots + \abs{\ev{\vec{v}, \vec{e}_{n}}}^{2}$.
+		  \item $\ev{\vec{v}, \vec{w}} = \ev{\vec{v}, \vec{e}_{1}} \conjugate{\ev{\vec{w}, \vec{e_{1}}}} + \cdots + \ev{\vec{v}, \vec{e}_{n}} \conjugate{\ev{\vec{w}, \vec{e_{n}}}}$
+	  \end{enumerate}
+  \end{theorem}
 	\begin{proof}
 		Define $v_{1}, \ldots, v_{n} \in \mathbb{C}$ and $w_{1}, \ldots, w_{n} \in \mathbb{C}$ such that
 		\[

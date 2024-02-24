@@ -1,0 +1,300 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+
+\renewcommand{\grad}{\nabla}
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+
+\title{MATH-UA 329: Homework 2}
+\author{James Pagan, February 2024}
+\date{Professor Güntürk}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 1}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+\begin{proof}
+  Define $x_{1}, x_{2} \in I$ such that $\abs{x_{1} - x_{2}} \le t_{1} + t_{2}$ and $\abs{f(x_{1}) - f(x_{2})} = \omega_{f}(t_{1} + t_{2})$. We will demonstrate that $\abs{f(x_{1}) - f(x_{2})} \le \omega_{f}(t_{1}) + \omega_{f}(t_{2})$.
+  
+  Let $z = x_{1} \left( \tfrac{t_{2}}{t_{1} + t_{2}} \right) + x_{2} \left( \tfrac{t_{1}}{t_{1} + t_{2}} \right)$. It is clear that $z$ lies between $x_{1}$ and $x_{2}$, so it is an element of $I$. Then
+  \[
+    \abs{x_{1} - z} \, = \, \abs{-x_{1} \left( \frac{t_{1}}{t_{1} + t_{2}} \right) - x_{2} \left( \frac{t_{1}}{t_{1} + t_{2}} \right)} \, = \, \frac{t_{1}}{t_{1} + t_{2}} \abs{x_{1} - x_{2}} \, = \, t_{1}.
+  \]
+  Similarly, we have that
+  \[
+    \abs{x_{2} - z} \, = \, \abs{x_{1} \left( \frac{t_{2}}{t_{1} + t_{2}} \right) + x_{2} \left( \frac{t_{2}}{t_{1} + t_{2}} \right)} \, = \, \frac{t_{2}}{t_{1} + t_{2}} \abs{x_{1} - x_{2}} \, = \, t_{2}.
+  \]
+  This enables us to use the moduli of continuity, $\omega_{f}(t_{1})$ and $\omega_{f}(t_{2})$:
+  \begin{align*}
+    \omega_{f}(t_{1} + t_{2}) & = \abs{f(x_{1}) - f(x)_{2}} \\
+                              & \le \abs{f(x_{1}) - f(z)} \, + \, \abs{f(x_{2}) - z} \\
+                              & \le \sup\limits_{\abs{y, z} \le t_{1}} \abs{f(y) - f(z)} \, + \, \sup\limits_{\abs{y, z} \le t_{2}} \abs{f(y) - f(z)} \\
+                              & = \omega_{f}(t_{1}) + \omega_{f}(t_{2}).
+  \end{align*}
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+\begin{proof}
+  The result from Part (a) ensures that $\omega_{f}(t_{1}) \le \omega_{f})(t_{2}) + \omega_{f}(t_{2} - t_{1})$; thus we have that $\omega_{f}(t_{1}) - \omega_{f}(t_{2}) \le \omega_{f}(t_{1} - t_{2})$. Hence we have that
+  \begin{align*}
+    \omega_{\omega_{f}}(t) & = \sup\limits_{\abs{x_{1} - x_{2}} \le t} \abs{\omega_{f}(x_{1}) - \omega_{f}(x_{2})} \\
+                           & \le \sup\limits_{\abs{x_{1} - x_{2}} \le t} \abs{\omega_{f}(x_{1} - x_{2})}.
+  \end{align*}
+  Since $\omega_{f}(t)$ is a strictly increasing function, the right-hand side is equal to $\omega_{f}(t)$. This concludes the proof.
+\end{proof}
+
+
+% --------------------------------------------- %
+
+\subsection{Part (c)}
+
+\begin{proof}
+  It is clear that from the result of Part (a) that for all $t \ge 0$ and integers $n > 0$, we have
+  \[
+    \omega_{f}(nt) = \omega_{f} \left( \sum\limits_{i = 1}^{n} t \right) \le \sum\limits_{i = 1}^{n} \omega_{f}(t) = n \omega_{f}(t).
+  \]
+  If $I = (a, b)$, let $\abs{I} = b - a$. It is trivial that $t \ge \abs{I}$ implies $\omega_{f}(\abs{I})$; thus we need only concern ourselves with $t \le \abs{I}$. We have two cases:
+  
+  \textbf{Case 1}: If $\abs{I} \le t$, we have that
+  \[
+    \omega_{f}(t) \ge \left( \frac{t}{\abs{I}} \right) \omega_{f}(t) \ge t \left( \frac{\omega_{f}\abs{I}}{\abs{I}} \right) \ge t \left( \frac{\omega_{f}(\abs{I} \, / \, 2)}{\abs{I}} \right).
+  \]
+  \textbf{Case 2}: If $\abs{I} > t$, there exists an integer $n$ between $\abs{I} \, / \, (2t)$ and $\abs{I} \, / \, t$; thus
+  \[
+    \omega_{f}(t) \, \ge \, \frac{n}{\abs{I} \, / \, t} \, \omega_{f}(t) \, \ge \, \frac{t}{\abs{I}} \omega_{f}(nt) \ge t \left( \frac{\omega_{f}(\abs{I} \, / \, 2)}{\abs{I}} \right).
+  \]
+  Combining these cases, we attain the theorem if we set $c = \tfrac{\omega_{f}(\abs{I}) \, / \, 2}{\abs{I}}$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+\begin{proof}
+  We will use algebra, as unenlightening as this may be. We have that
+  \begin{align*}
+    \sum\limits_{k = 0}^{n} (nx - k)^{2} P_{n, k}(x) \, &= \, n^{2} x^{2} \sum\limits_{k = 0}^{n} P_{n, k}(x) \, - \, 2nx \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, + \, \sum\limits_{k = 0}^{n} k^{2} P_{n, k}(x) \\
+                                                        &= \, n^{2} x^{2} \, - \, 2nx \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, + \, \sum\limits_{k = 0}^{n} k^{2} P_{n, k}(x)
+  \end{align*}
+  Our task is to simply these summations. We have
+  \begin{align*}
+    \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, &= \, \sum\limits_{k = 0}^{n} k \left( \frac{n!}{k! (n - k)!} \right) x^{k} (1 - x)^{n - k} \\
+                                             &= \, nx \sum\limits_{k = 1}^{n} \binom{n - 1}{k - 1} x^{k - 1} (1 - x)^{(n - 1) - (k - 1)} \\
+                                             &= \, nx \sum\limits_{k = 0}^{n - 1} \binom{n - 1}{k} x^{k} (1 - x)^{(n - 1) - k} \\
+                                             &= \, nx \big( x + (1 - x) \big)^{n - 1} \\
+                                             &= \, nx,
+  \end{align*}
+  For the summation $k^{2}$, we find it is easier to work with $k(k - 1)$ due to the factorial:
+  \begin{align*}
+    \sum\limits_{k = 0}^{n} k^{2} P_{n, k}(x) \, &= \, \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, + \, \sum\limits_{k = 0}^{n} k(k - 1) P_{n, k}(x) \\
+                                                 &= \, nx \, + \, \sum\limits_{k = 0}^{n} k(k - 1) P_{n, k}(x) \\
+                                                 &= \, nx \, + \, \sum\limits_{k = 0}^{n} k(k - 1) \left( \frac{n!}{k!(n - k)!} \right) x^{k}(1 - x)^{n - k} \\
+                                                 &= nx \, + \, n(n - 1)x^{2} \sum\limits_{k = 2}^{n} \binom{n - 2}{k - 2} x^{k - 2}(1 - x)^{(n - 2) - (k - 2)} \\
+                                                 &= nx + n(n - 1)x^{2} \sum\limits_{k = 0}^{n - 2} \binom{n - 2}{k} x^{k} (1 - x)^{(n - 2) - k} \\
+                                                       &= nx + n(n - 1)x^{2} \big( x + (1 - x) \big)^{n - 2} \\
+                                                       &= nx + n(n - 1)x^{2}. 
+  \end{align*}
+  We are ready to return to our original series: we have that
+  \begin{align*}
+    \sum\limits_{k = 0}^{n} (nx - k)^{2} P_{n, k}(x) &= n^{2}x^{2} \, - \, 2nx (nx) \, + \, \big( nx + n(n - 1)x^{2} \big) \\
+                                                     &= n^{2}x^{2} - 2n^{2}x^{2} + nx + n^{2}x^{2} - nx^{2} \\
+                                                     &= nx - nx^{2} \\
+                                                     &= nx(1 - x),
+  \end{align*}
+  completing the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+\begin{proof}
+  Let $f(x) = ax + b$ be a linear function. Then
+  \begin{align*}
+    B_{n}(f)(x) & = \sum\limits_{k = 0}^{n} f \left( \frac{k}{n} \right) \binom{n}{k} x^{k} (1 - x)^{n - k} \\
+                & = \sum\limits_{k = 0}^{n} \left( a \left( \tfrac{k}{n} \right) + b \right) P_{n, k}(x) \\
+                & = \frac{a}{n} \sum\limits_{k = 0}^{n} k P_{n, k}(x) \, + \, b \sum\limits_{k = 0}^{n} P_{n, k}(x) \\
+                & = \frac{a}{n} (nx) + b (1) = ax + b = f(x).
+  \end{align*}
+  The story for quadratics is more complex: if we let $f(x) = ax^{2} + bx + c$, we attain that
+  \begin{align*}
+    B_{n}(f)(x) & = \sum\limits_{k = 0}^{n} \left( a \left( \tfrac{k}{n} \right)^{2} + b \left( \tfrac{k}{n} \right) + c \right) \binom{n}{k} x^{k} (1 - x)^{n - k} \\
+                & = \frac{a}{n^{2}} \sum\limits_{k = 0}^{n} k^{2} P_{n, k}(x) \, + \, bx + c \\
+                & = \frac{a}{n^{2}} \left( nx + n(n - 1)x^{2} \right) + bx + c \\
+                &= \frac{a(n - 1)}{n} x^{2} + \frac{a + bn}{n} x + c.
+  \end{align*}
+  We are ready to bound the difference between $B_{n}(f)(x)$ and $f(x)$: since $x \in [0, 1]$,
+  \begin{align*}
+    \abs{f(x) - B_{n}(f)(x)} & = \frac{a}{n}x - \frac{a}{n}x^{2} \le \frac{a}{n} \left( \frac{1}{2} \right) - \frac{a}{n} \left( \frac{1}{2} \right)^{2} = \frac{a}{4n}.
+  \end{align*}
+  Setting $C = \tfrac{a}{4}$ completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+\begin{proof}
+  We must perform three routine calculations: for all $\vec{x}, \vec{y} \in \mathbb{R}^{d}$,
+  \begin{enumerate}
+    \item \textbf{Positivity}: Clearly $\norm{\vec{x}}_{\mat{A}} = \norm{\mat{A} \vec{x}} \ge 0$. The equality condition is as follows:
+    \[
+      \norm{\vec{x}}_{\mat{A}} = \vec{0} \iff \mat{A} \vec{x} = \vec{0} \iff \vec{x} \in \nll \mat{A} \iff \vec{x} = \vec{0}.
+    \]
+    \item \textbf{Homogeneity}: For all $\lambda \in \mathbb{C}$, we have that
+    \[
+      \norm{\lambda \vec{x}}_{\mat{A}} = \norm{\mat{A} (\lambda \vec{x})} = \norm{\lambda (\mat{A} \vec{x})} = \abs{\lambda} \norm{\mat{A} \vec{x}} = \abs{\lambda} \norm{\vec{x}}_{\mat{A}}
+    \]
+    \item \textbf{Triangle Inequality}: We have that
+    \[
+      \norm{\vec{x} + \vec{y}}_{\mat{A}} = \norm{\mat{A} \vec{x} + \mat{A} \vec{y}} \, \le \, \norm{\mat{A} \vec{x}} + \norm{\mat{A} \vec{y}} = \norm{\vec{x}}_{\mat{A}} + \norm{\vec{y}}_{\mat{A}}.
+    \]
+  \end{enumerate}
+  Thus, $\norm{\, \cdot \,}_{\mat{A}}$ defines a norm on $\mathbb{R}^{d}$. If $\mat{A}$ is not invertible, this norm fails to satisfy the positivity condition --- namely, we have $\norm{\vec{x}}_{\mat{A}} = \vec{0}$ for all nonzero vectors $\vec{x} \in \nll \mat{A}$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+\begin{proof}
+  We must perform three rather routine calculations: for all $\vec{x}, \vec{y} \in \mathbb{R}^{d}$,
+  \begin{enumerate}
+    \item \textbf{Positivity}: Clearly $\norm{\vec{x}}_{\mat{A}}' = \norm{\vec{x}} + \norm{\mat{A} \vec{x}} \ge 0$. The equality condition is as follows:
+    \[
+      \norm{\vec{x}}_{\mat{A}}' = \vec{0} \iff \norm{\vec{x}} + \norm{\mat{A} \vec{x}} = \vec{0} \iff \norm{\vec{x}} = \vec{0} \iff \vec{x} = \vec{0}.
+    \]
+    \item \textbf{Homogeneity}: For all $\lambda \in \mathbb{C}$, we have that
+    \[
+      \norm{\lambda \vec{x}}_{\mat{A}}' = \norm{\lambda \vec{x}} + \norm{\mat{A} (\lambda \vec{x})} = \abs{\lambda} \norm{\vec{x}} + \abs{\lambda} \norm{\mat{A} \vec{x}} = \abs{\lambda} \norm{\vec{x}}_{\mat{A}}'.
+    \]
+    \item \textbf{Triangle Inequality}: We have that
+    \begin{align*}
+      \norm{\vec{x} + \vec{y}}_{\mat{A}}' & = \norm{\vec{x} + \vec{y}} + \norm{\mat{A} \vec{x} + \mat{A} \vec{y}} \\
+                                          & \le \norm{\vec{x}} + \norm{\vec{y}} + \norm{\mat{A} \vec{x}} + \norm{\mat{A} \vec{y}} \\
+                                          & = \norm{\vec{x}}_{\mat{A}}' + \norm{\vec{y}}_{\mat{A}}'.
+    \end{align*}
+  \end{enumerate}
+  We deduce that $\norm{\, \cdot \,}_{\mat{A}}'$ is a norm on $\mathbb{R}^{d}$.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 4}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+Let $B_{1/2}(x_{1}), \ldots, B_{1/2}(x_{n})$ be a collection of open balls which cover $B$; without loss of generality, we may assume $x_{1}, \ldots, x_{n} \in B$. Let
+\[
+  x_{i} = (y_{1i}, y_{2i}, \ldots),
+\]
+and define $k_{i}$ as the unique integer such that $n_{k_{i}i} = \max \{ y_{ji} \, \mid \, j \in \mathbb{N} \}$. Any point in $B$ must have finitely many entries equal to or greater than $\tfrac{1}{2}$; thus there exists an integer $m$ such that for each $x_{i}$, the entry $y_{mi}$ is less than one-half. Hence
+\[
+  \max \{ y_{mi} \mid i \in \{ 1, \ldots, n \} \} + \frac{1}{2} < 1.
+\]
+Thus the point in $B$ with $m$-th coordinate equal to the above real number --- and all other coordinates equal to $0$ --- lies in $B$ and has $\ell_{\infty}$ norm greater than one-half. It thus lies outside the open balls $B_{1/2}(x_{1}), \ldots, B_{1/2}(x_{n})$.
+
+We conclude that no finite collection of open balls of radius $\tfrac{1}{2}$ can cover $B$.
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+Observe that the sequence $(u_{1}^{m})$ is bounded by $0$ and $1$. The Bolzano-Weierstrauss Theorem ensures it contains a convergent subsequence: denote it by $(u_{1}^{m})$. We may now utilize a contradiction argument:
+
+Suppose for contradiction that no such subsequence of $(u^{m})$ exists. Then there exists a minimum integer $n > 1$ such that the sequence $(u_{n}^{m})$ does not contain a convergent subsequence.
+
+By minimality, $(u^{m})$ contains a subsequence that converges pointwise for each components $1, \ldots, n - 1$: denote this subsequence by $(u^{m_{k}})$. Since the sequence $(u_{n}^{m_{k}})$ is bounded by $0$, and $1$, the Bolzano-Weierstrauss Theorem ensures that some infinite subsequence of $(u^{m_{k}})$ converges pointwise for component $n$ --- a contradiction.
+
+We conclude that there exists a sequence $(u^{m})$ which converges pointwise for each component.
+
+% --------------------------------------------- %
+
+\subsection{Part (c)}
+
+\textbf{Set One}: This set is $\boxed{\text{compact}}$. Given a sequence $(x^{n}) \in x$, it is easy to establish that it it contains a convergent subsequence; mirroring the argument in Part (b), we find through iterative Bolzano-Weierstrauss application that convergence of later entries is ensured by the convergence of each $x^{n}$ itself (in the sense of its components) to zero.
+
+\textbf{Set Two}: This set is $\boxed{\text{not compact}}$, since it contains the set
+\[
+  (e_{n}^{m}) \, = \, (\delta_{m, n}, n \in \mathbb{N}),
+\]
+which clearly contains no convergent subsequence.
+
+% --------------------------------------------- %
+
+\section{Problem 5}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+\begin{proof}
+  Utilizing the properties of the inner product, we have that
+	\begin{align*}
+		\norm{\vec{v} + \vec{w}}^{2} + \norm{\vec{v} - \vec{w}}^{2} &= \ev{\vec{v} + \vec{w}, \vec{v} + \vec{w}} + \ev{\vec{v} - \vec{w}, \vec{v} - \vec{w}} \\ 
+		&= \ev{\vec{v}, \vec{v}} + \ev{\vec{v}, \vec{w}} + \ev{\vec{w}, \vec{v}} + \ev{\vec{w}, \vec{w}} \\
+		& \quad + \ev{\vec{v}, \vec{v}} - \ev{\vec{v}, \vec{w}} - \ev{\vec{w}, \vec{v}} + \ev{\vec{w}, \vec{w}} \\
+		&= 2 \ev{\vec{v}, \vec{v}} + 2 \ev{\vec{w}, \vec{w}} \\
+		&= 2 \norm{\vec{v}}^{2} + 2 \norm{\vec{w}}^{2},
+	\end{align*}
+	as required. Geometrically, this corresponds to a famous theorem --- that for any parallelogram, the sums of the squares of its sides equals the sums of the squares of its diagonals.
+\end{proof}
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+We first tackle $\mathbb{R}^{2}$, examining the $2$-vectors $\vec{x} = (2, 0)$ and $\vec{y} = (0, 1)$ under the $p$-norm $\norm{\cdot }_{p}$: if we denote the $2$-norm by $\norm{\cdot}$, we have that
+\begin{equation}
+  2 \norm{\vec{x}}_{p} + 2 \norm{\vec{y}}_{p} = 6 = \norm{\vec{x} + \vec{y}}^{2} + \norm{\vec{x} - \vec{y}}^{2} > \norm{\vec{x} - \vec{y}}_{p}^{2} + \norm{\vec{x} - \vec{y}}_{p}^{2}.
+\end{equation}
+The observation that the $p$-norm is strictly decreasing on the interval $(1, \infty)$ follows from the Power Mean Inequality (and noting that the components of neither $\vec{x} + \vec{y}$ nor $\vec{x} - \vec{y}$ are equal).
+
+If we suppose for contradiction that an inner product on $\mathbb{R}^{2}$ induced a norm equal to the $p$-norm, the vectors $\vec{x}$ and $\vec{y}$ would violate the Parallelogram Equality. Hence this is not possible.
+
+The cases $\mathbb{R}^{n}$ for $n > 2$ and $\ell^{0}(\mathbb{N})$ are corollaries of this result --- if an inner product on them yielded a $p$-norm, the fact $\mathbb{R}^{2}$ is a subspace would yield an inner-product-induced $p$-norm on $\mathbb{R}^{2}$. This yields a desired contradiction.
+
+% --------------------------------------------- %
+
+\end{document}

@@ -10,4 +10,4 @@
 \contentsline {subsection}{\numberline {3.2}Examples}{6}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Relation with Principal Ideal Domains}{7}{subsection.3.3}%
 \contentsline {section}{\numberline {4}The Polynomial Ring $\mathbb {Z}[x]$}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Primative Polynomials}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.1}Primative Polynomials}{8}{subsection.4.1}%
