@@ -249,7 +249,7 @@ For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{
 
 \subsection{The Annihilator}
 
-If $N$ and $P$ are $R$-submodules of $M$, we define $(N : P)$ to be the set of all $r \in R$ such that $rP \subseteq N$.
+If $N$ and $P$ are $R$-submodules of $M$, we define $(N : P)$ to be the set of all $a \in R$ such that $aP \subseteq N$.
 
 \newpage
 
@@ -258,13 +258,13 @@ If $N$ and $P$ are $R$-submodules of $M$, we define $(N : P)$ to be the set of a
 		$(N : P)$ is an ideal of $R$.
 	\end{theorem}
 	\begin{proof}
-		If $r, s \in (N : P)$, then $rP, sP \subseteq N$; we must have that $rP + sP \subseteq N$. $(N : P)$ is nonempty, as $0P = (0) \subseteq N$; and clearly if $rP \in N$, then $-rP \in N$ as $N$ is an abelian group. Clearly $(N : P)$ satifies the multiplicative condition too.
+		If $a, b \in (N : P)$, then $aP, bP \subseteq N$; we must have that $aP + bP \subseteq N$. Observe that $(N : P)$ is nonempty, as $0P = (0) \subseteq N$; and clearly if $aP \in N$, then $-aP \in N$ as $N$ is an abelian group. $(N : P)$ satifies the multiplicative condition too.
 	\end{proof}
 \end{adjustwidth}
 
-The \textbf{annihilator} of a module $M$ is $(0 : M)$, the ideal of all $r$ such that $rM = 0$, and is denoted $\Ann M$. If $I \subseteq \Ann M$, we may regard $M$ as an $R / I$-module. In particular, observe that if $\bar{r} \in R / I$, then $\bar{r}x$ is invariant by elements of $\bar{r}$; if $r_{1}$ and $r_{2}$ are any two elements of $\bar{r}$, then $r_{i} = r_{2} + i$ for some $i \in I \subseteq \Ann M$, so $r_{i}x = (r_{2} + i)x = r_{2}x + ix = r_{2}x$.
+The \textbf{annihilator} of a module $M$ is $(0 : M)$, the ideal of all $a$ such that $aM = 0$, and is denoted $\Ann M$. If $\mathfrak{a} \subseteq \Ann M$, we may regard $M$ as an $R \, / \, \mathfrak{a}$-module. In particular, observe that if $\bar{a} \in R \, / \, \mathfrak{a}$, then $a_{1}, a_{2} \in \bar{a}$ implies $a_{1}x = a_{2}x$ --- so $\bar{a}$ is well-defined.
 
-An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihalator of $R$ may change depending on the ring --- if $\Ann M = I$, then $M$ is faithful as an $R / I$ module.
+An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihalator of $R$ may change depending on the ring --- if $\Ann M = \mathfrak{a}$, then $M$ is faithful as an $R \, / \, \mathfrak{a}$ module.
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
