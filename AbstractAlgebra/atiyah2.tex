@@ -229,6 +229,23 @@ The Second Isomorphism Theorem utilizes the definitioins of Section 2.1:
   \end{proof}
 \end{adjustwidth}
 
+The following theorem is intimately related to the Third Isomorphism Theroem. Suppose that $L \subseteq N \subseteq M$ are $R$-modules and $f : M \to L$, $g : M \to N$, and $f' : N \to L$ are epimorphisms such that $f = f' \circ g$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Given any two of $f$, $g$, and $g'$, the third epimorphism exists and is unique.
+  \end{theorem}
+  \begin{proof}
+    The case where one is given $g$ and $f'$ is quite clear.
+    \begin{enumerate}
+      \item \textbf{Reconstructing g}: Suppose $f : M \to L$ and $f' : N \to L$ are given. Define the function $g : M \to N$ such that
+      \[
+        g(n + L) = f(n).
+      \]
+    \end{enumerate}
+  \end{proof}
+\end{adjustwidth}
+
 % --------------------------------------------- %
 
 \section{Operations on Submodules}
@@ -500,7 +517,7 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 
 % --------------------------------------------- %
 
-\subsection{Exact Sequences of Homomorphisms}
+\subsection{Exact Sequences}
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
@@ -591,6 +608,57 @@ The following theorem is called the Snake Lemma, a special case of exact homolog
 \end{adjustwidth}
 
 We encourage the reader to adopt these results on faith. Homosexual Algebra is a complex subject of math that deserves its own set of notes.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $0 \to M_{0} \to M_{1} \to \cdots \to M_{n} \to 0$ be an exact sequence of $R$ modules in which all the modules $M_{i}$ and the kernels of all the homomorphisms belong to $C$. Then for any additive function $\phi$ on $C$, we have
+    \[
+      \sum\limits_{i = 0}^{n} (-1)^{i} \lambda(M_{i}) = 0.
+    \]
+  \end{theorem}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Tensor Products of Modules}
+
+Let $M, N, P$ be $R$-modules. A mapping $f : M \times N \to P$ is \textbf{R-bilinear} if each component is $R$-linear: for each $x \in M$, the mapping $y \mapsto f(x, y)$ is $R$-linear, and if for each $y \in M$, the mapping $x \mapsto f(x, y)$ is $R$-linear.
+
+Our goal is to construct a module $T$ such that the $R$-bilinear mappings $M \times N \to P$ are in natural one-to-one correspondence with the $R$-linear mappings $T \to P$ for all $P$. This module is called the \textbf{tensor product} of $M$ and $N$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $N, N$ be $R$-modules. Then there exists a pair $(T, g)$ consisting of an $R$-module $T$ and an $R$-bilinear mapping $g : M \times N \to T$ with the following property:
+
+    For all $R$-modules $P$ and $R$-bilinear mappings $f : M \times N \to P$, there exists a unique $R$-linear mapping $f' : T \to P$ such that $f = f' \circ g$. 
+
+    Moreover, if $(T, g)$ and $(T, g')$ are two pairs with this property, there exists an isomorphism $j : T \to T'$ such that $j \circ g = g'$.
+  \end{theorem}
+  \begin{proof}
+    The key is to take a special quotient of $M \times N$.
+    \begin{enumerate}
+      \item \textbf{Existence}: Let $C$ denote $R^{(M \times N)}$: the formal combination of elements of $M \times N$ with coefficents in $R$. Let $D$ be the submodule \textit{generated} by all elements of the form:
+      \begin{align*}
+        (x + x', y) \, - \, (& x, y) \, - \, (x', y) \\
+        (x, y + y') \, - \, (& x, y) \, - \, (x, y') \\
+        (ax, y) \, - \, & a(x, y) \\
+        (x, ay) \, - \, & a(x, y). \\
+      \end{align*}
+      Let $T = C \, / \, D$, and denote the image of $(x, y)$ in the quotient by $x \otimes y$. The quotient of the above ensures the desired properties of the tensor product:
+      \begin{align*}
+        (x + x') \otimes y \, &= \, x \otimes y \, + \, x' \otimes y \\
+        x \otimes (y + y') \, &= \, x \otimes y \, + \, x \otimes y' \\
+            a(x \otimes y) \, &= \, (ax) \otimes y \, = \, x \otimes (ay).
+      \end{align*}
+      Equivalently, the mapping $g : M \times N \to T$ defined by $g(x, y) = x \otimes y$ is $R$-bilinear.
+      Now, suppose $f : M \times N \to P$ is $R$-bilinear; this extends by linearity to a mapping $\bar{f} : C \to P$. Since $\bar{f}$ is $R$-bilinear, it annihilates each generator of $D$ --- so by extension, the entirety of $D$. The Third Isomorphism Theorem thus guarantees the existence of a unique mapping $\bar{f'} : \Ker \bar{f} \to D$ such that
+      \[
+        f = f' \circ g.
+      \]
+      \item \textbf{Uniqueness}:
+    \end{enumerate} 
+  \end{proof}
+\end{adjustwidth} 
 
 % --------------------------------------------- %
 
