@@ -154,7 +154,7 @@ The cokernel is perhaps an unfamiliar face. Such a quotient is not possible for 
      $N \, / \, \Ker f \, \cong \, \Im f$.
   \end{theorem}
   \begin{proof}
-    Let $K = \Ker f$, and define an $R$-morphism $g : M \, / \, N \to \Im f$ by $g(x + K) = f(x)$. We have for arbitrary $x, y \in N$ and $a \in R$ that
+    Let $K = \Ker f$, and define a mapping $g : M \, / \, N \to \Im f$ by $g(x + K) = f(x)$. We have for arbitrary $x, y \in N$ and $a \in R$ that
     \begin{align*}
       g(x + y + K) \, = \, f(x + y) \, &= \, f(x) + f(y) \, = \, g(x + K) + g(y + K). \\
             g(ax + K) \, = \, f(ax) \, &= \, a f(x) \, = \, a g(x + K).
@@ -268,14 +268,12 @@ An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihalator of $R$ may c
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		If $M_{1}$ and $M_{2}$ are submodules of $M$, then $\Ann(M_{1} + M_{2}) = \Ann M_{1} \cap \Ann M_{2}$
+		If $M_{1}, M_{2} \subseteq M$ are submodules, then $\Ann(M_{1} + M_{2}) = \Ann M_{1} \cap \Ann M_{2}$.
 	\end{theorem}
 	\begin{proof}
-		If $r \in \Ann M_{1} \cap \Ann M_{2} $, then for all $x_{1} + x_{2} \in M_{1} + M_{2}$, $r$ annihalates $x_{1}$ and $x_{2}$, so $r(x_{1} + x_{2}) = 0.$ Thus $r \in \Ann(M_{1} + M_{2})$.
+		Suppose $a \in \Ann M_{1} \cap \Ann M_{2}$. Then $a$ annihalates all $x_{1} + x_{2} \in M_{1} + M_{2}$, so $a \in \Ann(M_{1} + M_{2})$.
 
-		Now, suppose $r \notin \Ann M_{1} \cap \Ann M_{2} $. Then $r$ must fail to annnihilate an element in either $M_{1}$ or $M_{2}$ (or both) --- without loss of generality, let there exist $x_{1} \in M_{1}$ such that $rx_{1} \ne 0$.
-
-		Then as $rx_{1} \in M_{1} + M_{2}$, we find that $r \notin \Ann(M_{1} + M_{2})$. By contraposition, we find that if $r \in \Ann(M_{1} + M_{2})$, then $r \in \Ann M_{1} \cap \Ann M_{2}$. This completes the proof.
+		Suppose $a \notin \Ann M_{1} \cap \Ann M_{2} $. Then $a$ must fail to annnihilate an element in either $M_{1}$ or $M_{2}$ (or both) --- without loss of generality, let there exist $x_{1} \in M_{1}$ such that $ax_{1} \ne 0$. Then as $ax_{1} \in M_{1} + M_{2}$, we find that $a \notin \Ann(M_{1} + M_{2})$. This completes the proof.
 	\end{proof}
 \end{adjustwidth}
 
@@ -286,35 +284,31 @@ An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihalator of $R$ may c
 If $M$ and $N$ are $R$-modules, their \textbf{direct sum} $M \oplus N$ is the set of all pairs $(x, y)$ (with $x \in M$ and $y \in N$) endowed with the natural operations:
 \begin{align*}
 	(x_{1}, y_{1}) + (x_{2}, y_{2}) & = (x_{1} + x_{2}, y_{1} + y_{2}) \\
-	r(x, y)                         & = (rx, ry)
+	                        a(x, y) & = (ax, ay)
 \end{align*}
-More generally, for a family of $R$-modules $(M_{j})_{j \in J}$ , we define their \textbf{direct sum} $\bigoplus_{j \in J} M_{j}$ as the families $(x_{j})_{j \in J}$ such that $x_{j} \in M_{j}$ for all $j \in J$, with the restriction that only finitely many $x_{j}$ are nonzero.
+More generally, for a family of $R$-modules $(M_{\alpha})$, we define their \textbf{direct sum} $\bigoplus_{\alpha} M_{\alpha}$ as the families $(x_{\alpha})$ such that $x_{\alpha} \in M_{\alpha}$ for each $\alpha$ with the restriction that only finitely many $x_{\alpha}$ are nonzero.
 
-If we allow infinitely many $x_{j}$ to be nonzero, we attain the family's \textbf{direct product} $\prod_{j \in J} M_{j}$. Direct sums and direct products are equivalent if $J$ is finite, but not otherwise.
+If we allow infinitely many $x_{\alpha}$ to be nonzero, we attain the family's \textbf{direct product} $\prod_{\alpha} M_{\alpha}$. Direct sums and direct products are equivalent if there are finitely many $\alpha$, but not otherwise.
 
 \newpage
 
 \subsection{Direct Sums on Rings}
 
-Suppose that a commutative ring $R$ is a direct product $R = R_{1} \times \cdots \times R_{n}$. Then $R$ has $n$ ideals of the form
-\[
-	\mathfrak{a}_{j} = (0, \ldots, 0, r_{j}, 0, \ldots, 0),
-\]
-where $a_{i} \in R_{i}$ for each $i \in \{ 1, \ldots, n \}$. Viewing this relation in terms of modules,
-\[
-	R \cong \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}
-\]
-by the isomorphism $f(r_{1}, \ldots, r_{n}) = ((r_{1}, 0, \ldots), \ldots, (\ldots, 0, r_{n}))$.
+Direct products of rings and direct sums of ideals are equivalent notions:
+\begin{enumerate}
+  \item Suppose that $R \, = \, R_{1} \times \cdots \times R_{n}$. Then $R$ has $n$ ideals of the form $(\delta_{n, m})$ for each $m \in \{ 1, \ldots, n \}$. Viewing this relation in terms of modules,
+  \[
+  	R \cong \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}
+  \]
+  by the isomorphism $f(r_{1}, \ldots, r_{n}) = ((r_{1}, 0, \ldots), \ldots, (\ldots, 0, r_{n}))$.
+  \item Suppose that $R = \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}$, where $\mathfrak{a}_{i} \subseteq R$ are ideals. Defining $\mathfrak{b}_{i} = \bigoplus_{j \ne i} \mathfrak{a}_{j}$ for each $i$, we find that
+  \[
+	  R \cong (R \,/\, \mathfrak{b}_{1}) \times \cdots \times (R \,/\, \mathfrak{b}_{n})
+  \]
+  by $f(a_{1}, \ldots, a_{n}) = (a_{1} + \mathfrak{b}_{1}, \ldots, a_{n} + \mathfrak{b}_{n})$. Each $\mathfrak{a}_{i}$ is a ring isomorphic to $R \, / \, \mathfrak{b}_{i}$.
+\end{enumerate}
 
-Similarly, suppose $R$ is a commutative ring with ideals $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$, and
-\[
-	R = \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}.
-\]
-Then define $\mathfrak{b}_{i} = \bigoplus_{j \ne i} \mathfrak{a}_{j}$ for each $i \in \{ 1, \ldots, n \}$. We find that
-\[
-	R \cong (R \,/\, \mathfrak{b}_{1}) \times \cdots \times (R \,/\, \mathfrak{b}_{n})
-\]
-by the isomorphism $f(a_{1}, \ldots, a_{n}) = (a_{1} + \mathfrak{b}_{1}, \ldots, a_{n} + \mathfrak{b}_{n})$. We conclude that direct sums of ideals and direct products of subrings are dual notions. This is a critical strength of modules: it treats ideals and rings on equal footing, resulting in clarity and simplicity.
+This illustrates how one may define a direct sum of ideals.
 
 % --------------------------------------------- %
 
@@ -324,35 +318,38 @@ by the isomorphism $f(a_{1}, \ldots, a_{n}) = (a_{1} + \mathfrak{b}_{1}, \ldots,
 
 \subsection{Definition}
 
-An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set of \textbf{generators} $x_{1}, \ldots, x_{n}$ such that $M = Rx_{1} + \cdots + Rx_{n}$, where $Rx_{i}$ denotes the set $\{ rx_{i} \mid r \in R \}$ ($i \in \{ 1, \ldots, n \}$). In the following theorem, we denote $R \oplus \cdots \oplus R$ by $R^{n}$.
+An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set of \textbf{generators} $x_{1}, \ldots, x_{n}$ such that $M = Rx_{1} + \cdots + Rx_{n}$. The $R$-module $R \oplus \cdots \oplus R$ is denoted by $R^{n}$.
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		$M$ is a finitely-generated $R$-module if and only if $M$ is isomorphic to a quotient of $R^{n}$.
+		$M$ is finitely-generated by $n$ elements if and only if $M$ is isomorphic to a quotient of $R^{n}$.
 	\end{theorem}
 	\begin{proof}
-		Suppose $M$ is a finitely-generated $R$-module. Let $x_{1}, \ldots, x_{n} \in M$ generate $M$, and define $f : R^{n} \to M$ by $f(r_{1}, \ldots, r_{n}) = r_{1}x_{1} + \cdots + r_{n}x_{n}$. Then if $(r_{1}, \ldots, r_{n}), (s_{1}, \ldots, s_{n}) \in R^{n}$,
+    Suppose $M$ is finitely-generated by $x_{1}, \ldots, x_{n}$. Define a mapping $f : R^{n} \to M$ by $f(a_{1}, \ldots, a_{n}) = a_{1}x_{1} + \cdots + a_{n}x_{n}$. Then for all $(a_{1}, \ldots, a_{n}), (b_{1}, \ldots, b_{n}) \in R^{n}$, we have
 		\begin{align*}
-			f(r_{1} + s_{1}, \ldots, r_{n} + s_{n}) &= (r_{1} + s_{1}) x_{1} + \cdots(r_{n} + s_{n}) \\
-			&= (r_{1}x_{1} + \cdots + r_{n}x_{n}) + (s_{1}x_{1} + \cdots + s_{1}x_{1}) \\
-			&= f(r_{1}, \ldots, r_{n}) + f(s_{1}, \ldots, s_{n}),
+			f(a_{1} + b_{1}, \ldots, a_{n} + b_{n}) \, &= \, (a_{1} + b_{1}) x_{1} \, + \, \cdots \, + \, (a_{n} + b_{n})x_{n} \\
+			&= \, (a_{1}x_{1} + \cdots + a_{n}x_{n}) \, + \, (b_{1}x_{1} + \cdots + b_{n}x_{n}) \\
+			&= \, f(a_{1}, \ldots, a_{n}) \, + \, f(s_{1}, \ldots, s_{n}),
 		\end{align*}
-		and if $s \in R$,
+    and for all $(a_{1}, \ldots, a_{n}) \in R^{n}$ and $b \in R$, we have
 		\[
-			f(s r_{1}, \ldots, s r_{n}) = s r_{1} x_{1} + \cdots + s r_{n} x_{n} = s f(r_{1}, \ldots, r_{n}).
+			f(b a_{1}, \ldots, b a_{n}) \, = \, b a_{1} x_{1} + \cdots + b a_{n} x_{n} \, = \, b \, f(a_{1}, \ldots, a_{n}).
 		\]
-		Thus $f$ is an $R$-module homomorphism; its surjectivity follows from the generation of $M$ by $x_{1}, \ldots, x_{n}$. Then if we set $\Ker f = \mathfrak{a}$, the First Isomorphism Theorem yields that
+    Thus $f$ is an $R$-module homomorphism. Its surjectivity follows from the generation of $M$ by $x_{1}, \ldots, x_{n}$. Thus if we set $\Ker f = \mathfrak{a}$, the First Isomorphism Theorem yields that
 		\[
 			R^{n} \,/\, \mathfrak{a} \, \cong \, M.
 		\]
-		Now, suppose that $R^{n} \,/\, \mathfrak{a} \cong M$ for some submodule $\mathfrak{r}$ of $R^{n}$ by the mapping $f$. The canonical epimorphism $g : R^{n} \to R^{n} \,/\, \mathfrak{r}$ defined by $g(r_{1}, \ldots r_{n}) = (r_{1}, \ldots, r_{n}) + \mathfrak{r}$ is surjective, so $f \circ g : R^{n} \to M$ is a surjective $R$-module homomorhism.
-
-		Denote $x_{i} = (f \circ g) (0, \ldots, 0, 1, 0, \ldots 0)$ for $i \in \{ 1, \ldots, n \}$. Then for all $x \in M$, there exist $r_{1}, \ldots, r_{n}$ such that
+		Suppose that $R^{n} \,/\, \mathfrak{a} \, \cong \, M$ by an isomorphism $f$. Two definitions are in order:
+    \begin{enumerate}
+      \item Let $g : R^{n} \to R^{n} \, / \, \mathfrak{a}$ be the canonical epimorphism. Then the composition $f \circ g$ is a surjective $R$-module homomorphism.
+      \item For each $(\delta_{mi}) \in R^{n}$, Let $x_{i} = (f \circ g)(\delta_{mi})$ across each $i \in \{ 1, \ldots, n \}$. We claim that the $x_{i}$ generate $M$.
+    \end{enumerate}
+    From the surjectivity of $f \circ g$, all $x \in M$, there exists $r = (r_{1}, \ldots, r_{n}) \in R^{n}$ such that $(f \circ g)(r) = x$. Therefore 
 		\begin{align*}
 			x &= (f \circ g)(r_{1}, \ldots, r_{n}) \\
-			&= (f \circ g)(r_{1}, 0, \ldots, 0) + \cdots + (f \circ g)(0, \ldots, 0, r_{n}) \\
-			&= r_{1} (f \circ g)(1, 0, \ldots, 0) + \cdots + r_{n} (f \circ g)(0, \ldots, 0, 1) \\
-			&= r_{1} x_{1} + \cdots r_{n} x_{n}.
+        &= (f \circ g)(r_{1} \delta_{m1}) + \cdots + (f \circ g)(r_{n} \phi_{mn}) \\
+			  &= r_{1} (f \circ g)(\delta_{m1}) + \cdots + r_{n} (f \circ g)(\delta_{mn}) \\
+			  &= r_{1} x_{1} + \cdots r_{n} x_{n}.
 		\end{align*}
 		We conclude that $x_{1}, \ldots, x_{n}$ generate $M$.
 	\end{proof}
@@ -362,37 +359,37 @@ The following proof is a transcription from Atiyah-MacDonald:
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		Let $M$ be a finitely-generated $R$-module, let $\mathfrak{a}$ be an ideal of $R$, and let $f : M \to M$ be an $R$-module endomorphism of $M$ such that $f(M) \subset \mathfrak{r}M$. Then $\phi$ satisfies an equation of the form
+		Let $M$ be a finitely-generated $R$-module, let $\mathfrak{a}$ be an ideal of $R$, and let $f : M \to M$ be an $R$-module endomorphism of $M$ such that $f(M) \subset \mathfrak{a}M$. Then $f$ satisfies an equation of the form
 		\[
-			f^{n} + r_{n - 1} f^{n - 1} + \cdots + r_{0} f^{0} = 0,
+			f^{n} \, + \, a_{n - 1} f^{n - 1} \, + \, \cdots \, + \, a_{0} f^{0} \, = \, 0,
 		\]
-		where the $r_{i}$ are in $\mathfrak{a}$.
+		where each $a_{i}$ lies in $\mathfrak{a}$.
 	\end{theorem}
 	\begin{proof}
-		Let $x_{1}, \ldots, x_{n}$ generate $M$. Then each $f(x_{i}) \in \mathfrak{a} M$, so we may define $r_{ij} \in \mathfrak{r}$ for $i, j \in \{ 1, \ldots, n \}$ by $f(x_{i}) = \sum_{j = 1}^{n} r_{ij}x_{j}$. This equation may be equivalently written for each $i \in \{ 1, \ldots, n \}$ as
+		Let $x_{1}, \ldots, x_{n}$ generate $M$. Then each $f(x_{i}) \in \mathfrak{a} M$, so we may define $a_{ij} \in \mathfrak{a}$ for $i, j \in \{ 1, \ldots, n \}$ by $f(x_{i}) = \sum_{j = 1}^{n} a_{ij}x_{j}$. This equation may be equivalently written for each $i \in \{ 1, \ldots, n \}$ as
 		\[
 			\sum\limits_{j = 1}^{n} (\delta_{ij} f - a_{ij} f^{0}) x_{j} = 0,
 		\]
-		where $\delta_{ij}$ is the Kronecker delta. By multiplying the left by the adjoint of the matrix $\delta_{ij} f - a_{ij} f^{0}$, it follows that $\det(\delta_{ij} f - a_{ij} f^{0})$ annihilates each $x_{ij}$ --- hence, it is the zero endomorphism of $M$. Expanding out the determinant yields an equation of the required form.
+    By multiplying the left by the adjoint of the matrix $\delta_{ij} f - a_{ij} f^{0}$, it follows that the determinant of $\delta_{ij} f - a_{ij} f^{0}$ annihilates each $x_{ij}$ --- hence it is the zero endomorphism. Expanding out the determinant yields an equation of the required form.
 	\end{proof}
 \end{adjustwidth}
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{corollary}
-		Let $M$ be a finitely-generated $R$-module and let $\mathfrak{a}$ be an ideal of $R$ such that $\mathfrak{r} M = M$. Then there exists $r \in (1 + \mathfrak{r})$ such that $rM = 0$.
+		Let $M$ be a finitely-generated $R$-module and let $\mathfrak{a}$ be an ideal of $R$ such that $\mathfrak{a} M = M$. Then there exists $a \in (1 + \mathfrak{a})$ such that $a \in \Ann M$.
 	\end{corollary}
 	\begin{proof}
-		Consider Theorem 7 under the identity transformation --- namely $f^{0}$ for some nonzero endomorphism $f$. Then there exist $r_{n - 1}, \ldots, r_{0} \in \mathfrak{a}$ such that
+		Consider Theorem 7 under the identity transformation $f$. Then there exist $a_{n - 1}, \ldots, a_{0} \in \mathfrak{a}$ such that
 		\begin{align*}
-			0 &= f^{n} + r_{n - 1} f^{n - 1} + \cdots + r_{0} f^{0} \\
-			&= f^{0} + r_{n - 1} f^{0} + \cdots + r_{0} f^{0} \\
-			&= (1 + r_{n - 1} + \cdots + r_{0}) f^{0}.
+			0 &= f^{n} + a_{n - 1} f^{n - 1} + \cdots + a_{0} f^{0} \\
+			&= f + a_{n - 1} f + \cdots + a_{0} f \\
+			&= (1 + a_{n - 1} + \cdots + a_{0}) f.
 		\end{align*}
-		Setting $r = 1 + r_{n - 1} + \cdots + r_{0}$ yields that $r f^{0}$ is the zero endomorphism, so $r f^{0}(x) = rx = 0$ for each $x \in M$. We conclude that $rM = 0$.
+		Setting $a \, = \, 1 + a_{n - 1} + \cdots + a_{0}$ yields that $a f$ is the zero endomorphism, so $a f(x) = ax = 0$ for each $x \in M$. We conclude that $a \in \Ann M$.
 	\end{proof}
 \end{adjustwidth}
 
-A \textbf{free R-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} M_{j}$, where $M_{j} \cong R$ for each $j \in J$. A finitely generated module $M$ is therefore free if $M$ is isomorphic to $R^{n}$ itself, in which case $M$ has a ``basis''.
+A \textbf{free R-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} M_{j}$, where $M_{j} \cong R$ for each $j \in J$. A finitely generated module $M$ is therefore free if $M$ is isomorphic to $R^{n}$ itself.
 
 \subsection{Relation to the Jacobson Radical}
 
@@ -402,40 +399,38 @@ The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{lemma}[Nakayama's Lemma]
-		Let $M$ be a finitely generated $R$-module and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{J}$ of $R$. Then $\mathfrak{r}M = M$ implies $M = 0$.
+		Let $M$ be a finitely generated $R$-module and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{J}$ of $R$. Then $\mathfrak{a}M = M$ implies $M = 0$.
 	\end{lemma}
 	\begin{proof}
-		By Corollary 1, there exists $r \in 1 + j$ for $j \in \mathfrak{a}$ such that $rM = 0$. By the properties of the Jacobson radical, $1 + j$ (and thus $r$) is a unit. Hence,
+		By Corollary 1, there exists $a \in (1 + \mathfrak{J})$ such that $a \in \Ann M$. By the properties of the Jacobson radical, $a$ is a unit. Hence,
 		\[
-			M = (r^{-1}r)M = r^{-1}(rM) = r^{-1}(0) = 0,
+			M = (a^{-1}a)M = a^{-1}(aM) = a^{-1}(0) = 0,
 		\]
-		as desired.
+    which completes the proof.
 	\end{proof}
 	\begin{proof}
-		Suppose for contradiction that $\mathfrak{a}M = M$ and $M \ne 0$; let $x_{1}, \ldots, x_{n}$ be a set of generators of $M$ of shortest length. Then $x_{n} \in \mathfrak{r}M$, so $x_{n}$ satisfies an equation of the form
+		Suppose for contradiction that $\mathfrak{a}M = M$ and $M \ne 0$; let $x_{1}, \ldots, x_{n}$ be a set of generators of $M$ of shortest length. Then $x_{n} \in \mathfrak{a}M$, so $x_{n}$ satisfies an equation of the form
 		\[
-			 x_{n} = r_{1} x_{1} + \cdots + r_{n} x_{n}
+			 x_{n} = a_{1} x_{1} + \cdots + a_{n} x_{n}
 		\]
-		for $r_{1}, \ldots, r_{n} \in \mathfrak{a}$. None of these are $1$, since the Jacobson Radical is the intersection of maximal ideals, of which none contain $1$. We can therefore eliminate $x_{n}$;
+		for $a_{1}, \ldots, a_{n} \in \mathfrak{a}$. Since none of these are $1$, we have
 		\[
-			(1 - r_{n})x_{n} = r_{1}x_{1} + \cdots + r_{n - 1}x_{n - 1}.
+			(1 - a_{n})x_{n} = r_{1}x_{1} + \cdots + r_{n - 1}x_{n - 1}.
 		\]
-		Since $r_{n}$ is in the Jacobson radical, $(1 - r_{n})$ is a unit. We may therefore multiply this equation by the inverse of $(1 - r_{n})$ to express $x_{n}$ as a linear combination of $x_{1}, \ldots, x_{n - 1}$. 
-
-		Then $x_{1}, \ldots, x_{n - 1}$ generate $M$. This contradicts the minimality of the length of $x_{1}, \ldots, x_{n}$; we conclude that if $\mathfrak{a} M = M$, then $M = 0$.
+    Since $a_{n} \in \mathfrak{J}$, the element $(1 - a_{n})$ is a unit. Thus $x_{1}, \ldots, x_{n - 1}$ generate $M$, which yields the desired contradiction.
 	\end{proof}
 \end{adjustwidth}
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{corollary}
-		Let $M$ be a finitely-generated $R$-module, $N$ a submodule of $M$, and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{R}$ of $R$. Then $M = IM + N$ implies $M = N$.
+		Let $M$ be a finitely-generated $R$-module, $N \subseteq M$ be a submodule, and $\mathfrak{a} \subseteq \mathfrak{J}$ be an ideal of $R$ in the Jacobson radical. Then $M = \mathfrak{a}M + N$ implies $M = N$.
 	\end{corollary}
 	\begin{proof}
-		Suppose $M = \mathfrak{a} M + N$. Realize that for \textit{all} ideals $\mathfrak{r}$ of $R$,
-		\[
-			\mathfrak{a}(M \,/\, N) = (\mathfrak{r}M) \,/\, N = (\mathfrak{r}M + N) \,/\, N.
-		\]
-		Therefore, $\mathfrak{a}(M \,/\, N) = M \,/\, N$. By Nakayama's Lemma, $M \,/\, N = 0$, so $M = N$.
+    Suppose that $M = \mathfrak{a}M + N$. Then
+    \[
+      \mathfrak{a}(M \, / \, N) \, = \, \mathfrak{a}M \, / \, N \, = \, (\mathfrak{a}M + N) \, / \, N \, = \, M \, / \, N.
+    \]
+    Thus applying Nakayama's Lemma to $M \, / \, N$, we have $M \, / \, N = 0$; hence $M = N$.
 	\end{proof}
 \end{adjustwidth}
 
