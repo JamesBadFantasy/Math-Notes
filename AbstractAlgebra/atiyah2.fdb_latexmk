@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1708831929 "atiyah2.tex" "atiyah2.pdf" "atiyah2" 1708831930 0
+["pdflatex"] 1708880210 "atiyah2.tex" "atiyah2.pdf" "atiyah2" 1708880211 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1704400182 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -206,10 +206,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "atiyah2.aux" 1708831930 2665 a09457516e0360661ba99c377d752256 "pdflatex"
-  "atiyah2.out" 1708831930 2632 adb6ea9417d15aaac1b976ab0e7faabf "pdflatex"
-  "atiyah2.tex" 1708831929 30734 86b231823c591d3f3c5d3db273100af3 ""
-  "atiyah2.toc" 1708831930 1413 fb3ad2cf3296eb934100cc4e6fd34b5b "pdflatex"
+  "atiyah2.aux" 1708880210 2665 a09457516e0360661ba99c377d752256 "pdflatex"
+  "atiyah2.out" 1708880210 2632 adb6ea9417d15aaac1b976ab0e7faabf "pdflatex"
+  "atiyah2.tex" 1708880208 30738 6243ca631ed81f9f42a36e4581aa5177 ""
+  "atiyah2.toc" 1708880210 1413 fb3ad2cf3296eb934100cc4e6fd34b5b "pdflatex"
   (generated)
   "atiyah2.aux"
   "atiyah2.log"

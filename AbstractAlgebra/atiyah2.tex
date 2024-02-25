@@ -413,9 +413,9 @@ The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 		\[
 			 x_{n} = a_{1} x_{1} + \cdots + a_{n} x_{n}
 		\]
-		for $a_{1}, \ldots, a_{n} \in \mathfrak{a}$. Since none of these are $1$, we have
+		for $a_{1}, \ldots, a_{n} \in \mathfrak{a}$. Since none of these scalars are $1$, we have
 		\[
-			(1 - a_{n})x_{n} = r_{1}x_{1} + \cdots + r_{n - 1}x_{n - 1}.
+			(1 - a_{n})x_{n} = a_{1}x_{1} + \cdots + a_{n - 1}x_{n - 1}.
 		\]
     Since $a_{n} \in \mathfrak{J}$, the element $(1 - a_{n})$ is a unit. Thus $x_{1}, \ldots, x_{n - 1}$ generate $M$, which yields the desired contradiction.
 	\end{proof}
@@ -447,9 +447,9 @@ Consider a finitely-generated module $M$ over a local ring $R$ with maximal idea
 	\begin{proof}
 		It is relatively simple to verify that the function $f : M \,/\, \mathfrak{m} M \to M$ defined by
 		\[
-			f(r_{1} x_{1} + \cdots + r_{n} x_{n} + \mathfrak{m}M) = (r_{1} + \mathfrak{m})x_{1} + \cdots + (r_{n} + \mathfrak{m})x_{n}
+			f(a_{1} x_{1} + \cdots + a_{n} x_{n} + \mathfrak{m}M) = (a_{1} + \mathfrak{m})x_{1} + \cdots + (a_{n} + \mathfrak{m})x_{n}
 		\]
-		is bijective. It further satisfies $f(x + y) = f(x) + f(y)$ --- and $f(rx) = s f(x)$, where $s$ is the image of $r$ under the canonical epimorphism $\phi : R \to R \,/\, \mathfrak{m}$.
+		is bijective. It further satisfies $f(x + y) = f(x) + f(y)$ and $f(ax) = b f(x)$, where $b$ is the image of $a$ under the canonical epimorphism $\phi : R \to R \,/\, \mathfrak{m}$.
 	\end{proof}
 \end{adjustwidth}
 
