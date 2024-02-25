@@ -1,7 +1,7 @@
 % To-do:
 % - Subgroups of G / N
 % - Operations on Subgroups
-% - The Homomorphism Theorem
+% - The Isomorphism Theorems
 
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
@@ -270,7 +270,7 @@ The \textbf{canonical epimorphism} $\pi : G \to G \, / \, N$ is the surjective h
 \[
   \pi(ab) \, = \, abN \, = \, aN \times bN \, = \, \pi(a) \pi(b).
 \]
-Applying the Correspondence Theorem to the canonical surjection yields that subgroups in $G \, / \, N$ correspond one-to-one with subgroups in $G$ that contain $N$.
+Applying the Correspondence Theorem to the canonical epimorphism yields that subgroups in $G \, / \, N$ correspond one-to-one with subgroups in $G$ that contain $N$.
 
 % --------------------------------------------- %
 
@@ -287,7 +287,7 @@ A \textbf{group homomorphism} between two groups $G$ and $H$ is a mapping $\phi 
 There are several types of homomorphisms to consider:
 \begin{enumerate}
   \item A surjective homomorphism is an \textbf{epimorphism}, an injective homomorphism is a \textbf{monomorphism}, and a bijetive homomorphism is an \textbf{isomorphism}.
-  \item A homomorphism $\phi : G \to G$ is an \textbf{epimorphism}, and an isomorphic epimorphism is an \textbf{automorphism}.
+  \item A homomorphism $\phi : G \to G$ is an \textbf{endomorphism}, and an isomorphic endomorphism is an \textbf{automorphism}.
 \end{enumerate}
 
 If there exists an isomorphism between $G$ and $H$, their structures are equivalent: we say $G$ and $H$ are \textbf{isomorphic} and write $G \cong H$.
@@ -411,11 +411,11 @@ For the remainder of this section, let $\phi : G \to H$ be a homomorphism.
   \begin{proof}
     Let $K = \Ker \phi$, and define a morphism $\psi : G \, / \, K \to \Im \phi$ by $\psi(aK) = \phi(a)$. We have for arbitrary $a, b \in G$ that
     \[
-      \psi(aK \times bK) \, = \, \psi(abK) \, = \, \pi(ab) \, = \, \phi(a) \phi(b) \, = \, \psi(aK) \psi(bK).
+      \psi(aK \times bK) \, = \, \psi(abK) \, = \, \phi(ab) \, = \, \phi(a) \phi(b) \, = \, \psi(aK) \psi(bK).
     \]
     Hence $\psi$ is a homomorphism. For injectivity, suppose that $\Psi(aK) = \Psi(bK)$ --- that is, $\phi(a) = \phi(b)$. Then
     \[
-      \phi(a^{-1}b) \, = \, \phi(a)^{-1} \phi(b) \, = \, e_{H},
+      \phi(a^{-1}b) \, = \, \phi(a)^{-1} \phi(b) \, = \, e,
     \]
     so $a^{-1}b \in K$. Thus $aK = bK$. For surjectivity, it is clear that for all $\phi(a) \in \Im \phi$ we have $\psi(aK) = \phi(a)$. We conclude that $\psi$ is the desired isomorphism.
   \end{proof}
@@ -429,16 +429,91 @@ Let $\phi : G \to H$ be a homomorphism. Here are two special cases of the prior 
   \item If $\phi$ is an epimorphism, then $G \, / \, \Ker \phi \, \cong \, H$.
 \end{enumerate}
 
-For a subgroup $M' \subseteq H$, define the \textbf{contraction group} $M = \{ a \in G \, \mid \, \phi(a) \in M' \}$. This terminology is self-invented, but mirrors the contraction and extension of ideals.
+For a subgroup $M' \subseteq \Im \phi$, I call $M = \{ a \in G \, \mid \, \phi(a) \in M' \}$ the \textbf{contraction group}.
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}[Correspondence Theorem]
-    Subgroups of $G$ which contain $\Ker \phi$ correspond one-to-one with subgroups of $H$.
+    Subgroups of $G$ which contain $\Ker \phi$ correspond one-to-one with subgroups of $\Im \phi$.
   \end{theorem}
   \begin{proof}
-    
+    For each subgroup $H' \subseteq \Im \phi$, consider the contraction group $G' \, = \, \{ a \, \mid \, \phi(a) \in H' \}$. Observe the following:
+    \begin{enumerate}
+      \item \textbf{Nonempty}: Clearly $e \in G'$ since $\phi(e) = e \in H'$.
+      \item \textbf{Closed}: If $a, b \in G'$, then $\phi(ab) = \phi(a) \phi(b) \in H'$ by the closure of $H'$. Therefore $ab \in G'$.
+      \item \textbf{Inverses}: If $a \in G'$, then $\phi(a^{-1}) = \phi(a)^{-1} \in H'$; thus $a^{-1} \in G'$.
+    \end{enumerate}
+    Hence $G'$ is a subgroup. It is clear that $\Ker \phi \subseteq G'$, so the First Isomorphism Theorem yields that
+    \[
+      G' \, / \, \Ker \phi \, \cong \, H'.
+    \]
+    Thus this construction is injective. It is surjective, since for each $\Ker \subseteq G' \subseteq G$, the subgroup $G'$ is contracted by $\phi(G')$. The correspondence is now established.
   \end{proof}
 \end{adjustwidth}
+
+In fact, this bijection applies to \textit{normal} subgroups too. The Second Isomorphism Theroem the utilizes the properties in \textbf{SECTION NUMBERS HERE!}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Second Isomorphism Theorem]
+    Let $H \subseteq G$ be a subgroup and $N \nsg G$. Then $N \nsg HN$ and $H \cap N \nsg H$; furthermore, $HN \, / \, N \, \cong \, H \, / \, H \cap N$.
+  \end{theorem}
+  \begin{proof}
+    Define a mapping $\phi : H \to HN \, / \, N$ by $\phi(h) = HN$. Clearly $\phi$ is well-defined; it is a homomorphism, since $h_{1}, h_{2} \in H$ implies
+    \[
+      \phi(h_{1}h_{2}) \, = \, h_{1}h_{2}N \, = \, (h_{1}N)(h_{2}N) \, = \, \phi(h_{1}) \phi(h_{2}).
+    \]
+    $\phi$ is surjective, since for all $hN \in HN \, / \, N$, we have $\phi(h) = hN$. The kernel of $\phi$ is all $h \in N$ --- namely, $H \cap N$. We conclude by the First Isomorphism Theorem that
+    \[
+      H \, / \, H \cap N \quad \cong \quad HN \, / \, N,
+    \]
+    which completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+\newpage
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Third Isomorphism Theorem]
+    If $N \nsg G$ and $N \subseteq M \nsg G$, then $G \, / \, M \, = \, (G \, / \, N) \, / \, (M \, / \, N)$.
+  \end{theorem}
+  \begin{proof}
+    Let $\phi : G \to G \, / \, N$ be the canonical epimorphism. Define $\psi : G \to \phi(G) \, / \, \phi(M)$ by the rule $\psi(a) = \phi(a)\phi(M)$. It is clear that $\psi$ is well-defined and surjective; it is a homomorphism since
+    \[
+      \psi(ab) \, = \, \phi(ab) \phi(M) \, = \, \big(\phi(a) \phi(M)\big) \, \big(\phi(b) \phi(M) \big) \, = \, \psi(a) \psi(b).
+    \]
+    The kernel of $\phi$ is all $a \in M$. The First Isomorphism Theorem yields that
+    \[
+      G \, / \, M \quad \cong \quad \phi(G) \, / \, \phi(M).
+    \]
+    Since the kernel of $\phi$ is $N$, we have that $\phi(G) \, \cong \, G \, / \, N$ and $\phi(M) \, \cong \, M \, / \, N$; substituting yields the desired $G \, / \, M \, = \, (G \, / \, N) \, / \, (M \, / \, N)$.
+  \end{proof}
+\end{adjustwidth}
+
+A corollary of the Third Isomorphism Theorem is that $G \, / \, N \, \cong \, \phi(G) \, / \, \phi(N)$.
+
+% --------------------------------------------- %
+
+\section{Operations on Subgroups}
+
+% --------------------------------------------- %
+
+\subsection{Subgroup Product}
+
+Let $H \subseteq G$ be a subgroup and let $N \nsg G$. The \textbf{subgroup product} $HN$ is defined as
+\[
+  HN \quad \stackrel{\text{def}}{=} \quad \{ hn \, \mid \, h \in H, \, n \in N \}.
+\]
+It is relatively easy to deduce that $HN$ is a subgroup of $G$: for all $h_{1}n_{1}, h_{2}n_{2} \in HN$,
+\begin{enumerate}
+  \item \textbf{Closure}: Since $h_{2}^{-1}n_{1}h_{2} \in N$, define $n$ such that $n_{1}h_{2} = h_{2}n$. Then
+  \[
+    (h_{1}n_{1})(h_{2}n_{2}) = (h_{1}h_{2})(nn_{2}) \in HN.
+  \]
+  \item \textbf{Inverses}: Since $hn^{-1}h^{-1} \in N$, define $n_{0}$ such that $n^{-1}h^{-1} = h^{-1}n_{0}$. Then
+  \[
+    (h_{1}n_{1})^{-1} = n_{1}^{-1}h_{1}^{-1} = h^{-1}n_{0} \in HN.
+  \]
+\end{enumerate}
+Since $HN$ is clearly nonempty, we conclude that $HN \subseteq G$ is a subgroup. It is clear that $N \nsg HN$ and $H \subset HN$.
 
 % --------------------------------------------- %
 

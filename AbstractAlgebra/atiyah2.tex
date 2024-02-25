@@ -8,7 +8,7 @@
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
+\setlength{\parskip}{6pt}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -23,6 +23,8 @@
 \newcommand{\Coker}{\operatorname{Coker}}
 \newcommand{\Ann}{\operatorname{Ann}}
 \renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+
+\newcommand{\nsg}{\mathrel{\lhd}}
 
 \title{Atiyah-MacDonald: Modules}
 \author{James Pagan}
@@ -59,104 +61,173 @@ An \textbf{R-module} over a commutative ring $R$ is an abelian group $M$ (with o
 
 \begin{itemize}
 	\item If $R$ is a ring, $R[x]$ is a module.
-	\item All ideals $\mathfrak{a}$ of $R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
+	\item All ideals $\mathfrak{a} \subseteq R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
 	\item If $R$ is a field, $R$-modules are $R$-vector spaces. In fact, the axioms above are identical to the vector axioms, defined over commutative rings instead of fields.
 	\item Abelian groups $G$ are precisely the modules over $\mathbb{Z}$.
 \end{itemize}
 
 % --------------------------------------------- %
 
-\subsection{Homomorphisms of Modules}
+\subsection{R-Module Homomorphisms}
 
-A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is $R$-linear) if for all $a \in R$ and $x, y \in M$,
+A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is \textbf{R-linear}) if for all $a \in R$ and $x, y \in M$,
 \begin{align*}
 	f(x + y) & = f(x) + f(y) \\
 	f(ax)    & = a f(x).
 \end{align*}
-Thus, an $R$-module homomorphism $f$ is a homomorphism of abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear transformation. A bijective $R$-homomorphism is called an $R$-isomorphism.
-
-\newpage
+Thus, an $R$-module homomorphism $f$ is a homomorphism of abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear map. A bijective $R$-homomorphism is called an $R$-isomorphism.
 
 The set $\Hom_{R}(M, N)$ denotes the set of all $R$-module homomorphisms from $M$ to $N$, and is a module if we define the following operations for $a \in R$ and $f, g \in \Hom_{R}(M, N)$:
-\begin{align*}
+  \begin{align*}
 	(f + g)(x) & = f(x) + g(x) \\
-	(rf)(x)    & = r f(x).
+	(af)(x)    & = a f(x).
 \end{align*}
-We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if there is no ambiguity about the commutative ring $R$.
+We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if the ring $R$ is unambiguous.
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		$\Hom_{R}(R, M) \cong M$
 	\end{theorem}
 	\begin{proof}
-		Consider the mapping $\phi : \Hom_{R}(R, M)$ defined by $\phi(f) = f(1)$ for $f \in \Hom_{R}(R, M)$. See that for all $f, g \in \Hom_{R}(R, M)$,
-		\[
-			\phi(f + g) = (f + g)(1) = f(1) + g(1) = \phi(f) + \phi(g)
-		\]
-		and for all $a \in R$,
-		\[
-			\phi(af) = (af)(1) = a f(1) = a \phi(f),
-		\]
-		so $\phi$ is an $R$-homomorphism. Now, suppose that $\phi(f) = \phi(g)$; then $f(1) = g(1)$. For all $a \in R$, we deduce that $f(a) = a f(1) = a g(1) = g(a)$, so $h = g$ and $\phi$ is injective.
-
-		For all $x \in M$, consider the mapping $h : R \to M$ defined by $h(a) = ax$. As $h(ab) = abx = a h(b)$ for all $a, b \in R$, and
-		\[
-			h(a + b) = (a + b) h(1) = a h(1) + b h(1) = h(a) + h(b),
-		\]
-		we find that $h \in \Hom_{R}(R, M)$. Thus $\phi$ is surjective, as $\phi(h) = h(1) = m$, which establishes the desired isomrphism.
+		The mapping $\phi : \Hom_{R}(R, M) \to M$ defined by $\phi(f) = f(1)$ is a homomorphism, as verified by a routine computation: for all $f, g \in \Hom_{R}(M, N)$ and $a \in R$,
+		\begin{align*}
+      \phi(f + g) = (f + g)(1) &= f(1) + g(1) = \phi(f) + \phi(g) \\
+            \phi(af) = (af)(1) &= a f(1) = a \phi(f),
+		\end{align*}
+		so $\phi$ is an $R$-homomorphism. This mapping is injective, since each $f$ is uniquely determined by $f(1)$. It is also surjective; for each $m \in M$, set define a homomorphism by $h(1) = m$. Thus $\phi$ is the desired isomorphism.
 	\end{proof}
 \end{adjustwidth}
 
-Further observe that homomorphisms $u : M' \to M$ and $v : N \to N''$ induce mappings $\bar{u} : \Hom(M, N) \to \Hom(M', N)$ and $\bar{v} : \Hom(M, N) \to \Hom(M, N'')$ defined for $f \in \Hom(M, N)$ as follows
+Homomorphisms $u : M' \to M$ and $v : N \to N''$ induce mappings $\bar{u} : \Hom(M, N) \to \Hom(M', N)$ and $\bar{v} : \Hom(M, N) \to \Hom(M, N'')$ defined for $f \in \Hom(M, N)$ as follows
 \[
 	\bar{u}(f) = f \circ u \qquad \text{and} \qquad \bar{v}(f) = v \circ f.
 \]
-These identities translate between the landscapes of $R$-modules and homomorphisms between them. We will elaborate on this duality in Section 5.2.
-
-\newpage
+I do not know why such a manipulation is noteworthy. The formulas above are quite easy to memorize if the time ever comes to invoke them.
 
 % --------------------------------------------- %
 
-\section{Submodules and Quotient Modules}
+\subsection{Submodules}
 
-% --------------------------------------------- %
+A \textbf{submodule} $M'$ of $M$ is an abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. 
 
-\subsection{Definition}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    $\mathfrak{a}$ is an ideal of $R$ if and only if it is an $R$-submodule of $R$.
+  \end{lemma}
+  \begin{proof}
+    The proof evolves from a fundamental observation:
+    \[
+      R \mathfrak{a} = \mathfrak{a} \, \iff \, \text{scalar multiplication in the $R$-module $\mathfrak{a}$ is closed}.
+    \]
+    The rest of the multiplicative module conditions follow from the ring axioms.
+  \end{proof}
+\end{adjustwidth}
 
-A \textbf{submodule} $M'$ of $M$ is an abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. The following proof outlines a construction of \textbf{quotient modules}:
+The following proof outlines the construction of \textbf{quotient modules}:
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		The abelian quotient group $M / M'$ is an $R$-module under the opreation $r(x + M') = rx + M'$.
+		The abelian quotient group $M \, / \, M'$ is an $R$-module under the opreation $a(x + M') = ax + M'$.
 	\end{theorem}
 	\begin{proof}
-		We must perform four rather routine calculations:
+		We must perform four rather routine calculations: for all $x, y \in M$ and $a, b \in R$,
 		\begin{enumerate}
-			\item For all $x \in M$, we have that $1(x + M') = 1x + M' = x + M'$.
-			\item For all $r, s \in R$ and $x \in M$, we have that $r(s(x + M')) = r(sx + M') = rsx + M' = (rs)(x + M')$.
-			\item For all $r, s \in R$ and $x \in M$, we have that $(r + s)(x + M') = (r + s)x + M' = (rx + sx) + M' = (rx + M') + (sx + M') = r(x + M') + s(x + M')$.
-			\item For all $r \in R$ and $x, y \in M$, we have that $r((x + M') + (y + M')) = r((x + y) + M') = r(x + y) + M' = (rx + M') + (ry + M') = r(x + M') + r(y + M)'$.
+      \item \textbf{Identity}: $1(x + M') = 1x + M' = x + M'$.
+      \item \textbf{Compatability}: $a(b(x + M')) = a(bx + M') = abx + M' = (ab)(x + M')$.
+			\item \textbf{Left Distributivity}: $(a + b)(x + M') = (a + b)x + M' = (ax + bx) + M' = (ax + M') + (bx + M') = a(x + M') + b(x + M')$.
+			\item \textbf{Right Distriutivity}: $a((x + M') + (y + M')) = a((x + y) + M') = a(x + y) + M' = (ax + M') + (ay + M') = a(x + M') + a(y + M)'$.
 		\end{enumerate}
-		Therefore, $M / M'$ is an $R$-module.
+		Therefore, $M / M'$ is an $R$-module. Also, this operation is naturally well-defined.
 	\end{proof}
 \end{adjustwidth}
 
-% --------------------------------------------- %
+$R$-module homomorphisms $f : M \to N$ induce three notable submodules: 
+\begin{enumerate}
+  \item \textbf{Kernel}: $\Ker f \, = \, \{ x \in M \, \mid \, f(x) = 0 \}$, a submodule of $M$.
+  \item \textbf{Image}: $\Im f \, = \, \{ f(x) \, \mid \, x \in M \}$, a submodule of $N$.
+  \item \textbf{Cokernel}: $\Coker f \, = \, N \, / \, \Im f$, a quotient of $N$.
+\end{enumerate}
+The cokernel is perhaps an unfamiliar face. Such a quotient is not possible for rings or groups; images of homomorphisms need not be ideals of $R$ nor normal subgroups of $G$. 
 
-\subsection{Assorted Submodules}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[First Isomorphism Theorem]
+     $N \, / \, \Ker f \, \cong \, \Im f$.
+  \end{theorem}
+  \begin{proof}
+    Let $K = \Ker f$, and define an $R$-morphism $g : M \, / \, N \to \Im f$ by $g(x + K) = f(x)$. We have for arbitrary $x, y \in N$ and $a \in R$ that
+    \begin{align*}
+      g(x + y + K) \, = \, f(x + y) \, &= \, f(x) + f(y) \, = \, g(x + K) + g(y + K). \\
+            g(ax + K) \, = \, f(ax) \, &= \, a f(x) \, = \, a g(x + K).
+    \end{align*}
+    Hence $g$ is a homomorphism. For injectivity, suppose that $g(x + K) = g(y + K)$ --- that is, $f(x) = f(y)$. Then
+    \[
+      f(y - x) \, = \, f(y) - f(x) \, = \, 1,
+    \]
+    so $y - x \in K$. Thus $x + K = y + K$. Surjectivity is quite clear. We conclude that $g$ is the desired isomorhism.
+  \end{proof}
+\end{adjustwidth}
 
-Let $f : M \to N$ be an $R$-module homomorphism. Then the \textbf{kernel} and \textbf{image} of $f$ are defined as follows:
-\[
-	\Ker f = \{ x \mid x \in M, f(x) = 0 \} \qquad \text{and} \qquad \Im f = f(M),
-\]
-and are submodules of $M$ and $N$ respectively. The \textbf{cokernel} of $f$ is defined as follows:
-\[
-	\Coker f = N \,/\, \Im f.
-\]
-If $M'$ is a submodule of $M$ such that $M' \subseteq \Ker f$, then $f$ induces a natural homomorphism $\bar{f} : M / M' \to N$ defined by $\bar{f}(x + M') = f(x)$. The kernel of $\bar{f}$ is $\Ker f \,/\, M'$ --- the distinct cosets of $M'$ in the kernel of $f$. Taking $M' = \Ker f$ yields the First Isomorphism Theorem for $R$-modules:
-\[
-	M \,/\, \Ker f \cong \Im f.
-\]
+Let $f : M \to N$ be an $R$-module homomorphism. Here are two special cases of the prior theorem:
+\begin{enumerate}
+  \item If $f$ is a monomorphism, them $M \, \cong \, \Im f$.
+  \item If $f$ is an epimorphism, then $M \, / \, \Ker f \, \cong \, N$.
+\end{enumerate}
+
+For a submodule $N' \subseteq \Im f$, I call $M' = \{ x \in M \, \mid \, f(a) \in N' \}$ the \textbf{contraction module}.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Correspondence Theorem]
+    Submodules of $G$ which contain $\Ker f$ correspond one-to-one with submodules of $\Im f$.
+  \end{theorem}
+  \begin{proof}
+    For each submodule $N' \subseteq \Im f$ consider the contraction module $M' \, = \, \{ x \, \mid \, f(x) \in N' \}$. Since this is an Abelian subgroup, we need only check for multiplicative closure: for all $x \in M'$ and $a \in R$, we have
+    \[
+      f(ax) = a f(x) \in N' \implies ax \in N'.
+    \]
+    Hence $M'$ is a submodule. It is clear that $\Ker f \subseteq M'$, so the First Isomorphism Theorem yields that
+    \[
+      N' \, / \, \Ker f \, \cong \, M'.
+    \]
+    Thus this construction is injective. It is surjective, since for each $\Ker \subseteq N' \subseteq N$, the subgroup $N'$ is contracted by $f(N')$. The correspondence is now established.
+  \end{proof}
+\end{adjustwidth}
+
+The Second Isomorphism Theorem utilizes the definitioins of Section 2.1:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Second Isomorphism Theorem]
+    If $M_{1}, M_{2} \subseteq M$ are submodules, then $(M_{1} + M_{2}) \, / \, M_{1} \, \cong \, M_{2} \, / \, (M_{1} \cap M_{2})$.
+  \end{theorem}
+  \begin{proof}
+    Define a mapping $f : M_{2} \to (M_{1} + M_{2}) \, / \, M_{1}$ by $\phi(m_{2}) = m_{2} + M_{1}$. Clearly $\phi$ is well-defined; it is an $R$-module homomorphism, since $x_{1}, x_{2} \in M_{2}$ and $a \in R$ implies
+    \begin{align*}
+      f(x_{1} + x_{2}) \, = \, x_{1} + x_{2} + x_{1} \, &= \, (x_{1}N)(x_{2}N) \, = \, f(x_{1}) f(x_{2}) \\
+                    f(ax_{1}) \, = \, ax_{1} + x_{1} \, &= \, a(x_{1} + x_{1}) \, = \, a f(x_{1}).
+    \end{align*}
+    $f$ is surjective, since for all $x_{1} + M_{1} \in (M_{1} + M_{2}) \, / \, M_{2}$, we have $f(x_{1}) = x_{1} + X_{1}$. The kernel of $f$ is all $x \in M_{1}$ --- namely, $M_{1} \cap M_{2}$. We conclude by the First Isomorphism Theorem that
+    \[
+      (M_{1} + M_{2}) \, / \, M_{1} \quad = \quad M_{2} \, / \, (M_{1} \cap M_{2}),
+    \]
+    which completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Third Isomorphism Theorem]
+    If $L \nsg M$ and $L \subseteq N \nsg M$, then $M \, / \, N \, = \, (M \, / \, L) \, / \, (N \, / \, L)$.
+  \end{theorem}
+  \begin{proof}
+    Let $\phi : M \to M \, / \, L$ be the canonical epimorphism. Define $\psi : M \to \phi(M) \, / \, \phi(N)$ by the rule $\psi(a) = \phi(a)\phi(M)$. It is clear that $\psi$ is well-defined and surjective; it is an $R$-module homomorphism since
+    \[
+      \psi(ab) \, = \, \phi(ab) \phi(N) \, = \, \big(\phi(a) \phi(M)\big) \, \big(\phi(b) \phi(M) \big) \, = \, \psi(a) \psi(b).
+    \]
+    The kernel of $\phi$ is all $a \in N$. The First Isomorphism Theorem yields that
+    \[
+      M \, / \, N \quad \cong \quad \phi(M) \, / \, \phi(M).
+    \]
+    Since the kernel of $\phi$ is $L$, we have that $\phi(M) \, \cong \, M \, / \, L$ and $\phi(N) \, \cong \, N \, / \, L$; substituting yields the desired $M \, / \, N \, = \, (M \, / \, L) \, / \, (N \, / \, L)$.
+  \end{proof}
+\end{adjustwidth}
 
 % --------------------------------------------- %
 
@@ -172,24 +243,6 @@ Let $M$ be an $R$-module with submodules $M_{1}, \ldots, M_{n}$. We can consider
 	\item \textbf{Intersecrtion}: The intersection $M_{1} \cap \cdots \cap M_{n}$ is the largest submodule of $M$ that is contained inside each $M_{1}, \ldots, M_{n}$.
 \end{enumerate}
 
-The following result proves the Third Isomorphism Theorem for modules:
-
-\begin{adjustwidth}{1cm}{}
-	\begin{theorem}
-		If $N \subseteq M \subseteq L$ are $R$-modules, then
-		\[
-			(L \,/\, N) \,/\, (M \,/\, N) \cong (L \,/\, M).
-		\]
-	\end{theorem}
-	\begin{proof}
-		Define the mapping $f : L \,/\, N \to L \,/\, M$ by $f(x + N) = x + M$. First, we prove $\phi$ is well-defined; if $x + N = y + N$ for $x, y \in L$, then $x - y \in N \subset M$, so $x + M = y + M$. Therefore,
-		\[
-			x + N = y + N \implies f(x + N) = f(y + N).
-		\]
-		It is trivial to verify that $f$ is a surjective $R$-homomorphism with kernel $M \,/\, N$ (the cosets of $N$ contained within $M$). We find by the First Isomorphism Theorem that $(L \,/\, N) \,/\, (M \,/\, N) \cong L \,/\, M$.
-	\end{proof}
-\end{adjustwidth}
-
 For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{product} $\mathfrak{a} M$ as all finite sums $a_{1}x_{1} + \cdots + a_{n}x_{n}$ for $a_{i} \in \mathfrak{a}$ and $x_{i} \in M$  for each $i \in \{ 1, \ldots, n \}$. It is a submodule of $M$.
 
 % --------------------------------------------- %
@@ -198,7 +251,9 @@ For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{
 
 If $N$ and $P$ are $R$-submodules of $M$, we define $(N : P)$ to be the set of all $r \in R$ such that $rP \subseteq N$.
 
-\begin{adjustwidth}{1cm}{}
+\newpage
+
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		$(N : P)$ is an ideal of $R$.
 	\end{theorem}
@@ -211,7 +266,7 @@ The \textbf{annihilator} of a module $M$ is $(0 : M)$, the ideal of all $r$ such
 
 An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihalator of $R$ may change depending on the ring --- if $\Ann M = I$, then $M$ is faithful as an $R / I$ module.
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		If $M_{1}$ and $M_{2}$ are submodules of $M$, then $\Ann(M_{1} + M_{2}) = \Ann M_{1} \cap \Ann M_{2}$
 	\end{theorem}
@@ -271,7 +326,7 @@ by the isomorphism $f(a_{1}, \ldots, a_{n}) = (a_{1} + \mathfrak{b}_{1}, \ldots,
 
 An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set of \textbf{generators} $x_{1}, \ldots, x_{n}$ such that $M = Rx_{1} + \cdots + Rx_{n}$, where $Rx_{i}$ denotes the set $\{ rx_{i} \mid r \in R \}$ ($i \in \{ 1, \ldots, n \}$). In the following theorem, we denote $R \oplus \cdots \oplus R$ by $R^{n}$.
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		$M$ is a finitely-generated $R$-module if and only if $M$ is isomorphic to a quotient of $R^{n}$.
 	\end{theorem}
@@ -286,11 +341,11 @@ An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set
 		\[
 			f(s r_{1}, \ldots, s r_{n}) = s r_{1} x_{1} + \cdots + s r_{n} x_{n} = s f(r_{1}, \ldots, r_{n}).
 		\]
-		Thus $f$ is a homomorphism; its surjectivity follows from the generation of $M$ by $x_{1}, \ldots, x_{n}$. Then if we set $\Ker f = \mathfrak{a}$, the First Isomorphism Theorem yields that
+		Thus $f$ is an $R$-module homomorphism; its surjectivity follows from the generation of $M$ by $x_{1}, \ldots, x_{n}$. Then if we set $\Ker f = \mathfrak{a}$, the First Isomorphism Theorem yields that
 		\[
 			R^{n} \,/\, \mathfrak{a} \, \cong \, M.
 		\]
-		Now, suppose that $R^{n} \,/\, \mathfrak{a} \cong M$ for some submodule $\mathfrak{r}$ of $R^{n}$ by the mapping $f$. The natural homomorphism $g : R^{n} \to R^{n} \,/\, \mathfrak{r}$ defined by $g(r_{1}, \ldots r_{n}) = (r_{1}, \ldots, r_{n}) + \mathfrak{r}$ is surjective, so $f \circ g : R^{n} \to M$ is a surjective $R$-module homomorhism.
+		Now, suppose that $R^{n} \,/\, \mathfrak{a} \cong M$ for some submodule $\mathfrak{r}$ of $R^{n}$ by the mapping $f$. The canonical epimorphism $g : R^{n} \to R^{n} \,/\, \mathfrak{r}$ defined by $g(r_{1}, \ldots r_{n}) = (r_{1}, \ldots, r_{n}) + \mathfrak{r}$ is surjective, so $f \circ g : R^{n} \to M$ is a surjective $R$-module homomorhism.
 
 		Denote $x_{i} = (f \circ g) (0, \ldots, 0, 1, 0, \ldots 0)$ for $i \in \{ 1, \ldots, n \}$. Then for all $x \in M$, there exist $r_{1}, \ldots, r_{n}$ such that
 		\begin{align*}
@@ -305,7 +360,7 @@ An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set
 
 The following proof is a transcription from Atiyah-MacDonald:
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		Let $M$ be a finitely-generated $R$-module, let $\mathfrak{a}$ be an ideal of $R$, and let $f : M \to M$ be an $R$-module endomorphism of $M$ such that $f(M) \subset \mathfrak{r}M$. Then $\phi$ satisfies an equation of the form
 		\[
@@ -322,7 +377,7 @@ The following proof is a transcription from Atiyah-MacDonald:
 	\end{proof}
 \end{adjustwidth}
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{corollary}
 		Let $M$ be a finitely-generated $R$-module and let $\mathfrak{a}$ be an ideal of $R$ such that $\mathfrak{r} M = M$. Then there exists $r \in (1 + \mathfrak{r})$ such that $rM = 0$.
 	\end{corollary}
@@ -345,7 +400,7 @@ A \textbf{free R-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} 
 
 The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{lemma}[Nakayama's Lemma]
 		Let $M$ be a finitely generated $R$-module and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{J}$ of $R$. Then $\mathfrak{r}M = M$ implies $M = 0$.
 	\end{lemma}
@@ -371,7 +426,7 @@ The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 	\end{proof}
 \end{adjustwidth}
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{corollary}
 		Let $M$ be a finitely-generated $R$-module, $N$ a submodule of $M$, and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{R}$ of $R$. Then $M = IM + N$ implies $M = N$.
 	\end{corollary}
@@ -390,7 +445,7 @@ The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 
 Consider a finitely-generated module $M$ over a local ring $R$ with maximal ideal $\mathfrak{m}$. 
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		The elements of the $R$-module $M \,/\, \mathfrak{m} M$ and the $(R \,/\, \mathfrak{m})$-module $M$ are identical.
 	\end{theorem}
@@ -399,18 +454,18 @@ Consider a finitely-generated module $M$ over a local ring $R$ with maximal idea
 		\[
 			f(r_{1} x_{1} + \cdots + r_{n} x_{n} + \mathfrak{m}M) = (r_{1} + \mathfrak{m})x_{1} + \cdots + (r_{n} + \mathfrak{m})x_{n}
 		\]
-		is bijective. It further satisfies $f(x + y) = f(x) + f(y)$ --- and $f(rx) = s f(x)$, where $s$ is the image of $r$ under the canonical surjection $\phi : R \to R \,/\, \mathfrak{m}$.
+		is bijective. It further satisfies $f(x + y) = f(x) + f(y)$ --- and $f(rx) = s f(x)$, where $s$ is the image of $r$ under the canonical epimorphism $\phi : R \to R \,/\, \mathfrak{m}$.
 	\end{proof}
 \end{adjustwidth}
 
 This realization arises naturally, as $\mathfrak{m}$ annihalates the quotient module $M \,/\, \mathfrak{m} M$. Since $R \,/\, \mathfrak{m}$ is a field, $M \,/\, \mathfrak{m} M$ is actually a vector space.
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		Let $M$ be a module over a local ring. Then $x_{1}, \ldots, x_{n} \in M$ generate $M$ if and only if the images of $x_{1}, \ldots, x_{n}$ span the the vector space $M \,/\, \mathfrak{m} M$.
 	\end{theorem}
 	\begin{proof}
-		Let $f : M \to M \,/\, \mathfrak{m} M$ be the natural homomorphism. Then
+		Let $f : M \to M \,/\, \mathfrak{m} M$ be the canonical epimorphism. Then
 		\begin{align*}
 			\text{$x_{1}, \ldots, x_{n}$ generate $M$} &\iff \text{$x_{1}, \ldots, x_{n}$ generate $M \,/\, \mathfrak{m} M$} \\
 			&\iff \text{$x_{1}, \ldots, x_{n}$ are a basis of $M \,/\, \mathfrak{m} M$ over $R \,/\, \mathfrak{m}$}.
@@ -432,7 +487,7 @@ This realization arises naturally, as $\mathfrak{m}$ annihalates the quotient mo
 
 A sequence of $R$-modules and $R$-homomorphisms
 \begin{equation}
-	\cdots \longrightarrow M_{i - 1} \stackrel{f_{i}}{\longrightarrow} M_{i} \stackrel{f_{i + 1}}{\longrightarrow} M_{i + 1} \xrightarrow{\hspace*{1cm}} \cdots 
+	\cdots \longrightarrow M_{i - 1} \stackrel{f_{i}}{\longrightarrow} M_{i} \stackrel{f_{i + 1}}{\longrightarrow} M_{i + 1} \xrightarrow{\hspace*{0.5cm}} \cdots 
 \end{equation}
 is \textbf{exact} at $M_{i}$ if $\Im f_{i} = \Ker f_{i + 1}$. The sequence is \textbf{exact} if it is exact at each $M_{i}$. Such sequences induce a wealth of identities relating the modules and their images, kernels, and cokernels. Three examples of exact sequences are as follows:
 \begin{align*}
@@ -452,7 +507,7 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 
 \subsection{Exact Sequences of Homomorphisms}
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		The sequence
 		\begin{equation}
@@ -467,7 +522,7 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 	\newpage
 	\begin{proof}
 		The exactness of (2) is equivalent to $\Im u = \Ker v$ and the surjectivity of $v$, while the exactness of (3) is equivalent to the injectivity of $\bar{v}$ and $\Im \bar{v} = \Ker \bar{u}$.
-		\begin{adjustwidth}{1cm}{}
+		\begin{adjustwidth}{0.5cm}{}
 			\begin{claim}
 				$v$ is surjective if and only if $\bar{v}$ is injective.
 			\end{claim}
@@ -478,7 +533,7 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 				\]
 				Since $v$ is surjective, $f$ must map the entirety of $M$ to zero; thus $f = 0$, and $\bar{v}$ is injective.
 
-				Now, suppose that $v$ is not surjective. Then set $N = M'' \,/\, \Im v$ and let $f \in \Hom(M'', N)$ be the natural homomorphism; both are nonzero. Then
+				Now, suppose that $v$ is not surjective. Then set $N = M'' \,/\, \Im v$ and let $f \in \Hom(M'', N)$ be the canonical epimorphism; both are nonzero. Then
 				\[
 					\bar{v}(f)(M) = (f \circ v)(M) = f(\Im v) = 0.
 				\]
@@ -486,7 +541,7 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 			\end{proof}
 		\end{adjustwidth}
 		The second claimed biconditional relation requires proof of the following claim.
-		\begin{adjustwidth}{1cm}{}
+		\begin{adjustwidth}{0.5cm}{}
 			\begin{claim}
 				$\Im u = \Ker v$ for surjective $v$ implies that $\Im \bar{v} = \Ker \bar{u}$.
 			\end{claim}
@@ -508,7 +563,7 @@ Really, the natural language for these proofs is Homosexual Algebra and Abelian 
 
 The following theorem is asserted without proof, because I value my sanity.
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
 		The sequence
 		\[
@@ -524,7 +579,7 @@ The following theorem is asserted without proof, because I value my sanity.
 
 The following theorem is called the Snake Lemma, a special case of exact homology sequences in Homosexual Algebra: 
 
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
   \begin{theorem}[Snake Lemma]
     Suppose that
     \[ \begin{tikzcd}

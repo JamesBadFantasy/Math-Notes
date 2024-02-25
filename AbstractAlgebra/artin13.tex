@@ -1,0 +1,110 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+
+
+\title{Artin: Linear Algebra in a Ring}
+\author{James Pagan}
+\date{February 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+An \textbf{R-module} over a commutative ring $R$ is an abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
+\begin{enumerate}
+	\item $1x = x$;
+	\item $(ab)x = a(bx)$;
+	\item $a(x + y) = ax + ay$;
+	\item $(a + b)x = ax + bx$.
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\subsection{Examples of Modules}
+
+\begin{itemize}
+	\item If $R$ is a ring, $R[x]$ is a module.
+	\item All ideals $\mathfrak{a}$ of $R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
+	\item If $R$ is a field, $R$-modules are $R$-vector spaces. In fact, the axioms above are identical to the vector axioms, defined over commutative rings instead of fields.
+	\item Abelian groups $G$ are precisely the modules over $\mathbb{Z}$.
+\end{itemize}
+
+% --------------------------------------------- %
+
+\subsection{Homomorphisms of Modules}
+
+A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is $R$-linear) if for all $a \in R$ and $x, y \in M$,
+\begin{align*}
+	f(x + y) & = f(x) + f(y) \\
+	f(ax)    & = a f(x).
+\end{align*}
+Thus, an $R$-module homomorphism $f$ is a homomorphism of abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear transformation. A bijective $R$-homomorphism is called an $R$-isomorphism.
+
+\newpage
+
+The set $\Hom_{R}(M, N)$ denotes the set of all $R$-module homomorphisms from $M$ to $N$, and is a module if we define the following operations for $a \in R$ and $f, g \in \Hom_{R}(M, N)$:
+\begin{align*}
+	(f + g)(x) & = f(x) + g(x) \\
+	(rf)(x)    & = r f(x).
+\end{align*}
+We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if there is no ambiguity about the commutative ring $R$.
+
+% --------------------------------------------- %
+
+\section{Submodules and Quotient Modules}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+A \textbf{submodule} $M'$ of $M$ is an abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. The following proof outlines a construction of \textbf{quotient modules}:
+
+\begin{adjustwidth}{1cm}{}
+	\begin{theorem}
+		The abelian quotient group $M / M'$ is an $R$-module under the opreation $r(x + M') = rx + M'$.
+	\end{theorem}
+	\begin{proof}
+		We must perform four rather routine calculations:
+		\begin{enumerate}
+			\item For all $x \in M$, we have that $1(x + M') = 1x + M' = x + M'$.
+			\item For all $r, s \in R$ and $x \in M$, we have that $r(s(x + M')) = r(sx + M') = rsx + M' = (rs)(x + M')$.
+			\item For all $r, s \in R$ and $x \in M$, we have that $(r + s)(x + M') = (r + s)x + M' = (rx + sx) + M' = (rx + M') + (sx + M') = r(x + M') + s(x + M')$.
+			\item For all $r \in R$ and $x, y \in M$, we have that $r((x + M') + (y + M')) = r((x + y) + M') = r(x + y) + M' = (rx + M') + (ry + M') = r(x + M') + r(y + M)'$.
+		\end{enumerate}
+		Therefore, $M / M'$ is an $R$-module.
+	\end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+% --------------------------------------------- %
+
+\end{document}
