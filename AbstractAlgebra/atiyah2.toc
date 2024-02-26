@@ -5,14 +5,14 @@
 \contentsline {subsection}{\numberline {1.4}Submodules}{4}{subsection.1.4}%
 \contentsline {section}{\numberline {2}Operations on Submodules}{7}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Sums, Intersections, Products}{7}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}The Annihilator}{8}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Direct Sum and Product}{9}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Direct Sums on Rings}{10}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Finitely Generated Modules}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Definition}{10}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Relation to the Jacobson Radical}{12}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Relation to Local Rings}{13}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Exact Sequences}{14}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Definition}{14}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Exact Sequences}{14}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Tensor Products of Modules}{17}{section.5}%
+\contentsline {subsection}{\numberline {2.2}The Annihilator}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Direct Sum and Product}{8}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Direct Sums on Rings}{9}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Finitely Generated Modules}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Definition}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Relation to the Jacobson Radical}{11}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Relation to Local Rings}{12}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Exact Sequences}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Definition}{13}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Exact Sequences}{13}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Tensor Products of Modules}{16}{section.5}%

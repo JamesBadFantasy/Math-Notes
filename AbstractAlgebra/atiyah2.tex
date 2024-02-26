@@ -214,7 +214,7 @@ The Second Isomorphism Theorem utilizes the definitioins of Section 2.1:
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}[Third Isomorphism Theorem]
-    If $L \nsg M$ and $L \subseteq N \nsg M$, then $M \, / \, N \, = \, (M \, / \, L) \, / \, (N \, / \, L)$.
+    If $L \subseteq N \subseteq  M$ are modules and submodules, then $M \, / \, N \, = \, (M \, / \, L) \, / \, (N \, / \, L)$.
   \end{theorem}
   \begin{proof}
     Let $\phi : M \to M \, / \, L$ be the canonical epimorphism. Define $\psi : M \to \phi(M) \, / \, \phi(N)$ by the rule $\psi(a) = \phi(a)\phi(M)$. It is clear that $\psi$ is well-defined and surjective; it is an $R$-module homomorphism since
@@ -226,23 +226,6 @@ The Second Isomorphism Theorem utilizes the definitioins of Section 2.1:
       M \, / \, N \quad \cong \quad \phi(M) \, / \, \phi(M).
     \]
     Since the kernel of $\phi$ is $L$, we have that $\phi(M) \, \cong \, M \, / \, L$ and $\phi(N) \, \cong \, N \, / \, L$; substituting yields the desired $M \, / \, N \, = \, (M \, / \, L) \, / \, (N \, / \, L)$.
-  \end{proof}
-\end{adjustwidth}
-
-The following theorem is intimately related to the Third Isomorphism Theroem. Suppose that $L \subseteq N \subseteq M$ are $R$-modules and $f : M \to L$, $g : M \to N$, and $f' : N \to L$ are epimorphisms such that $f = f' \circ g$.
-
-\begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}
-    Given any two of $f$, $g$, and $g'$, the third epimorphism exists and is unique.
-  \end{theorem}
-  \begin{proof}
-    The case where one is given $g$ and $f'$ is quite clear.
-    \begin{enumerate}
-      \item \textbf{Reconstructing g}: Suppose $f : M \to L$ and $f' : N \to L$ are given. Define the function $g : M \to N$ such that
-      \[
-        g(n + L) = f(n).
-      \]
-    \end{enumerate}
   \end{proof}
 \end{adjustwidth}
 
@@ -651,13 +634,17 @@ Our goal is to construct a module $T$ such that the $R$-bilinear mappings $M \ti
             a(x \otimes y) \, &= \, (ax) \otimes y \, = \, x \otimes (ay).
       \end{align*}
       Equivalently, the mapping $g : M \times N \to T$ defined by $g(x, y) = x \otimes y$ is $R$-bilinear.
-      Now, suppose $f : M \times N \to P$ is $R$-bilinear; this extends by linearity to a mapping $\bar{f} : C \to P$. Since $\bar{f}$ is $R$-bilinear, it annihilates each generator of $D$ --- so by extension, the entirety of $D$. The Third Isomorphism Theorem thus guarantees the existence of a unique mapping $\bar{f'} : \Ker \bar{f} \to D$ such that
-      \[
-        f = f' \circ g.
-      \]
-      \item \textbf{Uniqueness}:
+      Now, suppose $f : M \times N \to P$ is $R$-bilinear; this extends by linearity to a mapping $\bar{f} : C \to P$. Since $\bar{f}$ is $R$-bilinear, it annihilates each generator of $D$ --- so by extension, the entirety of $D$. The Third Isomorphism Theorem thus guarantees the existence of a unique mapping $\bar{f'} : \Ker \bar{f} \to D$ such that $f = f' \circ g$.
+
+      \item \textbf{Uniqueness}: If there are two pairs $(T, g)$ and $(T', g')$ with this property, then considering the sequences $M \times N \to T \to T'$ and $M \times N \to T' \to T'$ ensures the existence of two mappings $j$, $j'$ such that
+      \begin{align*}
+         g &= j \circ g' \\
+        g' &= j' \circ g.
+      \end{align*}
+      Composition yields that $j \circ j'$ and $j' \circ j$ are both identities, so they are isomorphisms. We deduce that $T \, \cong \, T'$.
     \end{enumerate} 
-  \end{proof}
+    This completes the proof.
+  \end{proof} 
 \end{adjustwidth} 
 
 % --------------------------------------------- %
