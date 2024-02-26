@@ -500,7 +500,7 @@ Linear maps between normed vector spaces are not necessarily continuous!
   $\mat{L} \in \mathcal{L}(X, Y)$ is continuous if and only if it is uniformly continuous.
 \end{corollary}
 
-\subsubsection{Bounded Linear Operators}
+\subsubsection*{Bounded Linear Operators}
 
 Nonzero linear maps are never ``bounded''; if $\mat{T} \in \mathcal{L}(X, Y)$ is nonzero, let $\mat{T} \vec{x} \ne 0$; then nonzero $\lambda \in \mathbb{C}$ implies
 \[
@@ -514,10 +514,10 @@ where $B_{r}[0]$ is the closed ball of radius $r$. It is clear that $\mat{T}$ is
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
-    All linear maps in $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ are bounded.
+    Let $X$ be a finite-dimensional normed vector space, and let $Y$ be a normed vector space. Then all $\mat{T} \in \mathcal{L}(X, Y)$ are bounded.
   \end{theorem}  
   \begin{proof}
-    It suffices to show that $\mat{T}$ is bounded on the closed unit ball. Suppose that $\vec{z} = (z_{1}, \ldots, z_{n})$ has norm $1$ or smaller; then $\abs{z_{i}} \le 1$ for each $i$, so
+    It suffices to show that $\mat{T}$ is bounded on the closed unit ball. Let $X$ have dimension $n$ and a basis $\vec{e}_{1}, \vec{e_{n}}$. Then for all $\vec{z} = z_{1} \vec{e}_{1} + \cdots + z_{n} \vec{e_{n}}$ with norm $1$, we have $\abs{z}_{i} < 1$
 		\begin{align*}
       \norm{\mat{T} \vec{z}} &\le \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \\
 			&\le \norm{\mat{T} \vec{e}_{1}} + \cdots + \norm{\mat{T} \vec{e}_{n}}.
@@ -581,7 +581,7 @@ It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}
 \newpage
 
 \begin{theorem}
-	If $\mat{T} \in \mathcal{L}(X, Y)$ is bounded, then $\mat{T}$ uniformly continuous.
+	$\mat{T} \in \mathcal{L}(X, Y)$ is bounded if and only if $\mat{T}$ is uniformly continuous.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
   \begin{proof}
@@ -589,11 +589,18 @@ It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}
 		\begin{align*}
 			\norm{\mat{T} \vec{z} - \mat{T} \vec{w}} &\le \norm{\mat{T}} \cdot \norm{\vec{z} - \vec{w}} < \norm{\mat{T}} \left( \frac{\epsilon}{\norm{\mat{T}}} \right) = \epsilon.
 		\end{align*}
-		Thus, $\mat{T}$ is uniformly continuous.
+		Thus, $\mat{T}$ is uniformly continuous. If we suppose that $\mat{T}$ is uniformly continuous, then it is clear that $\mat{T}$ maps compact sets to bounded sets --- hence, the image of the unit ball is bounded.
 	\end{proof}
 \end{adjustwidth}
 
-\textbf{BOUNDED IF AND ONLY IF ITS CONTINUOUS!}
+\begin{theorem} 
+  Let $X$ be a finite-dimensional normed vector space. Then every $\mat{T} : X \to Y$ is continuous.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    
+  \end{proof}
+\end{adjustwidth}
 
 % --------------------------------------------- %
 
