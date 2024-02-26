@@ -386,31 +386,6 @@ Thus, polynomials are a countable dense subset of $I$.
 
 % --------------------------------------------- %
 
-\subsection{Normed Vector Space}
-
-A \textbf{normed vector space} is a complex vector space $X$ equipped with a mapping $\norm{\cdot} : X \to \mathbb{R}$ that satisfies the following properties:
-\begin{enumerate}
-	\item \textbf{Positivity}: $\norm{\vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
-	\item \textbf{Homogenity}: $\norm{\lambda \vec{x}} = \abs{\lambda} \norm{\vec{x}}$ for all $\lambda \in \mathbb{C}$.
-  \item \textbf{Triangle Inequality}: $\norm{\vec{x} + \vec{y}} \le \norm{\vec{x}} + \norm{\vec{y}}$
-\end{enumerate}
-It is clear that such a norm induces a metric on $X$. This metric is \textbf{translation invariant} --- namely, for all $z \in X$, we have $d(x, y) = d(x + z, y + z)$. In fact, we have $B_{r}(x) + z = B_{r}(x + z)$.
-
-An \textbf{inner product space} is a complex vector space $X$ equipped with a mapping $\ev{\cdot, \cdot} : X \times X \to \mathbb{C}$ that satisfies the following properties for all $\vec{x}, \vec{y}, \vec{z} \in \vec{X}$ and $\lambda \in \mathbb{C}$:
-\begin{enumerate}
-	\item \textbf{Conjugate Symmetry}: $\ev{\vec{x}, \vec{y}} = \conjugate{\ev{\vec{y}, \vec{x}}}$
-	\item \textbf{Positive-Definiteness}: $\ev{\vec{x}, \vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
-	\item \textbf{Additivity in First Argument}: $\ev{\vec{x} + \vec{y}, \vec{z}}$ = $\ev{\vec{x}, \vec{z}} + \ev{\vec{y}, \vec{z}}$.
-	\item \textbf{Homogenity in First Argument}: $\ev{\lambda \vec{x}, \vec{y}}$ = $\lambda \ev{\vec{x}, \vec{y}}$.
-\end{enumerate}
-More theorems about these spaces may be found in axler6.tex. It is clear that by setting $\norm{\vec{x}} = \ev{\vec{x}, \vec{x}}$, all inner product spaces are normed vector spaces. Hence,
-\[
-  \text{inner product spaces } \subseteq \text{ normed vector spaces } \subseteq \text{ metric spaces } \subseteq \text{ topological spaces}.
-\]
-A complete normed vector space is a \textbf{Banach space}< while a complete inner product space is a \textbf{Hilbert space}. These spaces need not be finite-dimensional.
-
-% --------------------------------------------- %
-
 \subsection{Equivalent Metrics}
 
 Two metrics $d$ and $\rho$ on $X$ are \textbf{equivalent} if there exists $0 < c \le C < \infty$ such that for all $x, y \in X$,
@@ -435,13 +410,36 @@ These relations do \textit{not} extend to infinite dimensional vector spaces, li
 \]
 Hence $p$-norms are not equivalent on spaces of infinite sequences.
 
-\newpage
-
 Though worth noting, we do have the following:
 \[
   c_{00} \subset \ell_{1}(\mathbb{N}) \subset \ell^{2}(\mathbb{N}) \subset c_{0} \subset c \subset \ell^{\infty}(\mathbb{N})
 \]
 All inclusions are clearly proper.
+
+% --------------------------------------------- %
+
+\subsection{Normed Vector Space}
+
+A \textbf{normed vector space} is a complex vector space $X$ equipped with a mapping $\norm{\cdot} : X \to \mathbb{R}$ that satisfies the following properties:
+\begin{enumerate}
+	\item \textbf{Positivity}: $\norm{\vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
+	\item \textbf{Homogenity}: $\norm{\lambda \vec{x}} = \abs{\lambda} \norm{\vec{x}}$ for all $\lambda \in \mathbb{C}$.
+  \item \textbf{Triangle Inequality}: $\norm{\vec{x} + \vec{y}} \le \norm{\vec{x}} + \norm{\vec{y}}$
+\end{enumerate}
+It is clear that such a norm induces a metric on $X$. This metric is \textbf{translation invariant} --- namely, for all $z \in X$, we have $d(x, y) = d(x + z, y + z)$. In fact, we have $B_{r}(x) + z = B_{r}(x + z)$.
+
+An \textbf{inner product space} is a complex vector space $X$ equipped with a mapping $\ev{\cdot, \cdot} : X \times X \to \mathbb{C}$ that satisfies the following properties for all $\vec{x}, \vec{y}, \vec{z} \in \vec{X}$ and $\lambda \in \mathbb{C}$:
+\begin{enumerate}
+	\item \textbf{Conjugate Symmetry}: $\ev{\vec{x}, \vec{y}} = \conjugate{\ev{\vec{y}, \vec{x}}}$
+	\item \textbf{Positive-Definiteness}: $\ev{\vec{x}, \vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
+	\item \textbf{Additivity in First Argument}: $\ev{\vec{x} + \vec{y}, \vec{z}}$ = $\ev{\vec{x}, \vec{z}} + \ev{\vec{y}, \vec{z}}$.
+	\item \textbf{Homogenity in First Argument}: $\ev{\lambda \vec{x}, \vec{y}}$ = $\lambda \ev{\vec{x}, \vec{y}}$.
+\end{enumerate}
+More theorems about these spaces may be found in axler6.tex. It is clear that by setting $\norm{\vec{x}} = \ev{\vec{x}, \vec{x}}$, all inner product spaces are normed vector spaces. Hence,
+\[
+  \text{inner product spaces } \subseteq \text{ normed vector spaces } \subseteq \text{ metric spaces } \subseteq \text{ topological spaces}.
+\]
+A complete normed vector space is a \textbf{Banach space}< while a complete inner product space is a \textbf{Hilbert space}. These spaces need not be finite-dimensional.
 
 \begin{theorem}
   Let $X$ be a finite dimensional vector space over $\mathbb{C}$ (or $\mathbb{R}^{n}$). Then any two norms on $X$ are equivalent.
@@ -459,8 +457,6 @@ All inclusions are clearly proper.
       \norm{\vec{u}}' \norm{\vec{z}} \, \le \, \norm{\frac{\vec{z}}{\norm{\vec{z}}}}' \norm{\vec{z}} \, = \, \norm{\vec{z}}' \, = \, \norm{\frac{\vec{z}}{\norm{\vec{z}}}}' \norm{\vec{z}} \, \le \, \norm{\vec{s}}' \norm{\vec{z}}.
     \]
     We conclude that all norms on $\mathbb{C}^{n}$ are equivalent to the canonical norm.
-
-
   \end{proof}
 \end{adjustwidth}
 
@@ -469,8 +465,6 @@ Since open sets are the same for equivalent metrics, we obtain that there is onl
   \norm{\vec{e}_{i} - \vec{e}_{j}} \ge 1.
 \]
 Thus the set of all $\vec{e}_{1}, \ldots$ contains no convergent subsequence, so it is not compact. Thus the Heine-Borel Theorem fails for $\ell^{p}(\mathbb{N})$.
-
-\newpage
 
 % --------------------------------------------- %
 
@@ -483,6 +477,8 @@ Let $(X, d_{X})$ and $(Y, d_{Y})$ be normed vector spaces. The set $\mathcal{L}(
 \end{align*}
 
 Linear maps between normed vector spaces are not necessarily continuous!
+
+\newpage
 
 \begin{theorem}
   Let $(X, d_{X})$ and $(Y, d_{Y})$ be normed vector spaces. A linear map $\mat{T} \in \mathcal{L}(X, Y)$ is continuous if and only if it is continuous at $\vec{0}_{X}$.
@@ -517,12 +513,15 @@ where $B_{r}[0]$ is the closed ball of radius $r$. It is clear that $\mat{T}$ is
     Let $X$ be a finite-dimensional normed vector space, and let $Y$ be a normed vector space. Then all $\mat{T} \in \mathcal{L}(X, Y)$ are bounded.
   \end{theorem}  
   \begin{proof}
-    It suffices to show that $\mat{T}$ is bounded on the closed unit ball. Let $X$ have dimension $n$ and a basis $\vec{e}_{1}, \vec{e_{n}}$. Then for all $\vec{z} = z_{1} \vec{e}_{1} + \cdots + z_{n} \vec{e_{n}}$ with norm $1$, we have $\abs{z}_{i} < 1$
-		\begin{align*}
-      \norm{\mat{T} \vec{z}} &\le \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \\
-			&\le \norm{\mat{T} \vec{e}_{1}} + \cdots + \norm{\mat{T} \vec{e}_{n}}.
-		\end{align*}
-    Letting this constant be $r$ yields that $\mat{T}$ is bouned on the closed unit ball.
+    Let $\dim X = n$ and let $\vec{e}_{1}, \ldots, \vec{e}_{n}$ be a basis of $X$. Then for all $\vec{z} = z_{1} \vec{e}_{1} + \cdots + z_{n} \vec{e}_{n}$, we have
+    \[
+      \norm{\mat{T} \vec{z}} \, \le \,  \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \, \le \, C (\abs{z_{1}} + \cdots + \abs{z_{n}}),
+    \]
+    where $C = \max \{ \norm{\mat{T} \vec{e}_{i}} \}$. Realize that $\norm{\vec{z}}_{1} = \abs{z_{1}} + \cdots + \abs{z_{n}}$ defines a norm on $X$; since all norms finite-dimensional vector spaces are equivalent, there exists another constant $M$ such that $\abs{z_{1}} + \cdots + \abs{z_{n}} = \norm{\vec{z}}_{1} \le M \norm{\vec{z}}$. Therefore
+    \[
+      \norm{\mat{T} \vec{z}} \le CM \norm{\vec{z}},
+    \]
+    so $\mat{T}$ is bounded. This completes the proof.
   \end{proof}
 \end{adjustwidth}
 
@@ -578,8 +577,6 @@ Notice that the matrix norm is nonnegative. The \textbf{critical vector} of $\ma
 
 It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}}$ for all $\lambda \in \mathbb{C}$ as well.
 
-\newpage
-
 \begin{theorem}
 	$\mat{T} \in \mathcal{L}(X, Y)$ is bounded if and only if $\mat{T}$ is uniformly continuous.
 \end{theorem}
@@ -593,12 +590,49 @@ It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}
 	\end{proof}
 \end{adjustwidth}
 
-\begin{theorem} 
-  Let $X$ be a finite-dimensional normed vector space. Then every $\mat{T} : X \to Y$ is continuous.
+Hence, all $\mat{T}$ from finite dimensional vector spaces are uniformly continuous and admit a matrix norm. For infinite dimensional vector spaces, it depends precisely on whether $\mat{T}$ is bounded.
+
+\begin{theorem}
+  If $Y$ is a Banach space, then $\mathcal{B}(X, Y)$ is a Banach space.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
   \begin{proof}
-    
+    Let $(\mat{T}_{n})$ be a Cauchy sequence in $\mathcal{B}(X, Y)$; for all $\epsilon > 0$, there exists $N$ such that
+    \begin{equation}
+      N \le n, m \implies \norm{\mat{T}_{n} - \mat{T}_{m}} < \epsilon.
+    \end{equation}
+    We will define the limit of $(\mat{T}_{n})$. For any $\vec{x} \in X$, we have that
+    \[
+      \norm{\mat{T}_{n} \vec{x} - \mat{T}_{m} \vec{x}} \, \le \, \norm{\mat{T}_{n} - \mat{T}_{m}} \norm{\vec{x}} \le \epsilon \norm{\vec{x}}.
+    \]
+    By selecting $\tfrac{\epsilon}{\norm{\vec{x}}}$ in equation (1), we find that $(\mat{T}_{n} \vec{x})$ is a Cauchy sequence in in $Y$. Thus, it converges to a unqiue vector in $Y$. Define a mapping $\mat{T} : X \to Y$ as follows:
+    \[
+      \mat{T} \vec{z} \quad \stackrel{\text{def}}{=} \quad \lim\limits_{n \to \infty} \mat{T}_{n} \vec{z}
+    \]
+    It is relatively easy to show that $\mat{T}$ is linear: for all $\vec{x}, \vec{y} \in X$ and $\lambda \in \mathbb{C}$, we have
+    \begin{align*}
+      \mat{T}(\vec{x} + \vec{y}) \, = \, \lim\limits_{n \to \infty} \mat{T}_{n}(\vec{x} + \vec{y}) \, &= \, \lim\limits_{n \to \infty} \mat{T}_{n} \vec{x} \, + \, \lim\limits_{n \to \infty} \mat{T}_{n} \vec{y} \, = \, \mat{T}\vec{x} \mat{T}\vec{y} \\
+      \mat{T}(\lambda \vec{x}) \, = \, \lim\limits_{n \to \infty} \mat{T}_{n}(\lambda \vec{x}) \, &= \, \lambda \lim\limits_{n \to \infty} \mat{T} \vec{x} \, = \, \lambda \mat{T}_{x}.
+    \end{align*}
+    We must show that $\mat{T}$ is bounded and is the limit of $(\mat{T}_{n})$. Observe that 
+    \[
+      \norm{\mat{T} \vec{z}} \, \le \, \norm{\mat{T} \vec{z} - \mat{T}_{n} \vec{z}} + \norm{\mat{T}_{n} \vec{z}}.
+    \]
+    Observe that the transformation $\phi : \vec{y} \to \norm{\mat{T}_{n} \vec{x} - \vec{y}}$ is continuous, since it is a composition of continuous functions. Hence
+    \[
+      \norm{\mat{T}_{n}\vec{z} \vec{x} - \mat{T}_{m}\vec{z}} \le \epsilon \norm{\vec{z}} \implies \norm{\mat{T}_{n} - \mat{T}\vec{z}} = \lim\limits_{m \to \infty} \norm{\mat{T}_{n} \vec{z} - \mat{T}_{m} \vec{z}} \le \epsilon \norm{\vec{x}}.
+    \]
+    Then pick $\epsilon = 1$ and $n = N$. We find that
+    \begin{align*}
+      \norm{\mat{T} \vec{x}} & \le \norm{(\mat{T} - \mat{T}_{n}) \vec{x}} + \norm{\mat{T}_{n} \vec{x}} \\
+                             & \le \norm{\vec{x}} + \norm{\mat{T}_{N}} \norm{\vec{x}} \\
+                             & \le (1 + \norm{\mat{T_{N}}}) \vec{x}.
+    \end{align*}
+    Letting $c = 1 + \norm{\mat{T}_{N}}$ yields that $\mat{T}$ is bounded. As per the limit condition, we have that
+    \[
+      \norm{\mat{T}_{n} - \mat{T}} = \sup\limits_{\vec{x} \ne \vec{0}} \frac{\norm{(\mat{T}_{n} - \mat{T}) \vec{x}}}{\norm{\vec{x}}} \le \epsilon,
+    \]
+    which completes the proof.
   \end{proof}
 \end{adjustwidth}
 

@@ -41,7 +41,11 @@
 
 % --------------------------------------------- %
 
-\section{Limits of Linear Operators}
+\section{Normed Vector Spaces}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
 
 % --------------------------------------------- %
 
@@ -103,17 +107,20 @@ It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}
 
 \subsection{Properties of Linear Maps}
 
-\begin{theorem}
-  All linear maps in $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ are bounded.
-\end{theorem}  
 \begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $X$ be a finite-dimensional normed vector space, and let $Y$ be a normed vector space. Then all $\mat{T} \in \mathcal{L}(X, Y)$ are bounded.
+  \end{theorem}  
   \begin{proof}
-    It suffices to show that $\mat{T}$ is bounded on the closed unit ball. Suppose that $\vec{z} = (z_{1}, \ldots, z_{n})$ has norm $1$ or smaller; then $\abs{z_{i}} \le 1$ for each $i$, so
-		\begin{align*}
-      \norm{\mat{T} \vec{z}} &\le \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \\
-			&\le \norm{\mat{T} \vec{e}_{1}} + \cdots + \norm{\mat{T} \vec{e}_{n}}.
-		\end{align*}
-    The right-hand side is a constant, so $\mat{T}$ is bounded on the closed unit ball.
+    Let $\dim X = n$ and let $\vec{e}_{1}, \ldots, \vec{e}_{n}$ be a basis of $X$. Then for all $\vec{z} = z_{1} \vec{e}_{1} + \cdots + z_{n} \vec{e}_{n}$, we have
+    \[
+      \norm{\mat{T} \vec{z}} \, \le \,  \abs{z_{1}} \norm{\mat{T} \vec{e}_{1}} + \cdots + \abs{z_{n}} \norm{\mat{T} \vec{e}_{n}} \, \le \, C (\abs{z_{1}} + \cdots + \abs{z_{n}}),
+    \]
+    where $C = \max \{ \norm{\mat{T} \vec{e}_{i}} \}$. Realize that $\norm{\vec{z}}_{1} = \abs{z_{1}} + \cdots + \abs{z_{n}}$ defines a norm on $X$; since all norms finite-dimensional vector spaces are equivalent, there exists another constant $M$ such that $\abs{z_{1}} + \cdots + \abs{z_{n}} = \norm{\vec{z}}_{1} \le M \norm{\vec{z}}$. Therefore
+    \[
+      \norm{\mat{T} \vec{z}} \le CM \norm{\vec{z}},
+    \]
+    so $\mat{T}$ is bounded. This completes the proof.
   \end{proof}
 \end{adjustwidth}
 
@@ -133,7 +140,7 @@ It is straightforward that $\norm{\lambda \mat{T}} = \abs{\lambda} \norm{\mat{T}
 Let $\Omega$ be the set of all bounded, invertible linear operators on $X$. Recall from Linear Algebra that an operator $\mat{T} \in \mathcal{L}(\mathbb{C}^{n})$ is invertible if and only if $\range \mat{T} = \mathbb{C}^{n}$.
 
 \begin{theorem}
-	If $\mat{T} \in \Omega$ and $\mat{S} \in \mathcal{L}(X)$ are both bounded, then
+	Let $X$ be a finite dimensional vector space. If $\mat{T} \in \Omega$ and $\mat{S} \in \mathcal{L}(X)$ are both bounded, then
 	\[
 		\norm{\mat{T}^{-1}} \cdot \norm{\mat{S} - \mat{T}} < 1
 	\]
@@ -157,7 +164,7 @@ Let $\Omega$ be the set of all bounded, invertible linear operators on $X$. Reca
 \newpage
 
 \begin{theorem}
-	$\Omega$ is an open subset of $\mathcal{L}(\mathbb{C}^{n})$, and the bijection $f : \mat{T} \to \mat{T}^{-1}$ is continuous on $\Omega$.
+	Let $X$ be a finite-dimensional normed vector space. Then $\Omega$ is an open subset of $\mathcal{L}(X)$, and the bijection $f : \mat{T} \to \mat{T}^{-1}$ is continuous on $\Omega$.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
 	\begin{proof}
@@ -200,7 +207,7 @@ While $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ and $\mathbb{C}^{n + m}$ may
 
 
 \begin{theorem}
-	$\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ equipped with the matrix norm is a complete metric space.
+	$\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ equipped with the matrix norm is a Banach space.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
     \begin{proof}
@@ -222,7 +229,7 @@ While $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ and $\mathbb{C}^{n + m}$ may
 		\[
 			\norm{\mat{T}_{i} - \mat{T}} \le \sqrt{\sum\limits_{j = 1}^{m} \sum\limits_{k = 1}^{n} \abs{_{i} t_{jk} - t_{jk}}^{2}} < \sqrt{\sum\limits_{j = 1}^{m} \sum\limits_{k = 1}^{n} \frac{\epsilon^{2}}{mn}} = \epsilon.
 		\]
-		We conclude that $\mat{T}_{1}, \mat{T}_{2}, \ldots$ converges to $\mat{T}$, so $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ is a complete metric space.
+		We conclude that $\mat{T}_{1}, \mat{T}_{2}, \ldots$ converges to $\mat{T}$, so $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ is a Banach space.
 	\end{proof}
 \end{adjustwidth}
 
