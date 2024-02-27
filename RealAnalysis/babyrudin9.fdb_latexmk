@@ -1,10 +1,12 @@
 # Fdb version 4
-["pdflatex"] 1708966821 "babyrudin9.tex" "babyrudin9.pdf" "babyrudin9" 1708966821 0
+["pdflatex"] 1709005178 "babyrudin9.tex" "babyrudin9.pdf" "babyrudin9" 1709005178 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1704400182 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1704400182 3584 402da0b29eafbad07963b1224b222f18 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm" 1704400182 3584 13049b61b922a28b158a38aeff75ee9b ""
+  "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm" 1704400182 3584 291a5713401683441e0a8c8f4417b17b ""
+  "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm" 1704400182 3584 49064b465390a8e316a3c8417a050403 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1095.tfm" 1704400182 3584 929cdff2b7a8c11bd4d49fd68cb0ae70 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1704400182 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm" 1704400182 3584 3169d30142b88a27d4ab0e3468e963a2 ""
@@ -57,6 +59,7 @@
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb" 1704400182 154600 ea54091d31de803b613ba9e80ca51709 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb" 1704400182 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb" 1704400182 135942 859a90cad7494a1e79c94baf546d7de5 ""
+  "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb" 1704400182 164227 3df942b4ff2124425d8fb1b6d3e01c7a ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb" 1704400182 145929 f25e56369a345c4ff583b067cd87ce8e ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb" 1704400182 136101 f533469f523533d38317ab5729d00c8a ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb" 1704400182 131438 3aa300b3e40e5c8ba7b4e5c6cebc5dd6 ""
@@ -122,10 +125,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "babyrudin9.aux" 1708966821 2484 2fb1901f4b0708382ee05f8d47689e3c "pdflatex"
-  "babyrudin9.out" 1708966821 2437 9458d6983b5cf40c5333cacefe278918 "pdflatex"
-  "babyrudin9.tex" 1708966820 34097 8205b59b40ab822fa83fbc6f7658f486 ""
-  "babyrudin9.toc" 1708966821 1311 be4c2e5f142ed747f5193176221a98fa "pdflatex"
+  "babyrudin9.aux" 1709005178 2486 60a30d7abd406f053480b941d509a614 "pdflatex"
+  "babyrudin9.out" 1709005178 2437 9458d6983b5cf40c5333cacefe278918 "pdflatex"
+  "babyrudin9.tex" 1709005177 37956 6966a1116c868fbfc189e4535db989f7 ""
+  "babyrudin9.toc" 1709005178 1313 2bf58142901799071c7db4d4c5c01c6e "pdflatex"
   (generated)
   "babyrudin9.aux"
   "babyrudin9.log"

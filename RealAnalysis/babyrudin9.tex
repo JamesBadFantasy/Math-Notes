@@ -19,6 +19,10 @@
 \renewcommand{\curl}{\nabla \cross}
 \renewcommand{\grad}{\nabla}
 
+\newcommand{\conjugate}[1]{\overline{#1}}
+
+\newcommand{\s}{$\\ \text{ }$}
+
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{claim}{Claim}
@@ -46,6 +50,46 @@
 % --------------------------------------------- %
 
 \subsection{Definition}
+
+A \textbf{normed vector space} is a complex vector space $X$ equipped with a mapping $\norm{\cdot} : X \to \mathbb{R}$ that satisfies the following properties:
+\begin{enumerate}
+	\item \textbf{Positivity}: $\norm{\vec{x}} \ge 0$, with equality if and only if $\vec{x} = \vec{0}$.
+	\item \textbf{Homogenity}: $\norm{\lambda \vec{x}} = \abs{\lambda} \norm{\vec{x}}$ for all $\lambda \in \mathbb{C}$.
+  \item \textbf{Triangle Inequality}: $\norm{\vec{x} + \vec{y}} \le \norm{\vec{x}} + \norm{\vec{y}}$
+\end{enumerate}
+A complete normed vector space is called a \textbf{Banach space}. As demonstrated in RealAnalysis/babyrudin3.tex, all the desired limit formulas hold on normed vector spaces.
+
+\begin{theorem}
+  Norms are uniformly continuous mappings from $X$ to $\mathbb{R}$.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    For all $\epsilon > 0$, we have that
+    \[
+      0 < \norm{\vec{x} - \vec{y}} < \epsilon \implies \norm{\norm{\vec{x}} - \norm{\vec{y}}} \, \le \, \norm{\vec{x} - \vec{y}} \, < \, \epsilon.
+    \]
+    We conclude that $\norm{\, \cdot \,} : X \to \mathbb{R}$ is uniformly continuous.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{theorem}
+  Let $X$ be a finite-dimensional vector space over $\mathbb{C}$. Then any two norms on $X$ are equivalent.
+\end{theorem}
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proof}
+    Let $\dim X = n$. We first prove the theorem for $\mathbb{C}^{n}$; let $\vec{e}_{1}, \ldots, \vec{e}_{n}$ be the canonical basis of $\mathbb{C}^{n}$, and suppose $\norm{\, \cdot \,}_{1} : \mathbb{C}^{n} \to [0, \infty)$ is a norm. We prove that $\norm{\vec{z}}_{1}$ is equivalent to the canonical norm $\norm{\vec{z}}$.
+    
+    Consider the boundary of the unit ball of the canonical norm in $\mathbb{C}^{n}$. Since $\norm{\cdot}_{1}$ is continuous, the Extreme Value Theorem guarantees that there exists $\vec{u}, \vec{s} \in X$ with canonical norm $1$ such that 
+    \[
+      \norm{\vec{u}}' = \inf\limits_{\norm{\vec{z}} = 1} \{  \norm{\vec{z}}' \} \qquad \text{and} \qquad \norm{\vec{s}}' = \sup\limits_{\norm{\vec{z}} = 1} \{ \norm{\vec{z}}' \}
+    \]
+    Then for all $\vec{z} \in \mathbb{C}^{n}$, the constants $\norm{\vec{u}}'$ and $\norm{\vec{s}}'$ allow for norm equivalence:
+    \[
+      \norm{\vec{u}}' \norm{\vec{z}} \, \le \, \norm{\frac{\vec{z}}{\norm{\vec{z}}}}' \norm{\vec{z}} \, = \, \norm{\vec{z}}' \, = \, \norm{\frac{\vec{z}}{\norm{\vec{z}}}}' \norm{\vec{z}} \, \le \, \norm{\vec{s}}' \norm{\vec{z}}.
+    \]
+    We conclude that all norms on $\mathbb{C}^{n}$ are equivalent to the canonical norm. Proving norm equivalence from $X$ to $\mathbb{C}^{n}$ is not challenging.
+  \end{proof}
+\end{adjustwidth}
 
 % --------------------------------------------- %
 
@@ -206,31 +250,49 @@ Let $\vec{w}$ be the critical vector of $\mat{T}$. Then
 While $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ and $\mathbb{C}^{n + m}$ may be isomorphic, the relevant bijection is \textit{not} an isometry. 
 
 
+
 \begin{theorem}
-	$\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ equipped with the matrix norm is a Banach space.
+  If $Y$ is a Banach space, then $\mathcal{B}(X, Y)$ is a Banach space.
 \end{theorem}
 \begin{adjustwidth}{0.5cm}{}
-    \begin{proof}
-		Let the sequence $\mat{T}_{1}, \mat{T}_{2}, \ldots$ be a Cauchy sequence in $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$; declare that for all $\epsilon > 0$, there exists an integer $N$ such that
-		\[
-			N < i, j \implies \norm{\mat{T}_{i} - \mat{T}_{j}} < \epsilon.
-		\]
-		Observe that if $k \in \{ 1, \ldots, n \}$, then $N \le i, j$ implies
-		\[
-			\norm{\mat{T}_{i} \vec{e}_{k} - \mat{T}_{j} \vec{e}_{k}} \le \norm{\vec{e}_{k}} \cdot \norm{\mat{T}_{i} - \mat{T}_{j}} = \norm{\mat{T}_{i} - \mat{T}_{j}} < \epsilon.
-		\]
-		Thus $\mat{T}_{1} \vec{e}_{k}, \mat{T}_{2} \vec{e}_{k}, \cdots$ is a Cauchy Sequence in $\mathbb{C}^{n}$. We may thus define $\mat{T}$ as the unique matrix that maps $\vec{e}_{k}$ to the limit of $\mat{T}_{1} \vec{e}_{k}, \mat{T}_{2} \vec{e}_{k}, \ldots$ in $\mathbb{C}^{m}$.
-		
-		For $i \in \mathbb{Z}_{> 0}$, let $_{i} t_{jk}$ be the components of $\mat{T}_{i}$ and let $t_{jk}$ be the components of $\mat{T}$. It is straightforward that $\lim\limits_{i \to \infty} \null_{i} t_{jk} = t_{jk}$; then there exist $N_{jk}$ such that
-		\[
-			N_{jk} < i \implies \abs{_{i} t_{jk} - t_{jk}} < \frac{\epsilon}{\sqrt{mn}}.
-		\]
-		Set $N = \max \{ N_{11}, \ldots, N_{jk} \}$. Then $N < i$ implies that
-		\[
-			\norm{\mat{T}_{i} - \mat{T}} \le \sqrt{\sum\limits_{j = 1}^{m} \sum\limits_{k = 1}^{n} \abs{_{i} t_{jk} - t_{jk}}^{2}} < \sqrt{\sum\limits_{j = 1}^{m} \sum\limits_{k = 1}^{n} \frac{\epsilon^{2}}{mn}} = \epsilon.
-		\]
-		We conclude that $\mat{T}_{1}, \mat{T}_{2}, \ldots$ converges to $\mat{T}$, so $\mathcal{L}(\mathbb{C}^{n}, \mathbb{C}^{m})$ is a Banach space.
-	\end{proof}
+  \begin{proof}
+    Let $(\mat{T}_{n})$ be a Cauchy sequence in $\mathcal{B}(X, Y)$; for all $\epsilon > 0$, there exists $N$ such that
+    \begin{equation}
+      N \le n, m \implies \norm{\mat{T}_{n} - \mat{T}_{m}} < \epsilon.
+    \end{equation}
+    We will define the limit of $(\mat{T}_{n})$. For any $\vec{x} \in X$, we have that
+    \[
+      \norm{\mat{T}_{n} \vec{x} - \mat{T}_{m} \vec{x}} \, \le \, \norm{\mat{T}_{n} - \mat{T}_{m}} \norm{\vec{x}} \le \epsilon \norm{\vec{x}}.
+    \]
+    By selecting $\tfrac{\epsilon}{\norm{\vec{x}}}$ in equation (1), we find that $(\mat{T}_{n} \vec{x})$ is a Cauchy sequence in in $Y$. Thus, it converges to a unqiue vector in $Y$. Define a mapping $\mat{T} : X \to Y$ as follows:
+    \[
+      \mat{T} \vec{z} \quad \stackrel{\text{def}}{=} \quad \lim\limits_{n \to \infty} \mat{T}_{n} \vec{z}
+    \]
+    It is relatively easy to show that $\mat{T}$ is linear: for all $\vec{x}, \vec{y} \in X$ and $\lambda \in \mathbb{C}$, we have
+    \begin{align*}
+      \mat{T}(\vec{x} + \vec{y}) \, = \, \lim\limits_{n \to \infty} \mat{T}_{n}(\vec{x} + \vec{y}) \, &= \, \lim\limits_{n \to \infty} \mat{T}_{n} \vec{x} \, + \, \lim\limits_{n \to \infty} \mat{T}_{n} \vec{y} \, = \, \mat{T}\vec{x} \mat{T}\vec{y} \\
+      \mat{T}(\lambda \vec{x}) \, = \, \lim\limits_{n \to \infty} \mat{T}_{n}(\lambda \vec{x}) \, &= \, \lambda \lim\limits_{n \to \infty} \mat{T} \vec{x} \, = \, \lambda \mat{T}_{x}.
+    \end{align*}
+    We must show that $\mat{T}$ is bounded and is the limit of $(\mat{T}_{n})$. Observe that 
+    \[
+      \norm{\mat{T} \vec{z}} \, \le \, \norm{\mat{T} \vec{z} - \mat{T}_{n} \vec{z}} + \norm{\mat{T}_{n} \vec{z}}.
+    \]
+    Observe that the transformation $\phi : \vec{y} \to \norm{\mat{T}_{n} \vec{x} - \vec{y}}$ is continuous, since it is a composition of continuous functions. Hence
+    \[
+      \norm{\mat{T}_{n}\vec{z} \vec{x} - \mat{T}_{m}\vec{z}} \le \epsilon \norm{\vec{z}} \implies \norm{\mat{T}_{n} - \mat{T}\vec{z}} = \lim\limits_{m \to \infty} \norm{\mat{T}_{n} \vec{z} - \mat{T}_{m} \vec{z}} \le \epsilon \norm{\vec{x}}.
+    \]
+    Then pick $\epsilon = 1$ and $n = N$. We find that
+    \begin{align*}
+      \norm{\mat{T} \vec{x}} & \le \norm{(\mat{T} - \mat{T}_{n}) \vec{x}} + \norm{\mat{T}_{n} \vec{x}} \\
+                             & \le \norm{\vec{x}} + \norm{\mat{T}_{N}} \norm{\vec{x}} \\
+                             & \le (1 + \norm{\mat{T_{N}}}) \vec{x}.
+    \end{align*}
+    Letting $c = 1 + \norm{\mat{T}_{N}}$ yields that $\mat{T}$ is bounded. As per the limit condition, we have that
+    \[
+      \norm{\mat{T}_{n} - \mat{T}} = \sup\limits_{\vec{x} \ne \vec{0}} \frac{\norm{(\mat{T}_{n} - \mat{T}) \vec{x}}}{\norm{\vec{x}}} \le \epsilon,
+    \]
+    which completes the proof.
+  \end{proof}
 \end{adjustwidth}
 
 \begin{corollary}
