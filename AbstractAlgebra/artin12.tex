@@ -14,6 +14,7 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{claim}{Claim}
 
+\newcommand{\conjugate}[1]{\overline{#1}}
 \newcommand{\s}{$\\ \text{ }$}
 
 \title{Artin: Factoring}
@@ -25,9 +26,6 @@
 \begin{document}
 
 \maketitle
-\begin{abstract}
-  The goal of this section is to characterize the polynomial ring $R[x_{1}, \ldots, x_{n}]$. In pursuit of this, we explore the properties of three special types of integral domains: Unique Factorization Domains, Principal Ideal Domains, and Euclidean Domains.
-\end{abstract}
 \tableofcontents
 \newpage
 
@@ -110,7 +108,7 @@ Hence, we could equivalently define unique factorization as decomposition to \te
 \[
   x \quad \subseteq \quad \bigcap\limits_{i = 1}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 2}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 3}^{\infty} \, (p_{i}) \quad \subseteq \quad \cdots
 \]
-is stationary.
+is stationary. This is the terminology favored by Artin.
 
 % --------------------------------------------- %
 
@@ -136,7 +134,7 @@ A \textbf{principal ideal domain} is an integral domain in which all ideals are 
     we obtain that $(p)$ is not irreducible, which contradicts Theorem 1. Hence $(p) = (m)$, so $(p)$ is maximal.
 	\end{proof}
 \end{adjustwidth}
-Three helpful facts about principal ideal domains are as follows:
+Four helpful facts about principal ideal domains are as follows:
 \begin{enumerate}
   \item If $\mathfrak{a}_{1} = (a_{1})$ and $\mathfrak{a}_{2} = (a_{2})$ are principal ideals, then $\mathfrak{a}_{1} \mathfrak{a}_{2} = (a_{1}a_{2})$. This holds in any commutative ring.
   \item Prime ideals cannot contain other prime ideals: if $(p_{1}) \subset (p_{2})$ are prime, then the fact
@@ -230,38 +228,6 @@ Much simpler than the proof in your 2nd Conest Math Notebook, right?
 
 An integral domain $R$ is a  \textbf{Euclidean domain} if there exists a size function $\sigma$ such that $a \in R$ and \textit{nonzero} $b \in R$ implies the existence of $q, r \in R$ such that $a = bq + r$, where $\sigma(r) < \sigma(b)$. It is clear that $\mathbb{Z}$ is a Euclidean domain.
 
-% --------------------------------------------- %
-
-\subsection{Examples}
-
-\begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}
-    $\mathbb{Z}[i]$ is a Euclidean domain.
-  \end{theorem}
-  \begin{proof}
-    Using the norm $\norm{a + bi} = a^{2} + b^{2}$, we will divide $a + bi$ by $c + di$. It is easy to deduce that there exist rationals $r, s$ such that
-    \[
-      \frac{a + bi}{c + di} \, = \, r + si.
-    \]
-    Approximate $r$ and $s$ by integers: namely define $n, m 
-    \in \mathbb{Z}$ such that $\abs{r - n} \le \tfrac{1}{2}$ and $\abs{s - m} \le \tfrac{1}{2}$. Then we can express the above as
-    \[
-      r + si  = (n + mi ) \, + \, (r - n) + i(s - m).
-    \]
-    Expanding this out, we obtain a rather messy equation:
-    \[
-      a + bi \quad = \quad (n + ni )(c + di ) \quad + \quad \big( (r - n) + i(s - m)  \big)(c + di ).
-    \]
-    All that remains to be proven is that the right-most term has a norm less than $c + di$, which is equivalent to showing that $(r - n) + i (s - m) $ has a norm less than one:
-    \[
-      \norm{(r - n) + i(s - m) } = (r - n)^{2} + (s - m)^{2} \le \frac{1}{4} + \frac{1}{4} < 1.
-    \]
-    This completes the proof.
-  \end{proof}
-\end{adjustwidth}
-
-For a field $F$, the ring $F[x]$ is a field. I proved this in my contest algebra notes.
-
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
     All fields are Euclidean domains.
@@ -274,6 +240,8 @@ For a field $F$, the ring $F[x]$ is a field. I proved this in my contest algebra
     If $\sigma$ is an arbitrary size function on $R$, then the caveat of remainder zero ensures that the above equations dictate a valid Euclidean division.
   \end{proof}
 \end{adjustwidth}
+
+For a field $F$, the ring $F[x]$ is a Euclidean domain. I proved this in my contest algebra notes.
 
 % --------------------------------------------- %
 
@@ -358,5 +326,141 @@ Observe that an integer $n \in \mathbb{Z}[x]$ is a prime element if and only if 
 That would be an insanely long number theory problem, in terms of a crazy sequence of equations --- and yet it falls so elegantly to the properties of prime ideals!
 
 % --------------------------------------------- %
+
+\section{The Gaussian Integers \texorpdfstring{$\mathbb{Z}[i]$}{Z[i]}}
+
+Since $\mathbb{Z}[i]$ is isomorphic to $\mathbb{Z}[x] \, / \, (x^{2} + 1)$, we can use tools from polynomial rings to study Gaussian integers.
+
+% --------------------------------------------- %
+
+\subsection{A Euclidean Domain}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    $\mathbb{Z}[i]$ is a Euclidean domain.
+  \end{theorem}
+  \begin{proof}
+    Using the norm $\norm{a + bi} = a^{2} + b^{2}$, we will divide $a + bi$ by $c + di$. It is easy to deduce that there exist rationals $r, s$ such that
+    \[
+      \frac{a + bi}{c + di} \, = \, r + si.
+    \]
+    Approximate $r$ and $s$ by integers: namely define $n, m 
+    \in \mathbb{Z}$ such that $\abs{r - n} \le \tfrac{1}{2}$ and $\abs{s - m} \le \tfrac{1}{2}$. Then we can express the above as
+    \[
+      r + si  = (n + mi ) \, + \, (r - n) + i(s - m).
+    \]
+    Expanding this out, we obtain a rather messy equation:
+    \[
+      a + bi \quad = \quad (n + ni )(c + di ) \quad + \quad \big( (r - n) + i(s - m)  \big)(c + di ).
+    \]
+    All that remains to be proven is that the right-most term has a norm less than $c + di$, which is equivalent to showing that $(r - n) + i (s - m) $ has a norm less than one:
+    \[
+      \norm{(r - n) + i(s - m) } = (r - n)^{2} + (s - m)^{2} \le \frac{1}{4} + \frac{1}{4} < 1.
+    \]
+    This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+\subsection{Gaussian Primes}
+
+An irreducible element in $\mathbb{Z}[i]$ is called a \textbf{Gaussian prime}.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $\pi$ be a Gaussian prime. Then $\pi \cdot \conjugate{\pi}$ is either a prime integer or the square of a prime integer.
+  \end{theorem}
+  \begin{proof}
+    For (1), let $\pi \cdot \conjugate{\pi}$ factor under $\mathbb{Z}$ as $p_{1}, \ldots, p_{n}$, and further factor each $p_{i}$ under the Gaussian integers. Since factorization in $\mathbb{Z}[i]$ is unique, this second factorization generates $n$ or more Gaussian primes. However, $\conjugate{\pi}$ is a Gaussian prime, since $z \mid \conjugate{\pi}$ implies $\conjugate{z} \mid \pi$. Hence $n$ is at most two.
+
+    Consider when $n = 2$ --- that is, when $p_{1}p_{2}$ factors in $\mathbb{Z}[i]$ as $\pi \cdot \conjugate{\pi}$. Then $p_{1}$ is an associate of $\pi$ or $\conjugate{\pi}$, while $p_{2}$ is the negative of the above associate. Hence $\pi \cdot \conjugate{\pi} = p_{1}^{2}$.
+  \end{proof}
+\end{adjustwidth}
+
+The following theorem characterizes the reverse direction:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $p$ be a prime integer. Then $p$ is either a Gaussian prime or factors as $\pi \cdot \conjugate{\pi}$ for some Gaussian prime $\pi$.
+  \end{theorem}
+  \begin{proof}
+    Suppose that $p$ is not a Gaussian prime, and let $p = \pi z$ for some Gaussian prime $\pi$ and Gaussian integer $z$. It is clear that $z = n \conjugate{\pi}$ for some $n \in \mathbb{Z}$; since $n \mid z$ implies $n \mid p$, we must have $n = 1$.
+  \end{proof}
+\end{adjustwidth}
+
+The following two theorems prepare for the debut of Fermat's Two-Square Theorem.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $p$ be a prime integer. Then the following are equivalent:
+    \begin{enumerate}
+      \item $p$ is a Gaussian prime.
+      \item $\mathbb{Z}[i] \, / \, (p)$ is a field.
+      \item $x^{2} + 1$ is irreducible in $\mathbb{Z}_{p}[x]$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    From the properties of Euclidean domains, it is clear that
+    \[
+      p \text{ is a Gaussian prime } \iff (p) \text{ is maximal } \iff \mathbb{Z}[i] \, / \, (p) \text{ is a field}.
+    \]
+    Thus (1) and (2) are equivalent. For the equivalency of (2) and (3), we have
+    \begin{align*}
+      \mathbb{Z}[i] \, / \, (p) \text{ is a field } & \iff \big( \mathbb{Z}[x] \, / \, (x^{2} + 1) \big) \, / \, (p) \text{ is a field} \\
+                                                    & \iff \mathbb{Z}_{p}[x] \, / \, (x^{2} + 1) \text{ is a field} \\
+                                                    & \iff (x^{2} + 1) \text{ is maximal in } \mathbb{Z}_{p}[x] \\
+                                                    & \iff x^{2} + 1 \text{ is irreducible in } \mathbb{Z}_{p}[x].
+    \end{align*}
+    The last equivalency follows from the fact that $\mathbb{Z}_{p}$ is a field, so $\mathbb{Z}_{p}[x]$ is a Euclidean Domain.
+  \end{proof}
+\end{adjustwidth}
+
+The following proof uses Sylow's Theorem, found in AbstractAlgebra/artin7.tex:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $p$ be an odd prime. Then the following two facts hold:
+    \begin{enumerate}
+      \item $\mathbb{Z}_{p}^{\times}$ contains an element of order $4$ if and only if $p \, \equiv \, 1 \pmod{4}$.
+      \item $x \in \mathbb{Z}_{p}$ has order $4$ if and only if $x^{2} \, \equiv \, -1 \pmod{p}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    We start with (1). Since $\mathbb{Z}_{p}$ is a finite field, $\mathbb{Z}_{p}^{\times} \, \cong \, C_{p - 1}$. Thus $\mathbb{Z}_{p}^{\times}$ has an element of order $4$ if and only if $4 \mid p - 1$, which entails $p \, \equiv \, 1 \pmod{4}$.
+
+    For (2), suppose $x \in \mathbb{Z}_{p}$ has order $4$. Then
+    \[
+      (x^{2} + 1)(x^{2} - 1) \, = \, x^{4} - 1 \, = \, 0.
+    \]
+    Since $\mathbb{Z}_{p}[x]$ is a Euclidean domain, one of these polynomials must be $0$; since $x$ does not have order $2$, we deduce $x^{2} + 1 = 0$. The reverse direction is easy to prove.
+  \end{proof}
+\end{adjustwidth}
+
+The following theorem is the culmination of this entire section:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Fermat's Two-Square Theorem]
+    Let $p$ be a prime integer. Then the following are equivalent:
+    \begin{enumerate}
+      \item $p$ is the product of complex conjugate Gaussian primes.
+      \item $p = 2$ or $p$ is congruent to $1$ modulo $4$.
+      \item $p$ is a sum of two integer squares.
+      \item $-1$ is a quadratic residue modulo $p$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    It is easy to see that (1) and (3) are equivalent. The equivalence of (2) and (4) is established by Theorem 12.
+
+    Suppose (3), observe that the squares modulo $4$ are $0$ and $1$; therefore, $p = a^{2} + b^{2}$ must be $0$, $1$, or $2$ modulo $4$. Hence $p$ is either $2 = 1^{2} + 1^{2}$ or a prime congruent to $1 \pmod{4}$, which is (2).
+
+    Suppose (4). Define $x$ such that $x^{2} \, \equiv \, -1 \pmod{p}$. Then $x^{4} \, \equiv \, 1 \pmod{p}$, so the polynomial $x^{4} + 1$ is reducible in the Euclidean domain $\mathbb{Z}_{p}[x]$. By the converse of Theorem 11, $p$ cannot be a Gauss prime --- hence by Theorem 10, it is the product of a Gauss prime and its conjugate. This entails (1).
+
+    We conclude that (1), (2), (3), and (4) are equivalent conditions.
+  \end{proof}
+\end{adjustwidth}
+
+This stunning and challenging theorem falls elegantly to the mechanics of Abstract Algebra. Isn't that fucking amazing?
+
+% --------------------------------------------- %
+
 
 \end{document}

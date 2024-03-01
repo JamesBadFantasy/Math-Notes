@@ -21,6 +21,8 @@
 \newcommand{\Spec}{\operatorname{Spec}}
 \renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
 
+\newcommand{\conjugate}[1]{\overline{#1}}
+
 \title{MATH-UA 349: Homework 4}
 \author{James Pagan, February 2024}
 \date{Professor Kleiner}
@@ -37,21 +39,117 @@
 
 \section{Problem 1}
 
+\begin{proof}
+  For the first polynomial, we have that
+  \begin{align*}
+    x^{9} - x \, &= \, x(x^{8} + 1) \\
+                 &= \, x(x^{8} + 8x^{7} + 28x^{6} + 56x^{5} + 70x^{4} + 56x^{3} + 28x^{2} + 8x + 1) \\
+                 &= \, \boxed{x(x + 1)^{8}}.
+  \end{align*}
+  The second polynomial is a similar story:
+  \begin{align*}
+    x^{9} - 1 \, &= \, (x^{3} - 1)(x^{6} + x^{3} + 1) \\
+                 &= \, \boxed{(x + 1)(x^{2} + x + 1)(x^{6} + x^{3} + 1)}.
+  \end{align*}
+  One can verify that $x^{6} + x^{3} + 1$ is irreducible through the Sieve of Eratosthenes.
+\end{proof}
+
 % --------------------------------------------- %
 
 \section{Problem 2}
+
+\begin{proof}
+  Let $p(x) = x^{4} + 6x^{3} + 9x + 3$. We claim that $\boxed{\text{$p$ generates a maximal ideal}}$ in $\mathbb{Q}[x]$.
+  
+  \begin{adjustwidth}{0.5cm}{}
+    \begin{lemma}
+      $p$ is irreducible in $\mathbb{Q}[x]$.
+    \end{lemma}
+    \begin{proof}\renewcommand{\qedsymbol}{}
+      By the Rational Root Theorem, the only possible rational roots of $p(x)$ are $-3$, $-1$, $1$, and $3$. A quick check verifies that none of these are roots of $p$ --- hence it has no rational roots.
+  
+      By the Factor Theorem, this ensures that no polynomial of the form $(x - q)$ for $q \in \mathbb{Q}$ divides $p$. Since these are the prime elements of the Euclidean domain $\mathbb{Q}[x]$, we conclude that $p$ is irreducible.
+    \end{proof}
+  \end{adjustwidth}
+  
+  Hence $p$ is a prime element of $\mathbb{Q}[x]$. Since $\mathbb{Q}[x]$ is a principal ideal domain, the ideal $(p)$ must be maximal.
+\end{proof}
 
 % --------------------------------------------- %
 
 \section{Problem 3}
 
+\begin{proof}
+  We claim that the argument of $\pi$ in polar coordinates is a muliple of $\tfrac{\pi}{4}$.
+
+  Suppose that $\pi = a + bi = r e^{i \theta}$ is a Gauss prime such that $\conjugate{\pi}$ and $\pi$ are associates --- that is, $\conjugate{\pi} = u \pi$ for some $u \in \{ 1, i, -1, -i \}$. This yields the equation
+  \[
+    r e^{-i \theta} = r e^{i \left( \theta + \tfrac{n \pi}{2} \right) }
+  \]
+  for some $n \in \mathbb{Z}$; equivalently, we find $-\theta = \theta + \tfrac{n \pi}{2}$; the solutions to this equation are of the form $\tfrac{4 k \pi}{8}$ for $k \in \{ 0, \ldots, 7 \}$. Hence in rectangular form, the Gauss prime $\pi$ has three forms:
+  \begin{enumerate}
+    \item $\pi$ is purely real.
+    \item $\pi$ is purely imaginary.
+    \item $\pi$ is on a diagonal of the complex plane --- that is, $\pi$ is of the form $a + ai$, $a - ai$, $-a - ai$, or $-a + ai$ for some $a \in \mathbb{Z}$.
+  \end{enumerate}
+  
+  If $\pi$ is purely real, it must be a prime congruent to $3 \pmod{4}$. If $\pi$ is purely imaginary, then its associate is of the previous form. If $\pi$ lies on a diagonal, it is quite clear that $\pi$ is $1 + i$ or one of its associates; hence $\pi \cdot \conjugate{\pi} = 2$.
+\end{proof}
+
 % --------------------------------------------- %
 
 \section{Problem 4}
 
+\textbf{Case 1}: If $p \equiv 3 \pmod{4}$, then $p$ is a Gaussian prime; hence $\mathbb{Z}[i] \, / \, (p)$ is a field with $p^{2}$ elements: they have the form $a + bi$ for $a, b \in \{ 0, \ldots, p - 1 \}$. We conclude that $\boxed{\mathbb{Z}[i] \, / \, (p) \, \cong \, \mathbb{F}_{p^{2}}}$.
+
+\textbf{Case 2}: If $p \equiv 1 \pmod{4}$, then $x^{2} + 1$ is not irreducible in $\mathbb{Z}_{p}$; hence there exist $a, b \in \mathbb{Z}_{p}$ such that $(x^{2} + 1) = (x + a)(x + b)$. As elaborated in Case 3, we have $a \ne b$. Hence we claim $\boxed{\mathbb{Z}[i] \, / \, (p) \, \cong \, \mathbb{Z}_{p}[x] \, / \, (x + a) \times \mathbb{Z}_{p}[x] \, / \, (x + b)}$. It is easy to see that
+\begin{align*}
+  \mathbb{Z}[i] \, / \, (p)  \, & \cong \,  \big( \mathbb{Z}[x] \, / \, (x^{2} + 1) \big) \, / \, (p) \\
+                                 & = \, \big( \mathbb{Z}[x] \, / \, (p) \big) \, / \, (x^{2} + 1) \\
+                                 & \cong \, \mathbb{Z}_{p}[x] \, / \, (x^{2} + 1) \\
+                                 & = \, \mathbb{Z}_{p}[x] \, / \, (x + a)(x + b).
+\end{align*}
+Since $\mathbb{Z}_{p}[x]$ is a Euclidean domain, the ideals $(x + a)$ and $(x + b)$ are maximal. Hence $(x + a) + (x + b) = \mathbb{Z}_{p}[x]$; we conclude by the Chinese Remainder Theorem the desired
+\[
+  \mathbb{Z}[i] \, / \, (p) \, \cong \, \mathbb{Z}_{p}[x] \, / \, (x + a)(x + b) \, \cong \, \mathbb{Z}_{p}[x] \, / \, (x + a) \times \mathbb{Z}_{p}[x] \, / \, (x + b).
+\]
+
+\textbf{Case 3}: We claim $p = 2$ if and only if $a = b$. This is because if $(x + a)^{2} = (x + 1)$, then $a^{2} = 1$ and $a + a = 0$; thus
+\[
+  0 = 0(a) = (a + a)a = a^{2} + a^{2} = 2.
+\]
+The other direction is trivial since $(x + 1)^{2} = x^{2} + 1$ in $\mathbb{Z}_{2}$. Similar logic to the above yields that $\boxed{\mathbb{Z}[i] \, / \, (2) \, \cong \, \mathbb{Z}_{2}[x] \, / \, (x + 1)^{2}}$.
+
 % --------------------------------------------- %
 
 \section{Problem 5}
+\begin{proof}
+  Let $n = p_{1}^{e_{1}} \cdots p_{n}^{e_{n}} q_{1}^{f_{1}} \cdots q_{m}^{f_{m}}$, where the $p_{i}$ are prime integers congruent to $1 \pmod{4}$ and the $q_{i}$ are prime integers congruent to $3 \pmod{4}$. We claim that
+  \[
+    \boxed{\text{$n$ is a sum of squares if and only if $f_{1}, \ldots, f_{n}$ are even}}.
+  \]
+  First, we demonstrate that if $f_{1}, \ldots, f_{n}$ are even, then $n$ is a sum of two squares.
+  
+  \begin{adjustwidth}{0.5cm}{}
+    \begin{lemma}[Brahmagupta-Diophantus Identity]
+      Let $j, k \in \mathbb{Z}$ be sums of two squares. Then $jk$ is a sum of two squares.
+    \end{lemma}
+    \begin{proof}
+      This follows from the identity
+      \[
+        (a^{2} + b^{2})(c^{2} + d^{2}) = (ac + bd)^{2} + (ad - bc)^{2}
+      \]
+      for integers $a$, $b$, $c$, and $d$.
+    \end{proof}
+  \end{adjustwidth}
+  Since $f_{i}$ is even for all $i$, each $q_{i}^{f_{i}}$ is a square; thus the product $q_{1}^{f_{1}} \cdots q_{m}^{f_{m}}$ is a sum of squares by Lemma 2. By Fermat's Two-Square Theorem, all the primes $p_{i}$ are a sum of squares. Thus their product $p_{1}^{e_{1}} \cdots p_{n}^{e_{n}}$ is a sum of squares. Multiplying the $p_{i}$ and $q_{i}$ together, we obtain that $n$ is a sum of two squares.
+  
+  Next, we demonstrate that if $n$ is a sum of two squares, then $f_{i}$ are even. Suppose for contradiction that $f_{k_{1}}, \cdots f_{k_{j}}$ are odd; then
+  \[
+    q_{k_{1}} \cdots q_{k_{j}} \mid n.
+  \]
+  Expressing $n$ as a product of Gaussian primes, it is easy to attain that $n$ cannot be a square since $q_{k_{1}}, \ldots, q_{k_{j}}$ are Gaussian primes, using Euclid's Lemma.
+\end{proof}
 
 % --------------------------------------------- %
 
@@ -94,7 +192,6 @@
   This yields the desired result.
 \end{proof}
 
-
 % --------------------------------------------- %
 
 \section{Problem 7}
@@ -103,9 +200,26 @@
 
 \subsection{Part (a)}
 
+For convenience, we denote by $x_{i}$ for each $i \in \{ 1, \ldots, n \}$ as the canonical basis $(\delta_{ik})_{k = 1}^{n}$ for each $i \in \{ 1, \ldots, n \}$, where $\delta$ is the Kronecker delta. Then the list
+\[
+  \phi(x_{1}), \ldots, \phi(x_{n}) \quad \in \quad R^{n}
+\]
+is linearly independent and has length $n$, so it must constitute a basis of $R^{n}$. Thus for $r_{1}, \ldots, r_{n} \in R$,
+\[
+  r_{1} \phi(x_{1}) + \cdots + r_{n} \phi(x_{n}) = 0 \quad \implies \quad r_{1} = \cdots = r_{n} = 0.
+\]
+Since the right-hand side equals $\phi(r_{1} x_{1} + \cdots + r_{n} x_{n})$, we conclude that $\phi$ has kernel $0$ --- thus $\phi$ is an isomorphism.
+
 % --------------------------------------------- %
 
 \subsection{Part (b)}
+
+$\boxed{\text{No}}$. Consider the ring $\mathbb{Z}[x]$ and the prime ideals $(2) \subset (2, x)$. These ideals are free $\mathbb{Z}[x]$-modules; hence let $\phi : (2, x) \to (2, x)$ be the $\mathbb{Z}[x]$-module homommorphism defined by $\phi(y) = 2y$. Two observations:
+\begin{enumerate}
+  \item \textbf{Injectivity}: Holds. Clearly $\Ker \phi = 0$, since $\mathbb{Z}[x]$ is an integral domain.
+  \item \textbf{Surjectivity}: Fails. $\phi$ maps the entirety of $(2, x)$ to $(2)$.
+\end{enumerate}
+Since $\phi$ is not an automorphism, it constitutes a counterexample to the stated claim.
 
 % --------------------------------------------- %
 
