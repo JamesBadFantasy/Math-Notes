@@ -3,6 +3,7 @@
 \usepackage{geometry, changepage, hyperref}
 \usepackage{amsmath, amssymb, amsthm, bm}
 \usepackage{physics, esint}
+\usepackage{tikz-cd}
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
 \setlength{\parindent}{0pt}
@@ -20,6 +21,8 @@
 \newcommand{\Ann}{\operatorname{Ann}}
 \newcommand{\Spec}{\operatorname{Spec}}
 \renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+
+\newcommand{\s}{$\\ \text{ }$}
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
@@ -87,9 +90,9 @@ The set $\Hom_{R}(M, N)$ denotes the set of all $R$-module homomorphisms from $M
 We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if the ring $R$ is unambiguous.
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
+	\begin{proposition}
 		$\Hom_{R}(R, M) \cong M$
-	\end{theorem}
+	\end{proposition}
 	\begin{proof}
 		The mapping $\phi : \Hom_{R}(R, M) \to M$ defined by $\phi(f) = f(1)$ is a homomorphism, as verified by a routine computation: for all $f, g \in \Hom_{R}(M, N)$ and $a \in R$,
 		\begin{align*}
@@ -113,9 +116,9 @@ I do not know why such a manipulation is noteworthy. The formulas above are quit
 A \textbf{submodule} $M'$ of $M$ is an Abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. 
 
 \begin{adjustwidth}{0.5cm}{}
-  \begin{lemma}
+  \begin{proposition}
     $\mathfrak{a}$ is an ideal of $R$ if and only if it is an $R$-submodule of $R$.
-  \end{lemma}
+  \end{proposition}
   \begin{proof}
     The proof evolves from a fundamental observation:
     \[
@@ -200,7 +203,7 @@ For a submodule $N' \subseteq \Im f$, I call $M' = \{ x \in M \, \mid \, f(a) \i
 
 % --------------------------------------------- %
 
-\subsection{Analogies with matrices}
+\subsection{R-Matrices}
 
 The \textbf{free and finitely-generated R-modules} are the $R$-vectors with entries in $R$ and operations defined as follows:
 \[
@@ -252,7 +255,7 @@ When $R$ has few units, invertibility is strong condition. For instance, a $\mat
 
 % --------------------------------------------- %
 
-\subsection{Reflections on Modules}
+\subsection{Free Modules}
 
 Given the similarity of free $R$-matrices with vector spaces, we may begin to investigate the generality of this connection. Hence, let $M$ be an $R$-module. $M$ is \textbf{finitely generated} if there exist $x_{1}, \ldots, x_{n} \in M$ such that
 \[
@@ -274,10 +277,61 @@ This homomorphism is injective if $x_{1}, \ldots, x_{n}$ generates $M$, surjecti
 \[
   \text{\textit{Most modules have no basis.}}
 \]
-A \textbf{free R-module} is a module that has a basis. A free $\mathbb{Z}$-module is \textbf{free Abelian group}. Finite Abelian groups are never free, since the additive order of each element is finite.
-
-
+We arrive at the definition of this section: \textbf{free R-module} is a module that has a basis. Compare this definition to Atiyah's delineated in AbstractAlgebra/atiyah2.tex. A free $\mathbb{Z}$-module is \textbf{free Abelian group}. Finite Abelian groups are never free --- if desired without Atiyah's logic, this is obtained by observing that each element has finite order:
+\[
+  o(x_{1}) x_{1} + \cdots o(x_{n}) x_{n} \, = \, 0 + \cdots + 0 \, = \, 0
+\]
+The \textbf{rank} of a free $R$-module $M$ is the cardinality of a basis of $M$. The rank of a free $R$-module is analogous to the dimension of a vector space.
 
 % --------------------------------------------- %
+
+\subsection{Matrices in Free Modules}
+
+Let $\mat{B}$ be the basis of a free $M$-module $M$. The \textbf{coordinate vector} $X$ of an element $\vec{v} \in M$ is the unique column vector such that $\vec{v} = \mat{B} X$. If $\mat{B}'$ is a change of basis, the relevant formula is $\mat{B}' = \mat{B}P$. We assert the following proposition without proof:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    The following two properties of bases hold:
+    \begin{enumerate}
+      \item A matrix $\mat{T}$ of a change-of-basis in a free module is an invertible $R$-matrix.
+      \item All bases of a free $R$-module have the same cardinality. \s
+    \end{enumerate}
+  \end{proposition}
+\end{adjustwidth}
+
+Let $M$ and $N$ be free $R$-modules with bases $\mat{B} = (x_{1}, \ldots, x_{n})$ and $\mat{C} = (y_{1}, \ldots, y_{m})$ respectively. Then all $R$-module homomorphisms $f : M \to N$ admit the form of left-multiplication by an $m$-by-$n$ $R$-matrix $\mat{T} = (t_{ij})$, with components given by
+\[
+  f(y_{j}) \, = \, \sum\limits_{i = 1}^{n} x_{i} t_{ij}
+\]
+If $X$ is the coordinate vector of $\vec{v} \in M$ --- namely, if $\vec{v} = \mat{B}X$ --- then $Y = \mat{T}X$ is the coordinate vector of its image.
+\[
+  \begin{tikzcd}
+    R^n \arrow[d, "\mat{B}"] \arrow[r, "\mat{T}"] & R^m \arrow[d, "\mat{C}"] \\
+    M \arrow[r, "f"]                              & N                       
+  \end{tikzcd}
+  \qquad \iff \qquad 
+  \begin{tikzcd}
+    X \arrow[d, dashed] \arrow[r, dashed] & Y \arrow[d, dashed] \\
+    \vec{v} \arrow[r, dashed]             & f(\vec{v})         
+  \end{tikzcd}
+\]
+Let the bases $\mat{B}$ and $\mat{C}$ change by invertible $R$-matrices $\mat{S}$ and $\mat{R}$. Then if $\mat{T}$ is the $R$-matrix of $f : M \to N$, the new formula for $\mat{T}$ is the same for vector spaces: $\mat{T} \, ' \, = \, \mat{R}^{-1} \mat{T} \mat{S}$.
+
+% --------------------------------------------- %
+
+% DISCLAIMER: Since this section is not relevant to Homework 5, I will return to its discussion later down the line.
+
+% --------------------------------------------- %
+
+% \section{Identities}
+%
+% This section is an informal discussion. It investigates the question: why do properties of $F$-matrices hold when their components are substituted with elements from a ring?
+
+% --------------------------------------------- %
+
+\section{Diagonalizing Integer Matrices}
+
+% --------------------------------------------- %
+
 
 \end{document}
