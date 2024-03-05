@@ -13,3 +13,4 @@
 \contentsline {section}{\numberline {5}The Gaussian Integers $\mathbb {Z}[i]$}{8}{section.5}%
 \contentsline {subsection}{\numberline {5.1}A Euclidean Domain}{8}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Gaussian Primes}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Sums of Two Squares}{11}{subsection.5.3}%

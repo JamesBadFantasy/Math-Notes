@@ -104,7 +104,7 @@ then $n = m$ and there exists a bijection such that $(p_{i}) = (q_{j})$ for each
   \end{proof}
 \end{adjustwidth}
 
-Hence, we could equivalently define unique factorization as decomposition to \textit{prime} elements. In this sense, factoriation in $R$ ``terminates'' if and only if $R$ satisfies the ascending chain condition for principal ideals; namely, the chain
+Hence, we could equivalently define unique factorization as decomposition to \textit{prime} elements. In this sense, factorization in $R$ ``terminates'' if and only if $R$ satisfies the ascending chain condition for principal ideals; namely, the chain
 \[
   x \quad \subseteq \quad \bigcap\limits_{i = 1}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 2}^{\infty} \, (p_{i}) \quad \subseteq \quad \bigcap\limits_{i = 3}^{\infty} \, (p_{i}) \quad \subseteq \quad \cdots
 \]
@@ -168,7 +168,7 @@ Four helpful facts about principal ideal domains are as follows:
     \[
       x \, = \, u_{1} p_{1} \cdots p_{n}.
     \]
-    If $u_{1}$ is contained in prime ideals, then they must be among $(p_{1}), \ldots, (p_{n})$. Hence we can express $u_{1}$ as a product of some $p_{1}, \ldots, p_{n}$ times $u_{2}$. Repeating at nauseum, we obtain a sequence $u_{1}, u_{2}, \ldots$ which yields the stationary chain
+    If $u_{1}$ is contained in prime ideals, then they must be among $(p_{1}), \ldots, (p_{n})$. Hence we can express $u_{1}$ as a product of some $p_{1}, \ldots, p_{n}$ times $u_{2}$. Repeating ad nauseam, we obtain a sequence $u_{1}, u_{2}, \ldots$ which yields the stationary chain
     \[
       (x) \subseteq (u_{1}) \subseteq (u_{2}) \subseteq \cdots.
     \]
@@ -211,12 +211,12 @@ It is clear that GCDs are unique up to association by Condition 2 --- thus we ca
 It is now easy to demonstrate that $\gcd(a_{1}, a_{2}, \ldots, a_{n}) = \gcd(a_{1}, \gcd(a_{2}, \ldots, a_{n}))$. This yields the following lemma:
 
 \begin{adjustwidth}{0.5cm}{}
-  \begin{lemma}[Bezout's Identity]
+  \begin{lemma}[Bézout's Identity]
     If $R$ is a principal ideal domain and $\gcd(a_{1}, \ldots, a_{n}) = d$, there exist integers $b_{1}, \ldots, b_{n}$ such that $d \, = \, a_{1}b_{1} + \cdots + a_{n}b_{n}$. \s
   \end{lemma}
 \end{adjustwidth}
 
-Much simpler than the proof in your 2nd Conest Math Notebook, right?
+Much simpler than the proof in your 2nd Contest Math Notebook, right?
 
 % --------------------------------------------- %
 
@@ -264,7 +264,7 @@ For a field $F$, the ring $F[x]$ is a Euclidean domain. I proved this in my cont
 
 We have thus attained a sequence of types of rings:
 \[
-  \text{rings} \, \subseteq \, \text{commutative rings} \, \subseteq \, \text{integral domains} \, \subseteq \, \text{UFDs} \, \subseteq \, \text{PIDs} \, \subseteq \, \text{GDs} \, \subseteq \, \text{fields}.
+  \text{rings} \, \subseteq \, \text{commutative rings} \, \subseteq \, \text{integral domains} \, \subseteq \, \text{UFDs} \, \subseteq \, \text{PIDs} \, \subseteq \, \text{EDs} \, \subseteq \, \text{fields}.
 \]
 
 % --------------------------------------------- %
@@ -284,13 +284,13 @@ and second is reduction modulo some prime $p$: the mappings $\psi : \mathbb{Z}[x
 
 % --------------------------------------------- %
 
-\subsection{Primative Polynomials}
+\subsection{Primitive Polynomials}
 
 The following lemma is quite obvious:
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{lemma}
-    Let $f(x) = a_{n}x^{n} + \cdots + a_{0}$ have integer coefficents. Then the following are equivalent:
+    Let $f(x) = a_{n}x^{n} + \cdots + a_{0}$ have integer coefficients. Then the following are equivalent:
     \begin{enumerate}
       \item $p$ divides each $a_{i}$.
       \item $p$ divides $f$ in $\mathbb{Z}[x]$
@@ -299,13 +299,13 @@ The following lemma is quite obvious:
   \end{lemma}
 \end{adjustwidth}
 
-A polynomial $f \in \mathbb{Z}[x]$ is called \textbf{primative} if the GCD of its coefficents is $1$.
+A polynomial $f \in \mathbb{Z}[x]$ is called \textbf{primitive} if the GCD of its coefficients is $1$.
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{lemma}
-    Let $f(x) = a_{n}x^{n} + \cdots + a_{0}$ have integer coefficents. Then the following are equivalent:
+    Let $f(x) = a_{n}x^{n} + \cdots + a_{0}$ have integer coefficients. Then the following are equivalent:
     \begin{enumerate}
-      \item $f$ is primative.
+      \item $f$ is primitive.
       \item $f$ is not divisible by any prime $p$.
       \item $\psi_{p}(f) \ne 0$ for all primes $p$. \s
     \end{enumerate}
@@ -316,10 +316,10 @@ Observe that an integer $n \in \mathbb{Z}[x]$ is a prime element if and only if 
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{lemma}[Gauss' Lemma]
-    The product of primative polynomials is primative.
+    The product of primitive polynomials is primitive.
   \end{lemma}
   \begin{proof}
-    Suppose that $fg$ is not primative; then $p \mid fg$ for some prime integer $p$. Thus $p \mid f$ or $p \mid g$, so one of $f$ and $g$ must not be primative. Taking the contrapositive yields the desired result.
+    Suppose that $fg$ is not primitive; then $p \mid fg$ for some prime integer $p$. Thus $p \mid f$ or $p \mid g$, so one of $f$ and $g$ must not be primitive. Taking the contrapositive yields the desired result.
   \end{proof}
 \end{adjustwidth}
 
@@ -363,16 +363,16 @@ Since $\mathbb{Z}[i]$ is isomorphic to $\mathbb{Z}[x] \, / \, (x^{2} + 1)$, we c
 
 \subsection{Gaussian Primes}
 
-An irreducible element in $\mathbb{Z}[i]$ is called a \textbf{Gaussian prime}.
+An irreducible element in $\mathbb{Z}[i]$ is called a \textbf{Gaussian prime}. It is clear that $\pi$ is a Gaussian prime if and only if $\conjugate{\pi}$ is a Gaussian prime.
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
     Let $\pi$ be a Gaussian prime. Then $\pi \cdot \conjugate{\pi}$ is either a prime integer or the square of a prime integer.
   \end{theorem}
   \begin{proof}
-    For (1), let $\pi \cdot \conjugate{\pi}$ factor under $\mathbb{Z}$ as $p_{1}, \ldots, p_{n}$, and further factor each $p_{i}$ under the Gaussian integers. Since factorization in $\mathbb{Z}[i]$ is unique, this second factorization generates $n$ or more Gaussian primes. However, $\conjugate{\pi}$ is a Gaussian prime, since $z \mid \conjugate{\pi}$ implies $\conjugate{z} \mid \pi$. Hence $n$ is at most two.
+    Let the integer $\pi \cdot \conjugate{\pi}$ have prime factorization $p_{1}, \ldots, p_{n}$; further factor each $p_{i}$ under the Gaussian integers. This will generate $n$ or more Gaussian primes; thus $n$ is at most two. If $n = 1$, then $\pi \cdot \conjugate{\pi}$ is a prime integer.
 
-    Consider when $n = 2$ --- that is, when $p_{1}p_{2}$ factors in $\mathbb{Z}[i]$ as $\pi \cdot \conjugate{\pi}$. Then $p_{1}$ is an associate of $\pi$ or $\conjugate{\pi}$, while $p_{2}$ is the negative of the above associate. Hence $\pi \cdot \conjugate{\pi} = p_{1}^{2}$.
+    Suppose that $n = 2$, and $p_{1}p_{2}$ factors in $\mathbb{Z}[i]$ as $\pi \cdot \conjugate{\pi}$. Then $p_{1}$ divides one of $\pi$ or $\conjugate{\pi}$; hence $\conjugate{p}_{1} = p_{1}$ divides the other, so $p_{1}^{2} \mid \pi \cdot \conjugate{\pi}$. We conclude that $p_{1} = p_{2}$.
   \end{proof}
 \end{adjustwidth}
 
@@ -383,7 +383,7 @@ The following theorem characterizes the reverse direction:
     Let $p$ be a prime integer. Then $p$ is either a Gaussian prime or factors as $\pi \cdot \conjugate{\pi}$ for some Gaussian prime $\pi$.
   \end{theorem}
   \begin{proof}
-    Suppose that $p$ is not a Gaussian prime, and let $p = \pi z$ for some Gaussian prime $\pi$ and Gaussian integer $z$. It is clear that $z = n \conjugate{\pi}$ for some $n \in \mathbb{Z}$; since $n \mid z$ implies $n \mid p$, we must have $n = 1$.
+    Suppose that $p$ is not a Gaussian prime, and let $p = \pi z$ for some Gaussian prime $\pi$ and Gaussian integer $z$. It is clear that $z = n \conjugate{\pi}$ for some $n \in \mathbb{Z}$; we must have $n = 1$ so that $p$ is prime. Hence $p = \pi \cdot \conjugate{\pi}$.
   \end{proof}
 \end{adjustwidth}
 
@@ -414,7 +414,7 @@ The following two theorems prepare for the debut of Fermat's Two-Square Theorem.
   \end{proof}
 \end{adjustwidth}
 
-The following proof uses Sylow's Theorem, found in AbstractAlgebra/artin7.tex:
+The following result belongs to classical number theory, enlightened by Abstract Algebra:
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
@@ -459,6 +459,41 @@ The following theorem is the culmination of this entire section:
 \end{adjustwidth}
 
 This stunning and challenging theorem falls elegantly to the mechanics of Abstract Algebra. Isn't that fucking amazing?
+
+% --------------------------------------------- %
+
+\subsection{Sums of Two Squares}
+
+The following content is not in Artin, but it answers a classical theorem from Number Theory:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $n = 2^{m} p_{1}^{e_{1}} \cdots p_{j}^{e_{j}} q_{1}^{f_{1}} \cdots q_{k}^{f_{k}}$ be the prime factorization of $n$, with $p_{i} \, \equiv  \, 1 \pmod{4}$ and $q_{i} \, \equiv  \, 3 \pmod{4}$. Then $n$ is a sum of two squares if and only if all $f_{i}$ are even.
+  \end{theorem}
+  \begin{proof}
+    Suppose that $f_{i}$ are all even. Note that products of sums of squares are sums of squares: by Diophantus' Identity,
+    \[
+      (a^{2} + b^{2})(c^{2} + d^{2}) = (ac + bd)^{2} + (ad - bc)^{2}
+    \]
+    Thus each $q_{i}^{f_{i}}$ is a square; the primes $p_{i}$ are sums of squares by Theorem 13. Thus their product $p_{1}^{e_{1}} \cdots p_{j}^{e_{j}} q_{1}^{f_{1}} \cdots q_{k}^{f_{k}}$ is a prime. Observe that $2^{m}$ is either a square or a sum of squares (namely $2^{m - 1} + 2^{m - 1}$); thus $n$ is a sum of squares.
+
+    Suppose that $n$ is a sum of squares. Then $n = \alpha \cdot \conjugate{\alpha}$ for some $\alpha \in \mathbb{C}[i]$; factoring each $\alpha$ in the Gaussian integers, we attain that
+    \[
+      n \, = \,  \alpha \cdot \conjugate{\alpha} \, = \, (\pi_{1} \cdots \pi_{j})(\conjugate{\pi}_{i} \cdots \conjugate{\pi}_{j})
+    \]
+    for Gaussian primes $\pi_{i}$. Suppose for contradiction that some $f_{k}$ is odd; then
+    \[
+      \nu_{q_{k}} \left( \frac{n}{q_{k}^{f_{k} - 1}} \right) = 1.
+    \]
+    Hence $q$ divides exactly one of $\alpha$ or $\conjugate{\alpha}$. Without loss of generality, let $q \mid \alpha$. Since $q_{k} \, \equiv \, 3 \pmod{4}$, it is a Gaussian prime; thus by Euclid's lemma, $q_{k} \, = \, \pi_{i}$ for some $i$. Hence
+    \[
+      q_{k} \, = \, \conjugate{q}_{k} \, = \, \conjugate{\pi}_{i} \, \mid \, \conjugate{\alpha}.
+    \]
+    This yields the desired contradiction. We deduce that each $f_{i}$ must be even.
+  \end{proof}
+\end{adjustwidth}
+
+The second part of that proof was fully original --- it impressed the TA Mohammad. Nobody likes Mohammad.
 
 % --------------------------------------------- %
 

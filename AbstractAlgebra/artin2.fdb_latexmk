@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1708821116 "artin2.tex" "artin2.pdf" "artin2" 1708821117 0
+["pdflatex"] 1709591523 "artin2.tex" "artin2.pdf" "artin2" 1709591523 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1704400182 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
@@ -119,10 +119,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "artin2.aux" 1708821117 2011 3382a1c626339e300b28082b84fa547b "pdflatex"
-  "artin2.out" 1708821117 1726 a80cd2fbf92187e312891430f46f84f8 "pdflatex"
-  "artin2.tex" 1708821116 22399 9beadd7aa1e608ebd4c5c518c474d534 ""
-  "artin2.toc" 1708821117 964 0e49f3a8fa7a5293a620cdc5f3275ae0 "pdflatex"
+  "artin2.aux" 1709591523 2011 3382a1c626339e300b28082b84fa547b "pdflatex"
+  "artin2.out" 1709591523 1726 a80cd2fbf92187e312891430f46f84f8 "pdflatex"
+  "artin2.tex" 1709591521 22346 9f6e2318277f1e608f9a916d4afa6825 ""
+  "artin2.toc" 1709591523 964 0e49f3a8fa7a5293a620cdc5f3275ae0 "pdflatex"
   (generated)
   "artin2.aux"
   "artin2.log"

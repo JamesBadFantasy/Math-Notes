@@ -47,7 +47,7 @@
 
 \subsection{Definition}
 
-An \textbf{R-module} over a commutative ring $R$ is an abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
+An \textbf{R-module} over a commutative ring $R$ is an Abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
 \begin{enumerate}
 	\item $1x = x$;
 	\item $(ab)x = a(bx)$;
@@ -75,7 +75,7 @@ A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module ho
 	f(x + y) & = f(x) + f(y) \\
 	f(ax)    & = a f(x).
 \end{align*}
-Thus, an $R$-module homomorphism $f$ is a homomorphism of abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear map. A bijective $R$-homomorphism is called an $R$-isomorphism.
+Thus, an $R$-module homomorphism $f$ is a homomorphism of Abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear map. A bijective $R$-homomorphism is called an $R$-isomorphism.
 
 The set $\Hom_{R}(M, N)$ denotes the set of all $R$-module homomorphisms from $M$ to $N$, and is a module if we define the following operations for $a \in R$ and $f, g \in \Hom_{R}(M, N)$:
   \begin{align*}
@@ -108,7 +108,7 @@ I do not know why such a manipulation is noteworthy. The formulas above are quit
 
 \subsection{Submodules}
 
-A \textbf{submodule} $M'$ of $M$ is an abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. 
+A \textbf{submodule} $M'$ of $M$ is an Abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. 
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{lemma}
@@ -127,15 +127,15 @@ The following proof outlines the construction of \textbf{quotient modules}:
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		The abelian quotient group $M \, / \, M'$ is an $R$-module under the opreation $a(x + M') = ax + M'$.
+		The Abelian quotient group $M \, / \, M'$ is an $R$-module under the operation $a(x + M') = ax + M'$.
 	\end{theorem}
 	\begin{proof}
 		We must perform four rather routine calculations: for all $x, y \in M$ and $a, b \in R$,
 		\begin{enumerate}
       \item \textbf{Identity}: $1(x + M') = 1x + M' = x + M'$.
-      \item \textbf{Compatability}: $a(b(x + M')) = a(bx + M') = abx + M' = (ab)(x + M')$.
+      \item \textbf{Compatibility}: $a(b(x + M')) = a(bx + M') = abx + M' = (ab)(x + M')$.
 			\item \textbf{Left Distributivity}: $(a + b)(x + M') = (a + b)x + M' = (ax + bx) + M' = (ax + M') + (bx + M') = a(x + M') + b(x + M')$.
-			\item \textbf{Right Distriutivity}: $a((x + M') + (y + M')) = a((x + y) + M') = a(x + y) + M' = (ax + M') + (ay + M') = a(x + M') + a(y + M)'$.
+			\item \textbf{Right Distributivity}: $a((x + M') + (y + M')) = a((x + y) + M') = a(x + y) + M' = (ax + M') + (ay + M') = a(x + M') + a(y + M)'$.
 		\end{enumerate}
 		Therefore, $M / M'$ is an $R$-module. Also, this operation is naturally well-defined.
 	\end{proof}
@@ -163,7 +163,7 @@ The cokernel is perhaps an unfamiliar face. Such a quotient is not possible for 
     \[
       f(y - x) \, = \, f(y) - f(x) \, = \, 1,
     \]
-    so $y - x \in K$. Thus $x + K = y + K$. Surjectivity is quite clear. We conclude that $g$ is the desired isomorhism.
+    so $y - x \in K$. Thus $x + K = y + K$. Surjectivity is quite clear. We conclude that $g$ is the desired isomorphism.
   \end{proof}
 \end{adjustwidth}
 
@@ -192,7 +192,7 @@ For a submodule $N' \subseteq \Im f$, I call $M' = \{ x \in M \, \mid \, f(a) \i
   \end{proof}
 \end{adjustwidth}
 
-The Second Isomorphism Theorem utilizes the definitioins of Section 2.1:
+The Second Isomorphism Theorem utilizes the definitions of Section 2.1:
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}[Second Isomorphism Theorem]
@@ -240,7 +240,7 @@ The Second Isomorphism Theorem utilizes the definitioins of Section 2.1:
 Let $M$ be an $R$-module with submodules $M_{1}, \ldots, M_{n}$. We can consider two crucial operations on these submodules:
 \begin{enumerate}
 	\item \textbf{Sum}: The sum $M_{1} + \cdots + M_{n}$ is the set of all sums $m_{1} + \cdots + m_{n}$, where $m_{i} \in M_{i}$ ($i \in \{ 1, \ldots, n \}$). It is the smallest submodule of $M$ that contains all $M_{1}, \ldots, M_{n}$.
-	\item \textbf{Intersecrtion}: The intersection $M_{1} \cap \cdots \cap M_{n}$ is the largest submodule of $M$ that is contained inside each $M_{1}, \ldots, M_{n}$.
+	\item \textbf{Intersection}: The intersection $M_{1} \cap \cdots \cap M_{n}$ is the largest submodule of $M$ that is contained inside each $M_{1}, \ldots, M_{n}$.
 \end{enumerate}
 
 For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{product} $\mathfrak{a} M$ as all finite sums $a_{1}x_{1} + \cdots + a_{n}x_{n}$ for $a_{i} \in \mathfrak{a}$ and $x_{i} \in M$  for each $i \in \{ 1, \ldots, n \}$. It is a submodule of $M$.
@@ -264,16 +264,16 @@ If $N$ and $P$ are $R$-submodules of $M$, we define $(N : P)$ to be the set of a
 
 The \textbf{annihilator} of a module $M$ is $(0 : M)$, the ideal of all $a$ such that $aM = 0$, and is denoted $\Ann M$. If $\mathfrak{a} \subseteq \Ann M$, we may regard $M$ as an $R \, / \, \mathfrak{a}$-module. In particular, observe that if $\bar{a} \in R \, / \, \mathfrak{a}$, then $a_{1}, a_{2} \in \bar{a}$ implies $a_{1}x = a_{2}x$ --- so $\bar{a}$ is well-defined.
 
-An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihalator of $R$ may change depending on the ring --- if $\Ann M = \mathfrak{a}$, then $M$ is faithful as an $R \, / \, \mathfrak{a}$ module.
+An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihilator of $R$ may change depending on the ring --- if $\Ann M = \mathfrak{a}$, then $M$ is faithful as an $R \, / \, \mathfrak{a}$ module.
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
 		If $M_{1}, M_{2} \subseteq M$ are submodules, then $\Ann(M_{1} + M_{2}) = \Ann M_{1} \cap \Ann M_{2}$.
 	\end{theorem}
 	\begin{proof}
-		Suppose $a \in \Ann M_{1} \cap \Ann M_{2}$. Then $a$ annihalates all $x_{1} + x_{2} \in M_{1} + M_{2}$, so $a \in \Ann(M_{1} + M_{2})$.
+		Suppose $a \in \Ann M_{1} \cap \Ann M_{2}$. Then $a$ annihilates all $x_{1} + x_{2} \in M_{1} + M_{2}$, so $a \in \Ann(M_{1} + M_{2})$.
 
-		Suppose $a \notin \Ann M_{1} \cap \Ann M_{2} $. Then $a$ must fail to annnihilate an element in either $M_{1}$ or $M_{2}$ (or both) --- without loss of generality, let there exist $x_{1} \in M_{1}$ such that $ax_{1} \ne 0$. Then as $ax_{1} \in M_{1} + M_{2}$, we find that $a \notin \Ann(M_{1} + M_{2})$. This completes the proof.
+		Suppose $a \notin \Ann M_{1} \cap \Ann M_{2} $. Then $a$ must fail to annihilate an element in either $M_{1}$ or $M_{2}$ (or both) --- without loss of generality, let there exist $x_{1} \in M_{1}$ such that $ax_{1} \ne 0$. Then as $ax_{1} \in M_{1} + M_{2}$, we find that $a \notin \Ann(M_{1} + M_{2})$. This completes the proof.
 	\end{proof}
 \end{adjustwidth}
 
@@ -453,11 +453,11 @@ Consider a finitely-generated module $M$ over a local ring $R$ with maximal idea
 	\end{proof}
 \end{adjustwidth}
 
-This realization arises naturally, as $\mathfrak{m}$ annihalates the quotient module $M \,/\, \mathfrak{m} M$. Since $R \,/\, \mathfrak{m}$ is a field, $M \,/\, \mathfrak{m} M$ is actually a vector space.
+This realization arises naturally, as $\mathfrak{m}$ annihilates the quotient module $M \,/\, \mathfrak{m} M$. Since $R \,/\, \mathfrak{m}$ is a field, $M \,/\, \mathfrak{m} M$ is actually a vector space.
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		Let $M$ be a module over a local ring. Then $x_{1}, \ldots, x_{n} \in M$ generate $M$ if and only if the images of $x_{1}, \ldots, x_{n}$ span the the vector space $M \,/\, \mathfrak{m} M$.
+		Let $M$ be a module over a local ring. Then $x_{1}, \ldots, x_{n} \in M$ generate $M$ if and only if the images of $x_{1}, \ldots, x_{n}$ span the vector space $M \,/\, \mathfrak{m} M$.
 	\end{theorem}
 	\begin{proof}
 		Let $f : M \to M \,/\, \mathfrak{m} M$ be the canonical epimorphism. Then
@@ -465,7 +465,7 @@ This realization arises naturally, as $\mathfrak{m}$ annihalates the quotient mo
 			\text{$x_{1}, \ldots, x_{n}$ generate $M$} &\iff \text{$x_{1}, \ldots, x_{n}$ generate $M \,/\, \mathfrak{m} M$} \\
 			&\iff \text{$x_{1}, \ldots, x_{n}$ are a basis of $M \,/\, \mathfrak{m} M$ over $R \,/\, \mathfrak{m}$}.
 		\end{align*}
-		The ommitted details are relatively simple to verify.
+		The omitted details are relatively simple to verify.
 	\end{proof}
 \end{adjustwidth}
 

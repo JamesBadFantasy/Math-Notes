@@ -50,7 +50,7 @@ A \textbf{ring} $R$ is a set endowed with two binary operations, here denoted ``
 		\item \textbf{Closure}: $a + b \in R$.
 		\item \textbf{Associativity}: $a + (b + c) = (a + b) + c$.
 		\item \textbf{Identity}: There is $0 \in R$ such that $a + 0 = 0 + a = a$.
-		\item \textbf{Invertability}: There is $-a \in R$ such that $a + (-a) = (-a) + a = 0$.
+		\item \textbf{Invertibility}: There is $-a \in R$ such that $a + (-a) = (-a) + a = 0$.
 		\item \textbf{Commutativity}: $a + b = b + a$.
 	\end{enumerate}
 	\item \textbf{Multiplicative Axioms}
@@ -126,7 +126,7 @@ All rings contain at least two subrings: the $0$ ring and $R$ itself.
 
 \newpage
 
-A \textbf{ideal} $\mathfrak{a}$ of $R$ is a subset of $R$ that satisfies the following twokproperties:
+A \textbf{ideal} $\mathfrak{a}$ of $R$ is a subset of $R$ that satisfies the following two properties:
 \begin{enumerate}
 	\item \textbf{Additive}: $\mathfrak{a}$ is an additive subgroup of $R$.
 	\item \textbf{Multiplicative}: For all $a \in \mathfrak{a}$ and $x \in R$, we have $ax, xa \in \mathfrak{a}$.
@@ -211,7 +211,7 @@ We can extend the notion of a quotient group to a ring $R$ with an ideal $\mathf
 	\end{proof}
 \end{adjustwidth}
 
-The canonical mapping $\phi : R \to R \,/\, \mathfrak{a}$ is thus a surjective homomomorphism with kernel $\mathfrak{a}$. A similar definition exists for the quotient of two ideals --- say, $\mathfrak{a} \,/\, \mathfrak{b}$ for $\mathfrak{a} \supseteq \mathfrak{b}$.
+The canonical mapping $\phi : R \to R \,/\, \mathfrak{a}$ is thus a surjective homomorphism with kernel $\mathfrak{a}$. A similar definition exists for the quotient of two ideals --- say, $\mathfrak{a} \,/\, \mathfrak{b}$ for $\mathfrak{a} \supseteq \mathfrak{b}$.
 
 \newpage
 
@@ -402,7 +402,7 @@ All maximal ideals are prime. The following theorem ensures a wealth of maximal 
 			\begin{proof}\renewcommand{\qedsymbol}{}
 				We must perform two rather routine calculations:
 				\begin{enumerate}
-					\item \textbf{Additivity}: If $x, y \in \bigcup \mathfrak{a}_{n}$, let $x \in \mathfrak{a}_{\alpha}$ and $y \in \mathfrak{a}_{\beta}$ for indicies $\alpha$ and $\beta$. Without loss of generality, let $\mathfrak{a}_{\alpha} \subseteq \mathfrak{a}_{\beta}$; then $x \in \mathfrak{a}_{\beta}$. Thus $x + y \in \mathfrak{a}_{\beta} \subseteq \bigcup \mathfrak{a}_{n}$.
+					\item \textbf{Additivity}: If $x, y \in \bigcup \mathfrak{a}_{n}$, let $x \in \mathfrak{a}_{\alpha}$ and $y \in \mathfrak{a}_{\beta}$ for indices $\alpha$ and $\beta$. Without loss of generality, let $\mathfrak{a}_{\alpha} \subseteq \mathfrak{a}_{\beta}$; then $x \in \mathfrak{a}_{\beta}$. Thus $x + y \in \mathfrak{a}_{\beta} \subseteq \bigcup \mathfrak{a}_{n}$.
 					\item \textbf{Multiplicativity}: Suppose $x \in \bigcup \mathfrak{a}_{n}$ and $a \in R$. Then $x \in \mathfrak{a}_{\alpha}$ for some index; we have $ax \in \mathfrak{a}_{\alpha} \subseteq \bigcup \mathfrak{a}_{n}$.
 				\end{enumerate}
 				We deduce that $\bigcup \mathfrak{a}_{n}$ is an ideal.
@@ -443,7 +443,7 @@ A \textbf{local ring} is a ring with exactly one maximal ideal. They may have an
 		$R$ is a local ring if and only if $R - \mathfrak{m}$ consists of units.
 	\end{theorem}
 	\begin{proof}
-		Suppose that $R - \mathfrak{m}$ consists of units. Then $\mathfrak{m}$ constitues all units of $R$; as all ideals are composed of non-units, ideals of $R$ must lie within $\mathfrak{m}$. Then $\mathfrak{m}$ is the sole maximal ideal of the local ring $R$.
+		Suppose that $R - \mathfrak{m}$ consists of units. Then $\mathfrak{m}$ constitutes all units of $R$; as all ideals are composed of non-units, ideals of $R$ must lie within $\mathfrak{m}$. Then $\mathfrak{m}$ is the sole maximal ideal of the local ring $R$.
 
 		Suppose that $R - \mathfrak{m}$ contains a non-unit $a \in R$. Then $(a)$ is a proper ideal, and lies within some maximal ideal $\mathfrak{n}$. As $a \in \mathfrak{n}$ and $a \notin \mathfrak{m}$, the ring $R$ has two maximal ideals and is not local.
 	\end{proof}
@@ -525,7 +525,7 @@ The following proof is my favorite in this document:
 	\begin{proof}
 		Suppose $a^{n} = 0$ and $\mathfrak{p}$ is a prime ideal of $R$. Then $a^{n} \in \mathfrak{p}$, so one of $aa \cdots a$ must be in $\mathfrak{p}$ (the prime condition inducts!).
 
-		Now, suppose that $a^{n} \ne 0$ for all $n \in \mathbb{Z}_{> 0}$. Let $S$ be the set of all ideals $\mathfrak{a}$ such that $a^{n} \notin \mathfrak{a}$ for all $n \in \mathbb{Z}_{> 0}$. This set is nonempty, since $0 \in S$; then $S$ is a partialy ordered set under inclusion. 
+		Now, suppose that $a^{n} \ne 0$ for all $n \in \mathbb{Z}_{> 0}$. Let $S$ be the set of all ideals $\mathfrak{a}$ such that $a^{n} \notin \mathfrak{a}$ for all $n \in \mathbb{Z}_{> 0}$. This set is nonempty, since $0 \in S$; then $S$ is a partially ordered set under inclusion. 
 
 		Using identical logic as in Theorem 15, we deduce that this set must have a maximal element $\mathfrak{p}$ --- however, $\mathfrak{p}$ may not be maximal in the scale of \textit{all} ideals of $R.$
 		\begin{adjustwidth}{0.5cm}{}
@@ -580,7 +580,7 @@ The \textbf{Jacobson radical} $\mathfrak{J}$ is the intersection of all the maxi
 If $\mathfrak{a}$ and $\mathfrak{b}$ are ideals of a ring $R$, we may perform the following operations upon them to yield three new ideals.
 \begin{enumerate}
 	\item \textbf{Sum}: $\mathfrak{a} + \mathfrak{b} = \{ a + b \mid a \in \mathfrak{a}, b \in \mathfrak{b} \}$, the smallest ideal of $R$ that contains $\mathfrak{a}$ and $\mathfrak{b}$.
-	\item \textbf{Intersection}: $\mathfrak{a} \cap \mathfrak{b}$, the largest ideal of $R$ contained within both $\mathfrak{a}$ and $\mathfrak{b}$. In fact an infinite intesection of ideals is an ideal.
+	\item \textbf{Intersection}: $\mathfrak{a} \cap \mathfrak{b}$, the largest ideal of $R$ contained within both $\mathfrak{a}$ and $\mathfrak{b}$. In fact an infinite intersection of ideals is an ideal.
 	\item \textbf{Product}: $\mathfrak{a} \mathfrak{b} = \{ \sum\limits a_{i}b_{i} \mid a_{i} \in \mathfrak{a}, b_{i} \in \mathfrak{b} \}$. We denote $\mathfrak{a} \mathfrak{a} \cdots \mathfrak{a}$ as $\mathfrak{a}^{n}$ and set $\mathfrak{a}^{0} = R$.
 \end{enumerate}
 
@@ -592,7 +592,7 @@ Ideals under sums and intersections form a complete lattice. Sums may be infinit
 
 Two ideals $\mathfrak{a}$ and $\mathfrak{b}$ are \textbf{relatively prime} if $\mathfrak{a} + \mathfrak{b} = R$. Clearly, this holds if and only if there exists $a \in \mathfrak{a}$ and $b \in \mathfrak{b}$ such that $a + b = 1$. 
 
-We have invokea facts about relatively prime ideals several times thus far throughout this document --- notably that if $\mathfrak{m}$ is maximal and $a \notin \mathfrak{m}$, then $\mathfrak{m} + (a) = R$.
+We invoked numerous facts about relatively prime ideals before this point --- notably that if $\mathfrak{m}$ is maximal and $a \notin \mathfrak{m}$, then $\mathfrak{m} + (a) = R$.
 
 \newpage
 
@@ -601,7 +601,7 @@ We have invokea facts about relatively prime ideals several times thus far throu
 		Let $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}$ be ideals of $R$. If $\mathfrak{a}_{i}$ and $\mathfrak{a}_{j}$ are coprime whenever $i \ne j$, then $\prod \mathfrak{a}_{i} = \cap \mathfrak{a}_{i}$
 	\end{theorem}
 	\begin{proof}
-		\textbf{Base case}: Consider ideals $\mathfrak{a}$ and $\mathfrak{b}$ of $R$. and let $ab \in \mathfrak{a}\mathfrak{b}$. Then as $\mathfrak{a}$ is an ideal, $ab \in \mathfrak{a}$; likewise, $ab \in \mathfrak{b}$. Them $ab \in \mathfrak{a} \cap \mathfrak{b}$. Now if $x \in \mathfrak{a} \cap \mathfrak{b}$, then $x \in \mathfrak{a}$ and $x \in \mathfrak{b}$. Let $a + b = 1$; then $xa \in \mathfrak{b}\mathfrak{a}$ and $xb \in \mathfrak{a}\mathfrak{b}$, so $x = xa + xb \in \mathfrak{a}\mathfrak{b}$. We conclude that $\mathfrak{a}\mathfrak{b} = \mathfrak{a} \cap \mathfrak{b}$ (this proof is wrong, $\mathfrak{ab}$ is consists of sums).
+		\textbf{Base case}: Consider ideals $\mathfrak{a}$ and $\mathfrak{b}$ of $R$ and let $ab \in \mathfrak{a}\mathfrak{b}$. Then as $\mathfrak{a}$ is an ideal, $ab \in \mathfrak{a}$; likewise, $ab \in \mathfrak{b}$. Them $ab \in \mathfrak{a} \cap \mathfrak{b}$. Now if $x \in \mathfrak{a} \cap \mathfrak{b}$, then $x \in \mathfrak{a}$ and $x \in \mathfrak{b}$. Let $a + b = 1$; then $xa \in \mathfrak{b}\mathfrak{a}$ and $xb \in \mathfrak{a}\mathfrak{b}$, so $x = xa + xb \in \mathfrak{a}\mathfrak{b}$. We conclude that $\mathfrak{a}\mathfrak{b} = \mathfrak{a} \cap \mathfrak{b}$ (this proof is wrong, $\mathfrak{ab}$ is consists of sums).
 
 		\textbf{Inductive step}: Let the theorem be true for $n$; we wish to prove that if $\mathfrak{a}_{1}, \ldots, \mathfrak{a}_{n}, \mathfrak{b}$ are all pairwise coprime, then
 		\[
@@ -702,8 +702,6 @@ The following theorem does not concern unions, but it recasts the formulation of
 	\end{corollary}
 \end{adjustwidth}
 
-
-
 % --------------------------------------------- %
 
 \subsection{The Ideal Quotient}
@@ -712,7 +710,7 @@ For ideals $\mathfrak{a}, \mathfrak{b}$ of $R$, their \textbf{ideal quotient} (w
 \[
 	(\mathfrak{a} : \mathfrak{b}) = \{ x \,\mid\, x \in R, \, x \mathfrak{b} \subseteq \mathfrak{a} \},
 \]
-The most important ideal quotient is the \textbf{annihalator}, defined as $(0 : \mathfrak{b})$ --- the set of all $x \in R$ such that $x (\mathfrak{b}) = 0$ --- and denoted as $\Ann \mathfrak{b}$. In this notation, the set $D$ of all zero-divisors of $R$ is
+The most important ideal quotient is the \textbf{annihilator}, defined as $(0 : \mathfrak{b})$ --- the set of all $x \in R$ such that $x (\mathfrak{b}) = 0$ --- and denoted as $\Ann \mathfrak{b}$. In this notation, the set $D$ of all zero-divisors of $R$ is
 \[
 	D = \bigcup\limits_{a \ne 0} \Ann \, (a).
 \]
@@ -720,7 +718,7 @@ If $(b)$ is a principal ideal, we write $(\mathfrak{a} : b)$ in place of $(\math
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		For all ideals $\mathfrak{a}_{i}$, $\mathfrak{b}_{i}$ and $\mathfrak{c}$ of $R$ for indicies $i \in I$, the following five properties hold:
+		For all ideals $\mathfrak{a}_{i}$, $\mathfrak{b}_{i}$ and $\mathfrak{c}$ of $R$ for indices $i \in I$, the following five properties hold:
 		\begin{enumerate}
 			\item $\mathfrak{a} \subseteq (\mathfrak{a} : \mathfrak{b})$.
 			\item $(\mathfrak{a} : \mathfrak{b}) \mathfrak{b} \subseteq \mathfrak{a}$.
@@ -884,11 +882,11 @@ Observe the similarity between (2) and Fermat's theorem on sums of two squares.
 		\end{enumerate}
 	\end{theorem}
 	\begin{proof}
-		These proofs are ommitted, in the interest of remaining productive. I will comment: (1) is quite trivial, and (2) follows directly afterward.
+		These proofs are omitted, in the interest of remaining productive. I will comment: (1) is quite trivial, and (2) follows directly afterward.
 	\end{proof}
 \end{adjustwidth}
 
-In the interest of remaining productive, we will not prove the following fomulas:
+In the interest of remaining productive, we will not prove the following formulas: 
 \begin{align*}
 	(\mathfrak{a}_{1} + \mathfrak{a}_{2})^{e} = \mathfrak{a}_{1}^{e} + \mathfrak{a}_{2}^{e} \qquad &\text{and} \qquad (\mathfrak{b}_{1} + \mathfrak{b}_{2})^{c} \supseteq \mathfrak{b}_{1}^{c} + \mathfrak{b}_{2}^{c} \\
 	(\mathfrak{a}_{1} \cap \mathfrak{a}_{2})^{e} \subseteq \mathfrak{a}_{1}^{e} \cap \mathfrak{a}_{2}^{e} \qquad &\text{and} \qquad (\mathfrak{b}_{1} \cap \mathfrak{b}_{2})^{c} = \mathfrak{b}_{1}^{c} \cap \mathfrak{b}_{2}^{c}  \\
@@ -940,7 +938,7 @@ Let $R$ be a ring and let $X$ denote the set of prime ideals of $R$. For each su
   \end{proof}
 \end{adjustwidth}
 
-Further observe that $V(0) = X$ and $V(1) = \varnothing$. Thus the sets $V(\mathfrak{a})$ across all $\mathfrak{a} \in X$ satisfy the closed set axioms of a toplogical space. The resulting topology is called the \textbf{Zariski topology}, and the set $X$ is called the \textbf{prime spectrum} of $R$, denoted $\Spec R$.
+Further observe that $V(0) = X$ and $V(1) = \varnothing$. Thus the sets $V(\mathfrak{a})$ across all $\mathfrak{a} \in X$ satisfy the closed set axioms of a topological space. The resulting topology is called the \textbf{Zariski topology}, and the set $X$ is called the \textbf{prime spectrum} of $R$, denoted $\Spec R$.
 
 % --------------------------------------------- %
 
@@ -1011,7 +1009,7 @@ In the Zariski topology, a set $S \subseteq X$ is \textbf{quasi-compact} if each
     \[
       V \left( \sum\limits_{\alpha} f_{\alpha}  \right)^{\complement} \, = \, \left( \bigcap\limits_{\alpha} V(f_{\alpha}) \right)^{\complement} \, = \, \bigcup\limits_{\alpha} X_{f_{\alpha}} \, = \, X_{f}.
     \]
-    Then $\sum\limits_{\alpha} f_{\alpha}$ contains a unit, so there exist indicies $\alpha_{1}, \ldots, \alpha_{n}$ and contants $r_{1}, \ldots, r_{n} \in R$ such that
+    Then $\sum\limits_{\alpha} f_{\alpha}$ contains a unit, so there exist indices $\alpha_{1}, \ldots, \alpha_{n}$ and constants $r_{1}, \ldots, r_{n} \in R$ such that
     \[
       1 \, = \, r_{1} f_{\alpha_{1}} + \cdots + r_{n} f_{\alpha_{n}},
     \]

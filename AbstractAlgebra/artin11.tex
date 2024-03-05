@@ -50,7 +50,7 @@ A \textbf{ring} $R$ is a set endowed with two binary operations, here denoted ``
 		\item \textbf{Closure}: $a + b \in R$.
 		\item \textbf{Associativity}: $a + (b + c) = (a + b) + c$.
 		\item \textbf{Identity}: There is $0 \in R$ such that $a + 0 = 0 + a = a$.
-		\item \textbf{Invertability}: There is $-a \in R$ such that $a + (-a) = (-a) + a = 0$.
+		\item \textbf{Invertibility}: There is $-a \in R$ such that $a + (-a) = (-a) + a = 0$.
 		\item \textbf{Commutativity}: $a + b = b + a$.
 	\end{enumerate}
 	\item \textbf{Multiplicative Axioms}
@@ -126,7 +126,7 @@ All rings contain at least two subrings: the $0$ ring and $R$ itself.
 
 \newpage
 
-A \textbf{ideal} $\mathfrak{a}$ of $R$ is a subset of $R$ that satisfies the following twokproperties:
+A \textbf{ideal} $\mathfrak{a}$ of $R$ is a subset of $R$ that satisfies the following two properties:
 \begin{enumerate}
 	\item \textbf{Additive}: $\mathfrak{a}$ is an additive subgroup of $R$.
 	\item \textbf{Multiplicative}: For all $a \in \mathfrak{a}$ and $x \in R$, we have $ax, xa \in \mathfrak{a}$.
@@ -211,7 +211,7 @@ We can extend the notion of a quotient group to a ring $R$ with an ideal $\mathf
 	\end{proof}
 \end{adjustwidth}
 
-The canonical mapping $\phi : R \to R \,/\, \mathfrak{a}$ is thus a surjective homomomorphism with kernel $\mathfrak{a}$. A similar definition exists for the quotient of two ideals --- say, $\mathfrak{a} \,/\, \mathfrak{b}$ for $\mathfrak{a} \supseteq \mathfrak{b}$.
+The canonical mapping $\phi : R \to R \,/\, \mathfrak{a}$ is thus a surjective homomorphism with kernel $\mathfrak{a}$. A similar definition exists for the quotient of two ideals --- say, $\mathfrak{a} \,/\, \mathfrak{b}$ for $\mathfrak{a} \supseteq \mathfrak{b}$.
 
 \newpage
 
@@ -317,11 +317,11 @@ An element $a \in R$ is a \textbf{unit} if it is invertible. It is trivial to ve
 
 \subsection*{Polynomial Rings}
 
-Let $R$ be a ring. The \textbf{polynomial ring} $R[x_{1}, \ldots, x_{n}]$ denotes the ring of all polynomials with variables $x_{1}, \ldots, x_{n}$ and coefficents in $R$.
+Let $R$ be a ring. The \textbf{polynomial ring} $R[x_{1}, \ldots, x_{n}]$ denotes the ring of all polynomials with variables $x_{1}, \ldots, x_{n}$ and coefficients in $R$.
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
-    Suppose $R$ is a ring, and let $f, g \in R[x]$ such that the leading coefficent of $g$ is a unit. Then there exists $q, r \in R[x]$ such that
+    Suppose $R$ is a ring, and let $f, g \in R[x]$ such that the leading coefficient of $g$ is a unit. Then there exists $q, r \in R[x]$ such that
     \[
       f(x) = g(x)q(x) + r(x),
     \]
@@ -332,7 +332,7 @@ Let $R$ be a ring. The \textbf{polynomial ring} $R[x_{1}, \ldots, x_{n}]$ denote
   \end{corollary}
 \end{adjustwidth}
 
-If $R$ is a Unique Factorization Domain, then so is $R[x]$. The Remainder Theorm holds in a general ring: the remainder dividing $f(x)$ by $(x - \alpha)$ is $f(\alpha)$.
+If $R$ is a Unique Factorization Domain, then so is $R[x]$. The Remainder Theorem holds in a general ring: the remainder dividing $f(x)$ by $(x - \alpha)$ is $f(\alpha)$.
 
 % --------------------------------------------- %
 
@@ -347,7 +347,7 @@ If $R$ is a Unique Factorization Domain, then so is $R[x]$. The Remainder Theorm
     that agrees with $\phi$ on constant polynomials and sends $x_{i}$ to $\alpha_{i}$.
   \end{theorem}
   \begin{proof}
-    Defining $\Phi$ as the map which sends $1$ to $1$ and $x_{i}$ to $\alpha_{i}$, it is easy to show that $\Phi$ is a homomorphism. The unqiueness of $\Phi$ follows from the fact these elements generate the totality of $R[x_{1}, \ldots, x_{i}]$, hence its image is unique.
+    Defining $\Phi$ as the map which sends $1$ to $1$ and $x_{i}$ to $\alpha_{i}$, it is easy to show that $\Phi$ is a homomorphism. The uniqueness of $\Phi$ follows from the fact these elements generate the totality of $R[x_{1}, \ldots, x_{i}]$, hence its image is unique.
   \end{proof}
 \end{adjustwidth}
 
@@ -383,7 +383,7 @@ The next result concerns adjoining elements:
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
-    Suppose the leading coefficent of $f \in R[x]$ is a unit. Then $R[x] \, / \, (f)$ contains constants and polynomials of degree strictly less than $f$.
+    Suppose the leading coefficient of $f \in R[x]$ is a unit. Then $R[x] \, / \, (f)$ contains constants and polynomials of degree strictly less than $f$.
   \end{theorem}
 \end{adjustwidth}
 
@@ -457,12 +457,11 @@ Since the irreducible polynomials in $\mathbb{C}[x]$ are $(x -\alpha)$ for $\alp
     There exists a bijection between maximal ideals of $\mathbb{C}[x_{1}, \ldots, x_{n}]$ and points in $\mathbb{C}^{n}$.
   \end{theorem}
   \begin{proof}
-    Select $(\alpha_{1}, \ldots, \alpha_{n}) \in \mathbb{C}^{n}$ abitrarily. We may use the substitution map from $\mathbb{C}[x_{1}, \ldots, x_{n}] \to \mathbb{C}$ defined by $x_{1} \to \alpha_{1}$; it is easy to prove that the map is surjective, so its kernel is a maximal ideal.
+    Select $(\alpha_{1}, \ldots, \alpha_{n}) \in \mathbb{C}^{n}$ arbitrarily. We may use the substitution map from $\mathbb{C}[x_{1}, \ldots, x_{n}] \to \mathbb{C}$ defined by $x_{1} \to \alpha_{1}$; it is easy to prove that the map is surjective, so its kernel is a maximal ideal.
 
-    It is harder to prove that all maximal ideals are the kernel of such a map. We ommmit the proof from here in the interest of brevity.
+    It is harder to prove that all maximal ideals are the kernel of such a map. We omit the proof from here in the interest of brevity.
   \end{proof}
 \end{adjustwidth}
-
 
 % --------------------------------------------- %
 

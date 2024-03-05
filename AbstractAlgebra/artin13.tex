@@ -21,6 +21,13 @@
 \newcommand{\Spec}{\operatorname{Spec}}
 \renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
 
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\cof}{\operatorname{cof}}
 
 \title{Artin: Linear Algebra in a Ring}
 \author{James Pagan}
@@ -36,9 +43,13 @@
 
 % --------------------------------------------- %
 
+\section{Modules}
+
+% --------------------------------------------- %
+
 \subsection{Definition}
 
-An \textbf{R-module} over a commutative ring $R$ is an abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
+An \textbf{R-module} over a commutative ring $R$ is an Abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
 \begin{enumerate}
 	\item $1x = x$;
 	\item $(ab)x = a(bx)$;
@@ -52,59 +63,220 @@ An \textbf{R-module} over a commutative ring $R$ is an abelian group $M$ (with o
 
 \begin{itemize}
 	\item If $R$ is a ring, $R[x]$ is a module.
-	\item All ideals $\mathfrak{a}$ of $R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
+	\item All ideals $\mathfrak{a} \subseteq R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
 	\item If $R$ is a field, $R$-modules are $R$-vector spaces. In fact, the axioms above are identical to the vector axioms, defined over commutative rings instead of fields.
 	\item Abelian groups $G$ are precisely the modules over $\mathbb{Z}$.
-  \item The \textbf{free modules}
 \end{itemize}
 
 % --------------------------------------------- %
 
-\subsection{Homomorphisms of Modules}
+\subsection{R-Module Homomorphisms}
 
-A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is $R$-linear) if for all $a \in R$ and $x, y \in M$,
+A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is \textbf{R-linear}) if for all $a \in R$ and $x, y \in M$,
 \begin{align*}
 	f(x + y) & = f(x) + f(y) \\
 	f(ax)    & = a f(x).
 \end{align*}
-Thus, an $R$-module homomorphism $f$ is a homomorphism of abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear transformation. A bijective $R$-homomorphism is called an $R$-isomorphism.
-
-\newpage
+Thus, an $R$-module homomorphism $f$ is a homomorphism of Abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear map. A bijective $R$-homomorphism is called an $R$-isomorphism.
 
 The set $\Hom_{R}(M, N)$ denotes the set of all $R$-module homomorphisms from $M$ to $N$, and is a module if we define the following operations for $a \in R$ and $f, g \in \Hom_{R}(M, N)$:
-\begin{align*}
+  \begin{align*}
 	(f + g)(x) & = f(x) + g(x) \\
-	(rf)(x)    & = r f(x).
+	(af)(x)    & = a f(x).
 \end{align*}
-We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if there is no ambiguity about the commutative ring $R$.
+We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if the ring $R$ is unambiguous.
 
-% --------------------------------------------- %
-
-\section{Submodules and Quotient Modules}
-
-% --------------------------------------------- %
-
-\subsection{Definition}
-
-A \textbf{submodule} $M'$ of $M$ is an abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. The following proof outlines a construction of \textbf{quotient modules}:
-
-\begin{adjustwidth}{1cm}{}
+\begin{adjustwidth}{0.5cm}{}
 	\begin{theorem}
-		The abelian quotient group $M / M'$ is an $R$-module under the opreation $r(x + M') = rx + M'$.
+		$\Hom_{R}(R, M) \cong M$
 	\end{theorem}
 	\begin{proof}
-		We must perform four rather routine calculations:
-		\begin{enumerate}
-			\item For all $x \in M$, we have that $1(x + M') = 1x + M' = x + M'$.
-			\item For all $r, s \in R$ and $x \in M$, we have that $r(s(x + M')) = r(sx + M') = rsx + M' = (rs)(x + M')$.
-			\item For all $r, s \in R$ and $x \in M$, we have that $(r + s)(x + M') = (r + s)x + M' = (rx + sx) + M' = (rx + M') + (sx + M') = r(x + M') + s(x + M')$.
-			\item For all $r \in R$ and $x, y \in M$, we have that $r((x + M') + (y + M')) = r((x + y) + M') = r(x + y) + M' = (rx + M') + (ry + M') = r(x + M') + r(y + M)'$.
-		\end{enumerate}
-		Therefore, $M / M'$ is an $R$-module.
+		The mapping $\phi : \Hom_{R}(R, M) \to M$ defined by $\phi(f) = f(1)$ is a homomorphism, as verified by a routine computation: for all $f, g \in \Hom_{R}(M, N)$ and $a \in R$,
+		\begin{align*}
+      \phi(f + g) = (f + g)(1) &= f(1) + g(1) = \phi(f) + \phi(g) \\
+            \phi(af) = (af)(1) &= a f(1) = a \phi(f),
+		\end{align*}
+		so $\phi$ is an $R$-homomorphism. This mapping is injective, since each $f$ is uniquely determined by $f(1)$. It is also surjective; for each $m \in M$, set define a homomorphism by $h(1) = m$. Thus $\phi$ is the desired isomorphism.
 	\end{proof}
 \end{adjustwidth}
 
+Homomorphisms $u : M' \to M$ and $v : N \to N''$ induce mappings $\bar{u} : \Hom(M, N) \to \Hom(M', N)$ and $\bar{v} : \Hom(M, N) \to \Hom(M, N'')$ defined for $f \in \Hom(M, N)$ as follows
+\[
+	\bar{u}(f) = f \circ u \qquad \text{and} \qquad \bar{v}(f) = v \circ f.
+\]
+I do not know why such a manipulation is noteworthy. The formulas above are quite easy to memorize if the time ever comes to invoke them.
+
 % --------------------------------------------- %
+
+\subsection{Submodules}
+
+A \textbf{submodule} $M'$ of $M$ is an Abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. 
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    $\mathfrak{a}$ is an ideal of $R$ if and only if it is an $R$-submodule of $R$.
+  \end{lemma}
+  \begin{proof}
+    The proof evolves from a fundamental observation:
+    \[
+      R \mathfrak{a} = \mathfrak{a} \, \iff \, \text{scalar multiplication in the $R$-module $\mathfrak{a}$ is closed}.
+    \]
+    The rest of the multiplicative module conditions follow from the ring axioms.
+  \end{proof}
+\end{adjustwidth}
+
+The following proof outlines the construction of \textbf{quotient modules}:
+
+\begin{adjustwidth}{0.5cm}{}
+	\begin{theorem}
+		The Abelian quotient group $M \, / \, M'$ is an $R$-module under the operation $a(x + M') = ax + M'$.
+	\end{theorem}
+	\begin{proof}
+		We must perform four rather routine calculations: for all $x, y \in M$ and $a, b \in R$,
+		\begin{enumerate}
+      \item \textbf{Identity}: $1(x + M') = 1x + M' = x + M'$.
+      \item \textbf{Compatibility}: $a(b(x + M')) = a(bx + M') = abx + M' = (ab)(x + M')$.
+			\item \textbf{Left Distributivity}: $(a + b)(x + M') = (a + b)x + M' = (ax + bx) + M' = (ax + M') + (bx + M') = a(x + M') + b(x + M')$.
+			\item \textbf{Right Distributivity}: $a((x + M') + (y + M')) = a((x + y) + M') = a(x + y) + M' = (ax + M') + (ay + M') = a(x + M') + a(y + M)'$.
+		\end{enumerate}
+		Therefore, $M / M'$ is an $R$-module. Also, this operation is naturally well-defined.
+	\end{proof}
+\end{adjustwidth}
+
+$R$-module homomorphisms $f : M \to N$ induce three notable submodules: 
+\begin{enumerate}
+  \item \textbf{Kernel}: $\Ker f \, = \, \{ x \in M \, \mid \, f(x) = 0 \}$, a submodule of $M$.
+  \item \textbf{Image}: $\Im f \, = \, \{ f(x) \, \mid \, x \in M \}$, a submodule of $N$.
+  \item \textbf{Cokernel}: $\Coker f \, = \, N \, / \, \Im f$, a quotient of $N$.
+\end{enumerate}
+The cokernel is perhaps an unfamiliar face. Such a quotient is not possible for rings or groups; images of homomorphisms need not be ideals of $R$ nor normal subgroups of $G$. 
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[First Isomorphism Theorem]
+     $N \, / \, \Ker f \, \cong \, \Im f$.
+  \end{theorem}
+  \begin{proof}
+    Let $K = \Ker f$, and define a mapping $g : M \, / \, N \to \Im f$ by $g(x + K) = f(x)$. We have for arbitrary $x, y \in N$ and $a \in R$ that
+    \begin{align*}
+      g(x + y + K) \, = \, f(x + y) \, &= \, f(x) + f(y) \, = \, g(x + K) + g(y + K). \\
+            g(ax + K) \, = \, f(ax) \, &= \, a f(x) \, = \, a g(x + K).
+    \end{align*}
+    Hence $g$ is a homomorphism. For injectivity, suppose that $g(x + K) = g(y + K)$ --- that is, $f(x) = f(y)$. Then
+    \[
+      f(y - x) \, = \, f(y) - f(x) \, = \, 1,
+    \]
+    so $y - x \in K$. Thus $x + K = y + K$. Surjectivity is quite clear. We conclude that $g$ is the desired isomorphism.
+  \end{proof}
+\end{adjustwidth}
+
+Let $f : M \to N$ be an $R$-module homomorphism. Here are two special cases of the prior theorem:
+\begin{enumerate}
+  \item If $f$ is a monomorphism, them $M \, \cong \, \Im f$.
+  \item If $f$ is an epimorphism, then $M \, / \, \Ker f \, \cong \, N$.
+\end{enumerate}
+
+For a submodule $N' \subseteq \Im f$, I call $M' = \{ x \in M \, \mid \, f(a) \in N' \}$ the \textbf{contraction module}.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Correspondence Theorem]
+    Submodules of $G$ which contain $\Ker f$ correspond one-to-one with submodules of $\Im f$.
+  \end{theorem}
+  \begin{proof}
+    For each submodule $N' \subseteq \Im f$ consider the contraction module $M' \, = \, \{ x \, \mid \, f(x) \in N' \}$. Since this is an Abelian subgroup, we need only check for multiplicative closure: for all $x \in M'$ and $a \in R$, we have
+    \[
+      f(ax) = a f(x) \in N' \implies ax \in N'.
+    \]
+    Hence $M'$ is a submodule. It is clear that $\Ker f \subseteq M'$, so the First Isomorphism Theorem yields that
+    \[
+      N' \, / \, \Ker f \, \cong \, M'.
+    \]
+    Thus this construction is injective. It is surjective, since for each $\Ker \subseteq N' \subseteq N$, the subgroup $N'$ is contracted by $f(N')$. The correspondence is now established.
+  \end{proof}
+\end{adjustwidth}
+
+% -------------------------------------------
+
+\section{Free Modules}
+
+% --------------------------------------------- %
+
+\subsection{Analogies with matrices}
+
+The \textbf{free and finitely-generated R-modules} are the $R$-vectors with entries in $R$ and operations defined as follows:
+\[
+  \begin{bmatrix} r_{1} \\ \vdots \\ r_{n} \end{bmatrix} \, + \, \begin{bmatrix} s_{1} \\ \vdots \\ s_{n} \end{bmatrix} \, = \, \begin{bmatrix} r_{1} + s_{1} \\ \vdots \\ r_{n} + s_{n} \end{bmatrix} \qquad \text{and} \qquad s \, \begin{bmatrix} r_{1} \\ \vdots \\ r_{n} \end{bmatrix} \, = \, \begin{bmatrix} s r_{1} \\ \vdots \\ s r_{n} \end{bmatrix}.
+\]
+Analogously to fields, we can define \textbf{R-matrices} --- matrices with components in $R$ --- as $R$-module homomorphisms from $R^{n}$ to $R^{m}$. Addition and multiplication of $R$-matrices is defined as expected. The set of all $R$-module homomorphisms forms the \textbf{general linear group}:
+\[
+  GL_{n}(R) \, = \, \{ \text{$n$-by-$n$ invertible $R$-matrices} \}.
+\]
+The \textbf{determinant} of an $R$-module is computed in precisely the same way, and satisfies a similar property: if $\mat{T}$ and $\mat{S}$ are $R$-matrices capable of multiplication,
+\[
+  \det(\mat{TS}) \, = \, \det(\mat{T}) \det(\mat{S})
+\]
+There is also the \textbf{cofactor matrix}: there exists a matrix $\cof(\mat{T})$ such that $\mat{T} \cof(\mat{T}) = \cof(\mat{T}) \mat{T} = \det(\mat{T}) \mat{I}$.
+
+\newpage
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    Let $\mat{T}$ be a square $R$-matrix. Then the following holds:
+    \begin{enumerate}
+      \item $\mat{T}$ is invertible if and only if $\det(\mat{T})$ is a unit.
+      \item $\mat{T}$ is invertible if and only if $\mat{T}$ has a one-sided inverse.
+      \item If $\mat{T}$ is invertible, then $\mat{T}$ is square.
+    \end{enumerate}
+  \end{lemma}
+  \begin{proof}
+    Suppose that $\det(\mat{T})$ is a unit. Then $(\det(\mat{T})^{-1})\cof(\mat{T})$ suffices as an inverse of $\mat{T}$ by the properties of cofactor matrices; the converse holds as well. If $\mat{T}$ has a one-sided inverse $\mat{S}$, then without loss of generality,
+    \[
+      \det(\mat{T}) \det(\mat{S}) \, = \, \det(\mat{TS}) \, = \, \det(\mat{I}) \, = \, 1,
+    \]
+    so $\det(\mat{T})$ is a unit; hence $\mat{T}$ is invertible. Now, suppose that $\mat{T}$ is invertible; if $\mat{T}$ is not square, we can extend it and its inverse $\mat{S}$ by adding rows (or columns) of zeroes. This yields the following equation without loss of generality:
+    \[
+      \left[
+      \begin{array}{c|c}
+        \\ \mat{T} \quad  & \quad 0 \\ \\
+      \end{array}
+      \right] \left[
+      \begin{array}{c}
+        \quad \mat{S} \quad \\ \\ \hline \\ 0
+      \end{array}
+      \right] \quad = \quad \mat{I}.
+    \]
+    This is a contradiction, since the left-hand side has determinant $0$ and the right-hand side has determinant $1$.
+  \end{proof}
+\end{adjustwidth}
+
+When $R$ has few units, invertibility is strong condition. For instance, a $\mathbb{Z}$-matrix is invertible if and only if its determinant is $\pm 1$. Thus $GL_{n}(\mathbb{Z}) \subset GL_{n}(\mathbb{R})$; of all integer matrices that are invertible as $\mathbb{R}$-matrices, few are invertible as $\mathbb{Z}$-matrices.
+
+% --------------------------------------------- %
+
+\subsection{Reflections on Modules}
+
+Given the similarity of free $R$-matrices with vector spaces, we may begin to investigate the generality of this connection. Hence, let $M$ be an $R$-module. $M$ is \textbf{finitely generated} if there exist $x_{1}, \ldots, x_{n} \in M$ such that
+\[
+  M \, = \, Rx_{1} + \cdots + Rx_{n} \, = \, \{ r_{1}x_{1} + \cdots + r_{n} \, \mid \, r_{1}, \ldots, r_{n} \in R \}.
+\]
+A set of elements $x_{1}, \ldots, x_{n}$ is \textbf{independent} if
+\[
+  r_{1}x_{1} + \cdots + r_{n}x_{n} = 0 \, \implies \, r_{1}, \ldots, r_{n} = 0.
+\]
+An independent set of generators is called a \textbf{basis}. As with vector spaces, $x_{1}, \ldots, x_{n} \in M$ is a basis of $M$ if and only if all elements of $M$ are a unique linear combination of $x_{1}, \ldots, x_{n}$. The \textbf{canonical basis} consisting of $\vec{e}_{1}, \ldots, \vec{e}_{n}$ is a basis of $R^{n}$.
+
+\newpage
+
+If $(x_{1}, \ldots, x_{n})$ is an ordered set of elements in $M$, we can define a homomorphism $R^{n} \to M$ defined by
+\[
+  \phi(r_{1}, \ldots r_{n}) \, = \, \begin{bmatrix} x_{1} & \cdots & x_{n} \end{bmatrix} \begin{bmatrix} r_{1} \\ \vdots \\ r_{n} \end{bmatrix} \, = \, r_{1}x_{1} + \cdots + r_{n}x_{n}.
+\]
+This homomorphism is injective if $x_{1}, \ldots, x_{n}$ generates $M$, surjective if $x_{1}, \ldots, x_{n}$ are independent, and bijective if $x_{1}, \ldots, x_{n}$ constitute a basis of $R^{n}$. Hence $M$ has a basis of length $n$ if and only if $M \, \cong \, R^{n}$. 
+\[
+  \text{\textit{Most modules have no basis.}}
+\]
+A \textbf{free R-module} is a module that has a basis. A free $\mathbb{Z}$-module is \textbf{free Abelian group}. Finite Abelian groups are never free, since the additive order of each element is finite.
+
+
 
 % --------------------------------------------- %
 

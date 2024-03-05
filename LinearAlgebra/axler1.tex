@@ -1,0 +1,129 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+
+\renewcommand{\grad}{\nabla}
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+
+\title{Axler: Vector Spaces}
+\author{James Pagan}
+\date{March 2024}
+% I learned these much, much earlier than March 2024...
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Vector Spaces}
+
+% --------------------------------------------- %
+
+An \textbf{vector space} over a field $F$ is an Abelian group $V$ (with operation written additively) endowed with a mapping $\mu : F \times V \to V$ (written multiplicatively) such that the following axioms are satisfied for all $\vec{v}, \vec{w} \in V$ and $a, b \in R$:
+\begin{enumerate}
+	\item $1 \vec{v} = \vec{v}$;
+	\item $(ab)\vec{v} = a(b \vec{v})$;
+	\item $a(\vec{v} + \vec{w}) = a \vec{v} + a \vec{w}$;
+	\item $(a + b) \vec{v} = a \vec{v} + b \vec{v}$.
+\end{enumerate}
+
+Elements of $V$ are called \textbf{vectors}. Since $(V, +)$ is an Abelian group, it has a unique additive identity, unique inverses, and satisfies $-(- \vec{v}) = \vec{v}$ and $- (\vec{v} + \vec{w}) = - \vec{v} - \vec{w}$ for all $\vec{v}, \vec{w} \in V$. The additive identity of $V$ is denoted $\vec{0}$ and the additive inverse of $\vec{v}$ is denoted $-\vec{v}$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $V$ be a $F$-vector space. Then the following holds for all $\vec{v}, \vec{w} \in V$ and $a \in F$:
+    \begin{enumerate}
+      \item $0 \vec{v} = \vec{0}$.
+      \item $a \vec{0} = \vec{0}$.
+      \item $(-1) \vec{v} = - \vec{v}$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    All three properties follow from the distributive laws. For (1), we have that
+    \[
+      0 \vec{v} + 0 \vec{v} \, = \, (0 + 0) \vec{v} = 0 \vec{v}.
+    \]
+    Subtracting both sides by $0 \vec{v}$ yields that $0 \vec{v} = \vec{0}$. For (2), a similar proof holds:
+    \[
+      a \vec{0} + a \vec{0} = a(\vec{0} + \vec{0}) = a \vec{0},
+    \]
+    hence $a \vec{0} = \vec{0}$. The third property is quite easy as well: we have that
+    \[
+      -1 \vec{v} + \vec{v} \, = \, (-1 + 1) \vec{v} \, = \, 0 \vec{v} \, = \, \vec{0} \, = \, 0 \vec{v} \, = \, (1 - 1) \vec{v} \, = \, \vec{v} + (-1 \vec{v})
+    \]
+    Hence $-1 \vec{v}$ is the unique inverse of $\vec{v}$, that being $-\vec{v}$.
+  \end{proof}
+\end{adjustwidth}
+
+A vector space over $\mathbb{R}$ is a \textbf{real vector space}, while vector spaces over $\mathbb{C}$ are \textbf{complex vector spaces}.
+
+% --------------------------------------------- %
+
+\section{Subspaces}
+
+A subset $U \subseteq V$ is a \textbf{subspace} if it is a vector space under the same field and operations as $V$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    A subset $U \subseteq V$ is a subspace if and only if $\vec{0} \in U$ and $U$ is closed under addition and scalar multiplication.
+  \end{theorem}
+  \begin{proof}
+    Suppose $U$ satisfies the three desired properties. Then $(U, +) \subseteq (V, +)$ is an Abelian subgroup; once multiplicative closure is ensured, the four other properties are inherited from $V$.
+  \end{proof}
+\end{adjustwidth}
+
+Let $V$ be an $F$-vector space with subspaces $V_{1}, \ldots, V_{m}$. We can consider two crucial operations on these subspaces: 
+
+\begin{enumerate}
+	\item \textbf{Sum}: The sum $V_{1} + \cdots + V_{n}$ is the set of all sums $m_{1} + \cdots + m_{n}$, where $m_{i} \in V_{i}$ ($i \in \{ 1, \ldots, n \}$). It is the smallest subspace of $V$ that contains all $V_{1}, \ldots, V_{n}$.
+	\item \textbf{Intersection}: The intersection $V_{1} \cap \cdots \cap V_{n}$ is the largest subspace of $V$ that is contained inside each $V_{1}, \ldots, V_{n}$.
+\end{enumerate}
+
+Axler discusses when $V_{1} + \cdots + V_{n}$ is isomorphic to $V_{1} \oplus \cdots \oplus V_{n}$, but in the interest of avoiding technicality, he defines direct sums indirectly: $V_{1} + \cdots + V_{n}$ is a \textbf{direct sum} if for all $\vec{v}_{i} \in V_{i}$, the equation
+\[
+  \vec{v}_{1} + \cdots + \vec{v}_{n} = \vec{0}
+\]
+has only one solution: when $\vec{v}_{1} = \cdots = \vec{v}_{n} = \vec{0}$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $V_{1}, \ldots, V_{n} \subseteq V$ be $F$-subspaces. Then the following holds:
+    \begin{enumerate}
+      \item $V_{1} + \cdots + V_{n}$ is a direct sum if and only if each $\vec{v}$ in the sum has a unique representation as sums of $\vec{v}_{i} \in V_{i}$.
+      \item $V_{1} + \cdots + V_{n}$ is a direct sum if and only if each 
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    Suppose that there exists a nontrivial solution to the equation: some $\vec{v}_{1} + \cdots + \vec{v}_{n} = \vec{0}$ where some $\vec{v}_{i}$ is nonzero. Then
+  \end{proof}
+\end{adjustwidth}
+
+
+% --------------------------------------------- %
+
+\end{document}
