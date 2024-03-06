@@ -7,4 +7,4 @@
 \contentsline {subsection}{\numberline {2.1}R-Matrices}{5}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Free Modules}{6}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Matrices in Free Modules}{7}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Diagonalizing Integer Matricies}{8}{section.3}%
+\contentsline {section}{\numberline {3}Diagonalizing Integer Matrices}{8}{section.3}%

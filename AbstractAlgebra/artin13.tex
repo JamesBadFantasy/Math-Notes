@@ -331,6 +331,32 @@ Let the bases $\mat{B}$ and $\mat{C}$ change by invertible $R$-matrices $\mat{S}
 
 \section{Diagonalizing Integer Matrices}
 
+The critical question is as follows: given an $m$-by-$n$ $\mathbb{Z}$-matrix $\mat{T}$ and $\vec{B} \in \mathbb{Z}^{m}$, when does there exist $\vec{A} \in \mathbb{Z}^{n}$ such that
+\[
+  \vec{A} \mat{T} \, = \, \vec{B}?
+\]
+The most important of these questions is when $\vec{A} \mat{T} = \vec{0}$. In a field, one often performs row reduction --- but deprived of multiplicative inverses, most row reductions are not allowed. Rather, we allow both row \textit{and} column reduction. One is permitted to perform any of the following operations:
+\begin{enumerate}
+  \item Add an integer multiple of a row to a row or a column to a column.
+  \item Interchange two rows or two columns.
+  \item Multiply a row or column by $-1$.
+\end{enumerate}
+
+Any such operation can be performed by multiplying $\mat{T}$ by an \textbf{elementary integer matrix}, which is always invertible. Therefore the final result of a sequence of operations has the form
+\[
+  \mat{T} \, ' \, = \, \mat{Q}^{-1} \mat{T} \mat{P},
+\]
+where $\mat{Q}^{-1}$ and $\mat{T}$ are invertible $\mathbb{Z}$-matrices of the appropriate sizes. $\mat{Q}^{-1}$ documents row operations, while $\mat{P}$ dictates column operations: those in $\mat{P}$ are multiplied in the same order as performed, while those in $\mat{Q}$ are in \textit{reverse} order.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    
+  \end{theorem}
+  \begin{proof}
+    
+  \end{proof}
+\end{adjustwidth}
+
 % --------------------------------------------- %
 
 
