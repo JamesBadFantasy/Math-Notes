@@ -131,9 +131,9 @@ A \textbf{submodule} $M'$ of $M$ is an Abelian subgroup of $M$ closed under mult
 The following proof outlines the construction of \textbf{quotient modules}:
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
+	\begin{proposition}
 		The Abelian quotient group $M \, / \, M'$ is an $R$-module under the operation $a(x + M') = ax + M'$.
-	\end{theorem}
+	\end{proposition}
 	\begin{proof}
 		We must perform four rather routine calculations: for all $x, y \in M$ and $a, b \in R$,
 		\begin{enumerate}
@@ -333,16 +333,16 @@ Let the bases $\mat{B}$ and $\mat{C}$ change by invertible $R$-matrices $\mat{S}
 
 The critical question is as follows: given an $m$-by-$n$ $\mathbb{Z}$-matrix $\mat{T}$ and $\vec{B} \in \mathbb{Z}^{m}$, when does there exist $\vec{A} \in \mathbb{Z}^{n}$ such that
 \[
-  \vec{A} \mat{T} \, = \, \vec{B}?
+  \mat{T}\vec{A} \, = \, \vec{B}?
 \]
-The most important of these questions is when $\vec{A} \mat{T} = \vec{0}$. In a field, one often performs row reduction --- but deprived of multiplicative inverses, most row reductions are not allowed. Rather, we allow both row \textit{and} column reduction. One is permitted to perform any of the following operations:
+The most important of these questions is when $\vec{A} \mat{T} = \vec{0}$. In a field, one often performs row reduction --- but deprived of multiplicative inverses, most row reductions are not allowed. Rather, we allow both row \textit{and} column reduction, that being any of the following:
 \begin{enumerate}
   \item Add an integer multiple of a row to a row or a column to a column.
   \item Interchange two rows or two columns.
   \item Multiply a row or column by $-1$.
 \end{enumerate}
 
-Any such operation can be performed by multiplying $\mat{T}$ by an \textbf{elementary integer matrix}, which is always invertible. Therefore the final result of a sequence of operations has the form
+Any such operation can be performed by multiplying $\mat{T}$ by an \textbf{elementary integer matrix}, which is always invertible. The final result of a sequence of operations has the form
 \[
   \mat{T} \, ' \, = \, \mat{Q}^{-1} \mat{T} \mat{P},
 \]
@@ -350,14 +350,140 @@ where $\mat{Q}^{-1}$ and $\mat{T}$ are invertible $\mathbb{Z}$-matrices of the a
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
-    
+    Let $\mat{T}$ be an $m$-by-$n$ integer matrix. Then there exist invertible matrices $P$ and $Q$ such that $Q^{-1}TP$ is diagonal --- say,
+    \[
+      \begin{bmatrix} \begin{bmatrix} d_{1} & \, & \, \\ \, & \ddots & \, \\ \, & \, & d_{k} \end{bmatrix}  & \, \\ \, & 0 \end{bmatrix},
+    \]
+    where $d_{i}$ are positive and $d_{1} \mid \cdots \mid d_{k}$.
+  \end{theorem}
+  \newpage
+  \begin{proof}
+    We present a rather unusual proof: an algorithmic one. The strategy is to reduce $\mat{A}$ to a matrix of the form
+    \begin{equation}
+      \begin{bmatrix} d_{1} & \cdots & 0 \\ \vdots & \begin{bmatrix} \, & \, & \, \\ \, & \mat{M} & \, \\ \, \end{bmatrix} \\ 0 \end{bmatrix},
+    \end{equation}
+    where $\mat{M}$ extends down to the bottom of the matrix (hard to draw!).
+    \begin{enumerate}
+      \item \textbf{Step 1}: Permute the rows and columns such that the $a_{ij}$ with the smallest absolute value to the upper left corner. If necessary, multiply by $-1$ such that this element is positive.
+      \item \textbf{Step 2}: If the first column contains a nonzero element $a_{i1}$, divide it by $a_{11}$: we have
+      \[
+        a_{i1} \, = \, a_{11}q + r,
+      \]
+      where $a_{11} > r \ge 0$. If $r > 0$, perform the relevant row operation such that $a_{i1}$ becomes $r$ and go to Step 1. If $r = 0$, then repeat Step 2. If there are no nonzero elements, proceed to Step 3.
+      \item \textbf{Step 3}: If the first row contains a nonzero element $a_{1j}$, divide it by $a_{11}$: we have
+      \[
+        a_{1j} \, = \, a_{11}q + r,
+      \]
+      where $a_{11} > r \ge 0$. If $r > 0$, perform the relevant column operation such that $a_{i1}$ becomes $r$ and go to Step 1. If $r = 0$, then repeat Step 3. If there are no nonzero elements, proceed to Step 4.
+      \item \textbf{Step 4}: We attain a matrix of the form in Equation (1). Suppose that some element of $\mat{M}$ is not divisible by $d_{1}$. Add this column into the first column and return to Step 1; this will yield an $a_{11}$ of smaller absolute value. If no such elements exist, proceed to Step 5.
+      \item \textbf{Step 5}: An easy induction on argument on $\max \{ m, n \}$ now implies that $\mat{T}$ can be factored into the required form.
+    \end{enumerate}
+    Observe that we exclusively return to earlier steps when $\abs{a_{11}}$ decreases. This can happen only finitely many times, so no step will ever repeat infinitely often. Then this algorithm indeed yields us a matrix of the desired form.
+  \end{proof}
+\end{adjustwidth}
+
+This proof isn't exactly rigorous, but it's still quite cool. I think you could formalize this via the classification of finitely-generated modules over PIDs. In any case, it ensures the existence of invertible integer matrices $\mat{Q}$ and $\mat{P}$ such that for all $\mat{T} \in \mathcal{L}(\mathbb{Z}^{n}, \mathbb{Z}^{n})$, we have
+\[
+  \mat{T} \, ' \, = \, \mat{Q}^{-1}\mat{T}\mat{P},
+\]
+where $\mat{T} \, '$ has the form of Theorem 4.
+
+\newpage
+
+We are ready to solve the equation $\mat{T} \vec{A} \, = \, \vec{B}$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $\mat{T} \, ' \, = \, \mat{Q}^{-1}\mat{T}\mat{P}$ as before. Then the following hold:
+    \begin{enumerate}
+      \item The integer solutions to the equation $\mat{T} \, ' \vec{A}' \, = \, \vec{0}$ are the vectors $\mat{A}$ whose first $k$ components are $0$.
+      \item The integer solutions to the equation $\mat{T} \vec{A} = \vec{0}$ are those of the form $\mat{A} = \mat{P} \vec{A}'$, where $\mat{T} \, ' \vec{A}' = \vec{0}$.
+      \item The image $W'$ of multiplication by $\mat{A}'$ is the integer combinations of the vectors $d_{1} \vec{e}_{1}, \ldots, d_{k} \vec{e}_{k}$.
+      \item The image $W$ of multiplication by $\mat{A}$ is the integer combinations of the vectors $\mat{Q} (d_{1} \vec{e}_{1}), \ldots, \mat{Q} (d_{k} \vec{e}_{k})$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    (1) follows from the fact that $\mat{T}'$ is diagonal: the equation $\mat{T} \, ' \vec{A}'$ for $\vec{A} = (a_{1}, \ldots, a_{n})$ reads
+    \[
+      d_{1}a_{1} \, = \, 0, \quad d_{2}a_{2} \, = \, 0, \quad \ldots \quad d_{k}a_{k} \, = \, 0.
+    \]
+    Hence there exists a solution if and only if $a_{1} = \cdots = a_{k} = 0$. Both (2) and (4) can be viewed as change of bases --- in which case, the matrix $\mat{P}$ carries the kernel of $\mat{T}$ to the kernel of $\mat{T}'$.
+
+    As for (3), it is quite easy to deduce that $\mat{T} \, '$ maps all $\vec{A} = (a_{1}, \ldots, a_{n})$ to the vector $(d_{1}a_{1}, \ldots, d_{k}a_{k}, 0, \ldots, 0)$. The vectors $d_{1} \vec{e}_{1}, \ldots, d_{k} \vec{e}_{k}$ clearly span this space.
+  \end{proof}
+\end{adjustwidth}
+
+Isn't this solution so simple and elegant? This section discussed computation and theory together, like some cosmic marble cake. But I digress: the basis of vectors described in (4) is not unique, though. I'm not sure if the matrix $\mat{A}'$ is unique, but it seems like it should be?
+
+% --------------------------------------------- %
+
+\subsection{Subgroups of Free Abelian Groups}
+
+Theorem 4 on diagonalization of $\mathbb{Z}$-matrices describes homomorphisms of Abelian groups.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{corollary}
+    Let $\phi : G \to H$ be a homomorphism of free Abelian groups. Then there exist bases of $G$ and $H$ such that the matrix of $\phi$ is diagonal. \s
+  \end{corollary}
+\end{adjustwidth}
+
+This section would ideally discuss $R$-submodules of free $R$-modules, where $R$ is a principal ideal domain. Unfortunately, integer matrices are no help here; the proof of Theorem 4 relied upon the Euclidean algorithm. Thus we instead focus on $\mathbb{Z}$-modules.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $G$ be a free Abelian group of rank $n$ and let $H \subseteq G$ be a subgroup. Then $H$ is a free Abelian group of rank $n$ or smaller.
   \end{theorem}
   \begin{proof}
-    
+    By Theorem \textbf{INSERT NUMBER HERE!}, $H$ is finitely generated. Thus let $\vec{G} = (g_{1}, \ldots, g_{m})$ and $\vec{H} = (h_{1}, \ldots, h_{n})$ be bases of $G$ and $H$. Thus if we set $h_{j} = \sum_{i} g_{i} a_{ij}$, the elements $a_{ij}$ form the components of the $\mat{T}$ matrix associated with the inclusion mapping $i : G \to H$:
+    \[
+      \begin{tikzcd}
+        \mathbb{Z}^m \arrow[r, "\mat{T}"] \arrow[d, "\vec{H}"] & \mathbb{Z}^n \arrow[d, "\vec{G}"] \\
+           H \arrow[r, "i"]                                    & G                                
+      \end{tikzcd}
+    \]
+    Since $\vec{G}$ is a basis, the right-hand arrow is bijective; since $\vec{H}$ generates $H$, the left-hand arrow is surjective.
+
+    Diagonalize $\mat{T}$ to the form $\mat{T} \, ' \, = \, \mat{Q}^{-1} \mat{T} \mat{P}$ for invertible matrices $\mat{P}$ and $\mat{Q}$. Thus we can interpret $\mat{Q}$ as a change of basis in $\mathbb{Z}^{m}$; since our original choice of $\vec{G}$ and $\vec{H}$ were arbitrary, we can substitute them into our commutative diagram. We find an isomorphism $\mathbb{Z}^{m} \, \cong \, H$, so $H$ is free.
+  \end{proof}
+\end{adjustwidth}
+
+This proof actually misses a few edge cases --- but frankly I just don't give a shit right now. I'll return to this over the weekend.
+
+% --------------------------------------------- %
+
+\section{Presentation Matrices}
+
+Left multiplication by an $m$-by-$n$ $R$-matrix $\mat{T}$ induces an $R$-module homomorphism
+\[
+  R^{n} \stackrel{\mat{T}}{\longrightarrow} R^{m}. 
+\]
+The image of $\mat{T}$ consists of all linear combinations of the columns of $\mat{T}$ with coefficients in the ring; we may denote this ring by $\mat{T} R^{n}$. We say that the quotient module $M \, = \, R^{m} \, / \, \mat{T} R^{n}$ is \textbf{presented} by $\mat{T}$. 
+
+More generally, any isomorphism $\sigma : R^{m} \, / \, \mat{T} R^{n} \to M$ is a \textbf{presentation} of $M$, where the $R$-matrix $\mat{T}$ is a \textbf{presentation matrix} of $M$. For instance, $C_{5}$ is presented by the integer matrix $[5]$ since $C_{5} \, \cong \, \mathbb{Z} \, / \, 5 \mathbb{Z}$.
+
+We can utilize the canonical epimorphism $\pi : R^{m} \to R^{m} \, / \, \mat{T} R^{n}$ to interpret $M$ as follows:
+
+\newpage
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $\pi : R^{m} \to R^{m} \, / \, \mat{T} R_{n}$ be the canonical epimorphism. Then 
+    \begin{enumerate}
+      \item $M$ is generated by $\vec{B} = (\vec{e}_{1}, \ldots, \vec{e}_{m})$, the images of the standard basis of $R^{m}$.
+      \item If $\vec{Y} = (y_{1}, \ldots, y_{m}) \in R^{n}$, the element $\mat{B}\vec{Y} = y_{1} \vec{e}_{1} + \cdots y_{m} \vec{e}_{m}$ is zero if and only if $Y$ is a linear combination of the columns of $\vec{T}$ --- which is to say, if and only if $\vec{Y}$ lies in the image of $\mat{T}$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    (1) is a trivial consequence of the surjectivity of $\pi$. As per (2), we have that
+    \begin{align*}
+      \text{$\vec{BY} = \vec{0}$} & \iff \text{$\vec{BY} \in \mat{T} R^{n}$} \\ 
+                                  & \iff \text{$\vec{BY}$ lies in the image of $\mat{T}$} \\
+                                  & \iff \text{$\vec{Y}$ is a linear combination of the columns of $\mat{T}$}.
+    \end{align*}
+    This completes the proof.
   \end{proof}
 \end{adjustwidth}
 
 % --------------------------------------------- %
-
 
 \end{document}

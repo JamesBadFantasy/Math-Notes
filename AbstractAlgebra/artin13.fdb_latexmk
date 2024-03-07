@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1709690637 "artin13.tex" "artin13.pdf" "artin13" 1709690638 0
+["pdflatex"] 1709780557 "artin13.tex" "artin13.pdf" "artin13" 1709780558 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1704400182 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -207,10 +207,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "artin13.aux" 1709690638 1750 705d6aa9c2a8e55d3131d453c8dd3cb3 "pdflatex"
-  "artin13.out" 1709690638 1339 c652b856fa8d17f1187fe12d0dc27b92 "pdflatex"
-  "artin13.tex" 1709690636 18023 383e19678565713ae7c4d4ad87a61234 ""
-  "artin13.toc" 1709690638 786 4481540eab83ec31e300ee0fa39d91c1 "pdflatex"
+  "artin13.aux" 1709780558 2010 5368469269be839412bf5a3178a1facd "pdflatex"
+  "artin13.out" 1709780558 1721 0e37928d0511038f751f88e37735e73e "pdflatex"
+  "artin13.tex" 1709780557 27178 a8cf31920f157263c0311d1541993612 ""
+  "artin13.toc" 1709780558 963 74e682211df2a2f133b9156115ba4437 "pdflatex"
   (generated)
   "artin13.aux"
   "artin13.log"
