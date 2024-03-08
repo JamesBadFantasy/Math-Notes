@@ -269,11 +269,11 @@ An independent set of generators is called a \textbf{basis}. As with vector spac
 
 \newpage
 
-If $(x_{1}, \ldots, x_{n})$ is an ordered set of elements in $M$, we can define a homomorphism $R^{n} \to M$ defined by
+If $\vec{B} = (x_{1}, \ldots, x_{n})$ is an ordered set of elements in $M$, we can define a homomorphism $R^{n} \stackrel{\vec{B}}{\longrightarrow} M$ defined by
 \[
-  \phi(r_{1}, \ldots r_{n}) \, = \, \begin{bmatrix} x_{1} & \cdots & x_{n} \end{bmatrix} \begin{bmatrix} r_{1} \\ \vdots \\ r_{n} \end{bmatrix} \, = \, r_{1}x_{1} + \cdots + r_{n}x_{n}.
+  \vec{B}X \, = \, \begin{bmatrix} x_{1} & \cdots & x_{n} \end{bmatrix} \begin{bmatrix} a_{1} \\ \vdots \\ a_{n} \end{bmatrix} \, = \, a_{1}x_{1} + \cdots + a_{n}x_{n}.
 \]
-This homomorphism is injective if $x_{1}, \ldots, x_{n}$ generates $M$, surjective if $x_{1}, \ldots, x_{n}$ are independent, and bijective if $x_{1}, \ldots, x_{n}$ constitute a basis of $R^{n}$. Hence $M$ has a basis of length $n$ if and only if $M \, \cong \, R^{n}$. 
+This homomorphism is injective if elements of $\vec{B}$ is independent, surjective $\vec{B}$ generates $M$, and bijective if $\vec{B}$ constitute a basis of $R^{n}$. Hence $M$ has a basis of length $n$ if and only if $M \, \cong \, R^{n}$. 
 \[
   \text{\textit{Most modules have no basis.}}
 \]
@@ -331,11 +331,11 @@ Let the bases $\mat{B}$ and $\mat{C}$ change by invertible $R$-matrices $\mat{S}
 
 \section{Diagonalizing Integer Matrices}
 
-The critical question is as follows: given an $m$-by-$n$ $\mathbb{Z}$-matrix $\mat{T}$ and $\vec{B} \in \mathbb{Z}^{m}$, when does there exist $\vec{A} \in \mathbb{Z}^{n}$ such that
+The critical question is as follows: given an $m$-by-$n$ $\mathbb{Z}$-matrix $\mat{T}$ and a vector $\vec{B} \in \mathbb{Z}^{m}$, when does there exist $\vec{A} \in \mathbb{Z}^{n}$ such that
 \[
   \mat{T}\vec{A} \, = \, \vec{B}?
 \]
-The most important of these questions is when $\vec{A} \mat{T} = \vec{0}$. In a field, one often performs row reduction --- but deprived of multiplicative inverses, most row reductions are not allowed. Rather, we allow both row \textit{and} column reduction, that being any of the following:
+The most important of these questions is when $\mat{T} \vec{A} = \vec{0}$. In a field, one often performs row reduction --- but deprived of multiplicative inverses, most row reductions are not allowed. Rather, we allow both row \textit{and} column reduction, that being any of the following:
 \begin{enumerate}
   \item Add an integer multiple of a row to a row or a column to a column.
   \item Interchange two rows or two columns.
@@ -386,7 +386,7 @@ This proof isn't exactly rigorous, but it's still quite cool. I think you could 
 \[
   \mat{T} \, ' \, = \, \mat{Q}^{-1}\mat{T}\mat{P},
 \]
-where $\mat{T} \, '$ has the form of Theorem 4.
+where $\mat{T} \, '$ has the form of Theorem 3.
 
 \newpage
 
@@ -398,8 +398,8 @@ We are ready to solve the equation $\mat{T} \vec{A} \, = \, \vec{B}$.
     \begin{enumerate}
       \item The integer solutions to the equation $\mat{T} \, ' \vec{A}' \, = \, \vec{0}$ are the vectors $\mat{A}$ whose first $k$ components are $0$.
       \item The integer solutions to the equation $\mat{T} \vec{A} = \vec{0}$ are those of the form $\mat{A} = \mat{P} \vec{A}'$, where $\mat{T} \, ' \vec{A}' = \vec{0}$.
-      \item The image $W'$ of multiplication by $\mat{A}'$ is the integer combinations of the vectors $d_{1} \vec{e}_{1}, \ldots, d_{k} \vec{e}_{k}$.
-      \item The image $W$ of multiplication by $\mat{A}$ is the integer combinations of the vectors $\mat{Q} (d_{1} \vec{e}_{1}), \ldots, \mat{Q} (d_{k} \vec{e}_{k})$.
+      \item The image $W'$ of multiplication by $\mat{T} \,'$ is the integer combinations of the vectors $d_{1} \vec{e}_{1}, \ldots, d_{k} \vec{e}_{k}$.
+      \item The image $W$ of multiplication by $\mat{T}$ is the integer combinations of the vectors $\mat{Q} (d_{1} \vec{e}_{1}), \ldots, \mat{Q} (d_{k} \vec{e}_{k})$.
     \end{enumerate}
   \end{proposition}
   \begin{proof}
@@ -407,13 +407,13 @@ We are ready to solve the equation $\mat{T} \vec{A} \, = \, \vec{B}$.
     \[
       d_{1}a_{1} \, = \, 0, \quad d_{2}a_{2} \, = \, 0, \quad \ldots \quad d_{k}a_{k} \, = \, 0.
     \]
-    Hence there exists a solution if and only if $a_{1} = \cdots = a_{k} = 0$. Both (2) and (4) can be viewed as change of bases --- in which case, the matrix $\mat{P}$ carries the kernel of $\mat{T}$ to the kernel of $\mat{T}'$.
+    Hence there exists a solution if and only if $a_{1} = \cdots = a_{k} = 0$. Both (2) and (4) can be viewed as change of bases --- in which case, the matrix $\mat{P}$ carries the kernel of $\mat{T}$ to the kernel of $\mat{T}'$, while $\mat{Q}$ carries the image of $\mat{T} \, '$ to the image of $\mat{T}$.
 
     As for (3), it is quite easy to deduce that $\mat{T} \, '$ maps all $\vec{A} = (a_{1}, \ldots, a_{n})$ to the vector $(d_{1}a_{1}, \ldots, d_{k}a_{k}, 0, \ldots, 0)$. The vectors $d_{1} \vec{e}_{1}, \ldots, d_{k} \vec{e}_{k}$ clearly span this space.
   \end{proof}
 \end{adjustwidth}
 
-Isn't this solution so simple and elegant? This section discussed computation and theory together, like some cosmic marble cake. But I digress: the basis of vectors described in (4) is not unique, though. I'm not sure if the matrix $\mat{A}'$ is unique, but it seems like it should be?
+Isn't this solution so simple and elegant? This section discussed computation and theory together, like some cosmic marble cake. But I digress: the basis of vectors described in (4) is not unique. I'm not sure if the matrix $\mat{A}'$ is unique, but it seems like it should be?
 
 % --------------------------------------------- %
 
@@ -470,19 +470,87 @@ We can utilize the canonical epimorphism $\pi : R^{m} \to R^{m} \, / \, \mat{T} 
     Let $\pi : R^{m} \to R^{m} \, / \, \mat{T} R_{n}$ be the canonical epimorphism. Then 
     \begin{enumerate}
       \item $M$ is generated by $\vec{B} = (\vec{e}_{1}, \ldots, \vec{e}_{m})$, the images of the standard basis of $R^{m}$.
-      \item If $\vec{Y} = (y_{1}, \ldots, y_{m}) \in R^{n}$, the element $\mat{B}\vec{Y} = y_{1} \vec{e}_{1} + \cdots y_{m} \vec{e}_{m}$ is zero if and only if $Y$ is a linear combination of the columns of $\vec{T}$ --- which is to say, if and only if $\vec{Y}$ lies in the image of $\mat{T}$.
+      \item If $\vec{Y} = (y_{1}, \ldots, y_{m}) \in R^{m}$, the element $\mat{B}\vec{Y} = y_{1} \vec{e}_{1} + \cdots y_{m} \vec{e}_{m}$ is zero if and only if $Y$ is a linear combination of the columns of $\vec{T}$ --- which is to say, if and only if $\vec{Y}$ lies in the image of $\mat{T}$.
     \end{enumerate}
   \end{proposition}
   \begin{proof}
     (1) is a trivial consequence of the surjectivity of $\pi$. As per (2), we have that
     \begin{align*}
       \text{$\vec{BY} = \vec{0}$} & \iff \text{$\vec{BY} \in \mat{T} R^{n}$} \\ 
-                                  & \iff \text{$\vec{BY}$ lies in the image of $\mat{T}$} \\
+                                  & \iff \text{$\vec{Y}$ lies in the image of $\mat{T}$} \\
                                   & \iff \text{$\vec{Y}$ is a linear combination of the columns of $\mat{T}$}.
     \end{align*}
     This completes the proof.
   \end{proof}
 \end{adjustwidth}
+
+If a module $M$ is generated by a set $\vec{B} = (x_{1}, \ldots, x_{m})$, we call an element $\vec{Y} = (y_{1}, \ldots, y_{m}) \in R^{m}$ such that $\vec{BY} = y_{1}x_{1} + \cdots + y_{n}x_{n} = 0$ a \textbf{relation vector} of the generators. The equation $y_{1}x_{1} + \cdots + y_{m}x_{m} = 0$ is called a \textbf{relation}. A set $S$ of relations is \textbf{complete} if each relation is a linear combination of relations in $S$.
+
+\textbf{Example 1.} Consider an Abelian group $G$ generated by $a, b, c$ with the complete set of relations
+\begin{align*}
+  3a \, + \, 2b \, + \, c &= \, 0 \\
+  8a \, + \, 4b \, + \, 2c \, &= \, 0 \\
+  7a \, + \, 6b \, + \, 2c \, &= \, 0 \\
+  9a \, + \, 6b \, + \, c \, &= \, 0.
+\end{align*}
+This group is presented by the following matrix:
+\[
+  \mat{T} = \begin{bmatrix} 3 & 8 & 7 & 9 \\ 2 & 4 & 6 & 6 \\ 1 & 2 & 2 & 1 \end{bmatrix}
+\]
+Its columns are the coefficients of the relations described above: $(x_{1}, x_{2}, x_{3}) \mat{T} \, = \, (0, 0, 0)$.
+
+\subsection{Translating between Presentations and Modules}
+
+We now delineate a method to find a presentation for an $R$-module $M$. We make two assumptions, both of which are easily satisfied if $R$ is Noetherian:
+\begin{enumerate}
+  \item $M$ is finitely generated --- say, by $\vec{B} = (x_{1}, \ldots, x_{m})$.
+  \item The module $W$ of relations of $\vec{B}$ is finitely generated.
+\end{enumerate}
+\newpage
+
+The generators $\vec{B}$ entail an epimorphism $R^{m} \stackrel{\vec{B}}{\longrightarrow} M$ that maps a column vector $\vec{Y} = (y_{1}, \ldots, y_{m})$ to the element $y_{1}x_{1} + \cdots + y_{m}x_{m}$. The kernel of this homomorphism is $W$: the module of relations of $\vec{B}$. By the First Isomorphism Theorem, we have
+\[
+  M \, \cong \, R^{m} \, / \, W.
+\]
+We turn our attention to $W$. Since $W$ is finitely generated, there exists a set of generators $\vec{C} = (w_{1}, \ldots, w_{n})$ from which we obtain an epimorphism $R^{n} \stackrel{\vec{C}}{\longrightarrow} W$. The generators $\vec{w}_{i} \in R^{m}$ may be arranged into a matrix as follows:
+\[
+  \mat{T} \quad = \quad \begin{bmatrix} \vdots & \vdots & \, & \vdots \\ \vec{w}_{1} & \vec{w}_{2} & \cdots & \vec{w}_{n} \\ \vdots & \vdots & \, & \vdots \end{bmatrix}.
+\]
+This $n$-by-$m$ $R$-matrix $\mat{T}$ is a composition of $R^{n} \to W$ with the embedding $W \subset R^{m}$. By construction, its image is $W$ --- which we may denote as $\mat{T}R^{m}$. Thus we have
+\[
+  M \, \cong \, R^{m} \, / \, W \, = \, R^{m} \, / \, \mat{T}R^{n}.
+\]
+$\mat{T}$ is a presentation of $M$. Observe that since $\mat{T}$ depends on $\vec{B}$ and $\vec{C}$, there are many potential presentations of $M$. In fact:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $\mat{T}$ be an $m$-by-$n$ presentation matrix of an $R$-module $M$. Then the following matrices $\mat{T} \, '$ also present $M$:
+    \begin{enumerate}
+      \item $\mat{T}\,' \, = \, \mat{Q}^{-1}\mat{T}$, where $\mat{Q} \in GL_{m}(R)$.
+      \item $\mat{T}\,' \, = \, \mat{T} \mat{P}$, where $\mat{P} \in GL_{n}(R)$.
+      \item $\mat{T}\,'$ obtained by deleting a column of zeroes.
+      \item If the $j$-th column of $\mat{T}$ is $\vec{e}_{i}$, the matrix $\mat{T}\,'$ obtained by deleting row $i$ and column $j$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    The proofs originate from the following observations:
+    \begin{enumerate}
+      \item The change of $\mat{T}$ to $\mat{Q}^{-1}\mat{T}$ corresponds to a change of basis in $R^{m}$ --- in other words, an isomorphism.
+      \item The change of $\mat{T}$ to $\mat{T}\mat{P}$ corresponds to a change of basis in $R^{n}$ --- in other words, an isomorphism.
+      \newpage
+      \item A column of zeroes corresponds to the trivial relation, which can be omitted.
+      \item A column of $\mat{T}$ equal to $\vec{e}_{i}$ corresponds to the relation $\vec{B}(\vec{e}_{i}) = 0$. The zero element is useless as a generator --- so we can simply cleave it away from the generating set and the relations. Doing so changes $R^{n}$ and $R^{m}$ to $R^{n - 1}$ and $R^{m - 1}$, and changes the matrix $\mat{T}$ by deleting the $i$-th row and $j$-th column.
+    \end{enumerate}
+    This concludes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+This provides a clean method for determining an $R$-module from its presentation. For the Abelian group in our example, it reduces to
+\begin{align*}
+  \mat{T} \, & = \, \begin{bmatrix} 3 & 8 & 7 & 9 \\ 2 & 4 & 6 & 6 \\ 1 & 2 & 2 & 1 \end{bmatrix} \implies \begin{bmatrix} 1 & 2 & 2 & 1 \\ 0 & 0 & 2 & 4 \\ 0 & 2 & 1 & 6 \end{bmatrix} \implies \begin{bmatrix} 0 & 2 & 4 \\ 2 & 1 & 6 \end{bmatrix} \implies \begin{bmatrix} -4 & 0 & -8 \\ 2 & 1 & 6 \end{bmatrix} \\
+             & \implies \begin{bmatrix} -4 & -8 \end{bmatrix} \implies \begin{bmatrix} 4 & 0 \end{bmatrix} \implies \begin{bmatrix} 4 \end{bmatrix}.
+\end{align*}
+Thus $\mat{T}$ presents the Abelian group $\mathbb{Z}_{4}$.
 
 % --------------------------------------------- %
 

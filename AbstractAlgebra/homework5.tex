@@ -54,4 +54,107 @@ across all $z \in \mathbb{Z}$.
 
 % --------------------------------------------- %
 
+\subsection{Part (b)}
+
+Based on the above diagonalization, a basis of the image of $\mat{T}$ is $\mat{Q}(\vec{e}_{1})$ and $\mat{Q}(2 \vec{e}_{2})$, where
+\[
+  \mat{Q}^{-1} \, = \,  \begin{bmatrix} 1 & -2 \\ 0 & 1 \end{bmatrix} \quad \implies \quad \mat{Q} \, = \, \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}.
+\]
+Therefore, the two basis vectors we seek are
+\[
+  \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} \, = \, \boxed{ \begin{bmatrix} 1 \\ 0 \end{bmatrix}} \qquad \text{and} \qquad \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 0 \\ 2 \end{bmatrix} \, = \, \boxed{ \begin{bmatrix} 4 \\ 2 \end{bmatrix}}\,.
+\]
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+We perform a series of operations on the matrix, after all of which the underlying Abelian group is invariant:
+\begin{align*}
+  \begin{bmatrix} 3 & 1 & 2 \\ 1 & 1 & 1 \\ 2 & 3 & 6 \end{bmatrix} \implies \begin{bmatrix} 0 & -2 & -1 \\ 1 & 1 & 1 \\ 0 & 1 & 4 \end{bmatrix} \implies \begin{bmatrix} -2 & -1 \\ 1 & 4 \end{bmatrix} \implies \begin{bmatrix} 0 & 7 \\ 1 & 4 \end{bmatrix} \implies \begin{bmatrix} 7 \end{bmatrix}.
+\end{align*}
+Thus the matrix represents $\mathbb{Z} \, / \, 7 \mathbb{Z} \, = \, \boxed{\mathbb{Z}_{7}}\,$.
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+Assembling these relations into a matrix, we obtain a presentation of $V$:
+\[
+  \begin{bmatrix} 7 & 5 & 2 \\ 3 & 3 & 0 \\ 13 & 11 & 2 \end{bmatrix}.
+\]
+We now perform a similar series of operations that simplifies this presentation matrix:
+\begin{align*}
+  \begin{bmatrix} 7 & 5 & 2 \\ 3 & 3 & 0 \\ 13 & 11 & 2 \end{bmatrix} & \implies \begin{bmatrix} 1 & 1 & 2 \\ 3 & 3 & 0 \\ 7 & 7 & 2 \end{bmatrix} \implies \begin{bmatrix} 0 & 1 & 2 \\ 0 & 3 & 0 \\ 0 & 7 & 2 \end{bmatrix} \implies \begin{bmatrix} 1 & 2 \\ 3 & 0 \\ 7 & 2 \end{bmatrix} \implies \begin{bmatrix} 1 & 2 \\ 0 & -6 \\ 0 & -12 \end{bmatrix} \\
+                    & \implies \begin{bmatrix} -6 \\ -12 \end{bmatrix} \implies \begin{bmatrix} 6 \\ 0 \end{bmatrix} \implies \begin{bmatrix} 6 \end{bmatrix}.
+\end{align*}
+Hence $V \, \cong \, \mathbb{Z}_{6} \, \cong \, C_{6}$. We now utilize the following lemma:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}
+    Suppose that $m$ and $n$ are relatively prime, positive integers. Then $C_{mn} \, \cong \, C_{m} \times C_{n}$.
+  \end{lemma}
+  \begin{proof}
+    Let $a$ generate $C_{mn}$. It is clear that $a^{m}$ has order $n$ and $a^{n}$ has order $m$, so 
+    \[
+      (a^{m}) \, \cong \, C_{n} \qquad \text{and} \qquad (a^{n}) \, \cong \, C_{m}.
+    \]
+    We seek to use the Chinese Remainder Theorem for $\mathbb{Z}$-modules. We must verify two conditions:
+    \begin{enumerate}
+      \item For all $k \in \{ 1, \ldots, mn \}$, Bézout's Identity ensures the existence of $b, c \in \mathbb{Z}$ such that $k = bm + cn$. Hence $a^{k} = a^{am + bn} = (a^{m})^{b}(a^{n})^{c}$. Thus we have the subgroup product $(a^{n}) \times (a^{m}) = C_{mn}$.
+      \item It is trivial that since $n$ and $m$ are relatively prime, $(a^{n}) \cap (a^{m}) = \{ e \}$.
+    \end{enumerate}
+    Thus, we conclude by the Chinese Remainder Theorem that
+    \[
+      C_{mn} \quad \cong \quad C_{mn} \, / \, (a^{n}) \times C_{mn} \, / \, (a^{m}) \quad \cong \quad (a^{m}) \times (a^{n}) \quad \cong \quad C_{n} \times C_{m}.
+    \]
+    This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+We thus conclude that $\boxed{V \, \cong \, C_{2} \times C_{3}}$.
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 4}
+
+All Abelian groups of order $400$ are of the form
+\[
+  C_{n_{1}} \times \cdots \times C_{n_{i}},
+\]
+where $n_{1}, \ldots, n_{i} > 2$ are integers such that $n_{1} \cdots n_{i} = 400$. For our purposes, denote a cyclic group $C_{n}$ as \textbf{irreducible} if there do not exist integers $a, b > 2$ such that $C_{n} \, \cong \, C_{a} \times C_{b}$. Several observations are in order:
+\begin{enumerate}
+  \item \textbf{Order}: If $C_{n_{1}} \times \cdots \times C_{n_{i}}$ has order $400$, then $n_{1} \cdots n_{i} = 400$ implies that each $n_{1}, \ldots, n_{k}$ must divide $400$. In particular, the prime factorizations of $n_{i}$ must not contain primes other than $2$ and $5$.
+  \item \textbf{Irreducibility implies Prime Powers}: Suppose that $C_{n_{i}}$ is cyclic, where $n_{i}$ is not a prime power; then there exist relatively prime integers $a, b > 2$ such that $n_{i} = ab$. Hence by Lemma 1 (Problem 3), we have $C_{n_{i}} \, \cong \, C_{a} \times C_{b}$ --- so $C_{n_{i}}$ is not irreducible. Contraposition yields that all irreducible $C_{n_{i}}$ must be a prime power.
+
+  \item \textbf{Prime Power implies Irreducibility}: Suppose that $C_{p^{n}}$ is a cyclic group. Then $C_{p^{n}}$ contains an element of order $p^{n}$, but all direct products
+  \[
+    C_{p^{a}} \times C_{p^{b}}
+  \]
+  contain an element of greatest order $\max \{ a, b \}$. Thus $C_{p^{n}}$ is irreducible.
+\end{enumerate}
+We deduce that $G$ is an Abelian group of order $400$ if and only if
+\[
+  G \quad \cong \quad C_{2^{n_{1}}} \times \cdots \times  C_{2^{n_{i}}} \times C_{5^{m_{1}}} \times \cdots \times C_{5^{m_{j}}},
+\]
+where $n_{k}$ and $m_{k}$ are positive integers such that $n_{1} + \cdots + n_{i} = 4$ and $m_{1} + \cdots + m_{j} = 2$. The number of distinct Abelian groups $G$ is the number of distinct solutions to these equations --- which is the number of partitions of $4$ times the number of partitions of $2$. Since there are $5$ partitions of the former and $2$ partitions of latter, the answer is $5 \times 2 \, = \, \boxed{10}$.
+
+% --------------------------------------------- %
+
+\section{Problem 6}
+
+Let $R$ be the ring of polynomials with complex coefficients and $2^{\aleph_{0}}$ variables --- in particular, let $x_{a}$ be a unique variable for all $a \in \mathbb{R}$. An example of an element of $R$ is as follows:
+\[
+  i (x_{\pi})^{100} \, + \, (2 - i) (x_{\sqrt{2}})^{9} (x_{0}) \, + \, (x_{-1}) \, + \, i\sqrt{4}.
+\]
+It is easy to verify that $R$ is a ring. The principal ideal
+\[
+  \mathfrak{a} \, = \, (x_{1}, x_{2}, x_{3}, x_{4}, \ldots) \, \subseteq \, R
+\]
+is clearly not finitely generated. For any finite set of elements $a_{1}, \ldots, a_{k} \in \mathfrak{a}$, let $i$ be the maximum integer such that $x_{i}$ appears in one of $a_{1}, \ldots, a_{k}$. Then $x_{i + 1} \notin (a_{1}, \ldots, a_{k})$, so this set of elements fails to generate $\mathfrak{a}$.
+
+% --------------------------------------------- %
+
 \end{document}

@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\title{Fuck}
+\author{Fuck}
+\date{Fuck}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Day 1}
+
+An \textbf{operation} $&$ on a set takes two values of $S$ and outputs one value of $S$. For instance,
+\begin{enumerate}
+  \item Addition, subtraction, multiplication, and division are operations on $\mathbb{Q}$. 
+  \item Exponentiation is an operation on $\mathbb{Z}$: let $a & b \, = \, a^{b}$.
+  \item We can define an operation $&$ for nonzero real numbers $a, b \in \mathbb{R}$ as $a & b \, = \, 1/(1/a + 1/b)$.
+\end{enumerate}
+An operation $&$ on a set $S$ is called \textbf{closed} if for all $a, b \in S$, the value $a & b$ exists and lies in $S$. In other words, $&$ never ``leaves'' $S$. 
+
+The operation & is \textbf{associative} if for all $a, b, c \in S$, we have $a & (b & c) \, = \, (a & b & c)$. Furthermore, $&$ is \textbf{commutative} if $a & b = b & a$. It is possible to have commutativity without associativity and vice versa!
+
+THE PROBLEMS:
+1. Is division of complex numbers $\mathbb{C}$ closed?
+2. Is addition of integers $\mathbb{Z}$ associative?
+3. Is subtraction of real numbers $\mathbb{R}$ commutative?
+
+% --------------------------------------------- %
+
+\section{Day 2}
+
+We often denote $S$ with the operation $&$ by the pair $(S, &)$. There are two other properties of operations we care about:
+\begin{enumerate}
+  \item $(S, &)$ has an \textbf{identity element} if there exists $e$ in $S$ such that $&$ ``does nothing'' with $e$ --- for all $a$ in $S$, we have $a & e \, = \, e & a \, = \, a$.
+  \item $(S, &)$ has \textbf{inverses} if for \textit{all} $a$ in $S$, there exists some $b$ in $S$ that ``cancels'' $a$ --- namely $a & b \, = \, b & a \, = \, e$, where $e$ is the identity. 
+\end{enumerate}
+We often write the inverse of $a$ as $a^{-1}$, where this is \textit{not necessarily $1$ divided by $a$}. It's like how the inverse of a matrix $\mat{T}$ is written $\mat{T}^{-1}$.
+
+Notice that to have inverses, there must be an identity. These five properties --- closure, associativity, identity, inverses, commutativity --- are the five critical properties an operator can have. Don't forget them!
+1. Do the positive integers $\mathbb{Z}_{> 0}$ under + have an identity element?
+2. Do the \textit{nonzero} complex numbers $\mathbb{C}$ under $\times$ have an identity element?
+3. $\mathbb{Q}$ has an additive identity. Does each rational number $\mathbb{Q}$ under $+$ have an inverse?
+
+% --------------------------------------------- %
+
+\section{Day 3}
+
+Listing out the properties of $(S, &)$ can get tiring --- so mathematicians gave bundles of these properties special names. $(S, &)$ has \textbf{group structure} if $&$ satisfies four properties: closure, associativity, identity, and inverses. If $(S, &)$ is also commutative (thus has all five), it has \textbf{Abelian group structure}.
+
+The set of polynomials with rational coefficients is denoted $\mathbb{Q}[x]$. Similarly, polynomials with integer, real, or complex coefficients are denoted $\mathbb{Z}[x]$, $\mathbb{R}[x]$, and $\mathbb{C}[x]$ respectively.
+\begin{enumerate}
+  \item The set of polynomials with rational coefficients is denoted $\mathbb{Q}[x]$. Does $\mathbb{Q}[x]$ with $+$ have group structure? Is it Abelian?
+  \item Does $\mathbb{Q}[x]$ under $\times$ have group structure? Is it Abelian?
+\end{enumerate}
+
+% --------------------------------------------- %
+
+\section{Day 4}
+
+Instead of saying $(S, +)$ ``has group structure'', we often simply call $S$ a \textbf{group} under $+$. In this sense, a group isn't really a ``thing'' --- it's just a list of properties something can have. We similarly refer to $(S, +)$ with Abelian group structure as an \textbf{Abelian group}. Over the following days, we will build examples of groups from diverse fields. 
+
+# Geometry and Symmetry
+
+SYMMETRIC GROUP PDF
+
+1. Is $S_{n}$ a group? If so, is it an Abelian group?
+2. How many elements are in $S_{n}$ for each positive integer $n$?
+
+% --------------------------------------------- %
+
+\section{Day 5}
+
+A group $(S, &)$ is called \textbf{finite} if $S$ is a finite set, and \textbf{infinite} otherwise. For instance, $(\mathbb{Z}, +)$ is an infinite group, while the set of permutations $S_{n}$ is a finite group. It's called the \textbf{symmetric group}, and is possibly the most important (and complicated) finite group.
+
+% --------------------------------------------- %
+
+\section{Day 6}
+
+The \textbf{dihedral group}
+
+% --------------------------------------------- %
+
+\section{Day 7}
+
+We now take a minute to examine groups from number theory: in particular, the integers $0, 1, \ldots, n - 1 \pmod{n}$.
+
+% --------------------------------------------- %
+
+\section{Day 8}
+
+The \textbf{cyclic group of order n} is the set $\{ e, a, \ldots, a^{n - 1} \}$ with multiplication, where $e$ is the identity and $a^{n} = e$. Here's an example of arithmetic in the cyclic group of order $4$:
+\[
+  a^{9} = (a^{4})(a^{4})(a) = (e)(e)(a) = a.
+\]
+The cyclic group is among the simplest examples of a finite group. It should be easy to see that cyclic groups are Abelian, since $(a^{n})(a^{m}) = (a^{m})(a^{n})$.
+1. Explain why $\{ 1, i, -1, -i \}$ with multiplication is a cyclic group of order $4$.
+2. Explain why $0, 1, \ldots, 5 \pmod{6}$ with addition is a cyclic group of order $6$.
+
+% --------------------------------------------- %
+
+\section{Day 9}
+
+There is one last example of a group I'd like to foster: matrix multiplication.
+\begin{enumerate}
+  \item Let $B$ be the set of $2$-by-$2$ matrices (with rational entries) under multiplication. Explain why $B$ is not a group.
+  \item The set of all $n$-by-$n$ \textit{invertible} matrices under multiplication is a group --- it's called the \textbf{general linear group}, and denoted $GL_{n}(\mathbb{R})$. Is the general linear group Abelian?
+\end{enumerate}
+
+% --------------------------------------------- %
+
+% SEND IN THE DISCORD:
+I am considering bringing back daily problems.
+- For several months, they'll discuss one single topic: group theory. Each problem would be bite-sized and digestible.
+- They will introduce new topics I didn't cover in lectures. I would attach a PDF to these questions that explains these concepts.
+
+% --------------------------------------------- %
+
+I want to first get a wide repository of groups under their belts.
+
+FIRST: Examples of groups.
+- Number systems. % Arithmetic operations on number systems. The 4th roots of unity.
+- Symmetry. % Symmetric group, dihedral groups.
+- Number Theory. % Modular arithmetic under addition or multiplication. Introduce the cyclic group.
+- Matrices. % The group of invertible matrices.
+
+NEXT: General properties. 
+% These problems will now take a radical turn. Instead of analyzing examples, we will prove properties about all groups.
+
+% Over the last week, we developed examples of groups from diverse mathematical fields: from arithmetic, symmetry and geometry, number theory, and linear algebra. Group Theory itself doesn't analyze these examples individually --- it examines all of them at once. It asks: what properties are derived from the group axioms alone? These properties automatically apply to ALL groups.
+- 1. \textbf{Uniqueness}: Prove that in any group, the identity is unique. Prove that the inverse is unique.
+- 2. \textbf{Properties about Inverses}: Remember that the inverse is unique. Prove that $(a^{-1})^{-1} = 1$. Prove that in any group, $()b)^{-1} b b^{-a}a^{-1}$.
+- 3. \textbf{Sanity Check}: We proved the four results above for any group. This means they apply to all our previous examples. State the four above results for invertible matrices in $GL_{n}(\mathbb{R})$ and for $\mathbb{Z}_{p}^{\times }$.
+
+NEXT: Homomorphisms and Isomorphisms
+- 4. \textbf{Homomorphisms}: Define a function from $\mathbb{Z}_{4}^{\times}$ to $\{ 1, i, -1, -i \}$ that is an isomorphism.
+- 6. \textbf{Isomorphisms}: 
+
+% --------------------------------------------- %
+
+\end{document}
