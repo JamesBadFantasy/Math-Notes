@@ -42,7 +42,7 @@
 
 \section{Problem 1}
  
-Let $\vec{x}$ be the vector in $X$ such that $\norm{\vec{x}}_{X} = 1$ and and $\norm{\mat{ST} \vec{x}}_{Z} = \norm{\mat{ST}}_{X \to Z}$. The existence of this vector is ensured by Extreme Value Theorem, since $\norm{\mat{ST}}_{X \to Z}$ is a supremum of the image of a compact set. Observing that $\norm{\vec{x}}_{X} = 1$, we have that
+Let $\vec{x}$ be the vector in $X$ such that $\norm{\vec{x}}_{X} = 1$ and $\norm{\mat{ST} \vec{x}}_{Z} = \norm{\mat{ST}}_{X \to Z}$. The existence of this vector is ensured by Extreme Value Theorem, since $\norm{\mat{ST}}_{X \to Z}$ is a supremum of the image of a compact set. Thus we have
 \begin{align*}
   \norm{\mat{ST}}_{X \to Z} \, & = \, \norm{\mat{ST} \vec{x}}_{Z} \\
                                & \le \, \norm{\mat{S}}_{Y \to Z} \norm{\mat{Tx}}_{Y} \\
@@ -50,6 +50,99 @@ Let $\vec{x}$ be the vector in $X$ such that $\norm{\vec{x}}_{X} = 1$ and and $\
                                & = \, \norm{\mat{S}}_{Y \to Z} \norm{\mat{T}}_{X \to Y}.
 \end{align*}
 This completes the proof.
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+% --------------------------------------------- %
+
+\subsection{Part (a)}
+
+Let the matrix $\mat{M}$ have the form
+\[
+  \mat{M} \quad \stackrel{\text{def}}{=} \quad \begin{bmatrix} M_{11} & \cdots & M_{1n} \\ \vdots & \ddots & \vdots \\ M_{m1} & \cdots & M_{mn} \end{bmatrix}
+\]
+For each $i \in \{ 1, \ldots, m \}$, define the constants $s_{i1}, \ldots, s_{in} \in \{ 1, -1 \}$ such that $s_{ij} M_{ij} = \abs{M_{ij}}$. Let 
+\begin{equation}
+  L \, \stackrel{\text{def}}{=} \, \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \, = \, \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n} M_{ij}s_{ij}.
+\end{equation}
+We will show that for all $\vec{x} \in \mathbb{R}^{n}$ such that $\norm{\vec{x}}_{\infty} = 1$, we have $\norm{\mat{M}\vec{x}} \le L$ and equality is attained. So, suppose that $\vec{x} = (x_{1}, \ldots, x_{n}) \in \mathbb{R}^{n}$ has supremum norm $1$. Hence $\abs{x_{i}} \le 1$ for all $i$; this yields
+\[
+  \mat{M} \vec{x} \, = \, \begin{bmatrix} M_{11} & \cdots & M_{1n} \\ \vdots & \ddots & \vdots \\ M_{m1} & \cdots & M_{mn} \end{bmatrix} \begin{bmatrix} x_{1} \\ \vdots \\ x_{n} \end{bmatrix} = \begin{bmatrix} \sum\limits_{j = 1}^{n} M_{1j}x_{j} \\ \vdots \\ \sum\limits_{j = 1}^{n} M_{mj}x_{j} \end{bmatrix}.
+\]
+We deduce that
+\begin{align*}
+  \norm{\mat{M}\vec{x}}_{\infty} \, = \, \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n}  M_{ij} x_{j} \, \le \, \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \abs{x_{j}} \, \le \, \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \, = \, L.
+\end{align*}
+We conclude that $L$ is an upper bound of $\norm{\mat{M}\vec{x}}$ across all $\vec{x} \in \mathbb{R}^{n}$ with supremum norm $1$. To demonstrate that $L$ is achieved, let $k$ be an integer in $\{ 1, \ldots, m \}$ such that the maximum in Equation (1) is achieved. Consider the vector $\vec{s} = (s_{k1}, \ldots, s_{kn})$:
+\[
+  \mat{M} \vec{s} \, = \, \begin{bmatrix} M_{11} & \cdots & M_{1n} \\ \vdots & \ddots & \vdots \\ M_{m1} & \cdots & M_{mn} \end{bmatrix} \begin{bmatrix} s_{k1} \\ \vdots \\ s_{kn} \end{bmatrix} = \begin{bmatrix} \sum\limits_{j = 1}^{n} M_{1j}s_{kj} \\ \vdots \\ \sum\limits_{j = 1}^{n} M_{mj}s_{kj} \end{bmatrix}.
+\]
+Observe that one of the entries of $\mat{M} \vec{s}$ is
+\[
+  \sum\limits_{j = 1}^{n} M_{kj}s_{kj} \, = \, \sum\limits_{j = 1}^{n} \abs{M_{kj}} \, = \, L.
+\]
+Thus the supremum norm of $\mat{M} \vec{s}$ is $\abs{L} = L$ or greater; since $\vec{s}$ clearly has supremum norm $1$, we proved it must be precisely $L$. We conclude that
+\[
+  \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \, = \, L \, = \, \sup\limits_{\norm{\vec{x}}_{\infty} = 1} \norm{\mat{M} \vec{x}}_{\infty} \, = \, \norm{\mat{M}}_{\infty, \infty}.
+\]
+We now describe all $\vec{x} \in \mathbb{R}^{n}$ such that $\norm{\vec{x}}_{\infty} = 1$ and $\norm{\mat{M}\vec{x}}_{\infty} = \norm{\mat{M}}_{\infty, \infty}$. It is quite simple: they are all vectors with components satisfying the following properties. For each $j \in \{ 1, \ldots, n \}$, select a $k$ such that the maximum of Equation 2 is satisfied.
+\begin{enumerate} 
+  \item If $M_{kj} = 0$, then the $j$-th coordinate of $\vec{x}$ can be any number from $-1$ to $1$. We impose these bounds on the coordinate so that $\vec{x}$ has $\infty$-norm $1$.
+  \item If $M_{kj} \ne 0$, then the $j$-th coordinate of $\vec{x}$ must be $s_{kj}$ --- namely, the element of $\{ 1, -1 \}$ such that $M_{kj}s_{kj} = \abs{M_{kj}}$.
+\end{enumerate}
+This completes the proof.
+
+% --------------------------------------------- %
+
+\subsection{Part (b)}
+
+Let $\mat{M}$ have the same form as above. Again, define the constant
+\begin{equation}
+  L \quad \stackrel{\text{def}}{=} \quad \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}}.
+\end{equation}
+Define $\vec{x} = (x_{1}, \ldots, x_{n}) \in \mathbb{R}^{n}$ such that $1 = \norm{\vec{x}}_{1} = \abs{x_{1}} + \cdots + \abs{x_{n}}$. This yields
+\[
+  \mat{M} \vec{x} \, = \, \begin{bmatrix} M_{11} & \cdots & M_{1n} \\ \vdots & \ddots & \vdots \\ M_{m1} & \cdots & M_{mn} \end{bmatrix} \begin{bmatrix} x_{1} \\ \vdots \\ x_{n} \end{bmatrix} = \begin{bmatrix} \sum\limits_{j = 1}^{n} M_{1j}x_{j} \\ \vdots \\ \sum\limits_{j = 1}^{n} M_{mj}x_{j} \end{bmatrix}.
+\]
+We deduce through computation that
+\begin{align*}
+  \norm{\mat{M}\vec{x}}_{1} \, &= \, \sum\limits_{i = 1}^{m} \sum\limits_{j = 1}^{n} \abs{M_{ij} x_{j}} \\ 
+                               &= \, \sum\limits_{j = 1}^{n} \left( \abs{x_{j}} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \right) \\ 
+                               &\le \, \sum\limits_{j = 1}^{n} \left( \abs{x_{j}} \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \right) \\
+                               &\le \, \left( \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \right) \left( \sum\limits_{j = 1}^{n} \abs{x_{j}} \right) \\
+                               &= \, \left( \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \right) \\
+                               &= \, L.
+\end{align*}
+Showing that $L$ is achieved is again quite easy. If $k$ is an integer in the set $\{ 1, \ldots, n \}$ such that the maximum in Equation (2) is achieved, the vector $\vec{e}_{k}$ does the job: since $\mat{M} \vec{e_{k}}$ is the vector $(M_{1k}, \ldots, M_{mk})$, we have
+\[
+  \norm{\mat{M}\vec{e}_{k}}_{1} \, = \, \sum\limits_{i = 1}^{m} \abs{M_{mk}} \, = \, \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \, = \, L.
+\]
+We conclude our identification of the supremum:
+\[
+  \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \, = \, L \, = \,  \sup\limits_{\norm{\vec{x}}_{1} = 1} \norm{\mat{M} \vec{x}}_{1} \, = \, \norm{\mat{M}}_{1, 1}.
+\]
+As per the vectors $\vec{x} \in \mathbb{R}^{n}$ such that $\norm{\vec{x}}_{1} = 1$ and $\norm{\mat{M} \vec{x}}_{1} = \norm{\mat{M}}_{1, 1}$: if there are distinct values $k_{1}, \ldots, k_{\ell}$ such that the maximum in Equation (2) is satisfied, we can construct all such vectors $\vec{x}$ as follows: The entries in $k_{1}, \ldots, k_{\ell}$ may be any positive real numbers that sum to $1$. All other entries must be zero.
+
+The verification of this fact is relatively easy to deduce from the above equations.
+
+% --------------------------------------------- %
+
+\subsection{Part (c)}
+
+The key is to examine the sums of the absolute values of all entries in $\mat{M}$:
+\begin{align*}
+  m \norm{\mat{M}}_{\infty, \infty} \, = \, m \left( \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \right) \, \ge \, \sum\limits_{i = 1}^{m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \, \ge \, \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \, = \, \norm{\mat{M}}_{1, 1}.
+\end{align*}
+Equality is achieved here if $\mat{M}$ contains one nonzero column in which all entries are equal. Similarly,
+\begin{align*}
+  n \norm{\mat{M}}_{1, 1} \, = \, n \left( \max\limits_{1 \le j \le n} \sum\limits_{i = 1}^{m} \abs{M_{ij}} \right) \, \ge \, \sum\limits_{i = 1}^{m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \, \ge \, \max\limits_{1 \le i \le m} \sum\limits_{j = 1}^{n} \abs{M_{ij}} \, = \, \norm{\mat{M}}_{\infty, \infty}.
+\end{align*}
+Equality here is similarly achieved if $\mat{M}$ contains one nonzero row in which all entries are equal. We conclude the existence of the desired constants:
+\[
+  \boxed{\tfrac{1}{m} \norm{\mat{M}}_{1, 1} \, \le \, \norm{\mat{M}}_{\infty, \infty} \, \le \, n\norm{\mat{M}}_{1, 1}}.
+\]
 
 % --------------------------------------------- %
 

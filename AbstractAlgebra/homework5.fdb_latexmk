@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1709862764 "homework5.tex" "homework5.pdf" "homework5" 1709862764 0
+["pdflatex"] 1709935285 "homework5.tex" "homework5.pdf" "homework5" 1709935286 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1704400182 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
@@ -124,10 +124,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "homework5.aux" 1709862764 1314 4ff07b399cf5658a62987ae199f8d06d "pdflatex"
-  "homework5.out" 1709862764 667 13e1ce702495a223a13315c1ea74f1b2 "pdflatex"
-  "homework5.tex" 1709862762 8260 67149a9322693485e36f223dc4a1c283 ""
-  "homework5.toc" 1709862764 473 265d97cb869447ff7b2f3a070fcf5062 "pdflatex"
+  "homework5.aux" 1709935286 1632 1c0a09107feb35a79f0370bf34a2aba9 "pdflatex"
+  "homework5.out" 1709935286 941 95a933899db50cdb4ec2e3c5711e90d5 "pdflatex"
+  "homework5.tex" 1709935285 10420 912cf1e70d25e8d87fff640399aba464 ""
+  "homework5.toc" 1709935286 668 f2baa9e208917fa4fb8fe154dbb340a8 "pdflatex"
   (generated)
   "homework5.aux"
   "homework5.log"
