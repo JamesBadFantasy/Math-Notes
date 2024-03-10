@@ -383,6 +383,12 @@ We will enumerate the topological properties of the following sets. If a propert
 	$F$ is a closed set if and only if $F^{\complement}$ is open.
 \end{corollary}
 
+The \textbf{natural topology} of metric spaces is defined as follows: A set $U \subseteq X$ is \textbf{open} if for all $x \in U$, there exists $\epsilon > 0$ such that $B_{e}(x)$ lies within $U$.
+\[
+  x \, \in \,  B_{\epsilon}(x) \, \stackrel{\text{def}}{=} \, \{ y \in X \, \mid \, d(x, y) < \epsilon \} \, \subseteq \, U.
+\]
+ Here, again, the novice has the opportunity to practice:
+
 \newpage
 
 \begin{theorem}
@@ -491,10 +497,12 @@ An \textbf{open cover} of a set $E$ in a metric space $X$ is a collection $\{ G_
 
 \subsection{Definition}
 
-A subset $K$ of a metric space $X$ is \textbf{compact} if every open cover of $K$ contains a \textit{finite} subcover --- if for all open covers $\{ G_{\alpha} \}$ of $K$, there exist finitely many indicies $\alpha_{1}, \ldots, \alpha_{n}$ such that
+A subset $K$ of a metric space $X$ is \textbf{compact} if every open cover of $K$ contains a \textit{finite} subcover --- if for all open covers $\{ G_{\alpha} \}$ of $K$, there exist finitely many indices $\alpha_{1}, \ldots, \alpha_{n}$ such that
 \[
 	K \subseteq G_{\alpha_{1}} \cup \cdots \cup G_{\alpha_{n}}.
 \]
+The history of these sets was discovered backwards --- in $\mathbb{C}^{n}$, the set $K$ is compact if and only if $K$ is closed and bounded. Thus beautiful properties of compactness were initially attributed to closure and boundedness --- only later did mathematicians realize compactness is the proper formulation to generalize these properties to arbitrary metric (and topological) spaces.
+
 All finite sets are clearly compact --- we may simply select one open set that contains each element to attain a finite subcovering. Temporarily, let $K$ be compact relative to $X$ if the definition above is satisfied.
 
 \newpage

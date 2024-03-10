@@ -31,7 +31,7 @@
 
 \section{The Concept of a Topological Space}
 
-We proceed assuming baisc familiarity with sets, as seen in RealAnalysis/babyrudin2.tex.
+We proceed assuming basic familiarity with sets, as seen in RealAnalysis/babyrudin2.tex.
 
 % --------------------------------------------- %
 
@@ -60,15 +60,15 @@ Naturally, exterior points of $S$ are interior points of $\overline{S}$ and the 
 
 The following theorem allows for an alternative definition of topological spaces $(X, \O)$ by \textit{closed sets}:
 
-\begin{theorem}
-  Let $X$ be a topological space. Then
-  \begin{enumerate}
-    \item Any arbitrary intersection of closed sets is closed.
-    \item Any finite union of closed sets is closed.
-    \item $X$ itself and $\varnothing$ are closed.
-  \end{enumerate}
-\end{theorem}
 \begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $X$ be a topological space. Then
+    \begin{enumerate}
+      \item Any arbitrary intersection of closed sets is closed.
+      \item Any finite union of closed sets is closed.
+      \item $X$ itself and $\varnothing$ are closed.
+    \end{enumerate}
+\end{theorem}
   \begin{proof}
     Let $F_{\alpha}$ be a collection of closed sets. Since their compliments are open, we have
     \[
@@ -82,10 +82,12 @@ The following theorem allows for an alternative definition of topological spaces
   \end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-  A set is open if and only if all of its points are interior.
-\end{theorem}
+Elementary point-set topology is characterized by widespread equivalency of definition.
+
 \begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    A set is open if and only if all of its points are interior.
+  \end{theorem}
   \begin{proof}
     If each point of $S$ is interior, then $x \in S$ implies the existence of an open set $U_{x}$ such that $x \in U_{x} \subseteq S$. Thus we define:
     \[
@@ -100,10 +102,12 @@ The following theorem allows for an alternative definition of topological spaces
   \end{proof}
 \end{adjustwidth}
 
-\begin{theorem}
-  The interior of $S$ is the union of all open sets contained in $S$.
-\end{theorem}
+We now witness an alternative definition of the interior of a set:
+
 \begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    The interior of $S$ is the union of all open sets contained in $S$.
+  \end{theorem}
   \begin{proof}
     Let $U$ be the union of all open sets contained in $S$. We claim that $\mathring{S} = U$ by a two-part argument:
     \begin{enumerate}
@@ -114,13 +118,7 @@ The following theorem allows for an alternative definition of topological spaces
   \end{proof}
 \end{adjustwidth}
 
-\begin{corollary}
-  The interior of a set is open.
-\end{corollary}
-
-\newpage
-
-By taking complements of these results about open sets and interiors, we find:
+A corollary of the above is that the interior of an open set is open. By taking complements of these results about open sets and interiors, we find:
 \begin{enumerate}
   \item A set is closed if and only if all of its points are interior or boundary points.
   \item The closure of $S$ is the intersection of all closed sets containing $S$.
@@ -131,6 +129,89 @@ By taking complements of these results about open sets and interiors, we find:
 
 \section{Metric Spaces}
 
+A \textbf{metric space} is a pair $(X, d)$ consisting of a set $X$ and a map $d : X \times X \to \mathbb{R}$ that satisfies the following properties: for all $x, y, z \in X$,
+\begin{enumerate}
+  \item \textbf{Positivity}: $d(x, y) \ge 0$, with equality if and only if $x = y$.
+  \item \textbf{Symmetry}: $d(x, y) = d(y, x)$.
+  \item \textbf{Triangle Inequality} $d(x, y) \le d(x, z) + d(z, y)$.
+\end{enumerate}
+The \textbf{natural topology} of metric spaces is defined as follows: A set $U \subseteq X$ is \textbf{open} if for all $x \in U$, there exists $\epsilon > 0$ such that $B_{e}(x)$ lies within $U$.
+\[
+  x \, \in \,  B_{\epsilon}(x) \, \stackrel{\text{def}}{=} \, \{ y \in X \, \mid \, d(x, y) < \epsilon \} \, \subseteq \, U.
+\]
+The set $\O(d)$ denotes all open sets in $X$. Here, again, the novice has the opportunity to practice that the natural topology of a metric space is indeed a topology:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    $(X, \O(d))$ is a topological space under the natural topology.
+  \end{theorem}
+  \begin{proof}
+    We must verify four conditions:
+    \begin{enumerate}
+      \item Let $(U_{\alpha})$ be a collection of open sets in $\O(d)$. Then
+      \begin{align*}
+        x \in \bigcup\limits_{\alpha} U_{\alpha} & \implies x \in U_{\beta} \text{ for some } \beta \\
+                                                 & \implies \text{ there exists } \epsilon > 0 \text{ such that } B_{e}(x) \, \subseteq \, U_{b} \, \subseteq \, \bigcup\limits_{\alpha} U_{\alpha}.
+      \end{align*}
+      Thus $\bigcup_{\alpha} U_{\alpha}$ is open.
+      \item Let $(U_{i})_{1}^{n}$ be a collection of open sets in $\O(d)$. Then
+      \begin{align*}
+        x \in \bigcap\limits_{i = 1}^{n} U_{i} & \implies \text{ there exist $\epsilon_{i}$ such that $B_{\epsilon_{i}}(x) \, \subseteq \, U_{i}$ for each $i$}.
+      \end{align*}
+      Set $\epsilon = \min\{\epsilon_{1}, \ldots, \epsilon_{n}\}$. Then $x \in B_{\epsilon}(x) \, \subseteq \, B_{\epsilon_{i}}(x)$ for each $i$, thus $x \in U_{i}$ for each $i$ and $x \in \bigcap_{i = 1}^{n} U_{i}$. Hence $\bigcap_{i = 1}^{n} U_{i}$ is open.
+      \item Clearly $X$ itself is open. In $\varnothing$, the open-ball-at-all-$x$ condition is automatically satisfied, since there are no $x \in \varnothing$.
+    \end{enumerate}
+    We conclude that $(X, \O(d))$ is a topological space.
+  \end{proof}
+\end{adjustwidth}
+
+At this point, even the experienced reader could well lean back on their chair, stare at the void and think for a few seconds about what role is played here by the Triangle Inequality. So? Well, absolutely none. But as soon as we want to start doing something with these topological spaces, the inequality will become very useful:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $(X, \O(d))$ be a metric space. Then open balls are open sets.
+  \end{theorem}
+  \begin{proof}
+    Suppose that $B_{\epsilon}(x)$ is an open ball for $\epsilon > 0$; select $y \in B_{\epsilon}(x)$ arbitrarily. We claim the open ball of radius $\epsilon - d(x, y)$ centered at $y$ lies in $B_{\epsilon}(x)$. So, consider all $z \in X$ such that $d(y, z) < \epsilon - d(x, y)$. Then
+    \[
+      d(x, z) \, \le \, d(x, y) + d(y, z) \, < \, d(x, y) + \epsilon - d(x, y) \, = \, \epsilon,
+    \]
+    so $z \in B_{\epsilon}(x)$. We conclude such an open ball at $y$ is a subset of $B_{\epsilon}(x)$, so $B_{\epsilon}(x)$ is an open set.
+  \end{proof}
+\end{adjustwidth}
+
+Metrics which are very different can occasionally induce the same topology. Two metrics $d_{1}$ and $d_{2}$ on $X$ are \textbf{equivalent} if $\O(d_{1}) = \O(d_{2})$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $d_{1}$ and $d_{2}$ be two metrics on $X$. The following conditions are equivalent:
+    \begin{enumerate}
+      \item $\O(d_{1}) \, = \, \O(d_{2})$.
+      \item Open balls in $d_{1}$ and $d_{2}$ can ``nest'': for all $x \in X$ and $r > 0$, there exists $r_{1}, r_{2} > 0$ such that
+      \[
+        B_{r_{1}}(x : d_{1}) \, \subseteq \, B_{r}(x : d_{2}) \qquad \text{and} \qquad B_{r_{2}}(x : d_{1}) \, \supseteq, \, B_{r}(x : d_{2}).
+      \]
+    \end{enumerate}
+  \end{theorem}
+  \newpage
+  \begin{proof}
+    It is clear that (1) implies (2). If we assume (2), we will prove that all open sets of $d_{1}$ are open sets of $d_{2}$.
+
+    Let $U \in \O(d_{1})$ be an open set. For each $x \in U$, let $\epsilon_{x} > 0$ be the real number such that $B_{\epsilon_{x}}(x) \subseteq U$. Then
+    \[
+      \bigcup\limits_{x \in X} B_{\epsilon_{x}}(x) \, = \, U.
+    \]
+    Our hypothesis ensures the existence of $r_{x}$ corresponding to $\epsilon_{x}$ such that $B_{r_{x}}(x : d_{2}) \subseteq R_{\epsilon_{x}}(x : d_{1})$. Hence we have
+    \[
+      \bigcup\limits_{x \in X} B_{r_{x}}(x : d_{2}) \, \subseteq \, \bigcup\limits_{x \in X} B_{\epsilon_{x}}(x : d_{1}) \, = \, U.
+    \]
+    The converse direction is easy to verify: if $x \in U$, then $x \in B_{r_{x}}(x : d_{2}) \, \subseteq \, \bigcup_{x \in X} B_{r_{x}}(x : d_{2})$. Thus this union is equal to $U$, so $U$ is an open set in $d_{2}$; hence $\O(d_{1}) \subseteq \O(d_{2})$. A similar argument yields that $\O(d_{1}) \supseteq \O(d_{2})$, which implies (1).
+  \end{proof}
+\end{adjustwidth}
+
+More on equivalent metrics lies in the file RealAnalysis/babyrudin2.tex. Here is a simple but instructive trick: if $(X, d)$ is a metric space, then so is $(X, d')$, where $d'$ is defined by $d'(x, y) \, = \, d(x, y) \, / \, (1 + d(x, y))$; moreover, $\O(d) = \O(d')$! But since all distances in $d'$ are less than $1$, it follows that if a metric is bounded, this property cannot be traced back to its topology.
+
+A topological space $(X, \O)$ is called \textbf{metrizable} if there exists a metric $d$ on $X$ such that $\O(d) = \O$. Question: are all but a few topological spaces metrizable, or is metrizability a rare special case? The answer is neither --- but rather the first or the second. There are many metrizable spaces. We will not discuss them here.
 
 % --------------------------------------------- %
 

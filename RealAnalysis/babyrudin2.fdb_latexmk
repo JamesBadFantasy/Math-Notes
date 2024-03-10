@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1706977530 "babyrudin2.tex" "babyrudin2.pdf" "babyrudin2" 1706977531 0
+["pdflatex"] 1710033943 "babyrudin2.tex" "babyrudin2.pdf" "babyrudin2" 1710033944 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1704400182 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -58,6 +58,7 @@
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb" 1704400182 154600 ea54091d31de803b613ba9e80ca51709 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb" 1704400182 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb" 1704400182 135942 859a90cad7494a1e79c94baf546d7de5 ""
+  "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb" 1704400182 164227 3df942b4ff2124425d8fb1b6d3e01c7a ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb" 1704400182 145929 f25e56369a345c4ff583b067cd87ce8e ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb" 1704400182 136101 f533469f523533d38317ab5729d00c8a ""
   "/usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb" 1704400182 131438 3aa300b3e40e5c8ba7b4e5c6cebc5dd6 ""
@@ -123,10 +124,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "babyrudin2.aux" 1706977531 2139 e9d20c6e33bc07dbd073c77cf35d95af "pdflatex"
-  "babyrudin2.out" 1706977531 1843 ed132315448098af08925c73e85a1a23 "pdflatex"
-  "babyrudin2.tex" 1706977529 40667 571121db8b92084216005f93d2a840a8 ""
-  "babyrudin2.toc" 1706977531 1051 d0c9d042688a78c786ef790c055d61f7 "pdflatex"
+  "babyrudin2.aux" 1710033943 2139 e9d20c6e33bc07dbd073c77cf35d95af "pdflatex"
+  "babyrudin2.out" 1710033943 1843 ed132315448098af08925c73e85a1a23 "pdflatex"
+  "babyrudin2.tex" 1710033943 41446 510137e3563f069127366a84e972ce35 ""
+  "babyrudin2.toc" 1710033943 1051 d0c9d042688a78c786ef790c055d61f7 "pdflatex"
   (generated)
   "babyrudin2.aux"
   "babyrudin2.log"

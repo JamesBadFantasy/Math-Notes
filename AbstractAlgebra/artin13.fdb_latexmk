@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1709858834 "artin13.tex" "artin13.pdf" "artin13" 1709858835 0
+["pdflatex"] 1710008694 "artin13.tex" "artin13.pdf" "artin13" 1710008695 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1704400182 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -59,7 +59,6 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1704400182 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1704400182 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1704400182 35752 024fb6c41858982481f6968b5fc26508 ""
-  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1704400182 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1704400182 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1704400182 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1704400182 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
@@ -208,10 +207,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "artin13.aux" 1709858835 2270 44b78d43c81959e062d1b0d501d4f80f "pdflatex"
-  "artin13.out" 1709858835 2108 61701ada48b1c9089c80feadf08a5b25 "pdflatex"
-  "artin13.tex" 1709858834 32988 a6be6a4c42983b33be425d718f9983c2 ""
-  "artin13.toc" 1709858835 1141 2e56b8b4cd3a1544377e2c99445e9454 "pdflatex"
+  "artin13.aux" 1710008694 2163 f270eb00fd0c7b65e9e4ed2b3c99d4e3 "pdflatex"
+  "artin13.out" 1710008694 2016 c4edcd1db5a56a00f3039328ff588111 "pdflatex"
+  "artin13.tex" 1709861017 32169 31f5e55f5bdf8e9cc20d2c78f40ed69a ""
+  "artin13.toc" 1710008694 1075 4604e25eeeee0d473a00a4e2eeec2a16 "pdflatex"
   (generated)
   "artin13.aux"
   "artin13.log"
