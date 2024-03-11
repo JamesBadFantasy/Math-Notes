@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.24)  4 MAR 2024 16:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.24)  10 MAR 2024 12:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -376,21 +376,21 @@ LaTeX Font Info:    Trying to load font information for U+euf on input line 139.
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) [4] [5] [6] [7] [8] [9] [10] [11] [12] (./artin12.aux)
 Package rerunfilecheck Info: File `artin12.out' has not changed.
-(rerunfilecheck)             Checksum: AB9FAC186E9491B39051C7E41E09CA32;2598.
+(rerunfilecheck)             Checksum: 1CBB357F127751313DCB920DD74C4820;2598.
  ) 
 Here is how much of TeX's memory you used:
- 10941 strings out of 477985
- 163130 string characters out of 5840058
+ 10942 strings out of 477985
+ 163141 string characters out of 5840058
  1863388 words of memory out of 5000000
  30896 multiletter control sequences out of 15000+600000
  538410 words of font info for 113 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,12n,77p,386b,668s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,77p,386b,666s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on artin12.pdf (12 pages, 299547 bytes).
+Output written on artin12.pdf (12 pages, 300236 bytes).
 PDF statistics:
- 312 PDF objects out of 1000 (max. 8388607)
- 255 compressed objects within 3 object streams
- 81 named destinations out of 1000 (max. 500000)
+ 313 PDF objects out of 1000 (max. 8388607)
+ 256 compressed objects within 3 object streams
+ 82 named destinations out of 1000 (max. 500000)
  129 words of extra memory for PDF output out of 10000 (max. 10000000)
 

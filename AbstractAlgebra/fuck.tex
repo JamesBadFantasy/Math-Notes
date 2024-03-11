@@ -14,6 +14,14 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{claim}{Claim}
 
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\cof}{\operatorname{cof}}
+
 \title{Fuck}
 \author{Fuck}
 \date{Fuck}
@@ -45,22 +53,22 @@ An operation $\ast$ on $S$ is called \textbf{closed} if for all $a, b \in S$, th
 
 % --------------------------------------------- %
 
-% \section{Day 2}
-%
-% We often denote $S$ with the operation $&$ by the pair $(S, &)$. There are two other properties of operations we care about:
-% \begin{enumerate}
-%   \item $(S, &)$ has an \textbf{identity element} if there exists $e$ in $S$ such that the operation ``does nothing'' with $e$ --- for all $a$ in $S$, we have $a & e \, = \, e & a \, = \, a$.
-%   \item $(S, &)$ has \textbf{inverses} if for \textit{all} $a$ in $S$, there exists some $b$ in $S$ that ``cancels'' $a$ --- namely $a & b \, = \, b & a \, = \, e$, where $e$ is the identity. 
-% \end{enumerate}
-% We often write the inverse of $a$ as $a^{-1}$, where this is \textit{not necessarily $1$ divided by $a$}. It's like how the inverse of a matrix $\mat{T}$ is written $\mat{T}^{-1}$. Notice that to have inverses, there must be an identity.
-%
-% Drill these five properties --- closure, associativity, identity, inverses, commutativity --- into your head! They will appear in basically every problem from now on
-%
-% 1. Find the identity of complex numbers $\mathbb{C}$ with respect to addition. Find the identity of \textit{nonzero} complex numbers with respect to multiplication.
-% 2. 
-%
-% 3. $\mathbb{Q}$ has an additive identity. Does each rational number $\mathbb{Q}$ under $+$ have an inverse?
-%
+\section{Day 2}
+
+We often denote $S$ with the operation $\ast$ by the pair $(S, \ast)$. There are two other properties of operations we care about:
+\begin{enumerate}
+  \item $(S, \ast)$ has an \textbf{identity element} if there exists $e$ in $S$ such that the operation ``does nothing'' with $e$ --- for all $a$ in $S$, we have $a \ast e \, = \, e \ast a \, = \, a$.
+  \item $(S, \ast)$ has \textbf{inverses} if for \textit{all} $a$ in $S$, there exists some $b$ in $S$ that ``cancels'' $a$ --- namely $a \ast b \, = \, b \ast a \, = \, e$, where $e$ is the identity. 
+\end{enumerate}
+We often write the inverse of $a$ as $a^{-1}$, where this is \textit{not necessarily $1$ divided by $a$}. It's like how the inverse of a matrix $\mat{T}$ is written $\mat{T}^{-1}$. Notice that to have inverses, there must be an identity. Drill these five properties --- closure, associativity, identity, inverses, commutativity --- into your head! 
+
+\begin{enumerate}
+  \item 
+\end{enumerate}
+
+1. Find the identity of complex numbers $\mathbb{C}$ with respect to addition. Find the identity of \textit{nonzero} complex numbers with respect to multiplication.
+3. $\mathbb{Q}$ has an additive identity. Does each rational number $\mathbb{Q}$ under $+$ have an inverse?
+
 % % --------------------------------------------- %
 %
 % \section{Day 3}
