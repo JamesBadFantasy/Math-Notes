@@ -78,7 +78,7 @@ Listing out the properties of $(S, \ast)$ can get tiring --- so mathematicians g
   \item \textbf{Identity}: There exists $e \in G$ such that $a \ast e \, = \, e \ast a \, = \, a$.
   \item \textbf{Inverses}: There exists $a^{-1} \in G$ such that $a \ast a^{-1} \, = \, a^{-1} \ast a \, = \, e$.
 \end{enumerate}
-The operation $\ast$ need not be commutative --- that is, a set where $a \ast b$ isn't always $b \ast a$ can still be a group. If it is commutative, we say $(S, \ast)$ has \textbf{Abelian group structure} (pronounced ah-BELL-ee-an).
+The operation $\ast$ need not be commutative --- that is, a set where $a \ast b$ isn't always $b \ast a$ can still be a group. If it \textit{is} commutative, we say $(S, \ast)$ has \textbf{Abelian group structure} (pronounced ah-BELL-ee-an).
 
 % 1. Does $(Q[x], +)$ have group structure? If so, is it Abelian?
 % 2. Does $(C[x], *)$ have group structure? If so, is it Abelian?
@@ -91,7 +91,7 @@ The operation $\ast$ need not be commutative --- that is, a set where $a \ast b$
 
 % Instead of saying $(S, \ast)$ ``has group structure'', we often simply call $(S, \ast)$ a \textbf{group}. In this sense, a group isn't really a ``thing'' --- it's just a list of properties something can have. Similarly, $(S, +)$ is an \textbf{Abelian group} if it has Abelian group structure.
 
-These examples of groups have been pretty shit, in my opinion. We're gonna examine much more interesting ones from geometry, number theory, and linear algebra. \textbf{We begin with geometry --- specifically symmetry}.
+These examples of groups have been pretty shit, in my opinion. We're gonna examine much more interesting ones from geometry, number theory, and linear algebra. \textbf{This begins with geometry --- specifically symmetry}.
 
 \begin{adjustwidth}{0.5cm}{}
   $\\$
@@ -101,12 +101,14 @@ These examples of groups have been pretty shit, in my opinion. We're gonna exami
   $\text{ } \\ \text{ }$
 \end{adjustwidth}
 
-In fact, \textbf{the symmetries of every shape form a group}: octahedrons (this is an AMC problem!), spheres, you name it. You can always compose rotations of the shape, performing one after the other, and expect the four group properties to hold.
+In fact, \textbf{the symmetries of \textit{every} shape form a group}: octahedrons (this is an AMC problem!), spheres, you name it. You can always compose rotations of the shape, performing one after the other, and expect the four group properties to hold.
 
 % https://www.google.com/search?q=rotations%20of%20a%20cube&tbm=isch&tbs=itp:animated&client=firefox-b-1-d&hl=en&sa=X&ved=0CAQQpwVqFwoTCMj8te-J64QDFQAAAAAdAAAAABAD&biw=1324&bih=725#imgrc=6WDXWosfGQOtJM
 
 % 1. Calculate the number of elements of this group --- namely, the distinct rotations of a cube that leave it looking identical.
 % 2. Show that (G, *) is not Abelian by a counterexample.
+
+% In fact, the symmetries of subatomic particles and molecules form a group too. This is called \textit{gauge symmetry}.
 
 % --------------------------------------------- %
 
@@ -114,18 +116,12 @@ In fact, \textbf{the symmetries of every shape form a group}: octahedrons (this 
 
 \section{Day 5}
 
+Groups were discovered in the 1820s by the prodigy Évariste Galois at 18-years-old. Unfortunately, he died only one year later. Now it is your turn to study group theory. For fifty years after its inception, group theory studied one group: the \textbf{symmetric group}.
 
-
-% 1. Is $S_{n}$ a group? If so, is it an Abelian group?
-% 2. How many elements are in $S_{n}$ for each positive integer $n$?
+% 1. Let n be a positive integer. How many elements are in the group S_n?
+% 2. Is S_n ever Abelian?
 %
-% % --------------------------------------------- %
-%
-% \section{Day 6}
-%
-% A group $(S, \ast)$ is called \textbf{finite} if $S$ is a finite set, and \textbf{infinite} otherwise. For instance, $(\mathbb{Z}, +)$ is an infinite group, while the set of permutations $S_{n}$ is a finite group. It's called the \textbf{symmetric group}, and is possibly the most important (and complicated) finite group.
-%
-% % --------------------------------------------- %
+% --------------------------------------------- %
 %
 % \section{Day 6}
 %

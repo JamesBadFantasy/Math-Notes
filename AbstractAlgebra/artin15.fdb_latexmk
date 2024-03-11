@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1710104535 "artin15.tex" "artin15.pdf" "artin15" 1710104536 0
+["pdflatex"] 1710165349 "artin15.tex" "artin15.pdf" "artin15" 1710165349 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1704400182 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
@@ -120,10 +120,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "artin15.aux" 1710104536 791 15416e5b8877419556ee58c195bdc642 "pdflatex"
-  "artin15.out" 1710104536 310 87a34574b5c2299b0bdca30c016cbdfe "pdflatex"
-  "artin15.tex" 1710104534 6403 c15c106daa7d25016303f7f6995358c3 ""
-  "artin15.toc" 1710104536 155 58d994b30693a7f2a923c577f060fd92 "pdflatex"
+  "artin15.aux" 1710165349 791 15416e5b8877419556ee58c195bdc642 "pdflatex"
+  "artin15.out" 1710165349 310 87a34574b5c2299b0bdca30c016cbdfe "pdflatex"
+  "artin15.tex" 1710105093 6453 a61313e3fd2adaa3dc12f625b172f7f4 ""
+  "artin15.toc" 1710165349 155 58d994b30693a7f2a923c577f060fd92 "pdflatex"
   (generated)
   "artin15.aux"
   "artin15.log"
