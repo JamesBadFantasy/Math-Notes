@@ -13,6 +13,7 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
 \newtheorem{claim}{Claim}
+\newtheorem*{ex1}{Example: Symmetries of a Cube}
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
@@ -21,6 +22,8 @@
 \newcommand{\nll}{\operatorname{null}}
 \newcommand{\range}{\operatorname{range}}
 \newcommand{\cof}{\operatorname{cof}}
+
+\newcommand{\s}{$\text{ } \\ \text{ }$}
 
 \title{Fuck}
 \author{Fuck}
@@ -62,43 +65,65 @@ We often denote $S$ with the operation $\ast$ by the pair $(S, \ast)$. There are
 \end{enumerate}
 We often write the inverse of $a$ as $a^{-1}$, where this is \textit{not necessarily $1$ divided by $a$}. It's like how the inverse of a matrix $\mat{T}$ is written $\mat{T}^{-1}$. Notice that to have inverses, there must be an identity. Drill these five properties --- closure, associativity, identity, inverses, commutativity --- into your head! 
 
+\newpage
+
+% --------------------------------------------- %
+
+\section{Day 3}
+
+Listing out the properties of $(S, \ast)$ can get tiring --- so mathematicians gave bundles of these properties special names. $(S, \ast)$ has \textbf{group structure} if $\ast$ satisfies the following properties: for all $a, b, c \in G$,
 \begin{enumerate}
-  \item 
+  \item \textbf{Closure}: $a \ast b \in G$.
+  \item \textbf{Associativity}: $a \ast (b \ast c) \, = \, (a \ast b) \ast c$.
+  \item \textbf{Identity}: There exists $e \in G$ such that $a \ast e \, = \, e \ast a \, = \, a$.
+  \item \textbf{Inverses}: There exists $a^{-1} \in G$ such that $a \ast a^{-1} \, = \, a^{-1} \ast a \, = \, e$.
 \end{enumerate}
+The operation $\ast$ need not be commutative --- that is, a set where $a \ast b$ isn't always $b \ast a$ can still be a group. If it is commutative, we say $(S, \ast)$ has \textbf{Abelian group structure} (pronounced ah-BELL-ee-an).
 
-1. Find the identity of complex numbers $\mathbb{C}$ with respect to addition. Find the identity of \textit{nonzero} complex numbers with respect to multiplication.
-3. $\mathbb{Q}$ has an additive identity. Does each rational number $\mathbb{Q}$ under $+$ have an inverse?
+% 1. Does $(Q[x], +)$ have group structure? If so, is it Abelian?
+% 2. Does $(C[x], *)$ have group structure? If so, is it Abelian?
+
+% Z[x] denotes the set of polynomials with integer coefficients. Similarly, Q[x], R[x], and C[x] denote the set of polynomials with rational, real, and complex coefficients. *You will see this notation again*.
 
 % % --------------------------------------------- %
-%
-% \section{Day 3}
-%
-% Listing out the properties of $(S, &)$ can get tiring --- so mathematicians gave bundles of these properties special names. $(S, &)$ has \textbf{group structure} if $&$ satisfies four properties: closure, associativity, identity, and inverses. If $(S, &)$ is also commutative (thus has all five), it has \textbf{Abelian group structure}.
-%
-% The set of polynomials with rational coefficients is denoted $\mathbb{Q}[x]$. Similarly, polynomials with integer, real, or complex coefficients are denoted $\mathbb{Z}[x]$, $\mathbb{R}[x]$, and $\mathbb{C}[x]$ respectively.
-% \begin{enumerate}
-%   \item The set of polynomials with rational coefficients is denoted $\mathbb{Q}[x]$. Does $\mathbb{Q}[x]$ with $+$ have group structure? Is it Abelian?
-%   \item Does $\mathbb{Q}[x]$ under $\times$ have group structure? Is it Abelian?
-% \end{enumerate}
-%
-% % --------------------------------------------- %
-%
-% \section{Day 4}
-%
-% Instead of saying $(S, +)$ ``has group structure'', we often simply call $S$ a \textbf{group} under $+$. In this sense, a group isn't really a ``thing'' --- it's just a list of properties something can have. We similarly refer to $(S, +)$ with Abelian group structure as an \textbf{Abelian group}. Over the following days, we will build examples of groups from diverse fields. 
-%
-% # Geometry and Symmetry
-%
-% SYMMETRIC GROUP PDF
-%
+
+\section{Day 4}
+
+% Instead of saying $(S, \ast)$ ``has group structure'', we often simply call $(S, \ast)$ a \textbf{group}. In this sense, a group isn't really a ``thing'' --- it's just a list of properties something can have. Similarly, $(S, +)$ is an \textbf{Abelian group} if it has Abelian group structure.
+
+These examples of groups have been pretty shit, in my opinion. We're gonna examine much more interesting ones from geometry, number theory, and linear algebra. \textbf{We begin with geometry --- specifically symmetry}.
+
+\begin{adjustwidth}{0.5cm}{}
+  $\\$
+  \textbf{Example: The Cube}. Paint each 8 faces of a cube a different color, and imagine the set of distinct rotations of the cube. We can compose two rotations by performing one after the other. Let's denote the set of rotations by $G$ and the operation by $\ast$.
+  
+  $(G, \ast)$ is closed and associate, because duh. There's an identity rotation --- namely doing nothing --- and each rotation can be ``performed in reverse'' to yield inverses. So, the symmetries $(G, \ast)$ of a cube constitute a group. 
+  $\text{ } \\ \text{ }$
+\end{adjustwidth}
+
+In fact, \textbf{the symmetries of every shape form a group}: octahedrons (this is an AMC problem!), spheres, you name it. You can always compose rotations of the shape, performing one after the other, and expect the four group properties to hold.
+
+% https://www.google.com/search?q=rotations%20of%20a%20cube&tbm=isch&tbs=itp:animated&client=firefox-b-1-d&hl=en&sa=X&ved=0CAQQpwVqFwoTCMj8te-J64QDFQAAAAAdAAAAABAD&biw=1324&bih=725#imgrc=6WDXWosfGQOtJM
+
+% 1. Calculate the number of elements of this group --- namely, the distinct rotations of a cube that leave it looking identical.
+% 2. Show that (G, *) is not Abelian by a counterexample.
+
+% --------------------------------------------- %
+
+\newpage
+
+\section{Day 5}
+
+
+
 % 1. Is $S_{n}$ a group? If so, is it an Abelian group?
 % 2. How many elements are in $S_{n}$ for each positive integer $n$?
 %
 % % --------------------------------------------- %
 %
-% \section{Day 5}
+% \section{Day 6}
 %
-% A group $(S, &)$ is called \textbf{finite} if $S$ is a finite set, and \textbf{infinite} otherwise. For instance, $(\mathbb{Z}, +)$ is an infinite group, while the set of permutations $S_{n}$ is a finite group. It's called the \textbf{symmetric group}, and is possibly the most important (and complicated) finite group.
+% A group $(S, \ast)$ is called \textbf{finite} if $S$ is a finite set, and \textbf{infinite} otherwise. For instance, $(\mathbb{Z}, +)$ is an infinite group, while the set of permutations $S_{n}$ is a finite group. It's called the \textbf{symmetric group}, and is possibly the most important (and complicated) finite group.
 %
 % % --------------------------------------------- %
 %

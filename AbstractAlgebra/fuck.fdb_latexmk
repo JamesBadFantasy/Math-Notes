@@ -1,9 +1,11 @@
 # Fdb version 4
-["pdflatex"] 1710085384 "fuck.tex" "fuck.pdf" "fuck" 1710085384 0
+["pdflatex"] 1710122101 "fuck.tex" "fuck.pdf" "fuck" 1710122101 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1704400182 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm" 1704400182 3584 13049b61b922a28b158a38aeff75ee9b ""
+  "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm" 1704400182 3584 291a5713401683441e0a8c8f4417b17b ""
+  "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm" 1704400182 3584 49064b465390a8e316a3c8417a050403 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1095.tfm" 1704400182 3584 929cdff2b7a8c11bd4d49fd68cb0ae70 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1704400182 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm" 1704400182 3584 3169d30142b88a27d4ab0e3468e963a2 ""
@@ -113,10 +115,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "fuck.aux" 1710085384 758 62589c006eae15bb9ea9e57eee1c48ff "pdflatex"
-  "fuck.out" 1710085384 142 c84af76f9f081b45a64486fcff223216 "pdflatex"
-  "fuck.tex" 1710085383 9172 b556806b9a674b241717f97fffa0a3d1 ""
-  "fuck.toc" 1710085384 122 b0b6c46a7d166b08f70b9b6da15397ec "pdflatex"
+  "fuck.aux" 1710122101 1064 0c545062e93765577adc3621f3272855 "pdflatex"
+  "fuck.out" 1710122101 355 1cb1327c6bea5dca2181089df8a1b17e "pdflatex"
+  "fuck.tex" 1710122100 10681 71fe113ee114ba7c0c210c303a21ca9b ""
+  "fuck.toc" 1710122101 305 b452b6a70d9471df26453b643bdda93c "pdflatex"
   (generated)
   "fuck.aux"
   "fuck.log"
