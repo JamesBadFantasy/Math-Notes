@@ -13,6 +13,7 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{claim}{Claim}
 \newtheorem{remark}{Remark}
+\newtheorem{proposition}{Proposition}
 
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\Ker}{\operatorname{Ker}}
@@ -22,6 +23,7 @@
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
 \newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\s}{$\text{ } \\ \text{ }$}
 
 \title{MATH-UA 349: Honors Algebra II}
 \author{James Pagan}
@@ -925,9 +927,120 @@ This introduces \textbf{rational canonical form}: let $\mat{T} : V \to V$ be a l
 
 Recall that $R$ is Noetherian if every ideal $\mathfrak{a} \subseteq R$ is finitely-generated. All PIDs are Noetherian.
 
+% --------------------------------------------- %
+
+\newpage
+
+\section{TIMESKIP!}
+
+\newpage
+
+% --------------------------------------------- %
+
+\section{Fields}
+
+% --------------------------------------------- %
+
+\subsection{Degree of a Field Extension}
+
+Let $K \, / \, F$ be a field extension. The \textbf{degree} $[K : F]$ is the dimension of $K$ as an $F$-vector space. Several observations follow:
+\begin{enumerate}
+  \item $[K : F] = 1$ if and only if $K = F$.
+  \item $[K : F] = 2$ if and only if $K = F[\delta]$, where $\delta$ is the square root of some element $\alpha \in F$. Namely, $\delta$ is a root of $x^{2} - \alpha = 0$, so
+  \[
+    F[\delta] \, \cong \, F[x] \, / \, (x^{2} - \alpha).
+  \]
+  This implies the quadratic formula: if we select $\alpha \in K \, \setminus \, F$, then $(1, \alpha)$ is a basis of $K$. Hence the minimal polynomial of $\alpha$ has a root with the same form as the quadratic formula.
+\end{enumerate}
+
+This leads us to the following theorem:
+
 \begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}[Hilbert Basis Theorem]
-    If $R$ is Noetherian, then $R[x]$ is Noetherian.
+  \begin{theorem}
+    Let $L \, / \, K \, / \, F$ be a chain of field extensions with finite degree.. Then
+    \[
+      [L : F] \, = \, [L : K] [K : F].
+    \]
+  \end{theorem}
+  \begin{proof}
+    The proof is simple: let $l_{1}, \ldots, l_{n} \in L$ be a basis over $K$, and let $k_{1}, \ldots, k_{m} \in K$ be a basis over $F$. The claim is that the products $l_{i}k_{j}$ is a basis of $L$ over $F$.
+    \begin{enumerate}
+      \item \textbf{Spanning}: For all $l \in l$, there exist $z_{1}, \ldots, z_{m} \in K$ such that
+      \[
+        l \, = \, l_{1} z_{1} + \cdots + l_{n} z_{n}.
+      \]
+      Similarly, each $z_{i} \in K$ is expressible for $f_{i1}, \ldots, f_{im} \in F$ as
+      \[
+        z_{i} = f_{i1} k_{1} + \cdots + f_{im} k_{m}.
+      \]
+      Superimposing these two by substitution expresses $l$ as a linear combination of terms of the form $l_{i}l_{j}$ multiplied by scalars in $F$.
+      \item \textbf{Independent}: If we suppose that there exist constants $l_{ij}$ such that
+      \[
+        \sum\limits_{i = 1}^{n} \sum\limits_{j = 1}^{m} f_{ij} l_{i} k_{j}.
+      \]
+      We can factor this and determine that because $k$ are independent, the scalars $f_{ij}$ must be zero.
+    \end{enumerate}
+    This completes the proof.
+  \end{proof}
+\end{adjustwidth}
+
+It is clear that if $\alpha$ has degree $n$, then $[F(\alpha) : F] = n$. If we would like to adjoin another element $\beta$ of degree $m$, we have
+\[
+  [F(\alpha, \beta) : F] \, = \, [F(\alpha, \beta) : F(\alpha)] [F(\alpha), F] \, = \, mn.
+\]
+
+An important corollary is as follows:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{corollary}[Artin 13.3.6]
+    The following two results hold:
+    \begin{enumerate}
+      \item Let $K \, / \, F$ be a finite field extension and let $\alpha \in K$ be algebraic. If $\deg \alpha = [K : F]$, then
+      \[
+        F[\alpha] \, = \, F(\alpha) \, = \, F.
+      \]
+      \item Let $L \, / \, K \, / \, F$ be a chain of field extensions, not necessarily finite. If $\alpha \in L$ is algebraic over $F$, then $\alpha$ over $K$ too; we have $\deg_{K} \alpha \le \deg_{L} \alpha$.
+      \item Let $K \, / \, F$ be a field extension. If $\alpha_{1}, \ldots, \alpha_{n} \in K$ are algebraic, then $F(\alpha_{1}, \ldots, \alpha_{n})$ is a finite extension of $F$.
+    \end{enumerate}
+  \end{corollary}
+  \begin{proof}
+    $F[\alpha]$ and $K$ are both $F$-vector spaces of dimension $[K : F]$, so they are isomorphic. They are equal since $F[\alpha] \subseteq K$ is a subspace of the same finite dimension. (2) is also quite clear.
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Ruler and Compass Construction}
+
+We are ready to answer the problem of ruler and compass construction. The key is to classify the types of permitted actions with these tools:
+\begin{enumerate}
+  \item Construct the line through two points
+  \item Construct the circle that contains one point and has a center at another point
+  \item Mark the intersection point of two (non-parallel) lines
+  \item Mark the intersection point(s) of a line and a circle (if they intersect)
+  \item Mark the intersection point(s) two circles (if they intersect).
+\end{enumerate}
+
+By repeating these actions, we generate systems of equations that will adjoin elements of degree $1$ or $2$. Hence the resulting field generated will have a degree that is a power of two. Hence it is not possible to double the cube, since this entails adjoining $\sqrt[3]{2}$ to $\mathbb{Z}$, an element with degree $3$. It is also not possible to square the circle, since $\pi$ is transcendental.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Suppose $(x, y) \in \mathbb{R}^{2}$ can be constructed. Then $[\mathbb{Q} (a_{1}, a_{2}) : \mathbb{Q}]$ is a power of two.
+  \end{theorem}
+  \begin{proof}
+    Since $(x, y)$ is constructible in a finite number of moves, it suffices to show that performing any of the five moves multiplies the degree of the field extension by $1$ or $2$. This may be calculated by using coordinates; each equation has at most degree $2$.
+  \end{proof}
+\end{adjustwidth}
+
+It is also not possible to construct polygons of arbitrary side length: for instance, the points of the $7$-gon are the roots of the roots of unity
+\[
+  z^{7} = 1 \, \implies \, (z - 1)(z^{6} + z^{5} + \cdots + 1).
+\]
+Clearly the right-hand side is irreducible; thus adjoining such an element would entail a field extension that is a multiple of $6$. This is not possible; hence this polygon is not constructible.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    If $(x_{1}, x_{2}) \in \mathbb{R}^{2}$ are such that $[\mathbb{Q}(x_{1}, x_{2}) : \mathbb{Q}]$ is a power of two, then $(x_{1}, x_{2})$ is a constructible point.
   \end{theorem}
   \begin{proof}
     

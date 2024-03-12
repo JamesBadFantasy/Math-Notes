@@ -29,3 +29,7 @@
 \contentsline {subsection}{\numberline {9.5}Assorted Submodules}{21}{subsection.9.5}%
 \contentsline {subsection}{\numberline {9.6}Cyclic Modules}{22}{subsection.9.6}%
 \contentsline {subsection}{\numberline {9.7}Noetherian Rings}{23}{subsection.9.7}%
+\contentsline {section}{\numberline {10}TIMESKIP!}{24}{section.10}%
+\contentsline {section}{\numberline {11}Fields}{25}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Degree of a Field Extension}{25}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Ruler and Compass Construction}{26}{subsection.11.2}%
