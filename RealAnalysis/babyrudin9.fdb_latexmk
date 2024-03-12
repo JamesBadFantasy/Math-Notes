@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1709005178 "babyrudin9.tex" "babyrudin9.pdf" "babyrudin9" 1709005178 0
+["pdflatex"] 1710170173 "babyrudin9.tex" "babyrudin9.pdf" "babyrudin9" 1710170174 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1704400182 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
@@ -125,10 +125,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "babyrudin9.aux" 1709005178 2486 60a30d7abd406f053480b941d509a614 "pdflatex"
-  "babyrudin9.out" 1709005178 2437 9458d6983b5cf40c5333cacefe278918 "pdflatex"
-  "babyrudin9.tex" 1709005177 37956 6966a1116c868fbfc189e4535db989f7 ""
-  "babyrudin9.toc" 1709005178 1313 2bf58142901799071c7db4d4c5c01c6e "pdflatex"
+  "babyrudin9.aux" 1710170174 2486 60a30d7abd406f053480b941d509a614 "pdflatex"
+  "babyrudin9.out" 1710170174 2437 9458d6983b5cf40c5333cacefe278918 "pdflatex"
+  "babyrudin9.tex" 1710170172 37962 d4c3a2297bb31f80818786446d96b717 ""
+  "babyrudin9.toc" 1710170174 1313 2bf58142901799071c7db4d4c5c01c6e "pdflatex"
   (generated)
   "babyrudin9.aux"
   "babyrudin9.log"

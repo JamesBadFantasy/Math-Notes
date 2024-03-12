@@ -637,4 +637,78 @@ Hence, all $\mat{T}$ from finite dimensional vector spaces are uniformly continu
 
 % --------------------------------------------- %
 
+\newpage
+
+\section*{TIME SKIP!}
+
+\newpage
+
+% --------------------------------------------- %
+
+Last week, we discussed that Fréchet differentiability implies Gateaux differentiability. We will now prove the chain rule.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Chain Rule]
+    Let $X$, $Y$, and $Z$ be normed vector spaces. Then let $f : \Omega \subseteq X \to Y$, let $f(\Omega) \subseteq \Gamma \subseteq Y$, and let $g(\Gamma) \to Z$. 
+
+    Suppose $f$ is differentiable at $\vec{a} \in \Omega$ and let $g$ be differentiable at $f(\vec{a}) \in \Gamma$. Then $g \circ f$ is differentiable at $\vec{a}$, and
+    \[
+      (g \circ f)'(\vec{a}) \, = \, g'(f(\vec{a})) \, f'(\vec{a}).
+    \]
+  \end{theorem}
+  \begin{proof}
+    Let us write out the information: we have that
+    \begin{align*}
+      f(\vec{a} + \vec{h}) \, &= \, f(\vec{a}) + f'(\vec{a}) \vec{h} + r_{f, a}(\vec{h}) \\
+      g(f(\vec{a}) + \vec{k}) \, &= \,  g(f(\vec{a})) + g'(f(\vec{a})) \vec{k} + r_{g, f(a)}(\vec{k}), \\
+    \end{align*}
+    where $r_{f, a}(\vec{h}) \, = \, o(\norm{\vec{h}}_{X})$ and $r_{g, f(a)}(\vec{k}) \, = \, o(\norm{\vec{k}}_{Y})$. Examine the quantity $g(f(\vec{a} + \vec{h}))$: we have
+    \[
+      g(f(\vec{a} + \vec{h})) \, = \, g(f(\vec{a}) + f'(\vec{a}) \vec{h} + r_{f, a}(\vec{h})).
+    \]
+    We will set $\vec{k} = f'(\vec{a})\vec{h} + r_{f, \vec{a}}(\vec{h})$. Doing this, we have
+    \begin{align*}
+      g(f(\vec{a} + \vec{h})) \, &= \, g(f(\vec{a}) + \vec{k}) \\
+                                 &= \, g(f(\vec{a})) + g'(f(\vec{a})) \vec{k} + r_{g, f(\vec{a})}(\vec{h}) \\
+                                 &= \, g(f(\vec{a})) + g'(f(\vec{a})) \left( f'(\vec{a}) \vec{h} + r_{f, \vec{a}}(\vec{h}) \right) + r_{g, f(\vec{a})}(\vec{k}) \\
+                                 &= \, g(f(\vec{a})) + g'(f(\vec{a})) f'(\vec{a}) \vec{h} \, + \, \big(   g'(f(\vec{a}))r_{f, \vec{a}(\vec{h})} + r_{g, f(\vec{a})}(f'(\vec{a})\vec{h} + r_{f, \vec{a}}(\vec{h})) \big)
+    \end{align*} 
+    We will prove the right-hand side of this expression is equal to $r_{g \circ f, \, \vec{a}}(\vec{h})$. We tackle each two terms in its expansion separately. As a homework problem, we found that the composition of bounded linear maps is bounded. Therefore,
+    \[
+      \norm{g'(f(\vec{a})) r_{f, \vec{a}}(\vec{h})} \, \le \, \norm{g'(f(\vec{a}))} \, \norm{r_{f, \vec{a}}(\vec{h})}.
+    \]
+    We can now divide both sides by $\norm{\vec{h}}_{X}$ --- in which case, the right-hand side goes to zero (since the first term is just a constant). Therefore, the left-hand side approaches zero. For the second term: for all $\eta > 0$, there exists $\delta$ such that
+    \[
+      \norm{\vec{h}}_{X} < \delta \, \implies \, \norm{r_{f, \vec{a}}(\vec{h})}_{Y} < \eta \norm{\vec{h}}.
+    \]
+    For all $\epsilon > 0$, there exists $\gamma$ such that
+    \[
+      \norm{\vec{k}}_{Y} < \gamma \, \implies \, \norm{r_{g, f(\vec{a})}(\vec{k})} < \epsilon \norm{\vec{k}}_{Y}.
+    \]
+    Let $\delta > 0$ be such that $\norm{\vec{h}}_{X} < \delta$ implies $\norm{f'(\vec{h}) + r_{f, \vec{a}}(\vec{h})} < \gamma$. This is possible since the limit of these terms approaches $0$ by the hypothesis $f$ is differentiable. Hence $\norm{\vec{h}}_{X} < \delta$ implies
+    \begin{align*}
+      \norm{f_{g, f(\vec{a})}(f'(\vec{a})\vec{h} + r_{f, \vec{a}}(\vec{h}))} \, &\le \, \epsilon \norm{ f'(\vec{a})\vec{h} + r_{f, \vec{a}}(\vec{h})} \\
+                                                                                           & \le  \, \epsilon \norm{f'(\vec{a})\vec{h}} + \epsilon \norm{r_{f, \vec{a}}(\vec{h})} \\
+                                                                                                                                                                                   & \le \, \epsilon \norm{\vec{h}}_{X} \left( \norm{f'(\vec{a})}+ \frac{\norm{r_{f, \vec{a}}(\vec{h})}}{\norm{\vec{h}}} \right)
+    \end{align*}
+    Without loss of generality, let $\delta > 0$ also satisfy
+    \[
+      \sup\limits_{\norm{\vec{h}} < \delta} \frac{\norm{r_{f, \vec{a}}(\vec{h})}}{\norm{\vec{h}}} \, \le \, 1.
+    \]
+    In which case, we have
+    \[
+      \norm{f_{g, f(\vec{a})}(f'(\vec{a})\vec{h} + r_{f, \vec{a}}(\vec{h}))} \, \le \, \epsilon \norm{\vec{h}}_{X} (\norm{f'(\vec{a})} + 1). \\
+    \]
+    The expression $f'(\vec{a}) + 1$ is a constant $C$ that can be replaced by setting $\epsilon$ to $\tfrac{\epsilon}{C}$. In this case, we get
+    \[
+      \norm{f_{g, f(\vec{a})}(f'(\vec{a})\vec{h} + r_{f, \vec{a}}(\vec{h}))} \, \le \, \epsilon \norm{\vec{h}}_{X}. \\
+    \]
+    As $\norm{\vec{h}}_{X}$ approaches zero, this expression approaches zero. This concludes the proof that shows the remainder in the original right-hand side approaches $0$, demonstrating the desired Fréchet derivative.
+  \end{proof}
+\end{adjustwidth}
+
+In fact, the Mean Value Theorem can generalize 
+
+% --------------------------------------------- %
+
 \end{document}
