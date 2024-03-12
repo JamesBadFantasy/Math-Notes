@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\cof}{\operatorname{cof}}
+
+\title{MATH-UA 329: Homework 3a}
+\author{James Pagan, March 2024}
+\date{Professor Güntürk}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 1}
+
+Let $\vec{v} = (x, y)$ be any vector in $\mathbb{R}^{2}$: it will constitute our direction vector. Hence
+\begin{align*}
+  \lim\limits_{\tau \to 0} \frac{f(\vec{0} + \tau \vec{v}) - f(\vec{0})}{\tau} \, &= \, \lim\limits_{\tau \to 0} \frac{(\tau x)^{3}(\tau y)}{\tau \big((\tau x)^{6} + (\tau y)^{2}\big)} \\
+                                                              & = \, \lim\limits_{\tau \to 0} \frac{\tau x^{3}y}{\tau^{4}x^{6} + y^{2}} \\
+                                                              & = \, \frac{0}{0 + y^{2}} \\
+                                                              & = \, 0.
+\end{align*}
+Thus the Gateaux derivative of $f$ at $\vec{0}$ is $0$. To witness the discontinuity of $f$ at $\vec{0}$, consider the path $\vec{c}(t) \, = \, (t, t^{3})$ for $t \in \mathbb{R}$. For all nonzero $t$, we have
+\[
+  f(\vec{c}(t)) \, = \, f(t, t^{3}) \, = \, \frac{(t)^{3}(t^{3})}{(t)^{6} + (t^{3})^{2}} \, = \, \frac{t^{6}}{2t^{6}} \, = \, \frac{1}{2}.
+\]
+Nonetheless, the image of the path $\vec{d}(t) = (t, 0)$ under $f$ equals 0 everywhere. Thus for all $\epsilon > 0$, there exists $\vec{x}, \vec{y} \in B_{\epsilon}(\vec{0})$ such that $f(\vec{x}) = \tfrac{1}{2}$ and $f(\vec{y}) = 0$. We conclude that $\lim\limits_{\vec{x} \to \vec{0}} f(\vec{x})$ cannot exist.
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+Let $u \in C[0, 1]$ be any function; it will constitute our direction vector. Hence
+\begin{align*}
+  \lim\limits_{\tau \to 0} \frac{F(\phi + \tau u) - F(\phi)}{\tau} \, &= \, \lim\limits_{\tau \to 0} \frac{\int_{0}^{1} (\phi(x) + \tau u(x))^{2} \dd{x} - \int_{0}^{1} \phi(x)^{2} \dd{x}}{\tau} \\
+                                                                      &= \, \lim\limits_{\tau \to 0} \frac{\int_{0}^{1} 2 \tau \phi(x) u(x) \dd{x} + \int_{0}^{1} \tau^{2} u(x) \dd{x}}{\tau} \\
+                                                                      &= \lim\limits_{\tau \to 0} \int_{0}^{1} 2 \phi(x) u(x) \dd{x} \, - \, \int_{0}^{1} \tau u(x) \dd{x} \\
+                                                                      &= \, \int_{0}^{1} 2 \phi(x) u(x).
+\end{align*}
+Thus $F$ is Gateaux differentiable. As per the mapping $F'_{G}(\phi)$ defined by
+\[
+  u(x)\, \mapsto \, \int_{0}^{1} 2\phi(x) u(x)
+\]
+for each $u(x) \in C[0, 1]$, we must compute its Gateaux derivative: for all $v(x) \in C[0, 1]$, we have
+\begin{align*}
+  \lim\limits_{\tau \to 0} \frac{F'_{G}(\phi)(u + \tau v) - F'_{G}(\phi)(u)}{\tau} \, &= \, \lim\limits_{\tau \to 0} \frac{\int_{0}^{1} 2 \phi(x) (u(x) + \tau v(x)) \dd{x} - \int_{0}^{1} 2 \phi(x) u(x) \dd{x}}{\tau} \\
+                                                                                      &= \, \lim\limits_{\tau \to 0} \frac{\int_{0}^{1} 2 \tau \phi(x) v(x) \dd{x}}{\tau} \\
+                                                                                      & = \, \int_{0}^{1} 2 \phi(x) v(x).
+\end{align*}
+This is the Gateaux derivative of the mapping $F'_{G}(\phi)$. Now, observe that $u, v \in C[0, 1]$ implies
+\begin{align*}
+  F'_{G}(\phi)(u + v) \, &= \, \int_{0}^{1} 2 \phi(x)(u(x) + v(x)) \dd{x} \\ 
+                         &= \, \int_{0}^{1} 2 \phi(x)u(x) \dd{x} + \int_{0}^{1} 2 \phi(x)v(x) \dd{x} \\
+                         &= \, F'_{G}(\phi)(u) + F'_{G}(\phi)(v).
+\end{align*}
+For all $u \in \mathcal{C}[0, 1]$ and constants $c \in \mathbb{R}$, it is trivial that $F'_{G}(\phi)(cu) = c F'_{G}(\phi)(u)$. We deduce that $F'_{G}(\phi)$ is a linear map. To demonstrate that it is continuous, we need only demonstrate it is bounded: consider the unit ball of all $u \in \mathcal{C}[0, 1]$ such that $\sup_{x \in \mathbb{R}} \abs{u(x)} \le 1$. Then
+\begin{align*}
+  \abs{F'(G)(\phi)(u)} \, &= \, \abs{\int_{0}^{1} \phi(x)u(x) \dd{x}} \\
+                          &\le  \, \sqrt{\int_{0}^{1} \phi(x)^{2} \dd{x}}\sqrt{\int_{0}^{1} u^{2}(x) \dd{x}} \\
+                          &\le \, \sqrt{\int_{0}^{1} \phi(x)^{2} \dd{x}}.
+\end{align*}
+Since $\phi^{2}(x) \in C[0, 1]$, it is bounded; thus the final term of this inequality. We conclude that $F'_{G}(\phi)$ is bounded on the image of the unit ball, so it is bounded everywhere --- hence it is continuous.
+
+% --------------------------------------------- %
+
+\end{document}
