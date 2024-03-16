@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.24)  11 MAR 2024 10:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.24)  16 MAR 2024 16:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -264,7 +264,7 @@ Package: xparse 2023-02-02 L3 Experimental document command parser
 Package: esint 
 \symlargesymbolsA=\mathgroup9
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 7.
+Package hyperref Info: Option `colorlinks' set `true' on input line 8.
 \c@theorem=\count288
 \c@lemma=\count289
 \c@proposition=\count290
@@ -375,15 +375,15 @@ Package rerunfilecheck Info: File `fuck.out' has not changed.
 (rerunfilecheck)             Checksum: 1CB1327C6BEA5DCA2181089DF8A1B17E;355.
  ) 
 Here is how much of TeX's memory you used:
- 10828 strings out of 477985
- 161696 string characters out of 5840058
+ 10826 strings out of 477985
+ 161687 string characters out of 5840058
  1857388 words of memory out of 5000000
- 30854 multiletter control sequences out of 15000+600000
+ 30852 multiletter control sequences out of 15000+600000
  529985 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,6n,77p,451b,435s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,77p,451b,434s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on fuck.pdf (4 pages, 200814 bytes).
+Output written on fuck.pdf (4 pages, 206272 bytes).
 PDF statistics:
  142 PDF objects out of 1000 (max. 8388607)
  104 compressed objects within 2 object streams

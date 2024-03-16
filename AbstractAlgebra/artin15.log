@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.24)  11 MAR 2024 14:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2024.1.24)  16 MAR 2024 16:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -263,34 +263,41 @@ Package: xparse 2023-02-02 L3 Experimental document command parser
 )) (/usr/share/texmf-dist/tex/latex/esint/esint.sty
 Package: esint 
 \symlargesymbolsA=\mathgroup9
+) (/usr/share/texmf-dist/tex/latex/tex-gyre/tgpagella.sty
+Package: tgpagella 2009/09/27 v1.2 TeX Gyre Pagella as default roman family
+) (/usr/share/texmf-dist/tex/latex/eulervm/eulervm.sty
+Package: eulervm 2005/01/11 v4.0 (WaS)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 7.
+Package hyperref Info: Option `colorlinks' set `true' on input line 8.
 \c@theorem=\count288
 \c@lemma=\count289
 \c@proposition=\count290
 \c@corollary=\count291
 \c@claim=\count292
- (./artin15.aux)
+LaTeX Font Info:    Trying to load font information for T1+qpl on input line 41.
+ (/usr/share/texmf-dist/tex/latex/tex-gyre/t1qpl.fd
+File: t1qpl.fd 2009/09/25 v1.2 font definition file for T1/qpl
+) (./artin15.aux)
 \openout1 = `artin15.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -348,20 +355,24 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 \makeMPintoPDFobject=\count298
 \everyMPtoPDFconversion=\toks30
 )) (/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 32.
+Package hyperref Info: Link coloring ON on input line 41.
  (./artin15.out) (./artin15.out)
 \@outlinefile=\write3
 \openout3 = `artin15.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
- (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+LaTeX Font Info:    Trying to load font information for U+zeur on input line 44.
+ (/usr/share/texmf-dist/tex/latex/eulervm/uzeur.fd
+File: uzeur.fd 2005/01/11 v4.0 (WaS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
- (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+LaTeX Font Info:    Trying to load font information for U+zeus on input line 44.
+ (/usr/share/texmf-dist/tex/latex/eulervm/uzeus.fd
+File: uzeus.fd 2005/01/11 v4.0 (WaS)
 )
-LaTeX Font Info:    Trying to load font information for U+esint on input line 35.
+LaTeX Font Info:    Trying to load font information for U+zeuex on input line 44.
+ (/usr/share/texmf-dist/tex/latex/eulervm/uzeuex.fd
+File: uzeuex.fd 2005/01/11 v4.0 (WaS)
+)
+LaTeX Font Info:    Trying to load font information for U+esint on input line 44.
  (/usr/share/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 ) (./artin15.toc)
@@ -370,23 +381,23 @@ File: uesint.fd
 
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2] [3] (./artin15.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}] [2] [3] [4] [5] [6] [7] (./artin15.aux)
 Package rerunfilecheck Info: File `artin15.out' has not changed.
-(rerunfilecheck)             Checksum: 87A34574B5C2299B0BDCA30C016CBDFE;310.
+(rerunfilecheck)             Checksum: 60A89745E792E4C466C5F3B373EF36AA;523.
  ) 
 Here is how much of TeX's memory you used:
- 10838 strings out of 477985
- 161872 string characters out of 5840058
- 1862388 words of memory out of 5000000
- 30856 multiletter control sequences out of 15000+600000
- 532285 words of font info for 90 fonts, out of 8000000 for 9000
+ 11030 strings out of 477985
+ 165162 string characters out of 5840058
+ 1863388 words of memory out of 5000000
+ 31009 multiletter control sequences out of 15000+600000
+ 563714 words of font info for 105 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,8n,77p,365b,460s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on artin15.pdf (3 pages, 190800 bytes).
+ 75i,11n,77p,408b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/euex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eurm7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb>
+Output written on artin15.pdf (7 pages, 237142 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
- 89 compressed objects within 1 object stream
- 22 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 169 PDF objects out of 1000 (max. 8388607)
+ 130 compressed objects within 2 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 25 words of extra memory for PDF output out of 10000 (max. 10000000)
 

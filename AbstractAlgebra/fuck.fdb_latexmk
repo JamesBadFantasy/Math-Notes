@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1710167394 "fuck.tex" "fuck.pdf" "fuck" 1710167394 0
+["pdflatex"] 1710619411 "fuck.tex" "fuck.pdf" "fuck" 1710619411 0
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1704400182 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbi1095.tfm" 1704400182 3072 19a65fbc725cfc66f5a5fc183b9d418b ""
@@ -117,10 +117,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "fuck.aux" 1710167394 1064 0c545062e93765577adc3621f3272855 "pdflatex"
-  "fuck.out" 1710167394 355 1cb1327c6bea5dca2181089df8a1b17e "pdflatex"
-  "fuck.tex" 1710167393 10644 0dd8027b099ce4200f6b1f5a36833ee3 ""
-  "fuck.toc" 1710167394 305 b452b6a70d9471df26453b643bdda93c "pdflatex"
+  "fuck.aux" 1710619411 1064 0c545062e93765577adc3621f3272855 "pdflatex"
+  "fuck.out" 1710619411 355 1cb1327c6bea5dca2181089df8a1b17e "pdflatex"
+  "fuck.tex" 1710619409 11687 07b04b32f2a73616a0fd261b9ccbec22 ""
+  "fuck.toc" 1710619411 305 b452b6a70d9471df26453b643bdda93c "pdflatex"
   (generated)
   "fuck.aux"
   "fuck.log"

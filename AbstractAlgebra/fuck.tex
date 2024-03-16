@@ -3,6 +3,7 @@
 \usepackage{geometry, changepage, hyperref}
 \usepackage{amsmath, amssymb, amsthm, bm}
 \usepackage{physics, esint}
+% \usepackage{fourier}
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
 \setlength{\parindent}{0pt}
@@ -13,7 +14,6 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
 \newtheorem{claim}{Claim}
-\newtheorem*{ex1}{Example: Symmetries of a Cube}
 
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
@@ -94,7 +94,7 @@ The operation $\ast$ need not be commutative --- that is, a set where $a \ast b$
 These examples of groups have been pretty shit, in my opinion. We're gonna examine much more interesting ones from geometry, number theory, and linear algebra. \textbf{This begins with geometry --- specifically symmetry}.
 
 \begin{adjustwidth}{0.5cm}{}
-  \s
+  $\text{ } \\$
   \textbf{Example: The Cube}. Paint each 8 faces of a cube a different color, and imagine the set of distinct rotations of the cube. We can compose two rotations by performing one after the other. Let's denote the set of rotations by $G$ and the operation by $\ast$.
   
   $(G, \ast)$ is closed and associate, because duh. There's an identity rotation --- namely doing nothing --- and each rotation can be ``performed in reverse'' to yield inverses. So, the symmetries $(G, \ast)$ of a cube constitute a group. 
@@ -116,7 +116,20 @@ In fact, \textbf{the symmetries of \textit{every} shape form a group}: octahedro
 
 \section{Day 5}
 
-Groups were discovered in the 1820s by the prodigy Évariste Galois at 18-years-old. Unfortunately, he died only one year later. Now it is your turn to study group theory. For fifty years after its inception, group theory studied one group: the \textbf{symmetric group}.
+Groups were discovered in the 1830s by the prodigy Évariste Galois at 18-years-old. Unfortunately, he died only one year later. Now it is your turn to study group theory. Group theory initially studied only a single group (and its subgroups): the \textbf{symmetric group}.
+
+\begin{adjustwidth}{0.5cm}{}
+  $\text{ } \\$
+  \textbf{Example: The Symmetric Group of Order 3}: $S_{3}$ denotes the group of permutations of three objects --- say, $A$, $B$, and $C$. The elements of $S_{3}$ are the \textit{actions} of permuting: the operation of $S_{3}$ is performing one permutation after the other. Here are some elements of $S_{3}$:
+  \begin{align*}
+    % \text{The }\text{action} \quad \wideOarc{ABC} \quad \text{ induces the permutation } \quad CBA. \\
+    % \text{The }\text{action} \quad \wideOarc{AB}C \quad \text{ induces the permutation } \quad BAC. \\
+    % \text{The identity }\text{element } \quad ABC \quad \text{ induces the permutation } \quad ABC.
+  \end{align*}
+  Combining permutations in $S_{3}$ is obviously closed and associative. It has an identity --- the permutation of doing nothing --- and each permutation may be ``performed in reverse'', so each element has an inverse. Thus $S_{3}$ is a group. 
+\end{adjustwidth}
+
+In general, $S_{n}$ denotes the group of permutations of $n$ objects. It has $n!$ elements.
 
 % 1. Let n be a positive integer. How many elements are in the group S_n?
 % 2. Is S_n ever Abelian?

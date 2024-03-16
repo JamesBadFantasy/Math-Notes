@@ -14,6 +14,13 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{claim}{Claim}
 
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+
 \title{MATH-UA 349: Homework 6}
 \author{James Pagan, March 2024}
 \date{Professor Kleiner}
@@ -29,6 +36,119 @@
 % --------------------------------------------- %
 
 \section{Problem 1}
+
+\begin{proof}
+  Let $r_{1}, \ldots, r_{n}$ be a basis of $R$ as an $F$-vector space and select nonzero $r \in R$ arbitrarily; we must demonstrate that $r$ is a unit. Define a mapping $\phi : R \to R$ by $\phi(x) = rx$. It is clear that $\phi$ is a linear operator on the $F$-vector space $R$.
+  \begin{enumerate}
+    \item $\phi$ is injective: $\phi(x) = 0$ implies $rx = 0$ implies $x = 0$, since $R$ is an integral domain.
+    \item $\phi$ is surjective: this follows from the fact $\phi$ is a linear operator on a finite-dimensional vector space. Such operators are injective if and only if they are surjective by the Rank-Nullity Theorem.
+  \end{enumerate}
+  Since $\phi$ is surjective, there exists $s \in R$ such that $\phi(s) = rs = 1$. We conclude that all nonzero $r \in R$ are units, so $R$ is a field.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+\begin{proof}
+  Simply substitute $x = \tfrac{-b + \delta}{2}$ into the quadratic equation:
+  \begin{align*}
+    x^{2} + bx + c \, &= \, \left( \frac{-b + \delta}{2} \right)^{2} + b \left( \frac{-b + \delta}{2} \right) + c \\
+                      &= \, \frac{b^{2} - 2b \delta + \delta^{2}}{4} \, + \, \frac{-2b^{2} + 2b \delta}{4} + \frac{4c}{4} \\
+                      &= \, \frac{\delta^{2} - b^{2} + 4c}{4} \\
+                      &= \, \frac{(b^{2} - 4c) - b^{2} + 4c}{4} \\
+                      &= \, 0
+  \end{align*}
+  Similar logic demonstrates that $x = \tfrac{-b - \delta}{2}$ is a root of the quadratic. Now, suppose that $b^{2} - 4c$ is \textit{not} a square; then adjoin $\delta$ to $F$ such that $\delta^{2} = b^{2} - 4c$. Identical logic to the above demonstrates that $\tfrac{-b \pm \delta}{2}$ are the two roots of $f$. Since $\delta \notin F$, neither of these roots are elements of $F$ --- so $f$ has no roots in $F$.
+\end{proof}
+
+
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+\begin{proof}
+  Observe that $a_{0} \ne 0$ by the irreducibility of $f$, so $\alpha \ne 0$. Hence claim the inverse has the form
+  \[
+    \boxed{\alpha^{-1} \, = \, -\frac{1}{\alpha_{0}}\sum\limits_{i = 1}^{n} a_{i} \alpha^{i - 1}}.
+  \]
+  To verify this, we need only multiply it by $\alpha$:
+  \begin{align*}
+    \alpha \left( - \frac{1}{a_{0}}\sum\limits_{i = 1}^{n} \alpha_{i} \alpha^{i - 1} \right) \, &= \, - \frac{1}{a_{0}} \sum\limits_{i = 1}^{n} a_{i} \alpha^{i} \\
+                                                                                                &= \, - \frac{1}{a_{0}} \left( - a_{0}  + \sum\limits_{i = 0}^{n} a_{i} \alpha^{i} \right) \\
+                                                                                                &= -\frac{1}{a_{0}} \left( -a_{0} + 0 \right) \\
+                                                                                                &= 1.
+  \end{align*}
+  This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 4}
+
+\begin{proof}
+  There are two facts which propel our observations:
+  \begin{enumerate}
+    \item $F(\alpha)$ has prime degree, and $\alpha^{2} \in F(\alpha)$.
+    \item $\alpha^{2} \notin F$, since $\alpha$ has degree $5$.
+  \end{enumerate}
+  Thus Corollary 15.3.7 implies that $\alpha^{2}$ has degree $5$, so $F(\alpha^{2}) = F(\alpha)$.
+\end{proof}
+
+
+% --------------------------------------------- %
+
+\section{Problem 5}
+
+\begin{proof}
+  A quick examination using the Einstein criterion yields that $x^{4} + 3x + 3$ is irreducible over $\mathbb{Q}$; thus it is the minimal polynomial of some algebraic number $\alpha$. Since $3$ and $4$ are relatively prime, we have that
+  \[
+    12 = [\mathbb{Q}(\alpha, \sqrt[3]{2}) : \mathbb{Q}] \, = \, [\mathbb{Q}(\alpha, \sqrt[3]{2}) : \mathbb{Q}(\sqrt[3]{2})] \, [\mathbb{Q}(\sqrt[3]{2}) : \mathbb{Q}] \, = \, [\mathbb{Q}(\alpha, \beta) : \mathbb{Q}(\sqrt[3]{2})] \times 3.
+  \]
+  Thus $[\mathbb{Q}(\alpha, \sqrt[3]{2}) : \mathbb{Q}(\sqrt[3]{2})] = 4$, so $\deg_{\mathbb{Q}(\sqrt[3]{2})} (\alpha) = 4$. We conclude that the minimal polynomial $x^{4} + 3x + 3$ cannot be reduced in $\mathbb{Q}(\sqrt[3]{2})$.
+\end{proof}
+
+
+% --------------------------------------------- %
+
+\section{Problem 6}
+
+Realize that the minimal polynomial of $\zeta_{5}$ is $x^{4} + x^{3} + x^{2} + x + 1$ and the minimal polynomial of $\zeta_{7}$ is $x^{6} + x^{5} + x^{4} + x^{3} + x^{2} + x + 1$ --- hence they have degrees $4$ and $6$. Clearly these polynomials are irreducible in $\mathbb{Q}$.
+
+By Corollary 15.3.8 in Artin, $[\mathbb{Q}(\zeta_{5}, \zeta_{7}) : \mathbb{Q}]$ is divisible by $[\mathbb{Q}(\zeta_{5}) : \mathbb{Q}] = 4$ and $\mathbb{Q}(\zeta_{7} : \mathbb{Q}) = 6$, but is less than their product --- hence it is either $12$ or $24$. Hence.
+\[
+  [\mathbb{Q}(\zeta_{5}, \zeta_{7}) : \mathbb{Q}(\zeta_{7})] \times 6 \, = \, [\mathbb{Q}(\zeta_{5}, \zeta_{7}) : \mathbb{Q}(\zeta_{7})] \, [\mathbb{Q}(\zeta_{7}) : \mathbb{Q}] \, = \, [\mathbb{Q}(\zeta_{5}, \zeta_{7}) : \mathbb{Q}] \, \in \, \{ 12, 24 \}.
+\]
+Thus $[\mathbb{Q}(\zeta_{5}, \zeta_{7}) : \mathbb{Q}(\zeta_{7})]$ is not $1$, so $\mathbb{Q}(\zeta_{5}, \zeta_{7}) \ne \mathbb{Z}(\zeta_{7})$. We conclude that $\zeta_{5} \notin \mathbb{Q}(\zeta_{7})$.
+
+% --------------------------------------------- %
+
+\section{Problem 7}
+
+The polynomial $x^{4} - a$ factors in $\mathbb{Q}(\sqrt[4]{2})$ as
+\[
+  (x^{2} + \sqrt{a})(x + \sqrt[4]{2})(x - \sqrt[4]{2}).
+\]
+This makes it clear that $\sqrt[4]{2}$ has degree $2$ in $\mathbb{Q}[\sqrt{2}]$. Thus
+\[
+  [\mathbb{Q}(\sqrt[4]{2}) : \mathbb{Q}] \, = \, [\mathbb{Q}(\sqrt[4]{2}) : \mathbb{Q}(\sqrt{2})] \, [\mathbb{Q}(\sqrt{2}) : \mathbb{Q}] \, = \, 2 \times 2 \, = \, 4,
+\]
+which yields the required result.
+
+% --------------------------------------------- %
+
+\section{Problem 8}
+
+\begin{proof}
+  Let $\deg \alpha = n$ and $\deg \alpha = m$. We start with the following observation:
+  \begin{equation}
+    [\mathbb{Q}(\alpha, \beta) : \mathbb{Q}] \, = \, [\mathbb{Q}(\alpha, \beta) : \mathbb{Q}(\alpha)] \, [\mathbb{Q}(\alpha), \mathbb{Q}].
+  \end{equation}
+  Clearly $[\mathbb{Q}(\alpha), \mathbb{Q}] \, = \, n$. As per $[\mathbb{Q}(\alpha, \beta) : \mathbb{Q}(\alpha)]$: the set $1, \beta, \ldots, \beta^{n - 1}$ spans $\mathbb{Q}(\alpha, \beta)$ over $\mathbb{Q}(\alpha)$, so its dimension as a $\mathbb{Q}(\alpha)$-vector space is $n$ or smaller. Thus both terms on the right-hand side of equation are finite, so $[\mathbb{Q}(\alpha, \beta) : \mathbb{Q}]$ is finite. We conclude that $\mathbb{Q}(\alpha, \beta)$ is a finite extension over $\mathbb{Q}$.
+
+  Since $\alpha + \beta$ and $\alpha \beta$ are elements of the finite extension $\mathbb{Q}(\alpha, \beta)$, they must be algebraic.
+\end{proof}
 
 % --------------------------------------------- %
 
