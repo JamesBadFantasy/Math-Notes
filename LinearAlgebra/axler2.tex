@@ -1,0 +1,257 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+\usepackage{tgpagella, eulervm}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\s}{$\text{ } \\ \text{ }$}
+
+% In the book it's "Finite Dimensional Vector Spaces."
+\title{Axler: Bases}
+\author{James Pagan}
+\date{March 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Span and Linear Independence}
+
+% --------------------------------------------- %
+
+\subsection{Linear Combinations and Span}
+
+Let $(\vec{v}_{\alpha})$ be vectors in an $F$-vector space $V$. Any vector of the form $\lambda_{1} \vec{v}_{\alpha_{1}} + \cdots + \lambda_{n} \vec{v}_{\alpha_{n}}$ for $\vec{v}_{a_{i}} \in (\vec{v}_{\alpha})$ and $\lambda_{i} \in F$ is called a \textbf{linear combination} of $\vec{v}_{1}, \ldots, \vec{v}_{n}$. The set of all linear combinations constitutes the \textbf{span} of the vectors:
+\[
+  \spn(\vec{v}_{\alpha}) \quad \stackrel{\text{def}}{=} \quad \{ \lambda_{1} \vec{v}_{\alpha_{i}} + \cdots + \lambda_{n} \vec{v}_{\alpha_{n}} \, \mid \, n \in \mathbb{Z}_{> 0}, \vec{v}_{\alpha_{i}} \in (\vec{v}_{\alpha}), \lambda_{i} \in F \}.
+\]
+It is quite clear that $\spn(\vec{v}_{1}, \ldots, \vec{v}_{n})$ is the smallest subspace of $V$ that contains $(\vec{v}_{\alpha})$. The vectors \textbf{span} $V$ if $\spn(\vec{v}_{\alpha}) = V$; if $V$ is spanned by some finite list of vectors, it is \textbf{finite-dimensional}. Otherwise, $V$ is \textbf{infinite-dimensional}. These are the classical terms for $V$ being a finitely-generated $F$-module.
+
+% --------------------------------------------- %
+
+\subsection{Linear Independence and Bases}
+
+A list of vectors $(\vec{v}_{a})$ in $V$ is \textbf{linearly independent} if for every nonempty finite subset $\vec{v}_{\alpha_{1}}, \ldots, \vec{v}_{\alpha_{n}} \in (\vec{v}_{\alpha})$, the only solution to the equation
+\[
+  \lambda_{1} \vec{v}_{\alpha_{1}} + \cdots + \lambda_{n} \vec{v}_{\alpha_{n}} \, = \, \vec{0}
+\]
+is when $\lambda_{1} = \cdots = \lambda_{n} = 0$. We declare the empty list $\varnothing$ to be linearly independent. A \textbf{linearly independent subset} is a list of vectors $(\vec{v}_{\alpha})$ which are linearly independent.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}[Linear Dependence Lemma]
+    Suppose $\vec{v}_{1}, \ldots, \vec{v}_{n}$ is a dependent list of vectors in $V$. Then there exists $\vec{v}_{k}$ from the list such that
+    \[
+      \vec{v}_{k} \in \spn(\vec{v}_{1}, \ldots, \vec{v}_{n}),
+    \]
+    and if one removes $\vec{v}_{k}$ from the list, the span of the remaining list equals $\spn(\vec{v}_{1}, \ldots, \vec{v}_{n})$.
+  \end{lemma}
+  \begin{proof}
+    Let $k \ge 2$ be the smallest integer such that $\vec{v}_{1}, \ldots, \vec{v}_{k}$ is dependent; there exist $\lambda_{1}, \ldots, \lambda_{n}$ not all zero such that $\lambda_{1} \vec{v}_{1} + \cdots + \lambda_{k} \vec{v}_{k} = \vec{0}$. We must have $\lambda_{k} \ne 0$, since $\vec{v}_{1}, \ldots, \vec{v}_{k - 1}$ are dependent; thus
+    \[
+      \vec{v}_{k} \, = \, - \frac{\lambda_{1}}{\lambda_{k}} \vec{v}_{1} \, - \, \cdots \, - \, \frac{\lambda_{k - 1}}{\lambda_{k}} \vec{v}_{k},
+    \]
+    so $\vec{v}_{k} \in \spn(\vec{v}_{1}, \ldots, \vec{v}_{k - 1})$. If we have any $\vec{w} \in \spn(\vec{v}_{1}, \ldots, \vec{v}_{n})$, we can substitute this expression for $\vec{v}_{k}$ into the equation to express $\vec{w}$ as a linear combination of the $\vec{v}_{i}$ excluding $\vec{v}_{k}$; hence the span remains unchanged.
+  \end{proof}
+\end{adjustwidth}
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}[Finite-Dimensional Case]
+    Let $V$ be a finite-dimensional vector space. Suppose that $\vec{u}_{1}, \ldots, \vec{u}_{m}$ is independent in $V$ and $\vec{w}_{1}, \ldots, \vec{w}_{n}$ spans $V$. Then $m \le n$
+  \end{proposition}
+  \begin{proof}
+    We present an algorithmic proof:
+    \begin{enumerate}
+      \item \textbf{Step 1}: The list $\vec{u}_{1}, \vec{w}_{1}, \ldots, \vec{w}_{n}$ must be linearly dependent, since $\vec{u}_{1}$ lies in the span of the $\vec{w}_{i}$. Hence we may remove some $\vec{w}_{i}$ from this list via the Linear Dependence Lemma to attain a new list which spans $V$.
+      \item \textbf{Step 2}: Now consider the list $\vec{u}_{2}, \vec{u}_{1}, \vec{w}_{1}, \ldots, \vec{w}_{n}$. The Linear Dependence Lemma allows us to remove some $\vec{w}_{i}$ to attain a list which spans $V$.
+    \end{enumerate}
+    We continue this process for $m$ steps. Along each step, the Linear Dependence Lemma allows us to pluck out a $\vec{w}_{i}$ --- a $\vec{v}_{i}$ is never removed. Thus $m \le n$.
+  \end{proof}
+\end{adjustwidth}
+
+This theorem generalizes to infinite lengths: suppose $\vec{v}_{1}, \ldots, \vec{v}_{n}$ spans $V$. Any infinite independent list $(\vec{u}_{\beta})$ in $V$ contains an independent sublist with length greater than $n$ --- a contradiction. Hence all independent lists in $V$ are finite.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}[Infinite-Dimensional Case]
+    Let $V$ be a vector space. Suppose that $(\vec{u}_{\beta})$ of length $U$ is independent in $V$ and $(\vec{w}_{\alpha})$ of length $W$ spans $V$. Then $U \le W$.
+  \end{proposition}
+  \begin{proof}
+    If one of $U$ and $W$ is finite, the result is implied by Proposition 1. Otherwise --- suppose that $(\vec{u}_{\beta})$ is an independent list of length $U$ in $V$ and $(\vec{w}_{\alpha})$ is a spanning list of length $W$ in $V$ such that $U, W \ge \aleph_{0}$. 
+
+    By Corollary 1, the list $(\vec{u}_{\beta})$ may be extended to become a basis $(\vec{v}_{\gamma})$. For each $\vec{w} \in (\vec{w}_{\alpha})$, there exists a finite subset $E_{\vec{w}} \subset (\vec{v}_{\gamma})$ such that
+    \[
+      \vec{w} \, = \, \sum\limits_{\vec{v} \in E_{\vec{w}}} \lambda_{i} \vec{v}.
+    \]
+    for $\lambda_{i} \in F$. By the Axiom of Choice, $\bigcup\limits_{\vec{w} \in (\vec{w}_{\alpha})} E_{\vec{w}}$ has the same cardinality as $(\vec{w})_{\alpha}$. 
+
+    We claim this union is equal to $(\vec{v}_{\gamma})$. All $\vec{v}_{\gamma}$ are expressible as linear combination of some $\vec{w}_{\alpha_{1}}, \ldots, \vec{w}_{\alpha_{n}}$ --- which in turn are a linear combination of finitely many elements in $(\vec{v}_{\gamma})$. As the elements in $(\vec{v}_{\gamma})$ are independent, the only possibility is that $\vec{v}_{\gamma} \in E_{\vec{w}_{\alpha_{i}}}$ for some $i$. Hence $\bigcup\limits_{\vec{w} \in (\vec{w}_{\alpha})} E_{\vec{w}} = (\vec{v}_{\gamma})$, so
+    \[
+      U = \abs{(\vec{u}_{\beta})} \le \abs{(\vec{v}_{\gamma})} = \abs{(\vec{w}_{\alpha})} = W
+    \]
+    Thus the desired result holds.
+  \end{proof}
+\end{adjustwidth}
+
+The following result is an easy corollary from Commutative Algebra. We prove it using elementary techniques as well:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Every subspace of a finite-dimensional vector space $V$ is finite-dimensional.
+  \end{proposition}
+  \begin{proof}
+    $V$ is a finitely-generated module over a Noetherian ring, so all submodules of $V$ are finitely generated. If desired without modules, the proof is algorithmic: let $W \subseteq V$ be a subspace. We construct a set of vectors which span $V$.
+    \begin{enumerate}
+      \item \textbf{Step 1}: If $W = 0$, we are done; otherwise, select some vector $\vec{w} \in W$.
+      \item \textbf{Step n}: If $U = \spn(\vec{w}_{1}, \ldots, \vec{w}_{n - 1})$, then $U$ is finite-dimensional. Otherwise, choose a vector $\vec{u}_{n} \notin W$ such that
+      \[
+        \vec{u}_{n} \notin \spn(\vec{u}_{1}, \ldots, \vec{u}_{n - 1}).
+      \]
+    \end{enumerate}
+    This set constructs a linearly independent list --- the length of which must be finite by Proposition 2. Thus the process must terminate, in which case $\vec{w}$
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Bases}
+
+A \textbf{basis} of $V$ is a list of vectors in $V$ that are linearly independent and span $V$. If $(\vec{v}_{\alpha})$ is a basis of $V$, each vector $\vec{w} \in V$ may be written as a unique combination
+\[
+  \vec{w} \, = \, \lambda_{1} \vec{v}_{\alpha_{1}} + \cdots + \lambda_{n} \vec{v}_{\alpha_{n}}
+\]
+for scalars $\lambda_{1}, \ldots, \lambda_{n} \in F$ and indices $\alpha_{i}$. We now expand upon Axler by discussing infinite-dimensional vector spaces:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    All vector spaces $V$ have a basis.
+  \end{theorem}
+  \begin{proof}
+    We furnish the tools necessary to apply Zorn's Lemma. Let $\mathcal{S}$ be the family of all linearly independent subsets of $V$, partially ordered by inclusion. Let $\mathcal{T}$ be a totally ordered subset of sets in $\mathcal{S}$.
+    \begin{adjustwidth}{0.5cm}{}
+      \begin{claim}
+        The union of all sets in $\mathcal{T}$ is a linearly independent subset of $V$.
+      \end{claim}
+      \begin{proof}\renewcommand{\qedsymbol}{}
+        Let $B = \bigcup_{A \in \mathcal{T}} A$. We must demonstrate that $B$ is linearly independent; hence, let $\vec{v}_{1}, \ldots, \vec{v}_{n}$ be some finite subset of $B$. Then there exist $A_{1}, \ldots, A_{n} \in \mathcal{T}$ such that $\vec{v}_{i} \in A_{i}$. 
+
+        Since $\mathcal{T}$ is totally ordered, one of these sets is a maximal element; thus $\vec{v}_{1}, \ldots, \vec{v}_{n} \in A_{j}$ for some $j$. Because $A_{j} \in \mathcal{S}$, it is a linearly independent subset; hence $\vec{v}_{1}, \ldots, \vec{v_{n}}$ are linearly independent. We conclude that $B$ is a linearly independent subset of $V$ --- hence, it lies in $\mathcal{S}$.
+      \end{proof}
+    \end{adjustwidth}
+    The set $B$ described above thus functions as an upper bound of $\mathcal{T}$ with respect to inclusion. Zorn's lemma now implies the existence of a maximal subset $M \in \mathcal{S}$.
+
+    The maximality of $M$ entails that for all $\vec{w} \in V$, we have $\spn(M) \cup \{ \vec{w} \} = \spn(M)$. Hence $\vec{w} \in \spn(M)$; we conclude that $V \subseteq \spn(M)$, which entails $V = \spn(M)$. Hence $M$ is a basis of $V$.
+  \end{proof}
+\end{adjustwidth}
+
+Hence all $F$-modules are free. Theorem 1 is actually \textit{equivalent} to the Axiom of Choice.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{corollary}
+    Any linearly independent list $(\vec{v}_{\alpha})$ can be extended to become a basis.
+  \end{corollary}
+  \begin{proof}
+    The argument follows Theorem 1 precisely --- except we define $\mathcal{S}$ as the set of all linearly independent subsets of $V$ \textit{that contains} $(\vec{v}_{\alpha})$. The argument demonstrates the existence of a basis which contains $(\vec{v}_{\alpha})$.
+  \end{proof}
+\end{adjustwidth}
+
+Its sister theorem is proven below:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{corollary}
+    Any spanning list $(\vec{v}_{\alpha})$ can be reduced to become a basis.
+  \end{corollary}
+  \begin{proof}
+    In the proof of Theorem 1, let $\mathcal{S}$ be the all the linearly independent subsets of $(\vec{v}_{\alpha})$. The same argument demonstrates that an element of $\mathcal{S}$ is a basis, as desired.
+  \end{proof}
+\end{adjustwidth}
+
+If $V$ is finite-dimensional, algorithms can prove the above results by elementary means. The fact that all finite-dimensional vector spaces have a basis follows from Corollary 2.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $W \subseteq V$ be a subspace. Then there exist a subspace $U \subseteq V$ such that $V \, \cong \, W \oplus U$.
+  \end{proposition}
+  \begin{proof}
+    Let $(\vec{w}_{\alpha})$ be a basis of $W$; extend it to become $(\vec{v}_{\alpha})$, a basis of $V$. Define $(\vec{u}_{\gamma}) = (\vec{v}_{\alpha}) \setminus (\vec{w}_{\alpha})$, and let $U = \spn(\vec{u}_{\gamma})$. Two things:
+    \begin{enumerate}
+      \item Clearly $W + U = V$, since we defined these spaces by splitting the bases.
+      \item $W \cap U \, = \,  \vec{0}$, since the contrary would provide a nontrivial equation which expresses a linear combination of $(\vec{v}_{\alpha})$ as $\vec{0}$.
+    \end{enumerate}
+    We conclude via the results of LinearAlgebra/axler1.tex that $V \, \cong \, W \oplus U$.
+  \end{proof} 
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\section{Dimension}
+
+Before we may define dimension, we need the assistance of the following theorem:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Dimension Theorem]
+    Let $V$ be a vector space. All bases of $V$ have the same cardinality.
+  \end{theorem}
+  \begin{proof}
+    Let $(\vec{u}_{\alpha})$ and $(\vec{w}_{\beta})$ be bases of $V$ with cardinalities $U$ and $W$. We apply Proposition 2 in two ways:
+    \begin{enumerate}
+      \item Since $(\vec{u}_{\alpha})$ is independent and $(\vec{w}_{\beta})$ is spanning, $U \le W$.
+      \item Since $(\vec{w}_{\beta})$ is independent and $(\vec{u}_{\alpha})$ is spanning, $W \le U$.
+    \end{enumerate}
+    We conclude that $U = W$.
+  \end{proof}
+\end{adjustwidth}
+
+The cardinality of s bases of $V$ is called the \textbf{dimension} of $V$. Clearly finite-dimensional vector spaces have finite dimension, and otherwise for infinite-dimensional vector spaces.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Suppose $W \subseteq V$ is a subspace. Then $\dim W \le dim V$.
+  \end{proposition}
+  \begin{proof}
+    Let $(\vec{w}_{\beta})$ and $(\vec{v}_{\alpha})$ be bases of $W$ and $V$ respectively. Observe that $(\vec{w}_{\beta})$ is independent in $V$ and $(\vec{v}_{\alpha})$ spans $V$; hence the result is implied by Proposition 2.
+  \end{proof}
+\end{adjustwidth}
+
+Unfortunately, the next two results do not generalize to infinite-dimensional vector spaces.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $V$ be finite-dimensional. Then any independent list or spanning list of of length $\dim V$ is a basis.
+  \end{proposition}
+  \begin{proof}
+    Let $\dim V = n$ and let $\vec{v}_{1}, \ldots, \vec{v}_{n} \in V$ be an independent list. We may extend it to become a basis, yielding a list of length $n$. Thus it must add no new vectors; $\vec{v}_{1}, \ldots, \vec{v}_{n}$ is a basis. Similarly, if $\vec{v}_{1}, \ldots, \vec{v}_{n} \in V$ is spanning, it may be reduced to attain a basis --- a reduction which eliminates no vectors, so $\vec{v}_{1}, \ldots, \vec{v}_{n}$ is a basis.
+  \end{proof}
+  \begin{corollary}
+    Let $V$ be finite dimensional and let $W \subseteq V$ be a subspace. Then $V = W$ if and only if $\dim V = \dim W$. \s
+  \end{corollary}
+\end{adjustwidth}
+
+For a counterexample, consider the vector space of polynomials in real coefficients and countably many variables: $\mathbb{R}[x_{1}, x_{2}, x_{3}, \ldots]$ The list $x_{2}, x_{3}, \ldots$ is independent and the list $x_{1}, x_{2}, x_{3}, \ldots, x_{1} + x_{2}$ spans. Both have cardinality $\aleph_{0}$, but neither is a basis.
+
+% --------------------------------------------- %
+
+\end{document}

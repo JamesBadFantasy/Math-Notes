@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Span and Linear Independence}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Linear Combinations and Span}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Linear Independence and Bases}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Bases}{4}{section.2}%
+\contentsline {section}{\numberline {3}Dimension}{6}{section.3}%

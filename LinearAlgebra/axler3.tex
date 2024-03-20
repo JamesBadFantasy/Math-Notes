@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+\usepackage{tgpagella, eulervm}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{claim}{Claim}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\mathop{} \!\hat{\textbf{#1}}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\tensor}[1]{\mathsf{#1}}
+\newcommand{\spn}{\operatorname{span}}
+\newcommand{\nll}{\operatorname{null}}
+\newcommand{\range}{\operatorname{range}}
+
+\renewcommand{\grad}{\nabla}
+\renewcommand{\div}{\nabla \cdot}
+\renewcommand{\curl}{\nabla \cross}
+
+\title{Axler: Linear Maps}
+\author{James Pagán}
+\date{March 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Vector Space of Linear Maps}
+
+% --------------------------------------------- %
+
+\subsection{Definition}
+
+Let $V$ and $W$ be $F$-vector spaces. An $F$-module homomorphism is an \textbf{F-linear map} --- a function $\mat{T} : V \to W$ such that for all $\vec{u}, \vec{v} \in V$ and $\lambda \in F$,
+\begin{align*}
+  \mat{T}(\vec{u} + \vec{v}) \, &= \, \mat{T} \vec{u} + \mat{T} \vec{v} \\
+    \mat{T}(\lambda \vec{v}) \, &= \, \lambda \mat{T} \vec{v}.
+\end{align*}
+By the properties of module homomorphisms, $\mat{T}$ maps $\vec{0}$ to $\vec{0}$. Note that the indices of the following theorem depend on the Axiom of Choice:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{lemma}[Linear Map Lemma]
+    Suppose $(\vec{v}_{\alpha})$ is a basis of $V$ and $(\vec{w}_{\alpha})$ is a basis of $W$. Then there exists a unique linear map $\mat{T} : V \to W$ such that $\vec{v}_{\alpha} \leadsto \vec{w}_{\alpha}$.
+  \end{lemma}
+  \begin{proof}
+    Define $\mat{T}$ as such a linear map: for all $\vec{u} \in V$, express $\vec{u} = \lambda_{1} \vec{v}_{\alpha_{1}} + \cdots + \lambda_{n} \vec{v}_{\alpha_{n}}$, and define
+    \[
+      \mat{T} \vec{u} \quad \stackrel{\text{def}}{=} \quad \lambda_{1} \vec{w}_{\alpha_{1}} + \cdots + \lambda_{n} \vec{w}_{\alpha_{n}}.
+    \]
+    $\mat{T}$ is well-defined, since representation via a basis is unique. A rather tedious argument demonstrates that it satisfies the additive and multiplicative conditions. Unicity follows from the fact that the valuation of every point is predetermined since $(\vec{v}_{\alpha})$ and $(\vec{w}_{\alpha})$ is a basis. In fact, $\mat{T}$ is an isomorphism!
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Algebraic Operations on \texorpdfstring{$\mathcal{L}(V, W)$}{L(V, W)}}
+
+The notation $\mathcal{L}(V, W)$ denotes the set of all linear maps from $V$ to $W$. Like with modules, we can define three operations on this set: if $\mat{T}, \mat{S} \in \mathcal{L}(V, W)$, then for all $\vec{v} \in V$ and $\lambda \in F$:
+\begin{enumerate}
+  \item \textbf{Addition}: $\mat{T} + \mat{S}$ is the unique linear map such that $(\mat{T} + \mat{S}) \vec{v} = \mat{T} \vec{v} + \mat{S} \vec{v}$.
+  \item \textbf{Scalar Multiplication}: $\lambda \mat{T}$ is the unique linear map such that $(\lambda \mat{T}) \vec{v} = \lambda (\mat{T} \vec{v})$.
+\end{enumerate}
+Equipped with these operations, $\mathcal{L}(V, W)$ is a vector space over $F$. There is a third operation: if $\mat{T} \in \mathcal{L}(V, W)$ and $\mat{S} \in \mathcal{L}(W, U)$, then for all $\vec{v} \in V$ and $\lambda \in F$:
+\begin{enumerate}
+  \item \textbf{Multiplication}: $\mat{ST}$ is the unique linear map in $\mathcal{L}(V, U)$ such that $(\mat{ST}) \vec{v} \, = \, \mat{S} (\mat{T} \vec{v})$.
+\end{enumerate}
+Hence multiplication is simply a composition of mappings.
+
+% --------------------------------------------- %
+
+\section{Null Spaces and Ranges}
+
+The kernel and image of an $F$-module homomorphism $\mat{T} \in \mathcal{L}(V, W)$ are given special names when $F$ is a field: the null space and range. For all such $\mat{T}$, we define:
+\begin{enumerate}
+  \item \textbf{Null Space}: $\nll \mat{T} = \{ \vec{v} \in V \, \mid \, \mat{T} \vec{v} = \vec{0} \}$.
+  \item \textbf{Range}: $\range \mat{T} = \{ \mat{T} \vec{v} \, \mid \, \vec{v} \in V \}$.
+\end{enumerate}
+As with modules, $\nll \mat{T}$ is a subspace of $V$ and $\range \mat{R}$ is a subspace of $W$. Furthermore, $\mat{T}$ is injective if and only if $\nll \mat{T} = \vec{0}$ and surjective if and only if $\range \mat{T} = W$. A bijective linear map is called an \textbf{invertible linear map} or \textbf{isomorphism}.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}[Fundamental Theorem of Linear Maps]
+    Let $V$ be finite-dimensional and suppose $\mat{T} \in \mathcal{L}(V, W)$. Then $\range \mat{T}$ is a finite-dimensional subspace, and
+    \[
+      \dim V \, = \, \dim \nll \mat{T} + \dim \range \mat{T}.
+    \]
+  \end{theorem}
+  \begin{proof}
+    Let $\vec{u}_{1}, \ldots, \vec{u}_{m}$ be a basis of $\nll \mat{T}$; extend it to a basis of $V$, namely
+    \[
+      \vec{u}_{1}, \ldots, \vec{u}_{m}, \vec{v}_{1}, \ldots, \vec{v}_{n}.
+    \]
+    The proof is finished if we prove that $\mat{T} \vec{v}_{1}, \ldots, \mat{T} \vec{v}_{n}$ is a basis of $\range \mat{T}$.
+    \begin{enumerate}
+      \item \textbf{Spanning}: Select $\vec{w} \in V$ arbitrarily; there exist constants $\lambda_{i}$ and $\mu_{i}$ such that
+      \[
+        \vec{w} \, = \, \lambda_{1} \vec{u}_{1} + \cdots + \lambda_{m} \vec{u}_{n} + \mu_{1} \vec{v}_{1} + \cdots + \mu_{n} \vec{u}_{n}.
+      \]
+      Applying $\mat{T}$ to this equation, we find $\mat{T} \vec{w} = \mu_{1} \mat{T} \vec{v}_{1} + \cdots + \mu_{n} \mat{T} \vec{v}_{n}$. We conclude that $\range \mat{T} = \spn(\mat{T} \vec{v}_{1}, \ldots, \mat{T} \vec{v}_{n})$.
+      \item \textbf{Independence}: Follows from the fact that $\vec{u}_{1}, \ldots, \vec{u}_{m}, \vec{v}_{1}, \ldots, \vec{v}_{n}$ is a basis of $V$.
+    \end{enumerate}
+    This establishes the desired basis: hence $\range \mat{T}$ is finite-dimensional, and $\dim V = m + n = \dim \nll \mat{T} + \dim \range \mat{T}$.
+  \end{proof}
+\end{adjustwidth}
+
+The cardinals $\dim \nll \mat{T}$ and $\dim \range \mat{T}$ are called the \textbf{nullity} and \textbf{rank} of $\mat{T}$ respectively.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $V$ and $W$ be a finite-dimensional vector spaces.
+    \begin{enumerate}
+      \item If $\dim V < \dim W$, then no linear map $\mat{T} \in \mathcal{L}(V, W)$ can be surjective.
+      \item If $\dim V > \dim W$, then no linear map $\mat{T} \in \mathcal{L}(V, W)$ can be injective.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    For (1), we have that
+    \[
+      \dim \range \mat{T} \, \le \, \dim \range \mat{T} + \dim \nll \mat{T} \, = \, \dim V \, < \, \dim W,
+    \]
+    so $\range \mat{T} \ne W$; hence $\mat{T}$ is not surjective. Similarly for (2), we have
+    \[
+      \dim \nll \mat{T} \, = \, \dim V - \dim \range \mat{T} \, \ge \, \dim V - \dim W \, > \, 0,
+    \]
+    so $\nll \mat{T} \ne 0$ and $\mat{T}$ is not injective.
+  \end{proof}
+\end{adjustwidth}
+
+I do not know whether this result generalizes to infinite-dimensional vector spaces. It requires delicate cardinal arithmetic. However, it does imply this: if $V$ and $W$ are finite dimensional, the existence of invertible $\mat{T} \in \mathcal{L}(V, W)$ implies that $\dim V = \dim W$
+
+% --------------------------------------------- %
+
+\section{Matrices}
+
+% --------------------------------------------- %
+
+\end{document}

@@ -3,6 +3,7 @@
 \usepackage{geometry, changepage, hyperref}
 \usepackage{amsmath, amssymb, amsthm, bm}
 \usepackage{physics, esint}
+\usepackage{tgpagella, eulervm}
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
 \setlength{\parindent}{0pt}
@@ -86,7 +87,7 @@ A vector space over $\mathbb{R}$ is a \textbf{real vector space}, while vector s
 
 \section{Subspaces}
 
-A subset $U \subseteq V$ is a \textbf{subspace} if it is a vector space under the same field and operations as $V$.
+A subset $U \subseteq V$ is a \textbf{subspace} if it is a vector space under the field and operations of $V$.
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
@@ -97,29 +98,29 @@ A subset $U \subseteq V$ is a \textbf{subspace} if it is a vector space under th
   \end{proof}
 \end{adjustwidth}
 
-Let $V$ be an $F$-vector space with subspaces $V_{1}, \ldots, V_{m}$. We can consider two crucial operations on these subspaces: 
+Let $V$ be an $F$-vector space with subspaces $V_{1}, \ldots, V_{m}$. We consider two crucial operations on these subspaces: 
 
 \begin{enumerate}
 	\item \textbf{Sum}: The sum $V_{1} + \cdots + V_{n}$ is the set of all sums $m_{1} + \cdots + m_{n}$, where $m_{i} \in V_{i}$ ($i \in \{ 1, \ldots, n \}$). It is the smallest subspace of $V$ that contains all $V_{1}, \ldots, V_{n}$.
 	\item \textbf{Intersection}: The intersection $V_{1} \cap \cdots \cap V_{n}$ is the largest subspace of $V$ that is contained inside each $V_{1}, \ldots, V_{n}$.
 \end{enumerate}
 
-Axler discusses when $V_{1} + \cdots + V_{n}$ is isomorphic to $V_{1} \oplus \cdots \oplus V_{n}$, but in the interest of avoiding technicality, he defines direct sums indirectly: $V_{1} + \cdots + V_{n}$ is a \textbf{direct sum} if for all $\vec{v}_{i} \in V_{i}$, the equation
-\[
-  \vec{v}_{1} + \cdots + \vec{v}_{n} = \vec{0}
-\]
-has only one solution: when $\vec{v}_{1} = \cdots = \vec{v}_{n} = \vec{0}$.
+Let $V_{1}, \ldots, V_{n}$ be $F$-vector spaces. The \textbf{direct sum} $V_{1} \oplus \cdots \oplus V_{n}$ is the set of all formal pairs $(\vec{v}_{1}, \ldots, \vec{v}_{n})$, with addition and scalar multiplication defined componentwise.
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}
     Let $V_{1}, \ldots, V_{n} \subseteq V$ be $F$-subspaces. Then the following holds:
     \begin{enumerate}
-      \item $V_{1} + \cdots + V_{n}$ is a direct sum if and only if each $\vec{v}$ in the sum has a unique representation as sums of $\vec{v}_{i} \in V_{i}$.
-      \item $V_{1} + \cdots + V_{n}$ is a direct sum if and only if each 
-    \end{enumerate}
+      \item $V_{1} + \cdots + V_{n} \, \cong \, V_{1} \oplus \cdots \oplus V_{n}$ if and only if $\vec{v}_{1} + \cdots + \vec{v}_{n} = \vec{0}$ for $\vec{v}_{i} \in V_{i}$ implies that $\vec{v}_{1} = \cdots = \vec{v}_{n} = \vec{0}$.
+      \item $V_{1} + \cdots + V_{n} \, \cong \, V_{1} \oplus \cdots \oplus V_{n}$ if and only if each vector in the former decomposes as a sum of $\vec{v}_{i} \in V_{i}$ uniquely.
+    \end{enumerate} 
   \end{theorem}
   \begin{proof}
-    Suppose that there exists a nontrivial solution to the equation: some $\vec{v}_{1} + \cdots + \vec{v}_{n} = \vec{0}$ where some $\vec{v}_{i}$ is nonzero. Then
+    Suppose that $\vec{v}_{1} + \cdots + \vec{v}_{n} = \vec{0}$ for $\vec{v}_{i} \in V_{i}$ implies that $\vec{v}_{1} = \cdots = \vec{v}_{n} = \vec{0}$. Then define a linear map
+    \[
+      V_{1} \oplus \cdots \oplus V_{n} \, \mapsto \, V_{1} + \cdots + V_{n} \quad \text{by} \quad \vec{v}_{1}, \ldots, \vec{v}_{n} \, \leadsto \, \vec{v}_{1} + \cdots + \vec{v}_{n}.
+    \]
+    By definition, this map is surjective; it is injective by our hypothesis. Hence the two vector spaces are isomorphic. The converse is easy to deduce --- while result (2) is a mere corollary of the first.
   \end{proof}
 \end{adjustwidth}
 

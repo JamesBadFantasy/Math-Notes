@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1710800551 "axler1.tex" "axler1.pdf" "axler1" 1710800552 0
+["pdflatex"] 1710892519 "axler3.tex" "axler3.pdf" "axler3" 1710892519 0
   "/usr/share/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc" 1704400182 2457 aaabbccba4df2a7f7371410ee4e075a3 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1704400182 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1095.tfm" 1704400182 3584 929cdff2b7a8c11bd4d49fd68cb0ae70 ""
@@ -43,7 +43,6 @@
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eurm7.pfb" 1704400182 22927 31e776418d6f3753a749eafbf9a8a2bf ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eusm10.pfb" 1704400182 10538 4c913b4f5af64465058317e624ed5562 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1704400182 31764 459c573c03a4949a528c2cc7f557e217 ""
-  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1704400182 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplb.pfb" 1704400182 336018 e6622f91e98a67b92e64fafb3343b644 ""
   "/usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb" 1704400182 331829 5cf03cf09698786f13e731076eabd68c ""
   "/usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplri.pfb" 1704400182 322895 de9f15f3717f7917950f034629a0ccbf ""
@@ -115,14 +114,14 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1704400182 40684 9b9ec0b4288972636ff6a3b9c4238efc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1706134808 4483110 adb1e1d04498b9576f1f17c4219c5e03 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1706134766 6768056 5be4d1eab6e3040990c32277aa9a64b9 ""
-  "axler1.aux" 1710800552 770 737591ca084619eead704c0bccbf3c1e "pdflatex"
-  "axler1.out" 1710800552 199 292800e5442b13d894dbe3099e31e037 "pdflatex"
-  "axler1.tex" 1710800549 5960 b89a7f6cd6b3514407a248361e01e059 ""
-  "axler1.toc" 1710800552 134 416ac99198358de9aac693c2d0b1daa6 "pdflatex"
+  "axler3.aux" 1710892519 1171 372a27e3b99dadd7599ddd46cbb6e807 "pdflatex"
+  "axler3.out" 1710892519 772 316a31159e3f1e1c564bff1242cec44c "pdflatex"
+  "axler3.tex" 1710892517 7690 eea56d0969eedf4d1ad2c98e47a11de5 ""
+  "axler3.toc" 1710892519 411 c24282358f0f762a3843f41410f13fd4 "pdflatex"
   (generated)
-  "axler1.aux"
-  "axler1.log"
-  "axler1.out"
-  "axler1.pdf"
-  "axler1.toc"
+  "axler3.aux"
+  "axler3.log"
+  "axler3.out"
+  "axler3.pdf"
+  "axler3.toc"
   (rewritten before read)

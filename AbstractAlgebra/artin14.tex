@@ -4,6 +4,7 @@
 \usepackage{amsmath, amssymb, amsthm, bm}
 \usepackage{physics, esint}
 \usepackage{tikz-cd}
+\usepackage{tgpagella, eulervm} 
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
 \setlength{\parindent}{0pt}
@@ -217,7 +218,7 @@ The \textbf{determinant} of an $R$-module is computed in precisely the same way,
 \[
   \det(\mat{TS}) \, = \, \det(\mat{T}) \det(\mat{S})
 \]
-There is also the \textbf{cofactor matrix}: there exists a matrix $\cof(\mat{T})$ such that $\mat{T} \cof(\mat{T}) = \cof(\mat{T}) \mat{T} = \det(\mat{T}) \mat{I}$.
+There is also the \textbf{cofactor matrix}: the matrix $\cof(\mat{T})$ such that $\mat{T} \cof(\mat{T}) = \cof(\mat{T}) \mat{T} = \det(\mat{T}) \mat{I}$.
 
 \newpage
 
@@ -257,37 +258,31 @@ When $R$ has few units, invertibility is strong condition. For instance, a $\mat
 
 \subsection{Free Modules}
 
-Given the similarity of free $R$-matrices with vector spaces, we may begin to investigate the generality of this connection. Hence, let $M$ be an $R$-module. $M$ is \textbf{finitely generated} if there exist $x_{1}, \ldots, x_{n} \in M$ such that
+A \textbf{free R-module} is an $R$-module that has a \textbf{basis}: a spanning set of independent elements. Compare this with the definition delineated in AbstractAlgebra/atiyah2.tex. We mean that $x_{1}, \ldots, x_{n} \in M$ are \textbf{independent} if
 \[
-  M \, = \, Rx_{1} + \cdots + Rx_{n} \, = \, \{ r_{1}x_{1} + \cdots + r_{n} \, \mid \, r_{1}, \ldots, r_{n} \in R \}.
+  a_{1} x_{1} + \cdots + a_{n} x_{n} = 0 \, \implies \, a_{1} = \cdots = a_{n} = 0.
 \]
-A set of elements $x_{1}, \ldots, x_{n}$ is \textbf{independent} if
+The \textbf{rank} of a free $R$-module is the length of its basis. Clearly $\operatorname{rank} M = n$ if and only if $M \, \cong \, R^{n}$. Anyways, a \textbf{finitely-generated R-module} is an $R$-module hat contains $x_{1}, \ldots, x_{n} \in M$ such that
 \[
-  r_{1}x_{1} + \cdots + r_{n}x_{n} = 0 \, \implies \, r_{1}, \ldots, r_{n} = 0.
+  M \, = \, R x_{1} + \cdots + R c_{n} \, = \, \{ a_{1}x_{1} + \cdots + a_{n}x_{n} \, \mid \, a_{1}, \ldots, a_{n} \in R \}.
 \]
-An independent set of generators is called a \textbf{basis}. As with vector spaces, $x_{1}, \ldots, x_{n} \in M$ is a basis of $M$ if and only if all elements of $M$ are a unique linear combination of $x_{1}, \ldots, x_{n}$. The \textbf{canonical basis} consisting of $\vec{e}_{1}, \ldots, \vec{e}_{n}$ is a basis of $R^{n}$.
-
+An independent set of generators is called a \textbf{basis}. As with vector spaces, $x_{1}, \ldots, x_{n} \in M$ is a basis of $M$ if and only if all elements of $M$ are a unique linear combination of $x_{1}, \ldots, x_{n}$. The \textbf{canonical basis} of $R^{n}$ consists of $\vec{e}_{1}, \ldots, \vec{e}_{n}$.
 \newpage
-
-If $\vec{B} = (x_{1}, \ldots, x_{n})$ is an ordered set of elements in $M$, we can define a homomorphism $R^{n} \stackrel{\vec{B}}{\longrightarrow} M$ defined by
-\[
-  \vec{B}X \, = \, \begin{bmatrix} x_{1} & \cdots & x_{n} \end{bmatrix} \begin{bmatrix} a_{1} \\ \vdots \\ a_{n} \end{bmatrix} \, = \, a_{1}x_{1} + \cdots + a_{n}x_{n}.
-\]
-This homomorphism is injective if elements of $\vec{B}$ is independent, surjective $\vec{B}$ generates $M$, and bijective if $\vec{B}$ constitute a basis of $R^{n}$. Hence $M$ has a basis of length $n$ if and only if $M \, \cong \, R^{n}$. 
-\[
-  \text{\textit{Most modules have no basis.}}
-\]
-We arrive at the definition of this section: \textbf{free R-module} is a module that has a basis. Compare this definition to Atiyah's delineated in AbstractAlgebra/atiyah2.tex. A free $\mathbb{Z}$-module is \textbf{free Abelian group}. Finite Abelian groups are never free --- if desired without Atiyah's logic, this is obtained by observing that each element has finite order:
+\textit{Most modules have no basis}. A free $\mathbb{Z}$-module is \textbf{free Abelian group}. Finite Abelian groups are never free, since each element has finite additive order:
 \[
   o(x_{1}) x_{1} + \cdots o(x_{n}) x_{n} \, = \, 0 + \cdots + 0 \, = \, 0
 \]
-The \textbf{rank} of a free $R$-module $M$ is the cardinality of a basis of $M$. The rank of a free $R$-module is analogous to the dimension of a vector space.
+Let $\vec{B} = (x_{1}, \ldots, x_{n})$ be a basis of a free $R$-module $M$. Then $\vec{B}$ induces a homomorphism $R^{n} \stackrel{\vec{B}}{\longrightarrow} M$ defined by
+\[
+  \vec{B}X \, = \, \begin{bmatrix} x_{1} & \cdots & x_{n} \end{bmatrix} \begin{bmatrix} a_{1} \\ \vdots \\ a_{n} \end{bmatrix} \, = \, a_{1}x_{1} + \cdots + a_{n}x_{n}.
+\]
+This homomorphism is injective if elements of $\vec{B}$ is independent, surjective $\vec{B}$ generates $M$, and bijective if $\vec{B}$ constitute a basis of $R^{n}$. Hence $M$ has a basis of length $n$ if and only if $M \, \cong \, R^{n}$. I \textit{really} don't like this notation, but I guess I have to live with it.
 
 % --------------------------------------------- %
 
 \subsection{Matrices in Free Modules}
 
-Let $\mat{B}$ be the basis of a free $M$-module $M$. The \textbf{coordinate vector} $X$ of an element $\vec{v} \in M$ is the unique column vector such that $\vec{v} = \mat{B} X$. If $\mat{B}'$ is a change of basis, the relevant formula is $\mat{B}' = \mat{B}P$. We assert the following proposition without proof:
+Let $\mat{B}$ be the basis of a free $R$-module $M$. The \textbf{coordinate vector} $X$ of an element $\vec{v} \in M$ is the unique column vector such that $\vec{v} = \mat{B} X$. If $\mat{B}'$ is a change of basis, the relevant formula is $\mat{B}' = \mat{B}P$. We assert the following proposition without proof:
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{proposition}
@@ -299,7 +294,7 @@ Let $\mat{B}$ be the basis of a free $M$-module $M$. The \textbf{coordinate vect
   \end{proposition}
 \end{adjustwidth}
 
-Let $M$ and $N$ be free $R$-modules with bases $\mat{B} = (x_{1}, \ldots, x_{n})$ and $\mat{C} = (y_{1}, \ldots, y_{m})$ respectively. Then all $R$-module homomorphisms $f : M \to N$ admit the form of left-multiplication by an $m$-by-$n$ $R$-matrix $\mat{T} = (t_{ij})$, with components given by
+Let $M$ and $N$ be free $R$-modules with bases $\mat{B} = (x_{1}, \ldots, x_{n})$ and $\mat{C} = (y_{1}, \ldots, y_{m})$ respectively. All $R$-module homomorphisms $f : M \to N$ admit the form of left-multiplication by an $m$-by-$n$ $R$-matrix $\mat{T} = (t_{ij})$, with components given by
 \[
   f(y_{j}) \, = \, \sum\limits_{i = 1}^{n} x_{i} t_{ij}
 \]
@@ -398,12 +393,12 @@ We are ready to solve the equation $\mat{T} \vec{A} \, = \, \vec{B}$.
     \begin{enumerate}
       \item The integer solutions to the equation $\mat{T} \, ' \vec{A}' \, = \, \vec{0}$ are the vectors $\mat{A}$ whose first $k$ components are $0$.
       \item The integer solutions to the equation $\mat{T} \vec{A} = \vec{0}$ are those of the form $\mat{A} = \mat{P} \vec{A}'$, where $\mat{T} \, ' \vec{A}' = \vec{0}$.
-      \item The image $W'$ of multiplication by $\mat{T} \,'$ is the integer combinations of the vectors $d_{1} \vec{e}_{1}, \ldots, d_{k} \vec{e}_{k}$.
-      \item The image $W$ of multiplication by $\mat{T}$ is the integer combinations of the vectors $\mat{Q} (d_{1} \vec{e}_{1}), \ldots, \mat{Q} (d_{k} \vec{e}_{k})$.
+      \item The image $W'$ of multiplication by $\mat{T} \,'$ is the integer combinations of the coordinate vectors $d_{1} \vec{e}_{1}, \ldots, d_{k} \vec{e}_{k}$.
+      \item The image $W$ of multiplication by $\mat{T}$ is the integer combinations of the coordinate vectors $\mat{Q} (d_{1} \vec{e}_{1}), \ldots, \mat{Q} (d_{k} \vec{e}_{k})$.
     \end{enumerate}
   \end{proposition}
   \begin{proof}
-    (1) follows from the fact that $\mat{T}'$ is diagonal: the equation $\mat{T} \, ' \vec{A}'$ for $\vec{A} = (a_{1}, \ldots, a_{n})$ reads
+    (1) is implied since $\mat{T}'$ is diagonal: the equation $\mat{T} \, ' \vec{A}'$ for $\vec{A} = (a_{1}, \ldots, a_{n})$ reads
     \[
       d_{1}a_{1} \, = \, 0, \quad d_{2}a_{2} \, = \, 0, \quad \ldots \quad d_{k}a_{k} \, = \, 0.
     \]
@@ -434,7 +429,7 @@ This section would ideally discuss $R$-submodules of free $R$-modules, where $R$
     Let $G$ be a free Abelian group of rank $n$ and let $H \subseteq G$ be a subgroup. Then $H$ is a free Abelian group of rank $n$ or smaller.
   \end{theorem}
   \begin{proof}
-    By Theorem \textbf{INSERT NUMBER HERE!}, $H$ is finitely generated. Thus let $\vec{G} = (g_{1}, \ldots, g_{m})$ and $\vec{H} = (h_{1}, \ldots, h_{n})$ be bases of $G$ and $H$. Thus if we set $h_{j} = \sum_{i} g_{i} a_{ij}$, the elements $a_{ij}$ form the components of the $\mat{T}$ matrix associated with the inclusion mapping $i : G \to H$:
+    By Theorem 5, $H$ is finitely generated. Thus let $\vec{G} = (g_{1}, \ldots, g_{m})$ and $\vec{H} = (h_{1}, \ldots, h_{n})$ be bases of $G$ and $H$. Thus if we set $h_{j} = \sum_{i} g_{i} a_{ij}$, the elements $a_{ij}$ form the components of the $\mat{T}$ matrix associated with the inclusion mapping $i : G \to H$:
     \[
       \begin{tikzcd}
         \mathbb{Z}^m \arrow[r, "\mat{T}"] \arrow[d, "\vec{H}"] & \mathbb{Z}^n \arrow[d, "\vec{G}"] \\
@@ -462,8 +457,6 @@ The image of $\mat{T}$ consists of all linear combinations of the columns of $\m
 More generally, any isomorphism $\sigma : R^{m} \, / \, \mat{T} R^{n} \to M$ is a \textbf{presentation} of $M$, where the $R$-matrix $\mat{T}$ is a \textbf{presentation matrix} of $M$. For instance, $C_{5}$ is presented by the integer matrix $[5]$ since $C_{5} \, \cong \, \mathbb{Z} \, / \, 5 \mathbb{Z}$.
 
 We can utilize the canonical epimorphism $\pi : R^{m} \to R^{m} \, / \, \mat{T} R^{n}$ to interpret $M$ as follows:
-
-\newpage
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{proposition}
@@ -506,7 +499,6 @@ We now delineate a method to find a presentation for an $R$-module $M$. We make 
   \item $M$ is finitely generated --- say, by $\vec{B} = (x_{1}, \ldots, x_{m})$.
   \item The module $W$ of relations of $\vec{B}$ is finitely generated.
 \end{enumerate}
-\newpage
 
 The generators $\vec{B}$ entail an epimorphism $R^{m} \stackrel{\vec{B}}{\longrightarrow} M$ that maps a column vector $\vec{Y} = (y_{1}, \ldots, y_{m})$ to the element $y_{1}x_{1} + \cdots + y_{m}x_{m}$. The kernel of this homomorphism is $W$: the module of relations of $\vec{B}$. By the First Isomorphism Theorem, we have
 \[
@@ -554,4 +546,65 @@ Thus $\mat{T}$ presents the Abelian group $\mathbb{Z}_{4}$.
 
 % --------------------------------------------- %
 
-\end{document}
+\section{Noetherian Rings and Modules}
+
+An $R$-module $M$ is \textbf{Noetherian} if all ascending chains of submodules
+\[
+  M_{1} \, \subseteq \, M_{2} \, \subseteq \, M_{3} \, \subseteq \, \cdots
+\]
+are stationary: there exists $i$ such that $M_{i} = M_{i + 1} = \cdots$. A ring $R$ is \textbf{Noetherian} if it is a Noetherian module over itself; namely, if all ascending chains of ideals are stationary.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    An $R$-module $M$ is Noetherian if and only if all submodules of $M$ are finitely generated.
+  \end{proposition}
+  \begin{proof}
+    Suppose that all submodules of $M$ are finitely generated, and let 
+    \[
+      M_{1} \, \subseteq \, M_{2} \, \subseteq \, M_{3} \, \subseteq \, \cdots
+    \]
+    be a chain of submodules in $M$. Then $N = \bigcup_{i = 1}^{\infty} M_{i}$ is a submodule of $M$, hence is finitely generated by some $x_{1}, \ldots, x_{n}$. Define $n_{i}$ such that $x_{i} \in M_{n_{i}}$; letting $n = \max\{ n_{1}, \ldots, n_{i} \}$, it is clear that all $x_{i} \in M_{n}$, so $M_{n} = N$. Hence the chain is stationary.
+
+    If there exists a submodule of $M$ which is infinitely generated by $x_{1}, x_{2}, \ldots$ (possibly with uncountably many generators), then
+    \[
+      (x_{1}) \, \subseteq \, (x_{1}, x_{2}) \, \subseteq \, (x_{1}, x_{2}, x_{3}) \, \subseteq \, \cdots
+    \]
+    is an ascending chain in $M$ which is not stationary; hence $M$ is not Noetherian.
+  \end{proof}
+\end{adjustwidth}
+
+Likewise, $R$ is Noetherian if and only if all ideals of $R$ are finitely-generated. This proposition highlights the importance of Noetherian modules; the Noetherian condition is just the right finiteness condition to make a lot of theorems work.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{corollary}
+    Every proper ideal $(a)$ is contained within some maximal ideal $\mathfrak{m}$.
+  \end{corollary}
+  \begin{proof}
+    By Krull's Theorem, the quotient ring $R \, / \, (a)$ contains a maximal ideal $\mathfrak{m}'$. By the Correspondence Theorem, the contraction of $\mathfrak{m}'$ is a maximal ideal $\mathfrak{m} \subset R$ which contains $(a)$.
+  \end{proof}
+\end{adjustwidth}
+
+We assert without proof that direct sums and quotients of Noetherian modules are Noetherian; the proof involves exact sequences, which we defer to notes on Atiyah-MacDonald. In any case, the Noetherian condition relates to finite generation:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{theorem}
+    Let $R$ be a Noetherian ring. Then all finitely-generated $R$-modules are Noetherian.
+  \end{theorem}
+  \begin{proof}
+    Let $R$ be Noetherian. Via our claims without proof, we have that
+    \begin{align*}
+      \text{$M$ is finitely-generated} \, &\iff \, \text{$M \, \cong \, R^{n} \, / \, \mathfrak{a}$} \\
+                                          &\implies \, \text{$M$ is Noetherian}.
+    \end{align*}
+    This completes the proof.
+  \end{proof}
+  \begin{corollary}
+    Let $M$ be a finitely generated module over a Noetherian ring. Then all submodules of $M$ are finitely generated. \s
+  \end{corollary}
+\end{adjustwidth}
+
+FUCK!
+
+% --------------------------------------------- %
+
+\end{document}g
