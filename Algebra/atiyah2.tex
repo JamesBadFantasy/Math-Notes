@@ -1,10 +1,10 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
-\usepackage{geometry, changepage}
+\usepackage{geometry, changepage, hyperref}
 \usepackage{amsmath, amssymb, amsthm, bm}
 \usepackage{physics}
-\usepackage{hyperref}
 \usepackage{tikz-cd}
+\usepackage{tgpagella, eulervm}
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
 \setlength{\parindent}{0pt}
@@ -12,19 +12,18 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
-\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
-\newtheorem*{theorem*}{Theorem}
-\newtheorem*{lemma*}{Lemma}
-\newtheorem*{claim*}{Claim}
+\newtheorem{claim}{Claim}
 
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\Ker}{\operatorname{Ker}}
 \newcommand{\Coker}{\operatorname{Coker}}
 \newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Spec}{\operatorname{Spec}}
 \renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
 
-\newcommand{\nsg}{\mathrel{\lhd}}
+\newcommand{\s}{$\text{ } \\ \text{ }$}
 
 \title{Atiyah-MacDonald: Modules}
 \author{James Pagan}
@@ -36,7 +35,6 @@
 
 \maketitle
 \tableofcontents
-
 \newpage
 
 % --------------------------------------------- %
@@ -47,7 +45,7 @@
 
 \subsection{Definition}
 
-An \textbf{R-module} over a commutative ring $R$ is an Abelian group $M$ (with operation written additively) endowed with a mapping $\mu : R \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in R$:
+An \textbf{A-module} over a commutative ring $A$ is an Abelian group $M$ (with operation written additively) endowed with a mapping $\mu : A \times M \to M$ (written multiplicatively) such that the following axioms are satisfied for all $x, y \in M$ and $a, b \in A$:
 \begin{enumerate}
 	\item $1x = x$;
 	\item $(ab)x = a(bx)$;
@@ -60,41 +58,41 @@ An \textbf{R-module} over a commutative ring $R$ is an Abelian group $M$ (with o
 \subsection{Examples of Modules}
 
 \begin{itemize}
-	\item If $R$ is a ring, $R[x]$ is a module.
-	\item All ideals $\mathfrak{a} \subseteq R$ are $R$-modules using the same additive and multiplicative operations as $R$ --- in particular $R$ itself is an $R$-module.
-	\item If $R$ is a field, $R$-modules are $R$-vector spaces. In fact, the axioms above are identical to the vector axioms, defined over commutative rings instead of fields.
+	\item If $A$ is a ring, $A[x]$ is a module.
+	\item All ideals $\mathfrak{a} \subseteq A$ are $A$-modules using the same additive and multiplicative operations as $A$ --- in particular $A$ itself is an $A$-module.
+	\item If $A$ is a field, $A$-modules are $A$-vector spaces. In fact, the axioms above are identical to the vector axioms, defined over commutative rings instead of fields.
 	\item Abelian groups $G$ are precisely the modules over $\mathbb{Z}$.
 \end{itemize}
 
 % --------------------------------------------- %
 
-\subsection{R-Module Homomorphisms}
+\subsection{A-Module Homomorphisms}
 
-A map $f: M \to N$ between two $R$-modules $M$ and $N$ is an \textbf{R-module homomorphism} (or is \textbf{R-linear}) if for all $a \in R$ and $x, y \in M$,
+A map $f: M \to N$ between two $A$-modules $M$ and $N$ is an \textbf{A-module homomorphism} (or is \textbf{A-linear}) if for all $a \in A$ and $x, y \in M$,
 \begin{align*}
 	f(x + y) & = f(x) + f(y) \\
 	f(ax)    & = a f(x).
 \end{align*}
-Thus, an $R$-module homomorphism $f$ is a homomorphism of Abelian groups that commutes with the action of each $a \in R$. If $R$ is a field, an $R$-module homomorphism is a linear map. A bijective $R$-homomorphism is called an $R$-isomorphism.
+Thus, an $A$-module homomorphism $f$ is a homomorphism of Abelian groups that commutes with the action of each $a \in A$. If $A$ is a field, an $A$-module homomorphism is a linear map. A bijective $A$-homomorphism is called an $A$-isomorphism.
 
-The set $\Hom_{R}(M, N)$ denotes the set of all $R$-module homomorphisms from $M$ to $N$, and is a module if we define the following operations for $a \in R$ and $f, g \in \Hom_{R}(M, N)$:
+The set $\Hom_{A}(M, N)$ denotes the set of all $A$-module homomorphisms from $M$ to $N$, and is a module if we define the following operations for $a \in A$ and $f, g \in \Hom_{A}(M, N)$:
   \begin{align*}
 	(f + g)(x) & = f(x) + g(x) \\
 	(af)(x)    & = a f(x).
 \end{align*}
-We denote $\Hom_{R}(M, N)$ by $\Hom(M, N)$ if the ring $R$ is unambiguous.
+We denote $\Hom_{A}(M, N)$ by $\Hom(M, N)$ if the ring $A$ is unambiguous.
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
-		$\Hom_{R}(R, M) \cong M$
-	\end{theorem}
+	\begin{proposition}
+		$\Hom_{A}(A, M) \cong M$
+	\end{proposition}
 	\begin{proof}
-		The mapping $\phi : \Hom_{R}(R, M) \to M$ defined by $\phi(f) = f(1)$ is a homomorphism, as verified by a routine computation: for all $f, g \in \Hom_{R}(M, N)$ and $a \in R$,
+		The mapping $\phi : \Hom_{A}(A, M) \to M$ defined by $\phi(f) = f(1)$ is a homomorphism, as verified by a routine computation: for all $f, g \in \Hom_{A}(M, N)$ and $a \in A$,
 		\begin{align*}
       \phi(f + g) = (f + g)(1) &= f(1) + g(1) = \phi(f) + \phi(g) \\
             \phi(af) = (af)(1) &= a f(1) = a \phi(f),
 		\end{align*}
-		so $\phi$ is an $R$-homomorphism. This mapping is injective, since each $f$ is uniquely determined by $f(1)$. It is also surjective; for each $m \in M$, set define a homomorphism by $h(1) = m$. Thus $\phi$ is the desired isomorphism.
+		so $\phi$ is an $A$-homomorphism. This mapping is injective, since each $f$ is uniquely determined by $f(1)$. It is also surjective; for each $m \in M$, set define a homomorphism by $h(1) = m$. Thus $\phi$ is the desired isomorphism.
 	\end{proof}
 \end{adjustwidth}
 
@@ -108,16 +106,16 @@ I do not know why such a manipulation is noteworthy. The formulas above are quit
 
 \subsection{Submodules}
 
-A \textbf{submodule} $M'$ of $M$ is an Abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $R$. 
+A \textbf{submodule} $M'$ of $M$ is an Abelian subgroup of $M$ closed under multiplication by elements of the commutative ring $A$. 
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{lemma}
-    $\mathfrak{a}$ is an ideal of $R$ if and only if it is an $R$-submodule of $R$.
+    $\mathfrak{a}$ is an ideal of $A$ if and only if it is an $A$-submodule of $A$.
   \end{lemma}
   \begin{proof}
     The proof evolves from a fundamental observation:
     \[
-      R \mathfrak{a} = \mathfrak{a} \, \iff \, \text{scalar multiplication in the $R$-module $\mathfrak{a}$ is closed}.
+      A \mathfrak{a} = \mathfrak{a} \, \iff \, \text{scalar multiplication in the $A$-module $\mathfrak{a}$ is closed}.
     \]
     The rest of the multiplicative module conditions follow from the ring axioms.
   \end{proof}
@@ -126,35 +124,35 @@ A \textbf{submodule} $M'$ of $M$ is an Abelian subgroup of $M$ closed under mult
 The following proof outlines the construction of \textbf{quotient modules}:
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
-		The Abelian quotient group $M \, / \, M'$ is an $R$-module under the operation $a(x + M') = ax + M'$.
-	\end{theorem}
+	\begin{proposition}
+		The Abelian quotient group $M \, / \, M'$ is an $A$-module under the operation $a(x + M') = ax + M'$.
+	\end{proposition}
 	\begin{proof}
-		We must perform four rather routine calculations: for all $x, y \in M$ and $a, b \in R$,
+		We must perform four rather routine calculations: for all $x, y \in M$ and $a, b \in A$,
 		\begin{enumerate}
       \item \textbf{Identity}: $1(x + M') = 1x + M' = x + M'$.
       \item \textbf{Compatibility}: $a(b(x + M')) = a(bx + M') = abx + M' = (ab)(x + M')$.
 			\item \textbf{Left Distributivity}: $(a + b)(x + M') = (a + b)x + M' = (ax + bx) + M' = (ax + M') + (bx + M') = a(x + M') + b(x + M')$.
 			\item \textbf{Right Distributivity}: $a((x + M') + (y + M')) = a((x + y) + M') = a(x + y) + M' = (ax + M') + (ay + M') = a(x + M') + a(y + M)'$.
 		\end{enumerate}
-		Therefore, $M / M'$ is an $R$-module. Also, this operation is naturally well-defined.
+		Therefore, $M / M'$ is an $A$-module. Also, this operation is naturally well-defined.
 	\end{proof}
 \end{adjustwidth}
 
-$R$-module homomorphisms $f : M \to N$ induce three notable submodules: 
+$A$-module homomorphisms $f : M \to N$ induce three notable submodules: 
 \begin{enumerate}
   \item \textbf{Kernel}: $\Ker f \, = \, \{ x \in M \, \mid \, f(x) = 0 \}$, a submodule of $M$.
   \item \textbf{Image}: $\Im f \, = \, \{ f(x) \, \mid \, x \in M \}$, a submodule of $N$.
   \item \textbf{Cokernel}: $\Coker f \, = \, N \, / \, \Im f$, a quotient of $N$.
 \end{enumerate}
-The cokernel is perhaps an unfamiliar face. Such a quotient is not possible for rings or groups; images of homomorphisms need not be ideals of $R$ nor normal subgroups of $G$. 
+The cokernel is perhaps an unfamiliar face. Such a quotient is not possible for rings or groups; images of homomorphisms need not be ideals of $A$ nor normal subgroups of $G$. 
 
 \begin{adjustwidth}{0.5cm}{}
   \begin{theorem}[First Isomorphism Theorem]
      $N \, / \, \Ker f \, \cong \, \Im f$.
   \end{theorem}
   \begin{proof}
-    Let $K = \Ker f$, and define a mapping $g : M \, / \, N \to \Im f$ by $g(x + K) = f(x)$. We have for arbitrary $x, y \in N$ and $a \in R$ that
+    Let $K = \Ker f$, and define a mapping $g : M \, / \, N \to \Im f$ by $g(x + K) = f(x)$. We have for arbitrary $x, y \in N$ and $a \in A$ that
     \begin{align*}
       g(x + y + K) \, = \, f(x + y) \, &= \, f(x) + f(y) \, = \, g(x + K) + g(y + K). \\
             g(ax + K) \, = \, f(ax) \, &= \, a f(x) \, = \, a g(x + K).
@@ -167,7 +165,7 @@ The cokernel is perhaps an unfamiliar face. Such a quotient is not possible for 
   \end{proof}
 \end{adjustwidth}
 
-Let $f : M \to N$ be an $R$-module homomorphism. Here are two special cases of the prior theorem:
+Let $f : M \to N$ be an $A$-module homomorphism. Here are two special cases of the prior theorem:
 \begin{enumerate}
   \item If $f$ is a monomorphism, them $M \, \cong \, \Im f$.
   \item If $f$ is an epimorphism, then $M \, / \, \Ker f \, \cong \, N$.
@@ -180,7 +178,7 @@ For a submodule $N' \subseteq \Im f$, I call $M' = \{ x \in M \, \mid \, f(a) \i
     Submodules of $G$ which contain $\Ker f$ correspond one-to-one with submodules of $\Im f$.
   \end{theorem}
   \begin{proof}
-    For each submodule $N' \subseteq \Im f$ consider the contraction module $M' \, = \, \{ x \, \mid \, f(x) \in N' \}$. Since this is an Abelian subgroup, we need only check for multiplicative closure: for all $x \in M'$ and $a \in R$, we have
+    For each submodule $N' \subseteq \Im f$ consider the contraction module $M' \, = \, \{ x \, \mid \, f(x) \in N' \}$. Since this is an Abelian subgroup, we need only check for multiplicative closure: for all $x \in M'$ and $a \in A$, we have
     \[
       f(ax) = a f(x) \in N' \implies ax \in N'.
     \]
@@ -199,7 +197,7 @@ The Second Isomorphism Theorem utilizes the definitions of Section 2.1:
     If $M_{1}, M_{2} \subseteq M$ are submodules, then $(M_{1} + M_{2}) \, / \, M_{1} \, \cong \, M_{2} \, / \, (M_{1} \cap M_{2})$.
   \end{theorem}
   \begin{proof}
-    Define a mapping $f : M_{2} \to (M_{1} + M_{2}) \, / \, M_{1}$ by $\phi(m_{2}) = m_{2} + M_{1}$. Clearly $\phi$ is well-defined; it is an $R$-module homomorphism, since $x_{1}, x_{2} \in M_{2}$ and $a \in R$ implies
+    Define a mapping $f : M_{2} \to (M_{1} + M_{2}) \, / \, M_{1}$ by $\phi(m_{2}) = m_{2} + M_{1}$. Clearly $\phi$ is well-defined; it is an $A$-module homomorphism, since $x_{1}, x_{2} \in M_{2}$ and $a \in A$ implies
     \begin{align*}
       f(x_{1} + x_{2}) \, = \, x_{1} + x_{2} + x_{1} \, &= \, (x_{1}N)(x_{2}N) \, = \, f(x_{1}) f(x_{2}) \\
                     f(ax_{1}) \, = \, ax_{1} + x_{1} \, &= \, a(x_{1} + x_{1}) \, = \, a f(x_{1}).
@@ -217,7 +215,7 @@ The Second Isomorphism Theorem utilizes the definitions of Section 2.1:
     If $L \subseteq N \subseteq  M$ are modules and submodules, then $M \, / \, N \, = \, (M \, / \, L) \, / \, (N \, / \, L)$.
   \end{theorem}
   \begin{proof}
-    Let $\phi : M \to M \, / \, L$ be the canonical epimorphism. Define $\psi : M \to \phi(M) \, / \, \phi(N)$ by the rule $\psi(a) = \phi(a)\phi(M)$. It is clear that $\psi$ is well-defined and surjective; it is an $R$-module homomorphism since
+    Let $\phi : M \to M \, / \, L$ be the canonical epimorphism. Define $\psi : M \to \phi(M) \, / \, \phi(N)$ by the rule $\psi(a) = \phi(a)\phi(M)$. It is clear that $\psi$ is well-defined and surjective; it is an $A$-module homomorphism since
     \[
       \psi(ab) \, = \, \phi(ab) \phi(N) \, = \, \big(\phi(a) \phi(M)\big) \, \big(\phi(b) \phi(M) \big) \, = \, \psi(a) \psi(b).
     \]
@@ -237,39 +235,39 @@ The Second Isomorphism Theorem utilizes the definitions of Section 2.1:
 
 \subsection{Sums, Intersections, Products}
 
-Let $M$ be an $R$-module with submodules $M_{1}, \ldots, M_{n}$. We can consider two crucial operations on these submodules:
+Let $M$ be an $A$-module with submodules $M_{1}, \ldots, M_{n}$. We can consider two crucial operations on these submodules:
 \begin{enumerate}
 	\item \textbf{Sum}: The sum $M_{1} + \cdots + M_{n}$ is the set of all sums $m_{1} + \cdots + m_{n}$, where $m_{i} \in M_{i}$ ($i \in \{ 1, \ldots, n \}$). It is the smallest submodule of $M$ that contains all $M_{1}, \ldots, M_{n}$.
 	\item \textbf{Intersection}: The intersection $M_{1} \cap \cdots \cap M_{n}$ is the largest submodule of $M$ that is contained inside each $M_{1}, \ldots, M_{n}$.
 \end{enumerate}
 
-For an ideal $\mathfrak{a}$ of $R$ and an $R$-module $M$, we define the \textbf{product} $\mathfrak{a} M$ as all finite sums $a_{1}x_{1} + \cdots + a_{n}x_{n}$ for $a_{i} \in \mathfrak{a}$ and $x_{i} \in M$  for each $i \in \{ 1, \ldots, n \}$. It is a submodule of $M$.
+For an ideal $\mathfrak{a}$ of $A$ and an $A$-module $M$, we define the \textbf{product} $\mathfrak{a} M$ as all finite sums $a_{1}x_{1} + \cdots + a_{n}x_{n}$ for $a_{i} \in \mathfrak{a}$ and $x_{i} \in M$  for each $i \in \{ 1, \ldots, n \}$. It is a submodule of $M$.
 
 % --------------------------------------------- %
 
 \subsection{The Annihilator}
 
-If $N$ and $P$ are $R$-submodules of $M$, we define $(N : P)$ to be the set of all $a \in R$ such that $aP \subseteq N$.
+If $N$ and $P$ are $A$-submodules of $M$, we define $(N : P)$ to be the set of all $a \in A$ such that $aP \subseteq N$.
 
 \newpage
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
-		$(N : P)$ is an ideal of $R$.
-	\end{theorem}
+	\begin{proposition}
+		$(N : P)$ is an ideal of $A$.
+	\end{proposition}
 	\begin{proof}
-		If $a, b \in (N : P)$, then $aP, bP \subseteq N$; we must have that $aP + bP \subseteq N$. Observe that $(N : P)$ is nonempty, as $0P = (0) \subseteq N$; and clearly if $aP \in N$, then $-aP \in N$ as $N$ is an abelian group. $(N : P)$ satifies the multiplicative condition too.
+		If $a, b \in (N : P)$, then $aP, bP \subseteq N$; we must have that $aP + bP \subseteq N$. Observe that $(N : P)$ is nonempty, as $0P = (0) \subseteq N$; and clearly if $aP \in N$, then $-aP \in N$ as $N$ is an Abelian group. $(N : P)$ satisfies the multiplicative condition too.
 	\end{proof}
 \end{adjustwidth}
 
-The \textbf{annihilator} of a module $M$ is $(0 : M)$, the ideal of all $a$ such that $aM = 0$, and is denoted $\Ann M$. If $\mathfrak{a} \subseteq \Ann M$, we may regard $M$ as an $R \, / \, \mathfrak{a}$-module. In particular, observe that if $\bar{a} \in R \, / \, \mathfrak{a}$, then $a_{1}, a_{2} \in \bar{a}$ implies $a_{1}x = a_{2}x$ --- so $\bar{a}$ is well-defined.
+The \textbf{annihilator} of a module $M$ is $(0 : M)$, the ideal of all $a$ such that $aM = 0$, and is denoted $\Ann M$. If $\mathfrak{a} \subseteq \Ann M$, we may regard $M$ as an $A \, / \, \mathfrak{a}$-module. In particular, observe that if $\bar{a} \in A \, / \, \mathfrak{a}$, then $a_{1}, a_{2} \in \bar{a}$ implies $a_{1}x = a_{2}x$ --- so $\bar{a}$ is well-defined.
 
-An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihilator of $R$ may change depending on the ring --- if $\Ann M = \mathfrak{a}$, then $M$ is faithful as an $R \, / \, \mathfrak{a}$ module.
+An $A$-module is \textbf{faithful} if $\Ann M = 0$. The annihilator of $A$ may change depending on the ring --- if $\Ann M = \mathfrak{a}$, then $M$ is faithful as an $A \, / \, \mathfrak{a}$ module.
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
+	\begin{proposition}
 		If $M_{1}, M_{2} \subseteq M$ are submodules, then $\Ann(M_{1} + M_{2}) = \Ann M_{1} \cap \Ann M_{2}$.
-	\end{theorem}
+	\end{proposition}
 	\begin{proof}
 		Suppose $a \in \Ann M_{1} \cap \Ann M_{2}$. Then $a$ annihilates all $x_{1} + x_{2} \in M_{1} + M_{2}$, so $a \in \Ann(M_{1} + M_{2})$.
 
@@ -281,12 +279,12 @@ An $R$-module is \textbf{faithful} if $\Ann M = 0$. The annihilator of $R$ may c
 
 \subsection{Direct Sum and Product}
 
-If $M$ and $N$ are $R$-modules, their \textbf{direct sum} $M \oplus N$ is the set of all pairs $(x, y)$ (with $x \in M$ and $y \in N$) endowed with the natural operations:
+If $M$ and $N$ are $A$-modules, their \textbf{direct sum} $M \oplus N$ is the set of all pairs $(x, y)$ (with $x \in M$ and $y \in N$) endowed with the natural operations:
 \begin{align*}
 	(x_{1}, y_{1}) + (x_{2}, y_{2}) & = (x_{1} + x_{2}, y_{1} + y_{2}) \\
 	                        a(x, y) & = (ax, ay)
 \end{align*}
-More generally, for a family of $R$-modules $(M_{\alpha})$, we define their \textbf{direct sum} $\bigoplus_{\alpha} M_{\alpha}$ as the families $(x_{\alpha})$ such that $x_{\alpha} \in M_{\alpha}$ for each $\alpha$ with the restriction that only finitely many $x_{\alpha}$ are nonzero.
+More generally, for a family of $A$-modules $(M_{\alpha})$, we define their \textbf{direct sum} $\bigoplus_{\alpha} M_{\alpha}$ as the families $(x_{\alpha})$ such that $x_{\alpha} \in M_{\alpha}$ for each $\alpha$ with the restriction that only finitely many $x_{\alpha}$ are nonzero.
 
 If we allow infinitely many $x_{\alpha}$ to be nonzero, we attain the family's \textbf{direct product} $\prod_{\alpha} M_{\alpha}$. Direct sums and direct products are equivalent if there are finitely many $\alpha$, but not otherwise.
 
@@ -296,16 +294,16 @@ If we allow infinitely many $x_{\alpha}$ to be nonzero, we attain the family's \
 
 Direct products of rings and direct sums of ideals are equivalent notions:
 \begin{enumerate}
-  \item Suppose that $R \, = \, R_{1} \times \cdots \times R_{n}$. Then $R$ has $n$ ideals of the form $(\delta_{n, m})$ for each $m \in \{ 1, \ldots, n \}$. Viewing this relation in terms of modules,
+  \item Suppose that $A \, = \, A_{1} \times \cdots \times A_{n}$. Then $A$ has $n$ ideals of the form $(\delta_{n, m})$ for each $m \in \{ 1, \ldots, n \}$. Viewing this relation in terms of modules,
   \[
-  	R \cong \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}
+  	A \cong \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}
   \]
   by the isomorphism $f(r_{1}, \ldots, r_{n}) = ((r_{1}, 0, \ldots), \ldots, (\ldots, 0, r_{n}))$.
-  \item Suppose that $R = \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}$, where $\mathfrak{a}_{i} \subseteq R$ are ideals. Defining $\mathfrak{b}_{i} = \bigoplus_{j \ne i} \mathfrak{a}_{j}$ for each $i$, we find that
+  \item Suppose that $A = \mathfrak{a}_{1} \oplus \cdots \oplus \mathfrak{a}_{n}$, where $\mathfrak{a}_{i} \subseteq A$ are ideals. Defining $\mathfrak{b}_{i} = \bigoplus_{j \ne i} \mathfrak{a}_{j}$ for each $i$, we find that
   \[
-	  R \cong (R \,/\, \mathfrak{b}_{1}) \times \cdots \times (R \,/\, \mathfrak{b}_{n})
+	  A \cong (A \,/\, \mathfrak{b}_{1}) \times \cdots \times (A \,/\, \mathfrak{b}_{n})
   \]
-  by $f(a_{1}, \ldots, a_{n}) = (a_{1} + \mathfrak{b}_{1}, \ldots, a_{n} + \mathfrak{b}_{n})$. Each $\mathfrak{a}_{i}$ is a ring isomorphic to $R \, / \, \mathfrak{b}_{i}$.
+  by $f(a_{1}, \ldots, a_{n}) = (a_{1} + \mathfrak{b}_{1}, \ldots, a_{n} + \mathfrak{b}_{n})$. Each $\mathfrak{a}_{i}$ is a ring isomorphic to $A \, / \, \mathfrak{b}_{i}$.
 \end{enumerate}
 
 This illustrates how one may define a direct sum of ideals.
@@ -318,33 +316,33 @@ This illustrates how one may define a direct sum of ideals.
 
 \subsection{Definition}
 
-An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set of \textbf{generators} $x_{1}, \ldots, x_{n}$ such that $M = Rx_{1} + \cdots + Rx_{n}$. The $R$-module $R \oplus \cdots \oplus R$ is denoted by $R^{n}$.
+An $A$-module $M$ is said to be \textbf{finitely generated} if there exist a set of \textbf{generators} $x_{1}, \ldots, x_{n}$ such that $M = Ax_{1} + \cdots + Ax_{n}$. The $A$-module $A \oplus \cdots \oplus A$ is denoted by $A^{n}$.
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
-		$M$ is finitely-generated by $n$ elements if and only if $M$ is isomorphic to a quotient of $R^{n}$.
-	\end{theorem}
+	\begin{proposition}
+		$M$ is finitely-generated by $n$ elements if and only if $M$ is isomorphic to a quotient of $A^{n}$.
+	\end{proposition}
 	\begin{proof}
-    Suppose $M$ is finitely-generated by $x_{1}, \ldots, x_{n}$. Define a mapping $f : R^{n} \to M$ by $f(a_{1}, \ldots, a_{n}) = a_{1}x_{1} + \cdots + a_{n}x_{n}$. Then for all $(a_{1}, \ldots, a_{n}), (b_{1}, \ldots, b_{n}) \in R^{n}$, we have
+    Suppose $M$ is finitely-generated by $x_{1}, \ldots, x_{n}$. Define a mapping $f : A^{n} \to M$ by $f(a_{1}, \ldots, a_{n}) = a_{1}x_{1} + \cdots + a_{n}x_{n}$. Then for all $(a_{1}, \ldots, a_{n}), (b_{1}, \ldots, b_{n}) \in A^{n}$, we have
 		\begin{align*}
 			f(a_{1} + b_{1}, \ldots, a_{n} + b_{n}) \, &= \, (a_{1} + b_{1}) x_{1} \, + \, \cdots \, + \, (a_{n} + b_{n})x_{n} \\
 			&= \, (a_{1}x_{1} + \cdots + a_{n}x_{n}) \, + \, (b_{1}x_{1} + \cdots + b_{n}x_{n}) \\
 			&= \, f(a_{1}, \ldots, a_{n}) \, + \, f(s_{1}, \ldots, s_{n}),
 		\end{align*}
-    and for all $(a_{1}, \ldots, a_{n}) \in R^{n}$ and $b \in R$, we have
+    and for all $(a_{1}, \ldots, a_{n}) \in A^{n}$ and $b \in A$, we have
 		\[
 			f(b a_{1}, \ldots, b a_{n}) \, = \, b a_{1} x_{1} + \cdots + b a_{n} x_{n} \, = \, b \, f(a_{1}, \ldots, a_{n}).
 		\]
-    Thus $f$ is an $R$-module homomorphism. Its surjectivity follows from the generation of $M$ by $x_{1}, \ldots, x_{n}$. Thus if we set $\Ker f = \mathfrak{a}$, the First Isomorphism Theorem yields that
+    Thus $f$ is an $A$-module homomorphism. Its surjectivity follows from the generation of $M$ by $x_{1}, \ldots, x_{n}$. Thus if we set $\Ker f = \mathfrak{a}$, the First Isomorphism Theorem yields that
 		\[
-			R^{n} \,/\, \mathfrak{a} \, \cong \, M.
+			A^{n} \,/\, \mathfrak{a} \, \cong \, M.
 		\]
-		Suppose that $R^{n} \,/\, \mathfrak{a} \, \cong \, M$ by an isomorphism $f$. Two definitions are in order:
+		Suppose that $A^{n} \,/\, \mathfrak{a} \, \cong \, M$ by an isomorphism $f$. Two definitions are in order:
     \begin{enumerate}
-      \item Let $g : R^{n} \to R^{n} \, / \, \mathfrak{a}$ be the canonical epimorphism. Then the composition $f \circ g$ is a surjective $R$-module homomorphism.
-      \item For each $(\delta_{mi}) \in R^{n}$, Let $x_{i} = (f \circ g)(\delta_{mi})$ across each $i \in \{ 1, \ldots, n \}$. We claim that the $x_{i}$ generate $M$.
+      \item Let $g : A^{n} \to A^{n} \, / \, \mathfrak{a}$ be the canonical epimorphism. Then the composition $f \circ g$ is a surjective $A$-module homomorphism.
+      \item For each $(\delta_{mi}) \in A^{n}$, Let $x_{i} = (f \circ g)(\delta_{mi})$ across each $i \in \{ 1, \ldots, n \}$. We claim that the $x_{i}$ generate $M$.
     \end{enumerate}
-    From the surjectivity of $f \circ g$, all $x \in M$, there exists $r = (r_{1}, \ldots, r_{n}) \in R^{n}$ such that $(f \circ g)(r) = x$. Therefore 
+    From the surjectivity of $f \circ g$, all $x \in M$, there exists $r = (r_{1}, \ldots, r_{n}) \in A^{n}$ such that $(f \circ g)(r) = x$. Therefore 
 		\begin{align*}
 			x &= (f \circ g)(r_{1}, \ldots, r_{n}) \\
         &= (f \circ g)(r_{1} \delta_{m1}) + \cdots + (f \circ g)(r_{n} \phi_{mn}) \\
@@ -358,13 +356,13 @@ An $R$-module $M$ is said to be \textbf{finitely generated} if there exist a set
 The following proof is a transcription from Atiyah-MacDonald:
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
-		Let $M$ be a finitely-generated $R$-module, let $\mathfrak{a}$ be an ideal of $R$, and let $f : M \to M$ be an $R$-module endomorphism of $M$ such that $f(M) \subset \mathfrak{a}M$. Then $f$ satisfies an equation of the form
+	\begin{proposition}
+		Let $M$ be a finitely-generated $A$-module, let $\mathfrak{a}$ be an ideal of $A$, and let $f : M \to M$ be an $A$-module endomorphism of $M$ such that $f(M) \subseteq \mathfrak{a}M$. Then $f$ satisfies an equation of the form
 		\[
 			f^{n} \, + \, a_{n - 1} f^{n - 1} \, + \, \cdots \, + \, a_{0} f^{0} \, = \, 0,
 		\]
 		where each $a_{i}$ lies in $\mathfrak{a}$.
-	\end{theorem}
+	\end{proposition}
 	\begin{proof}
 		Let $x_{1}, \ldots, x_{n}$ generate $M$. Then each $f(x_{i}) \in \mathfrak{a} M$, so we may define $a_{ij} \in \mathfrak{a}$ for $i, j \in \{ 1, \ldots, n \}$ by $f(x_{i}) = \sum_{j = 1}^{n} a_{ij}x_{j}$. This equation may be equivalently written for each $i \in \{ 1, \ldots, n \}$ as
 		\[
@@ -376,10 +374,10 @@ The following proof is a transcription from Atiyah-MacDonald:
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{corollary}
-		Let $M$ be a finitely-generated $R$-module and let $\mathfrak{a}$ be an ideal of $R$ such that $\mathfrak{a} M = M$. Then there exists $a \in (1 + \mathfrak{a})$ such that $a \in \Ann M$.
+		Let $M$ be a finitely-generated $A$-module and let $\mathfrak{a}$ be an ideal of $A$ such that $\mathfrak{a} M = M$. Then there exists $a \in (1 + \mathfrak{a})$ such that $a \in \Ann M$.
 	\end{corollary}
 	\begin{proof}
-		Consider Theorem 7 under the identity transformation $f$. Then there exist $a_{n - 1}, \ldots, a_{0} \in \mathfrak{a}$ such that
+		Consider Theorem 7 under the identity transformation: denote it by $f$. Then there exist $a_{n - 1}, \ldots, a_{0} \in \mathfrak{a}$ such that
 		\begin{align*}
 			0 &= f^{n} + a_{n - 1} f^{n - 1} + \cdots + a_{0} f^{0} \\
 			&= f + a_{n - 1} f + \cdots + a_{0} f \\
@@ -389,7 +387,7 @@ The following proof is a transcription from Atiyah-MacDonald:
 	\end{proof}
 \end{adjustwidth}
 
-A \textbf{free R-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} M_{j}$, where $M_{j} \cong R$ for each $j \in J$. A finitely generated module $M$ is therefore free if $M$ is isomorphic to $R^{n}$ itself.
+A \textbf{free A-module} $M$ is a module such that $M \cong \bigoplus_{j \in J} M_{j}$, where $M_{j} \cong A$ for each $j \in J$. A finitely generated module $M$ is therefore free if $M$ is isomorphic to $A^{n}$ itself.
 
 \subsection{Relation to the Jacobson Radical}
 
@@ -399,7 +397,7 @@ The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{lemma}[Nakayama's Lemma]
-		Let $M$ be a finitely generated $R$-module and $\mathfrak{a}$ an ideal of $R$ contained in the Jacobson radical $\mathfrak{J}$ of $R$. Then $\mathfrak{a}M = M$ implies $M = 0$.
+		Let $M$ be a finitely generated $A$-module and $\mathfrak{a}$ an ideal of $A$ contained in the Jacobson radical $\mathfrak{J}$ of $A$. Then $\mathfrak{a}M = M$ implies $M = 0$.
 	\end{lemma}
 	\begin{proof}
 		By Corollary 1, there exists $a \in (1 + \mathfrak{J})$ such that $a \in \Ann M$. By the properties of the Jacobson radical, $a$ is a unit. Hence,
@@ -423,7 +421,7 @@ The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 
 \begin{adjustwidth}{0.5cm}{}
 	\begin{corollary}
-		Let $M$ be a finitely-generated $R$-module, $N \subseteq M$ be a submodule, and $\mathfrak{a} \subseteq \mathfrak{J}$ be an ideal of $R$ in the Jacobson radical. Then $M = \mathfrak{a}M + N$ implies $M = N$.
+		Let $M$ be a finitely-generated $A$-module, $N \subseteq M$ be a submodule, and $\mathfrak{a} \subseteq \mathfrak{J}$ be an ideal of $A$ in the Jacobson radical. Then $M = \mathfrak{a}M + N$ implies $M = N$.
 	\end{corollary}
 	\begin{proof}
     Suppose that $M = \mathfrak{a}M + N$. Then
@@ -438,37 +436,36 @@ The following lemma is called \textbf{Nakayama's Lemma} and has two proofs:
 
 \subsection{Relation to Local Rings}
 
-Consider a finitely-generated module $M$ over a local ring $R$ with maximal ideal $\mathfrak{m}$. 
+Consider a finitely-generated module $M$ over a local ring $A$ with maximal ideal $\mathfrak{m}$. 
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
-		The elements of the $R$-module $M \,/\, \mathfrak{m} M$ and the $(R \,/\, \mathfrak{m})$-module $M$ are identical.
-	\end{theorem}
+	\begin{proposition}
+		The elements of the $A$-module $M \,/\, \mathfrak{m} M$ and the $(A \,/\, \mathfrak{m})$-module $M$ are identical.
+	\end{proposition}
 	\begin{proof}
 		It is relatively simple to verify that the function $f : M \,/\, \mathfrak{m} M \to M$ defined by
 		\[
 			f(a_{1} x_{1} + \cdots + a_{n} x_{n} + \mathfrak{m}M) = (a_{1} + \mathfrak{m})x_{1} + \cdots + (a_{n} + \mathfrak{m})x_{n}
 		\]
-		is bijective. It further satisfies $f(x + y) = f(x) + f(y)$ and $f(ax) = b f(x)$, where $b$ is the image of $a$ under the canonical epimorphism $\phi : R \to R \,/\, \mathfrak{m}$.
+		is bijective. It further satisfies $f(x + y) = f(x) + f(y)$ and $f(ax) = b f(x)$, where $b$ is the image of $a$ under the canonical epimorphism $\phi : A \to A \,/\, \mathfrak{m}$.
 	\end{proof}
 \end{adjustwidth}
 
-This realization arises naturally, as $\mathfrak{m}$ annihilates the quotient module $M \,/\, \mathfrak{m} M$. Since $R \,/\, \mathfrak{m}$ is a field, $M \,/\, \mathfrak{m} M$ is actually a vector space.
+This realization arises naturally, as $\mathfrak{m}$ annihilates the quotient module $M \,/\, \mathfrak{m} M$. Since $A \,/\, \mathfrak{m}$ is a field, $M \,/\, \mathfrak{m} M$ is actually a vector space.
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
+	\begin{proposition}
 		Let $M$ be a module over a local ring. Then $x_{1}, \ldots, x_{n} \in M$ generate $M$ if and only if the images of $x_{1}, \ldots, x_{n}$ span the vector space $M \,/\, \mathfrak{m} M$.
-	\end{theorem}
+	\end{proposition}
 	\begin{proof}
 		Let $f : M \to M \,/\, \mathfrak{m} M$ be the canonical epimorphism. Then
 		\begin{align*}
 			\text{$x_{1}, \ldots, x_{n}$ generate $M$} &\iff \text{$x_{1}, \ldots, x_{n}$ generate $M \,/\, \mathfrak{m} M$} \\
-			&\iff \text{$x_{1}, \ldots, x_{n}$ are a basis of $M \,/\, \mathfrak{m} M$ over $R \,/\, \mathfrak{m}$}.
+			&\iff \text{$x_{1}, \ldots, x_{n}$ are a basis of $M \,/\, \mathfrak{m} M$ over $A \,/\, \mathfrak{m}$}.
 		\end{align*}
 		The omitted details are relatively simple to verify.
 	\end{proof}
 \end{adjustwidth}
-
 
 \newpage
 
@@ -480,40 +477,40 @@ This realization arises naturally, as $\mathfrak{m}$ annihilates the quotient mo
 
 \subsection{Definition}
 
-A sequence of $R$-modules and $R$-homomorphisms
+A sequence of $A$-modules and $A$-homomorphisms
 \begin{equation}
 	\cdots \longrightarrow M_{i - 1} \stackrel{f_{i}}{\longrightarrow} M_{i} \stackrel{f_{i + 1}}{\longrightarrow} M_{i + 1} \xrightarrow{\hspace*{0.5cm}} \cdots 
 \end{equation}
-is \textbf{exact} at $M_{i}$ if $\Im f_{i} = \Ker f_{i + 1}$. The sequence is \textbf{exact} if it is exact at each $M_{i}$. Such sequences induce a wealth of identities relating the modules and their images, kernels, and cokernels. Three examples of exact sequences are as follows:
+is \textbf{exact} at $M_{i}$ if $\Im f_{i} = \Ker f_{i + 1}$. The sequence is \textbf{exact} if it is exact at each $M_{i}$. Such sequences induce a wealth of identities relating the modules and their images, kernels, and cokernels. To avoid redundant notation, denote $N_{i} \subseteq M_{i}$ by $N_{i} = \Im f_{i} = \Ker f_{i + 1}$. Three examples of exact sequences are as follows:
 \begin{align*}
-	0 \to M' \stackrel{f}{\to} M \text{ is exact } &\iff \text{$f$ is injective, so $M' \cong \Im f$} \\
-	M \stackrel{g}{\to} M'' \to 0 \text{ is exact } &\iff \text{$g$ is surjective, so $M \,/\, \Ker g \cong M'$.} \\
-	0 \to M' \stackrel{f}{\to} M \stackrel{g}{\to} M'' \to 0 \text{ is exact} &\iff \text{$f$ is injective, $g$ is surjective, and} \\
-	& \quad \qquad \text{$\Coker f = M \,/\, \Ker g \cong M'$}.
+	0 \to M' \stackrel{f}{\to} M \text{ is exact } &\iff \text{$f$ is injective, so $M' \cong N$} \\
+	M \stackrel{g}{\to} M'' \to 0 \text{ is exact } &\iff \text{$g$ is surjective, so $M \,/\, N \cong M''$.} \\
+	0 \to M' \stackrel{f}{\to} M \stackrel{g}{\to} M'' \to 0 \text{ is exact} &\iff \text{$f$ is injective and $g$ is surjective, so} \\
+	& \quad \qquad \text{$M' \, \cong \, N$ and $M \, / \, N \, \cong \, M''$}.
 \end{align*}
 
 An exact sequence of this third type is called a \textbf{short exact sequence}. Any long exact sequence, like that in equation (1), can be broken into numerous short exact sequences:
 \[
-	0 \longrightarrow \Coker f_{i - 1} \stackrel{f_{i}'}{\longrightarrow} M_{i} \stackrel{f_{i + 1}}{\longrightarrow} \Im f_{i + 1} \longrightarrow 0,
+	0 \longrightarrow N_{i} \stackrel{i}{\longrightarrow} M_{i} \stackrel{\pi}{\longrightarrow} N_{i + 1} \longrightarrow 0,
 \]
-where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, we will often write that $0 \to N_{i} \to M_{i} \to N_{i + 1} \to 0$ for some modules $N_{i}$ and $N_{i + 1}$ instead.
+where $i : N_{i} \to M_{i}$ is the inclusion mapping and $\phi : M_{i} \to N_{i + 1}$ is the canonical epimorphism, since $N_{i + 1} \, = \, \Im f_{i + 1} \, \cong \, M_{i} \, / \, N_{i}$
 
 % --------------------------------------------- %
 
-\subsection{Exact Sequences}
+\subsection{Propositions Regarding Exact Sequences}
 
 \begin{adjustwidth}{0.5cm}{}
-	\begin{theorem}
+	\begin{proposition}
 		The sequence
 		\begin{equation}
 			M' \stackrel{u}{\longrightarrow} M \stackrel{v}{\longrightarrow} M'' \longrightarrow 0
 		\end{equation}
-		of $R$-modules and $R$-module homomorphisms is exact if and only if for all $R$-modules $N$, the sequence
+		of $A$-modules and $A$-module homomorphisms is exact if and only if for all $A$-modules $N$, the sequence
 		\begin{equation}
 			0 \longrightarrow \Hom(M'', N) \stackrel{\bar{v}}{\longrightarrow} \Hom(M, N) \stackrel{\bar{u}}{\longrightarrow} \Hom(M', N)
 		\end{equation}
 		is exact, where $\bar{u}$ and $\bar{v}$ are as in Section 1.3.
-	\end{theorem}
+	\end{proposition}
 	\newpage
 	\begin{proof}
 		The exactness of (2) is equivalent to $\Im u = \Ker v$ and the surjectivity of $v$, while the exactness of (3) is equivalent to the injectivity of $\bar{v}$ and $\Im \bar{v} = \Ker \bar{u}$.
@@ -528,7 +525,7 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 				\]
 				Since $v$ is surjective, $f$ must map the entirety of $M$ to zero; thus $f = 0$, and $\bar{v}$ is injective.
 
-				Now, suppose that $v$ is not surjective. Then set $N = M'' \,/\, \Im v$ and let $f \in \Hom(M'', N)$ be the canonical epimorphism; both are nonzero. Then
+				Suppose that $v$ is not surjective. Then set $N = M'' \,/\, \Im v$ and let $f \in \Hom(M'', N)$ be the canonical epimorphism; both are nonzero. Then
 				\[
 					\bar{v}(f)(M) = (f \circ v)(M) = f(\Im v) = 0.
 				\]
@@ -552,75 +549,75 @@ where $f_{i}'$ is defined as $f_{i}'(x + \Ker f_{i}) = f_{i}(x)$. To save time, 
 	\end{proof}
 \end{adjustwidth}
 
-Really, the natural language for these proofs is Homosexual Algebra and Abelian categories. Thus we will state the lemmas from this chapter without proof.
+Really, the natural language for these proofs is Homosexual Algebra and Abelian categories. Thus we will state the results from this chapter without proof.
 
 \newpage
 
 The following theorem is asserted without proof, because I value my sanity.
 
 \begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}
+  \begin{proposition}
 		The sequence
 		\[
 			0 \longrightarrow N' \stackrel{u}{\longrightarrow} N \stackrel{v}{\longrightarrow} N''
     \]
-		of $R$-modules and $R$-module homomorphisms is exact if and only if for all $R$-modules $N$, the sequence
+		of $A$-modules and $A$-module homomorphisms is exact if and only if for all $A$-modules $N$, the sequence
 		\[
 			0 \longrightarrow \Hom(M, N') \stackrel{\bar{u}}{\longrightarrow} \Hom(M, N) \stackrel{\bar{v}}{\longrightarrow} \Hom(M, N'')
     \]
 		is exact, where $\bar{u}$ and $\bar{v}$ are as in Section 1.3.
-  \end{theorem}
+  \end{proposition}
 \end{adjustwidth}
 
 The following theorem is called the Snake Lemma, a special case of exact homology sequences in Homosexual Algebra: 
 
 \begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}[Snake Lemma]
+  \begin{lemma}[Snake Lemma]
     Suppose that
     \[ \begin{tikzcd}
       0 \arrow[r] & M' \arrow[r, "u"] \arrow[d, "f'"] & M \arrow[r, "v"] \arrow[d, "f"] & M'' \arrow[r] \arrow[d, "f''"] & 0 \\
       0 \arrow[r] & N' \arrow[r, "u'"]                & N \arrow[r, "v'"]               & N'' \arrow[r]                  & 0
     \end{tikzcd} \]
-    is a commutative diagram of $R$-modules and homomorphisms, with the rows exact. Then there exists an exact sequence
+    is a commutative diagram of $A$-modules and homomorphisms, with the rows exact. Then there exists an exact sequence
     \[ \begin{tikzcd}
       0 \arrow[r] & \Ker(f') \arrow[r, "\bar{u}"] & \Ker(f) \arrow[r, "\bar{v}"]     & \Ker(f'') \arrow[ld, "d"']      &                       &   \\
                   &                               & \Coker(f') \arrow[r, "\bar{u}'"] & \Coker(f) \arrow[r, "\bar{v}'"] & \Coker(f'') \arrow[r] & 0
     \end{tikzcd} \]
     in which $\bar{u}$ and $\bar{v}$ are restrictions of $u$ and $v$, and in which $\bar{u}'$ and $\bar{v}'$ induced by $u'$ and $v'$. The \textbf{boundary homomorphism} $d$ is defined in Atiyah-MacDonald page 23.
-  \end{theorem}
+  \end{lemma}
 \end{adjustwidth}
 
 We encourage the reader to adopt these results on faith. Homosexual Algebra is a complex subject of math that deserves its own set of notes.
 
 \begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}
-    Let $0 \to M_{0} \to M_{1} \to \cdots \to M_{n} \to 0$ be an exact sequence of $R$ modules in which all the modules $M_{i}$ and the kernels of all the homomorphisms belong to $C$. Then for any additive function $\phi$ on $C$, we have
+  \begin{proposition}
+    Let $0 \to M_{0} \to M_{1} \to \cdots \to M_{n} \to 0$ be an exact sequence of $A$ modules in which all the modules $M_{i}$ and the kernels of all the homomorphisms belong to $C$. Then for any additive function $\phi$ on $C$, we have
     \[
       \sum\limits_{i = 0}^{n} (-1)^{i} \lambda(M_{i}) = 0.
     \]
-  \end{theorem}
+  \end{proposition}
 \end{adjustwidth}
 
 % --------------------------------------------- %
 
 \section{Tensor Products of Modules}
 
-Let $M, N, P$ be $R$-modules. A mapping $f : M \times N \to P$ is \textbf{R-bilinear} if each component is $R$-linear: for each $x \in M$, the mapping $y \mapsto f(x, y)$ is $R$-linear, and if for each $y \in M$, the mapping $x \mapsto f(x, y)$ is $R$-linear.
+Let $M, N, P$ be $A$-modules. A mapping $f : M \times N \to P$ is \textbf{A-bilinear} if each component is $A$-linear: for each $x \in M$, the mapping $y \mapsto f(x, y)$ is $A$-linear, and if for each $y \in M$, the mapping $x \mapsto f(x, y)$ is $A$-linear.
 
-Our goal is to construct a module $T$ such that the $R$-bilinear mappings $M \times N \to P$ are in natural one-to-one correspondence with the $R$-linear mappings $T \to P$ for all $P$. This module is called the \textbf{tensor product} of $M$ and $N$.
+Our goal is to construct a module $T$ such that the $A$-bilinear mappings $M \times N \to P$ are in natural one-to-one correspondence with the $A$-linear mappings $T \to P$ for all $P$. This module is called the \textbf{tensor product} $M \otimes N$ of $M$ and $N$.
 
 \begin{adjustwidth}{0.5cm}{}
-  \begin{theorem}
-    Let $N, N$ be $R$-modules. Then there exists a pair $(T, g)$ consisting of an $R$-module $T$ and an $R$-bilinear mapping $g : M \times N \to T$ with the following property:
+  \begin{proposition}
+    Let $M, N$ be $A$-modules. Then there exists a pair $(T, g)$ consisting of an $A$-module $T$ and an $A$-bilinear mapping $g : M \times N \to T$ with the following property:
 
-    For all $R$-modules $P$ and $R$-bilinear mappings $f : M \times N \to P$, there exists a unique $R$-linear mapping $f' : T \to P$ such that $f = f' \circ g$. 
+    For all $A$-modules $P$ and $A$-bilinear mappings $f : M \times N \to P$, there exists a unique $A$-linear mapping $f' : T \to P$ such that $f = f' \circ g$. 
 
     Moreover, if $(T, g)$ and $(T, g')$ are two pairs with this property, there exists an isomorphism $j : T \to T'$ such that $j \circ g = g'$.
-  \end{theorem}
+  \end{proposition}
   \begin{proof}
     The key is to take a special quotient of $M \times N$.
     \begin{enumerate}
-      \item \textbf{Existence}: Let $C$ denote $R^{(M \times N)}$: the formal combination of elements of $M \times N$ with coefficents in $R$. Let $D$ be the submodule \textit{generated} by all elements of the form:
+      \item \textbf{Existence}: Let $C$ denote $A^{(M \times N)}$: the formal combination of elements of $M \times N$ with coefficients in $A$. Let $D$ be the submodule \textit{generated} by all elements of the form:
       \begin{align*}
         (x + x', y) \, - \, (& x, y) \, - \, (x', y) \\
         (x, y + y') \, - \, (& x, y) \, - \, (x, y') \\
@@ -633,8 +630,8 @@ Our goal is to construct a module $T$ such that the $R$-bilinear mappings $M \ti
         x \otimes (y + y') \, &= \, x \otimes y \, + \, x \otimes y' \\
             a(x \otimes y) \, &= \, (ax) \otimes y \, = \, x \otimes (ay).
       \end{align*}
-      Equivalently, the mapping $g : M \times N \to T$ defined by $g(x, y) = x \otimes y$ is $R$-bilinear.
-      Now, suppose $f : M \times N \to P$ is $R$-bilinear; this extends by linearity to a mapping $\bar{f} : C \to P$. Since $\bar{f}$ is $R$-bilinear, it annihilates each generator of $D$ --- so by extension, the entirety of $D$. The Third Isomorphism Theorem thus guarantees the existence of a unique mapping $\bar{f'} : \Ker \bar{f} \to D$ such that $f = f' \circ g$.
+      Equivalently, the mapping $g : M \times N \to T$ defined by $g(x, y) = x \otimes y$ is $A$-bilinear.
+      Now, suppose $f : M \times N \to P$ is $A$-bilinear; this extends by linearity to a mapping $\bar{f} : C \to P$. Since $\bar{f}$ is $A$-bilinear, it annihilates each generator of $D$ --- so by extension, the entirety of $D$. The Third Isomorphism Theorem thus guarantees the existence of a unique mapping $\bar{f'} : \Ker \bar{f} \to D$ such that $f = f' \circ g$.
 
       \item \textbf{Uniqueness}: If there are two pairs $(T, g)$ and $(T', g')$ with this property, then considering the sequences $M \times N \to T \to T'$ and $M \times N \to T' \to T'$ ensures the existence of two mappings $j$, $j'$ such that
       \begin{align*}
@@ -646,6 +643,212 @@ Our goal is to construct a module $T$ such that the $R$-bilinear mappings $M \ti
     This completes the proof.
   \end{proof} 
 \end{adjustwidth} 
+
+The tensor product allows us to ``decompose'' mappings $M \times N \to P$ in terms of the $A$-bilinear mapping $g$ and a plain homomorphism $T \to P$. Hence, we need not develop any new tools to analyze $A$
+\[
+  \begin{tikzcd}
+  M \times N \arrow[d, "g"] \arrow[r, "f"] & P \\
+  T \arrow[ru, "f'"']                      &  
+  \end{tikzcd}
+\]
+The tensor product $T$ is denoted by $M \otimes_{A} N$, or by $M \otimes N$ if there is no ambiguity about the ring $A$. It is generated by the ``products'' $x \otimes y$ --- so if $(x_{\alpha})$ and $(y_{\beta})$ generate $M \times N$, then $(x_{\alpha} \otimes y_{\beta})$ generates $M \otimes N$. In particular: if $M$ and $N$ are finitely generated, then $M \otimes N$ is too.
+
+Unfortunately, the notation $x \otimes y$ is inherently ambiguous. If $M' \subseteq M$ and $N' \subseteq N$ are submodules, it is possible for $x \otimes y$ to be zero in $M \otimes N$ and nonzero in $M' \otimes N'$.
+
+\begin{adjustwidth}{0.5cm}{}
+  $\text{  } \\$
+  \textbf{Example.} Consider the element $2 \otimes 1$ in the $\mathbb{Z}$-modules $\mathbb{Z} \otimes \mathbb{Z}_{2}$ and $2\mathbb{Z} \otimes \mathbb{Z}_{2}$. As an element of the former, we have
+  \[
+    2 \times 1 \, = \, 1 \otimes 2 \, = \, 1 \otimes 0 \, = \, 0,
+  \]
+  while as an element of the latter, it is nonzero; the element $1$ does not exist in $2 \mathbb{Z}$, so this separation is impossible. \s
+\end{adjustwidth}
+
+However, our sanity is partially ensured by the following corollary:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{corollary}
+    Let $(x_{i}) \in M$ and $(y_{i}) \in N$ be such that $\sum\limits_{i} x_{i} \otimes y_{i} \, = \, 0$ in $M \otimes N$. Then there exist finitely-generated submodules $M_{0} \subseteq M$ and $N_{0} \subseteq N$ such that $\sum\limits_{i} x_{i} \otimes y_{i} \, = \, 0$ in $M_{0} \otimes N_{0}$.
+  \end{corollary}
+  \begin{proof}
+    If $\sum\limits_{i} x_{i} \otimes y_{i} \, = \, 0$ in $M \otimes N$, then in the notation of Proposition 12, $\sum\limits_{i} x_{i} \otimes y_{i} \in D$; hence $\sum\limits_{i} x_{i} \otimes y_{i}$ is a finite sum of generators of $D$. Two definitions are in order:
+    \begin{enumerate}
+      \item Let $M_{0} \subseteq M$ be the submodule generated by the $x_{i}$ and all the elements of $M$ which occur as first coordinates of the generators of $D$.
+      \item Let $N_{0} \subseteq N$ be the submodule defined similarly.
+    \end{enumerate}
+    Then $\sum\limits_{i} x_{i} \otimes y_{i} \, = \, 0$ as an element of $M_{0} \otimes N_{0}$.
+  \end{proof}
+\end{adjustwidth}
+
+Henceforth, we shall never use the construction of the tensor product again. All that matters is the unicity of $T$ and $g$ as discussed in Proposition 12. If we wish to start with multilinear mappings $f : M_{1} \times \cdots \times M_{n} \to P$, then the resulting tensor product $M_{1} \otimes \cdots \otimes M_{2}$ satisfies the same conditions --- namely,
+
+\begin{adjustwidth}{0.5cm}{}
+  $\text{ } \\$
+  \textbf{Proposition 12*.} Let $M_{1}, \ldots, M_{n}$ be $A$-modules. Then there exists a pair $(T, g)$ consisting of an $A$-module $T$ and an $A$-bilinear mapping $g : M_{1} \times \cdots \times M_{n} \to T$ with the following property:
+
+  For all $A$-modules $P$ and $A$-bilinear mappings $f : M_{1} \times \cdots \times M_{n} \to P$, there exists a unique $A$-linear mapping $f' : T \to P$ such that $f = f' \circ g$. 
+
+  Moreover, if $(T, g)$ and $(T, g')$ are two pairs with this property, there exists an isomorphism $j : T \to T'$ such that $j \circ g = g'$. \s
+\end{adjustwidth}
+
+There are various so-called ``canonical isomorphisms,'' some of which are stated here:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $M, N, P$ be $A$-modules. Then there exist unique isomorphisms
+    \begin{enumerate}
+      \item $M \otimes N \, \mapsto \, N \otimes N$ such that $x \otimes y \, \leadsto \, y \otimes x$.
+      \item $(M \otimes N) \otimes P \, \mapsto \, M \otimes (N \otimes P) \, \mapsto \, M \otimes N \otimes P$ such that $(x \otimes y) \otimes z \, \leadsto \, x \otimes (y \otimes z) \, \leadsto \, x \otimes y \otimes z$.
+      \item $(M \oplus N) \otimes P \, \mapsto \, (M \otimes P) \oplus (N \otimes P)$ such that $(x, y) \otimes z \, \leadsto \, (x \otimes z, y \otimes z)$.
+      \item $A \otimes M \, \mapsto \, M$ such that $a \otimes x \, \leadsto \, ax$.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    The idea is simple: we manipulate the defining property of Proposition 12 to demonstrate the desired results. For (1), the following diagram will assist us:
+    \[
+      \begin{tikzcd}
+       M \times N \arrow[d, "g"] \arrow[r, "f"] & N \otimes M \arrow[ld, shift left] \\
+      M \otimes N \arrow[ru, shift left]        &                                   
+      \end{tikzcd}
+    \]
+    The mapping $f : M \times N \to N \otimes N$ defined by $f(x, y) = y \otimes x$ is $A$-bilinear, so there exists $g : M \times N \to M \otimes N$ such that $f = f' \circ g$. Similarly, another mapping $g' : M \times N \to M \otimes N$ defined by $f(x, y) = x \otimes y$ is $A$-bilinear, so it induces a homomorphism $h$: by unicity, it must be $f$. Composing the homomorphisms between $M \otimes N$ and $N \otimes M$ yields the identity, so the two must be isomorphic.
+
+    Similar proofs for the rest follow. They are omitted here for the sake of productivity; the proof for (2) may be found on Page 26 of Atiyah-MacDonald.
+  \end{proof}
+\end{adjustwidth}
+
+% --------------------------------------------- %
+
+\subsection{Tensor Products of Morphisms}
+
+Let $f : M \to M'$ and $g : N \to N'$ be $A$-module homomorphisms. Define $h : M \times N \to M' \times N'$  by $h(x, y) = f(x) \otimes f(y)$. It is easy to verify that $h$ is $A$-bilinear; thus we have a tensor product.
+\[
+  \begin{tikzcd}
+   M \times N \arrow[d] \arrow[r, "h"]               & M' \otimes N' \\
+  M \otimes N \arrow[ru, "f \otimes g"', shift left] &              
+  \end{tikzcd}
+\]
+We thus define the \textbf{morphism tensor product} $f \otimes g : M \otimes N \to M' \otimes N$ as the unique $A$-module homomorphism corresponding with $h$ such that
+\[
+  (f \otimes g)(x \otimes y) \, = \, f(x) \otimes g(y).
+\]
+It is simply a convenient way to define homomorphisms between tensor products. Composition of these morphisms is a little tricky: suppose we have more morphisms
+\[
+  f' : M' \to M'' \qquad \text{and} \qquad g' : N' \to N''.
+\]
+Then if $(f \otimes g)(x \otimes y) = f(x) \otimes g(y)$, we have that $(f' \otimes g')(f(x) \otimes g(y)) \, = \, f'(f(x)) \otimes g'(g(y))$. In short,
+\[
+  (f' \otimes g) \circ (f \otimes g) \, = \, (f' \circ f) \otimes (g' \circ g).
+\]
+Not so bad, right? I'll admit --- Proposition 13 is a bit of a headache, but the important part is to keep the commutative diagram in mind. Also: do not forget the unicity of $T$ and $g$!
+
+\newpage
+
+% --------------------------------------------- %
+
+\subsection{Interlude: Restriction and Extension of Scalars}
+
+Let $f : A \to B$ be a ring homomorphism and let $N$ be an $B$-module. We can endow $N$ with $A$-module structure as follows: if $a \in A$ and $x \in N$, then define $ax$ as $f(a)x$. The resulting $A$-module is obtained by \textbf{restriction of scalars}; $f$ defines an $A$-module structure on $N$.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Suppose $N$ is finitely-generated as an $B$-module and that $B$ is finitely-generated as an $A$-module. Then $N$ is finitely-generated as an $A$-module.
+  \end{proposition}
+  \begin{proof}
+    Suppose $N$ is generated by $x_{1}, \ldots, x_{n}$ and $B$ is generated by $s_{1}, \ldots, s_{m}$. Then the products $x_{i}s_{j}$ generate $A$ as an $A$-module. This argument is easy to formalize.
+  \end{proof}
+\end{adjustwidth}
+
+Now, suppose $M$ is an $A$-module. Since $B$ may be regarded as an $A$-module, we can form the $A$-module $M_{B} = B \otimes_{A} M$. Hence $M_{B}$ carries an $B$-module structure such that $s_{1} (s_{2} \otimes x) \, = \, s_{1}s_{2} \otimes x$ for $s_{1}, s_{2} \in B$ and $x \in M$ The $B$-module $M_{B}$ is obtained from $M$ by \textbf{restriction of scalars}.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    If $M$ is finitely-generated as an $A$-module, then $M_{B}$ is finitely-generated as an $B$-module.
+  \end{proposition}
+  \begin{proof}
+    If $x_{1}, \ldots, x_{n}$ generate $M$ over $A$, then $1 \otimes x_{i}$ generated $M_{B}$ over $B$. This argument is quite easy to formalize.
+  \end{proof}
+\end{adjustwidth}
+
+In summary: given a ring homomorphism $A \to B$, we can pass modules from one into the other. $B$-modules become $A$-modules through extension of scalars; $A$-modules $M$ become $B$-modules $M_{B}$ through restriction of scalars.
+
+% --------------------------------------------- %
+
+\subsection{Exactness Properties of the Tensor Product}
+
+There is a fundamental relationship between tensor products and modules of homomorphisms. 
+\begin{enumerate}
+  \item Let $f : M \times N \to P$ be $A$-bilinear. Then a fixed $x \in M$ induces an $A$-linear mapping from $N \to P$:
+  \[
+    y \, \mapsto \, f(x, y)
+  \]
+  \item Let $f : N \to \Hom_{A}(M, P)$ --- in other words, $y \in N$ implies $f(y) = \phi_{y}$, where $\phi_{y} : M \to P$. Then there is an $A$-bilinear map $M \times N \to P$ defined by $(x, y) \, \mapsto \, \phi_{y}(x)$.
+\end{enumerate}
+The $A$-bilinear mappings $M \times N \to P$ naturally correspond to $A$-linear mappings $M \otimes N \to P$. We conclude a canonical isomorphism:
+\[
+  \Hom_{A}(M \otimes N, P) \, \cong \, \Hom_{A}(M, \Hom_{A}(N, P)).
+\]
+This relation allows us to deduce exactness properties of the tensor product, using Propositions 9 and 10.
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Suppose that the sequence of $A$-modules and $A$-homomorphisms.
+    \begin{equation}
+      M' \stackrel{f}{\longrightarrow} M \stackrel{g}{\longrightarrow} M'' \longrightarrow 0
+    \end{equation}
+    is exact. Then for all $A$-modules $N$, the sequence
+    \begin{equation}
+      M' \otimes N \stackrel{f \otimes 1}{\longrightarrow} M \otimes N \stackrel{g \otimes 1}{\longrightarrow} M'' \otimes N \longrightarrow 0
+    \end{equation}
+    is exact, where $1$ denotes the identity morphism on $N$.
+  \end{proposition}
+  \begin{proof}
+    The proof follows from repeated applications of Proposition 9. Then since sequence (1) is exact,substitute the term ``$N$'' in the proposition with $\Hom_{A}(N, P)$ to find that
+    \[
+      0 \to \Hom(M'', \Hom(N, P)) \stackrel{\bar{g}}{\longrightarrow} \Hom(M, \Hom(N, P)) \stackrel{\bar{f}}{\longrightarrow} \Hom(M, \Hom(N, P))
+    \]
+    is exact. Hence by isomorphism, the sequence
+    \[
+      0 \longrightarrow \Hom_{A}(M'' \otimes N, P) \stackrel{\bar{g} \otimes 1}{\longrightarrow} \Hom_{A}(M \otimes N, P) \stackrel{\bar{f} \otimes 1}{\longrightarrow} \Hom_{A}(M' \otimes N, P)
+    \]
+    is exact (the functions in the arrows are inaccurate). A final application of Proposition 9 now yields the desired exact sequence.
+  \end{proof}
+\end{adjustwidth}
+
+It is \textit{not} true in general that if $M' \to M \to M''$ is exact, then $M' \otimes N \to M \otimes N \to M'' \otimes N$ is exact for an arbitrary $A$-module $N$.
+
+\begin{adjustwidth}{0.5cm}{}
+  $\text{  } \\$
+  \textbf{Example.} Let $A = \mathbb{Z}$ and consider the exact sequence $0 \to \mathbb{Z} \stackrel{f}{\to} \mathbb{Z}$, where $f(n) = 2n$. Let us tensor with $\mathbb{Z}_{2}$; the sequence $0 \to \mathbb{Z} \otimes \mathbb{Z}_{2} \stackrel{f \otimes 1}{\to} \mathbb{Z} \otimes \mathbb{Z}_{2}$ is not exact, because $f \otimes 1$ is the zero mapping: for all $x \otimes y \in \mathbb{Z} \otimes \mathbb{Z}_{2}$, we have
+  \[
+    (f \otimes 1)(x \otimes y) \, = \, f(x) \otimes y \, = \, 2x \otimes y \, = \, x \otimes 2y \, = \, x \otimes 0 \, = \, 0.
+  \]
+  However, $\mathbb{Z} \otimes \mathbb{Z}_{2}$ is not zero. One can construct a nonzero bilinear map $\mathbb{Z} \times \mathbb{Z}_{2} \to \mathbb{Z}_{2}$ embodied by the tensor.
+\end{adjustwidth}
+
+The functor $T_{N} : M \, \mapsto \, M \otimes_{A} N$ on the category of $A$-modules and homomorphisms is therefore not an exact functor. If $N$ is a module such that is an exact functor --- that is, tensoring with $N$ transforms all exact sequences into exact sequences --- then $N$ is a \textbf{flat A-module}. The following propositions help us characterize flat modules:
+
+\begin{adjustwidth}{0.5cm}{}
+  \begin{proposition}
+    Let $N$ be an $A$-module. Then the following are equivalent:
+    \begin{enumerate}
+      \item $N$ is a flat $A$-module.
+      \item If $0 \to M' \to M \to M'' \to 0$ is any exact sequence of $A$-modules, then $0 \to M' \otimes N \to M \otimes N \to M'' \otimes N \to 0$ is exact.
+      \item If $f : M' \to M$ is injective, then $f \otimes 1 : M' \otimes N \to M \otimes N$ is injective.
+      \item If $f : M' \to M$ is injective, and $M, M'$ are finitely generated, then $f \otimes 1 : M' \otimes N \to M \otimes N$ is injective.
+    \end{enumerate}
+  \end{proposition}
+  \begin{proof}
+    (1) and (2) are equivalent by splitting into exact sequences of length $3$. (2) and (3) are equivalent by comparing the following two exact sequences:
+    \[
+      0 \longrightarrow M' \stackrel{f}{\longrightarrow} M \stackrel{g}{\longrightarrow} M'' \longrightarrow 0 \\
+    \]
+    \[
+      0 \longrightarrow M' \otimes N \stackrel{f \otimes 1}{\longrightarrow} M \otimes N \stackrel{g \otimes 1}{\longrightarrow} M'' \otimes N \longrightarrow 0 \\
+    \]
+    The equivalency of exactness for the right-hand sides is ensured by Proposition 16. The equivalency of (2) and (3) is witnessed by examining the left-hand side. It is clear that (3) implies (4); the reverse is the final component of this proposition to prove.
+  \end{proof}
+\end{adjustwidth}
 
 % --------------------------------------------- %
 

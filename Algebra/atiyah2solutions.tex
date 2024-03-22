@@ -1,0 +1,123 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{geometry, changepage, hyperref}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{physics, esint}
+\usepackage{tgpagella, eulervm}
+
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{claim}{Claim}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\renewcommand{\longrightarrow}{\xrightarrow{\hspace*{0.7cm}}}
+
+\newcommand{\s}{$\text{ } \\ \text{ }$}
+
+\title{Atiyah-MacDonald: Modules Exercises}
+\author{James Pagan}
+\date{March 2024}
+
+% --------------------------------------------- %
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% --------------------------------------------- %
+
+\section{Problem 1}
+
+\begin{proof}
+  Let the modular inverse of $m \pmod{n}$ be $m^{-1}$. Then for all $a, b \in \mathbb{Z}_{n} \otimes \mathbb{Z}_{m}$,
+  \[
+    a \otimes b \, = \, mm^{-1}a \otimes b \, = \, m_{-1}a \otimes mb \, = \, m^{-1}a \otimes 0 \, = \, 0.
+  \]
+  We conclude that $\mathbb{Z}_{n} \otimes \mathbb{Z}_{m} \, = \, 0$.
+\end{proof}
+
+
+% --------------------------------------------- %
+
+\section{Problem 2}
+
+\begin{proof}
+  Consider the exact sequence
+  \[
+    \mathfrak{a} \stackrel{i}{\longrightarrow} A \stackrel{\pi}{\longrightarrow} A \, / \, \mathfrak{a} \longrightarrow 0,
+  \]
+  where $i$ is the inclusion map and $\pi$ is the canonical epimorphism. Tensoring with $M$, we find that
+  \[
+    \mathfrak{a} \otimes_{A} M \stackrel{i \otimes_{A} 1}{\longrightarrow} A \otimes_{A} M \stackrel{\pi \otimes_{A} 1}{\longrightarrow} (A \, / \, \mathfrak{a}) \otimes_{A} M \longrightarrow 0
+  \]
+  is an exact sequence. Observe that $A \otimes_{A} M \, \cong \, M$ by the mapping $f(a, x) = ax$; hence there exists a surjective mapping
+  \[
+    M \stackrel{(\pi \otimes_{A} 1) \circ g}{\longrightarrow} (A \, / \, \mathfrak{a}) \otimes_{A} M,
+  \]
+  where $g(x) = 1 \otimes_{A} x$. It is easy to verify that the kernel of this homomorphism is all elements of the form $a \otimes_{A} x$ for all elements $a \in \mathfrak{a}$ --- in other words, $\mathfrak{a} M$. Hence the First Isomorphism Theorem yields
+  \[
+    M \, / \, \mathfrak{a} M \, \cong \, (A \, / \, \mathfrak{a}) \otimes_{A} M.
+  \]
+  This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 3}
+
+\begin{proof}
+  Let $\mathfrak{m}$ be the sole maximal ideal of $A$. Realize that $M \otimes_{A} N \, = \, 0$ implies that 
+  \[
+    (A \, / \, \mathfrak{m}) \otimes_{A} (M \otimes_{A} N) \otimes_{A} (A \, / \, \mathfrak{m}) \, = \, 0 \, \implies \, M_{(A / \mathfrak{m})} \otimes_{A} N_{(A / \mathfrak{m})} \, = \, 0.
+  \]
+  However, $M_{(A / \mathfrak{m})}$ are vector spaces over the field $A \, / \, \mathfrak{m}$. Thus we have (probably)
+  \[
+    0 \, = \, \dim \big( M_{(A / \mathfrak{m})} \otimes_{A} N_{(A / \mathfrak{m})} \big) \, = \, \dim M_{(A / \mathfrak{m})} \times \dim N_{(A / \mathfrak{m})}.
+  \]
+  Thus one of $M_{(A / \mathfrak{m})}$ or $N_{A / \mathfrak{m}}$ must be zero. Without loss of generality, let $M_{(A / \mathfrak{m})}$ be zero; thus by exercise 2,
+  \[
+    M_{(A / \mathfrak{m})} \, = \, 0 \, \implies \, (A \, / \, \mathfrak{m}) \otimes_{A} M \, = \, 0 \, \implies \, M \, / \, \mathfrak{m} M \, = \, 0.
+  \]
+  Thus since $M$ is finitely-generated, $M = \mathfrak{m} M$. By Nakayama's Lemma, we conclude $M = 0$. This completes the proof.
+\end{proof}
+
+% --------------------------------------------- %
+
+\section{Problem 4}
+
+\begin{proof}
+  We utilize the following lemma. The proof is straightforward, omitted for brevity:
+  \begin{adjustwidth}{0.5cm}{}
+    \begin{lemma}
+      Let $P_{i} \stackrel{f_{i}}{\longrightarrow}  Q_{i}$ be homomorphisms of $A$-modules. Then
+      \[
+        \bigoplus\limits_{i} P_{i} \stackrel{\bigoplus\limits_{i} f_{i}}{\longrightarrow} \bigoplus\limits_{i} Q_{i}
+      \]
+      is injective if and only if each $f_{i}$ is injective.
+    \end{lemma}
+  \end{adjustwidth}
+  We are ready to tackle the problem at hand. Let $N_{1} \stackrel{f}{\longrightarrow} N_{2}$ be any monomorphism of $A$-modules. Then
+  \begin{align*}
+    \text{$\bigoplus\limits_{i} M_{i}$ is flat} \, &\iff \, N_{1} \otimes \bigoplus\limits_{i} M_{i} \stackrel{f \otimes \sum\limits_{i} 1_{i}}{\longrightarrow} N_{2} \otimes \bigoplus\limits_{i} N_{i} \text{ is injective} \\
+                                                   &\iff \, \bigoplus\limits_{i} (N_{1} \otimes M_{i}) \stackrel{\bigoplus\limits_{i} (f \otimes 1_{i})}{\longrightarrow} \bigoplus\limits_{i} (N_{2} \otimes M_{i}) \text{ is injective} \\
+                                                   &\iff \, N_{1} \otimes M_{i} \stackrel{f \otimes 1_{i}}{\longrightarrow} N_{2} \otimes M_{i} \text{ is injective for each } i \\ \text{ } \\
+                                                   &\iff \, M_{i} \text{ is flat for each } i.
+  \end{align*}
+  This completes the proof. Hence, all free modules are flat.
+\end{proof}
+
+% --------------------------------------------- %
+
+\end{document}
